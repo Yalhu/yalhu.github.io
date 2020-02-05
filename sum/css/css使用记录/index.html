@@ -1,0 +1,66 @@
+<h2 id="二期"><a href="#二期" class="headerlink" title="二期"></a>二期</h2><ol>
+<li><a href="https://blog.csdn.net/yb305/article/details/72357010" target="_blank" rel="noopener">父容器display:flex后，子元素的内部元素height:100%无效解决方法</a><br>解救办法：父类容器position:relative;子元素：position:absolute;width:100%,height:100%;</li>
+<li>display：flex 的直接子元素，高度默认是100%； 如果设置 改元素<code>align-self:center</code>,元素就会变为行内块，高度就不是100%，可以设置垂直居中    </li>
+<li>display:flex 下的子元素，比如div的宽度会撑开父元素宽度，出现横向滚动条；此时可以给改元素添加 <code>heigth:0%</code> 消除影响</li>
+<li>iconfont transform 失效，需要改为inline-block/block<blockquote>
+<p>transform适用于：所有块级元素及某些内联元素<br> <a href="https://blog.csdn.net/promiseCao/article/details/82757251" target="_blank" rel="noopener">transform失效了？iconfont字体图标无法旋转，无法缩放？的解决办法</a></p>
+</blockquote>
+</li>
+<li><p>【CSS】文字旋转90度<br> <a href="https://blog.csdn.net/weixin_41728561/article/details/84373347" target="_blank" rel="noopener">【CSS】文字旋转90度</a>   </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* 方法一**/</span><br><span class="line">.xuanzhuan &#123;</span><br><span class="line">    -moz-transform: rotate(90deg);</span><br><span class="line">    -webkit-transform: rotate(90deg);  </span><br><span class="line">    display: block;</span><br><span class="line">    position: absolute;</span><br><span class="line">    filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3)</span><br><span class="line">    text-transform: uppercase;</span><br><span class="line">&#125;</span><br><span class="line">/* 方法二**/</span><br><span class="line">writing-mode: vertical-rl;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>网页强制横屏。或者js实现方式<code>document.documentElement.requestFullscreen();screen.orientation.lock(&quot;portrait-primary&quot;);</code><br><a href="http://www.cnblogs.com/blfshiye/p/4937293.html" target="_blank" rel="noopener">[HTML5: Screen Orientation API]</a><br><a href="http://www.php.cn/css-tutorial-360008.html" target="_blank" rel="noopener">[页面强制横屏]</a>    </p>
+<p><a href="https://www.jb51.net/css/663929.html" target="_blank" rel="noopener">[Css实现手机端页面强制横屏的方法示例]</a>      </p>
+<blockquote>
+<p>P.S. 如果你的页面里有from表单要填的话，应该用 「弹出遮罩层让用户旋转手机」 的解决方案。检测手机竖屏下，提示用关闭屏幕旋转锁定，并横置手机。想想手机浏览器还是竖屏，而内容却被强制横屏的画面有多奇怪吧…</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*-- css单位：vmin/vmax, vh/vw --*/</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">orientation:</span> portrait) &#123;</span><br><span class="line">    <span class="selector-tag">html</span>&#123;</span><br><span class="line">        <span class="attribute">width </span>: <span class="number">100vmin</span>; </span><br><span class="line">        <span class="attribute">height </span>: <span class="number">100vmax</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">width </span>: <span class="number">100vmin</span>;</span><br><span class="line">        <span class="attribute">height </span>: <span class="number">100vmax</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-id">#gyroContain</span>&#123;</span><br><span class="line">        <span class="attribute">width </span>: <span class="number">100vmax</span>;</span><br><span class="line">        <span class="attribute">height </span>: <span class="number">100vmin</span>;</span><br><span class="line">        <span class="attribute">transform-origin</span>: top left;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">90deg</span>) <span class="built_in">translate</span>(<span class="number">0</span>,-<span class="number">100vmin</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">orientation:</span> landscape) &#123;</span><br><span class="line">    <span class="selector-tag">html</span>&#123;</span><br><span class="line">        <span class="attribute">width </span>: <span class="number">100vmax</span>;</span><br><span class="line">        <span class="attribute">height </span>: <span class="number">100vmin</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">width </span>: <span class="number">100vmax</span>;</span><br><span class="line">        <span class="attribute">height </span>: <span class="number">100vmin</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-id">#gyroContain</span>&#123;</span><br><span class="line">        <span class="attribute">width </span>: <span class="number">100vmax</span>;</span><br><span class="line">        <span class="attribute">height </span>: <span class="number">100vmin</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p> $PS: 当时是解决ppt在线浏览横屏，结果office文档在线浏览url跳转了，跳出当前页面了。反而使loading横屏了    </p>
+<h2 id="一期"><a href="#一期" class="headerlink" title="一期"></a>一期</h2></li>
+<li>css是区分大小的，而html不区分大小写  </li>
+<li>icon-font 不闪烁且只加载一次:本地加载(file:///D:/dev/…/html)不需要crossorigin;如果是服务器加载，需要添加属性：crossorigin。<br><code>&lt;link rel=&quot;preload&quot; as=&quot;font&quot; type=&quot;font/ttf&quot; crossorigin href=&quot;font/iconfont.ttf&quot;&gt;</code>   </li>
+<li>绝对定位后，父元素会失去高度<br>解决，1。Overflow：hidden，2。设置高度</li>
+<li>float 撑开父元素高度<ol>
+<li>父元素设置高度</li>
+<li>父元素后添加元素，clear:both; 可以利用 :after,再添加overflow，zoom</li>
+<li>父元素 overflow:hidden</li>
+<li>父元素也设置float，但是要设置宽度。 和overflow是一个原理</li>
+</ol>
+</li>
+<li>BFC   左右布局中margin, overflow</li>
+<li>多个块内元素 中间会有莫名的留白<br> 1)行内元素设置：vertial-align:bottom；2)父元素设置font-size:0;3)line-height足够小也可以;4)margin<br> div中img—inline-block和文本:img-display:block<br> ul下li:取消li之间的空格/破坏html的结构<br> inline-block有overflow-（只要不是visible—）: 上面img也是inline-block    </li>
+<li><p>图片自适应–缩放，最大限度充满容器</p>
+<pre><code>.wrapper{
+    width:300px;  
+    height:300px;  
+    border:solid 1px #000;  
+    background-color:red;  
+    background-image:url(images/donghua1.jpg); /*图片地址*/  
+    background-image:url(images/donghua3.jpg); /*图片地址*/  
+    background-origin:content;  /*从content区域开始显示背景*/
+    background-position:50% 50%;  /*图片上下左右居中*/  
+    background-size:contain;    /*保持图像本身的宽高比例，将图片缩放到宽度或高度正好适应定义背景的区域*/  
+    background-repeat:no-repeat; /*图像不重复显示*/  
+}
+</code></pre></li>
+<li><p>重复嵌套的两个style，第一个定义样式不生效</p>
+<pre><code>&lt;style&gt;
+&lt;style&gt;
+    .outer{
+        //这里的样式不生效    
+    }
+    .inner{
+        // 有效
+    }
+&lt;/style&gt;
+&lt;/style&gt;
+</code></pre></li>
+<li>style标签结合属性contenteditable*,可以在页面直接显示样式表，并且可编辑</li>
+<li><p>tr,td 是table元素定义height无效，改写display，或者嵌套div ;<br> table设置layout:fixed 可以限定宽高</p>
+</li>
+<li><p>搜索结果展示，超出隐藏/… 。包括垂直方向     </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.serch-description&#123;/*\\*/</span><br><span class="line">    max-width: 150px;// 垂直方向 max-height:95px;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">    text-overflow: ellipsis;</span><br><span class="line">    white-space: nowrap;</span><br><span class="line">&#125;</span><br><span class="line">.serch-description:hover&#123;</span><br><span class="line">    max-height:none;</span><br><span class="line">    white-space: unset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 多行文字:<br> 在webkit内核的浏览器中，多行文字省略可以采用CSS属性-webkit-line-clamp实现。<br> 方案二：clamp.js</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.multiple-line &#123;</span><br><span class="line">      overflow: hidden;</span><br><span class="line">      text-overflow: ellipsis;</span><br><span class="line">      display: -webkit-box; // 而且-webkit-box已经被flex替代,但是不能用flex代替</span><br><span class="line">      -webkit-line-clamp: 2;</span><br><span class="line">      -webkit-box-orient: vertical;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>

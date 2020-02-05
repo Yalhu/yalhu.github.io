@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2018.11.12 星期一 16:40  文档:http://nsis.sourceforge.net/Docs/   Windows: sendMessage,LB_GETTEXThttps://docs.microsoft.com/en-us/windows/desktop/Controls/lb-gettexthttps://msdn.microsoft.com/en-us/library">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSIS实用">
+<meta property="og:url" content="http://yoursite.com/sum/others/NSIS实用/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2018.11.12 星期一 16:40  文档:http://nsis.sourceforge.net/Docs/   Windows: sendMessage,LB_GETTEXThttps://docs.microsoft.com/en-us/windows/desktop/Controls/lb-gettexthttps://msdn.microsoft.com/en-us/library">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NSIS实用">
+<meta name="twitter:description" content="2018.11.12 星期一 16:40  文档:http://nsis.sourceforge.net/Docs/   Windows: sendMessage,LB_GETTEXThttps://docs.microsoft.com/en-us/windows/desktop/Controls/lb-gettexthttps://msdn.microsoft.com/en-us/library">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/others/NSIS实用/">
+
+
+
+
+
+  <title>NSIS实用 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/others/NSIS实用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NSIS实用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-12T08:00:00+08:00">
+                2018-11-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/others/NSIS实用/" class="leancloud_visitors" data-flag-title="NSIS实用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,804
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  17
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p style="text-align:right">2018.11.12 星期一 16:40</p>
+
+<p>文档:<a href="http://nsis.sourceforge.net/Docs/" target="_blank" rel="noopener">http://nsis.sourceforge.net/Docs/</a>  </p>
+<p>Windows: sendMessage,LB_GETTEXT<br><a href="https://docs.microsoft.com/en-us/windows/desktop/Controls/lb-gettext" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/windows/desktop/Controls/lb-gettext</a><br><a href="https://msdn.microsoft.com/en-us/library/ms909674.aspx" target="_blank" rel="noopener">https://msdn.microsoft.com/en-us/library/ms909674.aspx</a>  </p>
+<blockquote>
+<p>NSIS (Nullsoft Scriptable Install System) is a professional open source system to create Windows installers. It is designed to be as small and flexible as possible and is therefore very suitable for internet distribution.</p>
+</blockquote>
+<p>功能复杂需要利用一些插件:MUI2.nsh,LogicLib.nsh,nsDialogs.nsh,nsExec    </p>
+<p>实例:集成解决方案. 之前是v2<br>v2-nsDialogs:Listbox,删除有bug;v3修复,又新提案许多api   </p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>支持x86,x64<br>目录结构: Bin,Contrib,Docs,Examples,Include,Menu,Plugins,Stubs,<br>makensis.exe,NSIS.chm,NSIS.exe,…</p>
+<p>每个插件基本也是上面的目录结构,拷贝到相应文件夹即可.<br>Docs:文档,有text,html等各种格式,nsis是chm<br>Plugins:v3下会有两个子文件夹:x86-ansi,x86-unicode(根据电脑下载安装);下载的插件可能有四个文件夹,包括x64的   </p>
+<p>有的nsi文件是ansi码,用notepad++,vscode等打开 中文是乱码,需要设置编码方式<br>vscode 默认打开文件是utf-8, 没有选择ansi码的,可以选择GBK编码方式,属于ANSI编码  </p>
+<p>如果是utf-8编码,编译的时候通不过.需要用gbk编码方式重新保存   </p>
+<h3 id="编辑器"><a href="#编辑器" class="headerlink" title="编辑器"></a>编辑器</h3><p>GuiNsis(图形界面),Venis IX(编辑器),VSCode<br>后面两个需要配置编译程序位置,即makensis.exe   </p>
+<p>VSCode安装插件: nsis , C+S+B,编译出来, 右下角弹框 直接run<br>VSCode不能在侧边栏显示about/Funtions/View, 而Venis IX 就可以.虽然vscode查找方便,但还是没view   </p>
+<h2 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h2><p>用<strong>指令</strong>操作<br>不区分大小写<br>函数名不区分大小写,仍然使用js的写法: 开头大写的表示类,比如custom Page, btn/操作函数小写+动词开头<br>不光函数名,语法本身不区分大小写,比如变量名<br>不支持数组,直接进行栈操作($PS:很优秀,比如函数传参,getNextIP)        </p>
+<h3 id="字符串-数字操作"><a href="#字符串-数字操作" class="headerlink" title="字符串/数字操作"></a>字符串/数字操作</h3><!-- 字串连接可以用 `+`   $PS:不知道哪里看到的,应该不行  -->
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">StrCpy 用户变量(目标) 字串 \[最大长度] \[起始偏移]  </span><br><span class="line">StrLen 用户变量(长度输出) 字串  </span><br><span class="line"></span><br><span class="line">IntFmt 用户变量(输出) 格式 数字字串   (这个指令其实就是 C++ 里的 wsprintf 函数)  </span><br><span class="line">IntOp  用户变量(输出) 值1 操作 [值2]</span><br><span class="line"></span><br><span class="line">;连接字串</span><br><span class="line">StrCpy $0 &quot;字串1&quot;</span><br></pre></td></tr></table></figure>
+<p>api简单,不支持数组;<br>需要扩展插件: WordFunc.nsh, StrFunc.nsh,    </p>
+<p>Validate_IP_function:<a href="http://nsis.sourceforge.net/Validate_IP_function" target="_blank" rel="noopener">http://nsis.sourceforge.net/Validate_IP_function</a>  </p>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><p>可以建目录, 复制,删除文件等操作,判断文件是否存在<br>支持迭代拷贝目录结构 <code>/r</code>  </p>
+<p>可以直接写文件, 写行, 查找后修改 etc..<br>有写ini文件的指令,十分方便<br>也有写注册表,创建快捷方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">WriteINIStr &quot;$INSTDIR\db\config\db.ini&quot; &quot;mysqld&quot; &quot;basedir&quot; &apos;$INSTDIR\db&apos;</span><br><span class="line"></span><br><span class="line">FileOpen $0 &apos;$INSTDIR\db_cluster\ndb_mgm\config\db.ini&apos; w ;r,w,a</span><br><span class="line">IfErrors done</span><br><span class="line">FileWrite $0 &quot;[ndb_mgmd default] $\r$\n&quot;</span><br><span class="line">done:    # 标签</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">WriteRegStr HKLM &quot;Software\Microsoft\Windows\CurrentVersion\Uninstall\$&#123;APPNAME&#125;&quot; &quot;DisplayName&quot; &quot;$&#123;APPNAME&#125;&quot;</span><br><span class="line">WriteRegStr HKLM &quot;Software\Microsoft\Windows\CurrentVersion\Uninstall\$&#123;APPNAME&#125;&quot; &quot;UninstallString&quot; &quot;$AMBASEDIR\uninstall.exe&quot;</span><br><span class="line">WriteUninstaller &quot;$AMBASEDIR\uninstall.exe&quot;</span><br><span class="line"></span><br><span class="line">CreateDirectory &quot;$SMPROGRAMS\AcuManager&quot;</span><br><span class="line">CreateShortCut &quot;$SMPROGRAMS\AcuManager\Register.lnk&quot; &quot;$AMBASEDIR\Register9.exe&quot;</span><br><span class="line">CreateShortCut &quot;$SMPROGRAMS\AcuManager\Uninstall.lnk&quot; &quot;$AMBASEDIR\uninstall.exe&quot;</span><br></pre></td></tr></table></figure></p>
+<h3 id="程序执行"><a href="#程序执行" class="headerlink" title="程序执行"></a>程序执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Exec &apos;&quot;$INSTDIR\someprogram.exe&quot; some parameters&apos;</span><br><span class="line">ExecWait &apos;&quot;$INSTDIR\someprogram.exe&quot;&apos; $0</span><br><span class="line">DetailPrint &quot;程序返回: $0&quot;</span><br><span class="line">nsExec::ExecToLog /TIMEOUT=120000 &apos;&quot;$AMBASEDIR\db\data\update_force.bat&quot;&apos;</span><br><span class="line">Sleep 1000</span><br><span class="line"></span><br><span class="line">; 调用一个插件，使用“插件::命令 \[参数]”。    </span><br><span class="line">nsDialogs::Create 1018</span><br><span class="line">nsDialogs::Show</span><br></pre></td></tr></table></figure>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>Var [/GLOBAL] 变量名  区段或函数内定义的变量必须使用 /GLOBAL 标记   </p>
+<p>已经注册变量:$0、$1、$2、$3、$4、$5、$6、$7、$8、$9、$R0、$R1、$R2、$R3、$R4、$R5、$R6、$R7、$R8、$R9   </p>
+<p>许多常量:$PROGRAMFILES,$PROGRAMFILES,$DESKTOP,$WINDIR,$SMSTARTUP, $DOCUMENTS<br><code>$$(转义$),$\r,$\n,$\t</code>    </p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">; 注释</span><br><span class="line"># 注释</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">注释</span><br><span class="line">注释</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">Name /* 注释 */ mysetup</span><br><span class="line">File &quot;我的文件&quot; ;注释</span><br></pre></td></tr></table></figure>
+<h3 id="逻辑"><a href="#逻辑" class="headerlink" title="逻辑"></a>逻辑</h3><p>条件判断或执行代码循环可以使用 StrCmp、IntCmp、IfErrors、Goto 和其它来实现，但是还有更方便直观的方式来实现。LogicLib 提供了很多简单的宏来做条件或联合逻辑判断<br>${If} $0 == $1  <code>==</code>后面需要空格,用来判断${If}的参数个数<br>$PS: 结合标记. 标记应该可以多层嵌套,比起if/else 深层嵌套能较少缩进吧,就是标记跳来跳去不知道麻烦否   </p>
+<h3 id="标记和跳转"><a href="#标记和跳转" class="headerlink" title="标记和跳转"></a>标记和跳转</h3><p>标记可以跳转,逻辑就不行了<br><del>标记结束的地方可能是遇到下一条指令为止</del><br>标记就是标记,用来做跳转;标记没有什么结束位置,不同于Function/Section有End; 脚本/指令是一条一条往下执行的,跳转到标记就会一直顺序执行    </p>
+<blockquote>
+<p>标记是 Goto 指令的目标，或各种分支指令 (比如 IfErrors、MessageBox、IfFileExists 和 StrCmp) 的目标。标记必须存在于一个区段或函数里。标记是局限于该范围里的，这意味着这些指令只能访问和它们同处于一个区段或函数的标记。<br>相对跳转  和标记不一样，在任何你可用到标记的地方你也都可以相对跳转。相对跳转由数字标定。<br>一条指令就是在安装程序运行时可以被执行的所有命令。MessageBox、Goto、GetDLLVersion、FileRead、SetShellVarContext 都是指令。AddSize、Section、SectionGroup、SectionEnd、SetOverwrite (和所有处于编译器标记)、Name、SetFont、LangString 都不是指令，因为它们在编译时就被执行。<br>需要注意的是宏指令并不是真正意义上的一条指令，在编译时会被展开为若干条指令，所以你不能用相对跳转来跳过一条宏指令。 </p>
+</blockquote>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>1. nsis语言中可以没有引号,除非是字符串中间有空格,或者特殊符号比如参数是<code>#</code>等($PS:不知道从文档那个地方看到的). 比较下面例子中,两个${LineFind} 指令中几个参数, 有无引号都可以都可以执行成功<br>2. ${LineFind} 最后的回调函数中,必须要有<code>Push $var</code> 结束(example中都是在结尾,Push StopLineFind/‘StopLineFind’ 不好使,必须是$0,$1/$2也可以)<br><!-- $PS: 早发现的问题,没注意,花费了一天多时间(主要是编译时间长) --><br>3. <code>IfErrors 0 +2</code> 如果没有+2, 下一个指令(本例子中MessageBox) 也会执行;+1 也执行,即跳转到下一行. +2 是没有错误的跳转标记, +2 表示跳过了下面的一条,执行后面的指令   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># ## 可以没有 双引号</span><br><span class="line">$&#123;LineFind&#125; $INSTDIR\ARCManager\inc\db.php &quot;&quot; 4 &quot;replaceMongoHosts&quot;</span><br><span class="line">IfErrors 0 +2</span><br><span class="line">MessageBox MB_OK &quot;Config mongo hosts error !&quot;</span><br><span class="line"></span><br><span class="line">$&#123;LineFind&#125; &quot;$INSTDIR\config\AcuManager.xml&quot; &quot;&quot; &quot;3&quot; replaceLocalIP</span><br><span class="line">IfErrors 0 +2</span><br><span class="line">MessageBox MB_OK &quot;Config local IP error !&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="bugs-注意事项"><a href="#bugs-注意事项" class="headerlink" title="bugs/注意事项"></a>bugs/注意事项</h2><h3 id="nsis"><a href="#nsis" class="headerlink" title="nsis"></a>nsis</h3><p>0. 注意SetOutPath 和 InstallDir,$INSTDIR 路径联系<br>1. 版本信息<br>VIProductVersion 必须是四位的:[版本字串_X.X.X.X]<br>VIAddVersionKey:在文件信息中看不到.’并不是windows的bug,可能是什么文件没有打包进来’   </p>
+<p>版本信息在win7等一些电脑中看不到(?有疑问)   </p>
+<p>2. 多语言：如果是单语言，把多余的语言注释掉，并不完全是set language 先后顺序,有自己选择语言逻辑,和检测系统默认语言有关   </p>
+<blockquote>
+<p>不像定义使用花括号 - {} 一样，语言字串使用圆括号 - ()。<br>如果你想在 .onInit 函数里更改语言，需要注意的是在 .onInit 里的语言字串将仍旧使用基于用户的默认 Windows 语言检测到的语言，因为语言的初始化在 .onInit 之后。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">; Set languages (first is default language)   # $PS: 没关系,是系统默认  </span><br><span class="line">!insertmacro MUI_LANGUAGE &quot;English&quot;</span><br><span class="line">!insertmacro MUI_LANGUAGE &quot;SimpChinese&quot;</span><br><span class="line">!insertmacro MUI_LANGUAGE &quot;TradChinese&quot;</span><br><span class="line">!insertmacro MUI_RESERVEFILE_LANGDLL</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>3. 标记如果没有跳转/Return等,会顺着执行下一个指令, 发生if 和 else 都执行的情况<br><figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$&#123;WordFind&#125;</span> <span class="string">"C:\io.sys C:\logo.sys"</span> <span class="string">":\lo"</span> <span class="string">"E+1&#123;"</span> <span class="variable">$R0</span></span><br><span class="line"><span class="keyword">IfErrors</span> notfound found</span><br><span class="line"><span class="comment">## 1</span></span><br><span class="line">found:</span><br><span class="line"><span class="keyword">MessageBox</span> <span class="params">MB_OK</span> <span class="string">"The IP had added to server list"</span> <span class="params">IDOK</span> end</span><br><span class="line">notfound:</span><br><span class="line"><span class="keyword">MessageBox</span> <span class="params">MB_OK</span> <span class="string">'Not found'</span></span><br><span class="line">end:</span><br><span class="line"></span><br><span class="line"><span class="comment">## 2 </span></span><br><span class="line">notfound: </span><br><span class="line"><span class="keyword">MessageBox</span> <span class="params">MB_OK</span> <span class="string">"Must include local IP!"</span> </span><br><span class="line"><span class="keyword">Abort</span></span><br><span class="line">found:</span><br></pre></td></tr></table></figure></p>
+<p>4. 有些文档,网站都不知道入口在哪里,比如:nsDialogs,Validate IP function<br>Validate IP function:<a href="http://nsis.sourceforge.net/Validate_IP_function" target="_blank" rel="noopener">http://nsis.sourceforge.net/Validate_IP_function</a><br>NSIS nsDialogs Plug-in:<a href="http://nsis.sourceforge.net/Docs/nsDialogs/Readme.html" target="_blank" rel="noopener">http://nsis.sourceforge.net/Docs/nsDialogs/Readme.html</a>  </p>
+<p>5. File 指令 /x 参数编译不过. 老同志做法:目录不多,分开拷贝吧   </p>
+<blockquote>
+<p>File [/nonfatal] [/a] ([/r] [/x 文件|通配符 […]] (文件|通配符) […] | /oname=输出路径\文件名 输入路径\文件名)<br>使用 /x 开关可以用来来排除文件或目录。<br>$PS: nsis 可能根据 名字 来检索,所以/x不能是路径, 可以是文件夹名或者文件名, 支持通配符<br>File /r /x Config ..\MyProgram*.*<br>where “Config” is a directory “MyProgram\Plugins\Config”. NSIS searches only by name and it will be wrong to set any subfolders (e.g. “/x Plugins\Config” or “/x $INSTDIR\MyProgram\Plugins\Config\”). There is one lack: if you have the same folders in different directories, using the /r switch, both matching directories and files will be searched.<br><a href="http://www.itdaan.com/blog/2012/01/27/1f8b1d77fabf573444e606ce2e9a6a.html" target="_blank" rel="noopener">文件/x不排除声明的文件/目录</a><br><a href="https://stackoverflow.com/questions/9031175/nsis-file-x-doesnt-exclude-files-directories-as-claimed/16292431" target="_blank" rel="noopener">NSIS - File /x doesn’t exclude files/directories as claimed</a><br>(<a href="https://stackoverflow.com/questions/9031175/nsis-file-x-doesnt-exclude-files-directories-as-claimed" target="_blank" rel="noopener">https://stackoverflow.com/questions/9031175/nsis-file-x-doesnt-exclude-files-directories-as-claimed</a>)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># test</span><br><span class="line">; File /r &apos;aculearn-idm\db\*.*&apos; /x &apos;aculearn-idm\db\data\acldatabase\*.*&apos; ;编译不过</span><br><span class="line">; File /r /x &apos;aculearn-idm\db\data\acldatabase&apos; &apos;aculearn-idm\db\*.*&apos; ;可以编译过,不能排除</span><br><span class="line">; File /r /x aculearn-idm\db\data\acldatabase\*.* aculearn-idm\db\*.* ;可以编译过,不能排除</span><br><span class="line">; File /r /x &apos;acldatabase\*.*&apos; &apos;aculearn-idm\db\*.*&apos; ;可以编译过,不能排除</span><br><span class="line">## success</span><br><span class="line">File /r /x *.MYD /x &apos;*.MYI&apos; /x &apos;*.frm&apos; &apos;aculearn-idm\db\*.*&apos; ;可以编译过,也可以排除</span><br><span class="line">File /r /x acldatabase &apos;aculearn-idm\db\*.*&apos; ;可以编译过,也可以排除,排除了文件夹</span><br><span class="line">CreateDirectory &quot;$INSTDIR\db\data\acldatabase&quot;</span><br><span class="line"></span><br><span class="line"># 文档示例</span><br><span class="line">File /r /x CVS 我的工程\*.*</span><br><span class="line">File /r /x *.res /x *.obj /x *.pch source\*.*</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>6. 有些指令必须在Function或Section中使用,比如:StrcCpy,MessageBox;<br>$PS:没确认是不是指令必须写在函数或区块中<br>7. 一个nsi文件可以include另一个nsh文件. 页面跳转,变量等都是在内存中存储, 只要include的位置,就可以在nsi和nsh中正确使用变量   </p>
+<h3 id="2-nsDialogs"><a href="#2-nsDialogs" class="headerlink" title="2 nsDialogs"></a>2 nsDialogs</h3><p>没有监听blur/focus的事件,也没有方法主动获取焦点,所以有些需要无法实现<br>1.1 Listbox API:NSD_LB_DelString以及clear参数个数问题, v3修复好了<br><!-- [NSIS listbox使用技巧](https://blog.csdn.net/pkrobbie/article/details/4403992)   
+[NSIS listbox使用技巧](http://www.voidcn.com/article/p-hisorveu-ve.html)    --><br>1.2 Listbox API:NSD_LB_GetItemText (v3)无法获取内容,即使在page LEAVE 回调函数中<br><a href="http://forums.shoutcast.com/showthread.php?t=345386" target="_blank" rel="noopener">Using listboxes in nsDialogs</a><br>$SOL:把获取Listbox设置过程,设置到添加函数中了      </p>
+<p>用SendMessage 指令也无法获取<br>1.3 Listbox API:NSD_LB_GetItemData 未定义, nsh文件中定时时少了 下划线.<br>上述两个API都没有在文档中提及,不知道是否是因为有bug,没完成       </p>
+<p>2. NSD_CreateIPAddress:点击Next 会改变页面样式,包括下面几个按钮;点击返回,上一个自定义页面,字体都加粗,变大导致页面布局混乱; 而且这个控件有时候选择输出后输入不是很好   </p>
+<p>-9. Move data between ListBoxes<br><!-- [Move data between ListBoxes](http://nsis.sourceforge.net/Move_data_between_ListBoxes) --></p>
+<h3 id="3-nsArray"><a href="#3-nsArray" class="headerlink" title="3 nsArray"></a>3 nsArray</h3><p>需要自己下载安装<br>1. /at和/key的区分: nsArray::Set $ips /at=$1 $0<br>/at 后面参数需要数字,通过nsDialog-LisBox API 获取到长度的变量$1 可能是个字符串,不能通过/at传递, 需要 通过/key设置 nsArray<br>2. nsArray 定义的 数组变量 好像不需要声明也可以使用, 如果声明,即使使用了变量($ips/ips),编译结束都会有warnings:6001: Variable “ips” not referenced or never set, wasting memory!<br>而且定义数组变量的话,引用可能会导致混乱,比如var serverIPs,currIPs, 造成Droplist和ListBox 数据相同(上一步/下一步的时候,下拉框和列表框的内容一致了;开始/初始化时也会个列表框添加currIPs的内容)<br>Tips:变量不用声明,直接使用     </p>
+<p>nsArray 是一个’对象类数组’: key=&gt;1,value=&gt;’value’,并不是真正的数组–索引为数字,而是用对象的key; 删除/添加 下标/索引 并不会随着增减,因为是对象的key    </p>
+<h3 id="4-wordFunc"><a href="#4-wordFunc" class="headerlink" title="4 wordFunc"></a>4 wordFunc</h3><p>插件(安装包有,不需要下载) 没有docs; $PS: strFunc有docs<br>docs:<a href="http://nsis.sourceforge.net/Docs/AppendixE.html#wordfind" target="_blank" rel="noopener">http://nsis.sourceforge.net/Docs/AppendixE.html#wordfind</a><br>但是Doc可以在NSIS文档的附录中找到       </p>
+<p>for NSIS 2.07 and below users:<a href="https://nsis.sourceforge.io/WordReplace" target="_blank" rel="noopener">https://nsis.sourceforge.io/WordReplace</a>   </p>
+<h3 id="Windows-OS"><a href="#Windows-OS" class="headerlink" title="Windows OS"></a>Windows OS</h3><p>#### 1 GetVersion (Windows) plug-in: <a href="https://nsis.sourceforge.io/GetVersion_(Windows)_plug-in" target="_blank" rel="noopener">https://nsis.sourceforge.io/GetVersion_(Windows)_plug-in</a>   </p>
+<blockquote>
+<p>Windows 8 or above detection<br>If using NSIS 3.0 or above, use the ManifestSupportedOS installer attribute and the bundled WinVer.nsh<br>If using NSIS 2.46 or below, use !packhdr to embed additional supported OS GUIDs and an updated WinVer.nsh<br>#### 2 Get Windows version: <a href="https://nsis.sourceforge.io/Get_Windows_version" target="_blank" rel="noopener">https://nsis.sourceforge.io/Get_Windows_version</a><br>$PS: for nsis3<br>实际文档还是以安装目录下include文件夹下WinVer.nsh为标准   </p>
+</blockquote>
+<p>#### 3 Display Windows OS Name in a string:<a href="https://nsis.sourceforge.io/Display_Windows_OS_Name_in_a_string" target="_blank" rel="noopener">https://nsis.sourceforge.io/Display_Windows_OS_Name_in_a_string</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Name &quot;Windows OS Name&quot;</span><br><span class="line">OutFile &quot;OSName.exe&quot;</span><br><span class="line"></span><br><span class="line">Function &quot;GetWIN&quot;</span><br><span class="line">    ReadRegStr $0 HKLM &quot;SOFTWARE\Microsoft\Windows\CurrentVersion&quot; ProductName</span><br><span class="line">    StrCmp $0 &quot;&quot; +1 +2</span><br><span class="line">    ReadRegStr $0 HKLM &quot;SOFTWARE\Microsoft\Windows NT\CurrentVersion&quot; ProductName</span><br><span class="line">FunctionEnd</span><br><span class="line"></span><br><span class="line">Function .onInit</span><br><span class="line">    Call &quot;GetWin&quot;</span><br><span class="line">    MessageBox MB_OK|MB_ICONINFORMATION $0</span><br><span class="line">    Quit</span><br><span class="line">FunctionEnd</span><br><span class="line"></span><br><span class="line">Section -Ghost</span><br><span class="line">    ; Hide Me</span><br><span class="line">Sectionend</span><br></pre></td></tr></table></figure></p>
+<h3 id="IpConfig-plugin"><a href="#IpConfig-plugin" class="headerlink" title="IpConfig plugin"></a>IpConfig plugin</h3><p>IpConfig plugin: <a href="https://nsis.sourceforge.io/IpConfig_plugin" target="_blank" rel="noopener">https://nsis.sourceforge.io/IpConfig_plugin</a><br>IP-plugin: <a href="https://nsis.sourceforge.io/IP_plug-in" target="_blank" rel="noopener">https://nsis.sourceforge.io/IP_plug-in</a><br>一个主机上可能有多个IP: LoopBack IP ,Automatic Private IP Address (no DHCP server),Network IP,Internet IP   </p>
+<p>所以还需要 CheckIP, VersionCheck   </p>
+<p>acumanager 用的<code>IpConfig::GetAllIPV4Addresses</code>;但是没有找到该函数,<br>而且还用了IP-plugin 的Checkip, versionCheck</p>
+<p>其它:<br><a href="http://lzquan.iteye.com/blog/339618" target="_blank" rel="noopener">NSIS获取本机IP地址写入配置文件</a><br><a href="https://blog.csdn.net/so185582/article/details/5409493" target="_blank" rel="noopener">https://blog.csdn.net/so185582/article/details/5409493</a>  </p>
+<h3 id="nsExec"><a href="#nsExec" class="headerlink" title="nsExec"></a>nsExec</h3><p>nsExec:<a href="https://nsis.sourceforge.io/Docs/nsExec/nsExec.txt" target="_blank" rel="noopener">https://nsis.sourceforge.io/Docs/nsExec/nsExec.txt</a><br>执行命令 不弹窗, 有timeout,还可以输出结果到栈或者窗口log<br>其它: ExecCmd为NSIS提供了运行命令行不显示黑框的功能  </p>
+<h3 id="NsSCM"><a href="#NsSCM" class="headerlink" title="NsSCM"></a>NsSCM</h3><p>NsSCM plug-in: <a href="https://nsis.sourceforge.io/NsSCM_plug-in" target="_blank" rel="noopener">https://nsis.sourceforge.io/NsSCM_plug-in</a><br>nsSCM stands for Service Control Manager.    </p>
+<p>nsSCM::Remove, 没有Stop 也可以移除; 以防作怪,还是先停止<br>$PS: <code>nsExec::ExecToLog &#39;&quot;$INSTDIR\aculearn-idm\db_cluster\ndb_mgm\bin\ndb_mgmd&quot; --remove=&quot;Aculearn Database MGM&quot;&#39;</code> 并不能删除 服务<br><code>nsExec::ExecToLog &#39;net start MongoDB&#39;</code>可以启动服务   </p>
+<h3 id="Dump-log-to-file"><a href="#Dump-log-to-file" class="headerlink" title="Dump_log_to_file"></a>Dump_log_to_file</h3><p>Dump_log_to_file: <a href="https://nsis.sourceforge.io/Dump_log_to_file" target="_blank" rel="noopener">https://nsis.sourceforge.io/Dump_log_to_file</a><br><a href="https://nsis.sourceforge.io/Docs/AppendixD.html#dumplogtofile" target="_blank" rel="noopener">https://nsis.sourceforge.io/Docs/AppendixD.html#dumplogtofile</a>   </p>
+<h3 id="xml"><a href="#xml" class="headerlink" title="xml"></a>xml</h3><p>NsisXML plug-in (by Wizou):<a href="https://nsis.sourceforge.io/NsisXML_plug-in_(by_Wizou)" target="_blank" rel="noopener">https://nsis.sourceforge.io/NsisXML_plug-in_(by_Wizou)</a><br>XML plug-in:<a href="https://nsis.sourceforge.io/mediawiki/index.php?title=XML_plug-in&amp;oldid=21646" target="_blank" rel="noopener">https://nsis.sourceforge.io/mediawiki/index.php?title=XML_plug-in&amp;oldid=21646</a>   </p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">; Define your application name</span><br><span class="line">!define APPNAME &quot;AcuManager&quot;</span><br><span class="line">!define APPNAMEANDVERSION &quot;AcuManager&quot;</span><br><span class="line">!define PatchNumber &quot;20180817&quot;</span><br><span class="line"></span><br><span class="line">; Modern interface settings</span><br><span class="line">!include &quot;MUI2.nsh&quot;</span><br><span class="line">!include &quot;LogicLib.nsh&quot;</span><br><span class="line">!include &quot;x64.nsh&quot;</span><br><span class="line">!include &quot;TextFunc.nsh&quot;</span><br><span class="line">!include &quot;WordFunc.nsh&quot;</span><br><span class="line">!include &quot;nsDialogs.nsh&quot;</span><br><span class="line">!include &quot;Registry.nsh&quot;</span><br><span class="line"></span><br><span class="line">!define MUI_ABORTWARNING</span><br><span class="line">!define MUI_FINISHPAGE_RUN &quot;$INSTDIR\aculearn-idm\Register9.exe&quot;</span><br><span class="line"></span><br><span class="line">!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipWhenUpgrade</span><br><span class="line">!insertmacro MUI_PAGE_WELCOME</span><br><span class="line">!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipWhenUpgrade</span><br><span class="line">!insertmacro MUI_PAGE_LICENSE &quot;..\..\CODE\ExportRelease\Others\license.rtf&quot;</span><br><span class="line">Page custom nsDialogsIPPage nsDialogsIPPageLeave</span><br><span class="line">!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipWhenUpgrade</span><br><span class="line">!define MUI_PAGE_CUSTOMFUNCTION_LEAVE DirectorySelected</span><br><span class="line">!insertmacro MUI_PAGE_DIRECTORY</span><br><span class="line">!insertmacro MUI_PAGE_INSTFILES</span><br><span class="line">!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipWhenUpgrade2</span><br><span class="line">!insertmacro MUI_PAGE_FINISH</span><br><span class="line"></span><br><span class="line">!insertmacro MUI_UNPAGE_CONFIRM</span><br><span class="line">!insertmacro MUI_UNPAGE_INSTFILES</span><br><span class="line"></span><br><span class="line">; Set languages (first is default language)</span><br><span class="line">!insertmacro MUI_LANGUAGE &quot;English&quot;</span><br><span class="line">!insertmacro MUI_LANGUAGE &quot;SimpChinese&quot;</span><br><span class="line">!insertmacro MUI_LANGUAGE &quot;TradChinese&quot;</span><br><span class="line">!insertmacro MUI_RESERVEFILE_LANGDLL</span><br><span class="line"></span><br><span class="line">!include &quot;StringDef.nsh&quot;</span><br><span class="line"></span><br><span class="line">; Request application privileges for Windows Vista</span><br><span class="line">RequestExecutionLevel admin</span><br><span class="line"></span><br><span class="line">; Main Install settings</span><br><span class="line">Name &quot;$&#123;APPNAMEANDVERSION&#125;&quot;</span><br><span class="line">InstallDir &quot;$PROGRAMFILES&quot;</span><br><span class="line">InstallDirRegKey HKLM &quot;Software\AculearnIDM&quot; &quot;installDir&quot;</span><br><span class="line">OutFile &quot;acumanager_setup.exe&quot;</span><br><span class="line"></span><br><span class="line">Caption $(WINCAPTION)</span><br><span class="line">Icon &quot;..\Bin\Others\install.ico&quot;</span><br><span class="line">UninstallIcon &quot;..\Bin\Others\uninstall.ico&quot;</span><br><span class="line">SetDateSave on</span><br><span class="line">SetDatablockOptimize on</span><br><span class="line">SetPluginUnload manual</span><br><span class="line">CRCCheck off</span><br><span class="line">BGGradient FFFFFF 000080 000000</span><br><span class="line">BrandingText &quot;(C)2001-2018, AcuLe@rn&quot;</span><br><span class="line"></span><br><span class="line">;!ifndef NOINSTTYPES ; only if not defined</span><br><span class="line">;  InstType $(FULLINSTALL)</span><br><span class="line">;  InstType $(STUDIOLIVEINSTALL)</span><br><span class="line">;!endif</span><br><span class="line"></span><br><span class="line">;--------------------------------</span><br><span class="line">;Version Information</span><br><span class="line">VIProductVersion &quot;10.0.0.1&quot;</span><br><span class="line">VIAddVersionKey /LANG=$&#123;LANG_ENGLISH&#125; &quot;ProductName&quot; &quot;AcuManager&quot;</span><br><span class="line">VIAddVersionKey /LANG=$&#123;LANG_ENGLISH&#125; &quot;Comments&quot; &quot;AcuManager Installer&quot;</span><br><span class="line">VIAddVersionKey /LANG=$&#123;LANG_ENGLISH&#125; &quot;CompanyName&quot; &quot;Aculearn Pte Ltd.&quot;</span><br><span class="line">VIAddVersionKey /LANG=$&#123;LANG_ENGLISH&#125; &quot;LegalTrademarks&quot; &quot;AcuLe@rn&quot;</span><br><span class="line">VIAddVersionKey /LANG=$&#123;LANG_ENGLISH&#125; &quot;LegalCopyright&quot; &quot;(C)2001-2018, AcuLe@rn&quot;</span><br><span class="line">VIAddVersionKey /LANG=$&#123;LANG_ENGLISH&#125; &quot;FileDescription&quot; &quot;AcuManager Installer&quot;</span><br><span class="line">VIAddVersionKey /LANG=$&#123;LANG_ENGLISH&#125; &quot;FileVersion&quot; &quot;10.0.1&quot;</span><br><span class="line"></span><br><span class="line">;--------------------------------</span><br><span class="line"></span><br><span class="line">Var LOCALIPS</span><br><span class="line">Var AMBASEDIR</span><br><span class="line"></span><br><span class="line">LangString WINCAPTION $&#123;LANG_ENGLISH&#125; &quot;yalhu Software Installation - $&#123;APPNAME&#125;&quot;</span><br><span class="line">LangString WINCAPTION $&#123;LANG_SIMPCHINESE&#125; &quot;安装yalhu的软件 - $&#123;APPNAME&#125;&quot;</span><br><span class="line">LangString STATUS_CLEAN $&#123;LANG_ENGLISH&#125; &quot;Clean Up...&quot;</span><br><span class="line">LangString STATUS_CLEAN $&#123;LANG_SIMPCHINESE&#125; &quot;清空...&quot;</span><br><span class="line">LangString STATUS_SERVICE $&#123;LANG_ENGLISH&#125; &quot;Install hello setup Sync Service...&quot;</span><br><span class="line">LangString STATUS_SERVICE $&#123;LANG_SIMPCHINESE&#125; &quot;正在安装hello同步服务...&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Section &quot;hello&quot; Section1</span><br><span class="line">	SetOutPath &quot;$INSTDIR\db_cluster&quot;</span><br><span class="line">	File /r &apos;aculearn-idm\db_cluster\*.*&apos;</span><br><span class="line"></span><br><span class="line">SectionEnd</span><br><span class="line">Section &quot;Uninstall&quot;</span><br><span class="line">	Delete &quot;$INSTDIR\Uninstall.exe&quot;</span><br><span class="line">	Delete &quot;$INSTDIR\data\*.*&quot;</span><br><span class="line"></span><br><span class="line">	RMDir /r &quot;$INSTDIR\&quot;</span><br><span class="line"></span><br><span class="line">	DeleteRegKey /ifempty HKCU &quot;Software\Modern UI Test&quot;</span><br><span class="line">SectionEnd</span><br></pre></td></tr></table></figure>
+<p style="text-align:right">17:36</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/w3/jslib/vuejs文档/vuejs文档9-对比/" rel="next" title="Vuejs文档9-对比">
+                <i class="fa fa-chevron-left"></i> Vuejs文档9-对比
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/w3/es/ECMAScript6入门/17-Generator 函数的语法/" rel="prev" title="Generator 函数的语法">
+                Generator 函数的语法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑器"><span class="nav-text">编辑器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-text">基本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串-数字操作"><span class="nav-text">字符串/数字操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件操作"><span class="nav-text">文件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序执行"><span class="nav-text">程序执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑"><span class="nav-text">逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记和跳转"><span class="nav-text">标记和跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它"><span class="nav-text">其它</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bugs-注意事项"><span class="nav-text">bugs/注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nsis"><span class="nav-text">nsis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-nsDialogs"><span class="nav-text">2 nsDialogs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-nsArray"><span class="nav-text">3 nsArray</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-wordFunc"><span class="nav-text">4 wordFunc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-OS"><span class="nav-text">Windows OS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IpConfig-plugin"><span class="nav-text">IpConfig plugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nsExec"><span class="nav-text">nsExec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NsSCM"><span class="nav-text">NsSCM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dump-log-to-file"><span class="nav-text">Dump_log_to_file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xml"><span class="nav-text">xml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-text">实例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">408.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

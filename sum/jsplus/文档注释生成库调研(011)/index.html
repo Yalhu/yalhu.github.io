@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="为mediasoup准备，或者其他后来的可能性；接触了好些文档了仍然没有使用经验；不过，md经验不少，除了没有写过一些公式/流程图等 2018.2.22 四 17:10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文档注释生成库调研">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/文档注释生成库调研(011)/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="为mediasoup准备，或者其他后来的可能性；接触了好些文档了仍然没有使用经验；不过，md经验不少，除了没有写过一些公式/流程图等 2018.2.22 四 17:10">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文档注释生成库调研">
+<meta name="twitter:description" content="为mediasoup准备，或者其他后来的可能性；接触了好些文档了仍然没有使用经验；不过，md经验不少，除了没有写过一些公式/流程图等 2018.2.22 四 17:10">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/文档注释生成库调研(011)/">
+
+
+
+
+
+  <title>文档注释生成库调研 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/文档注释生成库调研(011)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文档注释生成库调研</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T08:00:00+08:00">
+                2018-02-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+          
+          
+
+          
+          
+             <span id="/sum/jsplus/文档注释生成库调研(011)/" class="leancloud_visitors" data-flag-title="文档注释生成库调研">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,455
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>为mediasoup准备，或者其他后来的可能性；接触了好些文档了<br>仍然没有使用经验；不过，md经验不少，除了没有写过一些公式/流程图等</p>
+<p style="text-align:right">2018.2.22 四 17:10</p>
+
+<a id="more"></a> 
+<!-- 1.24及之前有研究过，现记    -->
+<h1 id="A-Javascript自动化文档工具：YUI-Doc-JSDoc-3-JSDuck等比较"><a href="#A-Javascript自动化文档工具：YUI-Doc-JSDoc-3-JSDuck等比较" class="headerlink" title="A [Javascript自动化文档工具：YUI Doc, JSDoc 3, JSDuck等比较]"></a>A [Javascript自动化文档工具：YUI Doc, JSDoc 3, JSDuck等比较]</h1><p>jsduck  yuidoc  jsdoc-3  文档生成  javascript  yeelan0319 2015年03月05日发布<br><a href="https://segmentfault.com/a/1190000002579067" target="_blank" rel="noopener">https://segmentfault.com/a/1190000002579067</a></p>
+<h2 id="文中涉及的工具"><a href="#文中涉及的工具" class="headerlink" title="文中涉及的工具"></a>文中涉及的工具</h2><p>JSDoc 3、YUIDoc、Dox、Docco、JSDuck</p>
+<h2 id="比较标准"><a href="#比较标准" class="headerlink" title="比较标准"></a>比较标准</h2><ul>
+<li>生成文档的易读性</li>
+<li>工具的可扩展性</li>
+<li>注释语法标准</li>
+<li>注释语义的丰富程度</li>
+</ul>
+<h2 id="长话短说"><a href="#长话短说" class="headerlink" title="长话短说"></a>长话短说</h2><p>对没有兴趣了解细节比较的你，可以快速浏览下面的总结来了解这些工具。</p>
+<ol>
+<li><p>YUIDoc是YUI的附属项目。YUI团队希望这个文档工具不仅仅可以支持Javascript，而是更多的脚本语言，因此它并不考虑实际的代码实施细节，而只是对注释部分进行了扫描。从好的一面来说，如果你同时使用了Ruby/PHP/Python等等，YUI或许是一个比较适合的工具。从反面来说，因为它没有考虑实施细节，你需要额外的变量声明、同时生成的文档有可能会和实际的实施细节不吻合。</p>
+</li>
+<li><p>JSDoc 3的前身是JSDoc Toolkit。它会对代码的具体实施进行扫描，因此你如果不按照符合JSDoc的注释语法来进行注释的话，可能生成的文档一个字也没有。虽然它的学习曲线很高，但是一旦掌握了之后，由于它提供了完整的模版开发，事件触发等等接口，其灵活性也是不容小觑的。</p>
+</li>
+<li><p>Dox是一个非常轻量级和可以定制化的工具，它使用和JSDoc 3兼容的注释语法标准，并将其转化成JSON格式。因此在呈现方式上具有比JSDoc 3更强的可定制性，当然也意味着你初期的麻烦会比较多。</p>
+</li>
+<li><p>Docco是一种行间注释的方式。比起API注释，它更适合于注释代码的实施逻辑，以便于后期程序员能够快速捕捉到原作者在此处的实施意图。应该说是非常适合开源项目、多个作者共同维护的一个文档工具。比如最经典的Backbone Annotated Source就是使用Docco进行注释的。</p>
+</li>
+<li><p>JSDuck由Sencha开发，因此对于自家extJS具有非常强大的支持功能，包括令人咋舌的实时代码修改。但即使你不是使用extJS进行开发，JSDuck仍然是一个非常强大的工具，一方面它的语法非常灵活，描述支持Markdown语法，上手难度远远低于JSDoc 3；另一方面它生成的文档可读性堪比YUIDoc，同时支持源码的对照，学习起来也非常的容易。要说JSDuck有什么不好的地方，估计就是它把一切都Handle太完美了以致于没有给你提供什么可以自己定制的余地。</p>
+</li>
+</ol>
+<p>最后我选择了JSDuck作为文档生成的工具。从目的上说，我需要生成的是提供给Q&amp;A和其他团队成员参考的API文档，考虑到毕竟写代码才是我们的主要工作，注释和文档越简单能够表达意思越好用，而JSDuck恰好十分符合我的需求。但是你选择使用哪种工具还需要根据使用场景来具体考虑，还请参考下面的细节比较</p>
+<h2 id="细节比较（JSDoc-3-YUI-JSDuck）"><a href="#细节比较（JSDoc-3-YUI-JSDuck）" class="headerlink" title="细节比较（JSDoc 3, YUI, JSDuck）"></a>细节比较（JSDoc 3, YUI, JSDuck）</h2><h3 id="1-生成文档的易读性（YUIDoc、JSDuck）"><a href="#1-生成文档的易读性（YUIDoc、JSDuck）" class="headerlink" title="1 生成文档的易读性（YUIDoc、JSDuck）"></a>1 生成文档的易读性（YUIDoc、JSDuck）</h3><p>。。。</p>
+<p># B [给 Web 开发人员推荐的文档生成工具]<br>阅读 1492 收藏 112 2017-09-22 原文链接：my.oschina.net<br><a href="https://juejin.im/entry/59c47ad7f265da065e323334" target="_blank" rel="noopener">https://juejin.im/entry/59c47ad7f265da065e323334</a>  </p>
+<h1 id="C-告别手写-API文档生成工具推荐"><a href="#C-告别手写-API文档生成工具推荐" class="headerlink" title="C 告别手写 API文档生成工具推荐"></a>C 告别手写 API文档生成工具推荐</h1><p><a href="http://www.csdn.net/article/2013-02-20/2814189-API_DOC_TOOLS" target="_blank" rel="noopener">http://www.csdn.net/article/2013-02-20/2814189-API_DOC_TOOLS</a><br>发表于2013-02-20 10:19| 次阅读| 来源CSDN| 0 条评论| 作者张红月<br>APIAPI文档工具开放平台</p>
+<blockquote>
+<p>摘要：随着API的迅速发展，如何编写出更加规范的API文档说明则显的尤为重要。你是否还通过手写的方式来生成和编写这些文档呢？那么你就OUT啦！话说工欲善其事必先利其器，本文分享8款非常好的API文档生成工具给大家。</p>
+</blockquote>
+<p>随着API的发展以及需求的日益增加，对API文本文档的需求与随之而来。相信许多开发人员都遇到过编写API文档方面的问题及烦恼。<br>你是否还通过手写的方式来生成和编写这些文档呢？那么你就OUT啦！话说工欲善其事必先利其器，本文分享8款非常好的API文档生成工具给大家。</p>
+<p>Web API文档工具列表</p>
+<ol>
+<li><p>Swagger ——Swagger框架可以通过代码生成漂亮的在线API，甚至可以提供运行示例。支持Scala、Java、Javascript、Ruby、PHP甚至 Actionscript 3。在线 Demo 。</p>
+</li>
+<li><p>I/O Docs ——I/O Docs是一个用于RESTful Web APIs的交互式文档系统。使用 JSON 模型根据资源、方法和参数定义 APIs。I/O Docs 将生成 JavaScript 客户端接口，可通过这些接口来调用系统。服务器端基于 Node.js 开发。在线Demo</p>
+</li>
+<li><p>apiary.io ——能够快速启动和运行文档，包括GitHub集成和I/O验证——更多建议可以前往Reddit查看上关于 Siyfion讨论。</p>
+</li>
+<li><p>Docco ——Docco是一个快速而随意、hundred-line-long、迭代程序风格的文档生成器。它会以HTML的方式显示评论和代码。</p>
+</li>
+<li><p>Dexy ——非常灵活的一款文档工具，支持任何语言编写的API。</p>
+</li>
+<li><p>Doxygen ——Doxgen可以从一套归档源文件开始，生成HTML格式的在线类浏览器，或离线的LATEX、RTF参考手册。对于未归档的源文件，也可以通过配置Doxygen来提取代码结构。 更多建议可以前往Reddi上查看 gkumar007相关讨论。</p>
+</li>
+<li><p>TurnAPI ——是一款付费的文档API工具。里面包含了智能WIKI编辑器、基于标准的Markdown、文档分支、还可以与Git、SVN、Mercurial同步、整洁的主题、友好的界面。</p>
+</li>
+</ol>
+<p>以上仅是作者在实践中发现的一些很好的工具，如果你有更好的建议或工具推荐，欢迎与我们分享。<br>来自：<a href="!http://www.mattsilverman.com/2013/02/tools-to-generate-beautiful-api-documentation.html">MATTSILVERMAN</a></p>
+<p># D JavaScript 文档生成工具<br>2014-01-22 JavaScript<br><a href="http://blog.inching.org/JavaScript/2014-01-22-javascript-document.html" target="_blank" rel="noopener">http://blog.inching.org/JavaScript/2014-01-22-javascript-document.html</a></p>
+<p>=================<br># E 利用 Gitbook 生成文档中心站点<br>2016-02-17<br><a href="http://blog.bugtags.com/2016/02/17/gitbook-docs/" target="_blank" rel="noopener">http://blog.bugtags.com/2016/02/17/gitbook-docs/</a></p>
+<p>====================<br># F [JSDoc中文文档]<br><a href="http://www.css88.com/doc/jsdoc/index.html" target="_blank" rel="noopener">http://www.css88.com/doc/jsdoc/index.html</a><br>## 使用Markdown插件</p>
+<p># G APIDOC<br><a href="http://apidocjs.com/" target="_blank" rel="noopener">http://apidocjs.com/</a></p>
+<p># H 使用Swagger构建Node.js API文档与Mock Server<br>Erum 关注 2017.10.27 17:52* 字数 1257 阅读 282评论 0喜欢 0赞赏 2<br><a href="https://www.jianshu.com/p/50446a0513f8" target="_blank" rel="noopener">https://www.jianshu.com/p/50446a0513f8</a></p>
+<p># I dox, 使用 Markdown 和jsdoc的节点的JavaScript文档生成器<br><a href="https://www.helplib.com/GitHub/article_58201" target="_blank" rel="noopener">https://www.helplib.com/GitHub/article_58201</a></p>
+<p>==============================<br># A Documentation generator for JS client? #2079<br><a href="https://github.com/swagger-api/swagger-codegen/issues/2079" target="_blank" rel="noopener">https://github.com/swagger-api/swagger-codegen/issues/2079</a><br># B swagger-api/swagger-js<br><a href="https://github.com/swagger-api/swagger-js" target="_blank" rel="noopener">https://github.com/swagger-api/swagger-js</a><br>Javascript library to connect to swagger-enabled APIs via browser or nodejs <a href="http://swagger.io" target="_blank" rel="noopener">http://swagger.io</a><br># C Surnet/swagger-jsdoc<br><a href="https://github.com/Surnet/swagger-jsdoc" target="_blank" rel="noopener">https://github.com/Surnet/swagger-jsdoc</a><br>Generates swagger doc based on JSDoc.<br># D wisdomtool/rest-client<br><a href="https://github.com/wisdomtool/rest-client" target="_blank" rel="noopener">https://github.com/wisdomtool/rest-client</a><br>A tool for automated testing REST API, generating exquisite testing report and REST API documentation.<br># E JacksonTian/doxmate<br><a href="https://github.com/JacksonTian/doxmate" target="_blank" rel="noopener">https://github.com/JacksonTian/doxmate</a><br>文档伴侣 <a href="http://html5ify.com/doxmate" target="_blank" rel="noopener">http://html5ify.com/doxmate</a></p>
+<p>============================</p>
+<h1 id="Z-实际"><a href="#Z-实际" class="headerlink" title="Z 实际"></a>Z 实际</h1><h2 id="一-资料整理"><a href="#一-资料整理" class="headerlink" title="一 资料整理"></a>一 资料整理</h2><ol>
+<li>就前三篇分析比较，文档生成工具</li>
+<li>第五篇 是利用 Gitbook生成文档中心站点：和文档还有点不同，取可取</li>
+<li>F和G 是jsdoc第三方文档，官网</li>
+<li>H是swagger的应用，和工作文档同（restfull api）</li>
+<li>后面基本都是一些工具类</li>
+<li>C 可以写swagger注释，生产swagger的风格</li>
+<li>D 估计是利用swagger生成的产品</li>
+<li>最后 Doxmate，风格不错，有模板</li>
+</ol>
+<p>好像还有esdoc</p>
+<h2 id="二-选择"><a href="#二-选择" class="headerlink" title="二 选择"></a>二 选择</h2><h3 id="2-1-分析"><a href="#2-1-分析" class="headerlink" title="2.1 分析"></a>2.1 分析</h3><ol>
+<li>JSDoc 3还不错，虽然样式丑，但自主开发性高，已有一些不错的模板，而且见到几个文档也是JSDoc，比如video.js,debugger.js等npm包</li>
+<li>上述基本都是基于前端的，生成md文件，然后可以再用插件生成网站；对前端友好<br>而非，swagger的json，yaml格式。</li>
+<li>实际有swagger和php生成的restful api，样式做restful api还不错</li>
+<li>swagger好像比JSDOC等文档注释要丰富一点，<br>好在，swagger有插件可以写基于JSDOC注释，写swagger风格样式</li>
+<li>文档注释，JSDOC适中一点，没有swagger复杂，也不那么随意</li>
+<li>JSDOC的文档相对其他几个好一些（swagger文档也不错）</li>
+<li>基于前端的几个，Dox可以使用和JSDoc 3兼容的注释语法标准，并将其转化成JSON格式（考虑可以向swagger转）<br>E doxmate差不多就是dox</li>
+</ol>
+<h3 id="2-2-结果"><a href="#2-2-结果" class="headerlink" title="2.2 结果"></a>2.2 结果</h3><p>从分析，可知识JSDoc（名字上也和JS有联系，天生的喜感；用的也多，简单，稳定，可扩展）</p>
+<p style="text-align:right">18:10 </p>
+
+<h2 id="三-补充"><a href="#三-补充" class="headerlink" title="三 补充"></a>三 补充</h2><ol>
+<li>上述是从代码文件中，提取注释，生成md或者静态html文件，从而生成文档API网页</li>
+<li>swagger是json或者YAML格式的文件，生成文档API网页；也可以从代码注释中提取<br>单独的JSDOc 不知道不能生成文档文件</li>
+<li>也可以直接写md文件，生成文档API，可以利用gitbook等其他方式生成网站。（hexo搭建的博客系统，也可以生成网页）</li>
+<li>也可以直接写html等格式文件，自定义样式</li>
+<li>restfullAPI，php中应用的swagger注释，可提取出json或YAML格式文件产生网页；<br>该网页可交互：用户提交（符合格式的）请求，可以返回相应的结果</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Yalhu
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/sum/jsplus/文档注释生成库调研(011)/" title="文档注释生成库调研">http://yoursite.com/sum/jsplus/文档注释生成库调研(011)/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/w3/pkg/webpack-v3.10.0/" rel="next" title="Webpack文档">
+                <i class="fa fa-chevron-left"></i> Webpack文档
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/jsplus/canvas库研究--非图表类/" rel="prev" title="Canvas库研究--非图表类">
+                Canvas库研究--非图表类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-Javascript自动化文档工具：YUI-Doc-JSDoc-3-JSDuck等比较"><span class="nav-text">A [Javascript自动化文档工具：YUI Doc, JSDoc 3, JSDuck等比较]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文中涉及的工具"><span class="nav-text">文中涉及的工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较标准"><span class="nav-text">比较标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#长话短说"><span class="nav-text">长话短说</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#细节比较（JSDoc-3-YUI-JSDuck）"><span class="nav-text">细节比较（JSDoc 3, YUI, JSDuck）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-生成文档的易读性（YUIDoc、JSDuck）"><span class="nav-text">1 生成文档的易读性（YUIDoc、JSDuck）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-告别手写-API文档生成工具推荐"><span class="nav-text">C 告别手写 API文档生成工具推荐</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Z-实际"><span class="nav-text">Z 实际</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-资料整理"><span class="nav-text">一 资料整理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-选择"><span class="nav-text">二 选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-分析"><span class="nav-text">2.1 分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-结果"><span class="nav-text">2.2 结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-补充"><span class="nav-text">三 补充</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">408.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

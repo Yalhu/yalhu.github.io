@@ -1,0 +1,122 @@
+<p>title: 变量的解构赋值<br>date: 2018.9.6<br>tags: </p>
+<ul>
+<li>es</li>
+</ul>
+<hr>
+<p style="text-align:right">2018.9.6 星期四 11：56 </p>
+
+<p>数组的解构赋值<br>对象的解构赋值<br>字符串的解构赋值<br>数值和布尔值的解构赋值<br>函数参数的解构赋值<br>圆括号问题<br>用途</p>
+<!-- more -->
+<h2 id="1-数组的解构赋值"><a href="#1-数组的解构赋值" class="headerlink" title="1. 数组的解构赋值"></a>1. 数组的解构赋值</h2><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）。<code>let [a, b, c] = [1, 2, 3];</code><br>本质上，这种写法属于“模式匹配”，只要等号两边的模式相同，左边的变量就会被赋予对应的值。<br>如果解构不成功，变量的值就等于undefined。<br>另一种情况是不完全解构，即等号左边的模式，只匹配一部分的等号右边的数组。    </p>
+<p>上面的语句都会报错，因为等号右边的值，要么转为对象以后不具备 Iterator 接口（前五个表达式），要么本身就不具备 Iterator 接口（最后一个表达式）。      </p>
+<h3 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h3><p>解构赋值允许指定默认值。<br>如果默认值是一个表达式，那么这个表达式是惰性求值的，即只有在用到的时候，才会求值。</p>
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>{
+  <span class="built_in">console</span>.log(<span class="string">'aaa'</span>);
+}
+
+<span class="keyword">let</span> [x = f()] = [<span class="number">1</span>]; <span class="comment">//因为x能取到值，所以函数f根本不会执行。</span>
+</code></pre>
+<p>默认值可以引用解构赋值的其他变量，但该变量必须已经声明。    </p>
+<h2 id="2-对象的解构赋值"><a href="#2-对象的解构赋值" class="headerlink" title="2. 对象的解构赋值"></a>2. 对象的解构赋值</h2><p>对象的解构与数组有一个重要的不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值。      </p>
+<pre><code class="javascript"><span class="keyword">let</span> { bar, foo } = { <span class="attr">foo</span>: <span class="string">"aaa"</span>, <span class="attr">bar</span>: <span class="string">"bbb"</span> };    
+<span class="keyword">let</span> { <span class="attr">foo</span>: baz } = { <span class="attr">foo</span>: <span class="string">'aaa'</span>, <span class="attr">bar</span>: <span class="string">'bbb'</span> };
+baz <span class="comment">// "aaa"</span>
+
+<span class="comment">// 这实际上说明，对象的解构赋值是下面形式的简写（参见《对象的扩展》一章）。</span>
+    <span class="comment">// 也就是说，对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。真正被赋值的是后者，而不是前者。</span>
+<span class="keyword">let</span> { <span class="attr">foo</span>: foo, <span class="attr">bar</span>: bar } = { <span class="attr">foo</span>: <span class="string">"aaa"</span>, <span class="attr">bar</span>: <span class="string">"bbb"</span> };
+baz <span class="comment">// "aaa"</span>
+foo <span class="comment">// error: foo is not defined</span>
+<span class="comment">//foo是匹配的模式，baz才是变量。真正被赋值的是变量baz，而不是模式foo。</span>
+</code></pre>
+<p>#### 与数组一样，解构也可以用于嵌套结构的对象。</p>
+<pre><code class="javascript"><span class="keyword">let</span> obj = {
+  p: [
+    <span class="string">'Hello'</span>,
+    { <span class="attr">y</span>: <span class="string">'World'</span> }
+  ]
+};
+<span class="keyword">let</span> { <span class="attr">p</span>: [x, { y }] } = obj;
+x <span class="comment">// "Hello"</span>
+y <span class="comment">// "World"</span>
+
+<span class="comment">// 注意，这时p是模式，不是变量，因此不会被赋值。如果p也要作为变量赋值，可以写成下面这样。</span>
+<span class="keyword">let</span> { p, <span class="attr">p</span>: [x, { y }] } = obj;
+x <span class="comment">// "Hello"</span>
+y <span class="comment">// "World"</span>
+p <span class="comment">// ["Hello", {y: "World"}]</span>
+
+</code></pre>
+<p>#### 对象的解构也可以指定默认值。<br>默认值生效的条件是，对象的属性值严格等于undefined。     </p>
+<pre><code>var {x = 3} = {x: undefined};
+x // 3
+var {x = 3} = {x: null};
+x // null
+</code></pre><p>#### 如果解构失败，变量的值等于undefined。<br><code>let {foo} = {bar: &#39;baz&#39;}; foo // undefined</code></p>
+<p>#### 如果解构模式是嵌套的对象，而且子对象所在的父属性不存在，那么将会报错。<br><code>let {foo: {bar}} = {baz: &#39;baz&#39;};// 报错</code></p>
+<p>#### 如果要将一个已经声明的变量用于解构赋值，必须非常小心。    </p>
+<pre><code class="javascript"><span class="comment">// 错误``的写法</span>
+<span class="keyword">let</span> x;
+{x} = {<span class="attr">x</span>: <span class="number">1</span>};
+<span class="comment">// SyntaxError: syntax error</span>
+上面代码的写法会报错，因为 JavaScript 引擎会将{x}理解成一个代码块，从而发生语法错误。只有不将大括号写在行首，避免 JavaScript 将其解释为代码块，才能解决这个问题。
+
+<span class="comment">// 正确的写法</span>
+<span class="keyword">let</span> x;
+({x} = {<span class="attr">x</span>: <span class="number">1</span>});
+</code></pre>
+<p>#### 解构赋值允许等号左边的模式之中，不放置任何变量名。因此，可以写出非常古怪的赋值表达式。        </p>
+<pre><code class="javascript">({} = [<span class="literal">true</span>, <span class="literal">false</span>]);
+({} = <span class="string">'abc'</span>);
+({} = []);
+</code></pre>
+<p>#### 对象的解构赋值，可以很方便地将现有对象的方法，赋值到某个变量。<br>由于数组本质是特殊的对象，因此可以对数组进行对象属性的解构。    </p>
+<pre><code class="javascript"><span class="keyword">let</span> { log, sin, cos } = <span class="built_in">Math</span>;
+
+<span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
+<span class="keyword">let</span> {<span class="number">0</span> : first, [arr.length - <span class="number">1</span>] : last} = arr;
+first <span class="comment">// 1</span>
+last <span class="comment">// 3</span>
+</code></pre>
+<h2 id="3-字符串的解构赋值"><a href="#3-字符串的解构赋值" class="headerlink" title="3. 字符串的解构赋值"></a>3. 字符串的解构赋值</h2><p>字符串也可以解构赋值。这是因为此时，字符串被转换成了一个类似数组的对象。<br>类似数组的对象都有一个length属性，因此还可以对这个属性解构赋值。    </p>
+<pre><code class="javascript"><span class="keyword">let</span> {<span class="attr">length</span> : len} = <span class="string">'hello'</span>;
+len <span class="comment">// 5</span>
+</code></pre>
+<h2 id="4-数值和布尔值的解构赋值"><a href="#4-数值和布尔值的解构赋值" class="headerlink" title="4. 数值和布尔值的解构赋值"></a>4. 数值和布尔值的解构赋值</h2><p>解构赋值时，如果等号右边是数值和布尔值，则会先转为对象。<br>解构赋值的规则是，只要等号右边的值不是对象或数组，就先将其转为对象。由于undefined和null无法转为对象，所以对它们进行解构赋值，都会报错。     </p>
+<pre><code class="javascript"><span class="keyword">let</span> {<span class="attr">toString</span>: s} = <span class="number">123</span>;
+s === <span class="built_in">Number</span>.prototype.toString <span class="comment">// true</span>
+<span class="keyword">let</span> {<span class="attr">toString</span>: s} = <span class="literal">true</span>;
+s === <span class="built_in">Boolean</span>.prototype.toString <span class="comment">// true</span>
+
+<span class="keyword">let</span> { <span class="attr">prop</span>: x } = <span class="literal">undefined</span>; <span class="comment">// TypeError</span>
+<span class="keyword">let</span> { <span class="attr">prop</span>: y } = <span class="literal">null</span>; <span class="comment">// TypeError</span>
+</code></pre>
+<h2 id="5-函数参数的解构赋值"><a href="#5-函数参数的解构赋值" class="headerlink" title="5. 函数参数的解构赋值"></a>5. 函数参数的解构赋值</h2><p>函数参数的解构也可以使用默认值。    </p>
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">[x, y]</span>)</span>{
+  <span class="keyword">return</span> x + y;
+}
+add([<span class="number">1</span>, <span class="number">2</span>]); <span class="comment">// 3</span>
+
+[[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]].map(<span class="function">(<span class="params">[a, b]</span>) =&gt;</span> a + b);<span class="comment">// [ 3, 7 ]</span>
+
+<span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params">{x = <span class="number">0</span>, y = <span class="number">0</span>} = {}</span>) </span>{
+  <span class="keyword">return</span> [x, y];
+}
+move({<span class="attr">x</span>: <span class="number">3</span>, <span class="attr">y</span>: <span class="number">8</span>}); <span class="comment">// [3, 8]</span>
+move({<span class="attr">x</span>: <span class="number">3</span>}); <span class="comment">// [3, 0]</span>
+move({}); <span class="comment">// [0, 0]</span>
+move(); <span class="comment">// [0, 0]</span>
+
+[<span class="number">1</span>, <span class="literal">undefined</span>, <span class="number">3</span>].map(<span class="function">(<span class="params">x = <span class="string">'yes'</span></span>) =&gt;</span> x);<span class="comment">// [ 1, 'yes', 3 ]</span>
+</code></pre>
+<h2 id="6-圆括号问题"><a href="#6-圆括号问题" class="headerlink" title="6. 圆括号问题"></a>6. 圆括号问题</h2><p>解构赋值虽然很方便，但是解析起来并不容易。对于编译器来说，一个式子到底是模式，还是表达式，没有办法从一开始就知道，必须解析到（或解析不到）等号才能知道。</p>
+<p>由此带来的问题是，如果模式中出现圆括号怎么处理。ES6 的规则是，只要有可能导致解构的歧义，就不得使用圆括号。</p>
+<p>但是，这条规则实际上不那么容易辨别，处理起来相当麻烦。因此，建议只要有可能，就不要在模式中放置圆括号。</p>
+<h3 id="不能使用圆括号的情况"><a href="#不能使用圆括号的情况" class="headerlink" title="不能使用圆括号的情况"></a>不能使用圆括号的情况</h3><p>（1）变量声明语句<br>（2）函数参数：函数参数也属于变量声明<br>（3）赋值语句的模式     </p>
+<h3 id="可以使用圆括号的情况"><a href="#可以使用圆括号的情况" class="headerlink" title="可以使用圆括号的情况"></a>可以使用圆括号的情况</h3><p>可以使用圆括号的情况只有一种：赋值语句的非模式部分，可以使用圆括号。</p>
+<pre><code class="javascript">[(b)] = [<span class="number">3</span>]; <span class="comment">// 正确</span>
+({ <span class="attr">p</span>: (d) } = {}); <span class="comment">// 正确</span>
+[(<span class="built_in">parseInt</span>.prop)] = [<span class="number">3</span>]; <span class="comment">// 正确</span>
+</code></pre>
+<h2 id="7-用途"><a href="#7-用途" class="headerlink" title="7. 用途"></a>7. 用途</h2><p>（1）交换变量的值<br>（2）从函数返回多个值<br>（3）函数参数的定义：一组有/无次序的值<br>（4）提取 JSON 数据<br>（5）函数参数的默认值<br>（6）遍历 Map 结构<br>（7）输入模块的指定方法     </p>
+<p style="text-align:right">12:21 </p>

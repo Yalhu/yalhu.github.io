@@ -1,0 +1,92 @@
+<p>title: 字符串的扩展<br>date: 2018.9.6<br>tags: </p>
+<ul>
+<li>es</li>
+</ul>
+<hr>
+<p style="text-align:right">2018.9.6 星期四 12:56 </p>
+
+
+<p>1. 字符的 Unicode 表示法<br>2. codePointAt()<br>3. String.fromCodePoint()<br>4. 字符串的遍历器接口<br>5. normalize()<br>6. includes(), startsWith(), endsWith()<br>7. repeat()<br>8. padStart()，padEnd()<br>9. matchAll()<br>10. 模板字符串<br>11. 实例：模板编译<br>12. 标签模板<br>13. String.raw()<br>14. 模板字符串的限制 </p>
+<!-- more -->
+<h2 id="1-字符的-Unicode-表示法"><a href="#1-字符的-Unicode-表示法" class="headerlink" title="1. 字符的 Unicode 表示法"></a>1. 字符的 Unicode 表示法</h2><p>但是，这种表示法只限于码点在\u0000~\uFFFF之间的字符。超出这个范围的字符，必须用两个双字节的形式表示。<br>ES6 对这一点做出了改进，只要将码点放入大括号，就能正确解读该字符。<br>有了这种表示法之后，JavaScript 共有 6 种方法可以表示一个字符。      </p>
+<pre><code class="JavaScript"><span class="string">"\uD842\uDFB7"</span><span class="comment">// "𠮷"</span>
+<span class="string">"\u20BB7"</span><span class="comment">// " 7"</span>
+
+<span class="string">"\u{20BB7}"</span><span class="comment">// "𠮷"       </span>
+<span class="string">'\u{1F680}'</span> === <span class="string">'\uD83D\uDE80'</span> <span class="comment">// true</span>
+<span class="comment">// 6 中方法</span>
+<span class="string">'\z'</span> === <span class="string">'z'</span>  <span class="comment">// true</span>
+<span class="string">'\172'</span> === <span class="string">'z'</span> <span class="comment">// true</span>
+<span class="string">'\x7A'</span> === <span class="string">'z'</span> <span class="comment">// true</span>
+<span class="string">'\u007A'</span> === <span class="string">'z'</span> <span class="comment">// true</span>
+<span class="string">'\u{7A}'</span> === <span class="string">'z'</span> <span class="comment">// true</span>
+</code></pre>
+<h2 id="2-codePointAt"><a href="#2-codePointAt" class="headerlink" title="2. codePointAt()"></a>2. codePointAt()</h2><p>JavaScript 内部，字符以 UTF-16 的格式储存，每个字符固定为2个字节。对于那些需要4个字节储存的字符（Unicode 码点大于0xFFFF的字符），JavaScript 会认为它们是两个字符。<br>ES6 提供了codePointAt方法，能够正确处理 4 个字节储存的字符，返回一个字符的码点。    </p>
+<pre><code>var s = &quot;𠮷&quot;;
+
+s.length // 2
+s.charAt(0) // &apos;&apos;
+s.charAt(1) // &apos;&apos;
+s.charCodeAt(0) // 55362
+s.charCodeAt(1) // 57271
+
+let s = &apos;𠮷a&apos;;
+s.codePointAt(0) // 134071
+s.codePointAt(1) // 57271
+s.codePointAt(2) // 97
+</code></pre><p>总之，codePointAt方法会正确返回 32 位的 UTF-16 字符的码点。对于那些两个字节储存的常规字符，它的返回结果与charCodeAt方法相同。</p>
+<p>#### codePointAt方法返回的是码点的十进制值，如果想要十六进制的值，可以使用toString方法转换一下。   </p>
+<pre><code class="JavaScript"><span class="keyword">let</span> s = <span class="string">'𠮷a'</span>;
+s.codePointAt(<span class="number">0</span>).toString(<span class="number">16</span>) <span class="comment">// "20bb7"</span>
+s.codePointAt(<span class="number">2</span>).toString(<span class="number">16</span>) <span class="comment">// "61"</span>
+
+<span class="keyword">for</span> (<span class="keyword">let</span> ch <span class="keyword">of</span> s) {
+  <span class="built_in">console</span>.log(ch.codePointAt(<span class="number">0</span>).toString(<span class="number">16</span>));
+}
+<span class="comment">// 20bb7</span>
+<span class="comment">// 61</span>
+</code></pre>
+<p>你可能注意到了，codePointAt方法的参数，仍然是不正确的。比如，上面代码中，字符a在字符串s的正确位置序号应该是 1，但是必须向codePointAt方法传入 2。解决这个问题的一个办法是使用for…of循环，因为它会正确识别 32 位的 UTF-16 字符。    </p>
+<p>#### codePointAt方法是测试一个字符由两个字节还是由四个字节组成的最简单方法。</p>
+<pre><code>function is32Bit(c) {
+  return c.codePointAt(0) &gt; 0xFFFF;
+}
+</code></pre><h2 id="3-String-fromCodePoint"><a href="#3-String-fromCodePoint" class="headerlink" title="3. String.fromCodePoint()"></a>3. String.fromCodePoint()</h2><p>ES6 提供了String.fromCodePoint方法，可以识别大于0xFFFF的字符，弥补了String.fromCharCode方法的不足。在作用上，正好与codePointAt方法相反。        </p>
+<p>注意，fromCodePoint方法定义在String对象上，而codePointAt方法定义在字符串的实例对象上。  </p>
+<h2 id="4-字符串的遍历器接口"><a href="#4-字符串的遍历器接口" class="headerlink" title="4. 字符串的遍历器接口"></a>4. 字符串的遍历器接口</h2><p>使得字符串可以被for…of循环遍历。      </p>
+<p>除了遍历字符串，<br>这个遍历器最大的优点是可以识别大于0xFFFF的码点，传统的for循环无法识别这样的码点。</p>
+<pre><code class="JavaScript"><span class="keyword">let</span> text = <span class="built_in">String</span>.fromCodePoint(<span class="number">0x20BB7</span>);
+<span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; text.length; i++) {
+  <span class="built_in">console</span>.log(text[i]);
+}
+<span class="comment">// " "</span>
+<span class="comment">// " "</span>
+
+<span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> text) {
+  <span class="built_in">console</span>.log(i);
+}
+<span class="comment">// "𠮷"</span>
+</code></pre>
+<h2 id="5-normalize"><a href="#5-normalize" class="headerlink" title="5. normalize()"></a>5. normalize()</h2><h2 id="6-includes-startsWith-endsWith"><a href="#6-includes-startsWith-endsWith" class="headerlink" title="6. includes(), startsWith(), endsWith()"></a>6. includes(), startsWith(), endsWith()</h2><h2 id="7-repeat"><a href="#7-repeat" class="headerlink" title="7. repeat()"></a>7. repeat()</h2><h2 id="8-padStart-，padEnd"><a href="#8-padStart-，padEnd" class="headerlink" title="8. padStart()，padEnd()"></a>8. padStart()，padEnd()</h2><h2 id="9-matchAll"><a href="#9-matchAll" class="headerlink" title="9. matchAll()"></a>9. matchAll()</h2><h2 id="10-模板字符串"><a href="#10-模板字符串" class="headerlink" title="10. 模板字符串"></a>10. 模板字符串</h2><pre><code class="javascript"><span class="keyword">const</span> tmpl = <span class="function"><span class="params">addrs</span> =&gt;</span> <span class="string">`</span>
+<span class="string">  &lt;table&gt;</span>
+<span class="string">  <span class="subst">${addrs.map(addr =&gt; <span class="string">`</span></span></span>
+<span class="string"><span class="subst"><span class="string">    &lt;tr&gt;&lt;td&gt;<span class="subst">${addr.first}</span>&lt;/td&gt;&lt;/tr&gt;</span></span></span>
+<span class="string"><span class="subst"><span class="string">    &lt;tr&gt;&lt;td&gt;<span class="subst">${addr.last}</span>&lt;/td&gt;&lt;/tr&gt;</span></span></span>
+<span class="string"><span class="subst"><span class="string">  `</span>).join(<span class="string">''</span>)}</span></span>
+<span class="string">  &lt;/table&gt;</span>
+<span class="string">`</span>;
+</code></pre>
+<p>大括号内部可以放入任意的 JavaScript 表达式，可以进行运算，以及引用对象属性。<br>模板字符串之中还能调用函数。<br>如果大括号中的值不是字符串，将按照一般的规则转为字符串。比如，大括号中是一个对象，将默认调用对象的toString方法。<br>如果模板字符串中的变量没有声明，将报错。<br>模板字符串甚至还能嵌套。    </p>
+<h2 id="11-实例：模板编译"><a href="#11-实例：模板编译" class="headerlink" title="11. 实例：模板编译"></a>11. 实例：模板编译</h2><pre><code>let template = `
+&lt;ul&gt;
+  &lt;% for(let i=0; i &lt; data.supplies.length; i++) { %&gt;
+    &lt;li&gt;&lt;%= data.supplies[i] %&gt;&lt;/li&gt;
+  &lt;% } %&gt;
+&lt;/ul&gt;
+`;
+</code></pre><h2 id="12-标签模板"><a href="#12-标签模板" class="headerlink" title="12. 标签模板"></a>12. 标签模板</h2><p>模板字符串的功能，不仅仅是上面这些。它可以紧跟在一个函数名后面，该函数将被调用来处理这个模板字符串。这被称为“标签模板”功能（tagged template）。     </p>
+<p>“标签模板”的一个重要应用，就是过滤 HTML 字符串，防止用户输入恶意内容。<br>标签模板的另一个应用，就是多语言转换（国际化处理）。    </p>
+<p>模板字符串本身并不能取代 Mustache 之类的模板库，因为没有条件判断和循环处理功能，但是通过标签函数，你可以自己添加这些功能。<br>除此之外，你甚至可以使用标签模板，在 JavaScript 语言之中嵌入其他语言。      </p>
+<h2 id="13-String-raw"><a href="#13-String-raw" class="headerlink" title="13. String.raw()"></a>13. String.raw()</h2><p>往往用来充当模板字符串的处理函数，返回一个斜杠都被转义（即斜杠前面再加一个斜杠）的字符串，对应于替换变量后的模板字符串。        </p>
+<h2 id="14-模板字符串的限制"><a href="#14-模板字符串的限制" class="headerlink" title="14. 模板字符串的限制"></a>14. 模板字符串的限制</h2><p>前面提到标签模板里面，可以内嵌其他语言。但是，模板字符串默认会将字符串转义，导致无法嵌入其他语言。</p>
+<p style="text-align:right">13:01 </p>

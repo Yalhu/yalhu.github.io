@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="video.js,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="video.js在使用过程中遇到的一些问题 2017.9.21 四 16:20">
+<meta name="keywords" content="video.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="videojs在play.asp使用过程中的坑">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/vjsOnWork/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="video.js在使用过程中遇到的一些问题 2017.9.21 四 16:20">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="videojs在play.asp使用过程中的坑">
+<meta name="twitter:description" content="video.js在使用过程中遇到的一些问题 2017.9.21 四 16:20">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/vjsOnWork/">
+
+
+
+
+
+  <title>videojs在play.asp使用过程中的坑 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/vjsOnWork/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">videojs在play.asp使用过程中的坑</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-21T08:00:00+08:00">
+                2017-09-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/vjsOnWork/" class="leancloud_visitors" data-flag-title="videojs在play.asp使用过程中的坑">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,281
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>video.js在使用过程中遇到的一些问题</p>
+<p style="text-align:right">2017.9.21 四 16:20</p>
+
+<a id="more"></a>
+<!-- 两个月前就已经开始接触videojs了 -->
+<h1 id="A-videojs-documention"><a href="#A-videojs-documention" class="headerlink" title="A videojs documention"></a>A videojs documention</h1><p><a href="https://github.com/videojs/video.js/" target="_blank" rel="noopener">https://github.com/videojs/video.js/</a><br><strong>$_BLOB:</strong> <a href="https://yalhu.github.io/w3/jslib/videojs文档" target="_blank" rel="noopener">videojs文档</a></p>
+<h1 id="B-videojs和play-asp"><a href="#B-videojs和play-asp" class="headerlink" title="B videojs和play.asp"></a>B videojs和play.asp</h1><h2 id="0-控制：jQuery-VS-vjs"><a href="#0-控制：jQuery-VS-vjs" class="headerlink" title="0 控制：jQuery VS vjs"></a>0 控制：jQuery VS vjs</h2><ul>
+<li><p>vjs有自己的组件，事件，方法等，和jQ的性质差不多；既然是用vjs，就尽量用vjs的方法操作，API也方便（使用中发现，有优点，有缺点:页面加载完之前，是不到jQ对象的）。</p>
+</li>
+<li><p>vjs的<code>setTimeout ,requestAnimation</code>等方法</p>
+</li>
+<li><p>优点中，当然包括方便的video API ，DOM操作</p>
+</li>
+</ul>
+<h2 id="1-多语言"><a href="#1-多语言" class="headerlink" title="1 多语言"></a>1 多语言</h2><ol>
+<li><p>当时自己的多语言有点问题，==》用了vjs的多语言；<br>还有些通过<code>.el()</code>添加的dom（速度、质量等把一个vjs组件的子元素重写了），并不会引vjs用多语言，就借了其他的块相同vjs组件。</p>
+</li>
+<li><p>后来发现，多语言要提交给三方翻译，其他地方也要用。基于同一的理念，弃用了vjs的多语言   </p>
+</li>
+</ol>
+<h2 id="2-组件"><a href="#2-组件" class="headerlink" title="2 组件"></a>2 组件</h2><ol>
+<li><p>vjs有很多组件，在写menu，subtitle，quality，rate时，考虑要不要重新注册vjs组    件。<br>基于上面的元素有一些不确定性（字幕，质量等的多少没法控制，后面使用起来估计也不方便），既然有现成的，就还是用vjs的组件的，方便。</p>
+</li>
+<li><p>后来，准备控制条的tips时也准备注册组件，因为原生的title点击后会重新出现，而且    有些tips的内容有些许出入。<br>看了，vjs的源码，通过源码的比对，在js中重新夺回了控制权。  </p>
+</li>
+<li><p>menu，subtitle，quality，rate等的添加，增加了许多判断：div_index,control-bar-hold,tips,menu….</p>
+</li>
+<li><p>controlBar在点击的时候，是否需要保持，出现状态。<br>tips在移动设备上不需要出现。</p>
+</li>
+</ol>
+<p>后来又做到注释—-多了组件，和前面几个menu_**是不一样的风格，考虑是不是样式/设计不用vjs的，写html的时候可以用原生、jQuery或者其他的库，只是单纯的引用vjs的API</p>
+<h2 id="3-事件"><a href="#3-事件" class="headerlink" title="3 事件"></a>3 事件</h2><ol>
+<li><p>勾子函数没有一次用上的  </p>
+</li>
+<li><p>和dashjs一起使用，mediaplay的事件监听收到限制，需要提前注册    </p>
+</li>
+<li>由于以上两条：本地记录播放质量，字幕等时，在播放之前就设置有点困难。<br>所以，选择了监听player的播放事件。（只有速度成功了；字幕取不到，质量无法设置）。</li>
+</ol>
+<h1 id="C-坑（issues）"><a href="#C-坑（issues）" class="headerlink" title="C 坑（issues）"></a>C 坑（issues）</h1><h2 id="0-vjs-基础"><a href="#0-vjs-基础" class="headerlink" title="0 vjs 基础"></a>0 vjs 基础</h2><ol>
+<li><p>只有controls，才可以绑定video上 播放/暂停 事件</p>
+</li>
+<li><p>用js设置video宽高<code>video1.style.height=&#39;260px&#39;</code>，会阻止，video的全屏</p>
+<blockquote>
+<p>videojs/video.js/issues/1293</p>
+</blockquote>
+</li>
+<li><p>tap、click事件及冒泡问题</p>
+</li>
+<li><p>palyer的useractive（）事件，会触发控制条出现，但随后会消失:即使移除了，vjs的vjs-user-inactive样式，其他vjs的操作，又会对useractive 重新负值。。</p>
+<p> ==》自定义了arv-controlBar-hold</p>
+</li>
+<li>同上面一样，自定义了arv-tip-enabled<br>播放/暂停<br>移动的tap和阻止事件冒泡</li>
+<li>没有animate函数(jQuery)，有requestAnimationFrame(fn),和cancel</li>
+<li>重新定义的setTimeout，setInterval    </li>
+<li>ios音量组件的考虑</li>
+<li>移动端好像，监测不到video的事件<code>video.width(),video.currentTime()</code>,同样的pc就没有问题。最后都改成player的事件(4674)     </li>
+</ol>
+<h3 id="ModalDialog"><a href="#ModalDialog" class="headerlink" title="ModalDialog"></a>ModalDialog</h3><p>ModalDialog 使用出现问题：不能定义content中的内容；description 是在原有的基础加了test，而不是单独的test   </p>
+<blockquote>
+<p>\4463<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var modal_content = &apos;&lt;div id=&quot;do-this&quot;&gt;do this&lt;/div&gt; &lt;div id=&quot;do-that&quot;&gt;do that&lt;/div&gt;&apos;;</span><br><span class="line">// where the magic happens</span><br><span class="line">var contentEl = document.createElement(&apos;div&apos;);</span><br><span class="line">// probably better to just build the entire thing via DOM methods</span><br><span class="line">contentEl.innerHTML = modal_content;</span><br><span class="line">var ModalDialog = videojs.getComponent(&apos;ModalDialog&apos;);</span><br><span class="line">var modal = new ModalDialog(player, &#123;</span><br><span class="line">	content: contentEl,</span><br><span class="line">	temporary: false</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// $_sel</span><br><span class="line">arv_title.contentEl().innerHTML=&apos;&lt;b&gt;sdfs&lt;/b&gt;sdfs&apos;;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="1-player没有tap事件"><a href="#1-player没有tap事件" class="headerlink" title="1 player没有tap事件"></a>1 player没有tap事件</h2><p>sol:绑定div_video,自定义tap</p>
+<blockquote>
+<pre><code>//自定义tap
+$$(document).on(&quot;touchstart&quot;, function(e) {
+    if(!$$(e.target).hasClass(&quot;disable&quot;))  
+    $$&gt;e.target).data(&quot;isMoved&quot;, 0);
+});
+$$(document).on(&quot;touchmove&quot;, function(e) {
+    if(!$$(e.target).hasClass(&quot;disable&quot;)) 
+    $$(e.target).data(&quot;isMoved&quot;, 1);
+});
+$$(document).on(&quot;touchend&quot;, function(e) {
+    if(!$$(e.target).hasClass(&quot;disable&quot;) &amp;&amp; $$(e.target).data(&quot;isMoved&quot;) == 0) 
+    $$(e.target).trigger(&quot;tap&quot;);
+});
+</code></pre></blockquote>
+<h2 id="2-事件冒泡"><a href="#2-事件冒泡" class="headerlink" title="2 事件冒泡"></a>2 事件冒泡</h2><ul>
+<li>click： BUTTON，会； MENUITEM、 PROGRESS-CONTROL不会</li>
+<li>tap：都冒泡          </li>
+</ul>
+<p>sol: e.target==this</p>
+<h2 id="3-player-tap事件，在iPad中"><a href="#3-player-tap事件，在iPad中" class="headerlink" title="3 player  tap事件，在iPad中"></a>3 player  tap事件，在iPad中</h2><ul>
+<li><p>\<video>有controls(true)，vjs的tap事件，才会在iPad中作用，controlBar出现；</video></p>
+<blockquote>
+<p>#1886 2015.2.26: Unfortunately, this is how the video element works as well. Disabling controls also disables click events, so if you want to set something like this up you’ll need to add click event handlers to the Videojs element.</p>
+</blockquote>
+</li>
+<li><p>自定义tap，在iPad中还会触发click，其他移动设备（包括iPhone）没有这种现象<br>sol：e.preventDefault();  </p>
+</li>
+</ul>
+<blockquote>
+<p>扩展：根据解释，只有video标签 controls才能触发click等事件；而且其上的一些其他元素的事件都不能触发，只会触发video标签的<br>#642 2013.7.16: Yes, this is an iOS issue. VideoJS on iOS falls back to the native controls.<br>If the native controls on iOS are enabled, iOS will not let anyone listen to any events in the area above the video element.<br>You could remove the ‘controls’ attribute of the video element whenever you want to listen to click events and then put it back when you’re done.   </p>
+</blockquote>
+<h2 id="4-IOS中出现的问题"><a href="#4-IOS中出现的问题" class="headerlink" title="4 IOS中出现的问题"></a>4 IOS中出现的问题</h2><h3 id="4-1-不能播放dash，包括用了dashjs"><a href="#4-1-不能播放dash，包括用了dashjs" class="headerlink" title="4.1 不能播放dash，包括用了dashjs"></a>4.1 不能播放dash，包括用了dashjs</h3><h3 id="4-2-双控制条"><a href="#4-2-双控制条" class="headerlink" title="4.2 双控制条"></a>4.2 双控制条</h3><p>sol:    </p>
+<ol>
+<li><p>css</p>
+<pre><code>video::-webkit-media-controls-panel-container {
+  display: none !important;
+}
+video::-webkit-media-controls-start-playback-button {
+  display:none !important;
+  -webkit-appearance: none;
+}
+</code></pre></li>
+<li><p>js：</p>
+<pre><code>html5:{
+        nativeControlsForTouch: false
+},
+</code></pre></li>
+<li><p>标签属性：</p>
+<pre><code>playsinline
+</code></pre></li>
+</ol>
+<h3 id="4-3-网页开始自动播放"><a href="#4-3-网页开始自动播放" class="headerlink" title="4.3 网页开始自动播放"></a>4.3 网页开始自动播放</h3><p>设置<code>autoplay</code>并不会自动播放<br>sol： 还要加 <code>muted</code>(根据video标签的某个使用规则)</p>
+<blockquote>
+<p>#1364<br>#337:I am not sure how autoplay is working on an iPhone unless you’re testing with an old version of iOS (pre-6.1). Apple disables autoplay and preload on iOS:</p>
+<blockquote>
+<p>In Safari on iOS (for all devices, including iPad), where the user may be on a cellular network and be charged per data unit, preload and autoplay are disabled. No data is loaded until the user initiates it. This means the JavaScript play() and load() methods are also inactive until the user initiates playback, unless the play() or load() method is triggered by user action. In other words, a user-initiated Play button works, but an onLoad=”play()” event does not.<br>Sorry, it’s not possible.</p>
+</blockquote>
+</blockquote>
+<h3 id="4-4-点击开始播放自动进入全屏"><a href="#4-4-点击开始播放自动进入全屏" class="headerlink" title="4.4 点击开始播放自动进入全屏"></a>4.4 点击开始播放自动进入全屏</h3><p>sol： 上面的标签属性<code>playsinline</code>可以解决(好像要IOS10 及以上)</p>
+<blockquote>
+<p>#3761,#896</p>
+</blockquote>
+<h3 id="4-5-音量控制"><a href="#4-5-音量控制" class="headerlink" title="4.5 音量控制"></a>4.5 音量控制</h3><ul>
+<li>ios中音量不能通过编程控制,所以就隐藏了(包括在iPhone中)<blockquote>
+<p>#562 2013.6.5：the iPad does not allow us to change volume programmatically, so, the decision was made to <code>just hide the volume control altogether on</code> the iPad and other devices where programmatic volume control is not allowed.</p>
+</blockquote>
+</li>
+<li><p>那些不支持的就自动隐藏了</p>
+<blockquote>
+<p>#149 2012.12.21：It would be nice if video.js automatically hid the volume/mute    controls for iOS and Chrome/Android users as they are not operational. <br><br>#336    <br><br>#347  </p>
+</blockquote>
+</li>
+<li><p>考虑，用原生的</p>
+<blockquote>
+<p>#164 2012.4.5: I’ve been considering switching to use the <code>iPads native controls instead</code>, because custom controls are pretty limited. I’ll try to get that into the next release.</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="4-6-IOS中的音量控制：静音可以控制，但是volemeControl看不见"><a href="#4-6-IOS中的音量控制：静音可以控制，但是volemeControl看不见" class="headerlink" title="4.6 IOS中的音量控制：静音可以控制，但是volemeControl看不见"></a>4.6 IOS中的音量控制：静音可以控制，但是volemeControl看不见</h3><ul>
+<li><p>有人提出静音是可以控制的<br>sol： </p>
+<pre><code>.video-js .vjs-volume-panel { display: flex !important; }
+.video-js .vjs-mute-control { display: inline-block !important; }
+</code></pre></li>
+<li><p>但是volemeControl看不见<br>sol: 自己又重写了css，并从dom中移除  </p>
+<pre><code>//js
+arvplayer.controlBar.volumePanel.volumeControl.hide();
+arvplayer.controlBar.volumePanel.addClass(&apos;noVolumeContr&apos;);
+//css
+.video-js .vjs-volume-panel.noVolCont.vjs-volume-panel-horizontal.vjs-slider-active,   
+.video-js .vjs-volume-panel.noVolCont.vjs-volume-panel-horizontal:active,   
+.video-js .vjs-volume-panel.noVolCont.vjs-volume-panel-horizontal:focus,   
+.video-js .vjs-volume-panel.noVolCont.vjs-volume-panel-horizontal:hover{
+    width:4em;
+}
+</code></pre></li>
+</ul>
+<p style="text-align:right">2017.9.21 四 19:09</p>
+
+<h2 id="6-结合dashjs"><a href="#6-结合dashjs" class="headerlink" title="6 结合dashjs"></a>6 结合dashjs</h2><ol start="0">
+<li>应用dashjs API <code>player.dash.mediaPlayer.setQualityFor(&#39;video&#39;, 2)</code><blockquote>
+<p><a href="videojs-contrib-dash/issues/201">Questions work with dashjs</a>  </p>
+</blockquote>
+</li>
+<li>初始化的过程中有时候会报错 <blockquote>
+<p>Failed to set the ‘duration’ property on ‘MediaSource’: The MediaSource’s readyState is not ‘open’. #1349</p>
+</blockquote>
+</li>
+<li>ios 中 <em>不能播放的资源</em> 会提示出现，但视频照常播放 <blockquote>
+<p>/videojs/videojs-contrib-dash/issues/211</p>
+</blockquote>
+</li>
+<li><p>dashjs 的mediaplay的事件监听受到限制，需要在player初始化之前注册</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">videojs.Html5DashJS.hook(<span class="string">'beforeinitialize'</span>, myCustomCallback);</span><br><span class="line"><span class="keyword">var</span> myCustomCallback = <span class="function"><span class="keyword">function</span>(<span class="params">arvplayer, mediaPlayer</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (videojs &amp;&amp; videojs.log) &#123;</span><br><span class="line">        mediaPlayer.getDebug().setLogToBrowserConsole(<span class="literal">false</span>);</span><br><span class="line">        mediaPlayer.on(<span class="string">'log'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// videojs.log(event.message);</span></span><br><span class="line">        &#125;); </span><br><span class="line">    &#125;</span><br><span class="line">    mediaPlayer.on(<span class="string">'qualityChangeRendered'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;<span class="comment">//auto 下检测初始质量及变化</span></span><br><span class="line">        ddmp(<span class="string">'mediaplayer on qulitychange rendered ...'</span>);</span><br><span class="line">        ddmp(e);</span><br><span class="line">        <span class="keyword">var</span> i=e.newQuality;</span><br><span class="line">        <span class="comment">//dlog(this)// window</span></span><br><span class="line">        <span class="keyword">if</span>(mediaPlayer.getAutoSwitchQualityFor(<span class="string">'video'</span>))&#123;</span><br><span class="line">            arv_menu_quality.$$(<span class="string">'span'</span>)[<span class="number">1</span>].innerHTML=ga_player_lang[<span class="number">15</span>]+<span class="string">' &lt;span&gt;'</span>+ga_dash_mp4[i].split(<span class="string">","</span>)[<span class="number">1</span>]+<span class="string">'p&lt;/span&gt; &gt;'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>dash文件和mp4断网，重连后的恢复，稍微有些差别 <a href="#9-断网重连">断网重连</a>    </p>
+</li>
+</ol>
+<h2 id="7-操作系统差异"><a href="#7-操作系统差异" class="headerlink" title="7 操作系统差异"></a>7 操作系统差异</h2><h3 id="7-1-移动端"><a href="#7-1-移动端" class="headerlink" title="7.1 移动端"></a>7.1 移动端</h3><ol>
+<li>所有移动设备中音量控制条，并不会随设备的音量键的变化而改变</li>
+<li>移动设备监听不到video的属性和方法，都换成了player<a href="#vjs-基础">vjs 基础：列表8</a></li>
+<li>移动端，监听indexImage change调用事件时，不明白为什么要用定时器</li>
+<li>一直不能autoplay。除非muted。 <a href="#autoplay-policy">auto play</a></li>
+</ol>
+<h3 id="7-2-macos"><a href="#7-2-macos" class="headerlink" title="7.2 macos"></a>7.2 macos</h3><ol>
+<li>macos safari，播放dash，.8上会出错（81是正常的），<a href="#结合dashjs">dashjs播放：列表3</a></li>
+</ol>
+<h3 id="7-3-windows"><a href="#7-3-windows" class="headerlink" title="7.3 windows"></a>7.3 windows</h3><p>windows  safari 已经放弃支持了</p>
+<ol>
+<li>windows safari，不支持h5播放；用vjs-falsh，报错</li>
+</ol>
+<h2 id="8-字幕位置的诡异"><a href="#8-字幕位置的诡异" class="headerlink" title="8 字幕位置的诡异"></a>8 字幕位置的诡异</h2><p>(4674)</p>
+<ol>
+<li>第一条字幕（0:00）有时候出现，而且位置不确定</li>
+<li>控制条出现后会覆盖现有字幕，下一条字幕会出现在控制条上方，控制条消失后会下降 </li>
+<li>时机：loaded<blockquote>
+<p><a href="823">I need event for subtitles loaded!</a></p>
+</blockquote>
+</li>
+</ol>
+<h3 id="IOS原生字幕渲染-20180927"><a href="#IOS原生字幕渲染-20180927" class="headerlink" title="IOS原生字幕渲染 20180927"></a>IOS原生字幕渲染 20180927</h3><p>mp4文件中有字幕，和.vtt/.srt中的字幕是两回事。chrome中显示正常，不会显示两条字幕，单独播放mp4文件也没有字幕     </p>
+<ol>
+<li>第一条原生的字幕（和remote text track不一样）会显示，有时候还会显示两条字幕：原生和remote textTrack：<br>在loadedMetaData中 一段时间内，频繁 删除原生 tract（在video中） 节点，因为不能确定时机。   </li>
+<li>在Mac OS 中字幕位置上下轮流切换：在css中用 !import写死位置</li>
+</ol>
+<h2 id="9-断网重连"><a href="#9-断网重连" class="headerlink" title="9 断网重连"></a>9 断网重连</h2><p>issues：  </p>
+<ol>
+<li>mobile和dash(<del>1450</del>)没有监测到错误。(5089)</li>
+<li>ie和chrome监测到的错误代码不一样；</li>
+<li>vjs-hls更新后，dahs和mp4的表现不一样<blockquote>
+<p><a href="1805#issuecomment-380419750">Retry after network error</a></p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p><a href="5089">player error event doesn’t fire and not same on different brower</a></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onError</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">       dvjs(arvplayer.error());</span><br><span class="line">       <span class="keyword">var</span> time=arvplayer.currentTime();</span><br><span class="line">       </span><br><span class="line">       <span class="keyword">switch</span>(arvplayer.error().code)&#123;</span><br><span class="line">           <span class="comment">//\\case 1:  arvplayer.error(null).pause().load().currentTime(time).play();break;</span></span><br><span class="line">           <span class="keyword">case</span> <span class="number">1</span>: <span class="built_in">console</span>.error(<span class="string">'tfdeu seems have debug '</span>,e);<span class="keyword">break</span>;</span><br><span class="line">           <span class="keyword">case</span> <span class="number">3</span>: <span class="built_in">console</span>.error(<span class="string">'decode error'</span>);<span class="comment">//break; //Edge浏览器报3，</span></span><br><span class="line">           <span class="keyword">case</span> <span class="number">2</span>: </span><br><span class="line">               <span class="built_in">console</span>.error(<span class="string">'net error;arvplayer timer: '</span>,arvplayerTimer);</span><br><span class="line">               <span class="comment">// arvplayer.error(null); //null 虽然可以取消打叉，但是定时器无法一直触发</span></span><br><span class="line">               <span class="comment">// arvplayer.pause();</span></span><br><span class="line">               <span class="keyword">if</span>(arvplayerTimer)&#123;</span><br><span class="line">                   <span class="keyword">return</span>;</span><br><span class="line">               &#125;</span><br><span class="line">               isArvplayerReload=<span class="literal">true</span>;	<span class="comment">// 立即显示黑屏,onseeking 需要判断</span></span><br><span class="line">               <span class="built_in">document</span>.getElementById(<span class="string">'load_video'</span>).style.display = <span class="string">'block'</span>;</span><br><span class="line">               arvplayerTimer=arvplayer.setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                   dplay(<span class="string">'arvplayer restart ...'</span>);</span><br><span class="line">                   <span class="comment">// document.getElementById('load_video').style.display = 'block';</span></span><br><span class="line"></span><br><span class="line">                   <span class="comment">// <span class="doctag">FIXME:</span> when replay if reconnect network, div_video click propgate:won't control video play/pause </span></span><br><span class="line">                   arvplayer.load();<span class="comment">// it's no influence on dash,but **required for mp4**</span></span><br><span class="line">                   <span class="comment">// if it is mp4, will replay video all the time when disconnect network </span></span><br><span class="line">                   <span class="comment">// **for dash, it should reload the source**</span></span><br><span class="line">                   <span class="keyword">if</span>(arvplayerCurrentSource.type==<span class="string">'application/dash+xml'</span>)&#123;</span><br><span class="line">                       arvplayer.src(arvplayerCurrentSource);</span><br><span class="line">                   &#125;</span><br><span class="line">                   arvplayer.currentTime(time);</span><br><span class="line">                   arvplayer.play();<span class="comment">// if reconnect netwrok, **replay auto**</span></span><br><span class="line">                   <span class="comment">// dplay(arvplayer.error())//不行</span></span><br><span class="line">               &#125;,<span class="number">3000</span>);</span><br><span class="line">               <span class="keyword">break</span>;</span><br><span class="line">           <span class="keyword">case</span> <span class="number">4</span>: <span class="built_in">console</span>.error(<span class="string">'can\'t play this video'</span>);<span class="keyword">break</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">//\\ onSeeked();</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onPlaying</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	dvjs(<span class="string">'on playing ...'</span>);</span><br><span class="line">	<span class="keyword">if</span>(arvplayerTimer)&#123;</span><br><span class="line">		arvplayer.clearInterval(arvplayerTimer);</span><br><span class="line">		arvplayerTimer=<span class="literal">null</span>;</span><br><span class="line">		<span class="built_in">document</span>.getElementById(<span class="string">'load_video'</span>).style.display = <span class="string">'none'</span>;</span><br><span class="line">		isArvplayerReload=<span class="literal">false</span>;					</span><br><span class="line">	&#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onLoadeddata</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="comment">//\\ document.getElementById('load_video').style.display = 'none';</span></span><br><span class="line">	<span class="keyword">if</span>(!isArvplayerReload)&#123;<span class="comment">//\\</span></span><br><span class="line">		<span class="built_in">document</span>.getElementById(<span class="string">'load_video'</span>).style.display = <span class="string">'none'</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">onSeeked</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!isArvplayerReload)&#123;</span><br><span class="line">		<span class="built_in">document</span>.getElementById(<span class="string">'load_video'</span>).style.display = <span class="string">'none'</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其他参考：<code>player_api.reset().src({type: &#39;application/x-mpegURL&#39;, src: String(play_path), withCredentials: false});</code>     </p>
+<blockquote>
+<p><a href="4044">How to reload or replay the video.(In case of Error)</a></p>
+</blockquote>
+<h2 id="0-custom-error-messages"><a href="#0-custom-error-messages" class="headerlink" title="0 custom error messages"></a>0 custom error messages</h2><ol>
+<li><code>arvplayer.error(null);</code> <code>errorDisplay: false</code><blockquote>
+<p><a href="4272">Error message with the big X</a>   </p>
+</blockquote>
+</li>
+<li>Otherwise you can override the text by setting a new “English” translation<blockquote>
+<p><a href="4718">Question: how to customize media error messages without plugins</a> </p>
+</blockquote>
+</li>
+</ol>
+<h2 id="0-autoplay-policy"><a href="#0-autoplay-policy" class="headerlink" title="0 autoplay policy"></a>0 autoplay policy</h2><p>不同浏览器的autoplay policy不一样，尤其是chrome(<del>5160</del>)。<br>移动设备，一直是禁止的。<br>静音可行，没试过<br>080530: chrome PC promise下面的代码没有进入/执行；移动端就没事。 sol：把loadeddata在ready触发，不进行判断了</p>
+<ol>
+<li>直播的时候，没有触发<code>onlodeadmetadata</code>事件。 <blockquote>
+<p><a href="videojs-contrib-hls#1418">loadedmetadata didn’t fire and not autoplay when cross origin </a></p>
+</blockquote>
+</li>
+<li>直播的时候，原生的和库（can-auto-play）监测到的promise是相反的；<br> 检测到false的时候，依然可以自动播放。<br> 点播没有上面提到的问题。</li>
+</ol>
+<p>下面均在player的ready事件中绑定<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// studio</span></span><br><span class="line">arvplayer.play();</span><br><span class="line"><span class="keyword">var</span> promise = video1.play();</span><br><span class="line"><span class="keyword">if</span> (promise !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    promise.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Autoplay started!</span></span><br><span class="line">    &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Autoplay was prevented.</span></span><br><span class="line">        arv_bigPlayButton.show();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">//console.log('autoplay==undefined');</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// live</span></span><br><span class="line"><span class="keyword">var</span> promise = Video1.play();</span><br><span class="line"><span class="keyword">if</span> (promise !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    promise.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Autoplay started!</span></span><br><span class="line">        video1.play();</span><br><span class="line">    &#125;).catch(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// Autoplay was prevented.</span></span><br><span class="line">        onLoadeddata();</span><br><span class="line">        <span class="keyword">if</span>(video1.paused())&#123;</span><br><span class="line">            arv_bigPlayButton.show();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span>&#123;<span class="comment">// 实际可以播放，但catch</span></span><br><span class="line">            video1.play();</span><br><span class="line">            <span class="keyword">if</span>(!video1.paused())&#123;</span><br><span class="line">                arvfadeOut();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span>(e)&#123;</span><br><span class="line">            <span class="built_in">console</span>.warn(<span class="string">'real catch error'</span>,e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'autoplay==undefined'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><a href="https://developers.google.com/web/updates/2017/09/autoplay-policy-changes" target="_blank" rel="noopener">Autoplay Policy Changes</a>     </p>
+</blockquote>
+<blockquote>
+<p><a href="http://blog.videojs.com/autoplay-best-practices-with-video-js/" target="_blank" rel="noopener">Autoplay Best Practices with Video.js</a>  </p>
+</blockquote>
+<p>其它参考：</p>
+<blockquote>
+<p><a href="https://wordpress.org/support/topic/autoplay-is-not-working-with-desktop-chrome-v66/" target="_blank" rel="noopener">Autoplay is not working with desktop chrome v66</a>   </p>
+</blockquote>
+<blockquote>
+<p><a href="https://www.hellojava.com/article/22752" target="_blank" rel="noopener">How to handle “Uncaught (in promise) DOMException: play() failed because the user didn’t interact with the document first.” on Desktop with Chrome 66?</a><br>回答1不清楚；回答2，浏览器配置  Chrome://flags</p>
+</blockquote>
+<h2 id="1-poster"><a href="#1-poster" class="headerlink" title="1 poster"></a>1 poster</h2><ol>
+<li>chrome中 object-fit 适应问题<br><code>object-fit:fill | contain | cover | none | scale-down</code><br>object-fit主要适合于替换元素，比如：<code>&lt;video&gt;、&lt;object&gt;、&lt;img&gt;、&lt;input type=&quot;image&quot;&gt;、&lt;svg&gt;、&lt;svg:image&gt;、&lt;svg:video&gt;</code> 等。<del>其默认值为fill。</del><br>参考:[Html5的video标签自动填充满父div的大小]   </li>
+</ol>
+<p>默认为：contain。但是chrome中显示不稳定，别人电脑为fill。清空缓存并硬性重载（只有控制台打开状态才有），就正常了。   </p>
+<p>属于chrome的bug：<br>[Chrome bug with CSS3 object-fit/object-position]//github.com/Fyrd/caniuse/issues/3169<br><a href="https://stackoverflow.com/questions/30700144/responsive-object-fit-cover-fix-on-chrome" target="_blank" rel="noopener">Responsive object-fit: cover fix on Chrome</a><br>.. and so on   </p>
+<ol start="2">
+<li>audio only的时候，手机端，开始是暂停的话可以看到poster；点击播放后就是黑色。pc 正常。ios没有测试   /Fyrd/caniuse/issues/3169  </li>
+</ol>
+<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Yalhu
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/sum/jsplus/vjsOnWork/" title="videojs在play.asp使用过程中的坑">http://yoursite.com/sum/jsplus/vjsOnWork/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/video-js/" rel="tag"><i class="fa fa-tag"></i> video.js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/w3/jslib/videojs文档/" rel="next" title="Videojs文档">
+                <i class="fa fa-chevron-left"></i> Videojs文档
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/w3/sql/mongodb8days/" rel="prev" title="8天学通MongoDB">
+                8天学通MongoDB <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-videojs-documention"><span class="nav-text">A videojs documention</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-videojs和play-asp"><span class="nav-text">B videojs和play.asp</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-控制：jQuery-VS-vjs"><span class="nav-text">0 控制：jQuery VS vjs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-多语言"><span class="nav-text">1 多语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-组件"><span class="nav-text">2 组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-事件"><span class="nav-text">3 事件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-坑（issues）"><span class="nav-text">C 坑（issues）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-vjs-基础"><span class="nav-text">0 vjs 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ModalDialog"><span class="nav-text">ModalDialog</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-player没有tap事件"><span class="nav-text">1 player没有tap事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-事件冒泡"><span class="nav-text">2 事件冒泡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-player-tap事件，在iPad中"><span class="nav-text">3 player  tap事件，在iPad中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-IOS中出现的问题"><span class="nav-text">4 IOS中出现的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-不能播放dash，包括用了dashjs"><span class="nav-text">4.1 不能播放dash，包括用了dashjs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-双控制条"><span class="nav-text">4.2 双控制条</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-网页开始自动播放"><span class="nav-text">4.3 网页开始自动播放</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-点击开始播放自动进入全屏"><span class="nav-text">4.4 点击开始播放自动进入全屏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-音量控制"><span class="nav-text">4.5 音量控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-IOS中的音量控制：静音可以控制，但是volemeControl看不见"><span class="nav-text">4.6 IOS中的音量控制：静音可以控制，但是volemeControl看不见</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-结合dashjs"><span class="nav-text">6 结合dashjs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-操作系统差异"><span class="nav-text">7 操作系统差异</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-移动端"><span class="nav-text">7.1 移动端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-macos"><span class="nav-text">7.2 macos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-windows"><span class="nav-text">7.3 windows</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-字幕位置的诡异"><span class="nav-text">8 字幕位置的诡异</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IOS原生字幕渲染-20180927"><span class="nav-text">IOS原生字幕渲染 20180927</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-断网重连"><span class="nav-text">9 断网重连</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-custom-error-messages"><span class="nav-text">0 custom error messages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-autoplay-policy"><span class="nav-text">0 autoplay policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-poster"><span class="nav-text">1 poster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2"><span class="nav-text">2</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">408.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

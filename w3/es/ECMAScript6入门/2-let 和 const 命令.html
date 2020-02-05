@@ -1,0 +1,65 @@
+<p>title: let 和 const 命令<br>date: 2018.9.6<br>tags:</p>
+<ul>
+<li>es</li>
+</ul>
+<hr>
+<p style="text-align:right">2018.9.6 星期四 10：56 </p>
+
+
+<p>let 命令<br>块级作用域<br>const 命令<br>顶层对象的属性<br>global 对象</p>
+<!-- more -->
+<h2 id="let-命令"><a href="#let-命令" class="headerlink" title="let 命令"></a>let 命令</h2><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>ES6 新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。</p>
+<p>for循环的计数器，就很合适使用let命令。<br>如果使用let，声明的变量仅在块级作用域内有效，最后输出的是 6。   </p>
+<p>你可能会问，如果每一轮循环的变量i都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 JavaScript 引擎内部会记住上一轮循环的值，初始化本轮的变量i时，就在上一轮循环的基础上进行计算。    </p>
+<p>另外，for循环还有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。</p>
+<pre><code class="javaScript"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {
+  <span class="comment">// ...</span>
+}
+<span class="built_in">console</span>.log(i);
+<span class="comment">// ReferenceError: i is not defined</span>
+
+<span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) {
+  <span class="keyword">let</span> i = <span class="string">'abc'</span>;
+  <span class="built_in">console</span>.log(i);
+}
+<span class="comment">// abc</span>
+<span class="comment">// abc</span>
+<span class="comment">// abc</span>
+</code></pre>
+<h3 id="不存在变量提升"><a href="#不存在变量提升" class="headerlink" title="不存在变量提升"></a>不存在变量提升</h3><p>var命令会发生”变量提升“现象，即变量可以在声明之前使用，值为undefined。<br>为了纠正这种现象，let命令改变了语法行为，它所声明的变量一定要在声明后使用，否则报错。</p>
+<h3 id="暂时性死区"><a href="#暂时性死区" class="headerlink" title="暂时性死区"></a>暂时性死区</h3><p>ES6 明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。<br>总之，在代码块内，使用let命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”（temporal dead zone，简称 TDZ）。</p>
+<h3 id="不允许重复声明"><a href="#不允许重复声明" class="headerlink" title="不允许重复声明"></a>不允许重复声明</h3><p>let不允许在相同作用域内，重复声明同一个变量。<br>因此，不能在函数内部重新声明参数。</p>
+<pre><code class="javaScript"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">arg</span>) </span>{
+  <span class="keyword">let</span> arg; <span class="comment">// 报错</span>
+}
+<span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">arg</span>) </span>{
+  {
+    <span class="keyword">let</span> arg; <span class="comment">// 不报错</span>
+  }
+}
+</code></pre>
+<h2 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h2><h3 id="为什么需要块级作用域？"><a href="#为什么需要块级作用域？" class="headerlink" title="为什么需要块级作用域？"></a>为什么需要块级作用域？</h3><p>第一种场景，内层变量可能会覆盖外层变量。<br>第二种场景，用来计数的循环变量泄露为全局变量。</p>
+<h3 id="ES6-的块级作用域"><a href="#ES6-的块级作用域" class="headerlink" title="ES6 的块级作用域"></a>ES6 的块级作用域</h3><p>块级作用域的出现，实际上使得获得广泛应用的立即执行函数表达式（IIFE）不再必要了。</p>
+<h3 id="块级作用域与函数声明"><a href="#块级作用域与函数声明" class="headerlink" title="块级作用域与函数声明"></a>块级作用域与函数声明</h3><p>ES5 规定，函数只能在顶层作用域和函数作用域之中声明，不能在块级作用域声明。<br>但是，浏览器没有遵守这个规定，为了兼容以前的旧代码，还是支持在块级作用域之中声明函数，因此上面两种情况实际都能运行，不会报错。</p>
+<p>ES6 引入了块级作用域，明确允许在块级作用域之中声明函数。ES6 规定，块级作用域之中，函数声明语句的行为类似于let，在块级作用域之外不可引用。   </p>
+<p>考虑到环境导致的行为差异太大，应该避免在块级作用域内声明函数。如果确实需要，也应该写成函数表达式，而不是函数声明语句。      </p>
+<h2 id="const-命令"><a href="#const-命令" class="headerlink" title="const 命令"></a>const 命令</h2><h3 id="基本用法-1"><a href="#基本用法-1" class="headerlink" title="基本用法"></a>基本用法</h3><p>const声明的变量不得改变值，这意味着，const一旦声明变量，就必须立即初始化，不能留到以后赋值。<br>const命令声明的常量也是不提升，同样存在暂时性死区，只能在声明的位置后面使用。</p>
+<h3 id="本质"><a href="#本质" class="headerlink" title="本质"></a>本质</h3><p>const实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址所保存的数据不得改动。     </p>
+<p>const只能保证这个指针是固定的（即总是指向另一个固定的地址），至于它指向的数据结构是不是可变的，就完全不能控制了。因此，将一个对象声明为常量必须非常小心。<br>如果真的想将对象冻结，应该使用Object.freeze方法。<br>除了将对象本身冻结，对象的属性也应该冻结。下面是一个将对象彻底冻结的函数。  </p>
+<h3 id="ES6-声明变量的六种方法"><a href="#ES6-声明变量的六种方法" class="headerlink" title="ES6 声明变量的六种方法"></a>ES6 声明变量的六种方法</h3><p>var,function;<br>let,const;<br>import,class        </p>
+<h2 id="顶层对象的属性"><a href="#顶层对象的属性" class="headerlink" title="顶层对象的属性"></a>顶层对象的属性</h2><p>顶层对象，在浏览器环境指的是window对象，在 Node 指的是global对象。ES5 之中，顶层对象的属性与全局变量是等价的。<br>$_PS: window===top/self/this  </p>
+<p>顶层对象的属性与全局变量挂钩，被认为是 JavaScript 语言最大的设计败笔之一。….      </p>
+<p>ES6 为了改变这一点，一方面规定，为了保持兼容性，var命令和function命令声明的全局变量，依旧是顶层对象的属性；另一方面规定，let命令、const命令、class命令声明的全局变量，不属于顶层对象的属性。也就是说，从 ES6 开始，全局变量将逐步与顶层对象的属性脱钩。</p>
+<h2 id="global-对象"><a href="#global-对象" class="headerlink" title="global 对象"></a>global 对象</h2><p>ES5 的顶层对象，本身也是一个问题，因为它在各种实现里面是不统一的。  </p>
+<pre><code>* 浏览器里面，顶层对象是window，但 Node 和 Web Worker 没有window。
+* 浏览器和 Web Worker 里面，self也指向顶层对象，但是 Node 没有self。
+* Node 里面，顶层对象是global，但其他环境都不支持。
+</code></pre><p>同一段代码为了能够在各种环境，都能取到顶层对象，现在一般是使用this变量，但是有局限性。</p>
+<pre><code>* 全局环境中，this会返回顶层对象。但是，Node 模块和 ES6 模块中，this返回的是当前模块。
+* 函数里面的this，如果函数不是作为对象的方法运行，而是单纯作为函数运行，this会指向顶层对象。但是，严格模式下，这时this会返回undefined。
+* 不管是严格模式，还是普通模式，new Function(&apos;return this&apos;)()，总是会返回全局对象。但是，如果浏览器用了 CSP（Content Security Policy，内容安全策略），那么eval、new Function这些方法都可能无法使用。
+</code></pre><p>综上所述，很难找到一种方法，可以在所有情况下，都取到顶层对象。下面是两种勉强可以使用的方法。</p>
+<p>现在有一个提案，在语言标准的层面，引入global作为顶层对象。也就是说，在所有环境下，global都是存在的，都可以从它拿到顶层对象。</p>
+<p>垫片库system.global模拟了这个提案，可以在所有环境拿到global。</p>
+<p style="text-align:right">11:35 </p>
+

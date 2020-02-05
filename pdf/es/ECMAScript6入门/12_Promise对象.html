@@ -1,0 +1,209 @@
+<p>title: ECMAScript 6入门-12_Promise对象<br>date: 2018.1.28<br>tags: </p>
+<ul>
+<li>es<br>toc_fold: unfold</li>
+</ul>
+<hr>
+<p>前言</p>
+<p>一 ECMAScript 6简介<br>二 let和const命令<br>三 变量的解构赋值<br>四 字符串的扩展<br>五 数值的扩展<br>六 数组的扩展<br>七 对象的扩展<br>八 函数的扩展<br>九 Set和Map数据<br>零 Iterator和for…of..<br>一 Generator函数</p>
+<h2 id="二-Promise对象"><a href="#二-Promise对象" class="headerlink" title="二 Promise对象"></a>二 Promise对象</h2><p style="text-align:right">2018.1.28 星期日 22:58 +1 细化笔记</p><br><p style="text-align:right">2018.1.14 星期日 20:08</p>
+
+<h3 id="2-1-Promise的含义"><a href="#2-1-Promise的含义" class="headerlink" title="2.1 Promise的含义"></a>2.1 Promise的含义</h3><p><strong>所谓Promise，就是一个对象，用来传递异步操作的消息。它代表了某个未来才会知道结果的事件（通常是一个异步操作）</strong>，且这个事件提供统一的API，可供进一步处理。<br>Promise对象有以下两个特点。</p>
+<ol>
+<li>对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：Pending（进行中）、Resolved（已完成，又称Fulfilled）和Rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是Promise这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。</li>
+<li>一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：从Pending变为Resolved和从Pending变为Rejected。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果。就算改变已经发生了，你再对Promise对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。</li>
+</ol>
+<p>有了Promise对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise对象提供统一的接口，使得控制异步操作更加容易。</p>
+<p>如果某些事件不断地反复发生，一般来说，使用stream模式是比部署Promise更好的选择。</p>
+<h3 id="2-2-基本用法"><a href="#2-2-基本用法" class="headerlink" title="2.2 基本用法"></a>2.2 基本用法</h3><p>/step0/ ES6规定，Promise对象是一个构造函数，用来生成Promise实例。</p>
+<pre><code>var promise = new Promise(function(resolve, reject) {
+    // ... some code
+    if (/* 异步操作成功 */){
+        resolve(value);
+    } else {
+        reject(error);
+    }
+});
+</code></pre><p>Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject。它们是两个函数，由JavaScript引擎提供，不用自己部署。</p>
+<p>/step1/ Promise实例生成以后，可以用then方法分别指定Resolved状态和Reject状态的回调函数。<br>        promise.then(function(value) {<br>            // success<br>        }, function(value) {<br>            // failure<br>        });<br>then方法可以接受两个回调函数作为参数。第一个回调函数是Promise对象的状态变为Resolved时调用，第二个回调函数是Promise对象的状态变为Reject时调用。其中，第二个函数是可选的，不一定要提供。<br>这两个函数都接受Promise对象传出的值作为参数。  </p>
+<ol>
+<li><p>一个Promise对象的简单例子</p>
+<pre><code>function timeout(ms) {
+    return new Promise((resolve) =&gt; {
+        setTimeout(resolve, ms, &apos;done&apos;);
+    });
+}
+timeout(100).then((value) =&gt; {
+    console.log(value);
+});
+</code></pre></li>
+<li><p>一个用Promise对象实现的Ajax操作的例子</p>
+<pre><code>var getJSON = function(url) {
+    var promise = new Promise(function(resolve, reject){
+        var client = new XMLHttpRequest();
+        client.open(&quot;GET&quot;, url);
+        client.onreadystatechange = handler;
+        client.responseType = &quot;json&quot;;
+        client.setRequestHeader(&quot;Accept&quot;, &quot;application/json&quot;);
+        client.send();
+        function handler() {
+        if (this.status === 200) {
+            resolve(this.response);
+        } else {
+            reject(new Error(this.statusText));
+        }
+        };
+    });
+    return promise;
+};
+getJSON(&quot;/posts.json&quot;).then(function(json) {
+    console.log(&apos;Contents: &apos; + json);
+}, function(error) {
+    console.error(&apos;出错了&apos;, error);
+});
+</code></pre></li>
+<li><p>如果调用resolve函数和reject函数时带有参数，那么它们的参数会被传递给回调函数。reject函数的参数通常是Error对象的实例，表示抛出的错误；resolve函数的参数除了正常的值以外，还可能是另一个Promise实例，表示异步操作的结果有可能是一个值，也有可能是另一个异步操作，比如像下面这样。</p>
+<pre><code>var p1 = new Promise(function(resolve, reject){
+    // ...
+});
+var p2 = new Promise(function(resolve, reject){
+    // ...
+    resolve(p1);
+})
+</code></pre><p> 注意，这时p1的状态就会传递给p2，也就是说，p1的状态决定了p2的状态。如果p1的状态是Pending，    那么p2的回调函数就会等待p1的状态改变；如果p1的状态已经是Resolved或者Rejected，那么p2的回调函数将会立刻执行。</p>
+</li>
+</ol>
+<h3 id="2-3-Promise-prototype-then"><a href="#2-3-Promise-prototype-then" class="headerlink" title="2.3 Promise.prototype.then()"></a>2.3 Promise.prototype.then()</h3><ol>
+<li><p>then方法返回的是一个新的Promise实例（注意，不是原来那个Promise实例）。因此可以采用链式写法，即then方法后面再调用另一个then方法。</p>
+<pre><code>getJSON(&quot;/posts.json&quot;).then(function(json) {
+    return json.post;
+}).then(function(post) {
+    // ...
+});
+</code></pre></li>
+<li><p>采用链式的then，可以指定一组按照次序调用的回调函数。这时，前一个回调函数，有可能返回的还是一个Promise对象（即有异步操作），这时后一个回调函数，就会等待该Promise对象的状态发生变化，才会被调用。  </p>
+<pre><code>getJSON(&quot;/post/1.json&quot;).then(function(post) {
+    return getJSON(post.commentURL);
+}).then(function funcA(comments) {
+    console.log(&quot;Resolved: &quot;, comments);
+}, function funcB(err){
+    console.log(&quot;Rejected: &quot;, err);
+});    
+</code></pre><p> 如果采用箭头函数，上面的代码可以写得更简洁</p>
+<pre><code>getJSON(&quot;/post/1.json&quot;).then(
+    post =&gt; getJSON(post.commentURL)
+).then(
+    comments =&gt; console.log(&quot;Resolved: &quot;, comments),
+    err =&gt; console.log(&quot;Rejected: &quot;, err)
+);
+</code></pre><h3 id="2-4-Promise-prototype-catch"><a href="#2-4-Promise-prototype-catch" class="headerlink" title="2.4 Promise.prototype.catch()"></a>2.4 Promise.prototype.catch()</h3><p>Promise.prototype.catch方法是 .then(null, rejection) 的别名，用于指定发生错误时的回调函数。<br>..</p>
+</li>
+<li><p>下面是一个例子。</p>
+<pre><code>var promise = new Promise(function(resolve, reject) {
+    throw new Error(&apos;test&apos;)
+});
+promise.catch(function(error) { console.log(error) });
+// Error: test
+</code></pre></li>
+<li><p>如果Promise状态已经变成resolved，再抛出错误是无效的。</p>
+<pre><code>var promise = new Promise(function(resolve, reject) {
+    resolve(&quot;ok&quot;);
+    throw new Error(&apos;test&apos;);
+});
+promise
+    .then(function(value) { console.log(value) })
+    .catch(function(error) { console.log(error) });
+    // ok
+</code></pre></li>
+<li><p>Promise对象的错误具有“冒泡”性质，会一直向后传递，直到被捕获为止。也就是说，错误总是会被下一个catch语句捕获。</p>
+<pre><code>getJSON(&quot;/post/1.json&quot;).then(function(post) {
+    return getJSON(post.commentURL);
+}).then(function(comments) {
+    // some code
+}).catch(function(error) {
+    // 处理前面三个Promise产生的错误
+});
+</code></pre><p> 上面代码中，一共有三个Promise对象：一个由getJSON产生，两个由then产生。它们之中任何一个抛出的错误，都会被最后一个catch捕获。</p>
+</li>
+<li><p>跟传统的try/catch代码块不同的是，如果没有使用catch方法指定错误处理的回调函数，Promise对象抛出的错误不会传递到外层代码，即不会有任何反应。    </p>
+<ol>
+<li>..</li>
+<li>..</li>
+<li><p>Node.js有一个unhandledRejection事件，专门监听未捕获的reject错误。</p>
+<pre><code>process.on(&apos;unhandledRejection&apos;, function (err, p) {
+    console.error(err.stack)
+});
+</code></pre></li>
+</ol>
+</li>
+<li>需要注意的是，catch方法返回的还是一个Promise对象，因此后面还可以接着调用then方法。<br> catch方法之中，还能再抛出错误</li>
+</ol>
+<h3 id="2-5-Promise-all"><a href="#2-5-Promise-all" class="headerlink" title="2.5 Promise.all()"></a>2.5 Promise.all()</h3><p>Promise.all方法用于将多个Promise实例，包装成一个新的Promise实例。<br><code>var p = Promise.all([p1,p2,p3]);</code><br>上面代码中，Promise.all方法接受一个数组作为参数，p1、p2、p3都是Promise对象的实例。（Promise.all方法的参数不一定是数组，但是必须具有iterator接口，且返回的每个成员都是Promise实例。）</p>
+<pre><code>// 生成一个Promise对象的数组
+var promises = [2, 3, 5, 7, 11, 13].map(function(id){
+    return getJSON(&quot;/post/&quot; + id + &quot;.json&quot;);
+});
+Promise.all(promises).then(function(posts) {
+    // ...
+}).catch(function(reason){
+    // ...
+});
+</code></pre><h3 id="2-6-Promise-race"><a href="#2-6-Promise-race" class="headerlink" title="2.6 Promise.race()"></a>2.6 Promise.race()</h3><p>Promise.race方法同样是将多个Promise实例，包装成一个新的Promise实例。<br>上面代码中，只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的Promise实例的返回值，就传递给p的回调函数。</p>
+<p>如果Promise.all方法和Promise.race方法的参数，不是Promise实例，就会先调用下面讲到的Promise.resolve方法，将参数转为Promise实例，再进一步处理。</p>
+<h3 id="2-7-Promise-resolve"><a href="#2-7-Promise-resolve" class="headerlink" title="2.7 Promise.resolve()"></a>2.7 Promise.resolve()</h3><p>有时需要将现有对象转为Promise对象，Promise.resolve方法就起到这个作用。<br><code>var jsPromise = Promise.resolve($.ajax(&#39;/whatever.json&#39;));</code><br>上面代码将jQuery生成deferred对象，转为一个新的Promise对象。</p>
+<ol>
+<li><p>如果Promise.resolve方法的参数，不是具有then方法的对象（又称thenable对象），则返回一个新的Promise对象，且它的状态为Resolved。</p>
+<pre><code>var p = Promise.resolve(&apos;Hello&apos;);
+p.then(function (s){
+    console.log(s)
+});
+// Hello
+</code></pre></li>
+<li><p>Promise.resolve方法允许调用时不带参数。所以，如果希望得到一个Promise对象，比较方便的方法就是直接调用Promise.resolve方法。</p>
+<pre><code>var p = Promise.resolve();
+p.then(function () {
+    // ...
+});
+</code></pre></li>
+<li>如果Promise.resolve方法的参数是一个Promise实例，则会被原封不动地返回。          <h3 id="2-8-Promise-reject"><a href="#2-8-Promise-reject" class="headerlink" title="2.8 Promise.reject()"></a>2.8 Promise.reject()</h3></li>
+</ol>
+<h3 id="2-9-Generator函数与Promise的结合"><a href="#2-9-Generator函数与Promise的结合" class="headerlink" title="2.9 Generator函数与Promise的结合"></a>2.9 Generator函数与Promise的结合</h3><p>使用Generator函数管理流程，遇到异步操作的时候，通常返回一个Promise对象。</p>
+<pre><code>function getFoo () {
+    return new Promise(function (resolve, reject){
+        resolve(&apos;foo&apos;);
+    });
+}
+var g = function* () {
+    try {
+        var foo = yield getFoo();
+        console.log(foo);
+    } catch (e) {
+        console.log(e);
+    }
+};
+function run (generator) {
+    var it = generator();
+    function go(result) {
+        if (result.done) return result.value;
+        return result.value.then(function (value) {
+            return go(it.next(value));
+        }, function (error) {
+            return go(it.throw(value));
+        });
+    }
+    go(it.next());
+}
+run(g);
+</code></pre><p>上面代码的Generator函数g之中，有一个异步操作getFoo，它返回的就是一个Promise对象。函数run用来处理这个Promise对象，并调用下一个next方法。    </p>
+<h3 id="2-9-async函数"><a href="#2-9-async函数" class="headerlink" title="2.9 async函数"></a>2.9 async函数</h3><p>async函数与Promise、Generator函数一样，是用来取代回调函数、解决异步操作的一种方法。它本质上是Generator函数的语法糖。async函数并不属于ES6，而是被列入了ES7</p>
+<p style="text-align:right">2018.1.14 20：38</p><br><p style="text-align:right">1.28 23：38 细化完成</p>
+
+<h2 id="三-异步操作"><a href="#三-异步操作" class="headerlink" title="三 异步操作"></a>三 异步操作</h2><h3 id="3-1-基本概念"><a href="#3-1-基本概念" class="headerlink" title="3.1 基本概念"></a>3.1 基本概念</h3><h3 id="3-2-Generator函数"><a href="#3-2-Generator函数" class="headerlink" title="3.2 Generator函数"></a>3.2 Generator函数</h3><h3 id="3-3-Thunk函数"><a href="#3-3-Thunk函数" class="headerlink" title="3.3 Thunk函数"></a>3.3 Thunk函数</h3><h3 id="3-4-co模块"><a href="#3-4-co模块" class="headerlink" title="3.4 co模块"></a>3.4 co模块</h3><h3 id="3-5-async函数"><a href="#3-5-async函数" class="headerlink" title="3.5 async函数"></a>3.5 async函数</h3><p style="text-align:right">2018.1.14 星期日 23:08</p>
+
+<h2 id="四-Class"><a href="#四-Class" class="headerlink" title="四 Class"></a>四 Class</h2><h3 id="4-1-Class基本语法"><a href="#4-1-Class基本语法" class="headerlink" title="4.1 Class基本语法"></a>4.1 Class基本语法</h3><h3 id="4-2-Class的继承"><a href="#4-2-Class的继承" class="headerlink" title="4.2 Class的继承"></a>4.2 Class的继承</h3><h2 id="五-Module"><a href="#五-Module" class="headerlink" title="五 Module"></a>五 Module</h2><h3 id="5-1-export命令"><a href="#5-1-export命令" class="headerlink" title="5.1 export命令"></a>5.1 export命令</h3><h3 id="5-2-import命令"><a href="#5-2-import命令" class="headerlink" title="5.2 import命令"></a>5.2 import命令</h3><h3 id="5-3-模块的整体输入"><a href="#5-3-模块的整体输入" class="headerlink" title="5.3 模块的整体输入"></a>5.3 模块的整体输入</h3><h3 id="5-4-module命令"><a href="#5-4-module命令" class="headerlink" title="5.4 module命令"></a>5.4 module命令</h3><h3 id="5-5-export-default命令"><a href="#5-5-export-default命令" class="headerlink" title="5.5 export default命令"></a>5.5 export default命令</h3><h3 id="5-6-模块的继承"><a href="#5-6-模块的继承" class="headerlink" title="5.6 模块的继承"></a>5.6 模块的继承</h3><h3 id="5-7-ES6模块的转码"><a href="#5-7-ES6模块的转码" class="headerlink" title="5.7 ES6模块的转码"></a>5.7 ES6模块的转码</h3><h2 id="六-编程风格"><a href="#六-编程风格" class="headerlink" title="六 编程风格"></a>六 编程风格</h2><h3 id="6-1-块级作用域"><a href="#6-1-块级作用域" class="headerlink" title="6.1 块级作用域"></a>6.1 块级作用域</h3><h3 id="6-2-字符串"><a href="#6-2-字符串" class="headerlink" title="6.2 字符串"></a>6.2 字符串</h3><h3 id="6-3-解构赋值"><a href="#6-3-解构赋值" class="headerlink" title="6.3 解构赋值"></a>6.3 解构赋值</h3><h3 id="6-4-对象"><a href="#6-4-对象" class="headerlink" title="6.4 对象"></a>6.4 对象</h3><h3 id="6-5-数组"><a href="#6-5-数组" class="headerlink" title="6.5 数组"></a>6.5 数组</h3><h3 id="6-6-函数"><a href="#6-6-函数" class="headerlink" title="6.6 函数"></a>6.6 函数</h3><h3 id="6-7-Map结构"><a href="#6-7-Map结构" class="headerlink" title="6.7 Map结构"></a>6.7 Map结构</h3><h3 id="6-8-Class"><a href="#6-8-Class" class="headerlink" title="6.8 Class"></a>6.8 Class</h3><h3 id="6-9-模块"><a href="#6-9-模块" class="headerlink" title="6.9 模块"></a>6.9 模块</h3><h2 id="七-参考链接"><a href="#七-参考链接" class="headerlink" title="七 参考链接"></a>七 参考链接</h2><h3 id="7-1-官方文件"><a href="#7-1-官方文件" class="headerlink" title="7.1 官方文件"></a>7.1 官方文件</h3><h3 id="7-2-综合介绍"><a href="#7-2-综合介绍" class="headerlink" title="7.2 综合介绍"></a>7.2 综合介绍</h3><p style="text-align:right">2018.1.15 00：22</p>
+
+<p>读后总结： </p>
+<ol>
+<li>知道 Promise是一个对象：构造函数，接受一个函数参数，该函数有resolve,reject两个参数</li>
+<li>以及该对象配套方法</li>
+<li>目标，是掌握该对象的意义</li>
+</ol>

@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="第 1 章 jQ起步1.1 认识jQuery1.2 jQuery初步体验1.3 jQuery核心特性   第 2 章 jQ解密技术2.1 jQuery框架设计概述1 设计目标　2 目标实现   2.2 jQuery原型技术分解1 起源——原型继承2 生命——返回实例3 学步——分隔作用域4 生长——跨域访问5 成熟——选择器6 延续——迭代器7 延续——功能扩展8 延续——参数处理9 涅槃——名字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="犀利开发—jQuery内核详解与实践-3_高效选择的技巧与原理">
+<meta property="og:url" content="http://yoursite.com/pdf/jslib/犀利开发-jQuery内核详解与实践/第 3 章 高效选择的技巧与原理/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="第 1 章 jQ起步1.1 认识jQuery1.2 jQuery初步体验1.3 jQuery核心特性   第 2 章 jQ解密技术2.1 jQuery框架设计概述1 设计目标　2 目标实现   2.2 jQuery原型技术分解1 起源——原型继承2 生命——返回实例3 学步——分隔作用域4 生长——跨域访问5 成熟——选择器6 延续——迭代器7 延续——功能扩展8 延续——参数处理9 涅槃——名字">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.404Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="犀利开发—jQuery内核详解与实践-3_高效选择的技巧与原理">
+<meta name="twitter:description" content="第 1 章 jQ起步1.1 认识jQuery1.2 jQuery初步体验1.3 jQuery核心特性   第 2 章 jQ解密技术2.1 jQuery框架设计概述1 设计目标　2 目标实现   2.2 jQuery原型技术分解1 起源——原型继承2 生命——返回实例3 学步——分隔作用域4 生长——跨域访问5 成熟——选择器6 延续——迭代器7 延续——功能扩展8 延续——参数处理9 涅槃——名字">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/pdf/jslib/犀利开发-jQuery内核详解与实践/第 3 章 高效选择的技巧与原理/">
+
+
+
+
+
+  <title>犀利开发—jQuery内核详解与实践-3_高效选择的技巧与原理 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/pdf/jslib/犀利开发-jQuery内核详解与实践/第 3 章 高效选择的技巧与原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">犀利开发—jQuery内核详解与实践-3_高效选择的技巧与原理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-08T08:00:00+08:00">
+                2018-01-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/pdf/jslib/犀利开发-jQuery内核详解与实践/第 3 章 高效选择的技巧与原理/" class="leancloud_visitors" data-flag-title="犀利开发—jQuery内核详解与实践-3_高效选择的技巧与原理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  923
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="第-1-章-jQ起步"><a href="#第-1-章-jQ起步" class="headerlink" title="第 1 章 jQ起步"></a>第 1 章 jQ起步</h2><p>1.1 认识jQuery<br>1.2 jQuery初步体验<br>1.3 jQuery核心特性  </p>
+<h2 id="第-2-章-jQ解密技术"><a href="#第-2-章-jQ解密技术" class="headerlink" title="第 2 章 jQ解密技术"></a>第 2 章 jQ解密技术</h2><h3 id="2-1-jQuery框架设计概述"><a href="#2-1-jQuery框架设计概述" class="headerlink" title="2.1 jQuery框架设计概述"></a>2.1 jQuery框架设计概述</h3><p>1 设计目标　<br>2 目标实现  </p>
+<h3 id="2-2-jQuery原型技术分解"><a href="#2-2-jQuery原型技术分解" class="headerlink" title="2.2 jQuery原型技术分解"></a>2.2 jQuery原型技术分解</h3><p>1 起源——原型继承<br>2 生命——返回实例<br>3 学步——分隔作用域<br>4 生长——跨域访问<br>5 成熟——选择器<br>6 延续——迭代器<br>7 延续——功能扩展<br>8 延续——参数处理<br>9 涅槃——名字空间   </p>
+<h3 id="2-3-破解jQuery选折起接口"><a href="#2-3-破解jQuery选折起接口" class="headerlink" title="2.3 破解jQuery选折起接口"></a>2.3 破解jQuery选折起接口</h3><p>1 简单但很复杂的黑洞<br>2 盘根错节的逻辑关系<br>3 jquery构造器<br>4 生成DOM元素<br>5 引用DOM元素  </p>
+<h3 id="2-4-解析jQuery选择器引擎Sizzle"><a href="#2-4-解析jQuery选择器引擎Sizzle" class="headerlink" title="2.4 解析jQuery选择器引擎Sizzle"></a>2.4 解析jQuery选择器引擎Sizzle</h3><h3 id="2-5-类数组"><a href="#2-5-类数组" class="headerlink" title="2.5 类数组"></a>2.5 类数组</h3><h2 id="第-3-章-高效选择的技巧与原理"><a href="#第-3-章-高效选择的技巧与原理" class="headerlink" title="第 3 章 高效选择的技巧与原理"></a>第 3 章 高效选择的技巧与原理</h2><h3 id="3-1-选择器是什么"><a href="#3-1-选择器是什么" class="headerlink" title="3.1 选择器是什么"></a>3.1 选择器是什么</h3><h4 id="1-从css选择器说起"><a href="#1-从css选择器说起" class="headerlink" title="1 从css选择器说起"></a>1 从css选择器说起</h4><p>4伪类 5伪对象 6用户界面-4 7结构性-4 8其他（:not(s),:target-4</p>
+<h4 id="2-jQuery盗了谁的版"><a href="#2-jQuery盗了谁的版" class="headerlink" title="2 jQuery盗了谁的版"></a>2 jQuery盗了谁的版</h4><p>cssQuery</p>
+<h4 id="3-认识cssQuery选择器"><a href="#3-认识cssQuery选择器" class="headerlink" title="3 认识cssQuery选择器"></a>3 认识cssQuery选择器</h4><h4 id="4-使用cssQuery选择器"><a href="#4-使用cssQuery选择器" class="headerlink" title="4 使用cssQuery选择器"></a>4 使用cssQuery选择器</h4><h4 id="5-初步接触jQuery选择器"><a href="#5-初步接触jQuery选择器" class="headerlink" title="5 初步接触jQuery选择器"></a>5 初步接触jQuery选择器</h4><p>解决两大难题：支持css1，css2，css3；支持不同类型的主流浏览器<br>永远返回一个数组对象，所以 if($(‘tr’).length&gt;0)</p>
+<p>简单、包含、筛选、内容、属性、表单</p>
+<h3 id="3-2-简单选择器"><a href="#3-2-简单选择器" class="headerlink" title="3.2 简单选择器"></a>3.2 简单选择器</h3><p> #id element .class * selector1,selector2,selector3</p>
+<h4 id="1-选择指定ID元素"><a href="#1-选择指定ID元素" class="headerlink" title="1 选择指定ID元素"></a>1 选择指定ID元素</h4><ol start="3">
+<li>执行效率比较分析<br>jquery用时长 </li>
+<li>jQuery方法应用解析<br><div id="a.b">div1</div><br><div id="a:b">div1</div><br><div id="[div]">div1</div><br>$(“#a\.b”)  $(“#a\:b”)  $(“#\{div\}”)<br>document.getElementById(“a.b”)  a:b  [div]</li>
+</ol>
+<h4 id="2-选择指定类型"><a href="#2-选择指定类型" class="headerlink" title="2 选择指定类型"></a>2 选择指定类型</h4><ol start="3">
+<li>——   jQuery用时多，而且更严重 <h4 id="3-选择指定类"><a href="#3-选择指定类" class="headerlink" title="3 选择指定类"></a>3 选择指定类</h4></li>
+<li>—— 自定义的不如jQuery<br><p style="text-align:right">2018.1.10 00:26 P113&lt;/&gt;<br></p><p style="text-align:right">2018.1.10 21:36&lt;/&gt;</p></li>
+</ol>
+<h4 id="4-选择所有元素及其优化"><a href="#4-选择所有元素及其优化" class="headerlink" title="4 选择所有元素及其优化"></a>4 选择所有元素及其优化</h4><p>更高效的方法：结合两者<br>    var all=document.getElementByTagName(“*”)<br>    $(all).css(“color”,”red”)</p>
+<h4 id="5-选择多组元素及其实现"><a href="#5-选择多组元素及其实现" class="headerlink" title="5 选择多组元素及其实现"></a>5 选择多组元素及其实现</h4><h3 id="3-3-关系选择器"><a href="#3-3-关系选择器" class="headerlink" title="3.3 关系选择器"></a>3.3 关系选择器</h3><h4 id="1-层级选择器"><a href="#1-层级选择器" class="headerlink" title="1 层级选择器"></a>1 层级选择器</h4><p>选择器 、子选择器&gt;、相邻选择器+、兄弟选择器~</p>
+<h4 id="2-层级选择器的实现方法"><a href="#2-层级选择器的实现方法" class="headerlink" title="2 层级选择器的实现方法"></a>2 层级选择器的实现方法</h4><pre><code>var Expr=Sizzle.selectors={
+    relative:{
+        &quot;+&quot;:function(){},
+        &quot;&gt;&quot;:funciton(){},
+
+    }
+}
+function dirNodeCheck(dir,cur,doneName,checkSet,nodeCheck,isXML){}
+function dirCheck(dir,cur,doneName,checkSet,nodeCheck,isXML){}
+</code></pre><h4 id="3-子元素选择器"><a href="#3-子元素选择器" class="headerlink" title="3 子元素选择器"></a>3 子元素选择器</h4><p>:nth-child  :first-child  :last-child   :only-child</p>
+<h4 id="4-子元素选择器的实现方法"><a href="#4-子元素选择器的实现方法" class="headerlink" title="4 子元素选择器的实现方法"></a>4 子元素选择器的实现方法</h4><pre><code>var Expr=Sizzle.selectors={
+    order:[&quot;ID&quot;,&quot;NAME&quot;,&quot;TAG&quot;],
+    match:{
+        ID:/  /,CLASS://,NAME://,
+
+    }
+}
+</code></pre><h3 id="3-4-过滤选择器"><a href="#3-4-过滤选择器" class="headerlink" title="3.4 过滤选择器"></a>3.4 过滤选择器</h3><h4 id="1-定位过滤器"><a href="#1-定位过滤器" class="headerlink" title="1 定位过滤器"></a>1 定位过滤器</h4><p>:first,:last,:not,:even,:odd,:eq,:gt,:lt,:header,:animated</p>
+<h4 id="2-定位过滤器的实现方法"><a href="#2-定位过滤器的实现方法" class="headerlink" title="2 定位过滤器的实现方法"></a>2 定位过滤器的实现方法</h4><pre><code>var Expr=Sizzle.selectors={
+    setFilters:{
+        first:function(elem,i){return i===0},
+
+    },
+    filter:{
+        POS:function(elem,match,i,array){
+            var name=match[2],filter=Expr.setFilters[name]
+            if(filter){
+                return filter(elem,i,match,array)
+            }
+        }
+    }
+}
+</code></pre><h4 id="3-内容过滤器"><a href="#3-内容过滤器" class="headerlink" title="3 内容过滤器"></a>3 内容过滤器</h4><p>:contains,:empty,:has,:parent</p>
+<h4 id="4-内容过滤器的实现方法"><a href="#4-内容过滤器的实现方法" class="headerlink" title="4 内容过滤器的实现方法"></a>4 内容过滤器的实现方法</h4><pre><code>var Expr=Sizzle.selectors={
+    filters:{
+        parent:function(elem){return !!elem.firstChild},
+        empty:function(elem){return !elem.firstChild},
+        has:function(elem,i,match){},
+
+
+        PSEUDO:function(elem,match,i,array){
+            var name=match[1],filter=Expr.filters[name]
+            if(filter){}
+            else if(name===&quot;contains&quot;){}
+            else if(name===&quot;not&quot;){return true}
+        }
+    }
+}
+</code></pre><h4 id="5-可见过滤器"><a href="#5-可见过滤器" class="headerlink" title="5 可见过滤器"></a>5 可见过滤器</h4><p>:hidden,:visible</p>
+<h4 id="6-可见过滤器的实现方法"><a href="#6-可见过滤器的实现方法" class="headerlink" title="6 可见过滤器的实现方法"></a>6 可见过滤器的实现方法</h4><p>Sizzle.selectors.filters.hidden=function(elem){return elem.offsetWidth===0||elem.offsetHeight===0}<br>Sizzle.selectors.filters.visible=function(elem){return }<br>Sizzle.selectors.filters.animated=function(elem){return jQuery.grep(…)}</p>
+<h3 id="3-5-属性选择器"><a href="#3-5-属性选择器" class="headerlink" title="3.5 属性选择器"></a>3.5 属性选择器</h3><h4 id="1-使用属性选择器"><a href="#1-使用属性选择器" class="headerlink" title="1 使用属性选择器"></a>1 使用属性选择器</h4><p>[a],[a=v],!=,^=,$=,*=,[a1][a2][aN] </p>
+<h4 id="2-使用属性选择器的实现方法"><a href="#2-使用属性选择器的实现方法" class="headerlink" title="2 使用属性选择器的实现方法"></a>2 使用属性选择器的实现方法</h4><h3 id="3-6-表单选择器"><a href="#3-6-表单选择器" class="headerlink" title="3.6 表单选择器"></a>3.6 表单选择器</h3><h4 id="1-基本表单选择器"><a href="#1-基本表单选择器" class="headerlink" title="1 基本表单选择器"></a>1 基本表单选择器</h4><p>:input,:text,:password,:radio,:checkbox,:submit,:image,:reset,:button,:file,:hidden</p>
+<h4 id="2-高级表单选择器"><a href="#2-高级表单选择器" class="headerlink" title="2 高级表单选择器"></a>2 高级表单选择器</h4><p>:enable,:disable,:checked,:selected</p>
+<h4 id="3-表单选择器的实现方法"><a href="#3-表单选择器的实现方法" class="headerlink" title="3 表单选择器的实现方法"></a>3 表单选择器的实现方法</h4><h2 id="第-4-章-文档对象的操作及高效实践"><a href="#第-4-章-文档对象的操作及高效实践" class="headerlink" title="第 4 章 文档对象的操作及高效实践"></a>第 4 章 文档对象的操作及高效实践</h2><h2 id="第-5-章-事件封装机制与解析"><a href="#第-5-章-事件封装机制与解析" class="headerlink" title="第 5 章 事件封装机制与解析"></a>第 5 章 事件封装机制与解析</h2><h2 id="第-6-章-动画效果设计及其高效实践"><a href="#第-6-章-动画效果设计及其高效实践" class="headerlink" title="第 6 章 动画效果设计及其高效实践"></a>第 6 章 动画效果设计及其高效实践</h2><h2 id="第-7-章-Ajax异步通信高效实践"><a href="#第-7-章-Ajax异步通信高效实践" class="headerlink" title="第 7 章 Ajax异步通信高效实践"></a>第 7 章 Ajax异步通信高效实践</h2><h2 id="第-8-章-高效开发和使用插件"><a href="#第-8-章-高效开发和使用插件" class="headerlink" title="第 8 章 高效开发和使用插件"></a>第 8 章 高效开发和使用插件</h2><h2 id="第-9-章-jQ辅助工具"><a href="#第-9-章-jQ辅助工具" class="headerlink" title="第 9 章 jQ辅助工具"></a>第 9 章 jQ辅助工具</h2><h2 id="第-10-章-使用jQ打造Ajax异步交互式动态网站"><a href="#第-10-章-使用jQ打造Ajax异步交互式动态网站" class="headerlink" title="第 10 章 使用jQ打造Ajax异步交互式动态网站"></a>第 10 章 使用jQ打造Ajax异步交互式动态网站</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/pdf/jslib/犀利开发-jQuery内核详解与实践/第 5 章 事件封装机制与解析/" rel="next" title="犀利开发—jQuery内核详解与实践-5_事件封装机制与解析">
+                <i class="fa fa-chevron-left"></i> 犀利开发—jQuery内核详解与实践-5_事件封装机制与解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/pdf/jslib/犀利开发-jQuery内核详解与实践/第 4 章 文档对象的操作及高效实践/" rel="prev" title="犀利开发—jQuery内核详解与实践-4_文档对象的操作及高效实践">
+                犀利开发—jQuery内核详解与实践-4_文档对象的操作及高效实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第-1-章-jQ起步"><span class="nav-text">第 1 章 jQ起步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-2-章-jQ解密技术"><span class="nav-text">第 2 章 jQ解密技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-jQuery框架设计概述"><span class="nav-text">2.1 jQuery框架设计概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-jQuery原型技术分解"><span class="nav-text">2.2 jQuery原型技术分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-破解jQuery选折起接口"><span class="nav-text">2.3 破解jQuery选折起接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-解析jQuery选择器引擎Sizzle"><span class="nav-text">2.4 解析jQuery选择器引擎Sizzle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-类数组"><span class="nav-text">2.5 类数组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-3-章-高效选择的技巧与原理"><span class="nav-text">第 3 章 高效选择的技巧与原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-选择器是什么"><span class="nav-text">3.1 选择器是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-从css选择器说起"><span class="nav-text">1 从css选择器说起</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-jQuery盗了谁的版"><span class="nav-text">2 jQuery盗了谁的版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-认识cssQuery选择器"><span class="nav-text">3 认识cssQuery选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-使用cssQuery选择器"><span class="nav-text">4 使用cssQuery选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-初步接触jQuery选择器"><span class="nav-text">5 初步接触jQuery选择器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-简单选择器"><span class="nav-text">3.2 简单选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-选择指定ID元素"><span class="nav-text">1 选择指定ID元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-选择指定类型"><span class="nav-text">2 选择指定类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-选择指定类"><span class="nav-text">3 选择指定类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-选择所有元素及其优化"><span class="nav-text">4 选择所有元素及其优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-选择多组元素及其实现"><span class="nav-text">5 选择多组元素及其实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-关系选择器"><span class="nav-text">3.3 关系选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-层级选择器"><span class="nav-text">1 层级选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-层级选择器的实现方法"><span class="nav-text">2 层级选择器的实现方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-子元素选择器"><span class="nav-text">3 子元素选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-子元素选择器的实现方法"><span class="nav-text">4 子元素选择器的实现方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-过滤选择器"><span class="nav-text">3.4 过滤选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-定位过滤器"><span class="nav-text">1 定位过滤器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-定位过滤器的实现方法"><span class="nav-text">2 定位过滤器的实现方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-内容过滤器"><span class="nav-text">3 内容过滤器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-内容过滤器的实现方法"><span class="nav-text">4 内容过滤器的实现方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-可见过滤器"><span class="nav-text">5 可见过滤器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-可见过滤器的实现方法"><span class="nav-text">6 可见过滤器的实现方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-属性选择器"><span class="nav-text">3.5 属性选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-使用属性选择器"><span class="nav-text">1 使用属性选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-使用属性选择器的实现方法"><span class="nav-text">2 使用属性选择器的实现方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-表单选择器"><span class="nav-text">3.6 表单选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基本表单选择器"><span class="nav-text">1 基本表单选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-高级表单选择器"><span class="nav-text">2 高级表单选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-表单选择器的实现方法"><span class="nav-text">3 表单选择器的实现方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-4-章-文档对象的操作及高效实践"><span class="nav-text">第 4 章 文档对象的操作及高效实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-5-章-事件封装机制与解析"><span class="nav-text">第 5 章 事件封装机制与解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-6-章-动画效果设计及其高效实践"><span class="nav-text">第 6 章 动画效果设计及其高效实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-7-章-Ajax异步通信高效实践"><span class="nav-text">第 7 章 Ajax异步通信高效实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-8-章-高效开发和使用插件"><span class="nav-text">第 8 章 高效开发和使用插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-9-章-jQ辅助工具"><span class="nav-text">第 9 章 jQ辅助工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-10-章-使用jQ打造Ajax异步交互式动态网站"><span class="nav-text">第 10 章 使用jQ打造Ajax异步交互式动态网站</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">408.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

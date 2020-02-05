@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nodejs,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="toc and abstract.   菜鸟:http://www.runoob.com/nodejs/nodejs-tutorial.html 2017.1.1 星期日 15:10">
+<meta name="keywords" content="nodejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js教程-Runoob">
+<meta property="og:url" content="http://yoursite.com/w3/ser/nodejs-runoob/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="toc and abstract.   菜鸟:http://www.runoob.com/nodejs/nodejs-tutorial.html 2017.1.1 星期日 15:10">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.451Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js教程-Runoob">
+<meta name="twitter:description" content="toc and abstract.   菜鸟:http://www.runoob.com/nodejs/nodejs-tutorial.html 2017.1.1 星期日 15:10">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/w3/ser/nodejs-runoob/">
+
+
+
+
+
+  <title>Node.js教程-Runoob | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/w3/ser/nodejs-runoob/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Node.js教程-Runoob</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-01T08:00:00+08:00">
+                2017-01-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/w3/ser/nodejs-runoob/" class="leancloud_visitors" data-flag-title="Node.js教程-Runoob">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  8,963
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  36
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>toc and abstract.  </p>
+<p>菜鸟:<a href="http://www.runoob.com/nodejs/nodejs-tutorial.html" target="_blank" rel="noopener">http://www.runoob.com/nodejs/nodejs-tutorial.html</a></p>
+<p style="text-align:right">2017.1.1 星期日 15:10</p>
+
+<a id="more"></a>
+<h2 id="一-教程"><a href="#一-教程" class="headerlink" title="一 教程"></a>一 教程</h2><p>简单的说 Node.js 就是运行在服务端的 JavaScript。<br>Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。<br>Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。  </p>
+<ul>
+<li>Hello World<ol>
+<li>脚本模式</li>
+<li>交互模式</li>
+</ol>
+</li>
+</ul>
+<h2 id="二-安装配置"><a href="#二-安装配置" class="headerlink" title="二 安装配置"></a>二 安装配置</h2><p>LTS   </p>
+<ul>
+<li><p>Windows安装</p>
+<ol>
+<li><p>安装包 .msi  </p>
+<blockquote>
+<p>检测PATH环境变量是否配置了Node.js，点击开始=》运行=》输入”cmd” =&gt; 输入命令”path”，输出如下结果：   </p>
+</blockquote>
+</li>
+<li><p>二进制文件 (.exe)安装</p>
+</li>
+<li>版本测试</li>
+</ol>
+</li>
+<li>Ubuntu   </li>
+<li>CentOS    </li>
+</ul>
+<h2 id="三-创建第一个应用"><a href="#三-创建第一个应用" class="headerlink" title="三 创建第一个应用"></a>三 创建第一个应用</h2><p>不过对 Node.js 来说，概念完全不一样了。使用 Node.js 时，我们不仅仅 在实现一个应用，同时还实现了整个 HTTP 服务器。</p>
+<pre><code>var http = require(&apos;http&apos;);
+
+http.createServer(function (request, response) {
+
+    // 发送 HTTP 头部 
+    // HTTP 状态值: 200 : OK
+    // 内容类型: text/plain
+    response.writeHead(200, {&apos;Content-Type&apos;: &apos;text/plain&apos;});
+
+    // 发送响应数据 &quot;Hello World&quot;
+    response.end(&apos;Hello World\n&apos;);
+}).listen(8888);
+
+// 终端打印如下信息
+console.log(&apos;Server running at http://127.0.0.1:8888/&apos;);
+</code></pre><p>让我们先了解下 Node.js 应用是由哪几部分组成的：  </p>
+<ol>
+<li>引入 required 模块：我们可以使用 require 指令来载入 Node.js 模块。</li>
+<li>创建服务器：服务器可以监听客户端的请求，类似于 Apache 、Nginx 等 HTTP 服务器。</li>
+<li>接收请求与响应请求 服务器很容易创建，客户端可以使用浏览器或终端发送 HTTP <h2 id="四-NPM-使用介绍"><a href="#四-NPM-使用介绍" class="headerlink" title="四 NPM 使用介绍"></a>四 NPM 使用介绍</h2>NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：</li>
+</ol>
+<ul>
+<li>允许用户从NPM服务器下载别人编写的第三方包到本地使用。  </li>
+<li>允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用。</li>
+<li>允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。</li>
+</ul>
+<p>由于新版的nodejs已经集成了npm，所以之前npm也一并安装好了。同样可以通过输入 <code>npm -v</code> 来测试是否成功安装。</p>
+<p>如果你安装的是旧版本的 npm，可以很容易得通过 npm 命令来升级，命令如下：<code>npm install npm -g</code><br>使用淘宝镜像的命令：<code>cnpm install npm -g</code></p>
+<h3 id="1-使用-npm-命令安装模块"><a href="#1-使用-npm-命令安装模块" class="headerlink" title="1 使用 npm 命令安装模块"></a>1 使用 npm 命令安装模块</h3><pre><code>$ npm install express
+</code></pre><h3 id="2-全局安装与本地安装"><a href="#2-全局安装与本地安装" class="headerlink" title="2 全局安装与本地安装"></a>2 全局安装与本地安装</h3><pre><code>$ npm install express -g
+</code></pre><ul>
+<li>全局安装：</li>
+</ul>
+<ol>
+<li>将安装包放在 /usr/local 下或者你 node 的安装目录。  </li>
+<li>可以直接在命令行里使用。  </li>
+</ol>
+<ul>
+<li><p>查看安装信息  </p>
+<pre><code>//查看所有全局安装的模块
+$ npm list -g
+//某模块的版本号
+$ npm list grunt
+</code></pre><h3 id="3-使用-package-json"><a href="#3-使用-package-json" class="headerlink" title="3 使用 package.json"></a>3 使用 package.json</h3><h4 id="Package-json-属性说明"><a href="#Package-json-属性说明" class="headerlink" title="Package.json 属性说明"></a>Package.json 属性说明</h4><p>name,version,description,homepage,author,contributors,dependencies,repository,main,keywords</p>
+<h3 id="4-卸载模块"><a href="#4-卸载模块" class="headerlink" title="4 卸载模块"></a>4 卸载模块</h3><p>  $ npm uninstall express</p>
+<h3 id="5-更新"><a href="#5-更新" class="headerlink" title="5 更新"></a>5 更新</h3><p>  $ npm update express</p>
+<h3 id="6-搜索"><a href="#6-搜索" class="headerlink" title="6 搜索"></a>6 搜索</h3><p>  $ npm search express</p>
+<h3 id="7-创建"><a href="#7-创建" class="headerlink" title="7 创建"></a>7 创建</h3><p>  //生成package.json<br>  $ npm init<br>  //添加用户<br>  $ npm adduser<br>  //发布<br>  $ npm publish</p>
+<h3 id="8-版本号"><a href="#8-版本号" class="headerlink" title="8 版本号"></a>8 版本号</h3><p>X.Y.Z:主版本号，次版本号,补丁版本号   </p>
+</li>
+</ul>
+<p>版本号有了这个保证后，在申明第三方包依赖时，除了可依赖于一个固定版本号外，还可依赖于某个范围的版本号。例如”argv”: “0.0.x”表示依赖于0.0.x系列的最新版argv。</p>
+<h3 id="9-NPM-常用命令"><a href="#9-NPM-常用命令" class="headerlink" title="9 NPM 常用命令"></a>9 NPM 常用命令</h3><h3 id="10-使用淘宝-NPM-镜像"><a href="#10-使用淘宝-NPM-镜像" class="headerlink" title="10 使用淘宝 NPM 镜像"></a>10 使用淘宝 NPM 镜像</h3><pre><code>$ npm install -g cnpm --registry=https://registry.npm.taobao.org
+$ cnpm install [name]
+</code></pre><h2 id="五-REPL"><a href="#五-REPL" class="headerlink" title="五 REPL"></a>五 REPL</h2><p>Node.js REPL(Read Eval Print Loop:交互式解释器) 表示一个电脑的环境，类似 Window 系统的终端或 Unix/Linux shell，我们可以在终端中输入命令，并接收系统的响应。  </p>
+<p>Node 自带了交互式解释器，可以执行以下任务：<br>读取 、执行 、打印、 循环：循环操作以上步骤直到用户两次按下 ctrl-c 按钮退出。</p>
+<h3 id="1-启动-node"><a href="#1-启动-node" class="headerlink" title="1 启动 $ node"></a>1 启动 <code>$ node</code></h3><ol>
+<li>简单表达式运算</li>
+<li>使用变量</li>
+<li>多行表达式</li>
+<li><p>下划线（_）变量</p>
+<pre><code>var x=10,y=20;
+x+y
+var sum=_
+console.log(sum)//30
+</code></pre></li>
+</ol>
+<h3 id="2-REPL-命令"><a href="#2-REPL-命令" class="headerlink" title="2 REPL 命令"></a>2 REPL 命令</h3><p>ctrl+c,ctrl+c两次、ctrl+d,向上/下，tab，.help，.break,.clear,.save filename,.load filename   </p>
+<h3 id="3-停止-REPL"><a href="#3-停止-REPL" class="headerlink" title="3 停止 REPL"></a>3 停止 REPL</h3><pre><code>两次ctrl+c
+</code></pre><h2 id="六-回调函数"><a href="#六-回调函数" class="headerlink" title="六 回调函数"></a>六 回调函数</h2><ol>
+<li>Node.js 异步编程的直接体现就是回调。  </li>
+<li>异步编程依托于回调来实现，但不能说使用了回调后程序就异步化了。  </li>
+<li>回调函数在完成任务后就会被调用，Node 使用了大量的回调函数，Node 所有 API 都支持回调函数。 </li>
+</ol>
+<p>例如，我们可以一边读取文件，一边执行其他命令，在文件读取完成后，我们将文件内容作为回调函数的参数返回。这样在执行代码时就没有阻塞或等待文件 I/O 操作。这就大大提高了 Node.js 的性能，可以处理大量的并发请求。</p>
+<h3 id="1-阻塞代码实例"><a href="#1-阻塞代码实例" class="headerlink" title="1 阻塞代码实例"></a>1 阻塞代码实例</h3><pre><code>var fs = require(&quot;fs&quot;);
+var data = fs.readFileSync(&apos;input.txt&apos;);
+console.log(data.toString());
+console.log(&quot;程序执行结束!&quot;);
+</code></pre><h3 id="2-非阻塞代码实例"><a href="#2-非阻塞代码实例" class="headerlink" title="2 非阻塞代码实例"></a>2 非阻塞代码实例</h3><pre><code>var fs = require(&quot;fs&quot;);
+fs.readFile(&apos;input.txt&apos;, function (err, data) {
+    if (err) return console.error(err);
+    console.log(data.toString());
+});
+console.log(&quot;程序执行结束!&quot;);
+</code></pre><p>因此，阻塞是按顺序执行的，而非阻塞是不需要按顺序的，所以如果需要处理回调函数的参数，我们就需要写在回调函数内。</p>
+<h2 id="七-事件循环"><a href="#七-事件循环" class="headerlink" title="七 事件循环"></a>七 事件循环</h2><ol>
+<li>Node.js 是单进程单线程应用程序，但是通过事件和回调支持并发，所以性能非常高。</li>
+<li>Node.js 的每一个 API 都是异步的，并作为一个独立线程运行，使用异步函数调用，并处理并发。</li>
+<li>Node.js 基本上所有的事件机制都是用设计模式中观察者模式实现。</li>
+<li>Node.js 单线程类似进入一个while(true)的事件循环，直到没有事件观察者退出，每个异步事件都生成一个事件观察者，如果有事件发生就调用该回调函数.<h3 id="1-事件驱动程序"><a href="#1-事件驱动程序" class="headerlink" title="1 事件驱动程序"></a>1 事件驱动程序</h3></li>
+<li>Node.js 使用事件驱动模型，当web server接收到请求，就把它关闭然后进行处理，然后去服务下一个web请求。</li>
+<li>当这个请求完成，它被放回处理队列，当到达队列开头，这个结果被返回给用户。</li>
+</ol>
+<ul>
+<li>这个模型非常高效可扩展性非常强，因为webserver一直接受请求而不等待任何读写操作。（这也被称之为非阻塞式IO或者事件驱动IO）  </li>
+<li>在<strong>事件驱动模型</strong>中，会<em>生成一个主循环来监听事件，当检测到事件时触发回调函数</em>。<br>图例：<a href="http://www.runoob.com/nodejs/nodejs-event-loop.html" target="_blank" rel="noopener">http://www.runoob.com/nodejs/nodejs-event-loop.html</a></li>
+</ul>
+<p>Node.js 有多个内置的事件，我们可以通过引入 events 模块，并通过实例化 EventEmitter 类来绑定和监听事件，如下实例：</p>
+<pre><code>// 引入 events 模块
+var events = require(&apos;events&apos;);
+// 创建 eventEmitter 对象
+var eventEmitter = new events.EventEmitter();
+// 绑定事件及事件的处理程序
+eventEmitter.on(&apos;eventName&apos;, eventHandler);
+// 通过程序触发事件：
+eventEmitter.emit(&apos;eventName&apos;);
+</code></pre><h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><h3 id="2-Node-应用程序是如何工作的？"><a href="#2-Node-应用程序是如何工作的？" class="headerlink" title="2 Node 应用程序是如何工作的？"></a>2 Node 应用程序是如何工作的？</h3><p>在 Node 应用程序中，执行异步操作的函数将回调函数作为最后一个参数， 回调函数接收错误对象作为第一个参数。</p>
+<h2 id="八-EventEmitter"><a href="#八-EventEmitter" class="headerlink" title="八 EventEmitter"></a>八 EventEmitter</h2><p>Node.js 所有的异步 I/O 操作在完成时都会发送一个事件到事件队列。<br>Node.js里面的许多对象都会分发事件：一个net.Server对象会在每次有新连接时分发一个事件， 一个fs.readStream对象会在文件被打开的时候发出一个事件。 所有这些产生事件的对象都是 events.EventEmitter 的实例。</p>
+<h3 id="1-EventEmitter-类"><a href="#1-EventEmitter-类" class="headerlink" title="1 EventEmitter 类"></a>1 EventEmitter 类</h3><p>events 模块只提供了一个对象： events.EventEmitter。EventEmitter 的核心就是事件触发与事件监听器功能的封装。</p>
+<ol>
+<li><p>你可以通过require(“events”);来访问该模块。</p>
+<pre><code>// 引入 events 模块  
+var events = require(&apos;events&apos;);  
+// 创建 eventEmitter 对象
+var eventEmitter = new events.EventEmitter();
+</code></pre></li>
+<li><p>EventEmitter 对象如果在实例化时发生错误，会触发 error 事件。当添加新的监听器时，newListener 事件会触发，当监听器被移除时，removeListener 事件被触发。</p>
+<p> 下面我们用一个简单的例子说明 EventEmitter 的用法：  </p>
+</li>
+<li><p>EventEmitter 的每个事件由一个事件名和若干个参数组成，事件名是一个字符串，通常表达一定的语义。对于每个事件，EventEmitter 支持 若干个事件监听器。<br>当事件触发时，注册到这个事件的事件监听器被依次调用，事件参数作为回调函数参数传递。</p>
+<pre><code>var events = require(&apos;events&apos;); 
+var emitter = new events.EventEmitter(); 
+emitter.on(&apos;someEvent&apos;, function(arg1, arg2) { 
+    console.log(&apos;listener1&apos;, arg1, arg2); 
+}); 
+emitter.on(&apos;someEvent&apos;, function(arg1, arg2) { 
+    console.log(&apos;listener2&apos;, arg1, arg2); 
+}); 
+emitter.emit(&apos;someEvent&apos;, &apos;arg1 参数&apos;, &apos;arg2 参数&apos;); 
+</code></pre></li>
+<li>EventEmitter 提供了多个属性，如 on 和 emit。on 函数用于绑定事件函数，emit 属性用于触发一个事件。接下来我们来具体看下 EventEmitter 的属性介绍。<ul>
+<li>方法：addListener(event,listener),on(event,listener),once(v,l),removeListener(e,l),removeAllListener([e]),setMaxListeners(n),listeners(e),emit(e,[arg1],[arg2],[…])  </li>
+<li>类方法：listenerCount(emitter,event)</li>
+<li>事件：newListener,removeListener,</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-error-事件"><a href="#2-error-事件" class="headerlink" title="2 error 事件"></a>2 error 事件</h3><p>EventEmitter 定义了一个特殊的事件 error，它包含了错误的语义，我们在遇到 异常的时候通常会触发 error 事件。</p>
+<p>当 error 被触发时，EventEmitter 规定如果没有响 应的监听器，Node.js 会把它当作异常，退出程序并输出错误信息。</p>
+<p>我们一般要为会触发 error 事件的对象设置监听器，避免遇到错误后整个程序崩溃。例如：</p>
+<h3 id="3-继承-EventEmitter"><a href="#3-继承-EventEmitter" class="headerlink" title="3 继承 EventEmitter"></a>3 继承 EventEmitter</h3><p>大多数时候我们不会直接使用 EventEmitter，而是在对象中继承它。包括 fs、net、 http 在内的，只要是支持事件响应的核心模块都是 EventEmitter 的子类。</p>
+<p>为什么要这样做呢？原因有两点：</p>
+<ol>
+<li>首先，具有某个实体功能的对象实现事件符合语义， 事件的监听和发射应该是一个对象的方法。</li>
+<li>其次 JavaScript 的对象机制是基于原型的，支持 部分多重继承，继承 EventEmitter 不会打乱对象原有的继承关系。</li>
+</ol>
+<h2 id="九-Buffer"><a href="#九-Buffer" class="headerlink" title="九 Buffer"></a>九 Buffer</h2><p>JavaScript 语言自身只有字符串数据类型，没有二进制数据类型。<br>但在处理像TCP流或文件流时，必须使用到二进制数据。因此在 Node.js中，定义了一个 Buffer 类，该类用来创建一个专门存放二进制数据的缓存区。</p>
+<p>在 Node.js 中，Buffer 类是随 Node 内核一起发布的核心库。Buffer 库为 Node.js 带来了一种存储原始数据的方法，可以让 Node.js 处理二进制数据，每当需要在 Node.js 中处理I/O操作中移动的数据时，就有可能使用 Buffer 库。原始数据存储在 Buffer 类的实例中。一个 Buffer 类似于一个整数数组，但它对应于 V8 堆内存之外的一块原始内存。</p>
+<h3 id="1-创建-Buffer-类"><a href="#1-创建-Buffer-类" class="headerlink" title="1 创建 Buffer 类"></a>1 创建 Buffer 类</h3><pre><code>var buf = new Buffer(10);
+var buf = new Buffer([10, 20, 30, 40, 50]);
+var buf = new Buffer(&quot;www.runoob.com&quot;, &quot;utf-8&quot;);
+</code></pre><h3 id="2-写入缓冲区"><a href="#2-写入缓冲区" class="headerlink" title="2 写入缓冲区"></a>2 写入缓冲区</h3><pre><code>buf.write(string[, offset[, length]][, encoding])
+</code></pre><h3 id="3-从缓冲区读取数据"><a href="#3-从缓冲区读取数据" class="headerlink" title="3 从缓冲区读取数据"></a>3 从缓冲区读取数据</h3><pre><code>buf.toString([encoding[, start[, end]]])
+</code></pre><h3 id="4-将-Buffer-转换为-JSON-对象"><a href="#4-将-Buffer-转换为-JSON-对象" class="headerlink" title="4 将 Buffer 转换为 JSON 对象"></a>4 将 Buffer 转换为 JSON 对象</h3><pre><code>buf.toJSON()    
+</code></pre><h3 id="5-缓冲区合并"><a href="#5-缓冲区合并" class="headerlink" title="5 缓冲区合并"></a>5 缓冲区合并</h3><pre><code>Buffer.concat(list[, totalLength])    
+</code></pre><h3 id="6-缓冲区比较"><a href="#6-缓冲区比较" class="headerlink" title="6 缓冲区比较"></a>6 缓冲区比较</h3><pre><code>buf.compare(otherBuffer);
+</code></pre><h3 id="7-拷贝缓冲区"><a href="#7-拷贝缓冲区" class="headerlink" title="7 拷贝缓冲区"></a>7 拷贝缓冲区</h3><pre><code>buf.copy(targetBuffer[, targetStart[, sourceStart[, sourceEnd]]])
+</code></pre><h3 id="8-缓冲区裁剪"><a href="#8-缓冲区裁剪" class="headerlink" title="8 缓冲区裁剪"></a>8 缓冲区裁剪</h3><h3 id="9-缓冲区长度"><a href="#9-缓冲区长度" class="headerlink" title="9 缓冲区长度"></a>9 缓冲区长度</h3><h3 id="10-方法参考手册"><a href="#10-方法参考手册" class="headerlink" title="10 方法参考手册"></a>10 方法参考手册</h3><h2 id="十-Stream"><a href="#十-Stream" class="headerlink" title="十 Stream"></a>十 Stream</h2><p>Stream 是一个抽象接口，Node 中有很多对象实现了这个接口。例如，对http 服务器发起请求的request 对象就是一个 Stream，还有stdout（标准输出）。</p>
+<p>Node.js，Stream 有四种流类型：</p>
+<ul>
+<li>Readable - 可读操作。   </li>
+<li>Writable - 可写操作。  </li>
+<li>Duplex - 可读可写操作.</li>
+<li>Transform - 操作被写入数据，然后读出结果。</li>
+</ul>
+<p>所有的 Stream 对象都是 EventEmitter 的实例。常用的事件有：</p>
+<ul>
+<li>data - 当有数据可读时触发。</li>
+<li>end - 没有更多的数据可读时触发。</li>
+<li>error - 在接收和写入过程中发生错误时触发。</li>
+<li><p>finish - 所有数据已被写入到底层系统时触发。</p>
+<h3 id="1-从流中读取数据"><a href="#1-从流中读取数据" class="headerlink" title="1 从流中读取数据"></a>1 从流中读取数据</h3><p>  var fs = require(“fs”);<br>  var data = ‘’;<br>  // 创建可读流<br>  var readerStream = fs.createReadStream(‘input.txt’);<br>  // 设置编码为 utf8。<br>  readerStream.setEncoding(‘UTF8’);<br>  // 处理流事件 –&gt; data, end, and error<br>  readerStream.on(‘data’, function(chunk) {<br>  data += chunk;<br>  });<br>  readerStream.on(‘end’,function(){<br>  console.log(data);<br>  });<br>  readerStream.on(‘error’, function(err){<br>  console.log(err.stack);<br>  });<br>  console.log(“程序执行完毕”);</p>
+<h3 id="2-写入流"><a href="#2-写入流" class="headerlink" title="2 写入流"></a>2 写入流</h3><p>  var fs = require(“fs”);<br>  var data = ‘菜鸟教程官网地址：<a href="http://www.runoob.com&#39;" target="_blank" rel="noopener">www.runoob.com&#39;</a>;<br>  // 创建一个可以写入的流，写入到文件 output.txt 中<br>  var writerStream = fs.createWriteStream(‘output.txt’);<br>  // 使用 utf8 编码写入数据<br>  writerStream.write(data,’UTF8’);<br>  // 标记文件末尾<br>  writerStream.end();<br>  // 处理流事件 –&gt; data, end, and error<br>  writerStream.on(‘finish’, function() {</p>
+<pre><code>console.log(&quot;写入完成。&quot;);
+</code></pre><p>  });<br>  writerStream.on(‘error’, function(err){<br>  console.log(err.stack);<br>  });<br>  console.log(“程序执行完毕”);</p>
+<h3 id="3-管道流"><a href="#3-管道流" class="headerlink" title="3 管道流"></a>3 管道流</h3><p>  // 管道读写操作<br>  // 读取 input.txt 文件内容，并将内容写入到 output.txt 文件中<br>  readerStream.pipe(writerStream);</p>
+<h3 id="4-链式流"><a href="#4-链式流" class="headerlink" title="4 链式流"></a>4 链式流</h3><p>链式是通过连接输出流到另外一个流并创建多个对个流操作链的机制。链式流一般用于管道操作。<br>接下来我们就是用管道和链式来压缩和解压文件。</p>
+<p>  var fs = require(“fs”);<br>  var zlib = require(‘zlib’);</p>
+<p>  // 压缩 input.txt 文件为 input.txt.gz<br>  fs.createReadStream(‘input.txt’)<br>  .pipe(zlib.createGzip())<br>  .pipe(fs.createWriteStream(‘input.txt.gz’));<br>  console.log(“文件压缩完成。”);</p>
+<p>  // 解压 input.txt.gz 文件为 input.txt<br>  fs.createReadStream(‘input.txt.gz’)<br>  .pipe(zlib.createGunzip())<br>  .pipe(fs.createWriteStream(‘input.txt’));</p>
+<p>  console.log(“文件解压完成。”);</p>
+</li>
+</ul>
+<h2 id="十一-模块系统"><a href="#十一-模块系统" class="headerlink" title="十一 模块系统"></a>十一 模块系统</h2><p>为了让Node.js的文件可以相互调用，Node.js提供了一个简单的模块系统。</p>
+<p>模块是Node.js 应用程序的基本组成部分，文件和模块是一一对应的。换言之，一个 Node.js 文件就是一个模块，这个文件可能是JavaScript 代码、JSON 或者编译过的C/C++ 扩展</p>
+<h3 id="1-创建模块"><a href="#1-创建模块" class="headerlink" title="1 创建模块"></a>1 创建模块</h3><pre><code>//1 
+var hello = require(&apos;./hello&apos;);
+hello.world();
+//接下来我们就来创建 hello.js 文件，代码如下：
+exports.world = function() {
+    console.log(&apos;Hello World&apos;);
+}
+</code></pre><p>在以上示例中，hello.js 通过 exports 对象把 world 作为模块的访问接口，在 main.js 中通过 require(‘./hello’) 加载这个模块，然后就可以直接访 问 hello.js 中 exports 对象的成员函数了。</p>
+<p>2 有时候我们只是想把一个对象封装到模块中</p>
+<pre><code>function Hello() { 
+    var name; 
+    this.setName = function(thyName) { 
+        name = thyName; 
+    }; 
+    this.sayHello = function() { 
+        console.log(&apos;Hello &apos; + name); 
+    }; 
+}; 
+module.exports = Hello;
+//main.js 
+var Hello = require(&apos;./hello&apos;); 
+hello = new Hello(); 
+hello.setName(&apos;BYVoid&apos;); 
+hello.sayHello(); 
+</code></pre><p>模块接口的唯一变化是使用 module.exports = Hello 代替了exports.world = function(){}。 在外部引用该模块时，其接口对象就是要输出的 Hello 对象本身，而不是原先的 exports。</p>
+<h3 id="2-服务端的模块放在哪里"><a href="#2-服务端的模块放在哪里" class="headerlink" title="2 服务端的模块放在哪里"></a>2 服务端的模块放在哪里</h3><p>Node.js 的 require 方法中的文件查找策略如下：<br>由于 Node.js 中存在 4 类模块（原生模块和3种文件模块），尽管 require 方法极其简单，但是内部的加载却是十分复杂的，其加载优先级也各自不同。如下图所示：</p>
+<ul>
+<li>从文件模块缓存中加载</li>
+<li>从原生模块加载</li>
+<li>从文件加载<br>  require方法接受以下几种参数的传递：<ul>
+<li>http、fs、path等，原生模块。</li>
+<li>./mod或../mod，相对路径的文件模块。</li>
+<li>/pathtomodule/mod，绝对路径的文件模块。</li>
+<li>mod，非原生模块的文件模块。</li>
+</ul>
+</li>
+</ul>
+<h2 id="十二-函数"><a href="#十二-函数" class="headerlink" title="十二 函数"></a>十二 函数</h2><p>在JavaScript中，一个函数可以作为另一个函数的参数。我们可以先定义一个函数，然后传递，也可以在传递参数的地方直接定义函数。<br>Node.js中函数的使用与Javascript类似，举例来说，你可以这样做：</p>
+<h3 id="1-匿名函数"><a href="#1-匿名函数" class="headerlink" title="1 匿名函数"></a>1 匿名函数</h3><h3 id="2-函数传递是如何让HTTP服务器工作的"><a href="#2-函数传递是如何让HTTP服务器工作的" class="headerlink" title="2 函数传递是如何让HTTP服务器工作的"></a>2 函数传递是如何让HTTP服务器工作的</h3><pre><code>var http = require(&quot;http&quot;);
+http.createServer(function(request, response) {
+    response.writeHead(200, {&quot;Content-Type&quot;: &quot;text/plain&quot;});
+    response.write(&quot;Hello World&quot;);
+    response.end();
+}).listen(8888);
+</code></pre><h2 id="十三-路由"><a href="#十三-路由" class="headerlink" title="十三 路由"></a>十三 路由</h2><ol>
+<li><p>我们要为路由提供请求的 URL 和其他需要的 GET 及 POST 参数，随后路由需要根据这些数据来执行相应的代码。</p>
+</li>
+<li><p>因此，我们需要查看 HTTP 请求，从中提取出请求的 URL 以及 GET/POST 参数。这一功能应当属于路由还是服务器（甚至作为一个模块自身的功能）确实值得探讨，但这里暂定其为我们的HTTP服务器的功能。</p>
+</li>
+</ol>
+<p>我们需要的所有数据都会包含在 request 对象中，该对象作为 onRequest() 回调函数的第一个参数传递。但是为了解析这些数据，我们需要额外的 Node.JS 模块，它们分别是 url 和 querystring 模块。<br>当然我们也可以用 querystring 模块来解析 POST 请求体中的参数，稍后会有演示。 </p>
+<ol>
+<li><p>现在我们来给 onRequest() 函数加上一些逻辑，用来找出浏览器请求的 URL 路径：</p>
+<p> 好了，我们的应用现在可以通过请求的 URL 路径来区别不同请求了–这使我们得以使用路由（还未完成）来将请求以 URL 路径为基准映射到处理程序上。 </p>
+<p> 在我们所要构建的应用中，这意味着来自 /start 和 /upload 的请求可以使用不同的代码来处理。稍后我们将看到这些内容是如何整合到一起的。</p>
+</li>
+<li>现在我们可以来编写路由了，建立一个名为 router.js 的文件，添加以下内容：</li>
+<li><p>如你所见，这段代码什么也没干，不过对于现在来说这是应该的。在添加更多的逻辑以前，我们先来看看如何把路由和服务器整合起来。 </p>
+<p> 我们的服务器应当知道路由的存在并加以有效利用。我们当然可以通过硬编码的方式将这一依赖项绑定到服务器上，但是其它语言的编程经验告诉我们这会是一件非常痛苦的事，因此我们将使用依赖注入的方式较松散地添加路由模块。</p>
+<ol>
+<li>首先，我们来扩展一下服务器的 start() 函数，以便将路由函数作为参数传递过去，server.js 文件代码如下</li>
+<li>同时，我们会相应扩展 index.js，使得路由函数可以被注入到服务器中：</li>
+<li><p>在这里，我们传递的函数依旧什么也没做。</p>
+<p> 如果现在启动应用（node index.js，始终记得这个命令行），随后请求一个URL，你将会看到应用输出相应的信息，这表明我们的HTTP服务器已经在使用路由模块了，并会将请求的路径传递给路由：</p>
+</li>
+<li>以上输出已经去掉了比较烦人的 /favicon.ico 请求相关的部分。<br>浏览器访问 <a href="http://127.0.0.1:8888/，输出结果如下：" target="_blank" rel="noopener">http://127.0.0.1:8888/，输出结果如下：</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//server.js </span><br><span class="line">var http = require(&quot;http&quot;);</span><br><span class="line">var url = require(&quot;url&quot;);</span><br><span class="line">function start(route) &#123;</span><br><span class="line">    function onRequest(request, response) &#123;</span><br><span class="line">        var pathname = url.parse(request.url).pathname;</span><br><span class="line">        console.log(&quot;Request for &quot; + pathname + &quot; received.&quot;);</span><br><span class="line">        //3.1</span><br><span class="line">        route(pathname);</span><br><span class="line"></span><br><span class="line">        response.writeHead(200, &#123;&quot;Content-Type&quot;: &quot;text/plain&quot;&#125;);</span><br><span class="line">        response.write(&quot;Hello World&quot;);</span><br><span class="line">        response.end();</span><br><span class="line">    &#125;</span><br><span class="line">    http.createServer(onRequest).listen(8888);</span><br><span class="line">    console.log(&quot;Server has started.&quot;);</span><br><span class="line">&#125;</span><br><span class="line">exports.start = start;</span><br><span class="line">//2 router.js 文件代码：</span><br><span class="line">function route(pathname) &#123;</span><br><span class="line">  console.log(&quot;About to route a request for &quot; + pathname);</span><br><span class="line">&#125;</span><br><span class="line">exports.route = route;</span><br><span class="line">//3.2 index.js 文件代码：</span><br><span class="line">var server = require(&quot;./server&quot;);</span><br><span class="line">var router = require(&quot;./router&quot;);</span><br><span class="line">server.start(router.route);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="十四-全局对象"><a href="#十四-全局对象" class="headerlink" title="十四 全局对象"></a>十四 全局对象</h2><p>JavaScript 中有一个特殊的对象，称为全局对象（Global Object），它及其所有属性都可以在程序的任何地方访问，即全局变量。</p>
+<p>在浏览器 JavaScript 中，通常 window 是全局对象， 而 Node.js 中的全局对象是 global，所有全局变量（除了 global 本身以外）都是 global 对象的属性。<br>在 Node.js 我们可以直接访问到 global 的属性，而不需要在应用中包含它。</p>
+<h3 id="1-全局对象与全局变量"><a href="#1-全局对象与全局变量" class="headerlink" title="1 全局对象与全局变量"></a>1 全局对象与全局变量</h3><p>global 最根本的作用是作为全局变量的宿主。按照 ECMAScript 的定义，满足以下条 件的变量是全局变量：</p>
+<ul>
+<li>在最外层定义的变量；</li>
+<li>全局对象的属性；</li>
+<li>隐式定义的变量（未定义直接赋值的变量）。</li>
+</ul>
+<p>当你定义一个全局变量时，这个变量同时也会成为全局对象的属性，反之亦然。需要注 意的是，在 Node.js 中你不可能在最外层定义变量，因为所有用户代码都是属于当前模块的， 而模块本身不是最外层上下文。</p>
+<blockquote>
+<p>注意： 永远使用 var 定义变量以避免引入全局变量，因为全局变量会污染 命名空间，提高代码的耦合风险。</p>
+</blockquote>
+<h3 id="1-filename"><a href="#1-filename" class="headerlink" title="1 _filename"></a>1 _filename</h3><h3 id="2-dirname"><a href="#2-dirname" class="headerlink" title="2 _dirname"></a>2 _dirname</h3><h3 id="3-1-setTimeout-cb-ms"><a href="#3-1-setTimeout-cb-ms" class="headerlink" title="3.1 setTimeout(cb, ms)"></a>3.1 setTimeout(cb, ms)</h3><h3 id="3-2-clearTimeout-t"><a href="#3-2-clearTimeout-t" class="headerlink" title="3.2 clearTimeout(t)"></a>3.2 clearTimeout(t)</h3><h3 id="4-setInterval-cb-ms"><a href="#4-setInterval-cb-ms" class="headerlink" title="4 setInterval(cb, ms)"></a>4 setInterval(cb, ms)</h3><h3 id="5-console"><a href="#5-console" class="headerlink" title="5 console"></a>5 console</h3><p>console 用于提供控制台标准输出，它是由 Internet Explorer 的 JScript 引擎提供的调试工具，后来逐渐成为浏览器的事实标准。</p>
+<p>Node.js 沿用了这个标准，提供与习惯行为一致的 console 对象，用于向标准输出流（stdout）或标准错误流（stderr）输出字符。</p>
+<p>console 方法:log,info,error,warn,dir,time,timeEnd,trace,assert</p>
+<h3 id="6-process"><a href="#6-process" class="headerlink" title="6 process"></a>6 process</h3><p>process 是一个全局变量，即 global 对象的属性。<br>它用于描述当前Node.js 进程状态的对象，提供了一个与操作系统的简单接口。通常在你写本地命令行程序的时候，少不了要 和它打交道。下面将会介绍 process 对象的一些最常用的成员方法:exit,before,Exit,uncaughtException,Signal</p>
+<ul>
+<li><p>实例 </p>
+<pre><code>process.on(&apos;exit&apos;, function(code) {
+// 以下代码永远不会执行
+setTimeout(function() {
+    console.log(&quot;该代码不会执行&quot;);
+}, 0);
+
+console.log(&apos;退出码为:&apos;, code);
+});
+console.log(&quot;程序执行结束&quot;);
+</code></pre></li>
+<li>退出状态码</li>
+<li>Process 属性<br>。。</li>
+<li>方法参考手册</li>
+</ul>
+<h2 id="十五-常用工具"><a href="#十五-常用工具" class="headerlink" title="十五 常用工具"></a>十五 常用工具</h2><p>util 是一个Node.js 核心模块，提供常用函数的集合，用于弥补核心JavaScript 的功能 过于精简的不足。</p>
+<h3 id="1-util-inherits"><a href="#1-util-inherits" class="headerlink" title="1 util.inherits"></a>1 util.inherits</h3><p>util.inherits(constructor, superConstructor)是一个实现对象间原型继承 的函数。</p>
+<p>JavaScript 的面向对象特性是基于原型的，与常见的基于类的不同。JavaScript 没有 提供对象继承的语言级别特性，而是通过原型复制来实现的。</p>
+<h3 id="2-util-inspect"><a href="#2-util-inspect" class="headerlink" title="2 util.inspect"></a>2 util.inspect</h3><h3 id="3-util-isArray-object"><a href="#3-util-isArray-object" class="headerlink" title="3 util.isArray(object)"></a>3 util.isArray(object)</h3><h3 id="4-util-isRegExp-object"><a href="#4-util-isRegExp-object" class="headerlink" title="4 util.isRegExp(object)"></a>4 util.isRegExp(object)</h3><h3 id="5-util-isDate-object"><a href="#5-util-isDate-object" class="headerlink" title="5 util.isDate(object)"></a>5 util.isDate(object)</h3><h3 id="6-util-isError-object"><a href="#6-util-isError-object" class="headerlink" title="6 util.isError(object)"></a>6 util.isError(object)</h3><h2 id="十六-文件系统"><a href="#十六-文件系统" class="headerlink" title="十六 文件系统"></a>十六 文件系统</h2><h2 id="十七-GET-POST请求"><a href="#十七-GET-POST请求" class="headerlink" title="十七 GET/POST请求"></a>十七 GET/POST请求</h2><h2 id="十八-工具模块"><a href="#十八-工具模块" class="headerlink" title="十八 工具模块"></a>十八 工具模块</h2><h3 id="1-OS-模块"><a href="#1-OS-模块" class="headerlink" title="1 OS 模块"></a>1 OS 模块</h3><p>提供基本的系统操作函数。</p>
+<h3 id="2-Path-模块"><a href="#2-Path-模块" class="headerlink" title="2 Path 模块"></a>2 Path 模块</h3><p>提供了处理和转换文件路的工具。</p>
+<h3 id="3-Net-模块"><a href="#3-Net-模块" class="headerlink" title="3 Net 模块"></a>3 Net 模块</h3><p>用于底层的网络通信。提供了服务端和客户端的的操作。</p>
+<h3 id="4-DNS-模块"><a href="#4-DNS-模块" class="headerlink" title="4 DNS 模块"></a>4 DNS 模块</h3><p>用于解析域名。</p>
+<h3 id="5-Domain-模块"><a href="#5-Domain-模块" class="headerlink" title="5 Domain 模块"></a>5 Domain 模块</h3><p>简化异步代码的异常处理，可以捕捉处理try catch无法捕捉的。</p>
+<h2 id="十九-Web模块"><a href="#十九-Web模块" class="headerlink" title="十九 Web模块"></a>十九 Web模块</h2><h3 id="1-什么是-Web-服务器？"><a href="#1-什么是-Web-服务器？" class="headerlink" title="1 什么是 Web 服务器？"></a>1 什么是 Web 服务器？</h3><p>Web服务器一般指网站服务器，是指驻留于因特网上某种类型计算机的程序，Web服务器的基本功能就是提供Web信息浏览服务。它只需支持HTTP协议、HTML文档格式及URL，与客户端的网络浏览器配合。</p>
+<p>大多数 web 服务器都支持服务端的脚本语言（php、python、ruby）等，并通过脚本语言从数据库获取数据，将结果返回给客户端浏览器。</p>
+<p>目前最主流的三个Web服务器是Apache、Nginx、IIS。</p>
+<h3 id="2-Web-应用架构"><a href="#2-Web-应用架构" class="headerlink" title="2 Web 应用架构"></a>2 Web 应用架构</h3><ul>
+<li>Client - 客户端，一般指浏览器，浏览器可以通过 HTTP 协议向服务器请求数据。</li>
+<li>Server - 服务端，一般指 Web 服务器，可以接收客户端请求，并向客户端发送响应数据。</li>
+<li>Business - 业务层， 通过 Web 服务器处理应用程序，如与数据库交互，逻辑运算，调用外部程序等。</li>
+<li><p>Data - 数据层，一般由数据库组成。</p>
+<h3 id="3-使用-Node-创建-Web-服务器"><a href="#3-使用-Node-创建-Web-服务器" class="headerlink" title="3 使用 Node 创建 Web 服务器"></a>3 使用 Node 创建 Web 服务器</h3><p>Node.js 提供了 http 模块，http 模块主要用于搭建 HTTP 服务端和客户端，使用 HTTP 服务器或客户端功能必须调用 http 模块，代码如下：</p>
+<p>  var http = require(‘http’);<br>  var fs = require(‘fs’);<br>  var url = require(‘url’);<br>  // 创建服务器<br>  http.createServer( function (request, response) {<br>  // 解析请求，包括文件名<br>  var pathname = url.parse(request.url).pathname;<br>  // 输出请求的文件名<br>  console.log(“Request for “ + pathname + “ received.”);<br>  // 从文件系统中读取请求的文件内容<br>  fs.readFile(pathname.substr(1), function (err, data) {</p>
+<pre><code>if (err) {
+    console.log(err);
+    // HTTP 状态码: 404 : NOT FOUND
+    // Content Type: text/plain
+    response.writeHead(404, {&apos;Content-Type&apos;: &apos;text/html&apos;});
+}else{             
+    // HTTP 状态码: 200 : OK
+    // Content Type: text/plain
+    response.writeHead(200, {&apos;Content-Type&apos;: &apos;text/html&apos;});    
+
+    // 响应文件内容
+    response.write(data.toString());        
+}
+//  发送响应数据
+response.end();
+</code></pre><p>  });<br>  }).listen(8081);</p>
+<p>  // 控制台会输出以下信息<br>  console.log(‘Server running at <a href="http://127.0.0.1:8081/&#39;)" target="_blank" rel="noopener">http://127.0.0.1:8081/&#39;)</a>;</p>
+<h3 id="4-使用-Node-创建-Web-客户端"><a href="#4-使用-Node-创建-Web-客户端" class="headerlink" title="4 使用 Node 创建 Web 客户端"></a>4 使用 Node 创建 Web 客户端</h3><p>  var http = require(‘http’);<br>  // 用于请求的选项<br>  var options = {<br>  host: ‘localhost’,<br>  port: ‘8081’,<br>  path: ‘/index.htm’<br>  };<br>  // 处理响应的回调函数<br>  var callback = function(response){<br>  // 不断更新数据<br>  var body = ‘’;<br>  response.on(‘data’, function(data) {</p>
+<pre><code>body += data;
+</code></pre><p>  });<br>  response.on(‘end’, function() {</p>
+<pre><code>// 数据接收完成
+console.log(body);
+</code></pre><p>  });<br>  }<br>  // 向服务端发送请求<br>  var req = http.request(options, callback);<br>  req.end();</p>
+</li>
+</ul>
+<h2 id="二十-Express框架"><a href="#二十-Express框架" class="headerlink" title="二十 Express框架"></a>二十 Express框架</h2><h3 id="1-Express-简介"><a href="#1-Express-简介" class="headerlink" title="1 Express 简介"></a>1 Express 简介</h3><p>Express 是一个简洁而灵活的 node.js Web应用框架, 提供了一系列强大特性帮助你创建各种 Web 应用，和丰富的 HTTP 工具。</p>
+<p>使用 Express 可以快速地搭建一个完整功能的网站。</p>
+<p>Express 框架核心特性：</p>
+<ol>
+<li>可以设置中间件来响应 HTTP 请求。</li>
+<li>定义了路由表用于执行不同的 HTTP 请求动作。</li>
+<li>可以通过向模板传递参数来动态渲染 HTML 页面。<h3 id="2-安装-Express"><a href="#2-安装-Express" class="headerlink" title="2 安装 Express"></a>2 安装 Express</h3>以下几个重要的模块是需要与 express 框架一起安装的：</li>
+</ol>
+<ul>
+<li>body-parser - node.js 中间件，用于处理 JSON, Raw, Text 和 URL 编码的数据。</li>
+<li>cookie-parser - 这就是一个解析Cookie的工具。通过req.cookies可以取到传过来的cookie，并把它们转成对象。</li>
+<li>multer - node.js 中间件，用于处理 enctype=”multipart/form-data”（设置表单的MIME编码）的表单数据。<h3 id="3-第一个-Express-框架实例"><a href="#3-第一个-Express-框架实例" class="headerlink" title="3 第一个 Express 框架实例"></a>3 第一个 Express 框架实例</h3>  //express_demo.js 文件<br>  var express = require(‘express’);<br>  var app = express();<br>  app.get(‘/‘, function (req, res) {<pre><code>res.send(&apos;Hello World&apos;);
+</code></pre>  })<br>  var server = app.listen(8081, function () {<pre><code>var host = server.address().address
+var port = server.address().port
+console.log(&quot;应用实例，访问地址为 http://%s:%s&quot;, host, port)
+</code></pre>  })<h3 id="4-请求和响应"><a href="#4-请求和响应" class="headerlink" title="4 请求和响应"></a>4 请求和响应</h3>Express 应用使用回调函数的参数： request 和 response 对象来处理请求和响应的数据。<h4 id="1-Request-对象-request-对象表示-HTTP-请求，"><a href="#1-Request-对象-request-对象表示-HTTP-请求，" class="headerlink" title="1.Request 对象 - request 对象表示 HTTP 请求，"></a>1.Request 对象 - request 对象表示 HTTP 请求，</h4>包含了请求查询字符串，参数，内容，HTTP 头部等属性。常见属性有：<h4 id="2-Response-对象-response-对象表示-HTTP-响应，"><a href="#2-Response-对象-response-对象表示-HTTP-响应，" class="headerlink" title="2.Response 对象 - response 对象表示 HTTP 响应，"></a>2.Response 对象 - response 对象表示 HTTP 响应，</h4>即在接收到请求时向客户端发送的 HTTP 响应数据。常见属性有：<h3 id="5-路由"><a href="#5-路由" class="headerlink" title="5 路由"></a>5 路由</h3>我们已经了解了 HTTP 请求的基本应用，而路由决定了由谁(指定脚本)去响应客户端请求。  </li>
+</ul>
+<p>在HTTP请求中，我们可以通过路由提取出请求的URL以及GET/POST参数。</p>
+<h3 id="6-静态文件"><a href="#6-静态文件" class="headerlink" title="6 静态文件"></a>6 静态文件</h3><p>Express 提供了内置的中间件 express.static 来设置静态文件如：图片， CSS, JavaScript 等。</p>
+<p>你可以使用 express.static 中间件来设置静态文件路径。例如，如果你将图片， CSS, JavaScript 文件放在 public 目录下，你可以这么写：</p>
+<pre><code>app.use(express.static(&apos;public&apos;));
+</code></pre><p>在浏览器中访问 <a href="http://127.0.0.1:8081/images/logo.png" target="_blank" rel="noopener">http://127.0.0.1:8081/images/logo.png</a>    </p>
+<h3 id="7-GET-方法"><a href="#7-GET-方法" class="headerlink" title="7 GET 方法"></a>7 GET 方法</h3><p>以下实例演示了在表单中通过 GET 方法提交两个参数，我们可以使用 server.js 文件内的 process_get 路由器来处理输入：</p>
+<pre><code>&lt;html&gt;
+&lt;body&gt;
+&lt;form action=&quot;http://127.0.0.1:8081/process_get&quot; method=&quot;GET&quot;&gt;
+First Name: &lt;input type=&quot;text&quot; name=&quot;first_name&quot;&gt;  &lt;br&gt;
+
+Last Name: &lt;input type=&quot;text&quot; name=&quot;last_name&quot;&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+//
+var express = require(&apos;express&apos;);
+var app = express();
+app.use(express.static(&apos;public&apos;));
+app.get(&apos;/index.htm&apos;, function (req, res) {
+    res.sendFile( __dirname + &quot;/&quot; + &quot;index.htm&quot; );
+})
+app.get(&apos;/process_get&apos;, function (req, res) {
+    // 输出 JSON 格式
+    var response = {
+        &quot;first_name&quot;:req.query.first_name,
+        &quot;last_name&quot;:req.query.last_name
+    };
+    console.log(response);
+    res.end(JSON.stringify(response));
+})
+var server = app.listen(8081, function () {
+    var host = server.address().address
+    var port = server.address().port
+    console.log(&quot;应用实例，访问地址为 http://%s:%s&quot;, host, port)
+})   
+</code></pre><h3 id="8-POST-方法"><a href="#8-POST-方法" class="headerlink" title="8 POST 方法"></a>8 POST 方法</h3><p>以下实例演示了在表单中通过 POST 方法提交两个参数，我们可以使用 server.js 文件内的 process_post 路由器来处理输入：</p>
+<h3 id="9-文件上传"><a href="#9-文件上传" class="headerlink" title="9 文件上传"></a>9 文件上传</h3><p>以下我们创建一个用于上传文件的表单，使用 POST 方法，表单 enctype 属性设置为 multipart/form-data。</p>
+<h3 id="10-Cookie-管理"><a href="#10-Cookie-管理" class="headerlink" title="10 Cookie 管理"></a>10 Cookie 管理</h3><p>我们可以使用中间件向 Node.js 服务器发送 cookie 信息，以下代码输出了客户端发送的 cookie 信息：</p>
+<pre><code>// express_cookie.js 文件
+var express      = require(&apos;express&apos;)
+var cookieParser = require(&apos;cookie-parser&apos;)
+var app = express()
+app.use(cookieParser())
+app.get(&apos;/&apos;, function(req, res) {
+console.log(&quot;Cookies: &quot;, req.cookies)
+})
+app.listen(8081)
+</code></pre><h2 id="二一-RESTful-API"><a href="#二一-RESTful-API" class="headerlink" title="二一 RESTful API"></a>二一 RESTful API</h2><ul>
+<li><p>什么是 REST？<br>  REST即表述性状态传递（英文：Representational State Transfer，简称REST）是Roy Fielding博士在2000年他的博士论文中提出来的一种软件架构风格。</p>
+<p>  表述性状态转移是一组架构约束条件和原则。满足这些约束条件和原则的应用程序或设计就是RESTful。需要注意的是，REST是设计风格而不是标准。REST通常基于使用HTTP，URI，和XML（标准通用标记语言下的一个子集）以及HTML（标准通用标记语言下的一个应用）这些现有的广泛流行的协议和标准。REST 通常使用 JSON 数据格式。</p>
+</li>
+<li>HTTP 方法<br>以下为 REST 基本架构的四个方法：</li>
+</ul>
+<ol>
+<li>GET - 用于获取数据。</li>
+<li>PUT - 用于更新或添加数据。</li>
+<li>DELETE - 用于删除数据。</li>
+<li>POST - 用于添加数据。<h3 id="1-RESTful-Web-Services"><a href="#1-RESTful-Web-Services" class="headerlink" title="1 RESTful Web Services"></a>1 RESTful Web Services</h3>Web service是一个平台独立的，低耦合的，自包含的、基于可编程的web的应用程序，可使用开放的XML（标准通用标记语言下的一个子集）标准来描述、发布、发现、协调和配置这些应用程序，用于开发分布式的互操作的应用程序。</li>
+</ol>
+<p>基于 REST 架构的 Web Services 即是 RESTful。</p>
+<p>由于轻量级以及通过 HTTP 直接传输数据的特性，Web 服务的 RESTful 方法已经成为最常见的替代方法。可以使用各种语言（比如 Java 程序、Perl、Ruby、Python、PHP 和 Javascript[包括 Ajax]）实现客户端。</p>
+<p>RESTful Web 服务通常可以通过自动客户端或代表用户的应用程序访问。但是，这种服务的简便性让用户能够与之直接交互，使用它们的 Web 浏览器构建一个 GET URL 并读取返回的内容。</p>
+<h3 id="2-创建-RESTful"><a href="#2-创建-RESTful" class="headerlink" title="2 创建 RESTful"></a>2 创建 RESTful</h3><ol>
+<li>获取用户列表：RESTful API listUsers</li>
+<li>添加用户: RESTful API addUser</li>
+<li>显示用户详情: RESTful API :id（用户id）</li>
+<li>删除用户: RESTful API deleteUser</li>
+</ol>
+<h2 id="二二-多进程"><a href="#二二-多进程" class="headerlink" title="二二 多进程"></a>二二 多进程</h2><p>我们都知道 Node.js 是以单线程的模式运行的，但它使用的是事件驱动来处理并发，这样有助于我们在多核 cpu 的系统上创建多个子进程，从而提高性能。</p>
+<p>每个子进程总是带有三个流对象：child.stdin, child.stdout 和child.stderr。他们可能会共享父进程的 stdio 流，或者也可以是独立的被导流的流对象。</p>
+<p>Node 提供了 child_process 模块来创建子进程，方法有：</p>
+<ul>
+<li>exec - child_process.exec 使用子进程执行命令，缓存子进程的输出，并将子进程的输出以回调函数参数的形式返回。</li>
+<li>spawn - child_process.spawn 使用指定的命令行参数创建新进程。</li>
+<li>fork - child_process.fork 是 spawn()的特殊形式，用于在子进程中运行的模块，如 fork(‘./son.js’) 相当于 spawn(‘node’, [‘./son.js’]) 。与spawn方法不同的是，fork会在父进程与子进程之间，建立一个通信管道，用于进程之间的通信。<h3 id="1-exec-方法"><a href="#1-exec-方法" class="headerlink" title="1 exec() 方法"></a>1 exec() 方法</h3>  child_process.exec(command[, options], callback)<br>child_process.exec 使用子进程执行命令，缓存子进程的输出，并将子进程的输出以回调函数参数的形式返回。<h3 id="2-spawn-方法"><a href="#2-spawn-方法" class="headerlink" title="2 spawn() 方法"></a>2 spawn() 方法</h3>  child_process.spawn(command[, args][, options])<h3 id="3-fork-方法"><a href="#3-fork-方法" class="headerlink" title="3 fork 方法"></a>3 fork 方法</h3>  child_process.fork(modulePath[, args][, options])<br>child_process.fork 是 spawn() 方法的特殊形式，用于创建进程</li>
+</ul>
+<h2 id="二三-JXcore打包"><a href="#二三-JXcore打包" class="headerlink" title="二三 JXcore打包"></a>二三 JXcore打包</h2><p>Node.js 是一个开放源代码、跨平台的、用于服务器端和网络应用的运行环境。</p>
+<p>JXcore 是一个支持多线程的 Node.js 发行版本，基本不需要对你现有的代码做任何改动就可以直接线程安全地以多线程运行。</p>
+<h2 id="二四-MySQL"><a href="#二四-MySQL" class="headerlink" title="二四 MySQL"></a>二四 MySQL</h2><ul>
+<li><p>安装驱动</p>
+<pre><code>$ cnpm install mysql
+</code></pre></li>
+<li><p>连接数据库</p>
+<pre><code>var mysql      = require(&apos;mysql&apos;);
+</code></pre><p>  var connection = mysql.createConnection({<br>  host     : ‘localhost’,<br>  user     : ‘root’,<br>  password : ‘123456’,<br>  database : ‘test’<br>  });</p>
+<p>  connection.connect();</p>
+<p>  connection.query(‘SELECT 1 + 1 AS solution’, function (error, results, fields) {<br>  if (error) throw error;<br>  console.log(‘The solution is: ‘, results[0].solution);<br>  });</p>
+<h3 id="数据库操作-CURD"><a href="#数据库操作-CURD" class="headerlink" title="数据库操作( CURD )"></a>数据库操作( CURD )</h3></li>
+</ul>
+<ol>
+<li><p>查询数据<br>将上面我们提供的 SQL 文件导入数据库后，执行以下代码即可查询出数据：</p>
+<pre><code>var mysql  = require(&apos;mysql&apos;);  
+var connection = mysql.createConnection({     
+    host     : &apos;localhost&apos;,       
+    user     : &apos;root&apos;,              
+    password : &apos;123456&apos;,       
+    port: &apos;3306&apos;,                   
+    database: &apos;test&apos;, 
+}); 
+connection.connect();
+var  sql = &apos;SELECT * FROM websites&apos;;
+//查
+connection.query(sql,function (err, result) {
+    if(err){
+        console.log(&apos;[SELECT ERROR] - &apos;,err.message);
+        return;
+    }
+    console.log(&apos;-----------------SELECT-------------&apos;);
+    console.log(result);
+    console.log(&apos;-------------------------------\n\n&apos;);  
+});
+connection.end();    
+</code></pre></li>
+<li><p>插入数据</p>
+<pre><code>var  addSql = &apos;INSERT INTO websites(Id,name,url,alexa,country) VALUES(0,?,?,?,?)&apos;;
+var  addSqlParams = [&apos;菜鸟工具&apos;, &apos;https://c.runoob.com&apos;,&apos;23453&apos;, &apos;CN&apos;];
+//增
+connection.query(addSql,addSqlParams,function (err, result) {
+    ..
+}    
+</code></pre></li>
+<li><p>更新数据</p>
+<pre><code>var modSql = &apos;UPDATE websites SET name = ?,url = ? WHERE Id = ?&apos;;
+var modSqlParams = [&apos;菜鸟移动站&apos;, &apos;https://m.runoob.com&apos;,6];
+//改
+connection.query(modSql,modSqlParams,function (err, result) {        
+</code></pre></li>
+<li><p>删除数据</p>
+<pre><code>var delSql = &apos;DELETE FROM websites where id=6&apos;;
+//删
+connection.query(delSql,function (err, result) {
+</code></pre></li>
+</ol>
+<h2 id="二五-MongoDB"><a href="#二五-MongoDB" class="headerlink" title="二五 MongoDB"></a>二五 MongoDB</h2><p>MongoDB是一种文档导向数据库管理系统，由C++撰写而成。</p>
+<ul>
+<li><p>安装驱动</p>
+<pre><code>$ cnpm install mongodb  
+</code></pre><p>接下来我们来实现增删改查功能。</p>
+<h3 id="数据库操作-CURD-1"><a href="#数据库操作-CURD-1" class="headerlink" title="数据库操作( CURD )"></a>数据库操作( CURD )</h3></li>
+</ul>
+<ol>
+<li><p>插入数据</p>
+<pre><code>var MongoClient = require(&apos;mongodb&apos;).MongoClient;
+var DB_CONN_STR = &apos;mongodb://localhost:27017/runoob&apos;; //# 数据库为 runoob
+
+var insertData = function(db, callback) {  
+    //连接到表 site
+    var collection = db.collection(&apos;site&apos;);
+    //插入数据
+    var data = [{&quot;name&quot;:&quot;菜鸟教程&quot;,&quot;url&quot;:&quot;www.runoob.com&quot;},{&quot;name&quot;:&quot;菜鸟工具&quot;,&quot;url&quot;:&quot;c.runoob.com&quot;}];
+    collection.insert(data, function(err, result) { 
+        if(err)
+        {
+            console.log(&apos;Error:&apos;+ err);
+            return;
+        }     
+        callback(result);
+    });
+}
+
+MongoClient.connect(DB_CONN_STR, function(err, db) {
+    console.log(&quot;连接成功！&quot;);
+    insertData(db, function(result) {
+        console.log(result);
+        db.close();
+    });
+});
+</code></pre></li>
+<li><p>查询数据</p>
+<pre><code>var selectData = function(db, callback) {  
+    //连接到表  
+    var collection = db.collection(&apos;site&apos;);
+    //查询数据
+    var whereStr = {&quot;name&quot;:&apos;菜鸟教程&apos;};
+    collection.find(whereStr).toArray(function(err, result) {
+        if(err)
+        {
+            console.log(&apos;Error:&apos;+ err);
+            return;
+        }     
+        callback(result);
+    });
+}
+</code></pre></li>
+<li><p>更新数据</p>
+<pre><code>var updateData = function(db, callback) {  
+    //连接到表  
+    var collection = db.collection(&apos;site&apos;);
+    //更新数据
+    var whereStr = {&quot;name&quot;:&apos;菜鸟教程&apos;};
+    var updateStr = {$set: { &quot;url&quot; : &quot;https://www.runoob.com&quot; }};
+    collection.update(whereStr,updateStr, function(err, result) {
+        if(err)
+        {
+            console.log(&apos;Error:&apos;+ err);
+            return;
+        }     
+        callback(result);
+    });
+}
+</code></pre></li>
+<li><p>删除数据</p>
+<pre><code>var delData = function(db, callback) {  
+    //连接到表  
+    var collection = db.collection(&apos;site&apos;);
+    //删除数据
+    var whereStr = {&quot;name&quot;:&apos;菜鸟工具&apos;};
+    collection.remove(whereStr, function(err, result) {
+        if(err)
+        {
+        console.log(&apos;Error:&apos;+ err);
+        return;
+        }     
+        callback(result);
+    });
+}
+</code></pre></li>
+</ol>
+<p style="text-align:right">home 2017.1.1 日 22:53</p>
+
+<table>
+<thead>
+<tr>
+<th>目录章节</th>
+<th>状态</th>
+<th>截止时间</th>
+<th>后续安排</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>note</td>
+<td>///</td>
+<td>—-</td>
+<td>—-</td>
+<td></td>
+</tr>
+<tr>
+<td>code</td>
+<td>///</td>
+<td>—-</td>
+<td>—-</td>
+<td></td>
+</tr>
+<tr>
+<td>14 全局对象 前</td>
+<td>概念性知识，重在理解</td>
+<td>—-</td>
+<td>—-</td>
+<td></td>
+</tr>
+<tr>
+<td>14 全局对象 后</td>
+<td>应用性，实践，基本简单过一遍，有的没有过</td>
+<td>2017.10.1</td>
+<td>—-</td>
+<td></td>
+</tr>
+<tr>
+<td>16 文件系统</td>
+<td>没有过</td>
+<td>2017.10.1</td>
+<td>neededThenWork</td>
+</tr>
+<tr>
+<td>17 GET/POST请求</td>
+<td>没有过</td>
+<td>2017.10.1</td>
+<td>neededThenWork</td>
+</tr>
+<tr>
+<td>19 Web模块中文件（上传）</td>
+<td>没有过</td>
+<td>2017.10.1</td>
+<td>neededThenWork</td>
+</tr>
+<tr>
+<td>18 工具模块 5个</td>
+<td>没有过</td>
+<td>2017.10.1</td>
+<td>neededThenWork</td>
+</tr>
+<tr>
+<td>—-</td>
+<td>A 比较重要，偏实践</td>
+<td>—-</td>
+<td>—-</td>
+</tr>
+<tr>
+<td>15 常用工具util</td>
+<td>大概过了一下</td>
+<td>2017.10.1</td>
+<td>neededThenWork</td>
+</tr>
+<tr>
+<td>24 MySQL</td>
+<td>大概过了一下</td>
+<td>2017.10.1</td>
+<td>neededThenWork</td>
+</tr>
+<tr>
+<td>25 MongoDB</td>
+<td>大概过了一下</td>
+<td>2017.10.1</td>
+<td>neededThenWork</td>
+</tr>
+<tr>
+<td>20 Express框架</td>
+<td>大概过了一下</td>
+<td>2017.10.1</td>
+<td>neededThenWork</td>
+</tr>
+<tr>
+<td>—-</td>
+<td>B 比较重要，偏理论</td>
+<td>—-</td>
+<td>—-</td>
+</tr>
+<tr>
+<td>19 Web模块</td>
+<td>大概过了一下</td>
+<td>2017.10.1</td>
+<td>neededThenWork</td>
+</tr>
+<tr>
+<td>21 RESTful API</td>
+<td>大概过了一下</td>
+<td>2017.10.1</td>
+<td>neededThenWork</td>
+</tr>
+<tr>
+<td>22 多线程</td>
+<td>大概过了一下</td>
+<td>2017.10.1</td>
+<td>neededThenWork</td>
+</tr>
+<tr>
+<td>23 JXcore</td>
+<td>大概过了一下，根本不知道什么东西</td>
+<td>2017.10.1</td>
+<td>neededThenWork</td>
+</tr>
+<tr>
+<td>—-</td>
+<td>—-</td>
+<td>—-</td>
+<td>—-</td>
+<td></td>
+</tr>
+<tr>
+<td>—-</td>
+<td>—-</td>
+<td>—-</td>
+<td>—-</td>
+<td></td>
+</tr>
+<tr>
+<td>—-</td>
+<td>—-</td>
+<td>—-</td>
+<td>—-</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>总结：</p>
+<ol>
+<li>基本上都过了一遍，知道了。</li>
+<li>知道了，不等于 掌握、明白；离实际操作还有差别。</li>
+<li>还有一些没有过的，比如文件，get/post等；<br>还有一些没看明白的（JXcore），和没有看的部分（工具模块5个）。</li>
+</ol>
+<ul>
+<li>掌握nodejs 基本原理，常见操作，为以后熟练应用（具体某一块）打基础  </li>
+</ul>
+<p>其他：<a href="http://www.yiibai.com/nodejs/" target="_blank" rel="noopener">http://www.yiibai.com/nodejs/</a> </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nodejs/" rel="tag"><i class="fa fa-tag"></i> nodejs</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/template/" rel="next" title="Template">
+                <i class="fa fa-chevron-left"></i> Template
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/pdf/js/JavaScript忍者秘籍/" rel="prev" title="Javascript忍者秘籍">
+                Javascript忍者秘籍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-教程"><span class="nav-text">一 教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-安装配置"><span class="nav-text">二 安装配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-创建第一个应用"><span class="nav-text">三 创建第一个应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-NPM-使用介绍"><span class="nav-text">四 NPM 使用介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-使用-npm-命令安装模块"><span class="nav-text">1 使用 npm 命令安装模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-全局安装与本地安装"><span class="nav-text">2 全局安装与本地安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用-package-json"><span class="nav-text">3 使用 package.json</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Package-json-属性说明"><span class="nav-text">Package.json 属性说明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-卸载模块"><span class="nav-text">4 卸载模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-更新"><span class="nav-text">5 更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-搜索"><span class="nav-text">6 搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-创建"><span class="nav-text">7 创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-版本号"><span class="nav-text">8 版本号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-NPM-常用命令"><span class="nav-text">9 NPM 常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-使用淘宝-NPM-镜像"><span class="nav-text">10 使用淘宝 NPM 镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-REPL"><span class="nav-text">五 REPL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-启动-node"><span class="nav-text">1 启动 $ node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-REPL-命令"><span class="nav-text">2 REPL 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-停止-REPL"><span class="nav-text">3 停止 REPL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-回调函数"><span class="nav-text">六 回调函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-阻塞代码实例"><span class="nav-text">1 阻塞代码实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-非阻塞代码实例"><span class="nav-text">2 非阻塞代码实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七-事件循环"><span class="nav-text">七 事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-事件驱动程序"><span class="nav-text">1 事件驱动程序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例"><span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Node-应用程序是如何工作的？"><span class="nav-text">2 Node 应用程序是如何工作的？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八-EventEmitter"><span class="nav-text">八 EventEmitter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-EventEmitter-类"><span class="nav-text">1 EventEmitter 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-error-事件"><span class="nav-text">2 error 事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-继承-EventEmitter"><span class="nav-text">3 继承 EventEmitter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九-Buffer"><span class="nav-text">九 Buffer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-创建-Buffer-类"><span class="nav-text">1 创建 Buffer 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-写入缓冲区"><span class="nav-text">2 写入缓冲区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-从缓冲区读取数据"><span class="nav-text">3 从缓冲区读取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-将-Buffer-转换为-JSON-对象"><span class="nav-text">4 将 Buffer 转换为 JSON 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-缓冲区合并"><span class="nav-text">5 缓冲区合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-缓冲区比较"><span class="nav-text">6 缓冲区比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-拷贝缓冲区"><span class="nav-text">7 拷贝缓冲区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-缓冲区裁剪"><span class="nav-text">8 缓冲区裁剪</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-缓冲区长度"><span class="nav-text">9 缓冲区长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-方法参考手册"><span class="nav-text">10 方法参考手册</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十-Stream"><span class="nav-text">十 Stream</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-从流中读取数据"><span class="nav-text">1 从流中读取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-写入流"><span class="nav-text">2 写入流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-管道流"><span class="nav-text">3 管道流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-链式流"><span class="nav-text">4 链式流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十一-模块系统"><span class="nav-text">十一 模块系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-创建模块"><span class="nav-text">1 创建模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-服务端的模块放在哪里"><span class="nav-text">2 服务端的模块放在哪里</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十二-函数"><span class="nav-text">十二 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-匿名函数"><span class="nav-text">1 匿名函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-函数传递是如何让HTTP服务器工作的"><span class="nav-text">2 函数传递是如何让HTTP服务器工作的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十三-路由"><span class="nav-text">十三 路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十四-全局对象"><span class="nav-text">十四 全局对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-全局对象与全局变量"><span class="nav-text">1 全局对象与全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-filename"><span class="nav-text">1 _filename</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-dirname"><span class="nav-text">2 _dirname</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-setTimeout-cb-ms"><span class="nav-text">3.1 setTimeout(cb, ms)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-clearTimeout-t"><span class="nav-text">3.2 clearTimeout(t)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-setInterval-cb-ms"><span class="nav-text">4 setInterval(cb, ms)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-console"><span class="nav-text">5 console</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-process"><span class="nav-text">6 process</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十五-常用工具"><span class="nav-text">十五 常用工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-util-inherits"><span class="nav-text">1 util.inherits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-util-inspect"><span class="nav-text">2 util.inspect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-util-isArray-object"><span class="nav-text">3 util.isArray(object)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-util-isRegExp-object"><span class="nav-text">4 util.isRegExp(object)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-util-isDate-object"><span class="nav-text">5 util.isDate(object)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-util-isError-object"><span class="nav-text">6 util.isError(object)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十六-文件系统"><span class="nav-text">十六 文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十七-GET-POST请求"><span class="nav-text">十七 GET/POST请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十八-工具模块"><span class="nav-text">十八 工具模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-OS-模块"><span class="nav-text">1 OS 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Path-模块"><span class="nav-text">2 Path 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Net-模块"><span class="nav-text">3 Net 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-DNS-模块"><span class="nav-text">4 DNS 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Domain-模块"><span class="nav-text">5 Domain 模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十九-Web模块"><span class="nav-text">十九 Web模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是-Web-服务器？"><span class="nav-text">1 什么是 Web 服务器？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Web-应用架构"><span class="nav-text">2 Web 应用架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用-Node-创建-Web-服务器"><span class="nav-text">3 使用 Node 创建 Web 服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-使用-Node-创建-Web-客户端"><span class="nav-text">4 使用 Node 创建 Web 客户端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二十-Express框架"><span class="nav-text">二十 Express框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Express-简介"><span class="nav-text">1 Express 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装-Express"><span class="nav-text">2 安装 Express</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-第一个-Express-框架实例"><span class="nav-text">3 第一个 Express 框架实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-请求和响应"><span class="nav-text">4 请求和响应</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Request-对象-request-对象表示-HTTP-请求，"><span class="nav-text">1.Request 对象 - request 对象表示 HTTP 请求，</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Response-对象-response-对象表示-HTTP-响应，"><span class="nav-text">2.Response 对象 - response 对象表示 HTTP 响应，</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-路由"><span class="nav-text">5 路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-静态文件"><span class="nav-text">6 静态文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-GET-方法"><span class="nav-text">7 GET 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-POST-方法"><span class="nav-text">8 POST 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-文件上传"><span class="nav-text">9 文件上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-Cookie-管理"><span class="nav-text">10 Cookie 管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二一-RESTful-API"><span class="nav-text">二一 RESTful API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-RESTful-Web-Services"><span class="nav-text">1 RESTful Web Services</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建-RESTful"><span class="nav-text">2 创建 RESTful</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二二-多进程"><span class="nav-text">二二 多进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-exec-方法"><span class="nav-text">1 exec() 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-spawn-方法"><span class="nav-text">2 spawn() 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-fork-方法"><span class="nav-text">3 fork 方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二三-JXcore打包"><span class="nav-text">二三 JXcore打包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二四-MySQL"><span class="nav-text">二四 MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库操作-CURD"><span class="nav-text">数据库操作( CURD )</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二五-MongoDB"><span class="nav-text">二五 MongoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库操作-CURD-1"><span class="nav-text">数据库操作( CURD )</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">408.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

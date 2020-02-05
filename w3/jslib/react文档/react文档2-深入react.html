@@ -1,0 +1,75 @@
+<p>title: react文档2-深入react<br>date: 2018.9.21<br>tags: </p>
+<ul>
+<li>react.js<br>toc_fold: unfold</li>
+</ul>
+<hr>
+<p>高级指南: <a href="http://react.css88.com/docs/optimizing-performance.html">http://react.css88.com/docs/optimizing-performance.html</a>     </p>
+<p style="text-align:right">2018.9.21 星期五 10:21</p>
+
+
+<h1 id="8-与第三方库协作"><a href="#8-与第三方库协作" class="headerlink" title="8 与第三方库协作"></a>8 与第三方库协作</h1><p>本指南将列举一些更常见的用例，重点介绍与 jQuery 以及 Backbone 的集成，但同样的思路适用于将组件与任何现有代码集成。<br>## 与 DOM 操作类插件结合<br>## 在 React 中使用其他引擎加载页面<br>## 在 React 中使用其他数据层库和框架<br>一般来说，推荐大家使用符合单向数据流的框架和库，比如 React state、Flux 或 Redux。但 React 的组件也可以支持其他处理数据流的框架和库。    </p>
+<h1 id="2-代码拆分-Code-Splitting"><a href="#2-代码拆分-Code-Splitting" class="headerlink" title="2 代码拆分(Code-Splitting)"></a>2 代码拆分(Code-Splitting)</h1><p>## 打包(Bundling)<br>大多数的 React 应用程序使用Webpack或 Browserify 等工具来 “打包” 文件。<br>如果你使用的是Create React App，Next.js，Gatsby 或类似的工具，您将拥有一个开箱即用的 Webpack 安装程序来打包你的应用程序。<br>## 代码拆分<br>### import()   </p>
+<blockquote>
+<p>动态 import() 语法是ECMAScript（JavaScript）提案，目前不是语言标准的一部分。预计在不远的将来会被接受。  </p>
+</blockquote>
+<p>当 Webpack 遇到这个语法时，它会自动启动 代码拆分 来拆分你的应用程序。 如果您正在使用 Create React App ，则已经为你配置好了<br>在使用 Babel 时，你需要确保 Babel 能够解析动态导入语法，但目前 Babel 还不能直接对其进行转换。<br>## 库(Libraries)<br>React Loadable<br>## 基于路由的代码拆分  </p>
+<hr>
+<hr>
+<h1 id="14-一致性比较（Reconciliation）"><a href="#14-一致性比较（Reconciliation）" class="headerlink" title="14. 一致性比较（Reconciliation）"></a>14. 一致性比较（Reconciliation）</h1><p>React提供声明式API，因此在每次更新中你不需要关心具体的更改内容。<br>React 的 “diffing” 算法中我们所作出地决择，以使得组件的更新是可预测的并且可以适用于高性能应用。        </p>
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>当你使用 React ，在任何一个单点时刻你可以认为 render() 函数的作用是创建 React 元素树。在下一个 state 或props 更新时，render() 函数将会返回一个不同的 React 元素树。接下来 React 将会找出如何高效地更新 UI 来匹配最近时刻的 React 元素树。   </p>
+<p>目前存在大量通用的方法能够以最少的操作步骤将一个树转化成另外一棵树。然而，这个算法是复杂度为O(n3)，其中n 为树中元素的个数。     </p>
+<p>如果你在 React 中展示 1000 个元素，那么每次更新都需要10亿次的比较，这样的代价过于昂贵。然而，React 基于以下两个假设实现了时间复杂度为 O(n) 的算法:</p>
+<ol>
+<li>不同类型的两个元素将会产生不同的树。</li>
+<li>开发人员可以使用一个 key prop 来指示在不同的渲染中那个那些元素可以保持稳定。<br>事实上，这些假设在几乎所有的用例中都是有效的。  </li>
+</ol>
+<h2 id="Diffing-算法"><a href="#Diffing-算法" class="headerlink" title="Diffing 算法"></a>Diffing 算法</h2><p>当比较不同的两个树，React 首先比较两个根元素。根据根跟的类型不同，它有不同的行为。  </p>
+<p>### 元素类型不相同<br>### DOM元素类型相同<br>保留相同的底层 DOM 节点，只更新反生改变的属性（attributes）<br>### 相同类型的组件<br>当一个组件更新的时候，组件实例保持不变，以便在渲染中保持state。React会更新组件实例的属性来匹配新的元素，并在元素实例上调用 componentWillReceiveProps() 和 componentWillUpdate()。       </p>
+<p>接下来， render() 方法会被调用并且diff算法对上一次的结果和新的结果进行递归。<br>### 子元素递归<br>默认情况下，当递归一个 DOM 节点的子节点时，React 只需同时遍历所有的孩子基点同时生成一个改变当它们不同时。<br>如果在开始处插入一个节点也是这样简单地实现，那么性能将会很差。<br>### Keys<br>当子节点有了 key ，React 使用这个 key 去比较原来的树的子节点和之后树的子节点。<br>这个key 需要在它的兄弟节点中是唯一的就可以了，不需要是全局唯一。    </p>
+<p>$_索引做为key在排序中会有问题：<br>作为最后的手段，你可以将数组中的索引作为 key 。如果它们从不重新排序，它们工作也很好，但是如果存在重新排序，性能将会很差。       </p>
+<p>当索引用作key时，组件状态在重新排序时也会有问题。组件实例基于key进行更新和重用。如果key是索引，则item的顺序变化会改变key值。这将导致受控组件的状态可能会以意想不到的方式混淆和更新。</p>
+<h2 id="权衡利弊"><a href="#权衡利弊" class="headerlink" title="权衡利弊"></a>权衡利弊</h2><p>需要记住的是 reconciliation(协调) 算法仅仅只是一个实现细节。React 会在每个操作上重新渲染整个应用，最终的结果可能是相同的。我们经常细化启发式算法，以便优化性能。    </p>
+<p>因为React 依赖这个启发式，如果它们背后的假设没有得到满足，性能将会受到影响。    </p>
+<hr>
+<hr>
+<h1 id="12-React-中不使用-ES6"><a href="#12-React-中不使用-ES6" class="headerlink" title="12. React 中不使用 ES6"></a>12. React 中不使用 ES6</h1><p>通常情况下你可以用普通的 JavaScript 类定义一个组件:<br>如果你不使用 ES6 ，你可以使用 create-react-class 方法代替：<br>除了一些例外，ES6 classes(类) API 非常类似于函数 createReactClass()         </p>
+<pre><code class="javascript"><span class="keyword">var</span> createReactClass = <span class="built_in">require</span>(<span class="string">'create-react-class'</span>);
+<span class="keyword">var</span> Greeting = createReactClass({
+  render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, {this.props.name}<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;
+  }
+});
+</code></pre>
+<p>## 声明默认 Props<br>## 设置初始化 State(状态)<br>## 自动绑定<br>在 createReactClass() 中，并不需要这么做，因为方法可以自动绑定。<br>## Mixins<br>$_MORE:     </p>
+<blockquote>
+<p>ES6 是不支持 mixin 的，因此，当你用 ES6 classes(类)编写 React 时是不支持 mixins 的。<br>我们也在使用 mixins 的情况下发现了部分问题，所以我们不推荐目前使用。</p>
+</blockquote>
+<p>有时不同的组件可能会共用部分方法，这些方法会被称为横切关注点(cross-cutting concerns)。createReactClass 可以允许你使用 mixins 。     </p>
+<h1 id="13-React-中不使用-JSX"><a href="#13-React-中不使用-JSX" class="headerlink" title="13. React 中不使用 JSX"></a>13. React 中不使用 JSX</h1><p>JSX 对使用React 不是必须的。当你不想在你的构建环境中设置编译器，那么不使用 JSX 的 React 是非常方便的。  </p>
+<p>每一个 JSX 元素都是调用 React.createElement(component, props, …children) 的语法糖，因此，任何你使用 JSX 来做事都可以通过纯 JavaScript 实现。  </p>
+<p>如果你厌倦了使用 React.createElement ，另一个常见的模式是将其赋值给一个缩写     </p>
+<h1 id="9-深入-JSX"><a href="#9-深入-JSX" class="headerlink" title="9 深入 JSX"></a>9 深入 JSX</h1><p>从本质上讲，JSX 只是为 React.createElement(component, props, …children) 函数提供的语法糖。JSX代码:    </p>
+<pre><code class="javascript">&lt;MyButton color=<span class="string">"blue"</span> shadowSize={<span class="number">2</span>}&gt;
+  Click Me
+&lt;<span class="regexp">/MyButton&gt;</span>
+<span class="regexp">/</span><span class="regexp">/ 编译为  </span>
+<span class="regexp">React.createElement(</span>
+<span class="regexp">  MyButton,</span>
+<span class="regexp">  {color: 'blue', shadowSize: 2},</span>
+<span class="regexp">  'Click Me'</span>
+<span class="regexp">)</span>
+<span class="regexp">React.createElement(</span>
+<span class="regexp">  'div',</span>
+<span class="regexp">  {className: 'sidebar'},</span>
+<span class="regexp">  null</span>
+<span class="regexp">)</span>
+</code></pre>
+<h2 id="指定-React-元素类型"><a href="#指定-React-元素类型" class="headerlink" title="指定 React 元素类型"></a>指定 React 元素类型</h2><p>一个 JSX 标签的开始部分决定了 React 元素的类型。    </p>
+<p>首字母大写的标签指示 JSX 标签是一个 React 组件。这些标签会被编译成 命名变量 的直接引用。所以如果你使用 JSX <Foo /> 表达式，那么 Foo 必须在作用域中。    </p>
+<p>### React 必须在作用域中<br>### 对 JSX 类型使用点语法<br>### 用户定义组件必须以大写字母开头<br>### 在运行时选择类型   </p>
+<h2 id="JSX-中的-props-属性"><a href="#JSX-中的-props-属性" class="headerlink" title="JSX 中的 props(属性)"></a>JSX 中的 props(属性)</h2><p>### JavaScript 表达式作为 props(属性)<br>在 JavaScript 中，if 语句和 for 循环不是表达式，因此不能在 JSX 中直接使用。但你可以将他们放在附近的代码块中<br>### 字符串字面量<br>### props(属性) 默认为 “true”<br>通常情况下，我们不建议使用这种类型，因为这会与ES6中的对象shorthand混淆 。<br>### 属性展开<br>你也可以挑选你的组件将使用的指定属性(props)，同时使用展开运算符传递所有其他属性(props)。<br>展开(Spread) 属性可能很有用，但它们还可以轻松地将不必要的属性(props)传递给不关心它们的组件,或将无效的HTML属性传递给DOM。我们建议谨慎使用此语法。    </p>
+<h2 id="JSX-中的-Children"><a href="#JSX-中的-Children" class="headerlink" title="JSX 中的 Children"></a>JSX 中的 Children</h2><p>在 JSX 表达式中可以包含开放标签和闭合标签，标签中的内容会被传递一个特殊的 props(属性) ： props.children，下面有好几种方式传递 children ：<br>### 字符串字面量<br>### JSX Children<br>所以你可以混用字符串字面量和 JSX children。这是 JSX 与 HTML 另一点相似的地方，<br>### JavaScript 表达式作为 Children(子元素)<br>### Functions(函数) 作为 Children(子元素)<br>然而， props.children 类似于其他的 props(属性) ，可以被传入任何数据，而不是仅仅只是 React 可以渲染的数据。<br>只要在渲染之前组件可以将其转化为 React 能够处理的东西即可。这种用法并不常见，但是如果你需要扩展 JSX 的话，则会非常有用。<br>### Booleans, Null, 和 Undefined 被忽略<br>false，null，undefined，和 true 都是有效的的 children(子元素) 。但是并不会被渲染，<br>需要注意的是“falsy”值，例如数值 0 ，仍然会被 React 渲染。   </p>
+<h1 id="10-优化性能"><a href="#10-优化性能" class="headerlink" title="10 优化性能"></a>10 优化性能</h1><p>## 使用生产版本<br>chrome插件<br>## 使用 Chrome 性能分析工具 分析组件性能<br>## 虚拟化长列表:“windowing” (开窗口) 技术<br>## 避免重新渲染<br>在大多数情况下，您可以不用手写 shouldComponentUpdate() ，而是从 React.PureComponent 继承。 这相当于用当前和以前 props(属性) 和 state(状态) 的浅层比较来实现shouldComponentUpdate() 。   </p>
+<p>## 应用 shouldComponentUpdate<br>## 例子<br>在这种情况下，shouldComponentUpdate 函数仅仅检查 props.color 或者 state.count 是否发生改变。如果这些值没有发生变化，则组件不会进行更新。如果你的组件更复杂，你可以使用类似于对 props 和 state 的所有属性进行”浅比较”这种模式来决定组件是否需要更新。这种模式非常普遍，因此 React 提供了一个 helper 实现上面的逻辑：继承 React.PureComponent 。因此，下面的代码是一种更简单的方式实现了相同的功能：<br>## 不可变数据的力量<br>concat 重写,ES6 对于数组支持展开语法,Object.assign 方法,JavaScript提案添加了对象展开符<br>## 使用 Immutable 数据结构     </p>
+<p style="text-align:right">12:21</p>
+

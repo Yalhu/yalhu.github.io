@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="opti,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="编写高质量代码：网站重构、团队合作、html、css、javascript 附录：写在规则前、命名、分工、注释、html/css/javascript规范 2018.4.21 六 22:52">
+<meta name="keywords" content="opti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编写高质量代码--Web前端开发修炼之道">
+<meta property="og:url" content="http://yoursite.com/pdf/opti/编写高质量代码--Web前端开发修炼之道/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="编写高质量代码：网站重构、团队合作、html、css、javascript 附录：写在规则前、命名、分工、注释、html/css/javascript规范 2018.4.21 六 22:52">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编写高质量代码--Web前端开发修炼之道">
+<meta name="twitter:description" content="编写高质量代码：网站重构、团队合作、html、css、javascript 附录：写在规则前、命名、分工、注释、html/css/javascript规范 2018.4.21 六 22:52">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/pdf/opti/编写高质量代码--Web前端开发修炼之道/">
+
+
+
+
+
+  <title>编写高质量代码--Web前端开发修炼之道 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/pdf/opti/编写高质量代码--Web前端开发修炼之道/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">编写高质量代码--Web前端开发修炼之道</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-21T08:00:00+08:00">
+                2018-04-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/pdf/opti/编写高质量代码--Web前端开发修炼之道/" class="leancloud_visitors" data-flag-title="编写高质量代码--Web前端开发修炼之道">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6,819
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  26
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>编写高质量代码：<br>网站重构、团队合作、html、css、javascript</p>
+<p>附录：写在规则前、命名、分工、注释、html/css/javascript规范</p>
+<p style="text-align:right">2018.4.21 六 22:52 </p><br><a id="more"></a><br><br>2010.5 第一版<br><p style="text-align:right">2017.8.28 一 23：11  .doc</p><br><p style="text-align:right">2017.9.17 日 09:00 转为.md</p>
+
+<p><strong>$_PS:</strong> 感觉标题不够用,所以升为一级标题；也是按章节区分，升到一级加深权重</p>
+<h1 id="第一章-从网站重构说起"><a href="#第一章-从网站重构说起" class="headerlink" title="第一章 从网站重构说起"></a>第一章 从网站重构说起</h1><h2 id="1-糟糕的页面实现，头疼的维护工作"><a href="#1-糟糕的页面实现，头疼的维护工作" class="headerlink" title="1 糟糕的页面实现，头疼的维护工作"></a>1 糟糕的页面实现，头疼的维护工作</h2><p>1989诞生至今。。</p>
+<h2 id="2-Web标准——结构、样式和行为的分离"><a href="#2-Web标准——结构、样式和行为的分离" class="headerlink" title="2 Web标准——结构、样式和行为的分离"></a>2 Web标准——结构、样式和行为的分离</h2><p>仅仅只是开始</p>
+<h2 id="3-前端的现状"><a href="#3-前端的现状" class="headerlink" title="3 前端的现状"></a>3 前端的现状</h2><p>维护难：浏览器、技术、团队合作</p>
+<h2 id="4-打造高品质的前端代码，提高代码的可维护性—-精简、重用、有序"><a href="#4-打造高品质的前端代码，提高代码的可维护性—-精简、重用、有序" class="headerlink" title="4 打造高品质的前端代码，提高代码的可维护性—-精简、重用、有序"></a>4 打造高品质的前端代码，提高代码的可维护性—-精简、重用、有序</h2><p>所谓高质量的代码，在Web标准的思想指导下，在实现结构、样式和行为分离的基础，还要做到三点：</p>
+<h1 id="第二章-团队合作"><a href="#第二章-团队合作" class="headerlink" title="第二章 团队合作"></a>第二章 团队合作</h1><h2 id="1-揭秘前端开发工程师"><a href="#1-揭秘前端开发工程师" class="headerlink" title="1 揭秘前端开发工程师"></a>1 揭秘前端开发工程师</h2><p>1css基本：基本兼容浏览器。2Javascript：原生，类库，Ajax；3后台语言：不需要多深，当然越深越有帮助</p>
+<h2 id="2-欲精一行，必先通十行"><a href="#2-欲精一行，必先通十行" class="headerlink" title="2 欲精一行，必先通十行"></a>2 欲精一行，必先通十行</h2><p>“粗粒度”的精，专精很难—一专多能才现实，必要</p>
+<h2 id="3-增加代码可读性—-注释"><a href="#3-增加代码可读性—-注释" class="headerlink" title="3 增加代码可读性—-注释"></a>3 增加代码可读性—-注释</h2><p>直接团队合作，间接团队合作  “好的代码，注释占1/3”—虽然夸张</p>
+<h2 id="4-提高重用性—–公共组件和私有组件的维护-4-2和5-2（四，五章）"><a href="#4-提高重用性—–公共组件和私有组件的维护-4-2和5-2（四，五章）" class="headerlink" title="4 提高重用性—–公共组件和私有组件的维护   4.2和5.2（四，五章）"></a>4 提高重用性—–公共组件和私有组件的维护   4.2和5.2（四，五章）</h2><p>公共：只读，少数写，必要时（注释，API文档，演示Demo）</p>
+<h2 id="5-冗余和精简的矛盾—-选择集中还是分散"><a href="#5-冗余和精简的矛盾—-选择集中还是分散" class="headerlink" title="5 冗余和精简的矛盾—-选择集中还是分散"></a>5 冗余和精简的矛盾—-选择集中还是分散</h2><p>一次打包：jQuery<br>小块按需加载：YUI<br>平衡点，只可能尽量减少冗余，不可能根除</p>
+<h2 id="6-磨刀不误砍柴工—-前期的构思很重要"><a href="#6-磨刀不误砍柴工—-前期的构思很重要" class="headerlink" title="6 磨刀不误砍柴工—-前期的构思很重要"></a>6 磨刀不误砍柴工—-前期的构思很重要</h2><p>规范的指定、公共组件的设计、复杂功能的技术方案<br>占整个项目30%~60的时间，都算正常</p>
+<h2 id="7-制定规范"><a href="#7-制定规范" class="headerlink" title="7 制定规范"></a>7 制定规范</h2><h2 id="8-团队合作的最大难度不是技术，是人"><a href="#8-团队合作的最大难度不是技术，是人" class="headerlink" title="8 团队合作的最大难度不是技术，是人"></a>8 团队合作的最大难度不是技术，是人</h2><p>自己能独立  都是小问题，     ，要学会与人相处</p>
+<h1 id="第三章-高质量的HTML"><a href="#第三章-高质量的HTML" class="headerlink" title="第三章 高质量的HTML"></a>第三章 高质量的HTML</h1><h2 id="1-标签的语义"><a href="#1-标签的语义" class="headerlink" title="1 标签的语义"></a>1 标签的语义</h2><p>标签的设计都有语义，初了div，span</p>
+<h2 id="2-为什么要使用语义化标签"><a href="#2-为什么要使用语义化标签" class="headerlink" title="2 为什么要使用语义化标签"></a>2 为什么要使用语义化标签</h2><p>Web标准，css只是一部分，HTML才是最重要的，结构才是重点，样式只是修饰结构<br>先确定语义的标签，再选合适的css</p>
+<h2 id="3-如何确定你的标签是否语义良好"><a href="#3-如何确定你的标签是否语义良好" class="headerlink" title="3 如何确定你的标签是否语义良好"></a>3 如何确定你的标签是否语义良好</h2><p>简单方法：去掉样式，看网页结构是否组织良好有序，是否仍然有很好的可读性</p>
+<h2 id="4-常见模块你真的很了解吗"><a href="#4-常见模块你真的很了解吗" class="headerlink" title="4 常见模块你真的很了解吗"></a>4 常见模块你真的很了解吗</h2><h3 id="4-1-标题和内容：三个div—》一个h2包一个a，但a不是h—》用div包h2，a"><a href="#4-1-标题和内容：三个div—》一个h2包一个a，但a不是h—》用div包h2，a" class="headerlink" title="4.1 标题和内容：三个div—》一个h2包一个a，但a不是h—》用div包h2，a"></a>4.1 标题和内容：三个div—》一个h2包一个a，但a不是h—》用div包h2，a</h3><h3 id="4-2-表单-fieldset-legend-lable—for"><a href="#4-2-表单-fieldset-legend-lable—for" class="headerlink" title="4.2 表单 fieldset legend lable—for"></a>4.2 表单 fieldset legend lable—for</h3><h3 id="4-3-表格-caption-thead-tbody-tfood-th"><a href="#4-3-表格-caption-thead-tbody-tfood-th" class="headerlink" title="4.3 表格 caption thead tbody tfood th"></a>4.3 表格 caption thead tbody tfood th</h3><h3 id="4-4-其他：1尽可能少用语义div和span；2语义不明显，div，和p。尽量p，默认有上下间距，可读性更好，兼容特殊终端；3不使用纯样式标签：b，font，u等，改css。默认strong：加粗，em：斜体"><a href="#4-4-其他：1尽可能少用语义div和span；2语义不明显，div，和p。尽量p，默认有上下间距，可读性更好，兼容特殊终端；3不使用纯样式标签：b，font，u等，改css。默认strong：加粗，em：斜体" class="headerlink" title="4.4 其他：1尽可能少用语义div和span；2语义不明显，div，和p。尽量p，默认有上下间距，可读性更好，兼容特殊终端；3不使用纯样式标签：b，font，u等，改css。默认strong：加粗，em：斜体"></a>4.4 其他：1尽可能少用语义div和span；2语义不明显，div，和p。尽量p，默认有上下间距，可读性更好，兼容特殊终端；3不使用纯样式标签：b，font，u等，改css。默认strong：加粗，em：斜体</h3><h1 id="第四章-高质量的CSS"><a href="#第四章-高质量的CSS" class="headerlink" title="第四章 高质量的CSS"></a>第四章 高质量的CSS</h1><h2 id="1-怪异模式和DTD"><a href="#1-怪异模式和DTD" class="headerlink" title="1 怪异模式和DTD"></a>1 怪异模式和DTD</h2><h2 id="2-如何组织CSS"><a href="#2-如何组织CSS" class="headerlink" title="2 如何组织CSS"></a>2 如何组织CSS</h2><p>API：控制样式，对、错</p>
+<p>框架：进行组织，好、比较好、很烂、非常棒   多种角度：功能、区块。。</p>
+<p>Base.css：原子类，与具体UI无关-精简通用，高度可移植性，行对稳定，基本不需维护</p>
+<p>Common.css：模块，组件，UI组件风格保持相同，一个或者common_form,common_images</p>
+<p>Page.css：页面，page1，page2，若不多一个page文件，能用上面两尽量不用这。<br>多人，避免冲突：通常命名规则</p>
+<p>（非并列，而是层叠）    </p>
+<h2 id="3-推荐的base-css"><a href="#3-推荐的base-css" class="headerlink" title="3 推荐的base.css:"></a>3 推荐的base.css:</h2><p>两大类：reset 和通用原子类              一些非常巧的命名和设计———–非常的棒<br>reset,文字排版，定位，长度高度，边距</p>
+<p style="text-align:right">P89 00：24</p><br><p style="text-align:right">2017.8.29 二 22：24</p>  
+
+<h2 id="4-模块化CSS——-在CSS中引入面向对象编程思想"><a href="#4-模块化CSS——-在CSS中引入面向对象编程思想" class="headerlink" title="4 模块化CSS——-在CSS中引入面向对象编程思想"></a>4 模块化CSS——-在CSS中引入面向对象编程思想</h2><h3 id="4-1-如何划分模块—"><a href="#4-1-如何划分模块—" class="headerlink" title="4.1 如何划分模块—"></a>4.1 如何划分模块—</h3><p>单一职责：1，模块与模块之间尽量不要包含相同的部分，如果包含相同的部分，尽量将它们提取出来，拆分成一个独立的模块；<br>2，模块应在保证数量尽可能少的原则下，做到尽可能简单，以提高重用性</p>
+<h3 id="4-2-CSS的命名—-命名空间的概念"><a href="#4-2-CSS的命名—-命名空间的概念" class="headerlink" title="4.2 CSS的命名—-命名空间的概念"></a>4.2 CSS的命名—-命名空间的概念</h3><p>英文，驼峰+划线（单独并不是最好的实践），：last-child ie6没有需单独加一个类名；<br>2)直接挂last—-滥用子选择符—-》不轻易使用自选择符，故timeListLastItem<br>3)但命名看不出从属，封装性不好，—》timeList-lastItem  </p>
+<p>1)Base,common层公共，一人负责，不会出现冲突，page多人合作加唯一标识符<br>2)base层命名简短，common就长了，还有标识符，比起文件大小，好处还是可接受范围<br>划线—从属关系的分隔符；模块视为类，从属模块的元素视为类的属性，通过命名上的直观，得到一种“封装”。</p>
+<h3 id="4-3-挂多个class还是新建class——–多用组合，少用继承"><a href="#4-3-挂多个class还是新建class——–多用组合，少用继承" class="headerlink" title="4.3 挂多个class还是新建class——–多用组合，少用继承"></a>4.3 挂多个class还是新建class——–多用组合，少用继承</h3><p>方案一：三个类——-非常冗余<br>方案二：三个类——–只是做了提取，去除了冗余；添加新的类，css修改好几处<br>方案三：提取更多粒度更小的类，通过类的组合实现；以后只需添加类  </p>
+<p>偏激的工程师甚至认为继承是错误的，是造成维护性差的罪魁祸首，主张完全使用继承<br>挂多个类，让html看起来过于臃肿，固然不好看，但好处不容忽视<br><strong>$_PS:</strong>（自己认为综合项目—代码量，来考虑）</p>
+<h3 id="4-4-如何处理上下margin："><a href="#4-4-如何处理上下margin：" class="headerlink" title="4.4 如何处理上下margin："></a>4.4 如何处理上下margin：</h3><p>如果不确定模块的上下margin特别稳定，最好不要将它写到某块的类里，而是使用类的组合，单独为上下margin挂用于边距的原子类（如mt10）。模块最好不要混用margin-top和margin-bottom，使用一个</p>
+<h2 id="5-低权重原则——-避免滥用子选择器"><a href="#5-低权重原则——-避免滥用子选择器" class="headerlink" title="5 低权重原则——-避免滥用子选择器"></a>5 低权重原则——-避免滥用子选择器</h2><p>1，权重，就近（定义的先后顺序，而不是挂class名的先后）<br>2，为了保证样式容易被覆盖，提高可维护性，css选择符需保证权重尽可能低<br>3，少使用子选择器，就需要多添加class（方便扩展），web标准盛行初期，很多工程师认为不好，能使用子选择器就尽量使用，使用大量class的做法叫“多class症”。在经过大量实践后，作者认为多class有太大坏处，相反，与使用子选择器相比，新添class反而更有利于维护<br><strong>$_PS:</strong> 各有利弊，还是看项目代码，如果项目代码量少</p>
+<h2 id="6-CSS-sprite"><a href="#6-CSS-sprite" class="headerlink" title="6 CSS sprite"></a>6 CSS sprite</h2><p>1，    初期：图片不会马上加载，空白。。合并；；后来，还可以减少http请求次数<br>2，看似简单，不易掌握：1合并只能是背景图片，img标签不可以2横向或纵向也不可以，只能竖直或水平排列。。 图片如何排列尽量紧凑，同时保证不会影响扩展性<br>3，问题：图片位置精确度要求高—测量影响开发速度；不易轻易改动，可能影响其他周边图片，降低了可维护性<br>4，最大好处：建设http请求数，减轻服务器的压力；代价：降低开发效率，增大维护难度<br>流量并不大的网站，好处并不明显，但付出代价却很大，并不划算。。所以，主要取决于网站流量</p>
+<h2 id="7-CSS的常见问题"><a href="#7-CSS的常见问题" class="headerlink" title="7 CSS的常见问题"></a>7 CSS的常见问题</h2><h3 id="7-1-编码风格：多行式，一行式"><a href="#7-1-编码风格：多行式，一行式" class="headerlink" title="7.1 编码风格：多行式，一行式"></a>7.1 编码风格：多行式，一行式</h3><p>早期缺少调试工具——–主流是多行。随着，一行渐渐新主流。。。作者更推荐一行<br>（并不苟同）</p>
+<h3 id="7-2-id和class：一般情况尽量使用class，少用id（我觉得作者只是针对css样式来讲的）"><a href="#7-2-id和class：一般情况尽量使用class，少用id（我觉得作者只是针对css样式来讲的）" class="headerlink" title="7.2 id和class：一般情况尽量使用class，少用id（我觉得作者只是针对css样式来讲的）"></a>7.2 id和class：一般情况尽量使用class，少用id（我觉得作者只是针对css样式来讲的）</h3><h3 id="7-3-CSS-hack"><a href="#7-3-CSS-hack" class="headerlink" title="7.3 CSS hack"></a>7.3 CSS hack</h3><p>1，IE条件注释：非ie，指定ie版本。微软官方推荐的方式，从向前兼容性方面考虑，最安全的，理论上是最好的。。。。虽然向后兼容性是最好的，缺点明显：同一css选择符样式分散到三个文件中控制，增加开发和维护成本<br>2，选择符前缀法：<em>html–ie6，</em>+html—ie7，样式集中起来，可维护性强很多。但不能保证以后的ie9，ie10不识别，向后兼容性上存在一点风险。。另外，不能用于内联样式上<br>3，样式属性前缀法：_——ie6, <em>——-ie6,7   {width:80px;</em>width:70px;_width:60px;} 。。同样向后兼容有风险。。另外，可用于内联样式  </p>
+<p>总结：虽然ie条件注释，但后两流行，我们可根据需要选择使用</p>
+<h3 id="7-4-解决超链接访问后hover样式不出现的问题：lvha"><a href="#7-4-解决超链接访问后hover样式不出现的问题：lvha" class="headerlink" title="7.4 解决超链接访问后hover样式不出现的问题：lvha"></a>7.4 解决超链接访问后hover样式不出现的问题：lvha</h3><p style="text-align:right">P113 00：40</p><br><p style="text-align:right">2017.8.30 三 23：16</p>
+
+<h3 id="7-5-hasLayout"><a href="#7-5-hasLayout" class="headerlink" title="7.5 hasLayout"></a>7.5 hasLayout</h3><p>IE专有属性，用于css解析引擎。有时候一些复杂css设置解析会出现bug，可能是没有自动触发haslayout，通过技巧手动触发，就可以 解决bug。  </p>
+<p>方法：1,width,height,relative。早起height:1%,（6，按min-height解析）ie7出现后，可以正常识别，就不适用了。<br>2,更好的zoom：1；（不会像height引入副作用-不用csshack）。少数特殊情况下，特别似乎使用dhtml是，会无效，用更强大的relative触发；尽管会有一些副作用。<br>设计初衷是辅助块级元素的盒模型解析。如用于行内，会引发一些特殊效果。  </p>
+<h3 id="7-6-块级元素和行内元素的区别"><a href="#7-6-块级元素和行内元素的区别" class="headerlink" title="7.6 块级元素和行内元素的区别"></a>7.6 块级元素和行内元素的区别</h3><p>。。。行内元素：水平方向margin，padding有效；竖直margin无效，padding虽然增大面积，但并没有和相邻元素拉开距离。</p>
+<h3 id="7-7-display-inline-block和hasLayout"><a href="#7-7-display-inline-block和hasLayout" class="headerlink" title="7.7 display:inline-block和hasLayout"></a>7.7 display:inline-block和hasLayout</h3><p>1，Ie6，7只有block，inline，none。通过触发hasLayout实现。<br>P换span，触发hasLayout并不完美，设置span，<em>vertical-align：-10px。对齐方式<br>2，问题：1只能对行内2针对ie的hack，</em>vertical-align<br>3，还是可以的：Img，button有inline-block特性  </p>
+<h3 id="7-8-relative、absolute和float"><a href="#7-8-relative、absolute和float" class="headerlink" title="7.8 relative、absolute和float"></a>7.8 relative、absolute和float</h3><p>1，Relative，absolute，改变元素在文档流中的位置，可以激活left，z-index。默认都是z-index：0层—-文档流。让元素“浮”起来，z-大于0，relative会保留自己0层的占位，对其他0层的元素位置不影响；absolute完全脱离文档流，不在0层保留位置。<br>2，Float，不会“上浮”到另一个z层，仍然0层，不能top等精确控制，left“左右浮”；会改变正常的文档流排列，影响到周围元素<br>3，absolute，float隐式改变成inline-block，默认宽度并不占满父元素。显示设置display无效（float，ie6双边距，添加display：inline）  </p>
+<h3 id="7-9-居中"><a href="#7-9-居中" class="headerlink" title="7.9 居中"></a>7.9 居中</h3><h4 id="1，水平居中"><a href="#1，水平居中" class="headerlink" title="1，水平居中"></a>1，水平居中</h4><p>1）文本、图片等行内元素：text-align；<br>2）确定宽度的块级元素：margin：* auto<br>3）不确定宽度的块级：1table标签；2display：inline；问题：比起块级少一些功能；3父：float：left；子：relative，left：-50%；问题：relative副作用  </p>
+<h4 id="2，竖直居中"><a href="#2，竖直居中" class="headerlink" title="2，竖直居中"></a>2，竖直居中</h4><p>1）    父元素高度不确定的文本、图片，块级：父设置相同的上下边距<br>2）    父高度确定的单行文本：父line-height=父height<br>3）    父高度确定的多行文本、图片、块级：1父元素为th、td，vertical。Display：talbe-cell。Ie6，7不支持模拟表格—直接使用。无义标签和深度；2不支持ie6，7不支持table-cell，hack，给父子两层分别top：absolute，50%、relative，-50% ；hack不利于维护，relative，absolute副作用 </p>
+<h3 id="7-10-网格布局"><a href="#7-10-网格布局" class="headerlink" title="7.10 网格布局"></a>7.10 网格布局</h3><p>Main内容比起sidebar更重要，无论sidebar和main在样式上谁先后，html要main在前加<br>方案一：将浮动和宽度绑定在同一个类中，会限制灵活性<br>方案二：利用组合<br>方案三：上面都是宽度固定，若不定宽：1将宽也抽象出来w25，w70；2利用子选择器.content-lr-7025 .main{f:l;w:70}.content-lr-7025 .main{f:r;w:25}.削弱了main，sidebar做为样式挂钩的能力，。。不由这两个抽象类提供，衍生类—父元素控制  。  </p>
+<p>相较，子更便于修改。但是通过预设大量分支实现的，不够轻便。。<br>组合类更易于扩展，更轻便。(但扩展太好，不利于维护)对某些经常使用的功能，多人合作，统一的格式可以避免五花八门，可以站在全局角度严格控制。。。。。。。。作者认为子选择器更适合。</p>
+<p>宽度百分比，可以嵌套使用，提高重用性。布局极其灵活，content-xx-xxxx是全站统一管理的，非常稳定，—》专有名词 网格布局</p>
+<h3 id="7-11-z-index的相关问题以及Flash和IE6下的select元素"><a href="#7-11-z-index的相关问题以及Flash和IE6下的select元素" class="headerlink" title="7.11 z-index的相关问题以及Flash和IE6下的select元素"></a>7.11 z-index的相关问题以及Flash和IE6下的select元素</h3><h4 id="1，z-负数，单击无法弹出—被body挡住了。"><a href="#1，z-负数，单击无法弹出—被body挡住了。" class="headerlink" title="1，z-负数，单击无法弹出—被body挡住了。"></a>1，z-负数，单击无法弹出—被body挡住了。</h4><p>z-相同，html标签中后出现的在先出现的之上<br>（多元素重叠，relative，absolute激活z-index；负边距），取决于后出现的html，后浮上</p>
+<h4 id="2，flash-wmode-“window，opaque，transparent”。默认window优先非窗口类，z-无效，显示在最顶端。如同属非窗口，才判断z-，设为后两个值"><a href="#2，flash-wmode-“window，opaque，transparent”。默认window优先非窗口类，z-无效，显示在最顶端。如同属非窗口，才判断z-，设为后两个值" class="headerlink" title="2，flash wmode=“window，opaque，transparent”。默认window优先非窗口类，z-无效，显示在最顶端。如同属非窗口，才判断z-，设为后两个值"></a>2，flash wmode=“window，opaque，transparent”。默认window优先非窗口类，z-无效，显示在最顶端。如同属非窗口，才判断z-，设为后两个值</h4><h4 id="3，select在ie6也是窗口，这是ie6-bug：和test同大小的iframe放在test下面，select上面，遮住select"><a href="#3，select在ie6也是窗口，这是ie6-bug：和test同大小的iframe放在test下面，select上面，遮住select" class="headerlink" title="3，select在ie6也是窗口，这是ie6 bug：和test同大小的iframe放在test下面，select上面，遮住select"></a>3，select在ie6也是窗口，这是ie6 bug：和test同大小的iframe放在test下面，select上面，遮住select</h4><h3 id="7-12-插入png图片"><a href="#7-12-插入png图片" class="headerlink" title="7.12 插入png图片"></a>7.12 插入png图片</h3><h4 id="1，Ie6对png透明支持并不好。透明地方浅蓝色。Ie私有的滤镜解决"><a href="#1，Ie6对png透明支持并不好。透明地方浅蓝色。Ie私有的滤镜解决" class="headerlink" title="1，Ie6对png透明支持并不好。透明地方浅蓝色。Ie私有的滤镜解决"></a>1，Ie6对png透明支持并不好。透明地方浅蓝色。Ie私有的滤镜解决</h4><p> –progid:DXImageTransform.Microsoft.AlphaImageLoader(src=’png图片路径’,sizingMethod=’crop’)</p>
+<h4 id="2，可用代码一次解决。问题："><a href="#2，可用代码一次解决。问题：" class="headerlink" title="2，可用代码一次解决。问题："></a>2，可用代码一次解决。问题：</h4><p>全加载完之前，透明部分人浅蓝；遍历所有元素，效率不高；以背景插入，可能有position，repeat属性，而滤镜不支持，若设置，这两效果会丢失。</p>
+<h3 id="7-13-多版本IE并存方案—–CSS的调试利器IETester"><a href="#7-13-多版本IE并存方案—–CSS的调试利器IETester" class="headerlink" title="7.13 多版本IE并存方案—–CSS的调试利器IETester"></a>7.13 多版本IE并存方案—–CSS的调试利器IETester</h3><p>与Mltiple IE不同（早期的时候）</p>
+<p><strong>$_PS:</strong>（下午看了下大网站的css样式（网易云音乐，youtube），和这个标准差不多；youtube虽然样式名看不懂，但是感觉差不多。。。。另外这两个网站，都为移动端提供的另一套样式或者html，路径都有变化yunyinyue.com/m，m.youbute.com）</p>
+<p style="text-align:right">P151 01：15</p><br><p style="text-align:right">2017.9.10 日 22:30 </p>
+
+<h1 id="第五章-高质量的JavaScript"><a href="#第五章-高质量的JavaScript" class="headerlink" title="第五章 高质量的JavaScript"></a>第五章 高质量的JavaScript</h1><h2 id="1-养成良好的编程习惯"><a href="#1-养成良好的编程习惯" class="headerlink" title="1 养成良好的编程习惯"></a>1 养成良好的编程习惯</h2><h3 id="1-1-团队合作—如何避免js冲突"><a href="#1-1-团队合作—如何避免js冲突" class="headerlink" title="1.1    团队合作—如何避免js冲突"></a>1.1    团队合作—如何避免js冲突</h3><p>用匿名函数将脚本包起来，可以有效控制全局变量，避免冲突隐患。<br>添加必要的注释，可以大大提高代码的可维护性，对于团队合作来说，更是十分必要的<br>让js不产生冲突，需要避免全局变量的泛滥，合理使用命名空间以及为代码添加必要的的注释。</p>
+<ol>
+<li>A和B，匿名函数；  </li>
+<li>C用A，全局变量做桥梁；  </li>
+<li>还要用A，对象类型的全局，GLOBAL；  </li>
+<li>变量简单，容易相互覆盖=》不直接挂在G对象，而是此匿名函数的命名空间下（只考虑命名空间不冲突就可以了，属性名任意设置，不用担心会和哪个匿名函数里的某个G属性冲突。命名空间数量一般情况不会特别多，避免冲突相对容易====如果同一个匿名函数中的程序非常复杂，变量名很多，命名空间可进一步扩展，生成二级命名空间）。  </li>
+<li>生成命名空间非常常用功能==》定义为函数  </li>
+<li>可维护性不高，A改B的代码===》加注释</li>
+</ol>
+<h3 id="1-2-给程序一个统一的入口—-window-onload和DOMReady"><a href="#1-2-给程序一个统一的入口—-window-onload和DOMReady" class="headerlink" title="1.2    给程序一个统一的入口—-window.onload和DOMReady"></a>1.2    给程序一个统一的入口—-window.onload和DOMReady</h3><p>各自游击，纪律性没有保障==》从功能上对程序划分：框架+应用。<br>Function init(){}   选择DOMReady  为避免写DOMReay兼容，init()放在最后，<code>&lt;/body&gt;</code>前<br>实际工作，三部分  if(init){ init() }</p>
+<h3 id="1-3-css放在页头，Javascript放在页尾"><a href="#1-3-css放在页头，Javascript放在页尾" class="headerlink" title="1.3    css放在页头，Javascript放在页尾"></a>1.3    css放在页头，Javascript放在页尾</h3><h3 id="1-4-引入编译的概念—–文件压缩"><a href="#1-4-引入编译的概念—–文件压缩" class="headerlink" title="1.4    引入编译的概念—–文件压缩"></a>1.4    引入编译的概念—–文件压缩</h3><p>Packer:<a href="http://dean.edwards.name/packer/" target="_blank" rel="noopener">http://dean.edwards.name/packer/</a><br>YUI Compressor:<a href="http://developer.yahoo.com/yui/compressor/" target="_blank" rel="noopener">http://developer.yahoo.com/yui/compressor/</a>   也可压css<br>    基于Javr的jar应用，先安装JDK，配环境通过命令行<br>    Java –jar yuicompressor-x.y.z.jar myfile.js –o myfile-min.js<br>反压缩：<a href="http://jsbeautifier.org/" target="_blank" rel="noopener">http://jsbeautifier.org/</a></p>
+<h2 id="2-javascript的分层概念和Javascript库"><a href="#2-javascript的分层概念和Javascript库" class="headerlink" title="2 javascript的分层概念和Javascript库"></a>2 javascript的分层概念和Javascript库</h2><h3 id="2-1-Javascript如何分层-base-common-page-只有好坏，作者的经验"><a href="#2-1-Javascript如何分层-base-common-page-只有好坏，作者的经验" class="headerlink" title="2.1 Javascript如何分层   base common page (只有好坏，作者的经验)"></a>2.1 Javascript如何分层   base common page (只有好坏，作者的经验)</h3><h3 id="2-2-base层"><a href="#2-2-base层" class="headerlink" title="2.2 base层"></a>2.2 base层</h3><ol>
+<li>封装不同浏览器下js的差异，提供统一的接口:childNodes,透明度，event对象，冒泡，on attachEvent和addEventListener  </li>
+<li>扩展js语言底层的接口（虽然支持面向对象，但没有继承extend，类型判断，getElementByClassName）:trim,isNumber isString isBoolean …..,get   $, getElementByClassName,extend,</li>
+</ol>
+<p>前面5.1.2 将网页js代码分两大部分：框架级和应用。Base框架，加命名空间：dom,event,lang</p>
+<h3 id="2-3-common层"><a href="#2-3-common层" class="headerlink" title="2.3 common层"></a>2.3 common层</h3><p>不是简单的接口，而是相对庞大的组件：cookie,ajsx,drag,resize,animation,tab,tree,msg,colorPicker,calendar,richTextEditor…. </p>
+<p>没base通用，具体功能相关，不相关不加载；而且一个易用性，重用性，可扩展性好的组件，代码量偏高，按功能单独的文件common_cookie.js,common_drag.js,..按需加载<br>不仅依赖base，有时也依赖common其他， ，加载时注意顺序</p>
+<h3 id="2-4-page层-应用层"><a href="#2-4-page层-应用层" class="headerlink" title="2.4 page层  应用层"></a>2.4 page层  应用层</h3><p>平时绝大部分工作在page层，分层后，轻松了。若前两个够丰富、稳定，精力就全在业务逻辑上了，一提高效率，另一提高代码重用率，减小网页大小</p>
+<h3 id="2-5-JavaScript库"><a href="#2-5-JavaScript库" class="headerlink" title="2.5 JavaScript库"></a>2.5 JavaScript库</h3><p>Prototype,dojo,mootools,ext js,jquery,YUI</p>
+<p>YUI2:三大部分：Core-b、Utilities-c、Widgets-c</p>
+<p>jQuery:核心文件、jQuery UI</p>
+<p>也可以自己写组件，考验工程师能力的事，高品质组件：跨浏览器兼容、组件易用、可重用、可扩展、代码组织有序，高内聚低耦合</p>
+<p>长看到网上大量组件，依赖某js库。。。写好的库，。。。为什么不用呢，质，还可直接用第三方组件</p>
+<pre><code>5.2代码留下等待实现  
+</code></pre><p style="text-align:right">2017.9.11 一 00：41</p><br><p style="text-align:right">2017.9.11 一 22：00</p>
+
+<h2 id="3-编程使用技巧-236"><a href="#3-编程使用技巧-236" class="headerlink" title="3 编程使用技巧  236"></a>3 编程使用技巧  236</h2><h3 id="3-1-弹性"><a href="#3-1-弹性" class="headerlink" title="3.1 弹性"></a>3.1 弹性</h3><p>Get by id,如果再加两个==》数组，byTagName，弹出4444：闭包，_index属性；content结构里可能还有Tag===》3.2by class name</p>
+<h3 id="3-2-getElementById-getElementByTagName-getElementByName"><a href="#3-2-getElementById-getElementByTagName-getElementByName" class="headerlink" title="3.2 getElementById,getElementByTagName,getElementByName"></a>3.2 getElementById,getElementByTagName,getElementByName</h3><p>但因为一个页面内，相同的id只能出现一次，所以不适合获取一组有“相似功能”的dom节点。<br>用标签名获得dom节点，让程序和html结构耦合太紧。</p>
+<h3 id="3-3-可复用性-这页面3个，那页面5个"><a href="#3-3-可复用性-这页面3个，那页面5个" class="headerlink" title="3.3 可复用性 这页面3个，那页面5个"></a>3.3 可复用性 这页面3个，那页面5个</h3><p>同一个页面id只能出现一次，如果你的程序需要被多处复用，一定不能用id做为JavaScript获得dom节点挂钩。<br>组件需要指定一个根节点，以保持每个组件之间的独立性。</p>
+<h3 id="3-4-避免产生副作用-tab-高亮，灰底白字"><a href="#3-4-避免产生副作用-tab-高亮，灰底白字" class="headerlink" title="3.4 避免产生副作用  tab 高亮，灰底白字"></a>3.4 避免产生副作用  tab 高亮，灰底白字</h3><p>如果挂了其他样式，会冲突 ，addClass</p>
+<h3 id="3-5-通过传参实现定制-第一个高亮，第二个不高亮，第三个高亮但区别"><a href="#3-5-通过传参实现定制-第一个高亮，第二个不高亮，第三个高亮但区别" class="headerlink" title="3.5 通过传参实现定制 第一个高亮，第二个不高亮，第三个高亮但区别"></a>3.5 通过传参实现定制 第一个高亮，第二个不高亮，第三个高亮但区别</h3><p>如果一个函数内某个因素很不稳定，我们可以将它从函数内部分离出来，以参数的形式传入，从而将不稳定因素和函数解耦。</p>
+<h3 id="3-6-控制this关键字的指向"><a href="#3-6-控制this关键字的指向" class="headerlink" title="3.6 控制this关键字的指向"></a>3.6 控制this关键字的指向</h3><h3 id="3-7-预留回调接口-可增加tab的可扩展性"><a href="#3-7-预留回调接口-可增加tab的可扩展性" class="headerlink" title="3.7 预留回调接口   可增加tab的可扩展性"></a>3.7 预留回调接口   可增加tab的可扩展性</h3><p style="text-align:right">P231 2017.9.12 二 01：17</p><br><p style="text-align:right">2017.9.12 二 22：17</p>
+
+<h3 id="3-8-编程中的DRY原则-auto，showItem"><a href="#3-8-编程中的DRY原则-auto，showItem" class="headerlink" title="3.8 编程中的DRY原则   auto，showItem"></a>3.8 编程中的DRY原则   auto，showItem</h3><h3 id="3-9-用hash对象传参-多余的null参数，"><a href="#3-9-用hash对象传参-多余的null参数，" class="headerlink" title="3.9 用hash对象传参  多余的null参数，"></a>3.9 用hash对象传参  多余的null参数，</h3><h2 id="4-面向对象编程"><a href="#4-面向对象编程" class="headerlink" title="4 面向对象编程"></a>4 面向对象编程</h2><h3 id="4-1-面向过程编程和面向对象编程"><a href="#4-1-面向过程编程和面向对象编程" class="headerlink" title="4.1 面向过程编程和面向对象编程"></a>4.1 面向过程编程和面向对象编程</h3><p>过程：程序：“数据”—“处理函数”</p>
+<p>三方面问题：1没有直接关联，需同时关注两者；<br>2暴露在同一作用域，没有私用，公有概念，都可以互相访问，初期开发快，后期，由于耦合紧，可能关联到其他地方，牵一发动全身。<br>3典型的计算机思维方式：  。</p>
+<p>对象：对象：“属性”“行为”</p>
+<pre><code>只写了两个程序的代码，笔记没有做 
+</code></pre><p style="text-align:right">2017.9.13 三 00：51</p><br><p style="text-align:right">北一103 2017.9.16 六 11：31</p>
+
+<h3 id="4-2-JavaScript的面向对象编程"><a href="#4-2-JavaScript的面向对象编程" class="headerlink" title="4.2 JavaScript的面向对象编程"></a>4.2 JavaScript的面向对象编程</h3><h4 id="4-2-1-Js定义类"><a href="#4-2-1-Js定义类" class="headerlink" title="4.2.1 Js定义类"></a>4.2.1 Js定义类</h4><p>函数：普通函数，类</p>
+<p>Js定义类：不使用原型，使用原型，使用原型的hash对象写法<br>一般习惯把属性放构造函数，非原型，方便从构造函数接受参数</p>
+<h4 id="4-2-2-共有和私有"><a href="#4-2-2-共有和私有" class="headerlink" title="4.2.2 共有和私有"></a>4.2.2 共有和私有</h4><p>This定义共有，var私有；构造函数中的私有无法被原型中的方法访问，私有属性的作用域只在类的构造函数中  </p>
+<h5 id="1-最简单方法：共有方法也写在构造函数中；问题：实例化时都会复制一份"><a href="#1-最简单方法：共有方法也写在构造函数中；问题：实例化时都会复制一份" class="headerlink" title="1.最简单方法：共有方法也写在构造函数中；问题：实例化时都会复制一份"></a>1.最简单方法：共有方法也写在构造函数中；问题：实例化时都会复制一份</h5><p>把行为写在原型可以减少内存消耗</p>
+<h5 id="2-1-如果对属性和行为的私有性要求不高，常见做法是约定私有行为-siyou；"><a href="#2-1-如果对属性和行为的私有性要求不高，常见做法是约定私有行为-siyou；" class="headerlink" title="2.1 如果对属性和行为的私有性要求不高，常见做法是约定私有行为_siyou；"></a>2.1 如果对属性和行为的私有性要求不高，常见做法是约定私有行为_siyou；</h5><h5 id="2-2-1-极端主义者，直接访问类的属性不好，所有属性都是私有，通过get，set获取和设置"><a href="#2-2-1-极端主义者，直接访问类的属性不好，所有属性都是私有，通过get，set获取和设置" class="headerlink" title="2.2.1 极端主义者，直接访问类的属性不好，所有属性都是私有，通过get，set获取和设置"></a>2.2.1 极端主义者，直接访问类的属性不好，所有属性都是私有，通过get，set获取和设置</h5><p>2.2.2比较：set，get相关方法都要放在构造函数中-VS 所有方法都放在构造函数中，会占用更多内存。。但可以更好的保护属性：例如：Animal类的name只能为wangcai或xiaoqiang，type为只读<br>2.2.3 （你当然可以在编程的时候小心地注意那些属性有什么限制要求，不通过set，get方法对属性进行保护，任然使用this.xxx对属性直接读写，从而节省一点内存。<br>对于简单应用，作者推荐this.xxx来读写；更复杂的应用，对扩展性和健壮性要求很高，此时用set和get方法读取属性更合适）</p>
+<p><strong>另外，如果使用set设置属性，那么就有了监听valueChange的入口。(这才是本小小节主题)</strong></p>
+<p>真实世界中，我们的很多思维习惯都是状态驱动的，编程时监听属性的valueChange事件可以帮我们更接近真实世界的思维习惯</p>
+<h4 id="4-2-3-继承"><a href="#4-2-3-继承" class="headerlink" title="4.2.3 继承"></a>4.2.3 继承</h4><p>Js中实例的属性和行为是由构造函数和原型两部分共同组成的。<br>Js继承要分别继承构造函数和原型中的属性和行为</p>
+<p>1、继承构造函数：Animal.call(this,name);<br>2、继承原型：Bird.prototype=Animal.prototype;<br>   解决传值，传址：<br>1简单方法：遍历数组或hash对象，将复杂数据拆成简单数据，然后分别赋值。。值得一提，数组的传值还可以用数组的concat和slice方法实现<br>2另一种方法prototype传值，New SomeFunction（prototype和function的关系：用作类的function）<br>Bird.prototype=new Animal();<br>Bird.prototype.constructor=Bird;<em>因为上面的将Bird.prototype.constructor指向Animal，需纠正，重新指回Bird</em><br>3 封装上面函数 function extend(subClass,superClass)<br>extend(Bird,Animal);</p>
+<h3 id="4-3-用面向对象方式重写代码"><a href="#4-3-用面向对象方式重写代码" class="headerlink" title="4.3 用面向对象方式重写代码"></a>4.3 用面向对象方式重写代码</h3><p>PhonebookManger  Tab    </p>
+<p>UML语言将类描述出来  </p>
+<p>面向对象和过程，优缺点 5.4.1比较过。当程序越复杂，这些优缺点会表现的越明显。早晚要跨过的一道坎</p>
+<p style="text-align:right">被耽搁的星期六 2017.9.16 六 11:00</p><br><p style="text-align:right">2017.9.17 日 10:16</p>
+
+<h2 id="5-其他问题"><a href="#5-其他问题" class="headerlink" title="5 其他问题"></a>5 其他问题</h2><h3 id="5-1-prototype和内置类"><a href="#5-1-prototype和内置类" class="headerlink" title="5.1 prototype和内置类"></a>5.1 prototype和内置类</h3><p>(5.4.2 prototype和类的关系，进一步==》)  </p>
+<h4 id="1、js提供了内置类：Array、String、Function等，它们提供了js的大部分基本数据类型。有属性和方法，比如"><a href="#1、js提供了内置类：Array、String、Function等，它们提供了js的大部分基本数据类型。有属性和方法，比如" class="headerlink" title="1、js提供了内置类：Array、String、Function等，它们提供了js的大部分基本数据类型。有属性和方法，比如"></a>1、js提供了内置类：Array、String、Function等，它们提供了js的大部分基本数据类型。有属性和方法，比如</h4><p>需说明：这些内置类不一定需要new实例，平时习惯更简单的方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a=new String(&quot;sdfs&quot;);//通过new实例</span><br><span class="line">var b=&quot;sdf&quot;;//通过&quot;&quot;实例 String类对象</span><br><span class="line">var d=[1,2,4];//通过[]实例 Array类对象</span><br></pre></td></tr></table></figure></p>
+<h4 id="2、类就有原型，不论内置or自定义。通过修改内置类原型，让js基本对象有趣的功能：array–each-map等"><a href="#2、类就有原型，不论内置or自定义。通过修改内置类原型，让js基本对象有趣的功能：array–each-map等" class="headerlink" title="2、类就有原型，不论内置or自定义。通过修改内置类原型，让js基本对象有趣的功能：array–each,map等"></a>2、类就有原型，不论内置or自定义。通过修改内置类原型，让js基本对象有趣的功能：array–each,map等</h4><p>扩展方法中this：无论在类的构造函数还是原型，都指向实例化的对象。 </p>
+<h4 id="3、除了扩展，还可以重写"><a href="#3、除了扩展，还可以重写" class="headerlink" title="3、除了扩展，还可以重写"></a>3、除了扩展，还可以重写</h4><p>alert(a),自动调用a的toString。在需要字符串时，对象会隐式调用toString，包括我们自定义的对象[object Object]  </p>
+<h4 id="4、js中包括内置类和自定义类，所有类的祖先-都是Object。如果相对所有对象都扩展，可修改Object类的原型实现"><a href="#4、js中包括内置类和自定义类，所有类的祖先-都是Object。如果相对所有对象都扩展，可修改Object类的原型实现" class="headerlink" title="4、js中包括内置类和自定义类，所有类的祖先 都是Object。如果相对所有对象都扩展，可修改Object类的原型实现"></a>4、js中包括内置类和自定义类，所有类的祖先 都是Object。如果相对所有对象都扩展，可修改Object类的原型实现</h4><h4 id="5、修改内置类的原型—方便，但有人排斥—-污染，多人合作对他人造成影响，修改了游戏规则。改进myArray-自定义类，将内置类的实例做为参数传给构造函数；"><a href="#5、修改内置类的原型—方便，但有人排斥—-污染，多人合作对他人造成影响，修改了游戏规则。改进myArray-自定义类，将内置类的实例做为参数传给构造函数；" class="headerlink" title="5、修改内置类的原型—方便，但有人排斥—-污染，多人合作对他人造成影响，修改了游戏规则。改进myArray:自定义类，将内置类的实例做为参数传给构造函数；"></a>5、修改内置类的原型—方便，但有人排斥—-污染，多人合作对他人造成影响，修改了游戏规则。改进myArray:自定义类，将内置类的实例做为参数传给构造函数；</h4><p>各有优缺点：。。。。。。但需要new实例化</p>
+<p>小应用，不过多考虑可维护性，用前者–直接修改；<br>大中型，考虑维护性，后者。</p>
+<h3 id="5-2-标签的自定义属性"><a href="#5-2-标签的自定义属性" class="headerlink" title="5.2 标签的自定义属性"></a>5.2 标签的自定义属性</h3><p>js和html标签存在映射关系，html标签在js中作为dom节点对象存在。  </p>
+<h4 id="1、获取定义在html标签属性：1、DOM节点对象的getAttribute方法；2、DOM节点对象的属性"><a href="#1、获取定义在html标签属性：1、DOM节点对象的getAttribute方法；2、DOM节点对象的属性" class="headerlink" title="1、获取定义在html标签属性：1、DOM节点对象的getAttribute方法；2、DOM节点对象的属性"></a>1、获取定义在html标签属性：1、DOM节点对象的getAttribute方法；2、DOM节点对象的属性</h4><p>ie和firefox：getA 大部分一致，某些不同；node.XXXX结果会更一致。跨浏览器兼容性更好</p>
+<h4 id="2、相反在js中定义的属性，也可以映射到html标签中"><a href="#2、相反在js中定义的属性，也可以映射到html标签中" class="headerlink" title="2、相反在js中定义的属性，也可以映射到html标签中"></a>2、相反在js中定义的属性，也可以映射到html标签中</h4><h4 id="3、除了常规属性，还有自定义属性。Firefox无法node-XXXX-只能-node-getAttribute-“XXX”"><a href="#3、除了常规属性，还有自定义属性。Firefox无法node-XXXX-只能-node-getAttribute-“XXX”" class="headerlink" title="3、除了常规属性，还有自定义属性。Firefox无法node.XXXX,只能 node.getAttribute(“XXX”)"></a>3、除了常规属性，还有自定义属性。Firefox无法node.XXXX,只能 node.getAttribute(“XXX”)</h4><p>作者建议：常规node.XXX,自定义node.getAttribute(“XXX”)  </p>
+<p>自定义属性很有用的技巧，不但可以保存普通字符串，还可以其他数据：数组，hash==》数据反序列化、json。  </p>
+<pre><code>info=eval( &quot;(&quot;+info+&quot;)&quot; );
+</code></pre><p><strong>$_PS:</strong> 个人以为这不是好方法了，现在有更好的方式了，不用eval。   </p>
+<h3 id="5-3-标签的内联事件和event对象"><a href="#5-3-标签的内联事件和event对象" class="headerlink" title="5.3 标签的内联事件和event对象"></a>5.3 标签的内联事件和event对象</h3><p>event IE：window的一个属性，在全局作用域下。Firefox：事件的参数 </p>
+<h4 id="1、"><a href="#1、" class="headerlink" title="1、"></a>1、</h4><pre><code>document.getElementById(&quot;btn&quot;).onclick=function(){
+    alert(arguments.length);//ie7 0;ff:1 ..ie9:1
+} 
+</code></pre><h4 id="2、换成内联呢"><a href="#2、换成内联呢" class="headerlink" title="2、换成内联呢"></a>2、换成内联呢</h4><pre><code>&lt;input type=&quot;button&quot; id=&quot;btn&quot; value=&quot;click me&quot; onclick=&quot;handler()&quot;&gt;
+</code></pre><p>都弹出0<br>没有换成 <code>btn.onclick=handler;</code><br>而是 <code>btn.onclick=funciton(){handler();}</code></p>
+<h4 id="3、内联中，arguments-0-在ff下可以访问到event对象"><a href="#3、内联中，arguments-0-在ff下可以访问到event对象" class="headerlink" title="3、内联中，arguments[0],在ff下可以访问到event对象"></a>3、内联中，arguments[0],在ff下可以访问到event对象</h4><pre><code>&lt;input type=&quot;button&quot; id=&quot;btn&quot; value=&quot;click me&quot; onclick=&quot;alert(arguments[0].type)&quot;&gt;  
+</code></pre><h4 id="4、不使用标签内联事件时，可以给处理函数传参，指定argumens-0-参数名"><a href="#4、不使用标签内联事件时，可以给处理函数传参，指定argumens-0-参数名" class="headerlink" title="4、不使用标签内联事件时，可以给处理函数传参，指定argumens[0]参数名"></a>4、不使用标签内联事件时，可以给处理函数传参，指定argumens[0]参数名</h4><pre><code>document.getElementById(&quot;btn&quot;).onclick=function(e){
+    e=window.event||e;//兼容ie ff 
+}
+</code></pre><h4 id="5、标签内联事件中，没办法指定参数名，没法直接写变量在ie，ff下兼容event对象了吗？"><a href="#5、标签内联事件中，没办法指定参数名，没法直接写变量在ie，ff下兼容event对象了吗？" class="headerlink" title="5、标签内联事件中，没办法指定参数名，没法直接写变量在ie，ff下兼容event对象了吗？"></a>5、标签内联事件中，没办法指定参数名，没法直接写变量在ie，ff下兼容event对象了吗？</h4><p>否。可以用event变量名，兼容指向event对象，只能是event，其他a，b，Event都不行。  </p>
+<pre><code>&lt;input type=&quot;button&quot; id=&quot;btn&quot; value=&quot;click me&quot; onclick=&quot;alert(event.type)&quot;&gt;  
+</code></pre><p>ie,ff都可以正确弹出</p>
+<h4 id="6、标签内联事件中，甚至可以写注释，使用字符串"><a href="#6、标签内联事件中，甚至可以写注释，使用字符串" class="headerlink" title="6、标签内联事件中，甚至可以写注释，使用字符串"></a>6、标签内联事件中，甚至可以写注释，使用字符串</h4><h4 id="7、既用了标签内联事件，又用了DomNode-onXXX"><a href="#7、既用了标签内联事件，又用了DomNode-onXXX" class="headerlink" title="7、既用了标签内联事件，又用了DomNode.onXXX"></a>7、既用了标签内联事件，又用了DomNode.onXXX</h4><p>后面的会覆盖前面的</p>
+<h4 id="8、attachEvent-addEventListener"><a href="#8、attachEvent-addEventListener" class="headerlink" title="8、attachEvent  addEventListener"></a>8、attachEvent  addEventListener</h4><p>都弹出</p>
+<h3 id="5-4-利用事件冒泡机制"><a href="#5-4-利用事件冒泡机制" class="headerlink" title="5.4 利用事件冒泡机制"></a>5.4 利用事件冒泡机制</h3><pre><code>打分，星星 代码 没有写，用的是面向对象
+</code></pre><h3 id="5-5-改变DOM样式的三种方式"><a href="#5-5-改变DOM样式的三种方式" class="headerlink" title="5.5 改变DOM样式的三种方式"></a>5.5 改变DOM样式的三种方式</h3><h4 id="1、简单直接node-style-color-”red”"><a href="#1、简单直接node-style-color-”red”" class="headerlink" title="1、简单直接node.style.color=”red”;"></a>1、简单直接node.style.color=”red”;</h4><p> 同时多个样式。node.style.color=”red”;node.style.backgroundColor=”red”;..</p>
+<h4 id="2、node-className-”testStyle”"><a href="#2、node-className-”testStyle”" class="headerlink" title="2、node.className=”testStyle”"></a>2、node.className=”testStyle”</h4><p>多个dom呢。批量span，除了id为test的color，其他都…   </p>
+<p>这两都是针对单个dom节点的操作，可以逐个设置。。都不支持批量处理==》</p>
+<h4 id="3、"><a href="#3、" class="headerlink" title="3、"></a>3、</h4><pre><code>function addStyleNode(str){
+    var styleNode=document.createElement(&quot;style&quot;);
+    styleNode.type=&quot;text/css&quot;;
+    if(styleNode.styleSheet){
+        styleNode.styleSheet.cssText=str;
+    }else{
+        styleNode.innerHTML=str;
+    }
+}
+document.getElementsByTagName(&quot;head&quot;)[0].appendChild(styleNode);
+addStyleNode(&quot;sapn{color:#fff;font-...}#test{}...&quot;);
+</code></pre><p>思路：创建一个 <code>&lt;style&gt;</code>标签，然后往里填入css，再把它加入到页面里。<br>ff直接innerHTML；ie，只读的，通过<code>styleSheet.cssText</code><br><strong>$_PS:</strong> 这个第三点，不是很明白</p>
+<h1 id="附录A-写在规则前面的话"><a href="#附录A-写在规则前面的话" class="headerlink" title="附录A 写在规则前面的话"></a>附录A 写在规则前面的话</h1><h1 id="附录B-命名规则"><a href="#附录B-命名规则" class="headerlink" title="附录B 命名规则"></a>附录B 命名规则</h1><h1 id="附录C-分工安排"><a href="#附录C-分工安排" class="headerlink" title="附录C 分工安排"></a>附录C 分工安排</h1><h1 id="附录D-注释规则"><a href="#附录D-注释规则" class="headerlink" title="附录D 注释规则"></a>附录D 注释规则</h1><h1 id="附录E-HTML规范"><a href="#附录E-HTML规范" class="headerlink" title="附录E HTML规范"></a>附录E HTML规范</h1><h1 id="附录F-CSS规范"><a href="#附录F-CSS规范" class="headerlink" title="附录F CSS规范"></a>附录F CSS规范</h1><h1 id="附录G-Javascript规范"><a href="#附录G-Javascript规范" class="headerlink" title="附录G Javascript规范"></a>附录G Javascript规范</h1><p style="text-align:right">2017.9.17 日 12:20</p>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/opti/" rel="tag"><i class="fa fa-tag"></i> opti</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/css/css代码组织方法(002)/" rel="next" title="Css代码组织方法">
+                <i class="fa fa-chevron-left"></i> Css代码组织方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/others/vscode简单使用/" rel="prev" title="Vscode简单使用">
+                Vscode简单使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-从网站重构说起"><span class="nav-text">第一章 从网站重构说起</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-糟糕的页面实现，头疼的维护工作"><span class="nav-text">1 糟糕的页面实现，头疼的维护工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Web标准——结构、样式和行为的分离"><span class="nav-text">2 Web标准——结构、样式和行为的分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-前端的现状"><span class="nav-text">3 前端的现状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-打造高品质的前端代码，提高代码的可维护性—-精简、重用、有序"><span class="nav-text">4 打造高品质的前端代码，提高代码的可维护性—-精简、重用、有序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-团队合作"><span class="nav-text">第二章 团队合作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-揭秘前端开发工程师"><span class="nav-text">1 揭秘前端开发工程师</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-欲精一行，必先通十行"><span class="nav-text">2 欲精一行，必先通十行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-增加代码可读性—-注释"><span class="nav-text">3 增加代码可读性—-注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-提高重用性—–公共组件和私有组件的维护-4-2和5-2（四，五章）"><span class="nav-text">4 提高重用性—–公共组件和私有组件的维护   4.2和5.2（四，五章）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-冗余和精简的矛盾—-选择集中还是分散"><span class="nav-text">5 冗余和精简的矛盾—-选择集中还是分散</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-磨刀不误砍柴工—-前期的构思很重要"><span class="nav-text">6 磨刀不误砍柴工—-前期的构思很重要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-制定规范"><span class="nav-text">7 制定规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-团队合作的最大难度不是技术，是人"><span class="nav-text">8 团队合作的最大难度不是技术，是人</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-高质量的HTML"><span class="nav-text">第三章 高质量的HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-标签的语义"><span class="nav-text">1 标签的语义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-为什么要使用语义化标签"><span class="nav-text">2 为什么要使用语义化标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-如何确定你的标签是否语义良好"><span class="nav-text">3 如何确定你的标签是否语义良好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-常见模块你真的很了解吗"><span class="nav-text">4 常见模块你真的很了解吗</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-标题和内容：三个div—》一个h2包一个a，但a不是h—》用div包h2，a"><span class="nav-text">4.1 标题和内容：三个div—》一个h2包一个a，但a不是h—》用div包h2，a</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-表单-fieldset-legend-lable—for"><span class="nav-text">4.2 表单 fieldset legend lable—for</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-表格-caption-thead-tbody-tfood-th"><span class="nav-text">4.3 表格 caption thead tbody tfood th</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-其他：1尽可能少用语义div和span；2语义不明显，div，和p。尽量p，默认有上下间距，可读性更好，兼容特殊终端；3不使用纯样式标签：b，font，u等，改css。默认strong：加粗，em：斜体"><span class="nav-text">4.4 其他：1尽可能少用语义div和span；2语义不明显，div，和p。尽量p，默认有上下间距，可读性更好，兼容特殊终端；3不使用纯样式标签：b，font，u等，改css。默认strong：加粗，em：斜体</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-高质量的CSS"><span class="nav-text">第四章 高质量的CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-怪异模式和DTD"><span class="nav-text">1 怪异模式和DTD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-如何组织CSS"><span class="nav-text">2 如何组织CSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-推荐的base-css"><span class="nav-text">3 推荐的base.css:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-模块化CSS——-在CSS中引入面向对象编程思想"><span class="nav-text">4 模块化CSS——-在CSS中引入面向对象编程思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-如何划分模块—"><span class="nav-text">4.1 如何划分模块—</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-CSS的命名—-命名空间的概念"><span class="nav-text">4.2 CSS的命名—-命名空间的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-挂多个class还是新建class——–多用组合，少用继承"><span class="nav-text">4.3 挂多个class还是新建class——–多用组合，少用继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-如何处理上下margin："><span class="nav-text">4.4 如何处理上下margin：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-低权重原则——-避免滥用子选择器"><span class="nav-text">5 低权重原则——-避免滥用子选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-CSS-sprite"><span class="nav-text">6 CSS sprite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-CSS的常见问题"><span class="nav-text">7 CSS的常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-编码风格：多行式，一行式"><span class="nav-text">7.1 编码风格：多行式，一行式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-id和class：一般情况尽量使用class，少用id（我觉得作者只是针对css样式来讲的）"><span class="nav-text">7.2 id和class：一般情况尽量使用class，少用id（我觉得作者只是针对css样式来讲的）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-CSS-hack"><span class="nav-text">7.3 CSS hack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-解决超链接访问后hover样式不出现的问题：lvha"><span class="nav-text">7.4 解决超链接访问后hover样式不出现的问题：lvha</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-hasLayout"><span class="nav-text">7.5 hasLayout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-6-块级元素和行内元素的区别"><span class="nav-text">7.6 块级元素和行内元素的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-7-display-inline-block和hasLayout"><span class="nav-text">7.7 display:inline-block和hasLayout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-8-relative、absolute和float"><span class="nav-text">7.8 relative、absolute和float</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-9-居中"><span class="nav-text">7.9 居中</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1，水平居中"><span class="nav-text">1，水平居中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2，竖直居中"><span class="nav-text">2，竖直居中</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-10-网格布局"><span class="nav-text">7.10 网格布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-11-z-index的相关问题以及Flash和IE6下的select元素"><span class="nav-text">7.11 z-index的相关问题以及Flash和IE6下的select元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1，z-负数，单击无法弹出—被body挡住了。"><span class="nav-text">1，z-负数，单击无法弹出—被body挡住了。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2，flash-wmode-“window，opaque，transparent”。默认window优先非窗口类，z-无效，显示在最顶端。如同属非窗口，才判断z-，设为后两个值"><span class="nav-text">2，flash wmode=“window，opaque，transparent”。默认window优先非窗口类，z-无效，显示在最顶端。如同属非窗口，才判断z-，设为后两个值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3，select在ie6也是窗口，这是ie6-bug：和test同大小的iframe放在test下面，select上面，遮住select"><span class="nav-text">3，select在ie6也是窗口，这是ie6 bug：和test同大小的iframe放在test下面，select上面，遮住select</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-12-插入png图片"><span class="nav-text">7.12 插入png图片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1，Ie6对png透明支持并不好。透明地方浅蓝色。Ie私有的滤镜解决"><span class="nav-text">1，Ie6对png透明支持并不好。透明地方浅蓝色。Ie私有的滤镜解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2，可用代码一次解决。问题："><span class="nav-text">2，可用代码一次解决。问题：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-13-多版本IE并存方案—–CSS的调试利器IETester"><span class="nav-text">7.13 多版本IE并存方案—–CSS的调试利器IETester</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五章-高质量的JavaScript"><span class="nav-text">第五章 高质量的JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-养成良好的编程习惯"><span class="nav-text">1 养成良好的编程习惯</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-团队合作—如何避免js冲突"><span class="nav-text">1.1    团队合作—如何避免js冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-给程序一个统一的入口—-window-onload和DOMReady"><span class="nav-text">1.2    给程序一个统一的入口—-window.onload和DOMReady</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-css放在页头，Javascript放在页尾"><span class="nav-text">1.3    css放在页头，Javascript放在页尾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-引入编译的概念—–文件压缩"><span class="nav-text">1.4    引入编译的概念—–文件压缩</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-javascript的分层概念和Javascript库"><span class="nav-text">2 javascript的分层概念和Javascript库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Javascript如何分层-base-common-page-只有好坏，作者的经验"><span class="nav-text">2.1 Javascript如何分层   base common page (只有好坏，作者的经验)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-base层"><span class="nav-text">2.2 base层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-common层"><span class="nav-text">2.3 common层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-page层-应用层"><span class="nav-text">2.4 page层  应用层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-JavaScript库"><span class="nav-text">2.5 JavaScript库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-编程使用技巧-236"><span class="nav-text">3 编程使用技巧  236</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-弹性"><span class="nav-text">3.1 弹性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-getElementById-getElementByTagName-getElementByName"><span class="nav-text">3.2 getElementById,getElementByTagName,getElementByName</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-可复用性-这页面3个，那页面5个"><span class="nav-text">3.3 可复用性 这页面3个，那页面5个</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-避免产生副作用-tab-高亮，灰底白字"><span class="nav-text">3.4 避免产生副作用  tab 高亮，灰底白字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-通过传参实现定制-第一个高亮，第二个不高亮，第三个高亮但区别"><span class="nav-text">3.5 通过传参实现定制 第一个高亮，第二个不高亮，第三个高亮但区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-控制this关键字的指向"><span class="nav-text">3.6 控制this关键字的指向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-预留回调接口-可增加tab的可扩展性"><span class="nav-text">3.7 预留回调接口   可增加tab的可扩展性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8-编程中的DRY原则-auto，showItem"><span class="nav-text">3.8 编程中的DRY原则   auto，showItem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-9-用hash对象传参-多余的null参数，"><span class="nav-text">3.9 用hash对象传参  多余的null参数，</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-面向对象编程"><span class="nav-text">4 面向对象编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-面向过程编程和面向对象编程"><span class="nav-text">4.1 面向过程编程和面向对象编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-JavaScript的面向对象编程"><span class="nav-text">4.2 JavaScript的面向对象编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-1-Js定义类"><span class="nav-text">4.2.1 Js定义类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-2-共有和私有"><span class="nav-text">4.2.2 共有和私有</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-最简单方法：共有方法也写在构造函数中；问题：实例化时都会复制一份"><span class="nav-text">1.最简单方法：共有方法也写在构造函数中；问题：实例化时都会复制一份</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-如果对属性和行为的私有性要求不高，常见做法是约定私有行为-siyou；"><span class="nav-text">2.1 如果对属性和行为的私有性要求不高，常见做法是约定私有行为_siyou；</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-极端主义者，直接访问类的属性不好，所有属性都是私有，通过get，set获取和设置"><span class="nav-text">2.2.1 极端主义者，直接访问类的属性不好，所有属性都是私有，通过get，set获取和设置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-3-继承"><span class="nav-text">4.2.3 继承</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-用面向对象方式重写代码"><span class="nav-text">4.3 用面向对象方式重写代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-其他问题"><span class="nav-text">5 其他问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-prototype和内置类"><span class="nav-text">5.1 prototype和内置类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、js提供了内置类：Array、String、Function等，它们提供了js的大部分基本数据类型。有属性和方法，比如"><span class="nav-text">1、js提供了内置类：Array、String、Function等，它们提供了js的大部分基本数据类型。有属性和方法，比如</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、类就有原型，不论内置or自定义。通过修改内置类原型，让js基本对象有趣的功能：array–each-map等"><span class="nav-text">2、类就有原型，不论内置or自定义。通过修改内置类原型，让js基本对象有趣的功能：array–each,map等</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、除了扩展，还可以重写"><span class="nav-text">3、除了扩展，还可以重写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、js中包括内置类和自定义类，所有类的祖先-都是Object。如果相对所有对象都扩展，可修改Object类的原型实现"><span class="nav-text">4、js中包括内置类和自定义类，所有类的祖先 都是Object。如果相对所有对象都扩展，可修改Object类的原型实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、修改内置类的原型—方便，但有人排斥—-污染，多人合作对他人造成影响，修改了游戏规则。改进myArray-自定义类，将内置类的实例做为参数传给构造函数；"><span class="nav-text">5、修改内置类的原型—方便，但有人排斥—-污染，多人合作对他人造成影响，修改了游戏规则。改进myArray:自定义类，将内置类的实例做为参数传给构造函数；</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-标签的自定义属性"><span class="nav-text">5.2 标签的自定义属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、获取定义在html标签属性：1、DOM节点对象的getAttribute方法；2、DOM节点对象的属性"><span class="nav-text">1、获取定义在html标签属性：1、DOM节点对象的getAttribute方法；2、DOM节点对象的属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、相反在js中定义的属性，也可以映射到html标签中"><span class="nav-text">2、相反在js中定义的属性，也可以映射到html标签中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、除了常规属性，还有自定义属性。Firefox无法node-XXXX-只能-node-getAttribute-“XXX”"><span class="nav-text">3、除了常规属性，还有自定义属性。Firefox无法node.XXXX,只能 node.getAttribute(“XXX”)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-标签的内联事件和event对象"><span class="nav-text">5.3 标签的内联事件和event对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、"><span class="nav-text">1、</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、换成内联呢"><span class="nav-text">2、换成内联呢</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、内联中，arguments-0-在ff下可以访问到event对象"><span class="nav-text">3、内联中，arguments[0],在ff下可以访问到event对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、不使用标签内联事件时，可以给处理函数传参，指定argumens-0-参数名"><span class="nav-text">4、不使用标签内联事件时，可以给处理函数传参，指定argumens[0]参数名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、标签内联事件中，没办法指定参数名，没法直接写变量在ie，ff下兼容event对象了吗？"><span class="nav-text">5、标签内联事件中，没办法指定参数名，没法直接写变量在ie，ff下兼容event对象了吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、标签内联事件中，甚至可以写注释，使用字符串"><span class="nav-text">6、标签内联事件中，甚至可以写注释，使用字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、既用了标签内联事件，又用了DomNode-onXXX"><span class="nav-text">7、既用了标签内联事件，又用了DomNode.onXXX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、attachEvent-addEventListener"><span class="nav-text">8、attachEvent  addEventListener</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-利用事件冒泡机制"><span class="nav-text">5.4 利用事件冒泡机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-改变DOM样式的三种方式"><span class="nav-text">5.5 改变DOM样式的三种方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、简单直接node-style-color-”red”"><span class="nav-text">1、简单直接node.style.color=”red”;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、node-className-”testStyle”"><span class="nav-text">2、node.className=”testStyle”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、"><span class="nav-text">3、</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录A-写在规则前面的话"><span class="nav-text">附录A 写在规则前面的话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录B-命名规则"><span class="nav-text">附录B 命名规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录C-分工安排"><span class="nav-text">附录C 分工安排</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录D-注释规则"><span class="nav-text">附录D 注释规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录E-HTML规范"><span class="nav-text">附录E HTML规范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录F-CSS规范"><span class="nav-text">附录F CSS规范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#附录G-Javascript规范"><span class="nav-text">附录G Javascript规范</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">408.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

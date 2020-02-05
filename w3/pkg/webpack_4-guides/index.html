@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="webpack,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="cc and abstract.https://doc.webpack-china.org/guides/development/ 2018.1.25 星期四 14:42">
+<meta name="keywords" content="webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Webpack_4-Guides">
+<meta property="og:url" content="http://yoursite.com/w3/pkg/webpack_4-guides/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="cc and abstract.https://doc.webpack-china.org/guides/development/ 2018.1.25 星期四 14:42">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.451Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Webpack_4-Guides">
+<meta name="twitter:description" content="cc and abstract.https://doc.webpack-china.org/guides/development/ 2018.1.25 星期四 14:42">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/w3/pkg/webpack_4-guides/">
+
+
+
+
+
+  <title>Webpack_4-Guides | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/w3/pkg/webpack_4-guides/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Webpack_4-Guides</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-25T08:00:00+08:00">
+                2018-01-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+          
+          
+
+          
+          
+             <span id="/w3/pkg/webpack_4-guides/" class="leancloud_visitors" data-flag-title="Webpack_4-Guides">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,755
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  22
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- # 指南 -->
+<p>cc and abstract.<br><a href="https://doc.webpack-china.org/guides/development/" target="_blank" rel="noopener">https://doc.webpack-china.org/guides/development/</a></p>
+<p style="text-align:right">2018.1.25 星期四 14:42 </p>
+
+<a id="more"></a>
+<h2 id="一-安装"><a href="#一-安装" class="headerlink" title="一 安装"></a>一 安装</h2><h3 id="1-1-前提条件"><a href="#1-1-前提条件" class="headerlink" title="1.1 前提条件"></a>1.1 前提条件</h3><h3 id="1-2-本地安装"><a href="#1-2-本地安装" class="headerlink" title="1.2 本地安装"></a>1.2 本地安装</h3><h3 id="1-3-全局安装"><a href="#1-3-全局安装" class="headerlink" title="1.3 全局安装"></a>1.3 全局安装</h3><h3 id="1-4-最新体验版本"><a href="#1-4-最新体验版本" class="headerlink" title="1.4 最新体验版本"></a>1.4 最新体验版本</h3><h2 id="二-起步"><a href="#二-起步" class="headerlink" title="二 起步"></a>二 起步</h2><h3 id="2-1-基本安装"><a href="#2-1-基本安装" class="headerlink" title="2.1 基本安装"></a>2.1 基本安装</h3><h3 id="2-2-创建一个bundle文件"><a href="#2-2-创建一个bundle文件" class="headerlink" title="2.2 创建一个bundle文件"></a>2.2 创建一个bundle文件</h3><h3 id="2-3-模块"><a href="#2-3-模块" class="headerlink" title="2.3 模块"></a>2.3 模块</h3><h3 id="2-4-使用一个配置文件"><a href="#2-4-使用一个配置文件" class="headerlink" title="2.4 使用一个配置文件"></a>2.4 使用一个配置文件</h3><h3 id="2-5-NPM脚本"><a href="#2-5-NPM脚本" class="headerlink" title="2.5 NPM脚本"></a>2.5 NPM脚本</h3><h3 id="2-6-结论"><a href="#2-6-结论" class="headerlink" title="2.6 结论"></a>2.6 结论</h3><h2 id="三-管理资源"><a href="#三-管理资源" class="headerlink" title="三 管理资源"></a>三 管理资源</h2><h3 id="3-1-安装"><a href="#3-1-安装" class="headerlink" title="3.1 安装"></a>3.1 安装</h3><h3 id="3-2-加载CSS"><a href="#3-2-加载CSS" class="headerlink" title="3.2 加载CSS"></a>3.2 加载CSS</h3><h3 id="3-3-加载字体"><a href="#3-3-加载字体" class="headerlink" title="3.3 加载字体"></a>3.3 加载字体</h3><h3 id="3-4-加载数据"><a href="#3-4-加载数据" class="headerlink" title="3.4 加载数据"></a>3.4 加载数据</h3><h3 id="3-5-全局资源"><a href="#3-5-全局资源" class="headerlink" title="3.5 全局资源"></a>3.5 全局资源</h3><h3 id="3-6-回退处理"><a href="#3-6-回退处理" class="headerlink" title="3.6 回退处理"></a>3.6 回退处理</h3><h3 id="3-7-下一章节指南"><a href="#3-7-下一章节指南" class="headerlink" title="3.7 下一章节指南"></a>3.7 下一章节指南</h3><h3 id="3-8-延伸阅读"><a href="#3-8-延伸阅读" class="headerlink" title="3.8 延伸阅读"></a>3.8 延伸阅读</h3><h2 id="四-管理输出"><a href="#四-管理输出" class="headerlink" title="四 管理输出"></a>四 管理输出</h2><h3 id="4-1-预先准备"><a href="#4-1-预先准备" class="headerlink" title="4.1 预先准备"></a>4.1 预先准备</h3><h3 id="4-2-设定HtmlWebpackPlugin"><a href="#4-2-设定HtmlWebpackPlugin" class="headerlink" title="4.2 设定HtmlWebpackPlugin"></a>4.2 设定HtmlWebpackPlugin</h3><h3 id="4-3-清理-dist文件夹"><a href="#4-3-清理-dist文件夹" class="headerlink" title="4.3 清理/dist文件夹"></a>4.3 清理/dist文件夹</h3><h3 id="4-4-Manifest"><a href="#4-4-Manifest" class="headerlink" title="4.4 Manifest"></a>4.4 Manifest</h3><h3 id="4-5-结论"><a href="#4-5-结论" class="headerlink" title="4.5 结论"></a>4.5 结论</h3><h4 id="1"><a href="#1" class="headerlink" title="1"></a>1</h4><h4 id="2"><a href="#2" class="headerlink" title="2"></a>2</h4><h4 id="3"><a href="#3" class="headerlink" title="3"></a>3</h4><h4 id="4"><a href="#4" class="headerlink" title="4"></a>4</h4><h4 id="5"><a href="#5" class="headerlink" title="5"></a>5</h4><p>#### </p>
+<h2 id="五-开发"><a href="#五-开发" class="headerlink" title="五 开发"></a>五 开发</h2><h3 id="5-1-使用source-map"><a href="#5-1-使用source-map" class="headerlink" title="5.1 使用source map"></a>5.1 使用source map</h3><h3 id="5-2-选择一个开发工具"><a href="#5-2-选择一个开发工具" class="headerlink" title="5.2 选择一个开发工具"></a>5.2 选择一个开发工具</h3><h3 id="5-3-使用观察模式"><a href="#5-3-使用观察模式" class="headerlink" title="5.3 使用观察模式"></a>5.3 使用观察模式</h3><h3 id="5-4-使用-webpack-dev-server"><a href="#5-4-使用-webpack-dev-server" class="headerlink" title="5.4 使用 webpack-dev-server"></a>5.4 使用 webpack-dev-server</h3><h3 id="5-5-使用-Webpack-dev-middleware"><a href="#5-5-使用-Webpack-dev-middleware" class="headerlink" title="5.5 使用 Webpack-dev-middleware"></a>5.5 使用 Webpack-dev-middleware</h3><h3 id="5-6-调整文本编辑器"><a href="#5-6-调整文本编辑器" class="headerlink" title="5.6 调整文本编辑器"></a>5.6 调整文本编辑器</h3><h3 id="5-7-结论"><a href="#5-7-结论" class="headerlink" title="5.7 结论"></a>5.7 结论</h3><h2 id="六-模块热替换"><a href="#六-模块热替换" class="headerlink" title="六 模块热替换"></a>六 模块热替换</h2><h3 id="6-1-启用-HMR"><a href="#6-1-启用-HMR" class="headerlink" title="6.1 启用 HMR"></a>6.1 启用 HMR</h3><h3 id="6-2-通过Node-js-API"><a href="#6-2-通过Node-js-API" class="headerlink" title="6.2 通过Node.js API"></a>6.2 通过Node.js API</h3><h3 id="6-3-问题"><a href="#6-3-问题" class="headerlink" title="6.3 问题"></a>6.3 问题</h3><h3 id="6-4-HMR-修改样式表"><a href="#6-4-HMR-修改样式表" class="headerlink" title="6.4 HMR 修改样式表"></a>6.4 HMR 修改样式表</h3><h3 id="6-5-其他代码和框架"><a href="#6-5-其他代码和框架" class="headerlink" title="6.5 其他代码和框架"></a>6.5 其他代码和框架</h3><h2 id="七-Tree-Shaking"><a href="#七-Tree-Shaking" class="headerlink" title="七 Tree Shaking"></a>七 Tree Shaking</h2><p>tree shaking 是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)。它依赖于 ES2015 模块系统中的静态结构特性，例如 import 和 export。这个术语和概念实际上是兴起于 ES2015 模块打包工具 rollup。</p>
+<p>webpack 2 内置支持 ES2015 模块（别名 harmony modules），并能检测出未使用的模块导出。</p>
+<h3 id="7-1-添加一个通用模块"><a href="#7-1-添加一个通用模块" class="headerlink" title="7.1 添加一个通用模块"></a>7.1 添加一个通用模块</h3><p>注意，上面的 unused harmony export square 注释。如果你看下面的代码，你会注意到 square 没有被导出，但是，它仍然被包含在 bundle 中。我们将在下一节中解决这个问题。</p>
+<h3 id="7-2-精简输出"><a href="#7-2-精简输出" class="headerlink" title="7.2 精简输出"></a>7.2 精简输出</h3><p>UglifyJSPlugin</p>
+<p>显然，现在整个 bundle 都已经被精简过，但是如果仔细观察，则不会看到 square 函数被引入，但会看到 cube 函数的修改版本（function r(e){return e<em>e</em>e}n.a=r）</p>
+<h3 id="7-3-警告"><a href="#7-3-警告" class="headerlink" title="7.3 警告"></a>7.3 警告</h3><p>请注意，webpack 本身并不会执行 tree-shaking。它需要依赖于像 UglifyJS 这样的第三方工具来执行实际的未引用代码(dead code)删除工作。有些情况下，tree-shaking 可能不会生效。例如，考虑以下模块：<br>。。<br>一般来说，当一个工具不能保证某些特定的代码路径(path)不会导致副作用(side-effects)时，即使你确信它不应该存在生成的 bundle 中，但这个代码仍然会保留。常见的情况有：从第三方模块中调用一个函数，webpack 和/或 压缩工具(minifier)无法检查此模块；从第三方模块导入的函数被重新导出，等等。</p>
+<h3 id="7-4-结论"><a href="#7-4-结论" class="headerlink" title="7.4 结论"></a>7.4 结论</h3><p>为了学会使用 tree shaking，你必须……</p>
+<ul>
+<li>使用 ES2015 模块语法（即 import 和 export）。</li>
+<li>引入一个能够删除未引用代码(dead code)的压缩工具(minifier)（例如 UglifyJSPlugin）。</li>
+</ul>
+<h2 id="八-生产环境构建"><a href="#八-生产环境构建" class="headerlink" title="八 生产环境构建"></a>八 生产环境构建</h2><h3 id="8-1-配置"><a href="#8-1-配置" class="headerlink" title="8.1 配置"></a>8.1 配置</h3><p>开发环境(development)和生产环境(production)的构建目标差异很大。<strong>在开发环境中，我们需要具有强大的、具有实时重新加载(live reloading)或热模块替换(hot module replacement)能力的 source map 和 localhost server</strong>。而<strong>在生产环境中，我们的目标则转向于关注更小的 bundle，更轻量的 source map，以及更优化的资源，以改善加载时间</strong>。由于要遵循逻辑分离，我们通常建议为每个环境编写彼此独立的 webpack 配置。</p>
+<h3 id="8-2-NPM-Script"><a href="#8-2-NPM-Script" class="headerlink" title="8.2 NPM Script"></a>8.2 NPM Script</h3><h3 id="8-3-Minification"><a href="#8-3-Minification" class="headerlink" title="8.3 Minification"></a>8.3 Minification</h3><p>注意，虽然 UglifyJSPlugin 是代码压缩方面比较好的选择，但是还有一些其他可选择项。以下有几个同样很受欢迎的插件：</p>
+<h3 id="8-4-source-map"><a href="#8-4-source-map" class="headerlink" title="8.4 source map"></a>8.4 source map</h3><p>我们鼓励你在<strong>生产环境中启用 source map，因为它们对调试源码(debug)和运行基准测试(benchmark tests)很有帮助</strong>。虽然有如此强大的功能，然而还是应该针对生成环境用途，选择一个构建快速的推荐配置（具体细节请查看 devtool）。对于本指南，我们将在生产环境中使用 source-map 选项，而不是我们在<strong>开发环境中用到的inline-source-map</strong>：</p>
+<blockquote>
+<p>避免在生产中使用 inline-<strong><em> 和 eval-</em></strong>，因为它们可以增加 bundle 大小，并降低整体性能。</p>
+</blockquote>
+<h3 id="8-5-指定环境"><a href="#8-5-指定环境" class="headerlink" title="8.5 指定环境"></a>8.5 指定环境</h3><p>许多 library 将通过与 process.env.NODE_ENV 环境变量关联，以决定 library 中应该引用哪些内容。例如，当不处于生产环境中时，某些 library 为了使调试变得容易，可能会添加额外的日志记录(log)和测试(test)。其实，当使用 process.env.NODE_ENV === ‘production’ 时，一些 library 可能针对具体用户的环境进行代码优化，从而删除或添加一些重要代码。我们可以使用 webpack 内置的 DefinePlugin 为所有的依赖定义这个变量：</p>
+<p>如果你正在使用像 react 这样的 library，那么在添加此 DefinePlugin 插件后，你应该看到 bundle 大小显著下降。还要注意，任何位于 /src 的本地代码都可以关联到 process.env.NODE_ENV 环境变量，所以以下检查也是有效的：</p>
+<pre><code>import { cube } from &apos;./math.js&apos;;
+if (process.env.NODE_ENV !== &apos;production&apos;) {
+    console.log(&apos;Looks like we are in development mode!&apos;);
+}
+</code></pre><h3 id="8-6-Split-CSS"><a href="#8-6-Split-CSS" class="headerlink" title="8.6 Split CSS"></a>8.6 Split CSS</h3><h3 id="8-7-CLI-替代选项"><a href="#8-7-CLI-替代选项" class="headerlink" title="8.7 CLI 替代选项"></a>8.7 CLI 替代选项</h3><h2 id="九-代码分离"><a href="#九-代码分离" class="headerlink" title="九 代码分离"></a>九 代码分离</h2><p>代码分离是 webpack 中最引人注目的特性之一。<strong>此特性能够把代码分离到不同的 bundle 中，然后可以按需加载或并行加载这些文件。代码分离可以用于获取更小的 bundle，以及控制资源加载优先级，如果使用合理，会极大影响加载时间</strong>。</p>
+<p>有三种常用的代码分离方法：</p>
+<ul>
+<li>入口起点：使用 entry 配置手动地分离代码。</li>
+<li>防止重复：使用 CommonsChunkPlugin 去重和分离 chunk。</li>
+<li>动态导入：通过模块的内联函数调用来分离代码。<h3 id="9-1-入口起点"><a href="#9-1-入口起点" class="headerlink" title="9.1 入口起点"></a>9.1 入口起点</h3>正如前面提到的，这种方法存在一些问题:</li>
+</ul>
+<ol>
+<li>如果入口 chunks 之间包含重复的模块，那些重复模块都会被引入到各个 bundle 中。</li>
+<li>这种方法不够灵活，并且不能将核心应用程序逻辑进行动态拆分代码。<br>以上两点中，第一点对我们的示例来说无疑是个问题，因为之前我们在 ./src/index.js 中也引入过 lodash，这样就在两个 bundle 中造成重复引用。接着，我们通过使用 CommonsChunkPlugin 来移除重复的模块。<h3 id="9-2-防止重复"><a href="#9-2-防止重复" class="headerlink" title="9.2 防止重复"></a>9.2 防止重复</h3>CommonsChunkPlugin 插件可以将公共的依赖模块提取到已有的入口 chunk 中，或者提取到一个新生成的 chunk。让我们使用这个插件，将之前的示例中重复的 lodash 模块去除:</li>
+</ol>
+<p>这里我们使用 CommonsChunkPlugin 之后，现在应该可以看出，index.bundle.js 中已经移除了重复的依赖模块。需要注意的是，CommonsChunkPlugin 插件将 lodash 分离到单独的 chunk，并且将其从 main bundle 中移除，减轻了大小。执行 npm run build 查看效果：</p>
+<p>以下是由社区提供的，一些对于代码分离很有帮助的插件和 loaders：</p>
+<ul>
+<li>ExtractTextPlugin: 用于将 CSS 从主应用程序中分离。</li>
+<li>bundle-loader: 用于分离代码和延迟加载生成的 bundle。</li>
+<li>promise-loader: 类似于 bundle-loader ，但是使用的是 promises。</li>
+<li>CommonsChunkPlugin 插件还可以通过使用显式的 vendor chunks 功能，从应用程序代码中分离 vendor 模块。<h3 id="9-3-动态导入"><a href="#9-3-动态导入" class="headerlink" title="9.3 动态导入"></a>9.3 动态导入</h3>$_MORE:和ES import，async有关<h3 id="9-4-bundle分析"><a href="#9-4-bundle分析" class="headerlink" title="9.4 bundle分析"></a>9.4 bundle分析</h3><h3 id="9-5-下一步"><a href="#9-5-下一步" class="headerlink" title="9.5 下一步"></a>9.5 下一步</h3></li>
+</ul>
+<h2 id="零-懒加载"><a href="#零-懒加载" class="headerlink" title="零 懒加载"></a>零 懒加载</h2><p>实际上是先把你的代码在一些逻辑断点处分离开，然后在一些代码块中完成某些操作后，立即引用或即将引用另外一些新的代码块</p>
+<h3 id="0-1-示例"><a href="#0-1-示例" class="headerlink" title="0.1 示例"></a>0.1 示例</h3><pre><code>button.onclick = e =&gt; import(/* webpackChunkName: &quot;print&quot; */ &apos;./print&apos;).then(module =&gt; {
+    var print = module.default;
+    print();
+});
+</code></pre><blockquote>
+<p>注意当调用 ES6 模块的 import() 方法（引入模块）时，必须指向模块的 .default 值，因为它才是 promise 被处理后返回的实际的 module 对象。</p>
+</blockquote>
+<h3 id="0-2-框架"><a href="#0-2-框架" class="headerlink" title="0.2 框架"></a>0.2 框架</h3><p>许多框架和类库对于如何用它们自己的方式来实现（懒加载）都有自己的建议。这里有一些例子：</p>
+<ul>
+<li>React: Code Splitting and Lazy Loading<br>*Vue: Lazy Load in Vue using Webpack’s code splitting</li>
+</ul>
+<h2 id="一-缓存"><a href="#一-缓存" class="headerlink" title="一 缓存"></a>一 缓存</h2><h3 id="1-1-输出文件的文件名"><a href="#1-1-输出文件的文件名" class="headerlink" title="1.1 输出文件的文件名"></a>1.1 输出文件的文件名</h3><p>可以看到，bundle 的名称是它内容（通过 hash）的映射。如果我们不做修改，然后再次运行构建，我们的文件名按照期望，依然保持不变。然而，如果我们再次运行，可能会发现情况并非如此：</p>
+<p>这也是因为 webpack 在入口 chunk 中，包含了某些样板(boilerplate)，特别是 runtime 和 manifest。（译注：样板(boilerplate)指 webpack 运行时的引导代码）</p>
+<h3 id="1-2-提取模板"><a href="#1-2-提取模板" class="headerlink" title="1.2 提取模板"></a>1.2 提取模板</h3><p>就像我们之前从代码分离了解到的，CommonsChunkPlugin 可以用于将模块分离到单独的文件中。然而 <strong>CommonsChunkPlugin 有一个较少有人知道的功能是，能够在每次修改后的构建结果中，将 webpack 的样板(boilerplate)和 manifest 提取出来。通过指定 entry 配置中未用到的名称</strong>，此插件会自动将我们需要的内容提取到单独的包中：</p>
+<pre><code>const path = require(&apos;path&apos;);
+const webpack = require(&apos;webpack&apos;);
+const CleanWebpackPlugin = require(&apos;clean-webpack-plugin&apos;);
+const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);
+
+module.exports = {
+    entry: &apos;./src/index.js&apos;,
+    plugins: [
+        new CleanWebpackPlugin([&apos;dist&apos;]),
+        new HtmlWebpackPlugin({
+            title: &apos;Caching&apos;
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: &apos;vender&apos;
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: &apos;manifest&apos;
+        })
+    ],
+    output: {
+        filename: &apos;[name].[chunkhash].js&apos;,
+        path: path.resolve(__dirname, &apos;dist&apos;)
+    }
+};
+</code></pre><p>将第三方库(library)（例如 lodash 或 react）提取到单独的 vendor chunk 文件中，是比较推荐的做法，这是因为，它们很少像本地的源代码那样频繁修改。因此通过实现以上步骤，利用客户端的长效缓存机制，可以通过命中缓存来消除请求，并减少向服务器获取资源，同时还能保证客户端代码和服务器端代码版本一致。<strong>这可以通过使用新的 entry(入口) 起点，以及再额外配置一个 CommonsChunkPlugin 实例的组合方式来实现</strong>：    </p>
+<blockquote>
+<p>注意，引入顺序在这里很重要。CommonsChunkPlugin 的 ‘vendor’ 实例，必须在 ‘manifest’ 实例之前引入。</p>
+</blockquote>
+<h3 id="1-3-模块标识符"><a href="#1-3-模块标识符" class="headerlink" title="1.3 模块标识符"></a>1.3 模块标识符</h3><p>再次运行构建，然后我们期望的是，只有 main bundle 的 hash 发生变化，然而……</p>
+<p>……我们可以看到这三个文件的 hash 都变化了。这是因为每个 module.id 会基于默认的解析顺序(resolve order)进行增量。也就是说，当解析顺序发生变化，ID 也会随之改变。因此，简要概括：</p>
+<ul>
+<li>main bundle 会随着自身的新增内容的修改，而发生变化。</li>
+<li>vendor bundle 会随着自身的 module.id 的修改，而发生变化。</li>
+<li>manifest bundle 会因为当前包含一个新模块的引用，而发生变化。<br>第一个和最后一个都是符合预期的行为 – 而 vendor 的 hash 发生变化是我们要修复的。幸运的是，可以使用两个插件来解决这个问题。第一个插件是 NamedModulesPlugin，将使用模块的路径，而不是数字标识符。虽然此插件有助于在开发过程中输出结果的可读性，然而执行时间会长一些。第二个选择是使用 HashedModuleIdsPlugin，推荐用于生产环境构建：<h3 id="1-4-结论"><a href="#1-4-结论" class="headerlink" title="1.4 结论"></a>1.4 结论</h3><h3 id="1-5-译注"><a href="#1-5-译注" class="headerlink" title="1.5 译注"></a>1.5 译注</h3></li>
+</ul>
+<h2 id="二-创建Library"><a href="#二-创建Library" class="headerlink" title="二 创建Library"></a>二 创建Library</h2><h3 id="2-1-创建一个library"><a href="#2-1-创建一个library" class="headerlink" title="2.1 创建一个library"></a>2.1 创建一个library</h3><h3 id="2-2-基本配置"><a href="#2-2-基本配置" class="headerlink" title="2.2 基本配置"></a>2.2 基本配置</h3><h3 id="2-3-外部化lodash"><a href="#2-3-外部化lodash" class="headerlink" title="2.3 外部化lodash"></a>2.3 外部化lodash</h3><h3 id="2-4-外部扩展的限制"><a href="#2-4-外部扩展的限制" class="headerlink" title="2.4 外部扩展的限制"></a>2.4 外部扩展的限制</h3><h3 id="2-5-暴露library"><a href="#2-5-暴露library" class="headerlink" title="2.5 暴露library"></a>2.5 暴露library</h3><h3 id="2-6-最终步骤"><a href="#2-6-最终步骤" class="headerlink" title="2.6 最终步骤"></a>2.6 最终步骤</h3><p>$_EXCLUDE:没有创建库，所以无法配置；目前不创建库</p>
+<h2 id="三-Shimming"><a href="#三-Shimming" class="headerlink" title="三 Shimming"></a>三 Shimming</h2><p style="text-align:right">2018.2.9 星期五 18:30</p>
+
+<p>webpack 编译器(compiler)能够识别遵循 ES2015 模块语法、CommonJS 或 AMD 规范编写的模块。<strong>然而，一些第三方的库(library)可能会引用一些全局依赖（例如 jQuery 中的 $）。这些库也可能创建一些需要被导出的全局变量</strong>。这些“不符合规范的模块”就是 shimming 发挥作用的地方。</p>
+<blockquote>
+<p>我们不推荐使用全局的东西！在 webpack 背后的整个概念是让前端开发更加模块化。也就是说，需要编写具有良好的封闭性(well contained)、彼此隔离的模块，以及不要依赖于那些隐含的依赖模块（例如，全局变量）。请只在必要的时候才使用本文所述的这些特性。</p>
+</blockquote>
+<p><strong>shimming 另外一个使用场景就是，当你希望 polyfill 浏览器功能以支持更多用户时</strong>。在这种情况下，你可能只想要将这些 polyfills 提供给到需要修补(patch)的浏览器（也就是实现按需加载）。</p>
+<p>下面的文章将向我们展示这两种用例。</p>
+<h3 id="3-1-shimming全局变量"><a href="#3-1-shimming全局变量" class="headerlink" title="3.1 shimming全局变量"></a>3.1 shimming全局变量</h3><pre><code>plugins: [
+ new webpack.ProvidePlugin({
+    _: &apos;lodash&apos;,
+    join: [&apos;lodash&apos;, &apos;join&apos;]
+ })
+</code></pre><p>   ]<br>我们还可以使用 ProvidePlugin 暴露某个模块中单个导出值，只需通过一个“数组路径”进行配置   </p>
+<h3 id="3-2-细粒度shimming"><a href="#3-2-细粒度shimming" class="headerlink" title="3.2 细粒度shimming"></a>3.2 细粒度shimming</h3><p>一些传统的模块依赖的 this 指向的是 window 对象<br>    module: {<br>         rules: [<br>           {<br>             test: require.resolve(‘index.js’),<br>             use: ‘imports-loader?this=&gt;window’<br>           }<br>         ]<br>    },<br><strong>$_PS:</strong> shimming的第一种情况。如，bootstrap需要jQuey，也是这种方式    </p>
+<h3 id="3-3-全局exports"><a href="#3-3-全局exports" class="headerlink" title="3.3 全局exports"></a>3.3 全局exports</h3><p>你可能从来没有在自己的源码中做过这些事情，<strong>但是你也许遇到过一个老旧的库(library)，和上面所展示的代码类似。在这个用例中，我们可以使用 exports-loader，将一个全局变量作为一个普通的模块来导出</strong>。例如，为了将 file 导出为 file 以及将 helpers.parse 导出为 parse，做如下调整：</p>
+<pre><code>module: {
+     rules: [
+       {
+            test: require.resolve(&apos;globals.js&apos;),
+            use: &apos;exports-loader?file,parse=helpers.parse&apos;
+       }
+     ]
+},
+</code></pre><p><strong>$_PS:</strong> 还是第一种情况。比如jQuery1.11.3，或者其他老旧库，将一个全局变量作为一个普通的模块来导出    </p>
+<h3 id="3-4-加载polyfills"><a href="#3-4-加载polyfills" class="headerlink" title="3.4 加载polyfills"></a>3.4 加载polyfills</h3><p>有很多方法来载入 polyfills。例如，要引入 babel-polyfill 我们只需要如下操作：</p>
+<pre><code>npm install --save babel-polyfill
+</code></pre><p>然后使用 import 将其添加到我们的主 bundle 文件：</p>
+<blockquote>
+<p>请注意，我们没有将 import 绑定到变量。这是因为只需在基础代码(code base)之外，再额外执行 polyfills，这样我们就可以假定代码中已经具有某些原生功能。</p>
+</blockquote>
+<p>polyfills 虽然是一种模块引入方式，<strong>但是并不推荐在主 bundle 中引入 polyfills</strong>，因为这不利于具备这些模块功能的现代浏览器用户，会使他们下载体积很大、但却不需要的脚本文件。</p>
+<p>让我们把 import 放入一个新文件，并加入 whatwg-fetch polyfill：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> modernBrowser = (</span></span><br><span class="line"><span class="javascript">        <span class="string">'fetch'</span> <span class="keyword">in</span> <span class="built_in">window</span> &amp;&amp;</span></span><br><span class="line"><span class="javascript">        <span class="string">'assign'</span> <span class="keyword">in</span> <span class="built_in">Object</span></span></span><br><span class="line">    );</span><br><span class="line">    if ( !modernBrowser ) &#123;</span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> scriptElement = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">        scriptElement.async = <span class="literal">false</span>;</span></span><br><span class="line"><span class="actionscript">        scriptElement.src = <span class="string">'/polyfills.bundle.js'</span>;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.head.appendChild(scriptElement);</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="3-5-深度优化"><a href="#3-5-深度优化" class="headerlink" title="3.5 深度优化"></a>3.5 深度优化</h3><p>babel-preset-env package 使用 browserslist 来转译那些你浏览器中不支持的特性。这里预设了 useBuiltIns 选项，默认值是 false，<strong>能将你的全局 babel-polyfill 导入方式，改进为更细粒度的 import 格式</strong>：</p>
+<pre><code>import &apos;core-js/modules/es7.string.pad-start&apos;;
+import &apos;core-js/modules/es7.string.pad-end&apos;;
+import &apos;core-js/modules/web.timers&apos;;
+import &apos;core-js/modules/web.immediate&apos;;
+import &apos;core-js/modules/web.dom.iterable&apos;;
+</code></pre><p><strong>$_PS:</strong> 开发库的时候使用。项目中还有一些API需要调用，自定义的对象，全局对象的API就不可以使用了<code>Array.prototype.forEach</code>。开发中用上面babel-loader,  useBuiltIns 设为true </p>
+<h3 id="3-6-Node内置"><a href="#3-6-Node内置" class="headerlink" title="3.6 Node内置"></a>3.6 Node内置</h3><p>像 process 这种 Node 内置模块，能直接根据配置文件(configuration file)进行正确的 polyfills，且不需要任何特定的 loaders 或者 plugins。查看 node 配置页面获取更多信息。</p>
+<h3 id="3-7-其他工具"><a href="#3-7-其他工具" class="headerlink" title="3.7 其他工具"></a>3.7 其他工具</h3><p>还有一些其他的工具能够帮助我们处理这些老旧的模块。</p>
+<ol>
+<li>script-loader 会在全局上下文中对代码进行取值，类似于通过一个 script 标签引入脚本。在这种模式下，每一个标准的库(library)都应该能正常运行。require, module 等的取值是 undefined。<blockquote>
+<p>当使用 script-loader 时，模块将转化为字符串，然后添加到 bundle 中。它不会被 webpack 压缩，所以你应该选择一个 min 版本。同时，使用此 loader 将不会有 devtool 的支持。</p>
+</blockquote>
+</li>
+<li><p>这些老旧的模块如果没有 AMD/CommonJS 规范版本，<strong>但你也想将他们加入 dist 文件，你可以使用 noParse 来标识出这个模块。这样就能使 webpack 将引入这些模块，但是不进行转化(parse)，以及不解析(resolve) require() 和 import 语句。这个实践将提升构建性能</strong>。</p>
+<blockquote>
+<p>例如 ProvidePlugin，任何需要 AST 的功能，都无法正常运行。  </p>
+</blockquote>
+</li>
+<li><p>最后，有一些模块支持不同的模块格式，比如 AMD 规范、CommonJS 规范和遗留模块(legacy)。在大多数情况下，他们首先检查define，然后使用一些古怪的代码来导出一些属性。在这些情况下，可以通过imports-loader设置 define=&gt;false 来强制 CommonJS 路径。<br><strong>$_PS:</strong> 什么鬼，imports-loader之前不是用了吗</p>
+</li>
+</ol>
+<blockquote>
+<p>译者注：shim 是一个库(library)，它将一个新的 API 引入到一个旧的环境中，而且仅靠旧的环境中已有的手段实现。polyfill 就是一个用在浏览器 API 上的 shim。我们通常的做法是先检查当前浏览器是否支持某个 API，如果不支持的话就加载对应的 polyfill。然后新旧浏览器就都可以使用这个 API 了。</p>
+</blockquote>
+<p><strong>$__PS:</strong> 下面这些plugin,loader,configuration 不是一个概念，注意使用</p>
+<ol>
+<li>ProvidePlugin：把模块作为应用程序中的一个全局变量。</li>
+<li>imports-loader: 模块需要某个依赖时使用，比如this指向window，bootstrap需要jQuery</li>
+<li>exports-loader：将一个全局变量作为一个普通的模块来导出,需要import</li>
+<li>expose-loader: 暴露一个全局变量，不需要import。注意和ProvidePlugin的区别:？？ProvidePlugin可以暴露jQuery1.11.3的全局变量吗<blockquote>
+<p>The expose loader adds modules to the global object. This is useful for debugging, or supporting libraries that depend on libraries in globals.</p>
+</blockquote>
+</li>
+<li>script-loader：估计和expose差不多</li>
+<li>noParse:expose,script，还有exports的模块应该可以用module.noParse配置<blockquote>
+<p>noParse:防止 webpack 解析那些任何与给定正则表达式相匹配的文件。忽略的文件中不应该含有 import, require, define 的调用，或任何其他导入机制。忽略大型的 library 可以提高构建性能。</p>
+</blockquote>
+</li>
+<li><p>module.externals :有人说不符合webpack模块管理了？？</p>
+<blockquote>
+<p>防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖(external dependencies)。<br>例如，从 CDN 引入 jQuery，而不是把它打包：</p>
+</blockquote>
+</li>
+<li><p>DllPlugin：？？如果不用externals排除，用该方法剥离不经常改动的第三方依赖</p>
+<blockquote>
+<p>使用 DllPlugin 将更改不频繁的代码进行单独编译。这将改善引用程序的编译速度，即使它增加了构建过程的复杂性。<br>DLLPlugin 和 DLLReferencePlugin 用某种方法实现了拆分 bundles，同时还大大提升了构建的速度。</p>
+</blockquote>
+</li>
+<li>CommonsChunkPlugin：提取公共子模块，提供缓存。属于代码分离–防止重复。公共模块提出来，利用缓存，没有修改的部分，hashID不会更改<blockquote>
+<p>CommonsChunkPlugin，是一个可选的用于建立一个独立文件(又称作 chunk)的功能，这个文件包括多个入口 chunk 的公共模块。通过将公共模块拆出来，最终合成的文件能够在最开始的时候加载一次，便存起来到缓存中供后续使用。这个带来速度上的提升，因为浏览器会迅速将公共的代码从缓存中取出来，而不是每次访问一个新页面时，再去加载一个更大的文件。</p>
+</blockquote>
+</li>
+<li>ExtractTextPlugin:也属于代码分离，用于将 CSS 从主应用程序中分离</li>
+<li>UglifyJSPlugin:Tree Shaking–精简输出</li>
+</ol>
+<p style="text-align:right">2.9 20:46 </p>
+
+
+<h2 id="四-TypeScript"><a href="#四-TypeScript" class="headerlink" title="四 TypeScript"></a>四 TypeScript</h2><h3 id="4-1-基础安装"><a href="#4-1-基础安装" class="headerlink" title="4.1 基础安装"></a>4.1 基础安装</h3><h3 id="4-2-Loader"><a href="#4-2-Loader" class="headerlink" title="4.2 Loader"></a>4.2 Loader</h3><h3 id="4-3-source-map"><a href="#4-3-source-map" class="headerlink" title="4.3 source map"></a>4.3 source map</h3><h3 id="4-4-使用第三方库"><a href="#4-4-使用第三方库" class="headerlink" title="4.4 使用第三方库"></a>4.4 使用第三方库</h3><h3 id="4-5-导入其他资源"><a href="#4-5-导入其他资源" class="headerlink" title="4.5 导入其他资源"></a>4.5 导入其他资源</h3><h3 id="4-6-构建性能"><a href="#4-6-构建性能" class="headerlink" title="4.6 构建性能"></a>4.6 构建性能</h3><p>$_EXCLUDE:typescript语法没有用到</p>
+<h2 id="五-渐进式网络应用程序"><a href="#五-渐进式网络应用程序" class="headerlink" title="五 渐进式网络应用程序"></a>五 渐进式网络应用程序</h2><h3 id="5-1-现在我们并没有离线环境"><a href="#5-1-现在我们并没有离线环境" class="headerlink" title="5.1 现在我们并没有离线环境"></a>5.1 现在我们并没有离线环境</h3><h3 id="5-2-天津Workbox"><a href="#5-2-天津Workbox" class="headerlink" title="5.2 天津Workbox"></a>5.2 天津Workbox</h3><h3 id="5-3-注册我们的Service-Worker"><a href="#5-3-注册我们的Service-Worker" class="headerlink" title="5.3 注册我们的Service Worker"></a>5.3 注册我们的Service Worker</h3><h3 id="5-4-结论"><a href="#5-4-结论" class="headerlink" title="5.4 结论"></a>5.4 结论</h3><p>$_EXCLUDE:PWA，最后构建</p>
+<h2 id="六-迁移到新版本"><a href="#六-迁移到新版本" class="headerlink" title="六 迁移到新版本"></a>六 迁移到新版本</h2><p>$_EXCLUDE:没有迁移</p>
+<h2 id="七-使用环境变量"><a href="#七-使用环境变量" class="headerlink" title="七 使用环境变量"></a>七 使用环境变量</h2><p>$_PROBLEM:没实际实例，看不到目的，所以操作不明</p>
+<h2 id="八-构建性能"><a href="#八-构建性能" class="headerlink" title="八 构建性能"></a>八 构建性能</h2><h3 id="8-1-常规"><a href="#8-1-常规" class="headerlink" title="8.1 常规"></a>8.1 常规</h3><h4 id="1-保持版本最新"><a href="#1-保持版本最新" class="headerlink" title="1 保持版本最新"></a>1 保持版本最新</h4><h4 id="2-Loaders"><a href="#2-Loaders" class="headerlink" title="2 Loaders"></a>2 Loaders</h4><h4 id="3-Bootstrap"><a href="#3-Bootstrap" class="headerlink" title="3 Bootstrap"></a>3 Bootstrap</h4><h4 id="4-解析"><a href="#4-解析" class="headerlink" title="4 解析"></a>4 解析</h4><h4 id="5-Dlls"><a href="#5-Dlls" class="headerlink" title="5 Dlls"></a>5 Dlls</h4><h4 id="6-Samller-Faster"><a href="#6-Samller-Faster" class="headerlink" title="6 Samller = Faster"></a>6 Samller = Faster</h4><h4 id="7-Worker-Pool"><a href="#7-Worker-Pool" class="headerlink" title="7 Worker Pool"></a>7 Worker Pool</h4><h4 id="8-持久化缓存"><a href="#8-持久化缓存" class="headerlink" title="8 持久化缓存"></a>8 持久化缓存</h4><h4 id="9-自定义-plugins-loaders"><a href="#9-自定义-plugins-loaders" class="headerlink" title="9 自定义 plugins/loaders"></a>9 自定义 plugins/loaders</h4><h3 id="8-2-Development"><a href="#8-2-Development" class="headerlink" title="8.2 Development"></a>8.2 Development</h3><h4 id="1-增量编译"><a href="#1-增量编译" class="headerlink" title="1 增量编译"></a>1 增量编译</h4><h4 id="2-在内存中编译"><a href="#2-在内存中编译" class="headerlink" title="2 在内存中编译"></a>2 在内存中编译</h4><h4 id="3-Devtool"><a href="#3-Devtool" class="headerlink" title="3 Devtool"></a>3 Devtool</h4><h4 id="4-避免在生产环境下才会用"><a href="#4-避免在生产环境下才会用" class="headerlink" title="4 避免在生产环境下才会用"></a>4 避免在生产环境下才会用</h4><h4 id="5-最小化入口chunk"><a href="#5-最小化入口chunk" class="headerlink" title="5 最小化入口chunk"></a>5 最小化入口chunk</h4><h3 id="8-3-Production"><a href="#8-3-Production" class="headerlink" title="8.3 Production"></a>8.3 Production</h3><h4 id="1-多个编译时"><a href="#1-多个编译时" class="headerlink" title="1 多个编译时"></a>1 多个编译时</h4><h4 id="2-Source-Maps"><a href="#2-Source-Maps" class="headerlink" title="2 Source Maps"></a>2 Source Maps</h4><h2 id="8-4-工具相关问题"><a href="#8-4-工具相关问题" class="headerlink" title="8.4 工具相关问题"></a>8.4 工具相关问题</h2><h4 id="1-Babel"><a href="#1-Babel" class="headerlink" title="1 Babel"></a>1 Babel</h4><h4 id="2-Typescript"><a href="#2-Typescript" class="headerlink" title="2 Typescript"></a>2 Typescript</h4><h4 id="3-Sass"><a href="#3-Sass" class="headerlink" title="3 Sass"></a>3 Sass</h4><h2 id="九-开发-Vagrant"><a href="#九-开发-Vagrant" class="headerlink" title="九 开发-Vagrant"></a>九 开发-Vagrant</h2><h3 id="9-1-项目配置"><a href="#9-1-项目配置" class="headerlink" title="9.1 项目配置"></a>9.1 项目配置</h3><h3 id="9-2-启动服务器"><a href="#9-2-启动服务器" class="headerlink" title="9.2 启动服务器"></a>9.2 启动服务器</h3><h3 id="9-3-配合nginx的高级用法"><a href="#9-3-配合nginx的高级用法" class="headerlink" title="9.3 配合nginx的高级用法"></a>9.3 配合nginx的高级用法</h3><h3 id="9-4-小结"><a href="#9-4-小结" class="headerlink" title="9.4 小结"></a>9.4 小结</h3><p>$_EXCLUDE:不需要</p>
+<h2 id="零-管理依赖"><a href="#零-管理依赖" class="headerlink" title="零 管理依赖"></a>零 管理依赖</h2><h3 id="0-1-带表达式的require语句"><a href="#0-1-带表达式的require语句" class="headerlink" title="0.1 带表达式的require语句"></a>0.1 带表达式的require语句</h3><h3 id="0-2-require-context"><a href="#0-2-require-context" class="headerlink" title="0.2 require.context"></a>0.2 require.context</h3><h3 id="0-3-上下文模块"><a href="#0-3-上下文模块" class="headerlink" title="0.3 上下文模块"></a>0.3 上下文模块</h3><p>$_MORE:不明白</p>
+<h2 id="一-公共路径-Public-Path"><a href="#一-公共路径-Public-Path" class="headerlink" title="一 公共路径(Public Path)"></a>一 公共路径(Public Path)</h2><p>webpack 提供一个非常有用的配置，该配置能帮助你为项目中的所有资源指定一个基础路径。它被称为公共路径(publicPath)。</p>
+<h3 id="1-1-示例"><a href="#1-1-示例" class="headerlink" title="1.1 示例"></a>1.1 示例</h3><h4 id="1-在构建项目时设置路径值"><a href="#1-在构建项目时设置路径值" class="headerlink" title="1 在构建项目时设置路径值"></a>1 在构建项目时设置路径值</h4><p>在开发模式中，我们通常有一个 assets/ 文件夹，它往往存放在和首页一个级别的目录下。这样是挺方便；但是如果在生产环境下，你想把这些静态文件统一使用CDN加载，那该怎么办？</p>
+<p>想要解决这个问题，你可以使用有着悠久历史的环境变量。比如说，我们设置了一个名为 ASSET_PATH 的变量：</p>
+<pre><code>import webpack from &apos;webpack&apos;;
+// 如果预先定义过环境变量，就将其赋值给`ASSET_PATH`变量，否则赋值为根目录
+const ASSET_PATH = process.env.ASSET_PATH || &apos;/&apos;;
+
+export default {
+    output: {
+        publicPath: ASSET_PATH
+    },
+
+    plugins: [
+        // 该插件帮助我们安心地使用环境变量
+        new webpack.DefinePlugin({
+            &apos;process.env.ASSET_PATH&apos;: JSON.stringify(ASSET_PATH)
+        })
+    ]
+};
+</code></pre><h4 id="2-即时设定路径值"><a href="#2-即时设定路径值" class="headerlink" title="2 即时设定路径值"></a>2 即时设定路径值</h4><p>另一个可能出现的情况是，我们需要即时设置公共路径。webpack 提供一个全局变量供你设置，它名叫<code>__webpack_public_path__</code>。所以在你的项目入口，你可以简单地设置如下：</p>
+<pre><code>__webpack_public_path__ = process.env.ASSET_PATH;
+</code></pre><p>一切设置完成。因为我们已经在我们的配置项中使用了DefinePlugin， process.env.ASSET_PATH 就已经被定义了， 所以让我们能够安心地使用它了。</p>
+<p>警告：请注意，如果你在入口文件中使用 ES6 模块导入，则在导入后对 <strong>webpack_public_path</strong> 进行赋值。在这种情况下，你必须将公共路径(public path)赋值移至自己的专属模块，然后将其导入到你的 entry.js 之上：</p>
+<pre><code>// entry.js
+import &apos;./public-path&apos;;
+import &apos;./app&apos;;
+</code></pre><p>$_MORE:警告是什么意思？？</p>
+<h2 id="二-集成-Intergrations"><a href="#二-集成-Intergrations" class="headerlink" title="二 集成(Intergrations)"></a>二 集成(Intergrations)</h2><h3 id="2-1-NPM-Scripts"><a href="#2-1-NPM-Scripts" class="headerlink" title="2.1 NPM Scripts"></a>2.1 NPM Scripts</h3><h3 id="2-2-Grunt"><a href="#2-2-Grunt" class="headerlink" title="2.2 Grunt"></a>2.2 Grunt</h3><h3 id="2-3-Gulp"><a href="#2-3-Gulp" class="headerlink" title="2.3 Gulp"></a>2.3 Gulp</h3><h3 id="2-4-Mocha"><a href="#2-4-Mocha" class="headerlink" title="2.4 Mocha"></a>2.4 Mocha</h3><h3 id="2-5-Karma"><a href="#2-5-Karma" class="headerlink" title="2.5 Karma"></a>2.5 Karma</h3><p>$_EXCLUDE:不需要集成，单独使用</p>
+<p style="text-align:right"> </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack/" rel="tag"><i class="fa fa-tag"></i> webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/w3/pkg/webpack_1-concepts/" rel="next" title="Webpack_1-Concepts">
+                <i class="fa fa-chevron-left"></i> Webpack_1-Concepts
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/pdf/es/ECMAScript6入门/15_Module/" rel="prev" title="ECMAScript 6入门-15_Module">
+                ECMAScript 6入门-15_Module <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-安装"><span class="nav-text">一 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-前提条件"><span class="nav-text">1.1 前提条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-本地安装"><span class="nav-text">1.2 本地安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-全局安装"><span class="nav-text">1.3 全局安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-最新体验版本"><span class="nav-text">1.4 最新体验版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-起步"><span class="nav-text">二 起步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本安装"><span class="nav-text">2.1 基本安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-创建一个bundle文件"><span class="nav-text">2.2 创建一个bundle文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-模块"><span class="nav-text">2.3 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-使用一个配置文件"><span class="nav-text">2.4 使用一个配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-NPM脚本"><span class="nav-text">2.5 NPM脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-结论"><span class="nav-text">2.6 结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-管理资源"><span class="nav-text">三 管理资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-安装"><span class="nav-text">3.1 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-加载CSS"><span class="nav-text">3.2 加载CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-加载字体"><span class="nav-text">3.3 加载字体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-加载数据"><span class="nav-text">3.4 加载数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-全局资源"><span class="nav-text">3.5 全局资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-回退处理"><span class="nav-text">3.6 回退处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-下一章节指南"><span class="nav-text">3.7 下一章节指南</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8-延伸阅读"><span class="nav-text">3.8 延伸阅读</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-管理输出"><span class="nav-text">四 管理输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-预先准备"><span class="nav-text">4.1 预先准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-设定HtmlWebpackPlugin"><span class="nav-text">4.2 设定HtmlWebpackPlugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-清理-dist文件夹"><span class="nav-text">4.3 清理/dist文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-Manifest"><span class="nav-text">4.4 Manifest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-结论"><span class="nav-text">4.5 结论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1"><span class="nav-text">1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2"><span class="nav-text">2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3"><span class="nav-text">3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4"><span class="nav-text">4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5"><span class="nav-text">5</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-开发"><span class="nav-text">五 开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-使用source-map"><span class="nav-text">5.1 使用source map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-选择一个开发工具"><span class="nav-text">5.2 选择一个开发工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-使用观察模式"><span class="nav-text">5.3 使用观察模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-使用-webpack-dev-server"><span class="nav-text">5.4 使用 webpack-dev-server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-使用-Webpack-dev-middleware"><span class="nav-text">5.5 使用 Webpack-dev-middleware</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-调整文本编辑器"><span class="nav-text">5.6 调整文本编辑器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-7-结论"><span class="nav-text">5.7 结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-模块热替换"><span class="nav-text">六 模块热替换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-启用-HMR"><span class="nav-text">6.1 启用 HMR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-通过Node-js-API"><span class="nav-text">6.2 通过Node.js API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-问题"><span class="nav-text">6.3 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-HMR-修改样式表"><span class="nav-text">6.4 HMR 修改样式表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-其他代码和框架"><span class="nav-text">6.5 其他代码和框架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七-Tree-Shaking"><span class="nav-text">七 Tree Shaking</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-添加一个通用模块"><span class="nav-text">7.1 添加一个通用模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-精简输出"><span class="nav-text">7.2 精简输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-警告"><span class="nav-text">7.3 警告</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-结论"><span class="nav-text">7.4 结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八-生产环境构建"><span class="nav-text">八 生产环境构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-配置"><span class="nav-text">8.1 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-NPM-Script"><span class="nav-text">8.2 NPM Script</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-Minification"><span class="nav-text">8.3 Minification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-source-map"><span class="nav-text">8.4 source map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-5-指定环境"><span class="nav-text">8.5 指定环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-6-Split-CSS"><span class="nav-text">8.6 Split CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-7-CLI-替代选项"><span class="nav-text">8.7 CLI 替代选项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九-代码分离"><span class="nav-text">九 代码分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-入口起点"><span class="nav-text">9.1 入口起点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-防止重复"><span class="nav-text">9.2 防止重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-动态导入"><span class="nav-text">9.3 动态导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-bundle分析"><span class="nav-text">9.4 bundle分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-5-下一步"><span class="nav-text">9.5 下一步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零-懒加载"><span class="nav-text">零 懒加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1-示例"><span class="nav-text">0.1 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-2-框架"><span class="nav-text">0.2 框架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-缓存"><span class="nav-text">一 缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-输出文件的文件名"><span class="nav-text">1.1 输出文件的文件名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-提取模板"><span class="nav-text">1.2 提取模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-模块标识符"><span class="nav-text">1.3 模块标识符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-结论"><span class="nav-text">1.4 结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-译注"><span class="nav-text">1.5 译注</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-创建Library"><span class="nav-text">二 创建Library</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-创建一个library"><span class="nav-text">2.1 创建一个library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-基本配置"><span class="nav-text">2.2 基本配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-外部化lodash"><span class="nav-text">2.3 外部化lodash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-外部扩展的限制"><span class="nav-text">2.4 外部扩展的限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-暴露library"><span class="nav-text">2.5 暴露library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-最终步骤"><span class="nav-text">2.6 最终步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-Shimming"><span class="nav-text">三 Shimming</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-shimming全局变量"><span class="nav-text">3.1 shimming全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-细粒度shimming"><span class="nav-text">3.2 细粒度shimming</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-全局exports"><span class="nav-text">3.3 全局exports</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-加载polyfills"><span class="nav-text">3.4 加载polyfills</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-深度优化"><span class="nav-text">3.5 深度优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-Node内置"><span class="nav-text">3.6 Node内置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-其他工具"><span class="nav-text">3.7 其他工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-TypeScript"><span class="nav-text">四 TypeScript</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-基础安装"><span class="nav-text">4.1 基础安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Loader"><span class="nav-text">4.2 Loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-source-map"><span class="nav-text">4.3 source map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-使用第三方库"><span class="nav-text">4.4 使用第三方库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-导入其他资源"><span class="nav-text">4.5 导入其他资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-构建性能"><span class="nav-text">4.6 构建性能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-渐进式网络应用程序"><span class="nav-text">五 渐进式网络应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-现在我们并没有离线环境"><span class="nav-text">5.1 现在我们并没有离线环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-天津Workbox"><span class="nav-text">5.2 天津Workbox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-注册我们的Service-Worker"><span class="nav-text">5.3 注册我们的Service Worker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-结论"><span class="nav-text">5.4 结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-迁移到新版本"><span class="nav-text">六 迁移到新版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七-使用环境变量"><span class="nav-text">七 使用环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八-构建性能"><span class="nav-text">八 构建性能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-常规"><span class="nav-text">8.1 常规</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-保持版本最新"><span class="nav-text">1 保持版本最新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Loaders"><span class="nav-text">2 Loaders</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Bootstrap"><span class="nav-text">3 Bootstrap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-解析"><span class="nav-text">4 解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Dlls"><span class="nav-text">5 Dlls</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Samller-Faster"><span class="nav-text">6 Samller = Faster</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-Worker-Pool"><span class="nav-text">7 Worker Pool</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-持久化缓存"><span class="nav-text">8 持久化缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-自定义-plugins-loaders"><span class="nav-text">9 自定义 plugins/loaders</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-Development"><span class="nav-text">8.2 Development</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-增量编译"><span class="nav-text">1 增量编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-在内存中编译"><span class="nav-text">2 在内存中编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Devtool"><span class="nav-text">3 Devtool</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-避免在生产环境下才会用"><span class="nav-text">4 避免在生产环境下才会用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-最小化入口chunk"><span class="nav-text">5 最小化入口chunk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-Production"><span class="nav-text">8.3 Production</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-多个编译时"><span class="nav-text">1 多个编译时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Source-Maps"><span class="nav-text">2 Source Maps</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-4-工具相关问题"><span class="nav-text">8.4 工具相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Babel"><span class="nav-text">1 Babel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Typescript"><span class="nav-text">2 Typescript</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Sass"><span class="nav-text">3 Sass</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#九-开发-Vagrant"><span class="nav-text">九 开发-Vagrant</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-项目配置"><span class="nav-text">9.1 项目配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-启动服务器"><span class="nav-text">9.2 启动服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-配合nginx的高级用法"><span class="nav-text">9.3 配合nginx的高级用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-小结"><span class="nav-text">9.4 小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零-管理依赖"><span class="nav-text">零 管理依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1-带表达式的require语句"><span class="nav-text">0.1 带表达式的require语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-2-require-context"><span class="nav-text">0.2 require.context</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-3-上下文模块"><span class="nav-text">0.3 上下文模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-公共路径-Public-Path"><span class="nav-text">一 公共路径(Public Path)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-示例"><span class="nav-text">1.1 示例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-在构建项目时设置路径值"><span class="nav-text">1 在构建项目时设置路径值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-即时设定路径值"><span class="nav-text">2 即时设定路径值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-集成-Intergrations"><span class="nav-text">二 集成(Intergrations)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-NPM-Scripts"><span class="nav-text">2.1 NPM Scripts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Grunt"><span class="nav-text">2.2 Grunt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Gulp"><span class="nav-text">2.3 Gulp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Mocha"><span class="nav-text">2.4 Mocha</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-Karma"><span class="nav-text">2.5 Karma</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">408.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

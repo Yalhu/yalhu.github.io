@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="git,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2018.7.18 星期三 17:30  git –versiongit init     github Page好像还区分大小写  配置git config –list （全局，本地）git config  user.name user （修改本地/当前项目）git config user.email user@fenhao.doulougit config  –global user.name">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git操作">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/git操作/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2018.7.18 星期三 17:30  git –versiongit init     github Page好像还区分大小写  配置git config –list （全局，本地）git config  user.name user （修改本地/当前项目）git config user.email user@fenhao.doulougit config  –global user.name">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git操作">
+<meta name="twitter:description" content="2018.7.18 星期三 17:30  git –versiongit init     github Page好像还区分大小写  配置git config –list （全局，本地）git config  user.name user （修改本地/当前项目）git config user.email user@fenhao.doulougit config  –global user.name">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/git操作/">
+
+
+
+
+
+  <title>Git操作 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/git操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-18T08:00:00+08:00">
+                2018-07-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/git操作/" class="leancloud_visitors" data-flag-title="Git操作">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  7,142
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  30
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p style="text-align:right">2018.7.18 星期三 17:30</p>
+
+<p>git –version<br>git init    </p>
+<p>github Page好像还区分大小写 </p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>git config –list （全局，本地）<br>git config  user.name user （修改本地/当前项目）<br>git config user.email <a href="mailto:user@fenhao.doulou" target="_blank" rel="noopener">user@fenhao.doulou</a><br>git config  –global user.name user<br>git config –global –unset user.name</p>
+<p>cat .git/config     </p>
+<h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h2><p>git add .<br>git add -A<br>git add –all   </p>
+<p>git commit -m ‘mssd’<br>git am -m ‘sdfsf’s    </p>
+<h2 id="status"><a href="#status" class="headerlink" title="status"></a>status</h2><p>On branch master<br>### “Changes not staged for commit:”<br>git 分为工作区和版本库，工作区是你的代码，版本库就是git记录了。<br>在修改进入版本库前有一个暂存区也叫索引，就是做git add 操作后记录的区域。<br>当commit的时候是将暂存区的记录添加到版本数据库。    </p>
+<p>你的提示说staged没有内容，也就是说你没有执行过add操作   </p>
+<p>### Untracked files:<br>no changes added to commit  </p>
+<h2 id="log"><a href="#log" class="headerlink" title="log"></a>log</h2><p>一堆参数<br>git log –pretty=oneline<br>git show HEAD^:path/to/file  </p>
+<h2 id="查找删除文件"><a href="#查找删除文件" class="headerlink" title="查找删除文件"></a>查找删除文件</h2><p>git log -p filename (相对路径)<br>git log – [file_path]<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> see the changes of a file, works even </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">if</span> the file was deleted</span></span><br><span class="line">git log -- [file_path]  	</span><br><span class="line"><span class="meta">#</span><span class="bash"> include <span class="built_in">stat</span> parameter to see</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> some statics, e.g., how many files were </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> deleted</span></span><br><span class="line">git log -1 --stat -- [file_path]</span><br></pre></td></tr></table></figure></p>
+<p>(上面只是看到的commit，不好使，下面的好用)<br>大多数我们是不知道在何时删除了某个文件，通过下面这个命令我们可以查看在哪个 commit 中删除了哪些文件。<br>git log –diff-filter=D –summary<br>比如我想恢复 ic_selected.png 这个文件，我们可以看到删除该文件对应的 commit id<br>这个命令会检出该 commit 的上一个提交中的文件，因为我们是在该 commit 中删除的文件，所以需要在上一个 commit 才能恢复出文件。<br>git checkout $commit~1 filename   </p>
+<p>最后的处理方式：通过git-history(vscode插件)查到历史提交大概删除日期，从该commit中创建并切换分支，找到文件复制出来恢复的。     </p>
+<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><p>git remote<br>git remote -v<br>git remote add origin git://192.145.1.4:12/cloudclass.git<br>git remote set-url origin <a href="http://user@192.134.2:1001/r/cloudclass.git" target="_blank" rel="noopener">http://user@192.134.2:1001/r/cloudclass.git</a>     </p>
+<p>新项目第一次添加远程报错:Not a git repository (or any of the parent directories): .git<br>需要执行命令 git init   </p>
+<h2 id="clone两种方式-ssh和http"><a href="#clone两种方式-ssh和http" class="headerlink" title="clone两种方式:ssh和http"></a>clone两种方式:ssh和http</h2><p>git clone支持多种协议，除了HTTP(s)以外，还支持SSH、Git、本地文件协议等，通常来说，Git协议下载速度最快，SSH协议用于需要用户认证的场合。<br><!-- 参考：[git远程操作](https://www.jianshu.com/p/e78b28081a44)    --></p>
+<p>### git Blit<br>git clone ssh:<a href="mailto://user@192.168.1.5" target="_blank" rel="noopener">//user@192.168.1.5</a>:29418/cloudclass.git<br>git clone <a href="http://user@192.168.1.5:10001/r/cloudclass.git" target="_blank" rel="noopener">http://user@192.168.1.5:10001/r/cloudclass.git</a><br>git clone git://192.168.1.5/cloudclass.git      </p>
+<p>### github<br>ssh:    <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:videojs/video.js.git<br>https:  <a href="https://github.com/videojs/video.js.git" target="_blank" rel="noopener">https://github.com/videojs/video.js.git</a>     </p>
+<p>### ssh(YX:006)<br>SSH是一种网络协议，用于计算机之间的加密登录。采用了公钥加密。<br>github配置ssh后，每次提交代码可以不用输入密码/或者新设置的密码——非账户密码；</p>
+<p>如果clone的是https协议，每次都需要登陆github账户<br>### 保存用户名密码（不用每次push都输入）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## git保存用户名密码。主要是后面这两行，如果不想保存，则删除即可</span><br><span class="line">[credential]</span><br><span class="line">    helper = store</span><br></pre></td></tr></table></figure></p>
+<p>## git push fatal:HttpRequestException encountered<br>clone完后，在bash中git push 出错‘fatal:HttpRequestException encountered.’<br>原因： github禁用了TLS1.0/1.1协议</p>
+<p>截至2018年2月22日，GitHub禁用了对弱加密的支持，这意味着许多用户会突然发现自己无法使用Git for Windows进行身份验证（影响版本低于v2.16.0）。不要恐慌，有一个修复。将Git for Windows更新到最新版本（或至少v2.16.0）。<br>参考：<a href="https://www.cnblogs.com/xuey/p/8474071.html" target="_blank" rel="noopener">git push fatal: HttpRequestException encountered</a></p>
+<p>$_PS: 又切换ssh了:git remote set-url origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:user/hello.git</p>
+<h2 id="pull-push"><a href="#pull-push" class="headerlink" title="pull/push"></a>pull/push</h2><p>根据remote origin url提及的方式也不一样：ssh/http(clone时会添加，不是通过clone/本地建的项目需要先添加远程仓库)<br>别人提交过，要先pull:远程代码和本地不一致了，需要先pull更新，然后才能提交<br>本地仓库不同通过clone方式建立的/新建的，pull的时候出错：没有关系的仓库;需要添加参数pull<br>建立关系后，以后可以不用指明分支/主机，直接 pull/push</p>
+<p>git pull<br>git pull origin master –allow-unrelated-histories<br>git push -u origin master<br>    第一次提交.记得第一次push前commit,否则报错:error: src refspec master does not match any<br>    上面命令将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用git push了。<br>git push    </p>
+<p>git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;<br>-u: 如果当前分支与多个主机存在追踪关系，则可以使用-u选项指定一个默认主机，这样后面就可以不加任何参数使用git push。<br>参考：<a href="https://www.cnblogs.com/ederwin/articles/6666614.html" target="_blank" rel="noopener">[git push参数]</a>       </p>
+<h2 id="cache相关-gitignore"><a href="#cache相关-gitignore" class="headerlink" title="cache相关/.gitignore"></a>cache相关/.gitignore</h2><p>git rm –cache ./bin/client/release/html/_faker.min.js<br>(add不成功时，也可能是进入到cache中了，此方式也有效)<br>其它，add –all /add -A /add dir/faker.min.js 都没有用  </p>
+<p>### lock文件删除失败<br>rm -f xx/.git/index.lock   </p>
+<h2 id="git-push-origin-master"><a href="#git-push-origin-master" class="headerlink" title="git push origin master"></a>git push origin master</h2><p># <a href="http://lishicongli.blog.163.com/blog/static/1468259020132125247302/" target="_blank" rel="noopener">Git 的origin和master分析</a></p>
+<p>在clone完成之后，Git 会自动为你将此远程仓库命名为origin（origin只相当于一个别名，运行git remote –v或者查看.git/config可以看到origin的含义），并下载其中所有的数据，建立一个指向它的master 分支的指针，我们用(远程仓库名)/(分支名) 这样的形式表示远程分支，所以origin/master指向的是一个remote branch（从那个branch我们clone数据到本地），但你无法在本地更改其数据。</p>
+<p>同时，Git 会建立一个属于你自己的本地master 分支，它指向的是你刚刚从remote server传到你本地的副本。随着你不断的改动文件，git add, git commit，master的指向会自动移动，你也可以通过merge（fast forward）来移动master的指向。<br>……<br>origin指定了你要push到哪个remote</p>
+<p>master其实是一个“refspec”，正常的“refspec”的形式为”+<code>&lt;src&gt;:&lt;dst&gt;</code>”，冒号前表示local branch的名字，冒号后表示remote repository下 branch的名字。注意，如果你省略了<code>&lt;dst&gt;</code>，git就认为你想push到remote repository下和local branch相同名字的branch。听起来有点拗口，再解释下，push是怎么个push法，就是把本地branch指向的commit push到remote repository下的branch，比如</p>
+<p>$git push origin master:master (在local repository中找到名字为master的branch，使用它去更新remote repository下名字为master的branch，如果remote repository下不存在名字是master的branch，那么新建一个)</p>
+<p>$git push origin master （省略了<code>&lt;dst&gt;</code>，等价于“git push origin master:master”）</p>
+<p>$git push origin master:refs/for/mybranch (在local repository中找到名字为master的branch，用他去更新remote repository下面名字为mybranch的branch)</p>
+<p>$git push origin HEAD:refs/for/mybranch （HEAD指向当前工作的branch，master不一定指向当前工作的branch，所以我觉得用HEAD还比master好些）</p>
+<p>$git push origin :mybranch （再origin repository里面查找mybranch，删除它。用一个空的去更新它，就相当于删除了）</p>
+<p># <a href="https://www.zhihu.com/question/27712995/answer/39946123" target="_blank" rel="noopener">Git 里面的 origin 到底代表啥意思?</a><br>…<br>这个时候，如果user2想加一个远程指向你的代码库，他可以在控制台输入<br>    git remote add upstream <a href="https://github.com/user1/repository.git" target="_blank" rel="noopener">https://github.com/user1/repository.git</a><br>然后再输入一遍 git remote -v输出结果就会变为:<br>origin <a href="https://github.com/user2/repository.git" target="_blank" rel="noopener">https://github.com/user2/repository.git</a> (fetch)<br>origin <a href="https://github.com/user2/repository.git" target="_blank" rel="noopener">https://github.com/user2/repository.git</a> (push)<br>upstream <a href="https://github.com/user1/repository.git" target="_blank" rel="noopener">https://github.com/user1/repository.git</a> (push)<br>upstream <a href="https://github.com/user1/repository.git" target="_blank" rel="noopener">https://github.com/user1/repository.git</a> (push)</p>
+<p>增加了指向user1代码库的upstream，也就是之前对指向位置的命名。总结来讲，顾名思义，origin就是一个名字，它是在你clone一个托管在Github上代码库时，git为你默认创建的指向这个远程代码库的标签， @陈肖恩的答案并不准确，origin指向的是repository，master只是这个repository中默认创建的第一个branch。当你git push的时候因为origin和master都是默认创建的，所以可以这样省略，但是这个是bad practice，因为当你换一个branch再git push的时候，有时候就纠结了</p>
+<!-- 
+\# [git远程操作](https://www.jianshu.com/p/e78b28081a44)   
+## git clone
+git clone支持多种协议，除了HTTP(s)以外，还支持SSH、Git、本地文件协议等，通常来说，Git协议下载速度最快，SSH协议用于需要用户认证的场合。  
+在clone完成之后，... 和上面[Git 的origin和master分析] 差不多
+## git fetch
+...     
+git fetch origin branch1:branch2
+首先执行上面的fetch操作，使用远程branch1分支在本地创建branch2(但不会切换到该分支), 如果本地不存在branch2分支, 则会自动创建一个新的branch2分支, 如果本地存在branch2分支, 并且是`fast forward', 则自动合并两个分支, 否则, 会阻止以上操作.
+
+git fetch origin :branch2
+等价于: git fetch origin master:branch2
+## git push
+git  push  origin  本地分支A : 远程分支B 
+回答和上面  [Git 的origin和master分析] 差不多
+--->
+<h2 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a>git fetch</h2><p>git checkout -b 本地分支名x origin/远程分支名x<br>    采用此种方法建立的本地分支会和远程分支建立映射关系。<br>git fetch origin 远程分支名x:本地分支名x<br>    需要手动checkout;不会和远程分支建立映射关系。    </p>
+<p>git branch –set-upstream-to origin/远程分支名  本地分支名</p>
+<h2 id="fetch和pull的区别-001"><a href="#fetch和pull的区别-001" class="headerlink" title="[fetch和pull的区别 001]"></a>[fetch和pull的区别 001]</h2><p>要讲清楚git fetch，git pull的区别必须要附加讲清楚git remote，git merge 、远程repo， branch 、 commit-id 以及 FETCH_HEAD。   </p>
+<ol>
+<li>【git remote】首先， git是一个分布式的结构，这意味着本地和远程是一个相对的名称。<br>本地的repo仓库要与远程的repo配合完成版本对应必须要有 git remote子命令，通过git remote add来添加当前本地长度的远程repo， 有了这个动作本地的repo就知道了当遇到git push 的时候应该往哪里提交代码。</li>
+<li>【git branch】其次，git天生就是为了多版本分支管理而创造的，因此分支一说，不得不提， 分支就相当于是为了单独记录软件的某一个发布版本而存在的，既然git是分布式的，便有了本地分支和远程分支一说，git branch 可以查看本地分支， git branch -r 可以用来查看远程分支。 本地分支和远程分支在git push 的时候可以随意指定，交错对应，只要不出现版本从图即可。</li>
+<li>【git merge】再者，git的分布式结构也非常适合多人合作开发不同的功能模块，此时如果每个人都在其各自的分支上开发一个相对独立的模块的话，在每次release制作时都需先将各成员的模块做一个合并操作，用于合并各成员的工作成果，完成集成。 此时需要的就是git merge.<br>4.【git push 和 commit-id】在每次本地工作完成后，都会做一个git commit 操作来保存当前工作到本地的repo， 此时会产生一个commit-id，这是一个能唯一标识一个版本的序列号。 在使用git push后，这个序列号还会同步到远程repo。</li>
+</ol>
+<p>在理解了以上git要素之后，分析git fetch 和 git pull 就不再困难了。<br>首先，git fetch 有四种基本用法      </p>
+<ol>
+<li>git fetch →→ 这将更新git remote 中所有的远程repo 所包含分支的最新commit-id, 将其记录到.git/FETCH_HEAD文件中</li>
+<li>git fetch remote_repo →→ 这将更新名称为remote_repo 的远程repo上的所有branch的最新commit-id，将其记录。 </li>
+<li>git fetch remote_repo remote_branch_name →→ 这将这将更新名称为remote_repo 的远程repo上的分支： remote_branch_name</li>
+<li>git fetch remote_repo remote_branch_name:local_branch_name →→ 这将这将更新名称为remote_repo 的远程repo上的分支： remote_branch_name ，并在本地创建local_branch_name 本地分支保存远端分支的所有数据。</li>
+</ol>
+<p>FETCH_HEAD： 是一个版本链接，记录在本地的一个文件中，指向着目前已经从远程仓库取下来的分支的末端版本。</p>
+<p>git pull 的运行过程：<br>git pull : 首先，基于本地的FETCH_HEAD记录，比对本地的FETCH_HEAD记录与远程仓库的版本号，然后git fetch 获得当前指向的远程分支的后续版本的数据，然后再利用git merge将其与本地的当前分支合并。</p>
+<h2 id="撤销和回滚-版本回退"><a href="#撤销和回滚-版本回退" class="headerlink" title="撤销和回滚/版本回退"></a>撤销和回滚/版本回退</h2><!-- \# [Git - 暂存区及撤销修改](https://blog.csdn.net/kikajack/article/details/79846098)   -->
+<p>通过 git checkout – 文件名 命令可以撤销文件在工作区的修改。<br>通过 git reset 文件名 命令可以撤销指定文件的 git add 操作，即这个文件在暂存区的修改。<br>通过 git reset 命令可以撤销之前的所有 git add 操作，即在暂存区的修改。</p>
+<blockquote>
+<p>git checkout – 文件名 命令中的 – 表示命令行在 – 之后没有更多的选项。这样的好处是，如果碰巧有一个分支与文件名重名，仍然可以恢复该文件，而不是切换到同名的分支。</p>
+</blockquote>
+<p>没有放入暂存区（即文件一直在工作区）: git checkout<br>放入暂存区，且文件没有再次修改（即文件已经进入暂存区）: git reset; git checkout<br>放入暂存区，且文件再次修改：分三步 git checkout(撤销工作区的改动);git reset;git checkout</p>
+<!-- \# [版本回退](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013744142037508cf42e51debf49668810645e02887691000)        -->
+<p>### 0<br>首先，Git必须知道当前版本是哪个版本，在Git中，用HEAD表示当前版本，也就是最新的提交1094adb…上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。<br>### 1<br>现在，我们要把当前版本回退到上一个版本就可以使用git reset命令：<br>$ git reset –hard HEAD^<br>### 2<br>然我们用git log再看看现在版本库的状态：<br>最新的那个版本append GPL已经看不到了！好比你从21世纪坐时光穿梭机来到了19世纪，想再回去已经回不去了，肿么办？    </p>
+<p>1) 只要上面的命令行窗口还没有被关掉，你就可以顺着往上找啊找啊，找到那个append GPL的commit id是1094adb…，于是就可以指定回到未来的某个版本：<code>$ git reset --hard 1094a</code><br>版本号没必要写全，前几位就可以了，Git会自动去找。当然也不能只写前一两位，因为Git可能会找到多个版本号，就无法确定是哪一个了。<br>2) Git提供了一个命令git reflog用来记录你的每一次命令：      </p>
+<p>### 3<br>Git的版本回退速度非常快，因为Git在内部有个指向当前版本的HEAD指针，当你回退版本的时候，Git仅仅是把HEAD从指向append GPL：<br>然后顺便把工作区的文件更新了。所以你让HEAD指向哪个版本号，你就把当前版本定位在哪。      </p>
+<p>### 小结<br>HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset –hard commit_id。<br>穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。<br>要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。        </p>
+<h2 id="git-revert-和-git-reset-的区别"><a href="#git-revert-和-git-reset-的区别" class="headerlink" title="git revert 和 git reset 的区别"></a>git revert 和 git reset 的区别</h2><!-- \# [Git 回滚代码的正确姿势](https://www.jianshu.com/p/f7451177476a)        -->
+<p>sourceTree 中 revert 译为提交回滚，作用为忽略你指定的版本，然后提交一个新的版本。新的版本中已近删除了你所指定的版本。   </p>
+<p>reset 为 重置到这次提交，将内容重置到指定的版本。git reset 命令后面是需要加2种参数的：–-hard 和 –-soft。这条命令默认情况下是 -–soft。   </p>
+<p>执行上述命令时，这该条commit号之 后（时间作为参考点）的所有commit的修改都会退回到git缓冲区中。使用git status 命令可以在缓冲区中看到这些修改。而如果加上-–hard参数，则缓冲区中不会存储这些修改，git会直接丢弃这部分内容。可以使用 git push origin HEAD –force 强制将分区内容推送到远程服务器。</p>
+<p>默认参数 -soft,所有commit的修改都会退回到git缓冲区<br>参数–hard，所有commit的修改直接丢弃<br>推送到远程 <code>$ git push origin HEAD --force</code>  </p>
+<!--
+其它:  
+[Git撤销&回滚操作](https://blog.csdn.net/ligang2585116/article/details/71094887)
+--->
+<h2 id="储藏与清理"><a href="#储藏与清理" class="headerlink" title="储藏与清理"></a>储藏与清理</h2><p><a href="https://git-scm.com/book/zh/v2/Git-工具-储藏与清理" target="_blank" rel="noopener">7.3 Git 工具 - 储藏与清理</a>  </p>
+<p>现在想要切换分支，但是还不想要提交之前的工作；所以储藏修改。 将新的储藏推送到栈上，运行 <code>git stash 或 git stash save</code>   </p>
+<h2 id="tags"><a href="#tags" class="headerlink" title="tags"></a>tags</h2><h3 id="修改标签名"><a href="#修改标签名" class="headerlink" title="修改标签名"></a>修改标签名</h3><p><a href="https://www.iisns.com/p/1097" target="_blank" rel="noopener">Git 修改 tag 名称</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git tag new old</span><br><span class="line">git tag -d old</span><br><span class="line">git push origin :refs/tags/old</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure></p>
+<h2 id="merge操作"><a href="#merge操作" class="headerlink" title="merge操作"></a>merge操作</h2><ol>
+<li>不希望合并进去,公开 给 其他人的 文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.xml merge=ours</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>git config --global merge.ours.driver true</code>        </p>
+<blockquote>
+<p>只有先修改的往后来修改的合并的时候才会生效。        </p>
+</blockquote>
+<h2 id="（Git代码冲突）"><a href="#（Git代码冲突）" class="headerlink" title="（Git代码冲突）"></a>（Git代码冲突）</h2><p>Git出现error: Your local changes to the following files would be overwritten by merge: … Please, commit your changes or stash them before you can merge.  </p>
+<p>If you want remove all local changes from your working copy, simply stash them:<br>1、如果希望保留生产服务器上所做的改动,仅仅并入新配置项, 处理方法如下:<br>git stash    |git stash save –keep-index<br>git pull<br>git stash pop   |git stash drop<br>然后可以使用Git diff -w +文件名来确认代码自动合并的情况。   </p>
+<p>2、如果要直接使用服务器上最新版本，那么可以选择直接覆盖<br>git reset –hard<br>git pull<br>其中git reset是针对版本。,如果想针对文件回退本地修改,使用<br>git checkout HEAD file/to/overwrite<br>git pull    </p>
+<p>If you want to overwrite only specific parts of your local changes, there are two possibilities:<br>1. Commit everything you don’t want to overwrite and use the method above for the rest.<br>2. Use <code>git checkout path/to/file/to/revert</code> for the changes you wish to overwrite. Make sure that file is not staged via <code>git reset HEAD path/to/file/to/revert</code>.</p>
+<h2 id="clean"><a href="#clean" class="headerlink" title="clean"></a>clean</h2><p>git clean  -d  -fx “”<br>其中<br>x  —–删除忽略文件已经对git来说不识别的文件<br>d  —–删除未被添加到git的路径中的文件<br>f  —–强制运行</p>
+<h2 id="添加多个远程仓库"><a href="#添加多个远程仓库" class="headerlink" title="添加多个远程仓库"></a>添加多个远程仓库</h2><p># <a href="https://blog.csdn.net/mengzuchao/article/details/80489864" target="_blank" rel="noopener">git 本地项目添加多个远程仓库</a><br>第一种方式：</p>
+<ol>
+<li>添加一个远程库 名字不能是origin<br>git remote add 17MOX  <a href="http://git.17byh.com/17MOX/mxhy.git" target="_blank" rel="noopener">http://git.17byh.com/17MOX/mxhy.git</a>   </li>
+<li>拉，推<br>git pull 17MOX    远程分支名：本地分支名<br>git push 17MOx   本地分支名：远程分支名</li>
+</ol>
+<p>第二种方式：（好处时，推送时，可以同时推送到另外一个库）</p>
+<ol>
+<li>添加另外一个远程库<br>git remote set-url –add origin <a href="mailto:git@gitlab.com" target="_blank" rel="noopener">git@gitlab.com</a>:mzc/DIVIDE_PKG.git<br>git push origin master:master  </li>
+</ol>
+<p># <a href="https://segmentfault.com/q/1010000008366409" target="_blank" rel="noopener">Git 怎么添加多个远程仓库呢？</a><br>可以通过-all一次提交多个仓库<br>配置远程仓库<br>git remote add origin <a href="https://url" target="_blank" rel="noopener">https://url</a><br>再添加一个远程仓库<br>git remote set-url –add origin <a href="https://url" target="_blank" rel="noopener">https://url</a>    </p>
+<p>注意这里多次添加需要用<br>git remote set-url –add<br>不然会报错：fatal: remote origin already exists.<br>$PS: 这里是上文提到的第二种方式，同时提交<br>或者改名<br>git remote add otherOrigin <a href="https://url" target="_blank" rel="noopener">https://url</a></p>
+<p>一次提交到所有远程仓库<br>git push –all</p>
+<p>注意<br>git pull 是 git pull (from) origin (to) master<br>git push 是 git push (to) origin (from) master</p>
+<h3 id="配置多个仓库，想提交不同的gitignore"><a href="#配置多个仓库，想提交不同的gitignore" class="headerlink" title="配置多个仓库，想提交不同的gitignore"></a>配置多个仓库，想提交不同的gitignore</h3><p>1) 新建分支，修改.gitignore, 删除文件等其他修改。 缺点： 每次都要修改许多文件，然后才可以提交，有些繁琐。<br>2） git rm -r –cached<br>将.setting文件夹从版本库中删除<br>git rm -r –cached  .setting #–cached不会把本地的.setting删除<br>git commit -m ‘delete .setting dir’<br>git push -u origin master</p>
+<p>将被.gitignore文件所忽略的文件从版本库中删除<br>git rm -r –cached .<br>git add .<br>git commit<br>git push  -u origin master</p>
+<p>用 git rm 来删除文件，同时还会将这个删除操作记录下来；<br>用 rm 来删除文件，仅仅是删除了物理文件，没有将其从 git 的记录中剔除。</p>
+<p>直观的来讲，git rm 删除过的文件，执行 git commit -m “abc” 提交时，会自动将删除该文件的操作提交上去。</p>
+<p>而用 rm 命令直接删除的文件，单纯执行 git commit -m “abc” 提交时，则不会将删除该文件的操作提交上去，需要在执行commit的时候，多加一个-a参数，<br>即rm删除后，需要使用git commit -am “abc”提交才会将删除文件的操作提交上去。</p>
+<h2 id="git-remote-HTTP-Basic-Access-denied"><a href="#git-remote-HTTP-Basic-Access-denied" class="headerlink" title="git remote: HTTP Basic: Access denied"></a>git remote: HTTP Basic: Access denied</h2><p>原因：远程服务端的用户名和密码与当前系统中git保存的用户名和密码有冲突<br>git config –system –unset credential.helper命令，作用就是清空本地保存的用户名和密码<br>但后面发现每次操作远程仓库都需要重新输入用户名和密码，这个命令清空gitconfig里的自动保存用户名和密码配置，找到本地的gitconfig文件，写入：<br>如果不想保存，则删除即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[credential]</span><br><span class="line">    helper = store</span><br></pre></td></tr></table></figure></p>
+<p>\=====================================\<br># <a href="https://help.github.com/articles/connecting-to-github-with-ssh/" target="_blank" rel="noopener">Connecting to GitHub with SSH</a>    </p>
+<h2 id="SSH-key与公钥"><a href="#SSH-key与公钥" class="headerlink" title="SSH key与公钥"></a>SSH key与公钥</h2><p>## 一 About SSH<br>## 二 Checking for existing SSH keys<br>$ ls -al ~/.ssh      </p>
+<p>$ ssh-add -l  // 可以通过 ssh-add -l 来确私钥列表<br>可以通过 ssh-add -D 来清空私钥列表<br>$ ssh-add -D<br>## 三 Generating a new SSH key and adding it to the ssh-agent<br>### 3.1 Generating a new SSH key<br>$ ssh-keygen -t rsa -b 4096 -C “<a href="mailto:your_email@example.com" target="_blank" rel="noopener">your_email@example.com</a>“     </p>
+<p>Generating public/private rsa key pair.<br>Enter a file in which to save the key (/c/Users/you/.ssh/id_rsa):[Press enter]<br>Enter passphrase (empty for no passphrase): [Type a passphrase]<br>Enter same passphrase again: [Type passphrase again]   </p>
+<p>默认在 /c/users/administartor/.ssh/…<br>id_rsa:<br>id_rsa.pub: ssh-rsa AAAAB3NzaC1yc2E…<br>known_hosts:github添加成功后会写入：github.com,13.229.188.59 ssh-rsa AAAAB3NzaC1yc…<br>### 3.2 Adding your SSH key to the ssh-agent<br>$ eval $(ssh-agent -s)<br>$ ssh-add ~/.ssh/id_rsa     </p>
+<p>$PS: 如果多添加了没关系，反正关掉之后都没有了。需要重新启动ssh-agent, 执行ssh-add ~/.ssh/*/id_rsa</p>
+<p>## 四 Adding a new SSH key to your GitHub account<br>$ clip &lt; ~/.ssh/id_rsa.pub<br>然后去github/gitblit等git服务器添加SSH key      </p>
+<p>## 五 Testing your SSH connection<br>$ ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>   </p>
+<p>The authenticity of host ‘github.com (IP ADDRESS)’ can’t be established.<br>RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.<br>Are you sure you want to continue connecting (yes/no)?   </p>
+<p>Hi username! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
+<p>## 六 Working with SSH key passphrases    </p>
+<p style="text-align:right">18:52</p>
+
+<p>## $PS ssh-keygen删除旧密钥<br>linux 系统上使用ssh工具远程登录设备时，如果之前保存过该设备的密钥，之后该设备密钥更新，此时需执行以下命令才能后续的ssh正常登录。<br>ssh-keygen -f  “/root/.ssh/known_hosts” -R 192.168.0.1<br>其中 -f filename     指定密钥文件名。<br>     -R hostname   从 known_hosts 文件中删除所有属于 hostname 的密钥。</p>
+<h2 id="配置多个ssh"><a href="#配置多个ssh" class="headerlink" title="配置多个ssh"></a>配置多个ssh</h2><p>新建config文件,指定HostName对应的IdentityFile<br>$PS: github的Host 和 HostName 必须都是github.com; 上面那个不一样也没事<br>或者都在C:/Users/Administrator/.ssh/下,命名不同的id_rsa文件名, id_work1/work2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 该文件用于配置私钥对应的服务器</span><br><span class="line"># Default github user(first@mail.com)</span><br><span class="line">Host aculearn</span><br><span class="line">HostName 192.168.1.5</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">User yalong</span><br><span class="line">IdentityFile C:/Users/Administrator/.ssh/aculearn/id_rsa</span><br><span class="line"># Port 443</span><br><span class="line"># UserKnownHostsFile /dev/null</span><br><span class="line"># StrictHostKeyChecking no/ask/yes</span><br><span class="line"></span><br><span class="line"># second user(second@mail.com)</span><br><span class="line"># 建一个github别名，新建的帐号使用这个别名做克隆和更新</span><br><span class="line">Host github.com</span><br><span class="line">HostName github.com  </span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">User yalhu</span><br><span class="line">IdentityFile D:/ablob/.ssh/github/id_rsa</span><br><span class="line"># UserKnownHostsFile /dev/null</span><br><span class="line"># StrictHostKeyChecking no</span><br></pre></td></tr></table></figure></p>
+<p>Host 表示来源地址匹配字段<br>HostName表示源地址<br>IdentityFile 则为私匙文件地址<br>PreferredAuthentications 权限<br>User 配置私匙的用户名称<br>多个账号可以写相同的Host User不要一样</p>
+<p>$PS: dangd的gitlib配置了config没有成功，发现是没有开启ssh，并不是配置失败（换成http， clone可以成功，如果是ssh就不可以）<br>$PS: dangd的gitlib 换了http 提交(强制)也没有成功，把项目(pazhihu) 删除，重新建立就正常了。（也不是私有权限的原因，新建仓库切换成私有也可以提交成功）  </p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>#### 1 下面几种写法都可以<br>C:\Users\huyalong\.ssh\github\id_rsa<br>C:/Users/huyalong/.ssh/reader/id_rsa<br>C:\Users\huyalong.ssh\dangdang\id_rsa    </p>
+<p>$_abolish: 因为config id_rsa文件路径不对(没有到id_rsa)。所以每次都需要重新指定位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">~~ \#### 2 `ssh-keygen; ssh-add` 需要在当前项目中执行。如果在其他目录执行，并不会配置成功   ~~</span><br><span class="line">~~ \#### 3 每次都要ssh-add 添加id_rsa 到ssh-agent   ~~</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">\#11 [是否必须每次添加ssh-add](https://segmentfault.com/q/1010000000835302)   </span><br><span class="line">我的repo 分别推送到github，gitcafe。 正确添加了两个公钥私钥之后，并命名为id_github和id_gitcafe，发现每次push 代码 都必须重新ssh-add 上私钥。将id_github 名改回默认的id_rsa，就可以直接push了。但是gitcafe 被拒绝。有没有办法可以一次都设置上，不需要每次 ssh-add 私钥的。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">你首先得了解一件事：ssh-add 这个命令不是用来永久性的记住你所使用的私钥的。实际上，它的作用只是把你指定的私钥添加到 ssh-agent 所管理的一个 session 当中。而 ssh-agent 是一个用于存储私钥的临时性的 session 服务，也就是说当你重启之后，ssh-agent 服务也就重置了。</span><br><span class="line"></span><br><span class="line">如果是为了永久记住对应的私钥是哪个，我们不能依赖 ssh-agent 服务。能依赖什么则取决于以下哪些方案适合你的使用场景。</span><br><span class="line"></span><br><span class="line">\## 有没有简单点的办法？	</span><br><span class="line">有。如果 ssh-add 已经可以满足你的要求（除了启动以后还要再来一遍以外），那么你完全可以用脚本自动化这件事。简单地把你输入的 ssh-add 命令的内容写进 .bashrc 或 .bash_profile（或其他任何你使用的 shell 环境配置文件）中去，这样只要你打开终端，就等于自动做了这件事情。</span><br><span class="line"></span><br><span class="line">不过如我之前所说，这个机制是依赖 ssh-agent 服务的，并且只能在终端下有效。而用 Keychain 机制的话，是整个系统内都有效的（包括不依赖终端的应用程序）并且无需开启 ssh-agent 服务。</span><br><span class="line"></span><br><span class="line">最后 Keychain 服务不是只有 Mac 才有的，我刚才搜索了一下，Windows 和 各种 Linux 都有对应的机制，不过我没用过，只能以 Mac 为例了。了解了这些概念，相信你可以自己查得到具体的方法。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">关于 Host 和 Hostname 的对应关系，如果 Hostname 是域名则最好保持一致。但是这里有两个诀窍：	</span><br><span class="line">1. 如果同一域名下有两个不同的配置怎么办？Host 后面对应的是 Github 的两个用户名，</span><br><span class="line">2. 如果域名是数字 IP，是否可以简化呢？ Host 可以帮助你把对应的 IP 变成好记的名字。</span><br><span class="line">$PS: 即host为Hostname（可以是ip）的域名；如果不是ip，最好保持一致  </span><br><span class="line"></span><br><span class="line">\#11 end  ***************************</span><br><span class="line">````````abolish</span><br><span class="line"></span><br><span class="line">### vscode 配置git/ssh</span><br><span class="line">直接点击push不能提交,报deny,权限不足,即使remote的url是git@git.hub.com:user/repository   </span><br><span class="line">而且此时, c:\..user\administartor\.ssh  下已经有config配置了(当前是两个rsa:gitlib,github);   </span><br><span class="line">用Git Bash的时候可以提交, 而且是根据config的配置 弹窗 输入密码后 提交    </span><br><span class="line">$Question:如果github配置的ssh没有密码,是否可以直接提交    </span><br><span class="line">\#### 修正   </span><br><span class="line">[Support git with private key password](https://github.com/Microsoft/vscode/issues/13680#issuecomment-414841885)   </span><br><span class="line">`git config --global core.sshCommand &quot;C:/Windows/System32/OpenSSH/ssh.exe&quot;`   </span><br><span class="line">```markdown</span><br><span class="line">1. Make Git use the OpenSSH that comes with Windows instead of the one that comes with Git.</span><br><span class="line">git config --global core.sshCommand &quot;C:/Windows/System32/OpenSSH/ssh.exe&quot;</span><br><span class="line">2. Set the ssh-agent service (not the one that comes with git) to run automatically.</span><br><span class="line">Open Task Manager, Services tab, click Open Services.</span><br><span class="line">Find OpenSSH Authentication Agent, open properties, set Startup Type to Automatic, hit OK.</span><br><span class="line">Also start the service or restart your computer.</span><br><span class="line">3. Add your password protected key to the agent.</span><br><span class="line">ssh-add</span><br><span class="line">It should automatically pick up keys stored in C:\Users\%USERNAME%\.ssh which is where ssh-keygen creates them.</span><br><span class="line">Enter your password(s) at the prompt.</span><br></pre></td></tr></table></figure></p>
+<p>是可以通过push提交<br>问题:<br><!-- <https://github.com/Microsoft/vscode/issues/13680#issuecomment-440524500> --></p>
+<ol>
+<li>提交的时候不需要密码   </li>
+<li>只有新建的ssh有用,如果用之前配过的,比如: ablob.ssh\id_rsa 就会报错<br><code>ssh-add .ssh/id_rsa</code> (从ablob复制过来)    </li>
+<li>貌似设置新的ssh后原先的(ablob)也没有输入密码就提交了    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">Permissions for &apos;D:/ablob/.ssh/id_rsa&apos; are too open.</span><br><span class="line">It is required that your private key files are NOT accessible by others.</span><br><span class="line">This private key will be ignored.</span><br><span class="line">Load key &quot;D:/ablob/.ssh/id_rsa&quot;: bad permissions</span><br><span class="line">git@github.com: Permission denied (publickey).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>#### git-credential-store - Helper<br>git-credential-store:<a href="https://git-scm.com/docs/git-credential-store" target="_blank" rel="noopener">https://git-scm.com/docs/git-credential-store</a><br>git-credential-store - Helper to store credentials on disk<br>保存密码在文件中,可以不用设置ssh,https的远程仓库也可以提交.<br>不足:保存密码的文件权限需要专门设置权限,来保证安全性        </p>
+<p>$PS: 余下都是一些设置ssh的教程,没有设置密码.可能不设置密码可以push成功<br><!-- 其它:   
+[vsCode 使用git问题](https://segmentfault.com/q/1010000013809777)
+ --></p>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><h2 id="sourceTree"><a href="#sourceTree" class="headerlink" title="sourceTree"></a>sourceTree</h2><p>破解: 需要认证时退出，修改以下文件后，重新启动。<br>C:\Users\huyalong\AppData\Local\Atlassian\SourceTree\account.json<br>C:\Users\huyalong\AppData\Local\Atlassian\SourceTree.exe_Url_1kidzh22pwslluf1rgjympiqlohmf5ps\3.1.3.3158\user.config<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;setting name=&quot;DiffContext&quot; serializeAs=&quot;String&quot;&gt;</span><br><span class="line">	&lt;value&gt;3&lt;/value&gt;</span><br><span class="line">&lt;/setting&gt;</span><br><span class="line">&lt;setting name=&quot;DiffWhiteSpaceIgnored&quot; serializeAs=&quot;String&quot;&gt;</span><br><span class="line">	&lt;value&gt;False&lt;/value&gt;</span><br><span class="line">&lt;/setting&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;$id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;$type&quot;: &quot;SourceTree.Api.Host.Identity.Model.IdentityAccount, SourceTree.Api.Host.Identity&quot;,</span><br><span class="line">    &quot;Authenticate&quot;: true,</span><br><span class="line">    &quot;HostInstance&quot;: &#123;</span><br><span class="line">      &quot;$id&quot;: &quot;2&quot;,</span><br><span class="line">      &quot;$type&quot;: &quot;SourceTree.Host.Atlassianaccount.AtlassianAccountInstance, SourceTree.Host.AtlassianAccount&quot;,</span><br><span class="line">      &quot;Host&quot;: &#123;</span><br><span class="line">        &quot;$id&quot;: &quot;3&quot;,</span><br><span class="line">        &quot;$type&quot;: &quot;SourceTree.Host.Atlassianaccount.AtlassianAccountHost, SourceTree.Host.AtlassianAccount&quot;,</span><br><span class="line">        &quot;Id&quot;: &quot;atlassian account&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;BaseUrl&quot;: &quot;https://id.atlassian.com/&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;Credentials&quot;: &#123;</span><br><span class="line">      &quot;$id&quot;: &quot;4&quot;,</span><br><span class="line">      &quot;$type&quot;: &quot;SourceTree.Model.BasicAuthCredentials, SourceTree.Api.Account&quot;,</span><br><span class="line">      &quot;Username&quot;: &quot;&quot;,</span><br><span class="line">      &quot;Email&quot;: null</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;IsDefault&quot;: false</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/jsplus/git文件忽略/" rel="next" title="Git文件忽略">
+                <i class="fa fa-chevron-left"></i> Git文件忽略
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/w3/ser/python3-runoob/" rel="prev" title="Python3-Runoob">
+                Python3-Runoob <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交"><span class="nav-text">提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#status"><span class="nav-text">status</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log"><span class="nav-text">log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找删除文件"><span class="nav-text">查找删除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clone两种方式-ssh和http"><span class="nav-text">clone两种方式:ssh和http</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pull-push"><span class="nav-text">pull/push</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache相关-gitignore"><span class="nav-text">cache相关/.gitignore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-push-origin-master"><span class="nav-text">git push origin master</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-fetch"><span class="nav-text">git fetch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fetch和pull的区别-001"><span class="nav-text">[fetch和pull的区别 001]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销和回滚-版本回退"><span class="nav-text">撤销和回滚/版本回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-revert-和-git-reset-的区别"><span class="nav-text">git revert 和 git reset 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#储藏与清理"><span class="nav-text">储藏与清理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tags"><span class="nav-text">tags</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改标签名"><span class="nav-text">修改标签名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge操作"><span class="nav-text">merge操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（Git代码冲突）"><span class="nav-text">（Git代码冲突）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clean"><span class="nav-text">clean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加多个远程仓库"><span class="nav-text">添加多个远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置多个仓库，想提交不同的gitignore"><span class="nav-text">配置多个仓库，想提交不同的gitignore</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-remote-HTTP-Basic-Access-denied"><span class="nav-text">git remote: HTTP Basic: Access denied</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH-key与公钥"><span class="nav-text">SSH key与公钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置多个ssh"><span class="nav-text">配置多个ssh</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-text">注意事项</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sourceTree"><span class="nav-text">sourceTree</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">408.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

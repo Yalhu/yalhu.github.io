@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2019.4.5 星期五 19:09  $PS: 自检1) namespace的缺点及解决方式：沙箱模式；2) 私有属性和方法，静态成员（公共和私有，互通），特权方法，揭示模式构造函数私有，对象字面量私有3) 模块模式，声明依赖4) 链式，对象常量，method()   5.1 命名空间模式5.2 声明依赖关系5.3 私有属性和方法5.4 模块模式5.5 沙箱模式5.6 静态成员5.7 对象常量5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS模式-5：对象创建模式">
+<meta property="og:url" content="http://yoursite.com/pdf/js/js模式/5_对象创建模式/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2019.4.5 星期五 19:09  $PS: 自检1) namespace的缺点及解决方式：沙箱模式；2) 私有属性和方法，静态成员（公共和私有，互通），特权方法，揭示模式构造函数私有，对象字面量私有3) 模块模式，声明依赖4) 链式，对象常量，method()   5.1 命名空间模式5.2 声明依赖关系5.3 私有属性和方法5.4 模块模式5.5 沙箱模式5.6 静态成员5.7 对象常量5">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.400Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS模式-5：对象创建模式">
+<meta name="twitter:description" content="2019.4.5 星期五 19:09  $PS: 自检1) namespace的缺点及解决方式：沙箱模式；2) 私有属性和方法，静态成员（公共和私有，互通），特权方法，揭示模式构造函数私有，对象字面量私有3) 模块模式，声明依赖4) 链式，对象常量，method()   5.1 命名空间模式5.2 声明依赖关系5.3 私有属性和方法5.4 模块模式5.5 沙箱模式5.6 静态成员5.7 对象常量5">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/pdf/js/js模式/5_对象创建模式/">
+
+
+
+
+
+  <title>JS模式-5：对象创建模式 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/pdf/js/js模式/5_对象创建模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS模式-5：对象创建模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-05T08:00:00+08:00">
+                2019-04-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/pdf/js/js模式/5_对象创建模式/" class="leancloud_visitors" data-flag-title="JS模式-5：对象创建模式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,249
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p style="text-align:right">2019.4.5 星期五 19:09</p>
+
+<p>$PS: 自检<br>1) namespace的缺点及解决方式：沙箱模式；<br>2) 私有属性和方法，静态成员（公共和私有，互通），特权方法，揭示模式<br>构造函数私有，对象字面量私有<br>3) 模块模式，声明依赖<br>4) 链式，对象常量，method()  </p>
+<p>5.1 命名空间模式<br>5.2 声明依赖关系<br>5.3 私有属性和方法<br>5.4 模块模式<br>5.5 沙箱模式<br>5.6 静态成员<br>5.7 对象常量<br>5.8 链模式<br>5.9 method()方法        </p>
+<a id="more"></a>
+<p>P96-P123    </p>
+<h2 id="5-1-命名空间模式-namesapce"><a href="#5-1-命名空间模式-namesapce" class="headerlink" title="5.1 命名空间模式  namesapce"></a>5.1 命名空间模式  namesapce</h2><p><code>MYAPP.modules.module1=...</code>  (大写也用于常量)<br>缺点：<br>1) 跟多前缀字符；2）全局一个实例意味任何部分代码都可以修改该实例；3）长嵌套名字更长/慢的属性解析查询<br>沙箱模式可解决  </p>
+<h3 id="1-通用命名空间函数"><a href="#1-通用命名空间函数" class="headerlink" title="1 通用命名空间函数"></a>1 通用命名空间函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 0 不安全</span></span><br><span class="line"><span class="keyword">var</span> MYAPP=&#123;&#125;</span><br><span class="line"><span class="comment">// 1 修正</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> MYAPP === <span class="string">'undefined'</span>) &#123;<span class="keyword">var</span> MYAPP=&#123;&#125;&#125;</span><br><span class="line"><span class="keyword">var</span> MYAPP=MYAPP || &#123;&#125;</span><br><span class="line"><span class="comment">// 2 附加检查会迅速导致大量重复代码  </span></span><br><span class="line">MYAPP.namesapce=<span class="function"><span class="keyword">function</span>(<span class="params">ns_sting</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> parts=ns_sting.split(<span class="string">'.'</span>), parent=MYAPP, i </span><br><span class="line">    <span class="comment">// 剥离最前面的冗余全局变量</span></span><br><span class="line">    <span class="keyword">if</span>(parts[<span class="number">0</span>] === <span class="string">'MYAPP'</span>) parts=parts.slice(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;parts.length;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> parent[parts[i]] === <span class="string">'undefined'</span>)&#123;</span><br><span class="line">            parent[parts[i]]=&#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        parent=parent[parent[i]]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> parent</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 3 使用</span></span><br><span class="line"><span class="comment">// 3-1 返回给一个变量</span></span><br><span class="line"><span class="keyword">var</span> module2=MYAPP.namesapce(<span class="string">'MYAPP.modules.module2'</span>)</span><br><span class="line"><span class="comment">// 3-2 忽略MYAPP</span></span><br><span class="line">MYAPP.namesapce(<span class="string">'modules.module2'</span>)</span><br><span class="line"><span class="comment">// 3-3 长命名空间</span></span><br><span class="line">MYAPP.namesapce(<span class="string">'once.upon.a.time.there.was.this.long.nested.property'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="5-2-声明依赖关系"><a href="#5-2-声明依赖关系" class="headerlink" title="5.2 声明依赖关系"></a>5.2 声明依赖关系</h2><p>优点： 1)显示的  2）更容易发现并解析  3）解析快；4）更小代码量（uglify）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myFun=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> event=YAHOO.util.Event,</span><br><span class="line">        dom=YAHOO.util.dom</span><br><span class="line">     <span class="comment">// 使用 event 和 dom 变量     </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="5-3-私有属性和方法"><a href="#5-3-私有属性和方法" class="headerlink" title="5.3 私有属性和方法"></a>5.3 私有属性和方法</h2><p>没有像java的表示私有、保护、或公共属性和方法 ；所有都是公共的  </p>
+<h3 id="1-私有成员"><a href="#1-私有成员" class="headerlink" title="1 私有成员"></a>1 私有成员</h3><p>闭包closure<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Gadget</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name=<span class="string">'iPod'</span></span><br><span class="line">    <span class="keyword">this</span>.getName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> name&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-特权方法-Privileged-Method"><a href="#2-特权方法-Privileged-Method" class="headerlink" title="2 特权方法 Privileged Method"></a>2 特权方法 Privileged Method</h3><p>可以访问私有成员的公共方法</p>
+<h3 id="3-私有性失效"><a href="#3-私有性失效" class="headerlink" title="3 私有性失效"></a>3 私有性失效</h3><p>返回私有变量是一个引用类型<br>1）只返回需要的值类型；2）shallow/deep copy  </p>
+<h3 id="4-对象字面量以及私有性"><a href="#4-对象字面量以及私有性" class="headerlink" title="4 对象字面量以及私有性"></a>4 对象字面量以及私有性</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myobj</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name=<span class="string">'my,oh my'</span></span><br><span class="line">    myobj=&#123;</span><br><span class="line">        getName:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125; <span class="comment">// 特权方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"><span class="comment">// 实现2: 模式模块module pattern </span></span><br><span class="line"><span class="keyword">var</span> myobj=(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name=<span class="string">'dsfs'</span></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="attr">getName</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;&#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<h3 id="5-原型和私有性"><a href="#5-原型和私有性" class="headerlink" title="5 原型和私有性"></a>5 原型和私有性</h3><p>避免都创建一遍，故添加到构造函数的prototype属性；还可以隐藏共享的私有成员<br>组合：构造函数的私有属性和对象字面量的私有属性<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Gadget</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 私有成员</span></span><br><span class="line">    <span class="keyword">var</span> name=<span class="string">'iPod '</span></span><br><span class="line">    <span class="comment">// 共有函数</span></span><br><span class="line">    <span class="keyword">this</span>.getName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">Gadget.prototype=(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> browser=<span class="string">'my webki'</span></span><br><span class="line">    <span class="comment">// 共有原型成员</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        getBrowser:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> browser&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<h3 id="6-私有方法揭示为公共方法"><a href="#6-私有方法揭示为公共方法" class="headerlink" title="6 私有方法揭示为公共方法"></a>6 私有方法揭示为公共方法</h3><p>揭示模块模式  revealing module rattern<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myarray</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> astr=<span class="string">'sdfs'</span>,toString=<span class="built_in">Object</span>.prototype.toString  </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">isArray</span>(<span class="params">a</span>)</span>&#123;<span class="keyword">return</span> &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">indexOf</span>(<span class="params">haystack,needle</span>)</span>&#123;&#125;</span><br><span class="line">    myarray=&#123;isArray,indexOf,<span class="attr">inArray</span>:indexOf&#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<p>如果发生意外，比如公共indexOf,但私有的indexOf安全，因此inArray继续正常  </p>
+<h2 id="5-4-模块模式-Module-pattern"><a href="#5-4-模块模式-Module-pattern" class="headerlink" title="5.4 模块模式 Module pattern"></a>5.4 模块模式 Module pattern</h2><p>多种模式组合：命名空间，即时函数，私有和特权成员，声明依赖<br>使用广泛.js没有包package的特殊语法,该模式提供一种创建自包含非耦合代码片段。。<br>黑盒功能，并且可根据需求添加，替换，删除这些模块<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1 命名空间</span></span><br><span class="line">MYAPP.namesapce(<span class="string">'MYAPP.utilities.array'</span>)</span><br><span class="line"><span class="comment">// 2 定义该模块:可提供私有作用域的即时函数，返回一个对象，具有公共接口的实际模块</span></span><br><span class="line">MYAPP.utilities.array=(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 4 顶部可 声明司有关，任何依赖</span></span><br><span class="line">    <span class="keyword">var</span> ubbj=MYAPP.utilities.object </span><br><span class="line">    <span class="keyword">var</span> ops=<span class="built_in">Object</span>.prototype.toString </span><br><span class="line">    <span class="comment">// 2 返回对象</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="comment">// 3 公共接口添加方法</span></span><br><span class="line">        inArray:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</span><br><span class="line">        isArray:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<h3 id="揭示模块模式"><a href="#揭示模块模式" class="headerlink" title="揭示模块模式"></a>揭示模块模式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MYAPP.utilities.array=(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 私有属性</span></span><br><span class="line">    <span class="keyword">var</span> ubbj=MYAPP.utilities.object, </span><br><span class="line">    <span class="keyword">var</span> ops=<span class="built_in">Object</span>.prototype.toString, </span><br><span class="line">    <span class="comment">// 私有方法</span></span><br><span class="line">    inArray=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;,</span><br><span class="line">    isArray=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">    <span class="comment">// 揭示公有api</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="comment">// 3 公共接口添加方法</span></span><br><span class="line">        inArray,</span><br><span class="line">        isArray,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<h3 id="创建构造函数的模块"><a href="#创建构造函数的模块" class="headerlink" title="创建构造函数的模块"></a>创建构造函数的模块</h3><p>比前面创建对象更为方便。任然使用模式模块，只不过返回函数，而不是对象<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">MYAPP.namesapce(<span class="string">'MYAPP.utilities.Array'</span>)</span><br><span class="line">MYAPP.utilities.Array=(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 依赖，私有属性和方法  </span></span><br><span class="line">    <span class="keyword">var</span> ubbj=MYAPP.utilities.object ,</span><br><span class="line">    <span class="keyword">var</span> ops=<span class="built_in">Object</span>.prototype.toString ,</span><br><span class="line">    Constr;</span><br><span class="line">    <span class="comment">// 可选的一次性初始化过程</span></span><br><span class="line">    <span class="comment">// 公有API——构造函数</span></span><br><span class="line">    Constr=<span class="function"><span class="keyword">function</span>(<span class="params">o</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.elements=<span class="keyword">this</span>.toArray(<span class="number">0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 公有API——原型</span></span><br><span class="line">    Constr.property=&#123;</span><br><span class="line">        <span class="keyword">constructor</span>:MYAPP.utilities.Array,</span><br><span class="line">        version:'2.0',</span><br><span class="line">        toArray:function(obj)&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 返回要分配给新命名空间的构造函数</span></span><br><span class="line">    <span class="keyword">return</span> Constr</span><br><span class="line">&#125;)()</span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">var</span> arr=<span class="keyword">new</span> MYAPP.utilities.Array(obj)</span><br></pre></td></tr></table></figure></p>
+<h3 id="将全局变量导入到模块中"><a href="#将全局变量导入到模块中" class="headerlink" title="将全局变量导入到模块中"></a>将全局变量导入到模块中</h3><p>可将参数传递到包装了模块的即时函数中。可以是任何值，通常是全局变量，甚至是全局对象本身的引用。加速解析，因为导入的变量成为了该函数的局部变量<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MYAPP.utilities.Array=(<span class="function"><span class="keyword">function</span>(<span class="params">app,global</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;)(MYAPP,<span class="keyword">this</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="5-5-沙箱模式"><a href="#5-5-沙箱模式" class="headerlink" title="5.5 沙箱模式"></a>5.5 沙箱模式</h2><p>解决命名空间模式缺点：无法是同一程序两个版本运行一个页面；需要长字符及解析</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="$使用"></a>$使用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Sandbox(<span class="function"><span class="keyword">function</span>(<span class="params">box</span>)</span>&#123;   &#125;)</span><br><span class="line">Sandbox([<span class="string">'ajax'</span>,<span class="string">'event'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">box</span>)</span>&#123;   &#125;)</span><br><span class="line">Sandbox(<span class="string">'ajax'</span>,<span class="string">'event'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">box</span>)</span>&#123;   &#125;)</span><br><span class="line">Sandbox(<span class="string">'*'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">box</span>)</span>&#123;   &#125;)</span><br><span class="line"><span class="comment">// ### 多次/嵌套</span></span><br><span class="line">Sandbox(<span class="string">'dom'</span>,funciton(box)&#123;</span><br><span class="line">    Sandbox(<span class="string">'ajax'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">box</span>)</span>&#123;     &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="实现"><a href="#实现" class="headerlink" title="$实现"></a>$实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ### 1 增加模块,接受当前实例box做为参数，还可向该实例添加额外的属性和方法  </span></span><br><span class="line">Sandbox.modules=&#123;&#125;</span><br><span class="line">Sandbox.modules.dom=<span class="function"><span class="keyword">function</span>(<span class="params">box</span>)</span>&#123;box.getElement=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;&#125;</span><br><span class="line">Sandbox.modules.event=<span class="function"><span class="keyword">function</span>(<span class="params">box</span>)</span>&#123;&#125;</span><br><span class="line"><span class="comment">// ### 2 实现构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sandbox</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> args=<span class="built_in">Array</span>.property.slice.call(<span class="built_in">arguments</span>)</span><br><span class="line">    callback=args.pop()</span><br><span class="line">    <span class="comment">// 模块可做为数组，或单独传递</span></span><br><span class="line">    modules=(args[<span class="number">0</span>]&amp;&amp;<span class="keyword">typeof</span> args[<span class="number">0</span>]===<span class="string">'string'</span>) ? args:args[<span class="number">0</span>]</span><br><span class="line">    ,i </span><br><span class="line">    <span class="comment">// 确保做为构造函数调用</span></span><br><span class="line">    <span class="keyword">if</span>(!(<span class="keyword">this</span> <span class="keyword">instanceof</span> Sandbox))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Sandbox(modules,callback)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 向`this`添加的属性</span></span><br><span class="line">    <span class="keyword">this</span>.a=<span class="number">1</span></span><br><span class="line">    <span class="comment">// 向该核心 this 对象添加模块</span></span><br><span class="line">    <span class="keyword">if</span>(!modules||modules===<span class="string">'*'</span>)&#123;</span><br><span class="line">        modules=[]</span><br><span class="line">        <span class="keyword">for</span>(i <span class="keyword">in</span> Sandbox.modules)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Sandbox.modules.hasOwnProperty(i))&#123;</span><br><span class="line">                modules.push(i)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 初始化所需模块 </span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;modules.length;i+=<span class="number">1</span>)&#123;</span><br><span class="line">        Sandbox.modules[modules[i]](<span class="keyword">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// call the callback</span></span><br><span class="line">    callback(<span class="keyword">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ### 需要的任何原型属性</span></span><br><span class="line">Sandbox.property=&#123;</span><br><span class="line">    nam:<span class="string">'My application'</span>,</span><br><span class="line">    version:<span class="string">'1.0'</span>,</span><br><span class="line">    getName:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="keyword">this</span>.name&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-6-静态成员"><a href="#5-6-静态成员" class="headerlink" title="5.6 静态成员"></a>5.6 静态成员</h2><p>从一个实例到另一个实例都不会发生改变的属性和方法。  </p>
+<h3 id="共有静态成员"><a href="#共有静态成员" class="headerlink" title="共有静态成员"></a>共有静态成员</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Gadget=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="comment">// 静态方法</span></span><br><span class="line">Gadget.isShiny=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="comment">// ### 1.1 有时可以是静态方法与实例一起工作; 需要注意this；</span></span><br><span class="line">Gadget.prototype.isShiny=Gadget.isShiny</span><br><span class="line"><span class="comment">// ### 2 instance有助于确认是谁调用的</span></span><br><span class="line">Gadget.isShiny=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span> <span class="keyword">instanceof</span> Gadget)&#123;  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 向原型添加一个普遍方法</span></span><br><span class="line">Gadget.property.isShiny=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Gadget.isShiny.call(<span class="keyword">this</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="私有静态成员"><a href="#私有静态成员" class="headerlink" title="私有静态成员"></a>私有静态成员</h3><p>1) 同一个构造函数创建的所有对象共享该成员<br>2) 构造函数外部不可访问该成员<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Gadget=(funciton()&#123;</span><br><span class="line">    <span class="keyword">var</span> counter=<span class="number">0</span></span><br><span class="line">    <span class="keyword">var</span> NewGadget=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        counter+=<span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 特权方法</span></span><br><span class="line">    NewGadget.property.getLastId=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">    <span class="comment">// 覆盖该构造函数</span></span><br><span class="line">    <span class="keyword">return</span> NewGadget</span><br><span class="line">    </span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<h2 id="5-7-对象常量"><a href="#5-7-对象常量" class="headerlink" title="5.7 对象常量"></a>5.7 对象常量</h2><p>创建一个私有属性，提供取值方法，不提供设置函数。（矫枉过正）<br>大写命名约定<br>$PS: 现在js已经有常量的概念了<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意：声明常量与内置属性不冲突，比如toString，hasOwnProperty等，通过hasOwnproperty检查；</span></span><br><span class="line">    <span class="comment">// 并且加前缀，确保 名称之间互相适应</span></span><br><span class="line"><span class="keyword">var</span> constant=(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> constants=&#123;&#125;</span><br><span class="line">    ,ownProp=<span class="built_in">Object</span>.property.hasOwnProperty</span><br><span class="line">    ,allowed=&#123;<span class="attr">string</span>:<span class="number">1</span>,<span class="attr">number</span>:<span class="number">1</span>,<span class="attr">boolean</span>:<span class="number">1</span>&#125;</span><br><span class="line">    ,prefix=(<span class="built_in">Math</span>.random()+<span class="string">'_'</span>).slice(<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="keyword">set</span>:function(name,value)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span>.isDefined(name)) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">            <span class="keyword">if</span>(!ownProp.call(allowed,<span class="keyword">typeof</span> value)) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">            constants[prefix+name] = value</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        isDefined:<span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> ownProp.call(constants,prefix+name)</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">get</span>:function(name)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span>.isDefined(name))&#123;</span><br><span class="line">                <span class="keyword">return</span> constants[prefix+name]</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"><span class="comment">//  使用:检测，set，尝试更改，取值</span></span><br><span class="line">constant.isDefined(<span class="string">'maxwidt'</span>)</span><br><span class="line">constant.set(<span class="string">'maxwith'</span>,<span class="number">450</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="5-8-链模式-Chaining-Pattern"><a href="#5-8-链模式-Chaining-Pattern" class="headerlink" title="5.8 链模式  Chaining Pattern"></a>5.8 链模式  Chaining Pattern</h2><p>当创建的方法返回五任何意义的值时，可以返回this<br>优缺点<br>缺点：难以调试，步骤太多，无法知道哪一个方法失效。 火车失事 train wreck</p>
+<h2 id="5-9-method-方法"><a href="#5-9-method-方法" class="headerlink" title="5.9 method()方法"></a>5.9 method()方法</h2><p>以类思考的程序员，是js更加类似类。作者回想起来并不值得推荐<br>语法糖：向编程语言中添加便利的功能  </p>
+<p>然而实例向this添加方法的机制效率低下，每一实例都重新创建，并且耗更多内存空间。也就产生prototype<br>许多程序员对prototype陌生，因此将其隐藏在方法之后<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Person=<span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name=name</span><br><span class="line">&#125;.</span><br><span class="line">    method(<span class="string">'getName'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="keyword">this</span>.name&#125;).</span><br><span class="line">    method(<span class="string">'setName'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;<span class="keyword">this</span>.name=name;<span class="keyword">return</span> <span class="keyword">this</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现.this指构造函数   </span></span><br><span class="line"><span class="keyword">if</span>(type <span class="keyword">of</span> <span class="built_in">Function</span>.property.method!==<span class="string">'function'</span>)&#123;</span><br><span class="line">    <span class="built_in">Function</span>.property.method=<span class="function"><span class="keyword">function</span>(<span class="params">name,implemention</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.property[name]=implemention</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span> </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p style="text-align:right">21:06</p>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/jsplus/jquery学习/" rel="next" title="Jquery学习">
+                <i class="fa fa-chevron-left"></i> Jquery学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/pdf/js/js模式/7_设计模式/" rel="prev" title="JS模式-7：设计模式">
+                JS模式-7：设计模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-命名空间模式-namesapce"><span class="nav-text">5.1 命名空间模式  namesapce</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-通用命名空间函数"><span class="nav-text">1 通用命名空间函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-声明依赖关系"><span class="nav-text">5.2 声明依赖关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-私有属性和方法"><span class="nav-text">5.3 私有属性和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-私有成员"><span class="nav-text">1 私有成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-特权方法-Privileged-Method"><span class="nav-text">2 特权方法 Privileged Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-私有性失效"><span class="nav-text">3 私有性失效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-对象字面量以及私有性"><span class="nav-text">4 对象字面量以及私有性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-原型和私有性"><span class="nav-text">5 原型和私有性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-私有方法揭示为公共方法"><span class="nav-text">6 私有方法揭示为公共方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-模块模式-Module-pattern"><span class="nav-text">5.4 模块模式 Module pattern</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#揭示模块模式"><span class="nav-text">揭示模块模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建构造函数的模块"><span class="nav-text">创建构造函数的模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将全局变量导入到模块中"><span class="nav-text">将全局变量导入到模块中</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-沙箱模式"><span class="nav-text">5.5 沙箱模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-text">$使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-text">$实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6-静态成员"><span class="nav-text">5.6 静态成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#共有静态成员"><span class="nav-text">共有静态成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有静态成员"><span class="nav-text">私有静态成员</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-7-对象常量"><span class="nav-text">5.7 对象常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-8-链模式-Chaining-Pattern"><span class="nav-text">5.8 链模式  Chaining Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-9-method-方法"><span class="nav-text">5.9 method()方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">408.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

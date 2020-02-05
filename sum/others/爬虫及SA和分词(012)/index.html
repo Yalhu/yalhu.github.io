@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2018.8.2 星期四 11:34  python简单爬图片，查看了爬去微博/招聘/微信 数据，及情感分析；也用脚本-插件批量下载文本-小说    爬虫 不只python，node和php等也可以    Ⅰ 爬虫选择比较后，并没有多大选择，也查了 情感分析和中文分词，选择node：1. 没有那么多需求。只是爬个数据玩，自己需要的数据，可以的话简单分析。不会去爬各大网站内容，自己再做一个内容系统，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫及SA和分词">
+<meta property="og:url" content="http://yoursite.com/sum/others/爬虫及SA和分词(012)/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2018.8.2 星期四 11:34  python简单爬图片，查看了爬去微博/招聘/微信 数据，及情感分析；也用脚本-插件批量下载文本-小说    爬虫 不只python，node和php等也可以    Ⅰ 爬虫选择比较后，并没有多大选择，也查了 情感分析和中文分词，选择node：1. 没有那么多需求。只是爬个数据玩，自己需要的数据，可以的话简单分析。不会去爬各大网站内容，自己再做一个内容系统，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="爬虫及SA和分词">
+<meta name="twitter:description" content="2018.8.2 星期四 11:34  python简单爬图片，查看了爬去微博/招聘/微信 数据，及情感分析；也用脚本-插件批量下载文本-小说    爬虫 不只python，node和php等也可以    Ⅰ 爬虫选择比较后，并没有多大选择，也查了 情感分析和中文分词，选择node：1. 没有那么多需求。只是爬个数据玩，自己需要的数据，可以的话简单分析。不会去爬各大网站内容，自己再做一个内容系统，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/others/爬虫及SA和分词(012)/">
+
+
+
+
+
+  <title>爬虫及SA和分词 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/others/爬虫及SA和分词(012)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">爬虫及SA和分词</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-02T08:00:00+08:00">
+                2018-08-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/others/爬虫及SA和分词(012)/" class="leancloud_visitors" data-flag-title="爬虫及SA和分词">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,655
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  17
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p style="text-align:right">2018.8.2 星期四 11:34</p>
+
+<p>python简单爬图片，查看了爬去微博/招聘/微信 数据，及情感分析；<br>也用脚本-插件批量下载文本-小说   </p>
+<p>爬虫 不只python，node和php等也可以   </p>
+<h1 id="Ⅰ-爬虫选择"><a href="#Ⅰ-爬虫选择" class="headerlink" title="Ⅰ 爬虫选择"></a>Ⅰ 爬虫选择</h1><p>比较后，并没有多大选择，也查了 情感分析和中文分词，选择node：<br>1. 没有那么多需求。只是爬个数据玩，自己需要的数据，可以的话简单分析。不会去爬各大网站内容，自己再做一个内容系统，或者提供什么服务<br>2. js语法——ES 比较熟悉，最基本/简单的需求node都可以满足。python毕竟也是一门语言，需要仔细学习。选node不光写了js，也加强了node。<br>3. node也可以查找一些资料及库   </p>
+<h1 id="Ⅱ-情感分析"><a href="#Ⅱ-情感分析" class="headerlink" title="Ⅱ 情感分析"></a>Ⅱ 情感分析</h1><!-- 包括中文情感分析     -->
+<p># A [Twitter是怎么做情感分析的？长文解读！]<br><a href="https://yq.aliyun.com/articles/65239" target="_blank" rel="noopener">https://yq.aliyun.com/articles/65239</a>    </p>
+<p>1 引言<br>1.1 情感分析的应用<br>情感分析可应用于众多领域。;A. 电子商务 ;B. 市场呼声（Voice of the Market，VOM）;C. 消费者呼声（Voice of the Customer，VOC）;D. 品牌声誉管理;E. 政府<br>1.2 推文的特症<br>从情感分析的角度，我们讨论Twitter的以下几点特征：推文长度、使用的语言、数据可用性、话题范围、       </p>
+<p>2 相关工作<br>3 方法<br>我们使用了不同的特征集和机器学习分类器来确定适用于Twitter情感分析的最佳组合。 我们还尝试了各种预处理操作，处理文本中的标点符号、表情符号、Twitter特定术语以及词干。我们对以下特征进行了研究——一元词串、二元词串、三元词串、否定检测。最后，我们使用不同机器学习算法——朴素贝叶斯、决策树和最大熵模型，来训练我们的分类器。<br>3.1 数据集<br>Twitter情感分析面临的主要挑战之一便是标记数据的采集。研究者们公开了以下数据集用于分类器的训练和测试。<br>3.1.1 Twitter情感语料库     3.1.2 斯坦福Twitter语料库       </p>
+<p>3.2 预处理<br>3.2.1 话题标签  3.2.2 用户句柄    3.2.3 链接  3.2.4 表情符号    3.2.5 标点符号  3.2.6 重复字符      </p>
+<p>3.3 词干提取算法<br>所有的词干提取算法都属于以下几种主要类型——基于词缀去除的、基于统计的以及混合型的。<br>第一种类型，即词缀去除算法，是最基本一种词干提取算法。这些词干提取算法应用一组转换规则，试图剥离每个词的前缀和/或后缀[8]。普通的词干提取算法在单词的第N个字符处进行截断。但这很明显在实际场景下并不适用。   </p>
+<p>另一种广泛使用的著名词干分析器将在下一节介绍。<br>3.3.1 Porter词干提取算法    3.3.2 词形还原算法      </p>
+<p>3.4 特征<br>3.4.1 一元词串      3.4.2 n元词串   3.4.3 否定处理      </p>
+<p>4 实验<br>4.1 朴素贝叶斯      4.2 最大熵分类器        </p>
+<p>5 未来展望<br>研究支持向量机，为印地语推文构造分类器，使用语义分析改进结果    </p>
+<p>6 结论<br>我们使用标注数据集，为Twitter构建了一个情感分类器。同时，为了进行情感分析，我们还探讨了使用两步分类器与否定检测间的相关性。     </p>
+<p>我们的基准分类器仅使用一元词串特征，达到了约80.00%的准确率。如果使用否定检测或引入二元词串和三元词串，准确率会有所增长。因此，我们可以得出结论，否定检测和高阶n元词串都可用于文本分类。然而，如果我们同时使用否定检测和n元词串，准确率会略微下降。我们还注意到，单步分类器相比两步分类器效果更为突出。而且，一般来说，朴素贝叶斯分类器的性能优于最大熵分类器。</p>
+<p>以一元词串+二元词串+三元词串为特征并使用朴素贝叶斯分类器进行训练，我们达到了最佳的分类效果，准确率为86.68%。</p>
+<p># B [自然语言处理]<br><a href="http://www.cnblogs.com/en-heng/category/882183.html" target="_blank" rel="noopener">http://www.cnblogs.com/en-heng/category/882183.html</a>   </p>
+<p># C [利用深度学习方法进行情感分析以及在海航舆情云平台的实践]<br><a href="https://blog.csdn.net/javastart/article/details/56292109" target="_blank" rel="noopener">https://blog.csdn.net/javastart/article/details/56292109</a><br>原理解析<br>1.文本的预处理<br>由网络爬虫爬取到的原始语料，通常都会带有我们不需要的信息，比如额外的Html标签，所以需要对语料进行预处理。这里的预处理工作主要是为了提取完整的句子，去掉一些多余的标记符号。处理之后我们需要对原始语料进行情感标注，我们可以用-1标记消极情感评论，1标记积极情感评论。</p>
+<p>2.分词<br>为了判断句子中是否存在情感词典中相应的词语，我们需要把句子准确切割为一个个词语，即分词。现有可选择的分词工具有很多，我们可以研读各分词工具的测试报告，根据自己的需求选择合适的分词工具。</p>
+<p>3.构建情感词典<br>情感词典可分为四个部分：积极情感词典、消极情感词典、否定词典以及程度副词词典。为了得到更加完整的情感词典，我们可以收集多个情感词典，对它们进行整合去重，同时需要对部分词语进行调整，以达到尽可能高的准确率。</p>
+<p>此外，我们需要根据需求加入某些行业词汇，以增加分类中的命中率。不同行业某些词语的词频会有比较大的差别，而这些词有可能是情感分类的关键词之一。比如手机行业，“耐摔”和“防水”就是在这个领域有积极情绪的词。因此，有必要将这些因素考虑进模型之中。</p>
+<p>4.分类<br>为了简单起见，我们将每个积极情感词语赋予权重1，将每个消极情感词语赋予权重-1，并且假设情感值满足线性叠加原理；我们已经将句子进行分词，如果分词后的词语向量包含相应的词语，就加上其对应的权值，其中，否定词和程度副词会有特殊的判别规则，否定词会导致权值取反，而程度副词则让权值加倍。最后，根据总权值的正负性来判断句子的情感。基本的规则如图所示。</p>
+<h1 id="Ⅱ-Ⅱ-中文情感分析"><a href="#Ⅱ-Ⅱ-中文情感分析" class="headerlink" title="Ⅱ-Ⅱ 中文情感分析"></a>Ⅱ-Ⅱ 中文情感分析</h1><p># A [中文情感分类方法简介]<br><a href="http://ir.hit.edu.cn/~zkli/report/Brief%20Intro%20to%20Sentiment%20Analysis(share).pdf" target="_blank" rel="noopener">http://ir.hit.edu.cn/~zkli/report/Brief%20Intro%20to%20Sentiment%20Analysis(share).pdf</a>    </p>
+<p>1. 情感分类有什么用<br>1. 情感分类的任务有哪些<br>1. 情感分类的主要方法<br>1. 使用分词&amp;朴素贝叶斯做实验<br>1. 几点思考    </p>
+<p># B 中文情感分析 (Sentiment Analysis) 的难点在哪？现在做得比较好的有哪几家？<br><a href="https://www.zhihu.com/question/20700012" target="_blank" rel="noopener">https://www.zhihu.com/question/20700012</a>    </p>
+<p># C 中文文本情感分析：基于机器学习方法的思路<br><a href="https://blog.csdn.net/u013737526/article/details/73201572" target="_blank" rel="noopener">https://blog.csdn.net/u013737526/article/details/73201572</a><br>1.常用步骤  </p>
+<p>2.中文分词<br>1）这是相对于英文文本情感分析，中文独有的预处理。<br>2）常用方法：基于词典、基于规则、基于统计、基于字标注、基于人工智能。<br>3）常用工具：哈工大—语言云、东北大学NiuTrans统计机器翻译系统、中科院张华平博士ICTCLAS、波森科技、结巴分词、Ansj分词，HanLP。    </p>
+<p>3.特征提取<br>1）文本中拿什么作为特征。<br>2）常用方法：根据词性（adj、adv、v）、单词进行组合（unigram、bigram）、位置。<br>3）使用词的组合表示文本，两种方式：词出现与否、词出现的次数。   </p>
+<p>4.特征选择<br>1）选择哪些特征，如果把所有的特征都作为特征计算，那计算量非常大，高维稀疏矩阵。<br>2）常用方法：去停用词，卡方，互信息。<br>3）常用工具：word2vector ，doc2vec      </p>
+<p>5.分类模型<br>1）训练、测试。<br>1) 常用方法：朴素贝叶斯、最大熵、svm。      </p>
+<p>6.评价指标<br>1）准确率<br>Accuracy = (TP + TN)/(TP + FN + FP + TN) 反映了分类器统对整个样本的判定能力——能将正的判定为正，负的判定为负 。<br>2）精确率<br>Precision = TP/(TP+FP) 反映了被分类器判定的正例中真正的正例样本的比重<br>3）召回率<br>Recall = TP/(TP+FN) 反映了被正确判定的正例占总的正例的比重      </p>
+<p># D sentiment, 基于AFINN的node.js 情感分析<br><a href="https://www.helplib.com/GitHub/article_135674" target="_blank" rel="noopener">https://www.helplib.com/GitHub/article_135674</a><br><a href="https://github.com/thisandagain/sentiment" target="_blank" rel="noopener">https://github.com/thisandagain/sentiment</a>   </p>
+<p>工作原理<br>AFINN<br>AFINN是一个单词列表，它的价格为整数，减五( 负片) 和五( 正) 。 情绪分析是通过交叉检查 string tokens(words, emojis) 和AFINN列表并获得它们各自的分数来执行的。 比较评分是简单的： sum of each token/number of tokens 例如让我们执行以下操作：</p>
+<p>返回的对象<br>得分: 通过添加recongnized单词的情绪值来计算得分。<br>比较: 输入字符串的比较分数。<br>标记: 输入字符串中的单词或者符号等所有符号。<br>单词: 从AFINN列表中找到的输入字符串中的单词列表。<br>正数: AFINN列表中找到的输入字符串中肯定单词的列表。<br>负: 在AFINN列表中找到的输入字符串中的否定单词列表。<br>在这种情况下，爱值值为 3，敏感度为 -2，它的余标记为中性值为 0. 因为字符串有 9个标记，因此结果比较得分如下所示： (3 + -2)/9 = 0.111111111</p>
+<p>这种方法使你具有 0个中点，上下界约束为正和负 5 ( 与每个标记相同) 。   </p>
+<p>$_PS: sentiment-zh_cn :<a href="https://github.com/omegacoleman/sentiment-zh_cn" target="_blank" rel="noopener">https://github.com/omegacoleman/sentiment-zh_cn</a>   </p>
+<p># E Popular NPM sentiment analysis Projects - Libraries.io<br><a href="https://libraries.io/search?keywords=sentiment+analysis&amp;platforms=NPM" target="_blank" rel="noopener">https://libraries.io/search?keywords=sentiment+analysis&amp;platforms=NPM</a>   </p>
+<h1 id="Ⅲ-分词-中文分词"><a href="#Ⅲ-分词-中文分词" class="headerlink" title="Ⅲ 分词/中文分词"></a>Ⅲ 分词/中文分词</h1><!-- 主要是中文分词    -->
+<p># A [中文分词十年又回顾: 2007-2017]<br><a href="http://bcmi.sjtu.edu.cn/~zhaohai/pubs/CWS-10Year-Review-2.pdf" target="_blank" rel="noopener">http://bcmi.sjtu.edu.cn/~zhaohai/pubs/CWS-10Year-Review-2.pdf</a>   </p>
+<p># B [中文分词算法总结]<br><a href="https://www.jianshu.com/p/e978053b0b95" target="_blank" rel="noopener">https://www.jianshu.com/p/e978053b0b95</a>    </p>
+<p>中文分词和搜索引擎<br>中文分词技术<br>现有的分词算法可分为三大类：基于字符串匹配的分词方法、基于理解的分词方法和基于统计的分词方法。</p>
+<p># C [有哪些比较好的中文分词方案？]<br><a href="https://www.zhihu.com/question/19578687" target="_blank" rel="noopener">https://www.zhihu.com/question/19578687</a>   </p>
+<p># D 专栏 | 中文分词工具测评<br><a href="http://www.sohu.com/a/120375125_465975" target="_blank" rel="noopener">http://www.sohu.com/a/120375125_465975</a><br>## 中文分词工具<br>本文选择了4个常见的分词工具，分别是：哈工大LTP、中科院计算所NLPIR、清华大学THULAC和jieba，为了对比分词速度，选择了这四个工具的c++版本进行评测。     </p>
+<p>1、LTP<br>2、NLPIR<br>3、THULAC<br>4、jieba<br>## 测试数据集<br>1、SIGHAN Bakeoff 2005 MSR, 560KB<br>2、SIGHAN Bakeoff 2005 PKU, 510KB<br>3、人民日报 2014, 65MB  </p>
+<p>前两个数据集是SIGHAN于2005年组织的中文分词比赛所用的数据集，也是学术界测试分词工具的标准数据集，本文用于测试各大分词工具的准确性，而最后一个数据集规模较大，用于测试分词速度。  </p>
+<p>$_PS: jieba python<br>友情链接<br><a href="https://github.com/baidu/lac" target="_blank" rel="noopener">https://github.com/baidu/lac</a> 百度中文词法分析（分词+词性+专名）系统<br><a href="https://github.com/baidu/AnyQ" target="_blank" rel="noopener">https://github.com/baidu/AnyQ</a> 百度FAQ自动问答系统<br><a href="https://github.com/baidu/Senta" target="_blank" rel="noopener">https://github.com/baidu/Senta</a> 百度情感识别系统<br>$_PS: end   </p>
+<h3 id="nodejs中文分词"><a href="#nodejs中文分词" class="headerlink" title="nodejs中文分词"></a>nodejs中文分词</h3><p># A 3大Node.js中文分词模块对比<br><a href="http://geek100.com/2945.html" target="_blank" rel="noopener">http://geek100.com/2945.html</a><br>node-segment<br>nodejieba<br>node-analyzer   </p>
+<p># B Node.JS 中文分词模块<br>## 1 mmseg-node<br>一个基于 libmmseg 的 NodeJS 驱动。<br>Github：<a href="https://github.com/zzdhidden/mmseg-node" target="_blank" rel="noopener">https://github.com/zzdhidden/mmseg-node</a>   </p>
+<p>## 2 nseg<br>基于 MMSG 中文分词算法。<br>GitHub：<a href="https://github.com/mountain/nseg" target="_blank" rel="noopener">https://github.com/mountain/nseg</a>   </p>
+<p>## 3 node-segment<br>node-segment 模块以盘古分词组件中的词库为基础，算法设计也部分参考了盘古分词组件中的算法。<br>Github：<a href="https://github.com/leizongmin/node-segment" target="_blank" rel="noopener">https://github.com/leizongmin/node-segment</a>   </p>
+<p># C natural 用 node.js 进行自然语言处理<br>我们曾经介绍过用Python的TextBlob模块对文本进行情感分析，node.js同样可以进行自然预言处理。natural模块已经支持词法分析、词干分析、分类、语音、反比文档频数权重评价、WordNet、字符串相似度等处理。     </p>
+<p>目前为止，大多数算法还仅限于英文，以后会逐渐增加多语言支持。现在已支持俄语和西班牙语的词干分析。  </p>
+<h3 id="python-中文分词"><a href="#python-中文分词" class="headerlink" title="python 中文分词"></a>python 中文分词</h3><p># [中文分词原理及工具]<br><a href="https://cuiqingcai.com/5844.html" target="_blank" rel="noopener">https://cuiqingcai.com/5844.html</a>   </p>
+<p>基于规则的分词方法<br>基于统计的分词方法<br>基于语义的分词方法<br>基于理解的分词方法  </p>
+<p>分词工具<br>在这里介绍几个比较有代表性的支持分词的 Python 库，主要有：  </p>
+<ol>
+<li>jieba<br>专用于分词的 Python 库，GitHub：<a href="https://github.com/fxsjy/jieba，分词效果较好。" target="_blank" rel="noopener">https://github.com/fxsjy/jieba，分词效果较好。</a>  </li>
+<li>SnowNLP<br>SnowNLP: Simplified Chinese Text Processing，可以方便的处理中文文本内容，是受到了 TextBlob 的启发而写的，由于现在大部分的自然语言处理库基本都是针对英文的，于是写了一个方便处理中文的类库，并且和 TextBlob 不同的是，这里没有用 NLTK，所有的算法都是自己实现的，并且自带了一些训练好的字典。GitHub地址：<a href="https://github.com/isnowfy/snownlp。" target="_blank" rel="noopener">https://github.com/isnowfy/snownlp。</a></li>
+<li>THULAC<br>THULAC（THU Lexical Analyzer for Chinese）由清华大学自然语言处理与社会人文计算实验室研制推出的一套中文词法分析工具包，GitHub 链接：<a href="https://github.com/thunlp/THULAC-Python，具有中文分词和词性标注功能。THULAC具有如下几个特点：" target="_blank" rel="noopener">https://github.com/thunlp/THULAC-Python，具有中文分词和词性标注功能。THULAC具有如下几个特点：</a></li>
+<li>NLPIR<br>NLPIR 分词系统，前身为2000年发布的 ICTCLAS 词法分析系统，GitHub 链接：<a href="https://github.com/NLPIR-team/NLPIR，是由北京理工大学张华平博士研发的中文分词系统，经过十余年的不断完善，拥有丰富的功能和强大的性能。NLPIR是一整套对原始文本集进行处理和加工的软件，提供了中间件处理效果的可视化展示，也可以作为小规模数据的处理加工工具。主要功能包括：中文分词，词性标注，命名实体识别，用户词典、新词发现与关键词提取等功能。另外对于分词功能，它有" target="_blank" rel="noopener">https://github.com/NLPIR-team/NLPIR，是由北京理工大学张华平博士研发的中文分词系统，经过十余年的不断完善，拥有丰富的功能和强大的性能。NLPIR是一整套对原始文本集进行处理和加工的软件，提供了中间件处理效果的可视化展示，也可以作为小规模数据的处理加工工具。主要功能包括：中文分词，词性标注，命名实体识别，用户词典、新词发现与关键词提取等功能。另外对于分词功能，它有</a> Python 实现的版本，GitHub 链接：<a href="https://github.com/tsroten/pynlpir。" target="_blank" rel="noopener">https://github.com/tsroten/pynlpir。</a></li>
+</ol>
+<p>$_PS:<a href="http://www.52nlp.cn/category/word-segmentation" target="_blank" rel="noopener">推荐NLPIR大数据语义智能分析平台</a>     </p>
+<ol start="5">
+<li>NLTK<br>NLTK，Natural Language Toolkit，是一个自然语言处理的包工具，各种多种 NLP 处理相关功能，GitHub 链接：<a href="https://github.com/nltk/nltk。" target="_blank" rel="noopener">https://github.com/nltk/nltk。</a>  </li>
+</ol>
+<p>但是 NLTK 对于中文分词是不支持的，    </p>
+<ol start="6">
+<li>LTP<br>语言技术平台（Language Technology Platform，LTP）是哈工大社会计算与信息检索研究中心历时十年开发的一整套中文语言处理系统。LTP制定了基于XML的语言处理结果表示，并在此基础上提供了一整套自底向上的丰富而且高效的中文语言处理模块（包括词法、句法、语义等6项中文处理核心技术），以及基于动态链接库（Dynamic Link Library, DLL）的应用程序接口、可视化工具，并且能够以网络服务（Web Service）的形式进行使用。    </li>
+</ol>
+<p>LTP 有 Python 版本，GitHub地址：<a href="https://github.com/HIT-SCIR/pyltp，另外运行的时候需要下载模型，模型还比较大，下载地址：http://ltp.ai/download.html。" target="_blank" rel="noopener">https://github.com/HIT-SCIR/pyltp，另外运行的时候需要下载模型，模型还比较大，下载地址：http://ltp.ai/download.html。</a>    </p>
+<h1 id="Ⅳ-词云图"><a href="#Ⅳ-词云图" class="headerlink" title="Ⅳ 词云图"></a>Ⅳ 词云图</h1><p>基于前端：js2wordcloud,d3.js    </p>
+<p>python还有其他的分析/可视化工具/库       </p>
+<h1 id="爬虫选择"><a href="#爬虫选择" class="headerlink" title="爬虫选择"></a>爬虫选择</h1><p style="text-align:right">2019.2.18 星期二 10:48</p>
+
+<!-- [PHP, Python, Node.js 哪个比较适合写爬虫](https://www.zhihu.com/question/23643061)    -->
+<!-- [哪种语言合适写爬虫程序](https://blog.csdn.net/wakice/article/details/50668359)  -->
+<p>主要看你定义的“爬虫”干什么用。<br>1、如果是定向爬取几个页面，做一些简单的页面解析，爬取效率不是核心要求，那么用什么语言差异不大。<br>当然要是页面结构复杂，正则表达式写得巨复杂，尤其是用过那些支持xpath的类库/爬虫库后，就会发现此种方式虽然入门门槛低，但扩展性、可维护性等都奇差。因此此种情况下还是推荐采用一些现成的爬虫库，诸如xpath、多线程支持还是必须考虑的因素。</p>
+<p>2、如果是定向爬取，且主要目标是解析js动态生成的内容   此时候，页面内容是有js/ajax动态生成的，用普通的请求页面-&gt;解析的方法就不管用了，需要借助一个类似firefox、chrome浏览器的js引擎来对页面的js代码做动态解析。   此种情况下，推荐考虑casperJS+phantomjs或slimerJS+phantomjs ，当然诸如selenium之类的也可以考虑。</p>
+<p>3、如果爬虫是涉及大规模网站爬取，效率、扩展性、可维护性等是必须考虑的因素时候    大规模爬虫爬取涉及诸多问题：多线程并发、I/O机制、分布式爬取、消息通讯、判重机制、任务调度等等，此时候语言和所用框架的选取就具有极大意义了。     </p>
+<p>PHP对多线程、异步支持较差，不建议采用。    </p>
+<p>NodeJS：对一些垂直网站爬取倒可以，但由于分布式爬取、消息通讯等支持较弱，根据自己情况判断。     </p>
+<p>Python：强烈建议，对以上问题都有较好支持。尤其是Scrapy框架值得作为第一选择。<br>优点诸多：支持xpath；基于twisted，性能不错；有较好的调试工具；<br>此种情况下，如果还需要做js动态内容的解析，casperjs就不适合了，只有基于诸如chrome V8引擎之类自己做js引擎。     </p>
+<p>至于C、C++虽然性能不错，但不推荐，尤其是考虑到成本等诸多因素；对于大部分公司还是建议基于一些开源的框架来做，不要自己发明轮子，做一个简单的爬虫容易，但要做一个完备的爬虫挺难的。    </p>
+<p>像我搭建的微信公众号内容聚合的网站<a href="http://lewuxian.com就是基于Scrapy做的，当然还涉及消息队列等。可以参考下图：" target="_blank" rel="noopener">http://lewuxian.com就是基于Scrapy做的，当然还涉及消息队列等。可以参考下图：</a></p>
+<!-- $end -->
+<p>scrapy中文网：<a href="http://www.scrapyd.cn/doc/147.html" target="_blank" rel="noopener">http://www.scrapyd.cn/doc/147.html</a><br>CasperJS:<a href="http://casperjs.org/" target="_blank" rel="noopener">http://casperjs.org/</a>   </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/jsplus/hybris开发/" rel="next" title="Hybris开发">
+                <i class="fa fa-chevron-left"></i> Hybris开发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/jsplus/sketchpad/" rel="prev" title="画板练习">
+                画板练习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ⅰ-爬虫选择"><span class="nav-text">Ⅰ 爬虫选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ⅱ-情感分析"><span class="nav-text">Ⅱ 情感分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ⅱ-Ⅱ-中文情感分析"><span class="nav-text">Ⅱ-Ⅱ 中文情感分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ⅲ-分词-中文分词"><span class="nav-text">Ⅲ 分词/中文分词</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs中文分词"><span class="nav-text">nodejs中文分词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python-中文分词"><span class="nav-text">python 中文分词</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Ⅳ-词云图"><span class="nav-text">Ⅳ 词云图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#爬虫选择"><span class="nav-text">爬虫选择</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">408.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

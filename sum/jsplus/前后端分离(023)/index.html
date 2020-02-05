@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="javascript,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2019.5.3 星期五 23：45   前后端分离开发痛点解决问题：文档，mock data/mock server，自动化测试上面三个单拆开来，都不难；关键是怎么和自动测试集合在一起     还有 契约测试：基于持续集成与自动化测试  契约测试：当我们定义好了这个API的规范时，这个API就可以称为是前后端之间的契约，这种设计方式称之为契约式测试     分述文档许多写文档的库，比如：jsDo">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前后端分离">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/前后端分离(023)/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2019.5.3 星期五 23：45   前后端分离开发痛点解决问题：文档，mock data/mock server，自动化测试上面三个单拆开来，都不难；关键是怎么和自动测试集合在一起     还有 契约测试：基于持续集成与自动化测试  契约测试：当我们定义好了这个API的规范时，这个API就可以称为是前后端之间的契约，这种设计方式称之为契约式测试     分述文档许多写文档的库，比如：jsDo">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前后端分离">
+<meta name="twitter:description" content="2019.5.3 星期五 23：45   前后端分离开发痛点解决问题：文档，mock data/mock server，自动化测试上面三个单拆开来，都不难；关键是怎么和自动测试集合在一起     还有 契约测试：基于持续集成与自动化测试  契约测试：当我们定义好了这个API的规范时，这个API就可以称为是前后端之间的契约，这种设计方式称之为契约式测试     分述文档许多写文档的库，比如：jsDo">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/前后端分离(023)/">
+
+
+
+
+
+  <title>前后端分离 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/前后端分离(023)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前后端分离</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T08:00:00+08:00">
+                2019-05-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/前后端分离(023)/" class="leancloud_visitors" data-flag-title="前后端分离">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,091
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p style="text-align:right">2019.5.3 星期五 23：45 </p>
+
+<p>前后端分离开发痛点<br>解决问题：文档，mock data/mock server，自动化测试<br>上面三个单拆开来，都不难；关键是怎么和自动测试集合在一起    </p>
+<p>还有 契约测试：基于持续集成与自动化测试</p>
+<blockquote>
+<p>契约测试：当我们定义好了这个API的规范时，这个API就可以称为是前后端之间的契约，这种设计方式称之为契约式测试  </p>
+</blockquote>
+<!-- [你是如何构建 Web 前端 Mock Server 的？](https://www.zhihu.com/question/35436669) -->
+<h2 id="分述"><a href="#分述" class="headerlink" title="分述"></a>分述</h2><h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><p>许多写文档的库，比如：jsDoc、apidoc，swagger，showDoc，<br>YUIDoc、Dox、Docco、JSDuck   </p>
+<p>$BLOB:[文档注释生成库调研]</p>
+<p>根据一定的规则，写文档。也可以直接从注释中生成。   </p>
+<h3 id="mock-data"><a href="#mock-data" class="headerlink" title="mock data"></a>mock data</h3><p>如果只是mock data/mock server 是比较简单的。<br>mock data的库：fakejs, mockjs<br>方式：<br>1) 代码中硬编码(直接写数据)<br>2) 封装拦截器<br>3) 为所有接口统一添加前缀<br>4) 代理。server代理，工具代理<br>webpack-dev-server,nginx<br>Fiddler、charles; chrome 插件($PS: 应该可以实现)   </p>
+<p>mock server：json-server，express，mockjs，…<br>有的代价比较大，比如express；直接mock data简单。只是没有网络请求，但是不影响异步，可以封装Promise   </p>
+<h3 id="测试-自动测试"><a href="#测试-自动测试" class="headerlink" title="测试/自动测试"></a>测试/自动测试</h3><p>单个接口：get 可以直接在浏览器url请求<br>post等需要借助工具/插件：postman，runapi,36nu<br><!-- http://runapi.showdoc.cc/     --><br><!-- http://www.36nu.com/apiTest --></p>
+<p>如果多个接口要测试，需要写测试用例/导入测试数据，可以自动测试<br>正常情况，非正常情况（参数判断，返回判断，边界值，异常）   </p>
+<p>需要写脚本测试，可以建表格导入不同的测试数据，也可以测试性能。生成报告？？<br>上述不包括性能测试。有比较强大的可以顺带测试性能的，比如基于java的（$PS: 咱也不熟）  </p>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h3 id="以前做法"><a href="#以前做法" class="headerlink" title="以前做法"></a>以前做法</h3><p>hybris 开发：json server 试成功也没有用（chrome设置也可以直接请求json文件）<br>直接引入fakejs和fake data ，硬编码。<br>fake相较于mock简单，造假能力也丰富，不同于mock的语法、规则，没有占位符，api（命名）一看就懂   </p>
+<p>danghao一期：没有发送请求，硬编码数据，需要的地方用Promise返回数据。（当时已经证明接口是通的）<br>danghao二期: 发送请求，用webpack-dev-server 做了代理（都代理到同一个接口了），请求回来的数据直接硬编码，也没有fake  </p>
+<h3 id="现在"><a href="#现在" class="headerlink" title="现在"></a>现在</h3><p>首先没有文档，需要文档，这是最主要的。<br>其次，最好可以对后端的接口做自动测试，通过后再接入，不需要挨个去测后端的接口（即使后端测完，也需要验证；而且他们测的也不全/正确）<br>mock data也少不了     </p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="showdoc"><a href="#showdoc" class="headerlink" title="showdoc"></a>showdoc</h3><p><a href="https://www.showdoc.cc/" target="_blank" rel="noopener">https://www.showdoc.cc/</a><br>适合写文档，单纯的文档。可以有多个页面，可以写api文档，字典，说明书、术规范说明文档<br>可以团队管理，自己搭环境    </p>
+<p>没有mock data能力，也没有导出数据。测试更没有    </p>
+<h3 id="swagger-ui"><a href="#swagger-ui" class="headerlink" title="swagger-ui"></a>swagger-ui</h3><p><a href="https://github.com/swagger-api/swagger-ui" target="_blank" rel="noopener">https://github.com/swagger-api/swagger-ui</a><br>$PS: 有在线编辑器<br><a href="http://swagger.io" target="_blank" rel="noopener">http://swagger.io</a><br>swagger语法写起来比较复杂，虽然功能看起来很强大，yaml语法似乎写起来也省事（$PS: 只用缩进看起来有晃眼）<br>可以对接口进行测试（try it out），接口可以提供访问白名单？？   </p>
+<p>和jsdocs 比起来，还是jsdoc对前端友好一些。但是jsdoc貌似只生成文档，在js中写写注释还是不错的。如果写js库的话，可以考虑<br>fakejs/mockjs 只生成mock数据，或拦截请求，没有文档   </p>
+<p>postman 只对接口进行测试，可以写requests,可以添加到scenarios 做自动测试，也有ASSERTIONS<br>同样不是文档，也无法mock data   </p>
+<h3 id="rap2"><a href="#rap2" class="headerlink" title="rap2"></a>rap2</h3><p><a href="http://rap2.taobao.org/repository" target="_blank" rel="noopener">http://rap2.taobao.org/repository</a><br><a href="https://github.com/thx/RAP/" target="_blank" rel="noopener">https://github.com/thx/RAP/</a><br>文档：twiki  $PS: 好像还是rap1<br>上面是公开的在线地址，也可以自己搭建<br>建仓库，有model概念，团队管理，写文档，mock data/mock server ，还有状态    </p>
+<p>关键这个2，页面不鲁棒：不是加载半天不出来，就是提交缓慢<br>$PS: 可能和作者后端不熟有关   </p>
+<p>如果要做测试，可以配合postman一起使用      </p>
+<h3 id="yapi"><a href="#yapi" class="headerlink" title="yapi"></a>yapi</h3><p><a href="http://yapi.demo.qunar.com/project/" target="_blank" rel="noopener">http://yapi.demo.qunar.com/project/</a><br><a href="https://github.com/YMFE/yapi/" target="_blank" rel="noopener">https://github.com/YMFE/yapi/</a><br>文档：<a href="https://yapi.ymfe.org/documents/index.html" target="_blank" rel="noopener">https://yapi.ymfe.org/documents/index.html</a>        </p>
+<p>需要自己搭，公共的没有管理权限；权限管理，可视化接口管理，Mock Server，自动化测试，数据导入，插件机制<br>功能还是比较强大的：<br>接口（接口列表，测试集合），动态，数据管理，设置（项目，环境，请求，token，全局mock），wiki    </p>
+<p>mock data： 参数支持（rap2没有试成功）；json-schema；json（mockjs+json5）；拖动排序<br>    还有高级mock（自定义mock数据，rap2的话，还需要自己写点东西），测试校验<br>自动化测试：环境配置（方便测试不同环境，线上/测试/本地）；服务端测试；全局变量<br>数据导入/导出：json，swagger，har，postman； html，插件还支持word<br>二次开发：勾子函数，全局api  </p>
+<p>唯一弱于rap2的是版本管理，但是有tag； 感觉tag和版本管理没有关系，但是这个不影响目前使用，因为目前还没有不同版本的需求<br>yapi还有收藏，文档也比较全，有技术团队支持（去哪儿），完全中文开放<br>部署貌似也简单   </p>
+<h3 id="rap2-和api共同问题"><a href="#rap2-和api共同问题" class="headerlink" title="rap2 和api共同问题"></a>rap2 和api共同问题</h3><p>和rap2相同的不足是，相同的路径，即使url不同，也会是同一个接口。<br>rap2 可以根据 ${method} 区分get，post,delete等（rest风格）；yapi 有query？？<br>$PS: 上面的方式都没有尝试过，不确定        </p>
+<p>提需求了，实现不实现就不知道了<br>rap2: <a href="https://github.com/thx/RAP/issues/1304" target="_blank" rel="noopener">不同url可以返回不同的接口数据</a><br>    $PS: Yalhu提的<br>    <a href="https://github.com/YMFE/yapi/issues/49#issuecomment-488746153" target="_blank" rel="noopener">yapi 下个版本需求收集</a><br>yapi：<a href="https://github.com/YMFE/yapi/issues/867" target="_blank" rel="noopener">接口地址是否允许重复开关</a>  </p>
+<p>danghao接口地址都是<code>/index</code> :<code>/index?control=user&amp;action=</code>,<code>/index?control=order&amp;action=,/index?</code><br>在rap2和yapi看来这都是同一个接口，虽然可以根据参数动态返回数据；但这毕竟是当一个接口对待的，用yapi无法实现测试，测线上数据     </p>
+<p>需要和后端确认，接口路径是不是都是这一个，还是有不同的路径可以访问<br>如果都是一个路径，需要包装做拦截，如果不做webpack-dev-server代理，需要baseUrl。yapi的自动测试也难以实现了      </p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>当然选yapi了， rap2 页面慢就有点难忍；还有文档，部署，团队方面<br>$PS: yapi（8k）的star比rap（9k）少，rap2（3k）。 出现晚？？    </p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="mock-data-1"><a href="#mock-data-1" class="headerlink" title="mock data"></a>mock data</h3><p><a href="https://github.com/nuysoft/Mock/wiki" target="_blank" rel="noopener">https://github.com/nuysoft/Mock/wiki</a><br><!-- http://mockjs.com/examples.html#Array --><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> baseURL=process.env.NODE_ENV === <span class="string">'development'</span> ? <span class="string">'http://yapi.demo.qunar.com/mock/1304'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fetchData</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data=fakeData <span class="comment">// 1) 代码中硬编码(直接写数据)</span></span><br><span class="line">    fetch(BaseUrl+<span class="string">'/index'</span>)  <span class="comment">// 3) 为所有接口统一添加前缀 </span></span><br><span class="line">    fetch2(<span class="string">'/index'</span>) <span class="comment">// 2) 封装拦截器  </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fetch2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// let redirect = "http://" + ROOT + '/mockjsdata/' + projectId + url;</span></span><br><span class="line">    <span class="keyword">let</span> redirect=<span class="string">`<span class="subst">$&#123;RAP.protocol&#125;</span>://<span class="subst">$&#123;RAP.host&#125;</span>/app/mock/<span class="subst">$&#123;match.repositoryId&#125;</span>/<span class="subst">$&#123;match.method&#125;</span>/<span class="subst">$&#123;match.url&#125;</span>`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="jsdoc文档"><a href="#jsdoc文档" class="headerlink" title="jsdoc文档"></a>jsdoc文档</h3><p><a href="http://usejsdoc.org/" target="_blank" rel="noopener">http://usejsdoc.org/</a><br>也可以给类添加文档。<br>$PS: 可以自定义数据结构吗？？ definitions / Mock.Random.extend<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * this is foo</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>1 &#123;string&#125; param1 - this is param1</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>2 &#123;Object&#125; param2 - this is param2</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;&#125;</span> </span>- </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">funciton foo(param1,param2)&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="swagger文档"><a href="#swagger文档" class="headerlink" title="swagger文档"></a>swagger文档</h3><p>// swagger 。可以是rest风格。可分隔文件<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">swagger:"2.0"</span></span><br><span class="line"><span class="attr">info:</span></span><br><span class="line"><span class="string">version:1.0.0</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">Simple</span> <span class="string">API</span></span><br><span class="line">  <span class="attr">description:</span> <span class="string">A</span> <span class="string">simple</span> <span class="string">API</span> <span class="string">to</span> <span class="string">learn</span> <span class="string">how</span> <span class="string">to</span> <span class="string">write</span> <span class="string">OpenAPI</span> <span class="string">Specification</span></span><br><span class="line"><span class="attr">schemes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">https</span></span><br><span class="line"><span class="attr">host:</span> <span class="string">simple.api</span></span><br><span class="line"><span class="attr">basePath:</span> <span class="string">/openapi101</span></span><br><span class="line"><span class="attr">paths:</span></span><br><span class="line">  <span class="string">/persons:</span></span><br><span class="line">    <span class="attr">get:</span></span><br><span class="line">      <span class="attr">summary:</span> <span class="string">Gets</span> <span class="string">some</span> <span class="string">persons</span></span><br><span class="line">      <span class="attr">description:</span> <span class="string">Returns</span> <span class="string">a</span> <span class="string">list</span> <span class="string">containing</span> <span class="string">all</span> <span class="string">persons.</span> <span class="string">The</span> <span class="string">list</span> <span class="string">supports</span> <span class="string">paging.</span></span><br><span class="line">      <span class="attr">parameters:</span></span><br><span class="line">       <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">pageSize</span></span><br><span class="line">         <span class="attr">in:</span> <span class="string">query</span></span><br><span class="line">         <span class="attr">description:</span> <span class="string">Number</span> <span class="string">of</span> <span class="string">persons</span> <span class="string">returned</span></span><br><span class="line">         <span class="attr">type:</span> <span class="string">integer</span></span><br><span class="line">       <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">pageNumber</span></span><br><span class="line">         <span class="attr">in:</span> <span class="string">query</span></span><br><span class="line">         <span class="attr">description:</span> <span class="string">Page</span> <span class="string">number</span></span><br><span class="line">         <span class="attr">type:</span> <span class="string">integer</span></span><br><span class="line">      <span class="attr">responses:</span></span><br><span class="line">        <span class="attr">200:</span></span><br><span class="line">          <span class="attr">description:</span> <span class="string">A</span> <span class="string">list</span> <span class="string">of</span> <span class="string">Person</span></span><br><span class="line">          <span class="attr">schema:</span></span><br><span class="line">            <span class="string">$ref:</span> <span class="string">"#/definitions/Persons"</span></span><br><span class="line">        <span class="attr">500:</span></span><br><span class="line">          <span class="string">$ref:</span> <span class="string">"#/responses/Standard500ErrorResponse"</span></span><br><span class="line">    <span class="attr">post:</span></span><br><span class="line">      <span class="attr">summary:</span> <span class="string">Creates</span> <span class="string">a</span> <span class="string">person</span></span><br><span class="line">      <span class="attr">description:</span> <span class="string">Adds</span> <span class="string">a</span> <span class="string">new</span> <span class="string">person</span> <span class="string">to</span> <span class="string">the</span> <span class="string">persons</span> <span class="string">list.</span></span><br><span class="line">      <span class="attr">parameters:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">person</span></span><br><span class="line">          <span class="attr">in:</span> <span class="string">body</span></span><br><span class="line">          <span class="attr">description:</span> <span class="string">The</span> <span class="string">person</span> <span class="string">to</span> <span class="string">create.</span></span><br><span class="line">          <span class="attr">schema:</span></span><br><span class="line">            <span class="string">$ref:</span> <span class="string">"#/definitions/Person"</span></span><br><span class="line">      <span class="attr">responses:</span></span><br><span class="line">        <span class="attr">204:</span></span><br><span class="line">          <span class="attr">description:</span> <span class="string">Persons</span> <span class="string">succesfully</span> <span class="string">created.</span></span><br><span class="line">        <span class="attr">400:</span></span><br><span class="line">          <span class="attr">description:</span> <span class="string">Persons</span> <span class="string">couldn't</span> <span class="string">have</span> <span class="string">been</span> <span class="string">created.</span></span><br><span class="line">        <span class="attr">500:</span></span><br><span class="line">          <span class="string">$ref:</span> <span class="string">"#/responses/Standard500ErrorResponse"</span></span><br><span class="line">  <span class="string">/persons/&#123;username&#125;:</span></span><br><span class="line">    <span class="attr">get:</span></span><br><span class="line">      <span class="attr">summary:</span> <span class="string">Gets</span> <span class="string">a</span> <span class="string">person</span></span><br><span class="line">      <span class="attr">description:</span> <span class="string">Returns</span> <span class="string">a</span> <span class="string">single</span> <span class="string">person</span> <span class="string">for</span> <span class="string">its</span> <span class="string">username.</span></span><br><span class="line">      <span class="attr">parameters:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">username</span></span><br><span class="line">          <span class="attr">in:</span> <span class="string">path</span></span><br><span class="line">          <span class="attr">required:</span> <span class="literal">true</span></span><br><span class="line">          <span class="attr">description:</span> <span class="string">The</span> <span class="string">person's</span> <span class="string">username</span></span><br><span class="line">          <span class="attr">type:</span> <span class="string">string</span></span><br><span class="line">      <span class="attr">responses:</span></span><br><span class="line">        <span class="attr">200:</span></span><br><span class="line">          <span class="attr">description:</span> <span class="string">A</span> <span class="string">Person</span></span><br><span class="line">          <span class="attr">schema:</span></span><br><span class="line">            <span class="string">$ref:</span> <span class="string">"#/definitions/Person"</span></span><br><span class="line">        <span class="attr">404:</span></span><br><span class="line">          <span class="attr">description:</span> <span class="string">The</span> <span class="string">Person</span> <span class="string">does</span> <span class="string">not</span> <span class="string">exists.</span></span><br><span class="line">        <span class="attr">500:</span></span><br><span class="line">          <span class="string">$ref:</span> <span class="string">"#/responses/Standard500ErrorResponse"</span></span><br><span class="line"><span class="attr">definitions:</span></span><br><span class="line">  <span class="attr">Person:</span></span><br><span class="line">    <span class="attr">required:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">username</span></span><br><span class="line">    <span class="attr">properties:</span></span><br><span class="line">      <span class="attr">firstName:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">string</span></span><br><span class="line">      <span class="attr">lastName:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">string</span></span><br><span class="line">      <span class="attr">username:</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">string</span></span><br></pre></td></tr></table></figure></p>
+<p style="text-align:right">2019.5.4 星期六 02：13 </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"><i class="fa fa-tag"></i> javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/jsplus/vue实用/" rel="next" title="Vue实用">
+                <i class="fa fa-chevron-left"></i> Vue实用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/ser/mysql学习/" rel="prev" title="Mysql学习">
+                Mysql学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分述"><span class="nav-text">分述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文档"><span class="nav-text">文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mock-data"><span class="nav-text">mock data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试-自动测试"><span class="nav-text">测试/自动测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合"><span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#以前做法"><span class="nav-text">以前做法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#现在"><span class="nav-text">现在</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#showdoc"><span class="nav-text">showdoc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swagger-ui"><span class="nav-text">swagger-ui</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rap2"><span class="nav-text">rap2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yapi"><span class="nav-text">yapi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rap2-和api共同问题"><span class="nav-text">rap2 和api共同问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录"><span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mock-data-1"><span class="nav-text">mock data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsdoc文档"><span class="nav-text">jsdoc文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swagger文档"><span class="nav-text">swagger文档</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">408.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
