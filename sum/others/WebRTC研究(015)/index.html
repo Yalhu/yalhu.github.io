@@ -96,14 +96,14 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2018.8.27 星期一 10:11  基本Real time communication with WebRTC:https://codelabs.developers.google.com/codelabs/webrtc-web/WebRTC samples: https://webrtc.github.io/samples/         # [WebRTC 的前世今生]     换一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://you img base url/../assets/images/WebRTC架构图.jpg?e=1580891187&token=your qiniu access key:mbu0yZ-rdIu4CTuglKNqQDv6Eq0=">
-<meta property="og:image" content="http://you img base url/../assets/images/WebRTC通信流程.png?e=1580891187&token=your qiniu access key:KW3Y5mOL9rdDhZ082rAA5XeUfkk=">
-<meta property="og:image" content="http://you img base url/../assets/images/WebRTC_SFU比较.jpg?e=1580891187&token=your qiniu access key:m-dPDyWDrIzb5mv5ar9G6KyIZoE=">
+<meta property="og:image" content="http://you img base url/../assets/images/WebRTC架构图.jpg?e=1584348203&token=your qiniu access key:pS01qm5Oxnf5rn9NHMIaWn4CEqY=">
+<meta property="og:image" content="http://you img base url/../assets/images/WebRTC通信流程.png?e=1584348203&token=your qiniu access key:BoUhR2vKJLV5_KFD76TS_sgueLI=">
+<meta property="og:image" content="http://you img base url/../assets/images/WebRTC_SFU比较.jpg?e=1584348203&token=your qiniu access key:TVcpF2wx2rfUjuvICfxgECBhJGc=">
 <meta property="og:updated_time" content="2020-02-04T09:13:55.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebRTC研究">
 <meta name="twitter:description" content="2018.8.27 星期一 10:11  基本Real time communication with WebRTC:https://codelabs.developers.google.com/codelabs/webrtc-web/WebRTC samples: https://webrtc.github.io/samples/         # [WebRTC 的前世今生]     换一">
-<meta name="twitter:image" content="http://you img base url/../assets/images/WebRTC架构图.jpg?e=1580891187&token=your qiniu access key:mbu0yZ-rdIu4CTuglKNqQDv6Eq0=">
+<meta name="twitter:image" content="http://you img base url/../assets/images/WebRTC架构图.jpg?e=1584348203&token=your qiniu access key:pS01qm5Oxnf5rn9NHMIaWn4CEqY=">
 
 
 
@@ -431,7 +431,7 @@
 <p style="text-align:right">2018.8.27 星期一 10:11</p>
 
 <h2 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h2><p>Real time communication with WebRTC:<a href="https://codelabs.developers.google.com/codelabs/webrtc-web/" target="_blank" rel="noopener">https://codelabs.developers.google.com/codelabs/webrtc-web/</a><br>WebRTC samples: <a href="https://webrtc.github.io/samples/" target="_blank" rel="noopener">https://webrtc.github.io/samples/</a>  </p>
-<p><img src="http://you img base url/../assets/images/WebRTC架构图.jpg?e=1580891187&token=your qiniu access key:mbu0yZ-rdIu4CTuglKNqQDv6Eq0=" alt="WebRTC架构图">     </p>
+<p><img src="http://you img base url/../assets/images/WebRTC架构图.jpg?e=1584348203&token=your qiniu access key:pS01qm5Oxnf5rn9NHMIaWn4CEqY=" alt="WebRTC架构图">     </p>
 <p># <a href="https://blog.coding.net/blog/getting-started-with-webrtc" target="_blank" rel="noopener">[WebRTC 的前世今生]</a>    </p>
 <p>换一句话说，WebRTC 需要四中服务类型的信息。<br><em>用户发现和通信。
 </em>Signaling。<br><em>NAT/防火墙穿透。
@@ -454,7 +454,7 @@
 <p>通过服务器建立信道      </p>
 <p>NAT/防火墙穿越技术<br>建立点对点信道的一个常见问题，就是NAT穿越技术。在处于使用了NAT设备的私有TCP/IP网络中的主机之间需要建立连接时需要使用NAT穿越技术。以往在VoIP领域经常会遇到这个问题。目前已经有很多NAT穿越技术，但没有一项是完美的，因为NAT的行为是非标准化的。这些技术中大多使用了一个公共服务器，这个服务使用了一个从全球任何地方都能访问得到的IP地址。在RTCPeeConnection中，使用ICE框架来保证RTCPeerConnection能实现NAT穿越</p>
 <p>ICE，全名叫交互式连接建立（Interactive Connectivity Establishment）,一种综合性的NAT穿越技术，它是一种框架，可以整合各种NAT穿越技术如STUN、TURN（Traversal Using Relay NAT 中继NAT实现的穿透）。ICE会先使用STUN，尝试建立一个基于UDP的连接，如果失败了，就会去TCP（先尝试HTTP，然后尝试HTTPS），如果依旧失败ICE就会使用一个中继的TURN服务器。</p>
-<h2 id="WebRTC通信流程"><a href="#WebRTC通信流程" class="headerlink" title="WebRTC通信流程"></a>WebRTC通信流程</h2><p># <a href="https://www.bbsmax.com/A/amd0Dxqdge/" target="_blank" rel="noopener">WebRTC通信流程</a><br><img src="http://you img base url/../assets/images/WebRTC通信流程.png?e=1580891187&token=your qiniu access key:KW3Y5mOL9rdDhZ082rAA5XeUfkk=" alt="WebRTC通信流程"><br><!-- ![Alt text](/path/to/img.jpg "Optional title") --><br>上述序列中，WebRTC并不提供Stun服务器和Signal服务器，服务器端需要自己实现。Stun服务器可以用google提供的实现stun协议的测试服务器（stun:stun.l.google.com:19302），Signal服务器则完全需要自己实现了，它需要在ClientA和ClientB之间传送彼此的SDP信息和candidate信息，ClientA和ClientB通过这些信息建立P2P连接来传送音视频数据。由于网络环境的复杂性，并不是所有的客户端之间都能够建立P2P连接，这种情况下就需要有个relay服务器做音视频数据的中转，本文本着源码剖析的态度，这种情况就不考虑了。这里说明一下， stun/turn、relay服务器的实现在WebRTC源码中都有示例，真是个名副其实的大宝库。</p>
+<h2 id="WebRTC通信流程"><a href="#WebRTC通信流程" class="headerlink" title="WebRTC通信流程"></a>WebRTC通信流程</h2><p># <a href="https://www.bbsmax.com/A/amd0Dxqdge/" target="_blank" rel="noopener">WebRTC通信流程</a><br><img src="http://you img base url/../assets/images/WebRTC通信流程.png?e=1584348203&token=your qiniu access key:BoUhR2vKJLV5_KFD76TS_sgueLI=" alt="WebRTC通信流程"><br><!-- ![Alt text](/path/to/img.jpg "Optional title") --><br>上述序列中，WebRTC并不提供Stun服务器和Signal服务器，服务器端需要自己实现。Stun服务器可以用google提供的实现stun协议的测试服务器（stun:stun.l.google.com:19302），Signal服务器则完全需要自己实现了，它需要在ClientA和ClientB之间传送彼此的SDP信息和candidate信息，ClientA和ClientB通过这些信息建立P2P连接来传送音视频数据。由于网络环境的复杂性，并不是所有的客户端之间都能够建立P2P连接，这种情况下就需要有个relay服务器做音视频数据的中转，本文本着源码剖析的态度，这种情况就不考虑了。这里说明一下， stun/turn、relay服务器的实现在WebRTC源码中都有示例，真是个名副其实的大宝库。</p>
 <p>上述序列中，标注的场景是ClientA向ClientB发起对聊请求，调用描述如下：    </p>
 <ol>
 <li>ClientA首先创建PeerConnection对象，然后打开本地音视频设备，将音视频数据封装成MediaStream添加到PeerConnection中。</li>
@@ -486,7 +486,7 @@
 <p>Opensource SFU<br>Janus, mediasoup, licode, jitsi, kurento, and more<br>Can RTC clould service be a solution?   </p>
 <p>Cost<br>Bandwidth and disk space is expansive, so unless you co-op with Telco or your application is very high  value, otherwise</p>
 <p>hard to run a service by your own.<br>Cost: VOD &gt; webcast &gt; Conferencing<br>Tech: VOD &lt; webcast &lt; Conferencing (1 magnitudes)   </p>
-<h2 id="SFU"><a href="#SFU" class="headerlink" title="SFU"></a>SFU</h2><p>Signaling Server<br>SFU,MCF,*<br><img src="http://you img base url/../assets/images/WebRTC_SFU比较.jpg?e=1580891187&token=your qiniu access key:m-dPDyWDrIzb5mv5ar9G6KyIZoE=" alt="WebRTC SFU比较">   </p>
+<h2 id="SFU"><a href="#SFU" class="headerlink" title="SFU"></a>SFU</h2><p>Signaling Server<br>SFU,MCF,*<br><img src="http://you img base url/../assets/images/WebRTC_SFU比较.jpg?e=1584348203&token=your qiniu access key:TVcpF2wx2rfUjuvICfxgECBhJGc=" alt="WebRTC SFU比较">   </p>
 <p>Intel® Collaboration Suite for WebRTC version 4.0.1:<a href="https://software.intel.com/sites/products/documentation/webrtc/js/index.html" target="_blank" rel="noopener">https://software.intel.com/sites/products/documentation/webrtc/js/index.html</a><br>Licode: <a href="https://chotis2.dit.upm.es/" target="_blank" rel="noopener">https://chotis2.dit.upm.es/</a><br>mediasoup:<a href="https://mediasoup.org/documentation/" target="_blank" rel="noopener">https://mediasoup.org/documentation/</a>   </p>
 <!-- 
 ## 其他:   
@@ -678,7 +678,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">227</span>
+                  <span class="site-state-item-count">232</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -804,7 +804,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">408.1k</span>
+    <span title="Site words total count">412.0k</span>
   
 </div>
 
