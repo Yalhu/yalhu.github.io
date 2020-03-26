@@ -470,7 +470,7 @@
 <p>你的提示说staged没有内容，也就是说你没有执行过add操作   </p>
 <p>### Untracked files:<br>no changes added to commit  </p>
 <h2 id="log"><a href="#log" class="headerlink" title="log"></a>log</h2><p>一堆参数<br>git log –pretty=oneline<br>git show HEAD^:path/to/file  </p>
-<h2 id="查找删除文件"><a href="#查找删除文件" class="headerlink" title="查找删除文件"></a>查找删除文件</h2><p>git log -p filename (相对路径)<br>git log – [file_path]<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> see the changes of a file, works even </span><br><span class="line"><span class="meta">#</span> if the file was deleted</span><br><span class="line">git log -- [file_path]  	</span><br><span class="line"><span class="meta">#</span> include stat parameter to see</span><br><span class="line"><span class="meta">#</span> some statics, e.g., how many files were </span><br><span class="line"><span class="meta">#</span> deleted</span><br><span class="line">git log -1 --stat -- [file_path]</span><br></pre></td></tr></table></figure></p>
+<h2 id="查找删除文件"><a href="#查找删除文件" class="headerlink" title="查找删除文件"></a>查找删除文件</h2><p>git log -p filename (相对路径)<br>git log – [file_path]<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> see the changes of a file, works even </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">if</span> the file was deleted</span></span><br><span class="line">git log -- [file_path]  	</span><br><span class="line"><span class="meta">#</span><span class="bash"> include <span class="built_in">stat</span> parameter to see</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> some statics, e.g., how many files were </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> deleted</span></span><br><span class="line">git log -1 --stat -- [file_path]</span><br></pre></td></tr></table></figure></p>
 <p>(上面只是看到的commit，不好使，下面的好用)<br>大多数我们是不知道在何时删除了某个文件，通过下面这个命令我们可以查看在哪个 commit 中删除了哪些文件。<br>git log –diff-filter=D –summary<br>比如我想恢复 ic_selected.png 这个文件，我们可以看到删除该文件对应的 commit id<br>这个命令会检出该 commit 的上一个提交中的文件，因为我们是在该 commit 中删除的文件，所以需要在上一个 commit 才能恢复出文件。<br>git checkout $commit~1 filename   </p>
 <p>最后的处理方式：通过git-history(vscode插件)查到历史提交大概删除日期，从该commit中创建并切换分支，找到文件复制出来恢复的。     </p>
 <h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><p>git remote<br>git remote -v<br>git remote add origin git://192.145.1.4:12/cloudclass.git<br>git remote set-url origin <a href="http://user@192.134.2:1001/r/cloudclass.git" target="_blank" rel="noopener">http://user@192.134.2:1001/r/cloudclass.git</a>     </p>
@@ -682,8 +682,8 @@ git  push  origin  本地分支A : 远程分支B
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sum/jsplus/git文件忽略/" rel="next" title="Git文件忽略">
-                <i class="fa fa-chevron-left"></i> Git文件忽略
+              <a href="/sum/js/onclick参数传递/" rel="next" title="Onclick参数传递">
+                <i class="fa fa-chevron-left"></i> Onclick参数传递
               </a>
             
           </div>
@@ -692,8 +692,8 @@ git  push  origin  本地分支A : 远程分支B
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/w3/ser/python3-runoob/" rel="prev" title="Python3-Runoob">
-                Python3-Runoob <i class="fa fa-chevron-right"></i>
+              <a href="/sum/jsplus/git文件忽略/" rel="prev" title="Git文件忽略">
+                Git文件忽略 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -806,7 +806,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">232</span>
+                  <span class="site-state-item-count">230</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -941,7 +941,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">412.0k</span>
+    <span title="Site words total count">411.5k</span>
   
 </div>
 

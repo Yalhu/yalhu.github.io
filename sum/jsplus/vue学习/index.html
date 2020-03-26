@@ -88,19 +88,19 @@
 
 
 
-<meta name="description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue-loader2018.11.21  vue-cliwebpack3配置,从定义环境/生产 变量使用插件,而非mode选项.也是热更新,但是报错信息会一直累积(开始以为一直在出错,怎么出错这么多),应该可以配置$TODO: 报错信息清空/不缓存   所以参照webpack,比如路径,模板,输出文件,脚本运">
+<meta name="description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue学习">
 <meta property="og:url" content="http://yoursite.com/sum/jsplus/vue学习/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue-loader2018.11.21  vue-cliwebpack3配置,从定义环境/生产 变量使用插件,而非mode选项.也是热更新,但是报错信息会一直累积(开始以为一直在出错,怎么出错这么多),应该可以配置$TODO: 报错信息清空/不缓存   所以参照webpack,比如路径,模板,输出文件,脚本运">
+<meta property="og:description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们可">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://you img base url/./logo.png?e=1585218234&token=your qiniu access key:2kvzu6cirYa4FhAkck4Go9XepRc=">
-<meta property="og:updated_time" content="2020-02-05T09:51:32.117Z">
+<meta property="og:image" content="http://you img base url/./logo.png?e=1585220555&token=your qiniu access key:2fPahj8d0_JLlzntIzESdR2utGs=">
+<meta property="og:updated_time" content="2020-03-26T09:52:49.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue学习">
-<meta name="twitter:description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue-loader2018.11.21  vue-cliwebpack3配置,从定义环境/生产 变量使用插件,而非mode选项.也是热更新,但是报错信息会一直累积(开始以为一直在出错,怎么出错这么多),应该可以配置$TODO: 报错信息清空/不缓存   所以参照webpack,比如路径,模板,输出文件,脚本运">
-<meta name="twitter:image" content="http://you img base url/./logo.png?e=1585218234&token=your qiniu access key:2kvzu6cirYa4FhAkck4Go9XepRc=">
+<meta name="twitter:description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们可">
+<meta name="twitter:image" content="http://you img base url/./logo.png?e=1585220555&token=your qiniu access key:2fPahj8d0_JLlzntIzESdR2utGs=">
 
 
 
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="1970-01-01T21:36:21+08:00">
-                1970-01-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T08:00:00+08:00">
+                2018-11-01
               </time>
             
 
@@ -350,8 +350,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-05T17:51:32+08:00">
-                2020-02-05
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-26T17:52:49+08:00">
+                2020-03-26
               </time>
             
           </span>
@@ -422,7 +422,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,528
+                  2,362
                 </span>
               
 
@@ -438,7 +438,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  9
                 </span>
               
             </div>
@@ -460,26 +460,49 @@
 
       
         <p>vue组件写法/*.vue文件 ; Vue.component(), props   </p>
-<h2 id="vue-loader"><a href="#vue-loader" class="headerlink" title="vue-loader"></a>vue-loader</h2><p style="text-align:right">2018.11.21</p>
+<h1 id="vue实用"><a href="#vue实用" class="headerlink" title="vue实用"></a>vue实用</h1><h2 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h2><p>### 1 一般父子组件。<br>1) 通过prop,和$emit  $danghao:ContentNav 切换<br>2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布<br>如何实时响应？<br>如果修改父组件的值？</p>
+<p>### 2 在有些情况下，我们可能需要对一个 prop 进行“双向绑定”<br>1) 为了方便起见，我们为这种模式提供一个缩写，即 .sync 修饰符：     </p>
+<blockquote>
+<p>.sync 修饰符的 v-bind 不能和表达式一起使用    $PS: 同v-model<br>将 v-bind.sync 用在一个字面量的对象上是无法正常工作的  </p>
+</blockquote>
+<p>2) 比如表单的数据v-model。定义表单自己的数据，然后在声明周期中把父组件的值赋给 表单自己定义的值    $danghao: ContenNav nav组件的active 值；帐号信息 申请描述  </p>
+<p>### 根/父组件 值为异步获取/更新<br>1) 如果要直接引用<code>$root.$data.userInfo</code> 或<code>$root.userInfo</code>, 属性的值，需要注意数据类型正确。不能直接给一个空值<code>userInfo: {}</code> 属性也需要赋值 <code>user:{tags:[]}</code>,因为使用了tags的值<br>2) 如果可以确定 子组件 装载时，根组件的异步获取的数据已经成功，可以在子组件的生命周期中重新赋值<br>3) 通过watch 监听数据的变化      </p>
+<p>？ 子组件直接使用的 父/根 组件的值 会不会 同步更新视图  </p>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>1） 为什么组件data是一个函数？多个/不同实例间 不共用相同的数据<br>2）data：组件数据。<br>computed：根据data或者其他数据 过滤的数据，可以缓存，只要源数据发生变动。<br>也可以有set方法     </p>
+<blockquote>
+<p>计算属性是基于它们的响应式依赖进行缓存的<br>method: 每次调用都会执行。如果你不希望有缓存，请用方法来替代。<br>watch(侦听属性): 数据变化时执行异步或开销较大的操作时    </p>
+</blockquote>
+<h1 id="vue-loader"><a href="#vue-loader" class="headerlink" title="vue-loader"></a>vue-loader</h1><p style="text-align:right">2018.11.21</p>
 
-<h2 id="vue-cli"><a href="#vue-cli" class="headerlink" title="vue-cli"></a>vue-cli</h2><p>webpack3配置,从定义环境/生产 变量使用插件,而非mode选项.<br>也是热更新,但是报错信息会一直累积(开始以为一直在出错,怎么出错这么多),应该可以配置<br>$TODO: 报错信息清空/不缓存  </p>
+<h1 id="vue-cli"><a href="#vue-cli" class="headerlink" title="vue-cli"></a>vue-cli</h1><p>webpack3配置,从定义环境/生产 变量使用插件,而非mode选项.<br>也是热更新,但是报错信息会一直累积(开始以为一直在出错,怎么出错这么多),应该可以配置<br>$TODO: 报错信息清空/不缓存  </p>
 <p>所以参照webpack,比如路径,模板,输出文件,脚本运行方式(npm run dev/build)等,也可以自己修改/添加(比如less)配置,或者用webpack重新配置   </p>
 <p>生成文件在dist下,build中build的相关配置,比如webpack的.(creat-react-app 生成的项目在build文件夹下)    </p>
-<h3 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h3><p>dev.assetsSubDirectory: 提供资源的目录/文件夹<br>dev.assetsPublicPath: 访问资源的路径,基于webpack server的.所以才有了下面的使用方式<br>build.assetsSubDirectory: 生成(build)资源存放目录/文件夹(dist/static),不能出现路径,编译会出错<br>build.assetsPublicPath:访问资源的路径.如果是<code>/</code>表示绝对路径,如果服务器没有提供当前根目录的服务或者根目录没有资源,会加载失败. 网上许多vue项目打开空白就是这个原因:编译生成的js,css等文件在dist目录,而dist目录并没有在根目录(<code>\</code>路径)中,所以没有加载到资源,页面是空白的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"><span class="comment">// Template version: 1.3.1</span></span><br><span class="line"><span class="comment">// see http://vuejs-templates.github.io/webpack for documentation.</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  dev: &#123;</span><br><span class="line">    <span class="comment">// Paths</span></span><br><span class="line">    assetsSubDirectory: <span class="string">'static'</span>,</span><br><span class="line">    assetsPublicPath: <span class="string">'/'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  build: &#123;</span><br><span class="line">    index: path.resolve(__dirname, <span class="string">'../dist/index.html'</span>), <span class="comment">// Template for index.html</span></span><br><span class="line">    assetsRoot: path.resolve(__dirname, <span class="string">'../dist'</span>), <span class="comment">// Paths</span></span><br><span class="line">    assetsSubDirectory:<span class="string">'static'</span>,</span><br><span class="line">    <span class="comment">// assetsPublicPath: '/', // 原始   </span></span><br><span class="line">    assetsPublicPath: <span class="string">'./'</span>, <span class="comment">// 推荐  </span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h2><p>dev.assetsSubDirectory: 提供资源的目录/文件夹<br>dev.assetsPublicPath: 访问资源的路径,基于webpack server的.所以才有了下面的使用方式<br>build.assetsSubDirectory: 生成(build)资源存放目录/文件夹(dist/static),不能出现路径,编译会出错<br>build.assetsPublicPath:访问资源的路径.如果是<code>/</code>表示绝对路径,如果服务器没有提供当前根目录的服务或者根目录没有资源,会加载失败. 网上许多vue项目打开空白就是这个原因:编译生成的js,css等文件在dist目录,而dist目录并没有在根目录(<code>\</code>路径)中,所以没有加载到资源,页面是空白的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"><span class="comment">// Template version: 1.3.1</span></span><br><span class="line"><span class="comment">// see http://vuejs-templates.github.io/webpack for documentation.</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  dev: &#123;</span><br><span class="line">    <span class="comment">// Paths</span></span><br><span class="line">    assetsSubDirectory: <span class="string">'static'</span>,</span><br><span class="line">    assetsPublicPath: <span class="string">'/'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  build: &#123;</span><br><span class="line">    index: path.resolve(__dirname, <span class="string">'../dist/index.html'</span>), <span class="comment">// Template for index.html</span></span><br><span class="line">    assetsRoot: path.resolve(__dirname, <span class="string">'../dist'</span>), <span class="comment">// Paths</span></span><br><span class="line">    assetsSubDirectory:<span class="string">'static'</span>,</span><br><span class="line">    <span class="comment">// assetsPublicPath: '/', // 原始   </span></span><br><span class="line">    assetsPublicPath: <span class="string">'./'</span>, <span class="comment">// 推荐  </span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>背景图片和img标签引用资源方式<br>background的使用方式是引用的资源路径,并不是经过编译的模块, 所以上面使用资源路径的访问方式是正确的.下面出错,是因为访问的路径(webpack server提供的服务)下没有资源   </p>
 <p>img标签使用 相对路径的方式是会编译成模块,路径按当前文件的位置引用.而<code>/static</code>是绝对路径,使用资源路径(webpack server服务提供). dev访问正常, 如果build,网站配置并不会给dist配置<code>/</code>的访问路径,所以绝对路径<code>/static</code>并没有该资源.除非网站配置正确的访问路径,或者自己把资源添加到根目录.<br>所以推荐使用相对路径.配置build.assetsPublicPath的路径为<code>./</code>,非<code>/</code>,上面也可以使用绝对路径了.不过<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// ## background:Carousel.vue</span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(/static/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">el-carousel-item</span> <span class="attr">:style</span>=<span class="string">"&#123;background:'url(./static/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;"</span> <span class="attr">:key</span>=<span class="string">"index"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- blank --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(./images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(../assets/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(./assets/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"></span><br><span class="line">// ## img:Teachers.vue</span><br><span class="line"><span class="comment">&lt;!-- &lt;img src="/static/images/hamburger.png" class="image"&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/hamburger.png"</span> <span class="attr">class</span>=<span class="string">"image"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;img src="./images/hamburger.png" class="image"&gt; --&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="element-ui"><a href="#element-ui" class="headerlink" title="element ui"></a>element ui</h2><p>可以按需引入,也可以全部引入   </p>
-<p>改变/自定义 element ui 样式:需要在全局中修改(style标签不加 scoped),比如 <code>.el-carousel__button</code>, 或者单独引入css文件,即使是在本模块import; 添加className 提高权重,即使!import 也不会生效(如果样式不是全局的话).<br>$PS:听说可以在style中添加!import, html标签都找不到,往哪个元素上添加.自述比较麻烦<br>$PS:有的样式好像可以在scoped中修改,比如<code>.el-main</code>,<code>.el-col-6</code>,或许因为这些是layout样式?  </p>
-<p>$TODO: 样式引入方式/权重 分析.<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!<span class="selector-tag">--</span>  &lt;<span class="selector-tag">style</span> <span class="selector-tag">scoped</span>&gt;: <span class="selector-tag">worked</span> <span class="selector-tag">--</span>&gt;</span><br><span class="line"><span class="selector-class">.el-col-6</span>&#123;</span><br><span class="line">    <span class="attribute">padding</span>:<span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.el-main</span>&#123;</span><br><span class="line">    <span class="attribute">padding</span>:<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;!<span class="selector-tag">--</span>  &lt;<span class="selector-tag">style</span> <span class="selector-tag">scoped</span>&gt;: <span class="selector-tag">not</span> <span class="selector-tag">work</span> <span class="selector-tag">--</span>&gt;</span><br><span class="line"><span class="selector-class">.self</span> <span class="selector-class">.el-carousel__button</span>&#123;  <span class="comment">/* not work */</span></span><br><span class="line">    <span class="attribute">border-radius</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">background</span>:#<span class="number">#ff0</span><span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.el-carousel__button</span>&#123; <span class="comment">/* not work */</span></span><br><span class="line">    <span class="attribute">border-radius</span>:<span class="number">30%</span>;</span><br><span class="line">    <span class="attribute">background</span>:#<span class="number">#f00</span><span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><h3 id="assets和static文件夹的区别"><a href="#assets和static文件夹的区别" class="headerlink" title="assets和static文件夹的区别"></a>assets和static文件夹的区别</h3><!-- [vue-cli 自定义路径别名 assets和static文件夹的区别 --save-dev和--save的区别](https://juejin.im/post/59be4d325188257e764c8485)   -->
-<p>相信有很多人知道vue-cli有两个放置静态资源的地方，分别是src/assets文件夹和static文件夹,这两者的区别很多人可能不太清楚。<br>assets目录中的文件会被webpack处理解析为模块依赖，只支持相对路径形式。例如，在 <img src="http://you img base url/./logo.png?e=1585218234&token=your qiniu access key:2kvzu6cirYa4FhAkck4Go9XepRc=">和 background: url(./logo.png)中，”./logo.png” 是相对的资源路径，将由Webpack解析为模块依赖。</p>
+<h1 id="其它-1"><a href="#其它-1" class="headerlink" title="其它"></a>其它</h1><h2 id="assets和static文件夹的区别"><a href="#assets和static文件夹的区别" class="headerlink" title="assets和static文件夹的区别"></a>assets和static文件夹的区别</h2><!-- [vue-cli 自定义路径别名 assets和static文件夹的区别 --save-dev和--save的区别](https://juejin.im/post/59be4d325188257e764c8485)   -->
+<p>相信有很多人知道vue-cli有两个放置静态资源的地方，分别是src/assets文件夹和static文件夹,这两者的区别很多人可能不太清楚。<br>assets目录中的文件会被webpack处理解析为模块依赖，只支持相对路径形式。例如，在 <img src="http://you img base url/./logo.png?e=1585220555&token=your qiniu access key:2fPahj8d0_JLlzntIzESdR2utGs=">和 background: url(./logo.png)中，”./logo.png” 是相对的资源路径，将由Webpack解析为模块依赖。</p>
 <p>static/ 目录下的文件并不会被Webpack处理：它们会直接被复制到最终的打包目录（默认是dist/static）下。必须使用绝对路径引用这些文件，这是通过在 config.js 文件中的 build.assetsPublicPath 和 build.assetsSubDirectory 连接来确定的。<br>任何放在 static/ 中文件需要以绝对路径的形式引用：/static/[filename]。</p>
 <p>在我们实际的开发中，总的来说：static放不会变动的文件 assets放可能会变动的文件。</p>
 <p>因为webpack会将图片当做模块来引用，所以在js中需要使用require将图片引用进来，不能直接以字符串的形式。   </p>
-<h3 id="资源路径处理"><a href="#资源路径处理" class="headerlink" title="资源路径处理"></a>资源路径处理</h3><!-- [资源路径处理](https://vue-loader-v14.vuejs.org/zh-cn/configurations/asset-url.html)   -->
+<h2 id="资源路径处理"><a href="#资源路径处理" class="headerlink" title="资源路径处理"></a>资源路径处理</h2><!-- [资源路径处理](https://vue-loader-v14.vuejs.org/zh-cn/configurations/asset-url.html)   -->
 <p>默认情况下，vue-loader 使用 css-loader 和 Vue 模版编译器自动处理样式和模版文件。在编译过程中，所有的资源路径例如 <code>&lt;img src=&quot;...&quot;&gt;、background: url(...) 和 @import</code> 会作为模块依赖。   </p>
 <p>例如，url(./image.png) 会被转换为 require(‘./image.png’)，而</p>
 <p><code>&lt;img src=&quot;../image.png&quot;&gt;</code><br>将会编译为：<code>createElement(&#39;img&#39;, { attrs: { src: require(&#39;../image.png&#39;) }})</code><br>编译规则:<br>1) 如果路径是绝对路径，会原样保留。<br>2) 如果路径以 . 开头，将会被看作相对的模块依赖，并按照你的本地文件系统上的目录结构进行解析。<br>3) 如果路径以 ~ 开头，其后的部分将会被看作模块依赖。这意味着你可以用该特性来引用一个 node 依赖中的资源：<br>4) (13.7.0+) 如果路径以 @ 开头，也会被看作模块依赖。如果你的 webpack 配置中给 @ 配置了 alias，这就很有用了。所有 vue-cli 创建的项目都默认配置了将 @ 指向 /src。  </p>
+<h1 id="element-ui"><a href="#element-ui" class="headerlink" title="element ui"></a>element ui</h1><p>可以按需引入,也可以全部引入   </p>
+<p>改变/自定义 element ui 样式:需要在全局中修改(style标签不加 scoped),比如 <code>.el-carousel__button</code>, 或者单独引入css文件,即使是在本模块import; 添加className 提高权重,即使!import 也不会生效(如果样式不是全局的话).<br>$PS:听说可以在style中添加!import, html标签都找不到,往哪个元素上添加.自述比较麻烦<br>$PS:有的样式好像可以在scoped中修改,比如<code>.el-main</code>,<code>.el-col-6</code>,或许因为这些是layout样式?  </p>
+<p>$TODO: 样式引入方式/权重 分析.<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!<span class="selector-tag">--</span>  &lt;<span class="selector-tag">style</span> <span class="selector-tag">scoped</span>&gt;: <span class="selector-tag">worked</span> <span class="selector-tag">--</span>&gt;</span><br><span class="line"><span class="selector-class">.el-col-6</span>&#123;</span><br><span class="line">    <span class="attribute">padding</span>:<span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.el-main</span>&#123;</span><br><span class="line">    <span class="attribute">padding</span>:<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;!<span class="selector-tag">--</span>  &lt;<span class="selector-tag">style</span> <span class="selector-tag">scoped</span>&gt;: <span class="selector-tag">not</span> <span class="selector-tag">work</span> <span class="selector-tag">--</span>&gt;</span><br><span class="line"><span class="selector-class">.self</span> <span class="selector-class">.el-carousel__button</span>&#123;  <span class="comment">/* not work */</span></span><br><span class="line">    <span class="attribute">border-radius</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">background</span>:#<span class="number">#ff0</span><span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.el-carousel__button</span>&#123; <span class="comment">/* not work */</span></span><br><span class="line">    <span class="attribute">border-radius</span>:<span class="number">30%</span>;</span><br><span class="line">    <span class="attribute">background</span>:#<span class="number">#f00</span><span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p style="text-align:right">2019.4.14 星期日 17:30</p>
+
+<h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><p>Vuex:<a href="https://vuex.vuejs.org/zh/" target="_blank" rel="noopener">https://vuex.vuejs.org/zh/</a><br>## 一 安装<br>Vuex 依赖 Promise。如果你支持的浏览器并没有实现<br>## 二 vuex是什么   </p>
+<blockquote>
+<p>Flux 架构就像眼镜：您自会知道什么时候需要它。<br>状态管理模式:state,view,action<br>### 三 开始<br>## 四 核心概念<br>State：单一状态树（可module）。唯一数据源。多实例也可返回函数，相当与vue的data<br>Getter：相当与vue的计算属性，可缓存。可通过属性和方法访问<br>Mutation:可直接修改State，不能使用异步 。可用常量来管理所有事件类型，<br>Action：提交mutation非直接修改状态 ，可以包含异步。 可以多个异步组合<br>Module: 多种便捷方式，可以减少命名空间的书写  </p>
+</blockquote>
+<p>辅助函数 和 对象展开运算符  ：<code>...mapState，...mapGetters，...mapMutations，...mapActions</code><br>## 五 项目结构<br>根目录下可index 和根级别的action,mutation,module   </p>
+<p>## 六 插件     $Skip    </p>
+<p>## 七 严格模式<br><code>strict: true</code>.生产时要去掉<br>## 八 表单处理<br>当在严格模式中使用 Vuex 时，在属于 Vuex 的 state 上使用 v-model 会比较棘手：      在严格模式中，由于这个修改不是在 mutation 函数中执行的, 这里会抛出一个错误。      </p>
+<p>另一个方法是使用带有 setter 的双向绑定计算属性：    </p>
+<p>## 测试   $Skip<br>## 热重载  $Skip   </p>
 
       
     </div>
@@ -538,14 +561,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/sum/js/js数组API(034)/" rel="next" title="js数组API">
+                <i class="fa fa-chevron-left"></i> js数组API
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/temporaryData/" rel="prev" title="Tempordata">
-                Tempordata <i class="fa fa-chevron-right"></i>
+              <a href="/w3/jslib/vuejs文档/vuejs文档9-对比/" rel="prev" title="Vuejs文档9-对比">
+                Vuejs文档9-对比 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -658,7 +685,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">232</span>
+                  <span class="site-state-item-count">230</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -763,7 +790,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-loader"><span class="nav-text">vue-loader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-cli"><span class="nav-text">vue-cli</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#路径"><span class="nav-text">路径</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#element-ui"><span class="nav-text">element ui</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#assets和static文件夹的区别"><span class="nav-text">assets和static文件夹的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源路径处理"><span class="nav-text">资源路径处理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue实用"><span class="nav-text">vue实用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#组件通信"><span class="nav-text">组件通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-text">其它</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-loader"><span class="nav-text">vue-loader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-cli"><span class="nav-text">vue-cli</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#路径"><span class="nav-text">路径</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其它-1"><span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#assets和static文件夹的区别"><span class="nav-text">assets和static文件夹的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源路径处理"><span class="nav-text">资源路径处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#element-ui"><span class="nav-text">element ui</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vuex"><span class="nav-text">vuex</span></a></li></ol></div>
             
 
           </div>
@@ -797,7 +824,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">412.0k</span>
+    <span title="Site words total count">411.5k</span>
   
 </div>
 
