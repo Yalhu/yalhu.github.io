@@ -356,6 +356,39 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/w3/" itemprop="url" rel="index">
+                    <span itemprop="name">w3</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/w3/pkg/" itemprop="url" rel="index">
+                    <span itemprop="name">pkg</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
           
           
 
@@ -554,7 +587,7 @@ module.exports = {
 <p>请注意，我们没有将 import 绑定到变量。这是因为只需在基础代码(code base)之外，再额外执行 polyfills，这样我们就可以假定代码中已经具有某些原生功能。</p>
 </blockquote>
 <p>polyfills 虽然是一种模块引入方式，<strong>但是并不推荐在主 bundle 中引入 polyfills</strong>，因为这不利于具备这些模块功能的现代浏览器用户，会使他们下载体积很大、但却不需要的脚本文件。</p>
-<p>让我们把 import 放入一个新文件，并加入 whatwg-fetch polyfill：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> modernBrowser = (</span></span><br><span class="line"><span class="javascript">        <span class="string">'fetch'</span> <span class="keyword">in</span> <span class="built_in">window</span> &amp;&amp;</span></span><br><span class="line"><span class="javascript">        <span class="string">'assign'</span> <span class="keyword">in</span> <span class="built_in">Object</span></span></span><br><span class="line">    );</span><br><span class="line">    if ( !modernBrowser ) &#123;</span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> scriptElement = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">        scriptElement.async = <span class="literal">false</span>;</span></span><br><span class="line"><span class="actionscript">        scriptElement.src = <span class="string">'/polyfills.bundle.js'</span>;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.head.appendChild(scriptElement);</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>让我们把 import 放入一个新文件，并加入 whatwg-fetch polyfill：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> modernBrowser = (</span></span><br><span class="line"><span class="javascript">        <span class="string">'fetch'</span> <span class="keyword">in</span> <span class="built_in">window</span> &amp;&amp;</span></span><br><span class="line"><span class="javascript">        <span class="string">'assign'</span> <span class="keyword">in</span> <span class="built_in">Object</span></span></span><br><span class="line">    );</span><br><span class="line">    if ( !modernBrowser ) &#123;</span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> scriptElement = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        scriptElement.async = <span class="literal">false</span>;</span></span><br><span class="line"><span class="javascript">        scriptElement.src = <span class="string">'/polyfills.bundle.js'</span>;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.head.appendChild(scriptElement);</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="3-5-深度优化"><a href="#3-5-深度优化" class="headerlink" title="3.5 深度优化"></a>3.5 深度优化</h3><p>babel-preset-env package 使用 browserslist 来转译那些你浏览器中不支持的特性。这里预设了 useBuiltIns 选项，默认值是 false，<strong>能将你的全局 babel-polyfill 导入方式，改进为更细粒度的 import 格式</strong>：</p>
 <pre><code>import &apos;core-js/modules/es7.string.pad-start&apos;;
 import &apos;core-js/modules/es7.string.pad-end&apos;;
@@ -832,6 +865,15 @@ var jiathis_config={
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
             
 
             
