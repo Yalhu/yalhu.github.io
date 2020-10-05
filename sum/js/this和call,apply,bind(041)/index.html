@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2018.10.15 星期一 14:35  this 几个实例this关键字被用于指代当前的对象，通常，this指代的是方法中正在被调用的对象。12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta property="og:updated_time" content="2020-04-26T04:33:34.268Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="this和call,apply,bind.md">
 <meta name="twitter:description" content="2018.10.15 星期一 14:35  this 几个实例this关键字被用于指代当前的对象，通常，this指代的是方法中正在被调用的对象。12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-26T12:33:34+08:00">
+                2020-04-26
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,291
+                  2,292
                 </span>
               
 
@@ -473,7 +473,7 @@
 <p>4、类（伪）数组使用数组方法<br><code>var domNodes = Array.prototype.slice.call(document.getElementsByTagName(&quot;*&quot;));</code></p>
 <p>Javascript中存在一种名为伪数组的对象结构。比较特别的是 arguments 对象，还有像调用 getElementsByTagName , document.childNodes 之类的，它们返回NodeList对象都属于伪数组。不能应用 Array下的 push , pop 等方法。</p>
 <p>但是我们能通过 Array.prototype.slice.call 转换为真正的数组的带有 length 属性的对象，这样 domNodes 就可以应用 Array 下的所有方法了。</p>
-<p>$PS: log函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log.apply(<span class="built_in">console</span>, <span class="built_in">arguments</span>);</span><br><span class="line">&#125;;</span><br><span class="line">log(<span class="number">1</span>); <span class="comment">//1</span></span><br><span class="line">log(<span class="number">1</span>,<span class="number">2</span>); <span class="comment">//1</span></span><br><span class="line"><span class="comment">// ## 1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">msg</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(msg);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// ## 2</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">    args.unshift(<span class="string">'(app)'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log.apply(<span class="built_in">console</span>, args);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// ## 0</span></span><br><span class="line"><span class="comment">// log=console.log.bind(this)</span></span><br><span class="line">log=<span class="built_in">console</span>.log.bind(<span class="keyword">this</span>,<span class="string">'app|'</span>)</span><br><span class="line">log(<span class="number">1</span>,<span class="number">2</span>); <span class="comment">//app| 1 2</span></span><br></pre></td></tr></table></figure></p>
+<p>$PS: log函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log.apply(<span class="built_in">console</span>, <span class="built_in">arguments</span>);</span><br><span class="line">&#125;;</span><br><span class="line">log(<span class="number">1</span>); <span class="comment">//1</span></span><br><span class="line">log(<span class="number">1</span>,<span class="number">2</span>); <span class="comment">//1 2</span></span><br><span class="line"><span class="comment">// ## 1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">msg</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(msg);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// ## 2</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">    args.unshift(<span class="string">'(app)'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log.apply(<span class="built_in">console</span>, args);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// ## 0</span></span><br><span class="line"><span class="comment">// log=console.log.bind(this)</span></span><br><span class="line">log=<span class="built_in">console</span>.log.bind(<span class="keyword">this</span>,<span class="string">'app|'</span>)</span><br><span class="line">log(<span class="number">1</span>,<span class="number">2</span>); <span class="comment">//app| 1 2</span></span><br></pre></td></tr></table></figure></p>
 <p style="text-align:right">14:46</p>
 
 <p style="text-align:right">2018.10.29 星期一 11:25</p>
@@ -683,7 +683,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-count">271</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -694,7 +694,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -705,7 +705,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -822,7 +822,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">411.5k</span>
+    <span title="Site words total count">451.6k</span>
   
 </div>
 

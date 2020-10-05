@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2018.6.28 星期四   文件对象(blob) 和下载### [blob和base64]：Blob对象是一个代表二进制数据的基本对象，在它的基础上，又衍生出一系列相关的API，用来操作文件。 File对象：负责处理那些以文件形式存在的二进制数据，也就是操作本地文件；FileList对象：File对象的网页表单接口；FileReader对象：负责将二进制数据读入内存内容；URL对象：用于对二进">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta property="og:updated_time" content="2020-03-28T02:39:30.087Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Js文件操作">
 <meta name="twitter:description" content="2018.6.28 星期四   文件对象(blob) 和下载### [blob和base64]：Blob对象是一个代表二进制数据的基本对象，在它的基础上，又衍生出一系列相关的API，用来操作文件。 File对象：负责处理那些以文件形式存在的二进制数据，也就是操作本地文件；FileList对象：File对象的网页表单接口；FileReader对象：负责将二进制数据读入内存内容；URL对象：用于对二进">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-28T10:39:30+08:00">
+                2020-03-28
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  535
+                  531
                 </span>
               
 
@@ -463,6 +463,12 @@
 <h2 id="文件对象-blob-和下载"><a href="#文件对象-blob-和下载" class="headerlink" title="文件对象(blob) 和下载"></a>文件对象(blob) 和下载</h2><p>### [blob和base64]：<br>Blob对象是一个代表二进制数据的基本对象，在它的基础上，又衍生出一系列相关的API，用来操作文件。</p>
 <p>File对象：负责处理那些以文件形式存在的二进制数据，也就是操作本地文件；<br>FileList对象：File对象的网页表单接口；<br>FileReader对象：负责将二进制数据读入内存内容；<br>URL对象：用于对二进制数据生成URL。</p>
 <p>### 下载<br>blobDownload.html/blobDownload-html&amp;txt.html</p>
+<h2 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h2><!--
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Vue.prototype.exportBase64ToExcel=<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> aElem=<span class="built_in">document</span>.createElement(<span class="string">'a'</span>)</span><br><span class="line">    aElem.style.display = <span class="string">'none'</span>;</span><br><span class="line">    <span class="comment">// ## 1 后端返回文件流。前端自己产生文件名</span></span><br><span class="line">        <span class="comment">//    可能需要设置  'responseType': 'blob'  //设置响应的数据类型为一个包含二进制数据的 Blob 对象，必须设置！！！</span></span><br><span class="line">   <span class="comment">/*  let date=new Date()</span></span><br><span class="line"><span class="comment">    var fileName = this.activityTitle+'-用户统计-'+(date.getMonth()+1)+'-'+date.getDate()+'.xls';</span></span><br><span class="line"><span class="comment">    var blob = new Blob([data],&#123;type:' application/vnd.ms-excel'&#125;);</span></span><br><span class="line"><span class="comment">    aElem.href = URL.createObjectURL(blob); */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// ## 2 base64。 后端生成文件名，base64数据</span></span><br><span class="line">    <span class="keyword">var</span> fileName=data.fileName</span><br><span class="line">    aElem.href = <span class="string">'data:application/vnd.ms-excel;base64,'</span> + data.fileBase64</span><br><span class="line"></span><br><span class="line">    aElem.download = fileName;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(aElem);</span><br><span class="line">    aElem.click();</span><br><span class="line">    URL.revokeObjectURL(aElem.href); <span class="comment">// 释放URL 对象</span></span><br><span class="line">    <span class="built_in">document</span>.body.removeChild(aElem);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>–&gt;</p>
+<h2 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h2><!-- 
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 切换选择图片</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">changeImg(event,field)&#123; </span><br><span class="line">    <span class="comment">// console.log('upload img',event.target.files)</span></span><br><span class="line">    <span class="keyword">this</span>.cropimgField=field</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> file=event.target.files[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">if</span>(!file) <span class="keyword">return</span>  <span class="comment">// 直接点击取消，没有选择文件</span></span><br><span class="line">    <span class="keyword">if</span>(!(file.type==<span class="string">'image/jpeg'</span>||file.type==<span class="string">'image/png'</span>)) <span class="keyword">return</span> <span class="keyword">this</span>.$message.error(<span class="string">'图片格式不合法'</span>)</span><br><span class="line">    <span class="comment">// if (!/\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/.test(e.target.value)) &#123;return alert('图片类型必须是.gif,jpeg,jpg,png,bmp中的一种')&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.$refs.file_imgUrl.value=<span class="string">''</span> <span class="comment">// 可以再次上传相同图片到编辑弹窗。</span></span><br><span class="line">    <span class="comment">// ## 1 如果不需要裁剪，直接上传图片。</span></span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">this</span>.isCrop)&#123;</span><br><span class="line">        <span class="keyword">return</span> uploadImg2Server(file)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ## 1 如果需要裁剪，打开裁剪弹窗</span></span><br><span class="line">    <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader()</span><br><span class="line">    reader.onload = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> data</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> e.target.result === <span class="string">'object'</span>) &#123;</span><br><span class="line">            <span class="comment">// 把Array Buffer转化为blob 如果是base64不需要</span></span><br><span class="line">            data = <span class="built_in">window</span>.URL.createObjectURL(<span class="keyword">new</span> Blob([e.target.result]))</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            data = e.target.result</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.croppingImg = data</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.isShowImgcrop=<span class="literal">true</span></span><br><span class="line">    reader.readAsDataURL(file) <span class="comment">// 转化为base64</span></span><br><span class="line">    <span class="comment">// reader.readAsArrayBuffer(file) // 转化为blob</span></span><br><span class="line"></span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 上传裁剪后图片到服务器。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">async</span> uploadCropimg()&#123;</span><br><span class="line">    <span class="keyword">var</span> file=<span class="keyword">await</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="comment">// 获取截图的base64 数据</span></span><br><span class="line">        <span class="keyword">this</span>.$refs.cropper.getCropData(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// console.log(data)  </span></span><br><span class="line">            <span class="keyword">return</span> resolve(data)</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 获取截图的blob数据</span></span><br><span class="line">        <span class="comment">// this.$refs.cropper.getCropBlob((data) =&gt; &#123; return resolve(data) &#125;)      </span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.uploadImg2Server(file)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>–&gt;</p>
 <h2 id="文件上传-断点续传"><a href="#文件上传-断点续传" class="headerlink" title="文件上传/断点续传"></a>文件上传/断点续传</h2><!-- acuviewer/ video_upload.php: -->
 <p>resumable.js+bootstrap-progressbar.js   </p>
 <blockquote>
@@ -668,7 +674,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-count">271</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -679,7 +685,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -690,7 +696,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -773,7 +779,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件对象-blob-和下载"><span class="nav-text">文件对象(blob) 和下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件上传-断点续传"><span class="nav-text">文件上传/断点续传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取本地文件"><span class="nav-text">读取本地文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件对象-blob-和下载"><span class="nav-text">文件对象(blob) 和下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件下载"><span class="nav-text">文件下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取本地文件"><span class="nav-text">读取本地文件</span></a></li></ol></div>
             
 
           </div>
@@ -807,7 +813,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">411.5k</span>
+    <span title="Site words total count">451.6k</span>
   
 </div>
 

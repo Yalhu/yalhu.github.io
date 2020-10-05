@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2018.10.12 星期五 17:15   new操作符的工作原理12345678910111213141516171819202122232425262728293031323334var F=function()&amp;#123;    //this指向谁，在定义时是不知道的&amp;#125;;var p=new F; // $有无 () 都可以调用，有参和无参，和. 运算优先级不一样// ## 1 代">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta property="og:updated_time" content="2020-04-28T01:57:17.475Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Js表达式和运算符">
 <meta name="twitter:description" content="2018.10.12 星期五 17:15   new操作符的工作原理12345678910111213141516171819202122232425262728293031323334var F=function()&amp;#123;    //this指向谁，在定义时是不知道的&amp;#125;;var p=new F; // $有无 () 都可以调用，有参和无参，和. 运算优先级不一样// ## 1 代">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2020-04-28T09:57:17+08:00">
+                2020-04-28
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  837
+                  923
                 </span>
               
 
@@ -465,6 +465,7 @@
 <p>用new调用一个函数发生了这些事：<br>（1）新建一个对象<code>instance=new Object()</code>;<br>（2）设置原型链<code>instance.__proto__=F.prototype</code>;<br>（3）让F中的this指向instance，执行F的函数体。<br>（4）判断F的返回值类型：<br>如果是值类型，就丢弃它，还是返回instance。<br>如果是引用类型，就返回这个引用类型的对象，替换掉instance。      </p>
 <p>注：（1）如果没有写return，相当于return undefined，JavaScript中的函数都是这样。undefined是值类型的，因此丢弃它，返回instance。<br>（2）如果return this相当于返回一个引用类型的对象，它自己就是instance，无所谓替换不替换了。<br>（3）对instance并不需要设置它的constructor属性，这个属性在instance的原型中。<br>而且，任意一个新函数在创建时，原型的constructor就已经设置好了。<br>于是，这也要求我们在对prototype重新赋值的时候，重新指定constructor属性。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.assert(!p.hasOwnProperty(<span class="string">'constructor'</span>));</span><br><span class="line"><span class="built_in">console</span>.assert(F.prototype.hasOwnProperty(<span class="string">'constructor'</span>));</span><br><span class="line"><span class="comment">// 而且 。。  </span></span><br><span class="line"><span class="keyword">var</span> G=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line"><span class="built_in">console</span>.assert(G.prototype.hasOwnProperty(<span class="string">'constructor'</span>));</span><br><span class="line"><span class="built_in">console</span>.assert(G.prototype.constructor===G);</span><br><span class="line"><span class="comment">// 重新指定constructor属性。</span></span><br><span class="line">F.prototype=&#123;</span><br><span class="line">    <span class="keyword">constructor</span>:F</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <!-- $end -->
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span>(<span class="params">f</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//返回一个func</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> o = &#123;<span class="string">"__proto__"</span>: f.prototype&#125;;</span><br><span class="line">        f.apply(o, <span class="built_in">arguments</span>);<span class="comment">//继承父类的属性</span></span><br><span class="line">        <span class="keyword">return</span> o; <span class="comment">//返回一个Object</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> p2 = New(Person)(<span class="string">"Jack"</span>,<span class="number">25</span>);</span><br><span class="line">p2.name;<span class="comment">//Jack</span></span><br><span class="line">p2.age;<span class="comment">//25</span></span><br><span class="line">p2 <span class="keyword">instanceof</span> Person <span class="comment">// true</span></span><br><span class="line">Person.prototype.gender =<span class="string">"male"</span>;</span><br><span class="line">p2.gender<span class="comment">//male</span></span><br></pre></td></tr></table></figure>
 <h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// new 、this、以及原型链相关问</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line">Foo.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">&#125;</span><br><span class="line">Foo.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">4</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">5</span>)</span><br><span class="line">&#125;</span><br><span class="line">Foo.getName();  <span class="comment">// 2  // Foo的静态方法（如果C#、java等后端语言来说）</span></span><br><span class="line">getName();  <span class="comment">// 4</span></span><br><span class="line">Foo().getName();   <span class="comment">//  1   // $PS:3,没有new即也就不会返回实例，return的this指window</span></span><br><span class="line">getName();  <span class="comment">// 1</span></span><br><span class="line"><span class="keyword">new</span> Foo.getName();  <span class="comment">// 2</span></span><br><span class="line"><span class="keyword">new</span> Foo().getName();    <span class="comment">// 3 //  有new 返回实例;</span></span><br><span class="line">        <span class="comment">// 由于new是有参的，与.运算符同级，按照从左向右的执行顺序，先执行new Foo()。</span></span><br><span class="line"><span class="keyword">new</span> <span class="keyword">new</span> Foo().getName();    <span class="comment">// 3 </span></span><br><span class="line">    <span class="comment">// 原理：主要是运算符优先级的考查，实例开发中应该不会这样直接的用到。首先new有参，然后.getName(.运算符)（为什么是.运算符，这是因为new无参级别低一个档次）,再则new有参。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* $PS: function的声明在var 前面</span></span><br><span class="line"><span class="comment">console.log(name) // f name()&#123;&#125; </span></span><br><span class="line"><span class="comment">var name;</span></span><br><span class="line"><span class="comment">function name()&#123;&#125; */</span></span><br></pre></td></tr></table></figure>
 <h2 id="Object-和new-Object"><a href="#Object-和new-Object" class="headerlink" title="Object()和new Object()"></a>Object()和new Object()</h2><p>当以非构造函数形式被调用时，Object 等同于 new Object()      </p>
 <h2 id="与-运算优先级比较"><a href="#与-运算优先级比较" class="headerlink" title="与.运算优先级比较"></a>与.运算优先级比较</h2><p>new是有参的，与.运算符同级，按照从左向右的执行顺序，先执行new Foo()<br>new无参级别低一个档次，先进行.运算符    </p>
@@ -658,7 +659,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-count">271</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -669,7 +670,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -680,7 +681,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -763,7 +764,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#new操作符的工作原理"><span class="nav-text">new操作符的工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-text">练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-和new-Object"><span class="nav-text">Object()和new Object()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与-运算优先级比较"><span class="nav-text">与.运算优先级比较</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#new操作符的工作原理"><span class="nav-text">new操作符的工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-text">练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-和new-Object"><span class="nav-text">Object()和new Object()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与-运算优先级比较"><span class="nav-text">与.运算优先级比较</span></a></li></ol></div>
             
 
           </div>
@@ -797,7 +798,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">411.5k</span>
+    <span title="Site words total count">451.6k</span>
   
 </div>
 

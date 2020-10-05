@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="MDN:https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta property="og:updated_time" content="2020-07-13T15:22:31.513Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fetch使用">
 <meta name="twitter:description" content="MDN:https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2020-07-13T23:22:31+08:00">
+                2020-07-13
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  932
+                  918
                 </span>
               
 
@@ -462,9 +462,8 @@
 <a id="more"></a>
 <p style="text-align:right">2019.3.14 四 16:01</p>
 
-<!-- MDN:[使用 Fetch](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch)     -->
 <h2 id="json-格式数据处理"><a href="#json-格式数据处理" class="headerlink" title="json 格式数据处理"></a>json 格式数据处理</h2><p>最佳实践是在使用之前检查 content type 是否正确，比如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fetch(myRequest).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(response.headers.get(<span class="string">"content-type"</span>) === <span class="string">"application/json"</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> response.json().then(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// process your JSON further</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"Oops, we haven't got JSON!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 其他</span></span><br><span class="line"><span class="keyword">if</span>(response.ok) &#123;</span><br><span class="line">    <span class="keyword">return</span> response.blob();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="为什么我不再使用Fetch-API开发应用"><a href="#为什么我不再使用Fetch-API开发应用" class="headerlink" title="为什么我不再使用Fetch API开发应用"></a>为什么我不再使用Fetch API开发应用</h2><p><a href="https://zhuanlan.zhihu.com/p/28206325" target="_blank" rel="noopener">[为什么我不再使用Fetch API开发应用]</a>        </p>
+<h2 id="为什么我不再使用Fetch-API开发应用"><a href="#为什么我不再使用Fetch-API开发应用" class="headerlink" title="为什么我不再使用Fetch API开发应用"></a>为什么我不再使用Fetch API开发应用</h2><!-- [[为什么我不再使用Fetch API开发应用]](https://zhuanlan.zhihu.com/p/28206325) -->
 <h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p>我们需要加上一句 response.json() 来从 response 流对象中获取数据，但这只是一点很小的代价。   </p>
 <p>之前我提到的所有 http 工具库会把状态码错误的响应（比如404，500等）当成一个错误来处理，而 fetch 与 XMLHttpRequest 一样，只会在网络错误的情况下（比如 IP 地址无法解析，服务器不可访问或是不允许 CORS）reject 这个 promise。       </p>
 <h3 id="POST-请求"><a href="#POST-请求" class="headerlink" title="POST 请求"></a>POST 请求</h3><p>fetch 是一种底层的 api，它不会在我们处理这种一般情形时带来便利，你必须清楚明确地使用它。首先，JSON 必须先转换成字符串，然后还要设置 ‘Content-Type’ 头部，指出实体的类型是 JSON，否则服务器会把它当做普通的字符串处理。<br>$PS: axios 有instance       </p>
@@ -690,7 +689,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-count">271</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -701,7 +700,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -712,7 +711,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -825,7 +824,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">411.5k</span>
+    <span title="Site words total count">451.6k</span>
   
 </div>
 

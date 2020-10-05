@@ -95,13 +95,13 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="原文：关于Vue和React区别的一些笔记 这篇文章记录我在使用Vue和React的时候，对他们的不同之处的一些思考，不仅局限于他们本身，也会包括比如 Vuex/Redux 等经常搭配使用的工具。因为涉及到的内容很多，可能下面的每一个点都能写成一篇文章，这次先简单做一个概要，等我有空做一个详细的专题出来。 监听数据变化的实现原理不同 Vue 通过 getter/setter 以及一些函数的劫持，能">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/vue-vs-react-data-flow.png?e=1585220555&token=your qiniu access key:7h30Lp_zrGvD6trNrAszc2xag5k=">
-<meta property="og:image" content="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/message.png?e=1585220555&token=your qiniu access key:_mHbQ4koBniXFDul6id4iDVIQfY=">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta property="og:image" content="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/vue-vs-react-data-flow.png?e=1601894995&token=your qiniu access key:yHxclJ6jrMmLa3C-e9K3wYf6PAM=">
+<meta property="og:image" content="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/message.png?e=1601894995&token=your qiniu access key:YDksKRDiT3QvujzPjxtIaYNYNeg=">
+<meta property="og:updated_time" content="2020-05-17T05:18:12.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue和React比较">
 <meta name="twitter:description" content="原文：关于Vue和React区别的一些笔记 这篇文章记录我在使用Vue和React的时候，对他们的不同之处的一些思考，不仅局限于他们本身，也会包括比如 Vuex/Redux 等经常搭配使用的工具。因为涉及到的内容很多，可能下面的每一个点都能写成一篇文章，这次先简单做一个概要，等我有空做一个详细的专题出来。 监听数据变化的实现原理不同 Vue 通过 getter/setter 以及一些函数的劫持，能">
-<meta name="twitter:image" content="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/vue-vs-react-data-flow.png?e=1585220555&token=your qiniu access key:7h30Lp_zrGvD6trNrAszc2xag5k=">
+<meta name="twitter:image" content="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/vue-vs-react-data-flow.png?e=1601894995&token=your qiniu access key:yHxclJ6jrMmLa3C-e9K3wYf6PAM=">
 
 
 
@@ -351,8 +351,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2020-05-17T13:18:12+08:00">
+                2020-05-17
               </time>
             
           </span>
@@ -423,7 +423,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,925
+                  2,317
                 </span>
               
 
@@ -439,7 +439,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7
+                  8
                 </span>
               
             </div>
@@ -468,7 +468,7 @@
 </ul>
 <p>为什么 React 不精确监听数据变化呢？这是因为 Vue 和 React 设计理念上的区别，Vue 使用的是可变数据，而React更强调数据的不可变。所以应该说没有好坏之分，Vue更加简单，而React构建大型应用的时候更加鲁棒。    </p>
 <p>因为一般都会用一个数据层的框架比如 Vuex 和 Redux，所以这部分不作过多解释，在最后的 vuex 和 redux的区别 中也会讲到。</p>
-<h2 id="数据流的不同"><a href="#数据流的不同" class="headerlink" title="数据流的不同"></a>数据流的不同</h2><p><img src="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/vue-vs-react-data-flow.png?e=1585220555&token=your qiniu access key:7h30Lp_zrGvD6trNrAszc2xag5k=" alt="vue和react数据流"></p>
+<h2 id="数据流的不同"><a href="#数据流的不同" class="headerlink" title="数据流的不同"></a>数据流的不同</h2><p><img src="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/vue-vs-react-data-flow.png?e=1601894995&token=your qiniu access key:yHxclJ6jrMmLa3C-e9K3wYf6PAM=" alt="vue和react数据流"></p>
 <p>大家都知道Vue中默认是支持双向绑定的。在Vue1.0中我们可以实现两种双向绑定：</p>
 <ol>
 <li>父子组件之间，props 可以双向绑定</li>
@@ -481,7 +481,7 @@
 <p>React 最早也是使用 mixins 的，不过后来他们觉得这种方式对组件侵入太强会导致很多问题，就弃用了 mixinx 转而使用 HoC，关于mixin究竟哪里不好，可以参考React官方的这篇文章 <a href="https://reactjs.org/blog/2016/07/13/mixins-considered-harmful.html" target="_blank" rel="noopener">Mixins Considered Harmful</a>  </p>
 <p>而 Vue 一直是使用 mixin 来实现的。<br>为什么 Vue 不采用 HoC 的方式来实现呢？<br>高阶组件本质就是高阶函数，React 的组件是一个纯粹的函数，所以高阶函数对React来说非常简单。<br>但是Vue就不行了，Vue中组件是一个被包装的函数，并不简单的就是我们定义组件的时候传入的对象或者函数。比如我们定义的模板怎么被编译的？比如声明的props怎么接收到的？这些都是vue创建组件实例的时候隐式干的事。由于vue默默帮我们做了这么多事，所以我们自己如果直接把组件的声明包装一下，返回一个高阶组件，那么这个被包装的组件就无法正常工作了。   </p>
 <p>推荐一篇很棒的文章讲的是vue中如何实现高阶组件 <a href="http://hcysun.me/2018/01/05/%E6%8E%A2%E7%B4%A2Vue%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6/" target="_blank" rel="noopener">探索Vue高阶组件</a></p>
-<h2 id="组件通信的区别"><a href="#组件通信的区别" class="headerlink" title="组件通信的区别"></a>组件通信的区别</h2><p><img src="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/message.png?e=1585220555&token=your qiniu access key:_mHbQ4koBniXFDul6id4iDVIQfY=" alt="vue和react组件通信">  </p>
+<h2 id="组件通信的区别"><a href="#组件通信的区别" class="headerlink" title="组件通信的区别"></a>组件通信的区别</h2><p><img src="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/message.png?e=1601894995&token=your qiniu access key:YDksKRDiT3QvujzPjxtIaYNYNeg=" alt="vue和react组件通信">  </p>
 <p>其实这部分两个比较相似。    </p>
 <p>在Vue 中有三种方式可以实现组件通信：    </p>
 <ul>
@@ -521,6 +521,20 @@
 <li>Redux 在检测数据变化的时候，是通过 diff 的方式比较差异的，而Vuex其实和Vue的原理一样，是通过 getter/setter来比较的（如果看Vuex源码会知道，其实他内部直接创建一个Vue实例用来跟踪数据变化）  </li>
 </ul>
 <p>而这两点的区别，其实也是因为 React 和 Vue的设计理念上的区别。React更偏向于构建稳定大型的应用，非常的科班化。相比之下，Vue更偏向于简单迅速的解决问题，更灵活，不那么严格遵循条条框框。因此也会给人一种大型项目用React，小型项目用 Vue 的感觉。   </p>
+<!-- self -->
+<h3 id="文档学习"><a href="#文档学习" class="headerlink" title="文档学习"></a>文档学习</h3><p><a href="../../w3/jslib/vuex文档.md">vuex文档</a><br><a href="../../w3/jslib/redux文档.md">redu文档</a>    </p>
+<p>#### 区别      </p>
+<ol>
+<li>vuex 根组件store 注入store/state；redux 在每个组件通过connect 连接每个state, 全局通过Props 上下文传入<br>都把state 当作组件的props 使用。都有mapState/mapGetters(2computed)，mapState2Props 工具函数<br>vuex可以直接读取state， this.$store.state （灵活）； redux 只可以通过store.getState().state 读取   </li>
+<li>vuex 修改state 是直接修改；redux 还是强调不变数量，reducer每次返回新数据(需要注意组织state（范式化）方便更新数据。)。<br>和vue，react 的 双向数据绑定原理相关。   </li>
+<li>vuex 有modules 概念。redux 无此概念，单一状态树；但是可以拆分reducers，通过combineReducers 再组合起来；action也是单个分开的<br>vues虽然有modules，但是也是单一状态树。只是语法中可以抽出单独module；<br>redux 是在reducer中管理module，需要注意组织reducer     </li>
+<li>vuex action 是一个动作和mutaion 对应。 redux 中action 是一个 包含type 字段的对象，或者一个action 创建函数    </li>
+<li>vuex 触发数据变动 通过 commit(mutation)/dispatch(action)。 redux 都是通过dispatch.<br>vuex this.$store.commit/dispatch();   redux this.$props.dispatch();<br>都有mapMutations/mapActoin(2methods) , mapDiapatch2Methods 工具函数从store中注入组件中使用   </li>
+<li>redux 异步action 需要通过redux-thunk 中间件 实现     </li>
+</ol>
+<p>对象扩展运算符的使用：vuex map（state,getters,mutation,actions）时使用；redux reducer 返回新数据对象使用。    </p>
+<p>#### 后续<br>vue：store 注入方式（vue源码中读）<br>react： connect  连接方式（redux源码中读）<br>    异步action 尝试。   </p>
+<p>flux 思想及使用学习。   </p>
 
       
     </div>
@@ -703,7 +717,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-count">271</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -714,7 +728,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -725,7 +739,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -808,7 +822,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#监听数据变化的实现原理不同"><span class="nav-text">监听数据变化的实现原理不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据流的不同"><span class="nav-text">数据流的不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HoC-和-mixins"><span class="nav-text">HoC 和 mixins</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件通信的区别"><span class="nav-text">组件通信的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板渲染方式的不同"><span class="nav-text">模板渲染方式的不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vuex-和-Redux-的区别"><span class="nav-text">Vuex 和 Redux 的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#监听数据变化的实现原理不同"><span class="nav-text">监听数据变化的实现原理不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据流的不同"><span class="nav-text">数据流的不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HoC-和-mixins"><span class="nav-text">HoC 和 mixins</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件通信的区别"><span class="nav-text">组件通信的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板渲染方式的不同"><span class="nav-text">模板渲染方式的不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vuex-和-Redux-的区别"><span class="nav-text">Vuex 和 Redux 的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文档学习"><span class="nav-text">文档学习</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -842,7 +856,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">411.5k</span>
+    <span title="Site words total count">451.6k</span>
   
 </div>
 

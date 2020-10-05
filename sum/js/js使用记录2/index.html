@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2019.2.12 星期二    JS ~~等价于Math.floor. ~~3.6=3(=~(~3.6)=~(-4+1)); ~3.6 = -4 (-(3+1)) 反码(~)：二进制进行反码计算时。1变成0，0变成1。 举例子~6,6的二进制是110在机器上补足32位在110之前补码0。那么反码为111…..001，此时的反码减去1得111…..111000，那么原反码减去相减的码得到0000…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-05T14:08:13.286Z">
+<meta property="og:updated_time" content="2020-10-03T15:29:58.385Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Js使用记录2">
 <meta name="twitter:description" content="2019.2.12 星期二    JS ~~等价于Math.floor. ~~3.6=3(=~(~3.6)=~(-4+1)); ~3.6 = -4 (-(3+1)) 反码(~)：二进制进行反码计算时。1变成0，0变成1。 举例子~6,6的二进制是110在机器上补足32位在110之前补码0。那么反码为111…..001，此时的反码减去1得111…..111000，那么原反码减去相减的码得到0000…">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-05T22:08:13+08:00">
-                2020-02-05
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-03T23:29:58+08:00">
+                2020-10-03
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,470
+                  765
                 </span>
               
 
@@ -437,7 +437,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  11
+                  3
                 </span>
               
             </div>
@@ -480,60 +480,11 @@
 <li><p>获取月份最后一天。比如2月最后一天, <code>new Date(2019,2,0).getDate()</code></p>
 </li>
 </ol>
-<h3 id="DOM-相关"><a href="#DOM-相关" class="headerlink" title="DOM 相关"></a>DOM 相关</h3><ol>
-<li>获取select选择option <code>this.selectedIndex; this.selectedOptions[0]</code></li>
-<li><p>获取图片的元素宽高<br>需要等img加载完成后才可以获取到，否则第一次是空。除非，有缓存或者加载图片比js执行快<br># <a href="https://www.cnblogs.com/intangible/p/7202317.html" target="_blank" rel="noopener">js获取图片信息（一）—–获取图片的原始尺寸</a>    </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> img = <span class="built_in">document</span>.getElementById(<span class="string">"oImg"</span>), w,h;</span><br><span class="line"><span class="keyword">if</span> (oImg.naturalWidth) &#123;</span><br><span class="line">　　<span class="comment">// HTML5 browsers</span></span><br><span class="line">　　w = oImg.naturalWidth;</span><br><span class="line">　　h = oImg.naturalHeight;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;<span class="comment">// IE 6/7/8</span></span><br><span class="line">　　<span class="keyword">var</span> nImg = <span class="keyword">new</span> Image();</span><br><span class="line"><span class="comment">//      nImg.src = oImg.src;</span></span><br><span class="line">　　nImg.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">　　　　w = nImg.width;</span><br><span class="line">　　　　h = nImg.height;</span><br><span class="line">　　　　<span class="built_in">console</span>.log(w + <span class="string">"  "</span> + h)</span><br><span class="line">　　&#125;</span><br><span class="line">　　nImg.src = oImg.src;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>标准浏览器使用document.documentElement，低版本IE使用document.body  </p>
-</li>
-<li><p>原生方式事件代理bind，父元素绑定</p>
-</li>
-<li>事件绑定once实现   </li>
-<li>ready：DOMContendLoaded . onload:window,img</li>
-<li>a标签click，href先后顺序<br> “a标签onclick事件会在href属性生效前优先执行！”！<br>解决方法: 在onclick事件上做个setTimeout的短暂延时，使得onclick里面的事件因延时,在地址栏网址被修改后再去捕捉最新的地址栏链接！<br>[<a href="https://www.jb51.net/article/103151.htm" target="_blank" rel="noopener">详解Html a标签中href和onclick用法、区别、优先级别</a><br>Html A标签中 href 和 onclick 同时使用的问题 优先级别<br>1 顺序<br>ie 6 : href 先触发 onclick 后触发<br>其他浏览器 先触发onlick 后触发 href<br>2 <code>href=&quot;javascript: xxx()&quot;</code><br>不能传入this作为参数<br>onclick可以<br>3 优先触发的方法如果返回 false 导致后一个事件不被触发<br>6 总结：<br>1) 在不需要传递this作为方法的参数时候，推荐<br>只使用href=”JavaScript: “<br>2) 如果需要使用this参数，推荐<br>代码如下<br><code>&lt;a href=&quot;javascript:void(0);&quot; onclick=&quot;doSomthing(this)&quot; &gt;</code></li>
-</ol>
-<p><a href="http://www.cnblogs.com/iyangyuan/p/3979957.html" target="_blank" rel="noopener">html中a标签href属性的一个坑</a><br>此URL后边有一个name参数，只不过参数的值竟然带了空格，这样的链接，直接用android浏览器访问，是没有问题的，但用ios的浏览器访问，这就是一个错误的URL，会报错的！</p>
-<p>所以，我们会想到编码，name参数的值，可以用encodeURIComponent()方法进行编码，然后再拼接到URL上，这样就安全了（encodeURIComponent是js原生方法，直接用即可）。</p>
-<p>由此可见：“万恶”的href属性，在调用openURL传参时自动解码，而onclick属性则保持参数原封不动。</p>
-<p>因此，小菜强烈不推荐使用a标签的href属性调用js，onclick方法非常的科学，非常的稳定，非常的正确，href的本意就是用来跳转URL，就不要用它来执行js啦。其实更好的做法是绑定事件，那样代码更好管理，看起来也整洁。   </p>
-<ol start="4">
-<li>javascript中获取dom元素高度和宽度<!-- [javascript中获取dom元素高度和宽度]<https://www.cnblogs.com/gopark/p/9008175.html>   -->
-</li>
-</ol>
-<p>javascript中获取dom元素高度和宽度的方法如下：<br>网页可见区域宽： document.body.clientWidth<br>网页可见区域高： document.body.clientHeight<br>网页可见区域宽： document.body.offsetWidth (包括边线的宽)<br>网页可见区域高： document.body.offsetHeight (包括边线的高)<br>网页正文全文宽： document.body.scrollWidth<br>网页正文全文高： document.body.scrollHeight<br>网页被卷去的高： document.body.scrollTop<br>网页被卷去的左： document.body.scrollLeft          </p>
-<p>对应的dom元素的宽高有以下几个常用的：<br>元素的实际高度：document.getElementById(“div”).offsetHeight<br>元素的实际宽度：document.getElementById(“div”).offsetWidth<br>元素的实际距离左边界的距离：document.getElementById(“div”).offsetLeft<br>元素的实际距离上边界的距离：document.getElementById(“div”).offsetTop</p>
-<ol start="5">
-<li><p>滚动到顶部。滚动条在Y轴上的滚动距离，文档的总高度,浏览器视口的高度<br>$BLOB: 滚动条操作25## ## 判断div是否滚动到底部<br># <a href="https://www.jb51.net/article/42744.htm" target="_blank" rel="noopener">[判断滚动条到底部的JS代码]</a>    </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//滚动条在Y轴上的滚动距离</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getScrollTop</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　<span class="keyword">var</span> scrollTop = <span class="number">0</span>, bodyScrollTop = <span class="number">0</span>, documentScrollTop = <span class="number">0</span>;</span><br><span class="line">　　<span class="keyword">if</span>(<span class="built_in">document</span>.body)&#123;</span><br><span class="line">　　　　bodyScrollTop = <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">if</span>(<span class="built_in">document</span>.documentElement)&#123;</span><br><span class="line">　　　　documentScrollTop = <span class="built_in">document</span>.documentElement.scrollTop;</span><br><span class="line">　　&#125;</span><br><span class="line">　　scrollTop = (bodyScrollTop - documentScrollTop &gt; <span class="number">0</span>) ? bodyScrollTop : documentScrollTop;</span><br><span class="line">　　<span class="keyword">return</span> scrollTop;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//文档的总高度</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getScrollHeight</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　<span class="keyword">var</span> scrollHeight = <span class="number">0</span>, bodyScrollHeight = <span class="number">0</span>, documentScrollHeight = <span class="number">0</span>;</span><br><span class="line">　　<span class="keyword">if</span>(<span class="built_in">document</span>.body)&#123;</span><br><span class="line">　　　　bodyScrollHeight = <span class="built_in">document</span>.body.scrollHeight;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">if</span>(<span class="built_in">document</span>.documentElement)&#123;</span><br><span class="line">　　　　documentScrollHeight = <span class="built_in">document</span>.documentElement.scrollHeight;</span><br><span class="line">　　&#125;</span><br><span class="line">　　scrollHeight = (bodyScrollHeight - documentScrollHeight &gt; <span class="number">0</span>) ? bodyScrollHeight : documentScrollHeight;</span><br><span class="line">　　<span class="keyword">return</span> scrollHeight;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//浏览器视口的高度</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getWindowHeight</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　<span class="keyword">var</span> windowHeight = <span class="number">0</span>;</span><br><span class="line">　　<span class="keyword">if</span>(<span class="built_in">document</span>.compatMode == <span class="string">"CSS1Compat"</span>)&#123;</span><br><span class="line">　　　　windowHeight = <span class="built_in">document</span>.documentElement.clientHeight;</span><br><span class="line">　　&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">　　　　windowHeight = <span class="built_in">document</span>.body.clientHeight;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">return</span> windowHeight;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　<span class="keyword">if</span>(getScrollTop() + getWindowHeight() == getScrollHeight())&#123;</span><br><span class="line">　　　　alert(<span class="string">"you are in the bottom!"</span>);</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>移动端JS判断手势方向<br>当出现滚动时候，获取y轴距离的时候要加上滚动高度，不然高度差一直是0<br><a href="https://www.cnblogs.com/ranyonsue/p/7404173.html" target="_blank" rel="noopener">[移动端JS判断手势方向]</a>    </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 移动端判断滑动方向：左右上下滑动</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAngle</span>(<span class="params">dx, dy</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.atan2(-dy,dx) * <span class="number">180</span> / <span class="built_in">Math</span>.PI;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDirection</span>(<span class="params">startx,starty,endx,endy</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> dx =endx-startx;</span><br><span class="line">    <span class="keyword">var</span> dy =endy-starty</span><br><span class="line">    dy+=(getScrollTop()-scrollStartTop) <span class="comment">// scroll will have influence on y,beacuse when scroll dy is always less then 10</span></span><br><span class="line">    <span class="comment">// console.log('dx ,dy:',dx,dy)</span></span><br><span class="line">    <span class="keyword">var</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">Math</span>.abs(dx)&lt;<span class="number">2</span>&amp;&amp;<span class="built_in">Math</span>.abs(dy)&lt;<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* if(Math.abs(dy)&lt;15)&#123;</span></span><br><span class="line"><span class="comment">        if(dx&lt;-10)&#123;</span></span><br><span class="line"><span class="comment">            result=4</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        if(dx&gt;10)&#123;</span></span><br><span class="line"><span class="comment">            result=2</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">    &#125; */</span></span><br><span class="line">    <span class="keyword">var</span> angle = getAngle(dx,dy);</span><br><span class="line">    <span class="comment">// if(angle &gt;= -45 &amp;&amp; angle &lt; 45) &#123; </span></span><br><span class="line">    <span class="keyword">if</span>(angle &gt;= <span class="number">-25</span> &amp;&amp; angle &lt; <span class="number">25</span>) &#123; </span><br><span class="line">        result = <span class="number">2</span>; </span><br><span class="line">    <span class="comment">// &#125;else if (angle &gt;= 45 &amp;&amp; angle &lt; 135) &#123; </span></span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> (angle &gt;= <span class="number">25</span> &amp;&amp; angle &lt; <span class="number">155</span>) &#123; </span><br><span class="line">        result = <span class="number">1</span>; </span><br><span class="line">    <span class="comment">// &#125;else if (angle &gt;= -135 &amp;&amp; angle &lt; -45) &#123; </span></span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span> (angle &gt;= <span class="number">-155</span> &amp;&amp; angle &lt; <span class="number">-25</span>) &#123; </span><br><span class="line">        result = <span class="number">3</span>; </span><br><span class="line">    <span class="comment">// &#125; else if ((angle &gt;= 135 &amp;&amp; angle &lt;= 180) || (angle &gt;= -180 &amp;&amp; angle &lt; -135)) &#123; </span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ((angle &gt;= <span class="number">155</span> &amp;&amp; angle &lt;= <span class="number">180</span>) || (angle &gt;= <span class="number">-180</span> &amp;&amp; angle &lt; <span class="number">-155</span>)) &#123; </span><br><span class="line">        result = <span class="number">4</span>; </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="comment">/* if ( Math.abs(dx) &gt; Math.abs(dy) &amp;&amp; dx &gt; 0 ) &#123;</span></span><br><span class="line"><span class="comment">        // alert("left 2 right");</span></span><br><span class="line"><span class="comment">        result=2</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    else if ( Math.abs(dx) &gt; Math.abs(dy) &amp;&amp; dx &lt; 0 ) &#123;</span></span><br><span class="line"><span class="comment">        // alert("right 2 left");</span></span><br><span class="line"><span class="comment">        result=4</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    else if ( Math.abs(dy) &gt; Math.abs(dx) &amp;&amp; dy &gt; 0) &#123;</span></span><br><span class="line"><span class="comment">        // alert("top 2 bottom");</span></span><br><span class="line"><span class="comment">        result=3</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    else if ( Math.abs(dy) &gt; Math.abs(dx) &amp;&amp; dy &lt; 0 ) &#123;</span></span><br><span class="line"><span class="comment">        // alert("bottom 2 top");</span></span><br><span class="line"><span class="comment">        result=1</span></span><br><span class="line"><span class="comment">    &#125; else&#123;</span></span><br><span class="line"><span class="comment">        // alert("just touch");</span></span><br><span class="line"><span class="comment">        result=0</span></span><br><span class="line"><span class="comment">    &#125; */</span></span><br><span class="line">    <span class="comment">// console.log('y x angle',dy,dx,angle,result);</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>addEventListener IE兼容</p>
-</li>
-<li><p>为什么不用try  catch 处理</p>
-</li>
-<li><p>不能用frag的innerHTML，需要用 fragment.appendChild(some element)<br><a href="https://stackoverflow.com/questions/8202195/using-document-createdocumentfragment-and-innerhtml-to-manipulate-a-dom" target="_blank" rel="noopener">using document.createDocumentFragment() and innerHTML to manipulate a DOM</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frag = <span class="built_in">document</span>.createDocumentFragment();</span><br><span class="line">frag.innerHTML = aWholeHTMLDocument;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>追加html，<code>element.insertAdjacentHTML(position, text);</code><br>position 是相对于 element 元素的位置，并且只能是以下的字符串之一：<br>beforebegin：在 element 元素的前面。<br>afterbegin：在 element 元素的第一个子节点前面。<br>beforeend：在 element 元素的最后一个子节点后面。<br>afterend：在 element 元素的后面。</p>
-</li>
-</ol>
-<p>text 是字符串，会被解析成 HTML 或 XML，并插入到 DOM 树中。</p>
-<!-- [原生 js 如何追加 html](https://segmentfault.com/q/1010000007420031) -->
 <ol>
-<li><p>原生手动触发click. dom.click() 或者document.createEvent();dispatchEvent(Event)<br><a href="http://www.cnblogs.com/jetwu/archive/2011/11/07/2239631.html" target="_blank" rel="noopener">JS中手动触发事件</a><br><code>void initEvent(String eventTypeArg,boolean canBubbleArg,boolean cancelableArg)</code> HTMLEvents,MouseEvents,UIEvents</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">document</span>.all)&#123; <span class="comment">//For Ie</span></span><br><span class="line">     fireOnThis.click();</span><br><span class="line"> &#125;</span><br><span class="line"> elseif (<span class="built_in">document</span>.createEvent) &#123;<span class="comment">//FOR DOM2</span></span><br><span class="line"> </span><br><span class="line">     <span class="keyword">var</span> ev = <span class="built_in">document</span>.createEvent(<span class="string">'HTMLEvents'</span>);</span><br><span class="line">     ev.initEvent(<span class="string">'click'</span>, <span class="literal">true</span>, <span class="literal">true</span>);</span><br><span class="line">     fireOnThis.dispatchEvent(ev);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>光标定位到最后位置    </p>
-</li>
-<li><p>js获取伪类。最后通过给元素切换类名，不同的类名下，对应不同的伪类css样式.<br> 还有方法计算值，是利用元素的属性<code>content: attr(data-value)</code><br><a href="https://www.zhihu.com/question/264684026" target="_blank" rel="noopener">js能获取，修改伪类元素:before或:after吗？</a>   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sheet = style.sheet <span class="comment">// 获取到stylesheet</span></span><br><span class="line"><span class="comment">// Use addRule or insertRule to inject styles</span></span><br><span class="line">sheet.addRule(<span class="string">'.red::before'</span>,<span class="string">'color: green'</span>);</span><br><span class="line">sheet.insertRule(<span class="string">'.red::before &#123; color: green &#125;'</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-<p>// <a href="http://www.webhek.com/post/pseudo-element.html" target="_blank" rel="noopener">用JavaScript获取伪元素(Pseudo-Element)属性的方法</a></p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">var</span> color = <span class="built_in">window</span>.getComputedStyle(</span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'.element'</span>), <span class="string">':before'</span>).getPropertyValue(<span class="string">'color'</span>)</span><br></pre></td></tr></table></figure>
-</li>
+<li>URI search<br>home.html?coursewareid=44</li>
 </ol>
+<p>const params = (new URL(window.location)).searchParams;<br>// const url = new URL(window.location);<br>// const params = new URLSearchParams(url.search);</p>
+<p>// const currCourseId = window.location.href.search(‘coursewareid’) || ‘-‘; // 32, 不知道什么问题<br>    可能用了字符串的search 方法找到索引，并不是值.  href.search === String.prototype.search</p>
 <h2 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h2><ol>
 <li>promise.all 返回：只要都resolve或者只要有catch</li>
 <li>promise.finally 兼容</li>
@@ -618,8 +569,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/w3/ser/linux教程-runoob/" rel="prev" title="Linux教程-Runoob">
-                Linux教程-Runoob <i class="fa fa-chevron-right"></i>
+              <a href="/sum/js/dom 相关js/" rel="prev" title="Dom 相关Js">
+                Dom 相关Js <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -732,7 +683,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-count">271</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -743,7 +694,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -754,7 +705,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -837,7 +788,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JS"><span class="nav-text">JS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM-相关"><span class="nav-text">DOM 相关</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6"><span class="nav-text">ES6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP"><span class="nav-text">HTTP</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JS"><span class="nav-text">JS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6"><span class="nav-text">ES6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP"><span class="nav-text">HTTP</span></a></li></ol></div>
             
 
           </div>
@@ -871,7 +822,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">411.5k</span>
+    <span title="Site words total count">451.6k</span>
   
 </div>
 

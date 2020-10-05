@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2018.9.24 星期一 23:20    版本：v2.31 (2009-4-11)      1 本文目标2 如何使用本教程3 正则表达式到底是什么东西？字符是计算机软件处理文字时最基本的单位，可能是字母，数字，标点符号，空格，换行符，汉字等等。字符串是0个或更多个字符的序列。文本也就是文字，字符串。说某个字符串匹配某个正则表达式，通常是指这个字符串里有一部分（或几部分分别）能满足表达式给出的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.401Z">
+<meta property="og:updated_time" content="2020-09-19T11:28:00.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式30分钟入门教程">
 <meta name="twitter:description" content="2018.9.24 星期一 23:20    版本：v2.31 (2009-4-11)      1 本文目标2 如何使用本教程3 正则表达式到底是什么东西？字符是计算机软件处理文字时最基本的单位，可能是字母，数字，标点符号，空格，换行符，汉字等等。字符串是0个或更多个字符的序列。文本也就是文字，字符串。说某个字符串匹配某个正则表达式，通常是指这个字符串里有一部分（或几部分分别）能满足表达式给出的">
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2020-09-19T19:28:00+08:00">
+                2020-09-19
               </time>
             
           </span>
@@ -470,7 +470,7 @@
 <p>13 后向引用<br>使用小括号指定一个子表达式后，匹配这个子表达式的文本(也就是此分组捕获的内容)可以在表达式或其它程序中作进一步的处理。默认情况下，每个分组会自动拥有一个组号，规则是：从左向右，以分组的左括号为标志，第一个出现的分组的组号为1，第二个为2，以此类推。      </p>
 <p><code>\b(\w+)\b\s+\1\b</code>可以用来匹配重复的单词，像go go, 或者 kitty kitty。       </p>
 <p>你也可以自己指定子表达式的组名。要指定一个子表达式的组名，请使用这样的语法：<code>(?&lt;Word&gt;\w+)</code>(或者把尖括号换成’也行：<code>(?&#39;Word&#39;\w+)</code>),这样就把\w+的组名指定为Word 了。要反向引用这个分组捕获的内容，你可以使用\k<word>,所以上一个例子也可以写成这样：<code>\b(?&lt;Word&gt;\w+)\b\s+\k&lt;Word&gt;\b</code>。     </word></p>
-<p>使用小括号的时候，还有很多特定用途的语法。下面列出了最常用的一些：<br>分类 |代码/语法|说明<br>捕获<br><code>(exp</code>): 匹配exp,并捕获文本到自动命名的组里<br><code>(?&lt;name&gt;exp)</code> 匹配exp,并捕获文本到名称为name的组里，也可以写成(?’name’exp)<br><code>(?:exp)</code> 匹配exp,不捕获匹配的文本，也不给此分组分配组号<br>零宽断言<br><code>(?=exp)</code>匹配exp前面的位置   零宽度正预测先行断言<br><code>(?&lt;=exp)</code>匹配exp后面的位置  零宽度正回顾后发断言<br><code>(?!exp)</code>匹配后面跟的不是exp的位置    零宽度负预测先行断言<br><code>(?&lt;!exp)</code>匹配前面不是exp的位置       零宽度负回顾后发断言<br>注释<br><code>(?#comment)</code>这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读   </p>
+<p>使用小括号的时候，还有很多特定用途的语法。下面列出了最常用的一些：<br>分类 |代码/语法|说明<br>捕获<br><code>(exp)</code>: 匹配exp,并捕获文本到自动命名的组里<br><code>(?&lt;name&gt;exp)</code> 匹配exp,并捕获文本到名称为name的组里，也可以写成(?’name’exp)<br><code>(?:exp)</code> 匹配exp,不捕获匹配的文本，也不给此分组分配组号<br>零宽断言<br><code>(?=exp)</code>匹配exp前面的位置   零宽度正预测先行断言<br><code>(?&lt;=exp)</code>匹配exp后面的位置  零宽度正回顾后发断言<br><code>(?!exp)</code>匹配后面跟的不是exp的位置    零宽度负预测先行断言<br><code>(?&lt;!exp)</code>匹配前面不是exp的位置       零宽度负回顾后发断言<br>注释<br><code>(?#comment)</code>这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读   </p>
 <p>14 零宽断言<br>接下来的四个用于查找在某些内容(但并不包括这些内容)之前或之后的东西，也就是说它们像\b,^,$那样用于指定一个位置，这个位置应该满足一定的条件(即断言)，因此它们也被称为零宽断言 。       </p>
 <p><code>\b\w+(?=ing\b)</code>，匹配以ing结尾的单词的前面部分(除了ing以外的部分)，如查找I’m singing while you’re dancing. 时，它会匹配sing 和danc。 </p>
 <p>假如你想要给一个很长的数字中每三位间加一个逗号(当然是从右边加起了)，你可以这样查找需要在前面和里面添加逗号的部分：<code>((?&lt;=\d)\d{3})+\b</code>，<br>15 负向零宽断言<br>前面我们提到过怎么查找不是某个字符或不在某个字符类里的字符的方法(反义)。但是如果我们只是想要确保某个字符没有出现，但并不想去匹配它时怎么办？<br>例如，如果我们想查找这样的单词–它里面出现了字母q,但是q后面跟的不是字母u,我们可以尝试这样：     </p>
@@ -659,7 +659,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-count">271</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -670,7 +670,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -681,7 +681,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -777,7 +777,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">411.5k</span>
+    <span title="Site words total count">451.6k</span>
   
 </div>
 

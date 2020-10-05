@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2018.4.28 星期六 9.40  技术/组织强壮；开发方便；搜索不做对比； 一 基本使用安装支持正版；其他平台下载的可能是国内版。        chrome://version正版：Google Inc.版权所有2018 Google Inc. 保留所有权利。  国内下载地址： https://www.google.cn/chrome国内地址可以打开：http://www.google.c">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-22T09:39:48.706Z">
+<meta property="og:updated_time" content="2020-10-03T16:12:46.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chrome简单实用">
 <meta name="twitter:description" content="2018.4.28 星期六 9.40  技术/组织强壮；开发方便；搜索不做对比； 一 基本使用安装支持正版；其他平台下载的可能是国内版。        chrome://version正版：Google Inc.版权所有2018 Google Inc. 保留所有权利。  国内下载地址： https://www.google.cn/chrome国内地址可以打开：http://www.google.c">
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-03-22T17:39:48+08:00">
-                2020-03-22
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-04T00:12:46+08:00">
+                2020-10-03
               </time>
             
           </span>
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,410
+                  1,544
                 </span>
               
 
@@ -467,16 +467,24 @@
 <p>国内下载地址： <a href="https://www.google.cn/chrome" target="_blank" rel="noopener">https://www.google.cn/chrome</a><br>国内地址可以打开：<a href="http://www.google.cn/" target="_blank" rel="noopener">http://www.google.cn/</a>   </p>
 <h3 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h3><p>为什么在国内经常打不开 iTunes App Store 和 Mac App Store<br>以下设置1对我无效！设置1有时候根本连不上，气的我下载了pp助手。<br>1、在连接上网络的情况下，添加以下DNS服务器地址114.114.114.114、8.8.8.8； 然后就可以正常使用了。 8.8.8.8是谷歌的，或许被墙；114实测有效。<br>2、反而是默认空白的 DNS服务器地址上的更快。我家用的是浙江电信的宽带。</p>
 <h3 id="url-list"><a href="#url-list" class="headerlink" title="url list"></a>url list</h3><p><a href="chrome://chrome-urls" target="_blank" rel="noopener">chrome://chrome-urls</a>  ==  <a href="chrome://about/" target="_blank" rel="noopener">chrome://about/</a><br><a href="chrome://setting" target="_blank" rel="noopener">chrome://setting</a></p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>chrome 快捷方式打不开：可能是新旧版本不同，或者桌面任务栏快捷方式问题。重新安装或者移动任务栏快捷方式位置<br>chrome 设置–&gt;下载文件 导致页面奔溃：和搜狗输入法 有关，设置的时候把搜狗输入法切换成英文 或者关闭该输入法。搜狗输入法需V9以上  </p>
+<p>清除chrome 缓存：<a href="chrome://net-internals/#dns" target="_blank" rel="noopener">chrome://net-internals/#dns</a><br>$_PS: 有时强制刷新页面dns也不刷新，老吃亏了</p>
+<h3 id="hsts"><a href="#hsts" class="headerlink" title="hsts"></a>hsts</h3><p>Chrome禁止http自动转为https<br>在Chrome浏览器地址栏输入chrome://net-internals/#hsts<br>在Delete domain security policies 中输入要删除自动转换的域名</p>
+<p>原因<br>将HTTP请求自动转为HTTPS请求是浏览器的默认策略。当浏览器访问过某个HTTPS的网站后，再访问该网站时，一切HTTP请求会自动转为HTTPS请求。<br>HTTP转为HTTPS的主要原因是为了安全。</p>
+<p>背景<br>url 强制开启https。或者取消强制https<br>开发的时候，绑定host。访问时强制开启了https，导致访问不到开发的资源<br>http:h5.xesv5.com:8066/</p>
+<!-- [Chrome下强制http重定向到https的问题](https://www.cnblogs.com/philipding/p/7898090.html) -->
 <h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>搜索页面也可以做很多设置。在搜索输入框下面，有设置/工具可以设置。<br>设置了结果打开方式。 </p>
 <p>打开新标签页：</p>
 <ol>
 <li>ctrl+单击 或者 滚轮中间</li>
 <li>谷歌的搜索引擎（默认安装好之后打开浏览器就是谷歌官网页面）→在搜索框中输入：设置→按回车键搜索一下——（搜索结果上面）设置→搜索设置—–结果打开方式→勾选<br>(说明：跳到新打开的页面，需要翻墙)</li>
-<li>官网下架了，也有用户自行将其广告的功能废了。下载，解压，再将破解版的Neat_Bookmarks_0.8.9.crx文件拖拽到谷歌浏览器内，该插件就会自行安装了。百度云分享：<a href="http://pan.baidu.com/s/1eRDDlBW" target="_blank" rel="noopener">http://pan.baidu.com/s/1eRDDlBW</a> </li>
+<li>官网下架了，也有用户自行将其广告的功能废了。下载，解压，再将破解版的Neat_Bookmarks_0.8.9.crx文件拖拽到谷歌浏览器内，该插件就会自行安装了。百度云分享：<a href="http://pan.baidu.com/s/1eRDDlBW" target="_blank" rel="noopener">http://pan.baidu.com/s/1eRDDlBW</a> <!-- 
+其它参考：  
+[程序员的基础生存技能 -- 关于搜索引擎的小贴士](http://guoze.me/2016/06/26/how-to-google/)     
+[[程序员的基础生存技能：高效用Google]]
+**$_PS:** 上面两篇是相同的
+-->
+<h3 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h3>结合Vimium。</li>
 </ol>
-<p>其它参考：<br><a href="http://guoze.me/2016/06/26/how-to-google/" target="_blank" rel="noopener">程序员的基础生存技能 – 关于搜索引擎的小贴士</a><br>[[程序员的基础生存技能：高效用Google]]<br><strong>$_PS:</strong> 上面两篇是相同的</p>
-<h3 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h3><p>结合Vimium。</p>
 <p>其它参考：<br><a href="https://www.zhihu.com/question/20827603" target="_blank" rel="noopener">Chrome浏览器如何给一个书签增加快捷键？</a><br><a href="https://jingyan.baidu.com/article/915fc414f638e251394b2022.html" target="_blank" rel="noopener">如何恢复误删的 Chrome 书签</a>   </p>
 <h3 id="开发者工具"><a href="#开发者工具" class="headerlink" title="开发者工具"></a>开发者工具</h3><p>开发者工具 windows-safari：偏好设置—-&gt;高级—-&gt;勾选</p>
 <p>参考：<br><a href>Chrome 开发者工具</a><a href="https://developers.google.cn/web/tools/chrome-devtools/?hl=zh-cn" target="_blank" rel="noopener">https://developers.google.cn/web/tools/chrome-devtools/?hl=zh-cn</a><br><a href="http://www.css88.com/doc/chrome-devtools/javascript/step-code/" target="_blank" rel="noopener">Chrome 开发者工具#如何遍历你的代码</a></p>
@@ -500,6 +508,7 @@ https://crxdown.com/
 <h3 id="未使用"><a href="#未使用" class="headerlink" title="未使用"></a>未使用</h3><p>Awesome New Tab Page,OneTab<br>JSON Formatter,JSONView<br>GFW: 谷歌上网助手，谷歌访问助手（都不实用）<br>识别网页字体的，<br>webRTC相关，录制等</p>
 <p>其它参考：<br><a href="http://dadoneo.iteye.com/blog/984884" target="_blank" rel="noopener">chrome五十大实用插件集合</a></p>
 <!-- ## 四 其他参考 -->
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>chrome 快捷方式打不开：可能是新旧版本不同，或者桌面任务栏快捷方式问题。重新安装或者移动任务栏快捷方式位置<br>chrome 设置–&gt;下载文件 导致页面奔溃：和搜狗输入法 有关，设置的时候把搜狗输入法切换成英文 或者关闭该输入法。搜狗输入法需V9以上  </p>
 <h2 id="chrome浏览器本地文件支持ajax请求"><a href="#chrome浏览器本地文件支持ajax请求" class="headerlink" title="chrome浏览器本地文件支持ajax请求"></a>chrome浏览器本地文件支持ajax请求</h2><p><a href="https://my.oschina.net/gaollg/blog/81225" target="_blank" rel="noopener">chrome浏览器本地文件支持ajax请求</a></p>
 <p>给chrome加上启动参数：<br>–allow-file-access-from-files<br>或者　<br>–disable-web-security<br>如，右击谷歌浏览器快捷图标-属性–快捷方式-目标</p>
 <p>C:\Users\hp\AppData\Local\Google\Chrome\Application\chrome.exe –allow-file-access-from-files</p>
@@ -707,7 +716,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-count">271</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -718,7 +727,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -729,7 +738,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -808,7 +817,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-基本使用"><span class="nav-number">1.</span> <span class="nav-text">一 基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他问题"><span class="nav-number">1.2.</span> <span class="nav-text">其他问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#url-list"><span class="nav-number">1.3.</span> <span class="nav-text">url list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">1.4.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索"><span class="nav-number">1.5.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#书签"><span class="nav-number">1.6.</span> <span class="nav-text">书签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发者工具"><span class="nav-number">1.7.</span> <span class="nav-text">开发者工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它"><span class="nav-number">1.8.</span> <span class="nav-text">其它</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-快捷键"><span class="nav-number">2.</span> <span class="nav-text">二 快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-扩展程序"><span class="nav-number">3.</span> <span class="nav-text">三 扩展程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网页工具"><span class="nav-number">3.1.</span> <span class="nav-text">网页工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理工具"><span class="nav-number">3.2.</span> <span class="nav-text">管理工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome"><span class="nav-number">3.3.</span> <span class="nav-text">chrome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊介绍"><span class="nav-number">3.4.</span> <span class="nav-text">特殊介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它-1"><span class="nav-number">3.5.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未使用"><span class="nav-number">3.6.</span> <span class="nav-text">未使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome浏览器本地文件支持ajax请求"><span class="nav-number">4.</span> <span class="nav-text">chrome浏览器本地文件支持ajax请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Safari浏览器"><span class="nav-number">5.</span> <span class="nav-text">Safari浏览器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-基本使用"><span class="nav-number">1.</span> <span class="nav-text">一 基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他问题"><span class="nav-number">1.2.</span> <span class="nav-text">其他问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#url-list"><span class="nav-number">1.3.</span> <span class="nav-text">url list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hsts"><span class="nav-number">1.4.</span> <span class="nav-text">hsts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索"><span class="nav-number">1.5.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#书签"><span class="nav-number">1.6.</span> <span class="nav-text">书签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发者工具"><span class="nav-number">1.7.</span> <span class="nav-text">开发者工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它"><span class="nav-number">1.8.</span> <span class="nav-text">其它</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-快捷键"><span class="nav-number">2.</span> <span class="nav-text">二 快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-扩展程序"><span class="nav-number">3.</span> <span class="nav-text">三 扩展程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网页工具"><span class="nav-number">3.1.</span> <span class="nav-text">网页工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理工具"><span class="nav-number">3.2.</span> <span class="nav-text">管理工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome"><span class="nav-number">3.3.</span> <span class="nav-text">chrome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊介绍"><span class="nav-number">3.4.</span> <span class="nav-text">特殊介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它-1"><span class="nav-number">3.5.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未使用"><span class="nav-number">3.6.</span> <span class="nav-text">未使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome浏览器本地文件支持ajax请求"><span class="nav-number">5.</span> <span class="nav-text">chrome浏览器本地文件支持ajax请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Safari浏览器"><span class="nav-number">6.</span> <span class="nav-text">Safari浏览器</span></a></li></ol></div>
             
 
           </div>
@@ -842,7 +851,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">411.5k</span>
+    <span title="Site words total count">451.6k</span>
   
 </div>
 

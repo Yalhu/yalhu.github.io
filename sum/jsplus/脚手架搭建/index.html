@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="npm i chalk commander download-git-repo inquirer ora request -S commander: https://github.com/tj/commander.jsInquirer: https://github.com/SBoudrias/Inquirer.jschalk: https://github.com/chalk/chalkSimp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="脚手架搭建">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/脚手架搭建/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="npm i chalk commander download-git-repo inquirer ora request -S commander: https://github.com/tj/commander.jsInquirer: https://github.com/SBoudrias/Inquirer.jschalk: https://github.com/chalk/chalkSimp">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-10-05T10:01:47.905Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="脚手架搭建">
+<meta name="twitter:description" content="npm i chalk commander download-git-repo inquirer ora request -S commander: https://github.com/tj/commander.jsInquirer: https://github.com/SBoudrias/Inquirer.jschalk: https://github.com/chalk/chalkSimp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/脚手架搭建/">
+
+
+
+
+
+  <title>脚手架搭建 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/脚手架搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">脚手架搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-23T08:00:00+08:00">
+                2020-09-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-05T18:01:47+08:00">
+                2020-10-05
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/jsplus/" itemprop="url" rel="index">
+                    <span itemprop="name">jsplus</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/脚手架搭建/" class="leancloud_visitors" data-flag-title="脚手架搭建">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,995
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>npm i chalk commander download-git-repo inquirer ora request -S</code></p>
+<p>commander: <a href="https://github.com/tj/commander.js" target="_blank" rel="noopener">https://github.com/tj/commander.js</a><br>Inquirer: <a href="https://github.com/SBoudrias/Inquirer.js" target="_blank" rel="noopener">https://github.com/SBoudrias/Inquirer.js</a><br>chalk: <a href="https://github.com/chalk/chalk" target="_blank" rel="noopener">https://github.com/chalk/chalk</a><br>Simple Git: <a href="https://github.com/steveukx/git-js#readme" target="_blank" rel="noopener">https://github.com/steveukx/git-js#readme</a></p>
+<p style="text-align:right"> 2020.9.23 星期三  12：51 </p>
+
+<h1 id="cli-搭建"><a href="#cli-搭建" class="headerlink" title="cli 搭建"></a>cli 搭建</h1><h2 id="简要"><a href="#简要" class="headerlink" title="简要"></a>简要</h2><p>我们实现了一个脚手架的基本功能，大致分为三个流程（拉取模板-&gt;创建项目-&gt;收尾清理</p>
+<p>1) commander 创建可执行的node命令<br>2) command:init： 复制模版</p>
+<ol>
+<li>可提交到git，从服务端下载</li>
+<li>本地缓存（和cli一起），不用从服务端下载最新</li>
+<li>模版可以写死然后重写；<br>或者使用模版文件ejs等<br>；可添加其他命令，init,built,publish,test 等。<br>3) 创建bin命令；包括package.json中配置。<br>4) 测试；npm link<br>5) 发布到npm</li>
+</ol>
+<h3 id="使用模版文件"><a href="#使用模版文件" class="headerlink" title="使用模版文件"></a>使用模版文件</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"&lt;%= type.toLowerCase() %&gt;"</span>,</span><br><span class="line">  <span class="attr">"name_cn"</span>: <span class="string">"&lt;%= name %&gt;"</span>,</span><br><span class="line">  <span class="attr">"desc"</span>: <span class="string">"&lt;%= desc %&gt;"</span>,</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"&lt;%= type %&gt;"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.0.1"</span>,</span><br><span class="line">  <span class="attr">"category"</span>: <span class="string">"&lt;%= category %&gt;"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">"&lt;%= desc %&gt;"</span>,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"department"</span>:  <span class="string">"&lt;%= department %&gt;"</span>,</span><br><span class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ### 使用模版文件ejs 创建模版</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">renderDir</span>(<span class="params">dir, data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> files = readdir(dir, <span class="function"><span class="keyword">function</span> (<span class="params">filename</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/\.(less|css|view|js|json|md)$/gi</span>.test(filename);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">await</span> <span class="built_in">Promise</span>.all(files.map(<span class="keyword">async</span> (file) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> filepath = dir + <span class="string">'/'</span> + file;</span><br><span class="line">    <span class="keyword">const</span> content = <span class="keyword">await</span> fs.readFile(filepath, <span class="string">'utf8'</span>);</span><br><span class="line">    <span class="keyword">await</span> fs.outputFile(filepath, ejs.render(content, data));</span><br><span class="line">  &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="git相关"><a href="#git相关" class="headerlink" title="git相关"></a>git相关</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> simpleGit <span class="keyword">from</span> <span class="string">'simple-git'</span>;</span><br><span class="line"><span class="keyword">const</span> git = simpleGit();</span><br></pre></td></tr></table></figure>
+<p>有些提交可能需要用到git权限，比如发布到git，读取开发者信息等。<br>可以申请token，然后做相关操作。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><!-- 
+[开发一个简单的脚手架cli](https://blog.csdn.net/Headmaster_Tan/article/details/88531978)
+[开发一个简单的脚手架cli ](https://www.pianshen.com/article/1913275915/) 
+$_PS: 内容相同，简单了解。
+-->
+<!-- \# [如何自己搭一个脚手架](https://segmentfault.com/a/1190000016996897?utm_source=tag-newest) 
+$_PS: 实践了init；没有尝试list。下载用了downlong-git-repo
+-->
+<!-- \# [总结一个项目模板，开发一个简单的脚手架](https://www.imooc.com/article/300430) 
+$_PS: 比较完整。react参考/学习。以下内容为摘抄
+-->
+<p><code>npm i chalk commander download-git-repo inquirer ora request -S</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> commander = <span class="built_in">require</span>(<span class="string">'commander'</span>);</span><br><span class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">'chalk'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs-extra'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line"><span class="keyword">const</span> progress = <span class="built_in">require</span>(<span class="string">'request-progress'</span>);</span><br><span class="line"><span class="keyword">const</span> exec = <span class="built_in">require</span>(<span class="string">'child_process'</span>).exec;</span><br><span class="line"><span class="comment">// 实际</span></span><br><span class="line"><span class="keyword">import</span> fs <span class="keyword">from</span> <span class="string">'fs-extra'</span>;</span><br><span class="line"><span class="keyword">import</span> str <span class="keyword">from</span> <span class="string">'underscore.string'</span>;</span><br><span class="line"><span class="keyword">import</span> ejs <span class="keyword">from</span> <span class="string">'ejs'</span>;</span><br><span class="line"><span class="keyword">import</span> readdir <span class="keyword">from</span> <span class="string">'fs-readdir-recursive'</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>链接：<a href="https://www.imooc.com/article/300430" target="_blank" rel="noopener">https://www.imooc.com/article/300430</a></p>
+<p>|– bin<br>    |– co<br>    |– co2<br>|– command<br>    |– download.js<br>    |– generator.js<br>|– utils<br>    |– api.js<br>|– template<br>    |– src<br>      |– views/<br>    |– utils/<br>    |– /<br>    |– mainl.js<br>    |– package.json<br>|– index.js<br>|– package.json</p>
+<h3 id="创建bin命令"><a href="#创建bin命令" class="headerlink" title="创建bin命令"></a>创建bin命令</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line">process.env.NODE_PATH = __dirname + <span class="string">'/../node_modules'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../index'</span>)</span><br></pre></td></tr></table></figure>
+<p>在脚手架的package.json中配置bin</p>
+<p>“bin”: {<br>        “easy-cli-react”: “index.js”<br>}</p>
+<h3 id="模板下载"><a href="#模板下载" class="headerlink" title="模板下载"></a>模板下载</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> downloadZipName = <span class="string">'template.zip'</span>;</span><br><span class="line">progress(request(templateUrl))</span><br><span class="line">    .on(<span class="string">'progress'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">state</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(chalk.cyan(<span class="string">`[easy-cli-react]downloading project template (<span class="subst">$&#123;<span class="built_in">Math</span>.floor((state.percent * <span class="number">100</span>) || <span class="number">0</span>)​&#125;</span>%)`</span>));</span><br><span class="line">    &#125;)</span><br><span class="line">    .on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(chalk.red(<span class="string">`[error]<span class="subst">$&#123;err&#125;</span>`</span>));</span><br><span class="line">    &#125;)</span><br><span class="line">    .on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">console</span>.log(chalk.cyan(<span class="string">'[easy-cli-react]downloading project template (100%)'</span>));</span><br><span class="line">  </span><br><span class="line">  			<span class="comment">// 省略...</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 解压并且重命名文件夹</span></span><br><span class="line">        <span class="keyword">const</span> cmdStr = [</span><br><span class="line">            <span class="string">`unzip -o <span class="subst">$&#123;downloadZipName&#125;</span> -d ./`</span>,</span><br><span class="line">            <span class="string">`rm <span class="subst">$&#123;downloadZipName&#125;</span>`</span>,</span><br><span class="line">            <span class="string">`mv easy-template-react-master <span class="subst">$&#123;projectName&#125;</span>`</span></span><br><span class="line">        ].join(<span class="string">' &amp;&amp; '</span>);</span><br><span class="line">  			exec(cmdStr);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 省略...</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .pipe(fs.createWriteStream(downloadZipName));</span><br><span class="line"><span class="comment">// 修改package.json内的项目名</span></span><br><span class="line"><span class="keyword">const</span> packageJson = fs.readJsonSync(<span class="string">`<span class="subst">$&#123;projectName&#125;</span>/package.json`</span>);</span><br><span class="line">packageJson.name = projectName;</span><br><span class="line">fs.writeFileSync(</span><br><span class="line">    <span class="string">`<span class="subst">$&#123;projectName&#125;</span>/package.json`</span>, </span><br><span class="line">    <span class="built_in">JSON</span>.stringify(packageJson, <span class="literal">null</span>, <span class="number">4</span>)</span><br><span class="line">);</span><br><span class="line"><span class="built_in">console</span>.log(chalk.cyan(<span class="string">'[easy-cli-react]done!!'</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="模板样例"><a href="#模板样例" class="headerlink" title="模板样例"></a>模板样例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">|____.babelrc                           # babel配置</span><br><span class="line">|____LICENSE                            # 项目协议</span><br><span class="line">|____dist                               # 打包产出目录</span><br><span class="line">|____README.md </span><br><span class="line">|____.gitignore</span><br><span class="line">|____package-lock.json</span><br><span class="line">|____package.json</span><br><span class="line">|____build </span><br><span class="line">| |____plugins                          # 自定义的webpack插件</span><br><span class="line">| | |____MyPlugin.js                    </span><br><span class="line">| |____server                           # 脚本</span><br><span class="line">| | |____buildServer.js                     # 打包脚本</span><br><span class="line">| | |____devServer.js                       # 本地开发server</span><br><span class="line">| |____webpackConfig                    # webpack配置</span><br><span class="line">| | |____webpack.dev.config.js              # 开发时配置</span><br><span class="line">| | |____webpack.base.config.js             # 基本配置</span><br><span class="line">| | |____webpack.build.config.js            # 打包时配置</span><br><span class="line">| | |____devProxyConfig.js                  # 本地开发代理配置</span><br><span class="line">|____postcss.config.js                  # postcss 配置</span><br><span class="line">|____src 																# 项目代码</span><br><span class="line">| |____template                         	# html模板</span><br><span class="line">| | |____template.html</span><br><span class="line">| |____lib                              	# 公用库代码</span><br><span class="line">| | |____tools.js</span><br><span class="line">| |____index.js                         	# 入口文件js</span><br><span class="line">| |____index.scss                       	# 入口文件css</span><br></pre></td></tr></table></figure>
+<h1 id="commander"><a href="#commander" class="headerlink" title="commander"></a>commander</h1><p>文档：<a href="https://github.com/tj/commander.js/blob/master/Readme_zh-CN.md" target="_blank" rel="noopener">https://github.com/tj/commander.js/blob/master/Readme_zh-CN.md</a><br>github: <a href="https://github.com/tj/commander.js" target="_blank" rel="noopener">https://github.com/tj/commander.js</a></p>
+<h2 id="实际"><a href="#实际" class="headerlink" title="实际"></a>实际</h2><ol>
+<li><code>program.parse(process.argv)</code>后才可以访问program.args<br>parse一般放在最后</li>
+<li>program监听不到事件，只好在command的action中 注入函数<br>如果每一个命令前都需要，那就。。<ol>
+<li>可以监听不存在的command <code>on(command:*)</code></li>
+<li>可以监听到选项option  <code>on(option:small)</code></li>
+<li>还可以<code>on(&#39;--help&#39;)</code><br>$_PS: Commander 继承自EventEmitter<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3>无法监听到command <del>/#1090</del> /#1197</li>
+</ol>
+</li>
+</ol>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const program = require('commander')</span></span><br><span class="line"><span class="comment">// const &#123; program &#125; = require('commander')</span></span><br><span class="line"><span class="keyword">const</span> &#123; Command &#125; = <span class="built_in">require</span>(<span class="string">'commander'</span>);</span><br><span class="line"><span class="keyword">const</span> program = <span class="keyword">new</span> Command();</span><br><span class="line"><span class="keyword">const</span> pkg = <span class="built_in">require</span>(<span class="string">'./package.json'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* # options */</span></span><br><span class="line">program</span><br><span class="line">  .option(<span class="string">'-d, --debug'</span>, <span class="string">'output extra debugging'</span>)</span><br><span class="line">  .option(<span class="string">'-s, --small'</span>, <span class="string">'small pizza size'</span>)</span><br><span class="line">  .option(<span class="string">'-p, --pizza-type &lt;type&gt;'</span>, <span class="string">'flavour of pizza'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// console.log('program', program)</span></span><br><span class="line"><span class="comment">// 未执行parse前没有args属性</span></span><br><span class="line"><span class="comment">// console.log('program.args', program.args) // undefined</span></span><br><span class="line"><span class="comment">// program.parse(process.argv);</span></span><br><span class="line"><span class="comment">// console.log('program: after parase ', program)</span></span><br><span class="line"><span class="comment">// console.log('program.args', program.args) // [init]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// console.log(program.opts()); // &#123; debug: true, small: undefined, pizzaType: undefined &#125;</span></span><br><span class="line"><span class="keyword">if</span> (program.debug) <span class="built_in">console</span>.log(program.opts());</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'pizza details:'</span>);</span><br><span class="line"><span class="keyword">if</span> (program.small) <span class="built_in">console</span>.log(<span class="string">'- small pizza size'</span>);</span><br><span class="line"><span class="keyword">if</span> (program.pizzaType) <span class="built_in">console</span>.log(<span class="string">`- <span class="subst">$&#123;program.pizzaType&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* # version */</span></span><br><span class="line">program.version(pkg.version)</span><br><span class="line">  .usage(<span class="string">'&lt;command&gt; [options]'</span>)</span><br><span class="line"></span><br><span class="line">program.action(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'haha , here is action'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* # command */</span></span><br><span class="line">program</span><br><span class="line">  .command(<span class="string">'init'</span>)</span><br><span class="line">  .description(<span class="string">'生成一个新项目'</span>)</span><br><span class="line">  .alias(<span class="string">'i'</span>)</span><br><span class="line">  .action(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.emit(<span class="string">'command:init'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'init action'</span>)</span><br><span class="line">    <span class="comment">// require('./command/init')()</span></span><br><span class="line">    </span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* event listener */</span></span><br><span class="line"><span class="comment">// ## --help</span></span><br><span class="line">program.on(<span class="string">'--help'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'on help*.'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// ## command</span></span><br><span class="line"><span class="comment">// ### error on unknown commands</span></span><br><span class="line">program.on(<span class="string">'command:*'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">operands</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">`hahhn error: unknown command '<span class="subst">$&#123;operands[<span class="number">0</span>]&#125;</span>'`</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'operands'</span>,operands, <span class="keyword">this</span>.name())</span><br><span class="line">  <span class="comment">// const availableCommands = program.commands.map(cmd =&gt; cmd.name());</span></span><br><span class="line">  <span class="comment">// mySuggestBestMatch(operands[0], availableCommands);</span></span><br><span class="line">  <span class="comment">// process.exitCode = 1;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* parse */</span></span><br><span class="line"><span class="comment">// 执行parse后才可以通过属性访问</span></span><br><span class="line">program</span><br><span class="line">  .parse(process.argv)</span><br><span class="line"><span class="keyword">if</span>(!program.args.length) &#123;</span><br><span class="line">  program.help()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="inrequirer"><a href="#inrequirer" class="headerlink" title="inrequirer"></a>inrequirer</h1><p>github: <a href="https://github.com/SBoudrias/Inquirer.js" target="_blank" rel="noopener">https://github.com/SBoudrias/Inquirer.js</a></p>
+<h2 id="实际-1"><a href="#实际-1" class="headerlink" title="实际"></a>实际</h2><p>返回的Promise，可以通过async/await 同步方式使用。不在回调中<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getText</span>(<span class="params">message = <span class="string">''</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="keyword">await</span> inquirer.prompt([&#123;</span><br><span class="line">      name: <span class="string">'input'</span>,</span><br><span class="line">      message: message,</span><br><span class="line">      validate: <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Boolean</span>(name.trim());</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;])</span><br><span class="line">  ).input;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="基础-1"><a href="#基础-1" class="headerlink" title="基础"></a>基础</h2><!-- \# [inquirer.js —— 一个用户与命令行交互的工具](https://blog.csdn.net/qq_26733915/article/details/80461257) -->
+<p>使用脚手架的时候最明显的就是与命令行的交互，如果想自己做一个脚手架或者在某些时候要与用户进行交互，这个时候就不得不提到inquirer.js了。</p>
+<p>type：表示提问的类型，包括：input, confirm, list, rawlist, expand, checkbox, password, editor；<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> inquirer = <span class="built_in">require</span>(<span class="string">'inquirer'</span>);</span><br><span class="line"><span class="keyword">const</span> promptList = [</span><br><span class="line">    <span class="comment">// 具体交互内容</span></span><br><span class="line">];</span><br><span class="line">inquirer.prompt(promptList).then(<span class="function"><span class="params">answers</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(answers); <span class="comment">// 返回的结果</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// ## input</span></span><br><span class="line"><span class="keyword">const</span> promptList = [&#123;</span><br><span class="line">    type: <span class="string">'input'</span>,</span><br><span class="line">    message: <span class="string">'设置一个用户名:'</span>,</span><br><span class="line">    name: <span class="string">'name'</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="string">"test_user"</span> <span class="comment">// 默认值</span></span><br><span class="line">&#125;,&#123;</span><br><span class="line">    type: <span class="string">'input'</span>,</span><br><span class="line">    message: <span class="string">'请输入手机号:'</span>,</span><br><span class="line">    name: <span class="string">'phone'</span>,</span><br><span class="line">    validate: <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(val.match(<span class="regexp">/\d&#123;11&#125;/g</span>)) &#123; <span class="comment">// 校验位数</span></span><br><span class="line">            <span class="keyword">return</span> val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"请输入11位数字"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br><span class="line"><span class="comment">// ## confirm</span></span><br><span class="line"><span class="keyword">const</span> promptList = [&#123;</span><br><span class="line">    type: <span class="string">"confirm"</span>,</span><br><span class="line">    message: <span class="string">"是否使用监听？"</span>,</span><br><span class="line">    name: <span class="string">"watch"</span>,</span><br><span class="line">    prefix: <span class="string">"前缀"</span></span><br><span class="line">&#125;,&#123;</span><br><span class="line">    type: <span class="string">"confirm"</span>,</span><br><span class="line">    message: <span class="string">"是否进行文件过滤？"</span>,</span><br><span class="line">    name: <span class="string">"filter"</span>,</span><br><span class="line">    suffix: <span class="string">"后缀"</span>,</span><br><span class="line">    when: <span class="function"><span class="keyword">function</span>(<span class="params">answers</span>) </span>&#123; <span class="comment">// 当watch为true的时候才会提问当前问题</span></span><br><span class="line">        <span class="keyword">return</span> answers.watch</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></p>
+<h2 id="node方式"><a href="#node方式" class="headerlink" title="node方式"></a>node方式</h2><p># <a href="http://lzw.me/a/nodejs-stdin.html" target="_blank" rel="noopener">nodeJS 中从命令行等待并读入用户输入实现与用户交互的方法</a></p>
+<ol>
+<li>fs.readSync + process.stdin 同步读取用户输入</li>
+<li>readline.question 获取用户输入</li>
+<li>基于 nodejs 模块 readline-sync</li>
+</ol>
+<p>readline-sync: <a href="https://www.npmjs.com/package/readline-sync" target="_blank" rel="noopener">https://www.npmjs.com/package/readline-sync</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ## 1 fs.readSync + process.stdin</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readSyncByfs</span>(<span class="params">tips</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> response;</span><br><span class="line">    tips = tips || <span class="string">'&gt; '</span>;</span><br><span class="line">    process.stdout.write(tips);</span><br><span class="line">    process.stdin.pause();</span><br><span class="line">    response = fs.readSync(process.stdin.fd, <span class="number">1000</span>, <span class="number">0</span>, <span class="string">'utf8'</span>);</span><br><span class="line">    process.stdin.end();</span><br><span class="line">    <span class="keyword">return</span> response[<span class="number">0</span>].trim();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="built_in">console</span>.log(readSyncByfs(<span class="string">'请输入任意字符：'</span>));</span><br><span class="line"><span class="comment">// ## 2 readline.question</span></span><br><span class="line"><span class="keyword">const</span> readline = <span class="built_in">require</span>(<span class="string">'readline'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readSyncByRl</span>(<span class="params">tips</span>) </span>&#123;</span><br><span class="line">    tips = tips || <span class="string">'&gt; '</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> rl = readline.createInterface(&#123;</span><br><span class="line">            input: process.stdin,</span><br><span class="line">            output: process.stdout</span><br><span class="line">        &#125;);</span><br><span class="line"> </span><br><span class="line">        rl.question(tips, (answer) =&gt; &#123;</span><br><span class="line">            rl.close();</span><br><span class="line">            resolve(answer.trim());</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">readSyncByRl(<span class="string">'请输入任意字符：'</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// ##3 readline-sync</span></span><br><span class="line"><span class="keyword">var</span> readlineSync = <span class="built_in">require</span>(<span class="string">'readline-sync'</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Wait for user's response.</span></span><br><span class="line"><span class="keyword">var</span> userName = readlineSync.question(<span class="string">'May I have your name? '</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Hi '</span> + userName + <span class="string">'!'</span>);</span><br></pre></td></tr></table></figure></p>
+<h1 id="chalk"><a href="#chalk" class="headerlink" title="chalk"></a>chalk</h1><p>chalk: <a href="https://github.com/chalk/chalk" target="_blank" rel="noopener">https://github.com/chalk/chalk</a></p>
+<p>Terminal string styling done right<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(chalk.blue(<span class="string">'Hello world!'</span>));</span><br><span class="line">log(chalk.blue(<span class="string">'Hello'</span>) + <span class="string">' World'</span> + chalk.red(<span class="string">'!'</span>));</span><br><span class="line">log(chalk.blue.bgRed.bold(<span class="string">'Hello world!'</span>));</span><br></pre></td></tr></table></figure></p>
+<h1 id="ora"><a href="#ora" class="headerlink" title="ora"></a>ora</h1><p>ora: <a href="https://github.com/sindresorhus/ora" target="_blank" rel="noopener">https://github.com/sindresorhus/ora</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ora = <span class="built_in">require</span>(<span class="string">'ora'</span>);</span><br><span class="line"><span class="keyword">const</span> spinner = ora(<span class="string">'Loading unicorns'</span>).start();</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">	spinner.color = <span class="string">'yellow'</span>;</span><br><span class="line">	spinner.text = <span class="string">'Loading rainbows'</span>;</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br><span class="line">spinner..stop()</span><br><span class="line"><span class="comment">// .succeed(text?) ,.fail(text?) ,...</span></span><br><span class="line"><span class="comment">/* # color of the text */</span></span><br><span class="line"><span class="keyword">const</span> ora = <span class="built_in">require</span>(<span class="string">'ora'</span>);</span><br><span class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">'chalk'</span>);</span><br><span class="line"><span class="keyword">const</span> spinner = ora(<span class="string">`Loading <span class="subst">$&#123;chalk.red(<span class="string">'unicorns'</span>)&#125;</span>`</span>).start();</span><br></pre></td></tr></table></figure></p>
+<h1 id="Yeoman"><a href="#Yeoman" class="headerlink" title="Yeoman"></a>Yeoman</h1><p>除了上述方法，我们也可以直接通过大名鼎鼎的Yeoman来创建，不过个人觉得没必要，毕竟这玩意也不难。</p>
+<p>yeman: <a href="https://github.com/yeoman/yeoman" target="_blank" rel="noopener">https://github.com/yeoman/yeoman</a><br>yeoman: <a href="https://yeoman.io/" target="_blank" rel="noopener">https://yeoman.io/</a></p>
+<h1 id="Simple-Git"><a href="#Simple-Git" class="headerlink" title="Simple Git"></a>Simple Git</h1><p>Simple Git: <a href="https://github.com/steveukx/git-js#readme" target="_blank" rel="noopener">https://github.com/steveukx/git-js#readme</a><br>A lightweight interface for running git commands in any node.js application.</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p><a href="http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html" target="_blank" rel="noopener">[npm scripts 使用指南]</a><br><a href="https://juejin.im/post/6844903826344902670" target="_blank" rel="noopener">#!/usr/bin/env node 到底是什么？</a></p>
+<p>shabang,shebang: sharp/hash/mesh;shell.  bang；#!<br>npm link</p>
+<p style="text-align:right"> </p>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/js/观察者和发布订阅/" rel="next" title="观察者和发布订阅">
+                <i class="fa fa-chevron-left"></i> 观察者和发布订阅
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/jsplus/uniapp使用/" rel="prev" title="Uniapp使用">
+                Uniapp使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cli-搭建"><span class="nav-text">cli 搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简要"><span class="nav-text">简要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用模版文件"><span class="nav-text">使用模版文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git相关"><span class="nav-text">git相关</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建bin命令"><span class="nav-text">创建bin命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板下载"><span class="nav-text">模板下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板样例"><span class="nav-text">模板样例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#commander"><span class="nav-text">commander</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实际"><span class="nav-text">实际</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-text">问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#inrequirer"><span class="nav-text">inrequirer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实际-1"><span class="nav-text">实际</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础-1"><span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node方式"><span class="nav-text">node方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#chalk"><span class="nav-text">chalk</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ora"><span class="nav-text">ora</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Yeoman"><span class="nav-text">Yeoman</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Simple-Git"><span class="nav-text">Simple Git</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-text">其他</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">451.6k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

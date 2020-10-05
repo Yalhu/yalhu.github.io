@@ -21,10 +21,10 @@
 <p>注意我们如何使用ES6 计算的属性名称语法来更新与给定输入名称相对应的 state(状态) 键：  </p>
 <h2 id="受控-Input-组件的-null-值"><a href="#受控-Input-组件的-null-值" class="headerlink" title="受控 Input 组件的 null 值"></a>受控 Input 组件的 null 值</h2><p>在 受控组件 上指定值 prop 可防止用户更改输入，除非您希望如此。<br>如果你已经指定了一个 value ，但是输入仍然是可编辑的，你可能会意外地把 value 设置为undefined 或 null 。   </p>
 <p>以下代码演示了这一点。 （输入首先被锁定，但在短暂的延迟后可以编辑。）   </p>
-<pre><code class="JavaScript">ReactDOM.render(&lt;input value="hi" /&gt;, mountNode);
+<pre><code class="JavaScript">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">value</span>=<span class="string">"hi"</span> /&gt;</span></span>, mountNode);
 
 setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-  ReactDOM.render(&lt;input value={null} /&gt;, mountNode);
+  ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">value</span>=<span class="string">{null}</span> /&gt;</span></span>, mountNode);
 }, <span class="number">1000</span>);
 </code></pre>
 <h2 id="受控组件的替代方案"><a href="#受控组件的替代方案" class="headerlink" title="受控组件的替代方案"></a>受控组件的替代方案</h2><p>有时使用受控组件有些乏味，因为你需要为每一个可更改的数据提供事件处理器，并通过 React 组件管理所有输入状态。<br>当你将已经存在的代码转换为 React 时，或将 React 应用程序与非 React 库集成时，这可能变得特别烦人。<br>在这些情况下，您可能需要使用不受控的组件，用于实现输入表单的替代技术。</p>

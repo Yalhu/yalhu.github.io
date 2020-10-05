@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="# [https://zh.wikipedia.org/wiki/Base64] base64基于64个可打印字符来表示二进制数据的表示方法。Base64可以用来将binary的字节序列数据编码成ASCII字符序列构成的文本。    由于 {\displaystyle 2^{6}=64} {\displaystyle 2^{6}=64}，所以每6个比特为一个单元，对应某个可打印字符。3个字节有24">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta property="og:updated_time" content="2020-03-28T02:52:30.400Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Blob和base64">
 <meta name="twitter:description" content="# [https://zh.wikipedia.org/wiki/Base64] base64基于64个可打印字符来表示二进制数据的表示方法。Base64可以用来将binary的字节序列数据编码成ASCII字符序列构成的文本。    由于 {\displaystyle 2^{6}=64} {\displaystyle 2^{6}=64}，所以每6个比特为一个单元，对应某个可打印字符。3个字节有24">
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-28T10:52:30+08:00">
+                2020-03-28
               </time>
             
           </span>
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,375
+                  1,410
                 </span>
               
 
@@ -478,11 +478,15 @@
 <p><code>var objecturl =  window.URL.createObjectURL(blob);</code>   </p>
 <p>会对二进制数据生成一个URL，类似于“blob:http%3A//test.com/666e6730-f45c-47c1-8012-ccc706f17191”。这个URL可以放置于任何通常可以放置URL的地方，比如img标签的src属性。需要注意的是，即使是同样的二进制数据，每调用一次URL.createObjectURL方法，就会得到一个不一样的URL。</p>
 <p>这个URL的存在时间，等同于网页的存在时间，一旦网页刷新或卸载，这个URL就失效。除此之外，也可以手动调用URL.revokeObjectURL方法，使URL失效。</p>
-<p># [php – 什么是blob url,为什么使用它？]</p>
-<h2 id="blob-url"><a href="#blob-url" class="headerlink" title="blob url"></a>blob url</h2><p>Blob网址只能由浏览器在内部生成。 URL.createObjectURL()将创建对Blob或File对象的特殊引用，稍后可以使用URL.revokeObjectURL()释放它。这些URL只能在浏览器的单个实例中和在同一会话(即页面/文档的生命周期)中本地使用。</p>
+<p># [php – 什么是blob url,为什么使用它？]    </p>
+<h2 id="blob-url"><a href="#blob-url" class="headerlink" title="blob url"></a>blob url</h2><!-- 实际还是URL -->
+<p>Blob网址只能由浏览器在内部生成。 URL.createObjectURL()将创建对Blob或File对象的特殊引用，稍后可以使用URL.revokeObjectURL()释放它。这些URL只能在浏览器的单个实例中和在同一会话(即页面/文档的生命周期)中本地使用。</p>
 <p>Blob URL /对象URL是一种伪协议，允许Blob和File对象用作图像，二进制数据的下载链接等URL源。</p>
-<h2 id="Data-URL和图片"><a href="#Data-URL和图片" class="headerlink" title="Data URL和图片"></a>Data URL和图片</h2><p># <a href="http://www.webhek.com/post/data-url.html" target="_blank" rel="noopener">Data URL和图片</a><br>## 3 在CSS里使用Data URL<br>## 4 将图片转换成Data URL格式的方法</p>
-<p># [MediaSource的使用以及封装MP4转加载Blob的插件]</p>
+<h2 id="Data-URL和图片"><a href="#Data-URL和图片" class="headerlink" title="Data URL和图片"></a>Data URL和图片</h2><!-- 实际是base64的图片 -->
+<p># <a href="http://www.webhek.com/post/data-url.html" target="_blank" rel="noopener">Data URL和图片</a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"data:image/gif;base64,R0lGODlhMwAxAIAAAAAAAPUUHkNJxhLZfEJNvol06tzwrgdLbXsFZYmSMPnHLB+zNJFbq15+SOf50M7vMZofJy8zJys2UxsCT3kO229LH1tXAAAOw=="</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>## 2 为什么Data URL是个好东西<br>## 3 在CSS里使用Data URL<br>## 4 将图片转换成Data URL格式的方法</p>
+<h2 id="文件上传和下载"><a href="#文件上传和下载" class="headerlink" title="文件上传和下载"></a>文件上传和下载</h2><p>见[js文件操作(009)]     </p>
+<p># [MediaSource的使用以及封装MP4转加载Blob的插件]       </p>
 <h2 id="MediaSource-mp4转blob"><a href="#MediaSource-mp4转blob" class="headerlink" title="MediaSource/mp4转blob"></a>MediaSource/mp4转blob</h2><p>API allowing media data to be accessed from HTML video and audio elements.</p>
 <h2 id="下载blob-视频"><a href="#下载blob-视频" class="headerlink" title="下载blob 视频"></a>下载blob 视频</h2><p># <a href="https://cloud.tencent.com/developer/ask/81565" target="_blank" rel="noopener">当url是blob url时，html5下载属性不起作用应该怎么解决？</a><br>注意：使用MediaStream对象作为此方法的输入正在被弃用。正在讨论是否应该彻底删除它。因此，应该尽量避免在MediaStream中使用此方法，而应该使用HTMLMediaElement.srcObject（）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function downloadvideo(video)&#123;</span><br><span class="line">    // const url = URL.createObjectURL(video.captureStream());// # 1 not ok</span><br><span class="line"></span><br><span class="line">    //adding a dom element and fetching it in HTMLMediaElement.</span><br><span class="line">    var mediaStream = video.captureStream();</span><br><span class="line">    HTMLMediaElement.srcObject = mediaStream;</span><br><span class="line">    var url = HTMLMediaElement.currentSrc;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    const aelem = document.createElement(&apos;a&apos;);</span><br><span class="line">    document.body.appendChild(aelem);</span><br><span class="line">    aelem.setAttribute(&quot;href&quot;,url);</span><br><span class="line">    aelem.setAttribute(&quot;download&quot;,&quot;video.mp4&quot;);</span><br><span class="line">    aelem.click();</span><br><span class="line">    //URL.revokeObjectURL(url);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>其它：<br><a href="https://stackoverflow.com/questions/14952052/convert-blob-url-to-normal-url" target="_blank" rel="noopener">Convert blob URL to normal URL</a>  </p>
@@ -669,7 +673,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">230</span>
+                  <span class="site-state-item-count">271</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -680,7 +684,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -691,7 +695,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -770,7 +774,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#base64"><span class="nav-text">base64</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blob对象"><span class="nav-text">blob对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URL对象"><span class="nav-text">URL对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blob-url"><span class="nav-text">blob url</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-URL和图片"><span class="nav-text">Data URL和图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MediaSource-mp4转blob"><span class="nav-text">MediaSource/mp4转blob</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载blob-视频"><span class="nav-text">下载blob 视频</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#base64"><span class="nav-text">base64</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blob对象"><span class="nav-text">blob对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URL对象"><span class="nav-text">URL对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blob-url"><span class="nav-text">blob url</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-URL和图片"><span class="nav-text">Data URL和图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件上传和下载"><span class="nav-text">文件上传和下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MediaSource-mp4转blob"><span class="nav-text">MediaSource/mp4转blob</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载blob-视频"><span class="nav-text">下载blob 视频</span></a></li></ol></div>
             
 
           </div>
@@ -804,7 +808,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">411.5k</span>
+    <span title="Site words total count">451.6k</span>
   
 </div>
 
