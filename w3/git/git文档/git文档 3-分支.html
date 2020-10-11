@@ -35,12 +35,12 @@ f30ab (HEAD -&gt; master, testing) add feature #32 - ability to add new formats 
 在这种情况下，你的开发历史从一个更早的地方开始分叉开来（diverged）。 因为，master 分支所在提交并不是 iss53 分支所在提交的直接祖先，Git 不得不做一些额外的工作。 --><br>出现这种情况的时候，Git 会使用两个分支的末端所指的快照（C4 和 C5）以及这两个分支的公共祖先（C2），做一个简单的三方合并。</p>
 <p>Figure 24. 一次典型合并中所用到的三个快照<br>和之前将分支指针向前推进所不同的是，Git 将此次三方合并的结果做了一个新的快照并且自动创建一个新的提交指向它。 这个被称作一次<strong>合并提交</strong>，它的特别之处在于他有不止一个父提交。</p>
 <p>遇到冲突时的分支合并<br>此时 Git 做了合并，但是没有自动地创建一个新的合并提交。 Git 会暂停下来，等待你去解决合并产生的冲突。<br><!-- 如果你想使用图形化工具来解决冲突，你可以运行 git mergetool，该命令会为你启动一个合适的可视化合并工具，并带领你一步一步解决这些冲突： --><br><!-- 如果你想使用除默认工具（在这里 Git 使用 opendiff 做为默认的合并工具，因为作者在 Mac 上运行该程序） 外的其他合并工具 --></p>
-<h2 id="3-3-分支管理"><a href="#3-3-分支管理" class="headerlink" title="3.3 分支管理"></a>3.3 分支管理</h2><pre><code class="shell"><span class="meta">#</span><span class="bash"> 需要查看每一个分支的最后一次提交</span>
+<h2 id="3-3-分支管理"><a href="#3-3-分支管理" class="headerlink" title="3.3 分支管理"></a>3.3 分支管理</h2><pre><code class="shell"><span class="meta">#</span> 需要查看每一个分支的最后一次提交
 git branch -v
-<span class="meta">#</span><span class="bash"> --merged 与 --no-merged 这两个有用的选项可以过滤这个列表中已经合并或尚未合并到当前分支的分支。</span>
+<span class="meta">#</span> --merged 与 --no-merged 这两个有用的选项可以过滤这个列表中已经合并或尚未合并到当前分支的分支。
 git branch --no-merged
 
-<span class="meta">#</span><span class="bash"> 你总是可以提供一个附加的参数来查看其它分支的合并状态而不必检出它们。 例如，尚未合并到 master 分支的有哪些？</span>
+<span class="meta">#</span> 你总是可以提供一个附加的参数来查看其它分支的合并状态而不必检出它们。 例如，尚未合并到 master 分支的有哪些？
 git checkout testing
 git branch --no-merged master ## 在testing 分支查看 没有merge到master 分支的分支
 </code></pre>
@@ -53,9 +53,9 @@ git branch --no-merged master ## 在testing 分支查看 没有merge到master �
 <p>Figure 29. 合并了 dumbidea 和 iss91v2 分支之后的提交历史<br>我们将会在 <strong>分布式 Git</strong> 中向你揭示更多有关分支工作流的细节， 因此，请确保你阅读完那个章节之后，再来决定你的下个项目要使用什么样的分支策略（branching scheme）。</p>
 <p>请牢记，当你做这么多操作的时候，这些分支全部都存于本地。 当你新建和合并分支的时候，所有这一切都只发生在你本地的 Git 版本库中 —— 没有与服务器发生交互。</p>
 <h2 id="3-5-远程分支"><a href="#3-5-远程分支" class="headerlink" title="3.5 远程分支"></a>3.5 远程分支</h2><p>远程引用是对远程仓库的引用（指针），包括分支、标签等等。</p>
-<pre><code class="shell"><span class="meta">#</span><span class="bash"> 显式地获得远程引用的完整列表</span>
+<pre><code class="shell"><span class="meta">#</span> 显式地获得远程引用的完整列表
 git ls-remote &lt;remote&gt; 
-<span class="meta">#</span><span class="bash"> 获得远程分支的更多信息</span>
+<span class="meta">#</span> 获得远程分支的更多信息
 git remote show &lt;remote&gt; 
 </code></pre>
 <p>然而，一个更常见的做法是利用<strong>远程跟踪分支</strong>。</p>
@@ -66,15 +66,15 @@ git remote show &lt;remote&gt;
 <p>Figure 34. 远程跟踪分支 teamone/master</p>
 <h4 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h4><!-- 当你想要公开分享一个分支时，需要将其推送到有写入权限的远程仓库上。  -->
 <p>本地的分支并不会自动与远程仓库同步——你必须显式地推送想要分享的分支。</p>
-<pre><code class="shell"><span class="meta">#</span><span class="bash"> 推送本地的 serverfix 分支来更新远程仓库上的 serverfix 分支</span>
-<span class="meta">$</span><span class="bash"> git push origin serverfix</span>
+<pre><code class="shell"><span class="meta">#</span> 推送本地的 serverfix 分支来更新远程仓库上的 serverfix 分支
+<span class="meta">$</span> git push origin serverfix
     #  Git 自动将 serverfix 分支名字展开为 refs/heads/serverfix:refs/heads/serverfix
-<span class="meta">#</span><span class="bash"> 它会做同样的事——也就是说“推送本地的 serverfix 分支，将其作为远程仓库的 serverfix 分支”</span>
+<span class="meta">#</span> 它会做同样的事——也就是说“推送本地的 serverfix 分支，将其作为远程仓库的 serverfix 分支”
 git push origin serverfix:awesomebranch
     # 推送本地分支到一个命名不相同的远程分支
 
 
-<span class="meta">#</span><span class="bash"> 如果不想在每一次推送时都输入用户名与密码，你可以设置一个 “credential cache”。 最简单的方式就是将其保存在内存中几分钟，</span>
+<span class="meta">#</span> 如果不想在每一次推送时都输入用户名与密码，你可以设置一个 “credential cache”。 最简单的方式就是将其保存在内存中几分钟，
 git config --global credential.helper cache
 </code></pre>
 <p>下一次其他协作者从服务器上抓取数据时，他们会在本地生成一个远程分支 origin/serverfix，指向服务器的 serverfix 分支的引用：<br><code>git fetch origin</code><br>要特别注意的一点是当抓取到新的远程跟踪分支时，本地不会自动生成一份可编辑的副本（拷贝）。<br>换一句话说，这种情况下，不会有一个新的 serverfix 分支——只有一个不可以修改的 origin/serverfix 指针。</p>
@@ -105,19 +105,19 @@ git checkout serverfix
 <h2 id="3-6-变基"><a href="#3-6-变基" class="headerlink" title="3.6 变基"></a>3.6 变基</h2><p style="text-align:right" > 2020.5.29 星期五  8：50 </p>
 
 <h3 id="变基"><a href="#变基" class="headerlink" title="变基"></a>变基</h3><p>在 Git 中整合来自不同分支的修改主要有两种方法：merge 以及 rebase。</p>
-<pre><code class="shell"><span class="meta">$</span><span class="bash"> git checkout experiment</span>
-<span class="meta">$</span><span class="bash"> git rebase master</span>
-<span class="meta">#</span><span class="bash"> 现在回到 master 分支，进行一次快进合并。</span>
-<span class="meta">$</span><span class="bash"> git checkout experiment</span>
-<span class="meta">$</span><span class="bash"> git rebase master</span>
+<pre><code class="shell"><span class="meta">$</span> git checkout experiment
+<span class="meta">$</span> git rebase master
+<span class="meta">#</span> 现在回到 master 分支，进行一次快进合并。
+<span class="meta">$</span> git checkout experiment
+<span class="meta">$</span> git rebase master
 
 </code></pre>
 <p>它的原理是首先找到这两个分支（即当前分支 experiment、变基操作的目标基底分支 master） 的最近共同祖先 C2，<br>然后对比当前分支相对于该祖先的历次提交，提取相应的修改并存为临时文件， 然后将当前分支指向目标基底 C3, 最后以此将之前另存为临时文<br>件的修改依序应用。</p>
 <p>在对两个分支进行变基时，所生成的“重放”并不一定要在目标分支上应用，你也可以指定另外的一个分支进行应用<br>Figure 39. 从一个主题分支里再分出一个主题分支的提交历史</p>
-<pre><code class="shell"><span class="meta">#</span><span class="bash"> 取出 client 分支，找出它从 server 分支分歧之后的补丁， 然后把这些补丁在 master 分支上重放一遍，让 client 看起来像直接基于 master 修改一样</span>
-<span class="meta">$</span><span class="bash"> git rebase --onto master server client</span>
-<span class="meta">$</span><span class="bash"> git checkout master</span>
-<span class="meta">$</span><span class="bash"> git merge client</span>
+<pre><code class="shell"><span class="meta">#</span> 取出 client 分支，找出它从 server 分支分歧之后的补丁， 然后把这些补丁在 master 分支上重放一遍，让 client 看起来像直接基于 master 修改一样
+<span class="meta">$</span> git rebase --onto master server client
+<span class="meta">$</span> git checkout master
+<span class="meta">$</span> git merge client
 </code></pre>
 <h4 id="变基的风险"><a href="#变基的风险" class="headerlink" title="变基的风险"></a>变基的风险</h4><p><strong>如果提交存在于你的仓库之外，而别人可能基于这些提交进行开发，那么不要执行变基。</strong></p>
 <p>变基操作的实质是丢弃一些现有的提交，然后相应地新建一些内容一样但实际上不同的提交。</p>

@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="2020.9.27 星期  ：    安装-macbrew （失败）直接下载文件配置环境变量（vim ~/.bash_profile; source ~/.base_profile）启动：mongod –port 27017 安装位置：/usr/local/lib  || 或者/usr/local/(homebrew安装python也在这个位置.)不放到local下，为了local里面的文件做区">
+<meta name="description" content="2020.9.27 星期  ：   安装和启动(mac)安装-macbrew （失败）直接下载文件配置环境变量（vim ~/.bash_profile; source ~/.base_profile）启动：mongod –port 27017 安装位置：/usr/local/lib  || 或者/usr/local/(homebrew安装python也在这个位置.)不放到local下，为了loc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mongo操作">
 <meta property="og:url" content="http://yoursite.com/sum/ser/mongo操作/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2020.9.27 星期  ：    安装-macbrew （失败）直接下载文件配置环境变量（vim ~/.bash_profile; source ~/.base_profile）启动：mongod –port 27017 安装位置：/usr/local/lib  || 或者/usr/local/(homebrew安装python也在这个位置.)不放到local下，为了local里面的文件做区">
+<meta property="og:description" content="2020.9.27 星期  ：   安装和启动(mac)安装-macbrew （失败）直接下载文件配置环境变量（vim ~/.bash_profile; source ~/.base_profile）启动：mongod –port 27017 安装位置：/usr/local/lib  || 或者/usr/local/(homebrew安装python也在这个位置.)不放到local下，为了loc">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-05T10:02:35.355Z">
+<meta property="og:updated_time" content="2020-10-08T07:22:26.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mongo操作">
-<meta name="twitter:description" content="2020.9.27 星期  ：    安装-macbrew （失败）直接下载文件配置环境变量（vim ~/.bash_profile; source ~/.base_profile）启动：mongod –port 27017 安装位置：/usr/local/lib  || 或者/usr/local/(homebrew安装python也在这个位置.)不放到local下，为了local里面的文件做区">
+<meta name="twitter:description" content="2020.9.27 星期  ：   安装和启动(mac)安装-macbrew （失败）直接下载文件配置环境变量（vim ~/.bash_profile; source ~/.base_profile）启动：mongod –port 27017 安装位置：/usr/local/lib  || 或者/usr/local/(homebrew安装python也在这个位置.)不放到local下，为了loc">
 
 
 
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-05T18:02:35+08:00">
-                2020-10-05
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-08T15:22:26+08:00">
+                2020-10-08
               </time>
             
           </span>
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,516
+                  1,864
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  8
                 </span>
               
             </div>
@@ -459,15 +459,22 @@
       
         <p style="text-align:right"> 2020.9.27 星期  ： </p>
 
-
-<h2 id="安装-mac"><a href="#安装-mac" class="headerlink" title="安装-mac"></a>安装-mac</h2><p>brew （失败）<br>直接下载文件<br>配置环境变量（vim ~/.bash_profile; source ~/.base_profile）<br>启动：mongod –port 27017</p>
+<h2 id="安装和启动-mac"><a href="#安装和启动-mac" class="headerlink" title="安装和启动(mac)"></a>安装和启动(mac)</h2><h3 id="安装-mac"><a href="#安装-mac" class="headerlink" title="安装-mac"></a>安装-mac</h3><p>brew （失败）<br>直接下载文件<br>配置环境变量（vim ~/.bash_profile; source ~/.base_profile）<br>启动：mongod –port 27017</p>
 <p>安装位置：<del>/usr/local/lib</del>  || 或者/usr/local/<br>(homebrew安装python也在这个位置.)<br>不放到local下，为了local里面的文件做区分</p>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>新建配置文件（下载文件没有找到配置文件）<br>/usr/local/etc/mongo.conf<br>(redis,nginx (homebrew)安装也在这个位置)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">port=27017</span><br><span class="line">dbpath=/usr/local/var/mongodb-db</span><br><span class="line">logpath=/usr/local/var/log/mongodb/mongo.log</span><br><span class="line">logappend=true</span><br><span class="line">fork=true</span><br><span class="line">Auth=true</span><br><span class="line"></span><br><span class="line">#启用日志文件，默认启用</span><br><span class="line"># journal=true</span><br><span class="line"> </span><br><span class="line">#这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false</span><br><span class="line">quiet=false</span><br></pre></td></tr></table></figure></p>
 <p>记得修改文件夹权限<br><code>sudo chmod -R 777 /usr/local/var/mongodb-db/</code><br>sudo chmod -R go+w /data/db    // 取得读写权限</p>
 <h4 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h4><p>作用：在前台启动Mongodb进程，如果Session窗口关闭，Mongodb进程也随之停止。<br>不过Mongodb同时还提供了一种后台Daemon方式启动，只需要加上一个”–fork”参数即可，<br>值得注意的是，用到了”–fork”参数就必须启用”–logpath”参数。如下所示</p>
 <h3 id="brew安装区别"><a href="#brew安装区别" class="headerlink" title="brew安装区别"></a>brew安装区别</h3><p>brew安装后文件位置在<br>/usr/local/Cellar/pgk/1.12.3/*</p>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mongod -f /usr/<span class="built_in">local</span>/etc/mongo.conf <span class="comment">## mac</span></span><br><span class="line"><span class="comment"># mongod --config D:/program/mongodb/mongo.conf ## windows</span></span><br><span class="line"><span class="comment">## mongod其他参数：--auth, --dbpath, --logpath, --fork，</span></span><br><span class="line">  <span class="comment">## ---master, --slave,-source</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin/mongod --master --slave -dbpath=/data/db/master -port=11536 --<span class="built_in">source</span> 127.0.0.1:11537</span><br><span class="line"><span class="comment">## 进入mongo</span></span><br><span class="line">mongo --port <span class="comment"># -u,-p,</span></span><br></pre></td></tr></table></figure>
-<h2 id="添加auth权限"><a href="#添加auth权限" class="headerlink" title="添加auth权限"></a>添加auth权限</h2><p><a href="https://www.cnblogs.com/imgss/p/10274813.html" target="_blank" rel="noopener">MongoDB加auth权限</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 初始化mongo用户</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin/mongod -f  /etc/mongod.conf</span><br><span class="line">mongo 127.0.0.1:27017</span><br><span class="line"></span><br><span class="line">use admin</span><br><span class="line">db.createUser(&#123;user:<span class="string">'admin'</span>,<span class="built_in">pwd</span>:<span class="string">'admin'</span>,roles:[&#123;role:<span class="string">"dbAdminAnyDatabase"</span>,db:<span class="string">"admin"</span>&#125;,&#123;role:<span class="string">"readWriteAnyDatabase"</span>,db:<span class="string">"admin"</span>&#125;,&#123;role:<span class="string">"userAdmin"</span>,db:<span class="string">"ares"</span>&#125;,&#123;role:<span class="string">"readWrite"</span>,db:<span class="string">"ares"</span>&#125;,&#123;role:<span class="string">"userAdmin"</span>,db:<span class="string">"ares"</span>&#125;,&#123;role:<span class="string">"readWrite"</span>,db:<span class="string">"ares"</span>&#125;]&#125;)</span><br><span class="line"></span><br><span class="line">db.system.version.update(&#123;<span class="string">'_id'</span>:<span class="string">'authSchema'</span>&#125;,&#123;<span class="variable">$set</span>:&#123;<span class="string">'currentVersion'</span>:3&#125;&#125;)</span><br><span class="line">db.system.version.find()</span><br><span class="line"></span><br><span class="line"><span class="comment">## auth方式重启mongo并创建xes_fe用户</span></span><br><span class="line">lsof -i:27017 <span class="comment">#// 查询mongod的PID</span></span><br><span class="line"><span class="built_in">kill</span> 9 PID  <span class="comment">#// 终止mongod</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin/mongod -f  /etc/mongod.conf --auth  <span class="comment">#// 重启</span></span><br><span class="line"></span><br><span class="line">mongo 127.0.0.1:27017</span><br><span class="line"></span><br><span class="line">use admin</span><br><span class="line">db.auth(<span class="string">'admin'</span>, <span class="string">'admin'</span>)</span><br><span class="line"></span><br><span class="line">use ares</span><br><span class="line">db.createUser(&#123;user:<span class="string">'root'</span>,<span class="built_in">pwd</span>:<span class="string">'root'</span>,roles:[&#123;role:<span class="string">'readWrite'</span>,db:<span class="string">'ares'</span>&#125;]&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="启动-mac"><a href="#启动-mac" class="headerlink" title="启动-mac"></a>启动-mac</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mongod -f /usr/<span class="built_in">local</span>/etc/mongo.conf <span class="comment">## mac</span></span><br><span class="line"><span class="comment"># mongod --config D:/program/mongodb/mongo.conf ## windows</span></span><br><span class="line"><span class="comment">## mongod其他参数：--auth, --dbpath, --logpath, --fork，</span></span><br><span class="line">  <span class="comment">## ---master, --slave,-source</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin/mongod --master --slave -dbpath=/data/db/master -port=11536 --<span class="built_in">source</span> 127.0.0.1:11537</span><br><span class="line"><span class="comment">## 进入mongo</span></span><br><span class="line">mongo --port <span class="comment"># -u,-p,</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装和启动-windows"><a href="#安装和启动-windows" class="headerlink" title="安装和启动(windows)"></a>安装和启动(windows)</h2><p>可以放到d盘（从c盘）等任意位置。<br>创建配置文件.mongod.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dbpath= D:\data\mongodb #数据库路径 </span><br><span class="line">port= 27017 #端口号 默认为27017  </span><br><span class="line"> </span><br><span class="line">journal= true #启用日志文件，默认启用  </span><br><span class="line">logpath= D:\var\log\mongod.log #日志输出文件路径  </span><br><span class="line">logappend= true #错误日志采用追加模式  </span><br><span class="line">quiet= true #这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false  </span><br><span class="line"> </span><br><span class="line"># destination= file</span><br></pre></td></tr></table></figure></p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>直接通过命令行启动<br>或者通过services 启动(services.mac).(需要设置好配置文件和安装 MongoDB服务)</p>
+<p><strong>需要注意</strong>：</p>
+<ol>
+<li>命令行必须要 用管理员方式启动<br>可以设置mongod.exe 默认为管理员方式打开(通过文件属性 )</li>
+<li>配置文件需要是绝对/全路径。<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 安装 MongoDB服务</span></span><br><span class="line"><span class="comment"># 通过执行mongod.exe，使用--install选项来安装服务，使用--config选项来指定之前创建的配置文件。</span></span><br><span class="line">C:\mongodb\bin\mongod.exe --config <span class="string">"C:\mongodb\mongod.cfg"</span> --install <span class="comment"># --serviceName MongoDB</span></span><br><span class="line"><span class="comment"># ./mongod.exe --config '/d/Server/mongodb-3.4.24/mongod.conf' --install</span></span><br><span class="line"><span class="comment">### 卸载</span></span><br><span class="line">C:\mongodb\bin\mongod.exe --remove --servicesName <span class="string">"MongoDB"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 通过服务启动/关闭</span></span><br><span class="line">net start MongoDB    启动服务</span><br><span class="line">net stop MongoDB    关闭服务</span><br><span class="line">sc delete MongoDB    卸载服务</span><br><span class="line"></span><br><span class="line"><span class="comment">## 命令行下运行 MongoDB 服务器</span></span><br><span class="line">C:\mongodb\bin\mongod.exe --dbpath c:\data\db</span><br><span class="line"><span class="comment"># ./mongod.exe -f '/d/Server/mongodb-3.4.24/mongod.conf'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="添加auth权限"><a href="#添加auth权限" class="headerlink" title="添加auth权限"></a>添加auth权限</h2><p><a href="https://www.cnblogs.com/imgss/p/10274813.html" target="_blank" rel="noopener">MongoDB加auth权限</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 初始化mongo用户</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin/mongod -f  /etc/mongod.conf</span><br><span class="line">mongo 127.0.0.1:27017</span><br><span class="line"></span><br><span class="line">use admin</span><br><span class="line">db.createUser(&#123;user:<span class="string">'admin'</span>,<span class="built_in">pwd</span>:<span class="string">'admin'</span>,roles:[&#123;role:<span class="string">"dbAdminAnyDatabase"</span>,db:<span class="string">"admin"</span>&#125;,&#123;role:<span class="string">"readWriteAnyDatabase"</span>,db:<span class="string">"admin"</span>&#125;,&#123;role:<span class="string">"userAdmin"</span>,db:<span class="string">"ares"</span>&#125;,&#123;role:<span class="string">"readWrite"</span>,db:<span class="string">"ares"</span>&#125;,&#123;role:<span class="string">"userAdmin"</span>,db:<span class="string">"ares"</span>&#125;,&#123;role:<span class="string">"readWrite"</span>,db:<span class="string">"ares"</span>&#125;]&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># db.createUser(&#123; user: "root",  pwd: "123456", roles: [ &#123; role: "userAdminAnyDatabase", db: "admin" &#125; ] &#125;) </span></span><br><span class="line"></span><br><span class="line">db.system.version.update(&#123;<span class="string">'_id'</span>:<span class="string">'authSchema'</span>&#125;,&#123;<span class="variable">$set</span>:&#123;<span class="string">'currentVersion'</span>:3&#125;&#125;)</span><br><span class="line">db.system.version.find()</span><br><span class="line"></span><br><span class="line"><span class="comment">## auth方式重启mongo并创建xes_fe用户</span></span><br><span class="line">lsof -i:27017 <span class="comment">#// 查询mongod的PID</span></span><br><span class="line"><span class="built_in">kill</span> 9 PID  <span class="comment">#// 终止mongod</span></span><br><span class="line">/usr/<span class="built_in">local</span>/bin/mongod -f  /etc/mongod.conf --auth  <span class="comment">#// 重启</span></span><br><span class="line"></span><br><span class="line">mongo 127.0.0.1:27017</span><br><span class="line"></span><br><span class="line">use admin</span><br><span class="line">db.auth(<span class="string">'admin'</span>, <span class="string">'admin'</span>)</span><br><span class="line"></span><br><span class="line">use ares</span><br><span class="line">db.createUser(&#123;user:<span class="string">'root'</span>,<span class="built_in">pwd</span>:<span class="string">'root'</span>,roles:[&#123;role:<span class="string">'readWrite'</span>,db:<span class="string">'ares'</span>&#125;]&#125;)</span><br></pre></td></tr></table></figure></p>
 <p>后续服务端可以通过root 连接mongo数据库 进行操作</p>
 <!-- db.auth('xes', 'big_root') -->
 <p>lsof -i:27027<br>ps -ef | grep mongo</p>
@@ -481,16 +488,31 @@
 <p>oplog数据存储在数据库的local数据库下。<br>主要字段如下:</p>
 <p>有了这些信息，我们就可以用代码模拟mongodb的同步模式，对操作日志实现重播，从而实现数据的增量同步。<br>基本代码逻辑如下：</p>
 <h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><p>带认证 <code>--authenticationDatabase admin</code><br><a href="https://blog.csdn.net/qq_37142346/article/details/82822726" target="_blank" rel="noopener">MongoDB数据备份与恢复以及安全认证</a><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mongorestore <span class="comment">--db ares --host=127.0.0.1 --port=27027 --dir /Users/tal/working/202009231107/ares  --drop</span></span><br><span class="line">mongorestore <span class="comment">--db ares --host=127.0.0.1 --port=27027 --dir /Users/tal/working/202009231107/ares  --drop -u admin -p=admin --authenticationDatabase admin</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="bosn"><a href="#bosn" class="headerlink" title="bosn"></a>bosn</h3><p><a href="https://blog.csdn.net/weixin_45444133/article/details/105099806" target="_blank" rel="noopener">Mongodb开启认证时的备份和恢复（mongodump 和mongorestore ）</a></p>
+<h3 id="bosn"><a href="#bosn" class="headerlink" title="bosn"></a>bosn</h3><!-- \# [Mongodb开启认证时的备份和恢复（mongodump 和mongorestore ）](https://blog.csdn.net/weixin_45444133/article/details/105099806) -->
 <h4 id="bson-和json"><a href="#bson-和json" class="headerlink" title="bson 和json"></a>bson 和json</h4><p>mongodump导出的是bson格式，是二进制形式，不过可以使用mongo自带的bsondump命令查看里面的数据，<br>而mongoexport导出的则是文本，可以是csv、json格式。</p>
 <p>JSON可读性强但体积较大，BSON则是二进制文件，体积小但对人类几乎没有可读性。<br>JSON虽然具有较好的跨版本通用性，但其只保留了数据部分，不保留索引，账户等其他基础信息。使用时应该注意。</p>
 <p>在一些mongodb版本之间，BSON格式可能会随版本不同而有所不同，所以不同版本之间用mongodump/mongorestore可能不会成功，具体要看版本之间的兼容性。<br>当无法使用BSON进行跨版本的数据迁移的时候，使用JSON格式即mongoexport/mongoimport是一个可选项。跨版本的mongodump/mongorestore个人并不推荐，实在要做请先检查文档看两个版本是否兼容（大部分时候是的）。</p>
-<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><p>Studio 3T for MongoDB</p>
-<p># <a href="https://www.jianshu.com/p/038fe91affa2" target="_blank" rel="noopener">mongodb可视化工具 mac版 Studio 3T破解 (永久版)</a><br><code>sudo spctl --master-disable</code></p>
-<p style="text-align:right"> </p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><!-- [mongodb 常用命令](https://www.jianshu.com/p/49722075f330)
+$_PS: RiverSouthMan -->
+<h1 id="工具-可视化"><a href="#工具-可视化" class="headerlink" title="工具(可视化)"></a>工具(可视化)</h1><h2 id="Studio-3T-for-MongoDB"><a href="#Studio-3T-for-MongoDB" class="headerlink" title="Studio 3T for MongoDB"></a>Studio 3T for MongoDB</h2><!-- \# [mongodb可视化工具 mac版 Studio 3T破解 (永久版)](https://www.jianshu.com/p/038fe91affa2) -->
+<p><code>sudo spctl --master-disable</code></p>
+<h2 id="MongoDB-Compass"><a href="#MongoDB-Compass" class="headerlink" title="MongoDB Compass"></a>MongoDB Compass</h2><p>连接mongod<br><code>mongodb://root:123456@127.0.0.1:27017/admin</code> </p>
+<h2 id="mongodVU"><a href="#mongodVU" class="headerlink" title="mongodVU"></a>mongodVU</h2><p style="text-align:right"> </p>
 
-<p>mongorestore –db ares –host=127.0.0.1 –port=27027 –dir /Users/wy/Documents/aimee/xesproject/可视化编辑平台/ares  –drop</p>
+<!-- 
+[设置文件直接以管理员权限运行](http://blog.sina.com.cn/s/blog_69e8e64e0102yoaj.html)
+1. 属性-》兼容性-》以管理员身份运行此程序
+2. 直接从注册表中着手，为文件设置管理员身份权限。
+    在注册表中找到HKEY_CURRENT_USER\Software\Microsoft\WindowsNT\CurrentVersion\AppCom
 
+让cmd一直默认以管理员身份打开
+一、手动修改注册表
+Win+R – regedit
+找到以下位置
+HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+，新建一个字符串值，命名为”c:\windows\system32\cmd.exe”
+然后右键–修改 – 数值数据写入“RUNASADMIN”，确定 ！
+ -->
       
     </div>
     
@@ -672,7 +694,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">269</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -694,7 +716,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -777,7 +799,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-mac"><span class="nav-text">安装-mac</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fork"><span class="nav-text">fork</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew安装区别"><span class="nav-text">brew安装区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动"><span class="nav-text">启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加auth权限"><span class="nav-text">添加auth权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库同步"><span class="nav-text">数据库同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、冷拷贝"><span class="nav-text">1、冷拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、使用mongodump"><span class="nav-text">2、使用mongodump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、增量备份"><span class="nav-text">3、增量备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实操"><span class="nav-text">实操</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bosn"><span class="nav-text">bosn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bson-和json"><span class="nav-text">bson 和json</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-text">工具</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装和启动-mac"><span class="nav-text">安装和启动(mac)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-mac"><span class="nav-text">安装-mac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fork"><span class="nav-text">fork</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew安装区别"><span class="nav-text">brew安装区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动-mac"><span class="nav-text">启动-mac</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装和启动-windows"><span class="nav-text">安装和启动(windows)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-text">启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加auth权限"><span class="nav-text">添加auth权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库同步"><span class="nav-text">数据库同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、冷拷贝"><span class="nav-text">1、冷拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、使用mongodump"><span class="nav-text">2、使用mongodump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、增量备份"><span class="nav-text">3、增量备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实操"><span class="nav-text">实操</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bosn"><span class="nav-text">bosn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bson-和json"><span class="nav-text">bson 和json</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-text">其他</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工具-可视化"><span class="nav-text">工具(可视化)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Studio-3T-for-MongoDB"><span class="nav-text">Studio 3T for MongoDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB-Compass"><span class="nav-text">MongoDB Compass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodVU"><span class="nav-text">mongodVU</span></a></li></ol></li></div>
             
 
           </div>
@@ -811,7 +833,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">451.6k</span>
+    <span title="Site words total count">450.4k</span>
   
 </div>
 

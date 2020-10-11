@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="A：安全，execCommand，选中；B: 库的使用不是很明白（没有用过）；使用过程中的坑，不错。C: 还有禁止复制的时候;包括反复制。   2018.4.15 10:15 星期日   # A [如何用20行JS代码实现粘贴板功能] 一 关于剪贴板的安全几年前，浏览器不可能直接使用剪贴板。开发人员不得不通过Flash来实现。 剪贴板看起来无关紧要，但想象一下，如果浏览器能够随意查看和操作内">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta property="og:updated_time" content="2020-10-08T05:36:55.481Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Js 复制内容到剪贴板">
 <meta name="twitter:description" content="A：安全，execCommand，选中；B: 库的使用不是很明白（没有用过）；使用过程中的坑，不错。C: 还有禁止复制的时候;包括反复制。   2018.4.15 10:15 星期日   # A [如何用20行JS代码实现粘贴板功能] 一 关于剪贴板的安全几年前，浏览器不可能直接使用剪贴板。开发人员不得不通过Flash来实现。 剪贴板看起来无关紧要，但想象一下，如果浏览器能够随意查看和操作内">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-08T13:36:55+08:00">
+                2020-10-08
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,295
+                  2,297
                 </span>
               
 
@@ -550,6 +550,7 @@ window.getSelection().addRange(range);
 </li>
 </ol>
 <p>完整代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="built_in">document</span>.querySelector(<span class="string">'#btn'</span>);</span><br><span class="line">btn.addEventListener(<span class="string">'click'</span>,() =&gt; &#123;</span><br><span class="line">	<span class="keyword">const</span> input = <span class="built_in">document</span>.createElement(<span class="string">'input'</span>);</span><br><span class="line">    input.setAttribute(<span class="string">'readonly'</span>, <span class="string">'readonly'</span>);</span><br><span class="line">    input.setAttribute(<span class="string">'value'</span>, <span class="string">'hello world'</span>);</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(input);</span><br><span class="line">	input.setSelectionRange(<span class="number">0</span>, <span class="number">9999</span>);</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">document</span>.execCommand(<span class="string">'copy'</span>)) &#123;</span><br><span class="line">		<span class="built_in">document</span>.execCommand(<span class="string">'copy'</span>);</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'复制成功'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="built_in">document</span>.body.removeChild(input);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p># E 实践<br><!-- \# [js中paste粘贴事件](https://blog.csdn.net/m0_37743842/article/details/105355280) --><br><!-- $_PS: zhangyi --></p>
 <p style="text-align:right">10：32</p>
 
 <p># C [网页内容不能选中复制的解决方法大全]</p>
@@ -587,12 +588,7 @@ window.getSelection().addRange(range);
 </code></pre></li>
 </ol>
 <h2 id="第二部分：反复制粘贴的破解办法集锦"><a href="#第二部分：反复制粘贴的破解办法集锦" class="headerlink" title="第二部分：反复制粘贴的破解办法集锦"></a>第二部分：反复制粘贴的破解办法集锦</h2><p><strong>$_PS:</strong> 都是正常流程；并不能真正完全禁止</p>
-<p>1，点击工具-INTERNET选项-安全设置。把它设置为高，点确定，再刷新下网页就可复制了。不过复制了后改回原来的，不然会影响正常上网。也可以点击IE菜单栏上的”文件”-&gt;发送-&gt;电子邮件页面(跟这向导说的去做就可以拉,一路点击’下一步”)然后就可以在弹出的邮件窗口中复制你要的内容就可以了。安全级别最高的时候，一切控件和脚本均不能运行，再厉害的网页限制手段统统全部作废。</p>
-<p>2，用文件菜单里的另存为</p>
-<p>3，查看-源文件。</p>
-<p>4，换个浏览器如GreenBrowser，如MYIE，它有一个解除右键设置的选项，你可以试试;….浏览器插件</p>
-<p>5， 在页面中点击右键，当出现警告窗口时，左手按键盘上的“CTRL+F4”键关闭提示窗口（以上的方法适用于仅禁用而没有隐藏右键菜单的网页）。</p>
-<p>balabala …..</p>
+<p>1，点击工具-INTERNET选项-安全设置。把它设置为高，点确定，再刷新下网页就可复制了。不过复制了后改回原来的，不然会影响正常上网。也可以点击IE菜单栏上的”文件”-&gt;发送-&gt;电子邮件页面(跟这向导说的去做就可以拉,一路点击’下一步”)然后就可以在弹出的邮件窗口中复制你要的内容就可以了。安全级别最高的时候，一切控件和脚本均不能运行，再厉害的网页限制手段统统全部作废。<br>2，用文件菜单里的另存为<br>3，查看-源文件。<br>4，换个浏览器如GreenBrowser，如MYIE，它有一个解除右键设置的选项，你可以试试;….浏览器插件<br>5， 在页面中点击右键，当出现警告窗口时，左手按键盘上的“CTRL+F4”键关闭提示窗口（以上的方法适用于仅禁用而没有隐藏右键菜单的网页）。</p>
 
       
     </div>
@@ -781,7 +777,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">269</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -803,7 +799,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -920,7 +916,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">451.6k</span>
+    <span title="Site words total count">450.4k</span>
   
 </div>
 

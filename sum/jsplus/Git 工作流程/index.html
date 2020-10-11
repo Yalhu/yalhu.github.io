@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="git,">
 
 
 
@@ -89,13 +89,14 @@
 
 
 <meta name="description" content="git config –system –unset credential.helper Git 中文参考  2020.9.13 星期日  22：58   Git 工作流程 本文介绍三种广泛使用的工作流程：Git flow, Github flow, Gitlab flow有一个共同点：都采用”功能驱动式开发”（Feature-driven development，简称FDD）。它指的是，需求是开发">
+<meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git 工作流程">
 <meta property="og:url" content="http://yoursite.com/sum/jsplus/Git 工作流程/index.html">
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="git config –system –unset credential.helper Git 中文参考  2020.9.13 星期日  22：58   Git 工作流程 本文介绍三种广泛使用的工作流程：Git flow, Github flow, Gitlab flow有一个共同点：都采用”功能驱动式开发”（Feature-driven development，简称FDD）。它指的是，需求是开发">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-05T10:02:35.166Z">
+<meta property="og:updated_time" content="2020-10-08T07:02:50.702Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git 工作流程">
 <meta name="twitter:description" content="git config –system –unset credential.helper Git 中文参考  2020.9.13 星期日  22：58   Git 工作流程 本文介绍三种广泛使用的工作流程：Git flow, Github flow, Gitlab flow有一个共同点：都采用”功能驱动式开发”（Feature-driven development，简称FDD）。它指的是，需求是开发">
@@ -348,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-05T18:02:35+08:00">
-                2020-10-05
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-08T15:02:50+08:00">
+                2020-10-08
               </time>
             
           </span>
@@ -481,7 +482,7 @@
 </blockquote>
 <h3 id="5-4-Merge节点"><a href="#5-4-Merge节点" class="headerlink" title="5.4 Merge节点"></a>5.4 Merge节点</h3><p>Git有两种合并：一种是”直进式合并”（fast forward），不生成单独的合并节点；<br>另一种是”非直进式合并”（none fast-forword），会生成单独节点。</p>
 <p>前者不利于保持commit信息的清晰，也不利于以后的回滚，建议总是采用后者（即使用–no-ff参数）。<br>只要发生合并，就要有一个单独的合并节点。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>--squash：使用squash方式合并，把多次分支commit历史压缩为一次</span><br><span class="line"><span class="meta">#</span>--no-ff：不使用fast-forward方式合并，保留分支的commit历史</span><br><span class="line">git merge --no-ff feature</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">--squash：使用squash方式合并，把多次分支commit历史压缩为一次</span></span><br><span class="line"><span class="meta">#</span><span class="bash">--no-ff：不使用fast-forward方式合并，保留分支的commit历史</span></span><br><span class="line">git merge --no-ff feature</span><br></pre></td></tr></table></figure>
 <h3 id="5-5-Squash-多个commit"><a href="#5-5-Squash-多个commit" class="headerlink" title="5.5 Squash 多个commit"></a>5.5 Squash 多个commit</h3><p>为了便于他人阅读你的提交，也便于cherry-pick或撤销代码变化，在发起Pull Request之前，应该把多个commit合并成一个。<br>（前提是，<strong>该分支只有你一个人开发，且没有跟master合并过。</strong>）</p>
 <p>这可以采用rebase命令附带的squash操作，具体方法请参考我写的《Git 使用规范流程》。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>3种。<br>git flow：原始/简单；两个分支master，develop<br>github flow: github 社区方式；每个人都可以fork/checkout 分支，提PR，然后merge。最后部署，或和删除<br>gitlab flow: 工作中 多环境，多分支/开发/需求。上线流程</p>
@@ -546,6 +547,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+          
+        </div>
       
 
       
@@ -680,7 +687,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">269</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -702,7 +709,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -819,7 +826,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">451.6k</span>
+    <span title="Site words total count">450.4k</span>
   
 </div>
 

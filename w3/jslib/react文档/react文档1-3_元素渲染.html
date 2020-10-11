@@ -8,7 +8,7 @@
 <h2 id="将元素渲染到-DOM-中"><a href="#将元素渲染到-DOM-中" class="headerlink" title="将元素渲染到 DOM 中"></a>将元素渲染到 DOM 中</h2><p>元素是构成 React 应用的最小单位。<br>元素用来描述你在屏幕上看到的内容：  </p>
 <p>与浏览器的 DOM 元素不同，React 当中的元素事实上是普通的对象，React DOM 可以确保 浏览器 DOM 的数据内容与 React 元素保持一致。    </p>
 <p>我们用React 开发应用时一般只会定义一个根节点。但如果你是在一个已有的项目当中引入 React 的话，你可能会需要在不同的部分单独定义 React 根节点。    </p>
-<pre><code class="javascript"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;
+<pre><code class="javascript"><span class="keyword">const</span> element = &lt;h1&gt;Hello, world&lt;/h1&gt;;
 ReactDOM.render(
   element,
   <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>)
