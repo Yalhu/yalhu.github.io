@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2019.5.3 星期五 23：45   前后端分离开发痛点解决问题：文档，mock data/mock server，自动化测试上面三个单拆开来，都不难；关键是怎么和自动测试集合在一起     还有 契约测试：基于持续集成与自动化测试  契约测试：当我们定义好了这个API的规范时，这个API就可以称为是前后端之间的契约，这种设计方式称之为契约式测试     分述文档许多写文档的库，比如：jsDo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.435Z">
+<meta property="og:updated_time" content="2020-10-17T11:13:03.863Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前后端分离">
 <meta name="twitter:description" content="2019.5.3 星期五 23：45   前后端分离开发痛点解决问题：文档，mock data/mock server，自动化测试上面三个单拆开来，都不难；关键是怎么和自动测试集合在一起     还有 契约测试：基于持续集成与自动化测试  契约测试：当我们定义好了这个API的规范时，这个API就可以称为是前后端之间的契约，这种设计方式称之为契约式测试     分述文档许多写文档的库，比如：jsDo">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-17T19:13:03+08:00">
+                2020-10-17
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,091
+                  2,087
                 </span>
               
 
@@ -490,7 +490,7 @@
 <p>mock data： 参数支持（rap2没有试成功）；json-schema；json（mockjs+json5）；拖动排序<br>    还有高级mock（自定义mock数据，rap2的话，还需要自己写点东西），测试校验<br>自动化测试：环境配置（方便测试不同环境，线上/测试/本地）；服务端测试；全局变量<br>数据导入/导出：json，swagger，har，postman； html，插件还支持word<br>二次开发：勾子函数，全局api  </p>
 <p>唯一弱于rap2的是版本管理，但是有tag； 感觉tag和版本管理没有关系，但是这个不影响目前使用，因为目前还没有不同版本的需求<br>yapi还有收藏，文档也比较全，有技术团队支持（去哪儿），完全中文开放<br>部署貌似也简单   </p>
 <h3 id="rap2-和api共同问题"><a href="#rap2-和api共同问题" class="headerlink" title="rap2 和api共同问题"></a>rap2 和api共同问题</h3><p>和rap2相同的不足是，相同的路径，即使url不同，也会是同一个接口。<br>rap2 可以根据 ${method} 区分get，post,delete等（rest风格）；yapi 有query？？<br>$PS: 上面的方式都没有尝试过，不确定        </p>
-<p>提需求了，实现不实现就不知道了<br>rap2: <a href="https://github.com/thx/RAP/issues/1304" target="_blank" rel="noopener">不同url可以返回不同的接口数据</a><br>    $PS: Yalhu提的<br>    <a href="https://github.com/YMFE/yapi/issues/49#issuecomment-488746153" target="_blank" rel="noopener">yapi 下个版本需求收集</a><br>yapi：<a href="https://github.com/YMFE/yapi/issues/867" target="_blank" rel="noopener">接口地址是否允许重复开关</a>  </p>
+<p>提需求了，实现不实现就不知道了<br>rap2: <a href="https://github.com/thx/RAP/issues/1304" target="_blank" rel="noopener">不同url可以返回不同的接口数据</a><br>    <!-- $PS: ziji提的 --><br>    <a href="https://github.com/YMFE/yapi/issues/49#issuecomment-488746153" target="_blank" rel="noopener">yapi 下个版本需求收集</a><br>yapi：<a href="https://github.com/YMFE/yapi/issues/867" target="_blank" rel="noopener">接口地址是否允许重复开关</a>  </p>
 <p>danghao接口地址都是<code>/index</code> :<code>/index?control=user&amp;action=</code>,<code>/index?control=order&amp;action=,/index?</code><br>在rap2和yapi看来这都是同一个接口，虽然可以根据参数动态返回数据；但这毕竟是当一个接口对待的，用yapi无法实现测试，测线上数据     </p>
 <p>需要和后端确认，接口路径是不是都是这一个，还是有不同的路径可以访问<br>如果都是一个路径，需要包装做拦截，如果不做webpack-dev-server代理，需要baseUrl。yapi的自动测试也难以实现了      </p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>当然选yapi了， rap2 页面慢就有点难忍；还有文档，部署，团队方面<br>$PS: yapi（8k）的star比rap（9k）少，rap2（3k）。 出现晚？？    </p>
@@ -686,7 +686,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">269</span>
+                  <span class="site-state-item-count">270</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -708,7 +708,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -729,7 +729,7 @@ var jiathis_config={
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                    <a href="mailto:yalhu@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>
@@ -825,7 +825,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">450.4k</span>
+    <span title="Site words total count">453.3k</span>
   
 </div>
 

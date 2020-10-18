@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="2019.5.20 星期一     fse: https://github.com/jprichardson/node-fs-extrarimraf: https://github.com/isaacs/rimraf#readme Q:因为Javascript的异步机制,使得写出来的程序往往是一层一层的callback嵌套,代码的可读性和维护性都很差. 而Promise的出现使得我们可以更加直观简">
+<meta name="description" content="2019.5.20 星期一     fse: https://github.com/jprichardson/node-fs-extrarimraf: https://github.com/isaacs/rimraf#readmenodemon: https://github.com/remy/nodemon Q:因为Javascript的异步机制,使得写出来的程序往往是一层一层的callback">
 <meta name="keywords" content="nodejs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Node(服务端)常用npm包">
 <meta property="og:url" content="http://yoursite.com/sum/ser/node(服务端)常用npm包/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2019.5.20 星期一     fse: https://github.com/jprichardson/node-fs-extrarimraf: https://github.com/isaacs/rimraf#readme Q:因为Javascript的异步机制,使得写出来的程序往往是一层一层的callback嵌套,代码的可读性和维护性都很差. 而Promise的出现使得我们可以更加直观简">
+<meta property="og:description" content="2019.5.20 星期一     fse: https://github.com/jprichardson/node-fs-extrarimraf: https://github.com/isaacs/rimraf#readmenodemon: https://github.com/remy/nodemon Q:因为Javascript的异步机制,使得写出来的程序往往是一层一层的callback">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-11T10:21:53.011Z">
+<meta property="og:updated_time" content="2020-10-18T08:20:31.440Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node(服务端)常用npm包">
-<meta name="twitter:description" content="2019.5.20 星期一     fse: https://github.com/jprichardson/node-fs-extrarimraf: https://github.com/isaacs/rimraf#readme Q:因为Javascript的异步机制,使得写出来的程序往往是一层一层的callback嵌套,代码的可读性和维护性都很差. 而Promise的出现使得我们可以更加直观简">
+<meta name="twitter:description" content="2019.5.20 星期一     fse: https://github.com/jprichardson/node-fs-extrarimraf: https://github.com/isaacs/rimraf#readmenodemon: https://github.com/remy/nodemon Q:因为Javascript的异步机制,使得写出来的程序往往是一层一层的callback">
 
 
 
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-11T18:21:53+08:00">
-                2020-10-11
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-18T16:20:31+08:00">
+                2020-10-18
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,573
+                  1,579
                 </span>
               
 
@@ -462,7 +462,7 @@
 
 
 
-<p>fse: <a href="https://github.com/jprichardson/node-fs-extra" target="_blank" rel="noopener">https://github.com/jprichardson/node-fs-extra</a><br>rimraf: <a href="https://github.com/isaacs/rimraf#readme" target="_blank" rel="noopener">https://github.com/isaacs/rimraf#readme</a></p>
+<p>fse: <a href="https://github.com/jprichardson/node-fs-extra" target="_blank" rel="noopener">https://github.com/jprichardson/node-fs-extra</a><br>rimraf: <a href="https://github.com/isaacs/rimraf#readme" target="_blank" rel="noopener">https://github.com/isaacs/rimraf#readme</a><br>nodemon: <a href="https://github.com/remy/nodemon" target="_blank" rel="noopener">https://github.com/remy/nodemon</a></p>
 <p>Q:<br>因为Javascript的异步机制,使得写出来的程序往往是一层一层的callback嵌套,代码的可读性和维护性都很差. 而Promise的出现使得我们可以更加直观简洁的去处理异步编程.</p>
 <h2 id="网络请求"><a href="#网络请求" class="headerlink" title="网络请求"></a>网络请求</h2><p>http,request,axios等<br>当时只是做一个图片下载和上传（cdn），尝试找php中curl发现并不需要。只是网络请求就可以了。<br>上传图片的时候，只是因为格式不对，和接口定义的不一致，需要上传表格类型数据    </p>
 <p>$NOTE: 在用pipe传递流的时候，需要注意监听error,<strong>而且要在pipe之前</strong>。否则error没有handle，就会出错，导致这个进程结束。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">request(imgUrl,&#123;<span class="attr">timeout</span>:<span class="number">2000</span>&#125;)</span><br><span class="line">.on(<span class="string">'error'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123; <span class="comment">// $PS:  需要写在pipe前面监听error</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'request图片失败err:'</span>,err.code)</span><br><span class="line">    <span class="keyword">return</span> reject(err)</span><br><span class="line">&#125;)</span><br><span class="line">.pipe(fs.createWriteStream(<span class="string">'image-temp.jpg'</span>))</span><br><span class="line">.on(<span class="string">'finish'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
@@ -738,7 +738,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">269</span>
+                  <span class="site-state-item-count">270</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -760,7 +760,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -781,7 +781,7 @@ var jiathis_config={
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                    <a href="mailto:yalhu@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>
@@ -877,7 +877,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">450.4k</span>
+    <span title="Site words total count">453.3k</span>
   
 </div>
 

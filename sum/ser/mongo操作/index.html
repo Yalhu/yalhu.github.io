@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="mongo,sql,">
 
 
 
@@ -88,17 +88,18 @@
 
 
 
-<meta name="description" content="2020.9.27 星期  ：   安装和启动(mac)安装-macbrew （失败）直接下载文件配置环境变量（vim ~/.bash_profile; source ~/.base_profile）启动：mongod –port 27017 安装位置：/usr/local/lib  || 或者/usr/local/(homebrew安装python也在这个位置.)不放到local下，为了loc">
+<meta name="description" content="文档：https://www.mongodb.org.cn/tutorial/9.htmlhttps://docs.mongodb.com/manual/  2020.9.27 星期  ：   安装和启动(mac)安装-macbrew （失败）直接下载文件配置环境变量（vim ~/.bash_profile; source ~/.base_profile）启动：mongod –port 27017">
+<meta name="keywords" content="mongo,sql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mongo操作">
 <meta property="og:url" content="http://yoursite.com/sum/ser/mongo操作/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2020.9.27 星期  ：   安装和启动(mac)安装-macbrew （失败）直接下载文件配置环境变量（vim ~/.bash_profile; source ~/.base_profile）启动：mongod –port 27017 安装位置：/usr/local/lib  || 或者/usr/local/(homebrew安装python也在这个位置.)不放到local下，为了loc">
+<meta property="og:description" content="文档：https://www.mongodb.org.cn/tutorial/9.htmlhttps://docs.mongodb.com/manual/  2020.9.27 星期  ：   安装和启动(mac)安装-macbrew （失败）直接下载文件配置环境变量（vim ~/.bash_profile; source ~/.base_profile）启动：mongod –port 27017">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-08T07:22:26.274Z">
+<meta property="og:updated_time" content="2020-10-18T08:37:23.565Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mongo操作">
-<meta name="twitter:description" content="2020.9.27 星期  ：   安装和启动(mac)安装-macbrew （失败）直接下载文件配置环境变量（vim ~/.bash_profile; source ~/.base_profile）启动：mongod –port 27017 安装位置：/usr/local/lib  || 或者/usr/local/(homebrew安装python也在这个位置.)不放到local下，为了loc">
+<meta name="twitter:description" content="文档：https://www.mongodb.org.cn/tutorial/9.htmlhttps://docs.mongodb.com/manual/  2020.9.27 星期  ：   安装和启动(mac)安装-macbrew （失败）直接下载文件配置环境变量（vim ~/.bash_profile; source ~/.base_profile）启动：mongod –port 27017">
 
 
 
@@ -348,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-08T15:22:26+08:00">
-                2020-10-08
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-18T16:37:23+08:00">
+                2020-10-18
               </time>
             
           </span>
@@ -420,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,864
+                  2,288
                 </span>
               
 
@@ -436,7 +437,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  10
                 </span>
               
             </div>
@@ -457,7 +458,8 @@
       
 
       
-        <p style="text-align:right"> 2020.9.27 星期  ： </p>
+        <p>文档：<a href="https://www.mongodb.org.cn/tutorial/9.html" target="_blank" rel="noopener">https://www.mongodb.org.cn/tutorial/9.html</a><br><a href="https://docs.mongodb.com/manual/" target="_blank" rel="noopener">https://docs.mongodb.com/manual/</a><br><!-- $_PS: 有的内容（左侧目录）并没有 --></p>
+<p style="text-align:right"> 2020.9.27 星期  ： </p>
 
 <h2 id="安装和启动-mac"><a href="#安装和启动-mac" class="headerlink" title="安装和启动(mac)"></a>安装和启动(mac)</h2><h3 id="安装-mac"><a href="#安装-mac" class="headerlink" title="安装-mac"></a>安装-mac</h3><p>brew （失败）<br>直接下载文件<br>配置环境变量（vim ~/.bash_profile; source ~/.base_profile）<br>启动：mongod –port 27017</p>
 <p>安装位置：<del>/usr/local/lib</del>  || 或者/usr/local/<br>(homebrew安装python也在这个位置.)<br>不放到local下，为了local里面的文件做区分</p>
@@ -494,10 +496,15 @@
 <p>在一些mongodb版本之间，BSON格式可能会随版本不同而有所不同，所以不同版本之间用mongodump/mongorestore可能不会成功，具体要看版本之间的兼容性。<br>当无法使用BSON进行跨版本的数据迁移的时候，使用JSON格式即mongoexport/mongoimport是一个可选项。跨版本的mongodump/mongorestore个人并不推荐，实在要做请先检查文档看两个版本是否兼容（大部分时候是的）。</p>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><!-- [mongodb 常用命令](https://www.jianshu.com/p/49722075f330)
 $_PS: RiverSouthMan -->
-<h1 id="工具-可视化"><a href="#工具-可视化" class="headerlink" title="工具(可视化)"></a>工具(可视化)</h1><h2 id="Studio-3T-for-MongoDB"><a href="#Studio-3T-for-MongoDB" class="headerlink" title="Studio 3T for MongoDB"></a>Studio 3T for MongoDB</h2><!-- \# [mongodb可视化工具 mac版 Studio 3T破解 (永久版)](https://www.jianshu.com/p/038fe91affa2) -->
+<h1 id="工具-可视化"><a href="#工具-可视化" class="headerlink" title="工具(可视化)"></a>工具(可视化)</h1><h2 id="Studio-3T-for-MongoDB"><a href="#Studio-3T-for-MongoDB" class="headerlink" title="Studio 3T for MongoDB"></a>Studio 3T for MongoDB</h2><h3 id="studio-3T-破解"><a href="#studio-3T-破解" class="headerlink" title="studio 3T 破解"></a>studio 3T 破解</h3><h4 id="windows-破解"><a href="#windows-破解" class="headerlink" title="windows 破解"></a>windows 破解</h4><p><a href="https://www.jianshu.com/p/7257f15e2620" target="_blank" rel="noopener">studio 3T 两种破解教程</a><br>1 注册表<br>按住运win 和 r 键输入 regedit<br>找到以下路径<br>HKEY_USERS\S-1-5-21-xxxxxxxxxxxxxx\SOFTWARE\JavaSoft\Prefs\3t\mongochef\enterprise<br>将除了 installation-date-2019.2.1（这个是软件安装日期的时间戳）这个项以外的项数据修改为空，再次打开软件就又是30天试用了<br>2) 脚本<br>studio3t.bat 文件复制到以下路径 C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp<br><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">ECHO</span> 重置Studio <span class="number">3</span>T的使用日期......</span><br><span class="line"><span class="keyword">FOR</span> /f "tokens=<span class="number">1</span>,<span class="number">2</span>,* " <span class="variable">%%i</span> <span class="keyword">IN</span> ('reg query "HKEY_CURRENT_USER\Software\JavaSoft\Prefs\<span class="number">3</span>t\mongochef\enterprise" ^| <span class="built_in">find</span> /V "installation" ^| <span class="built_in">find</span> /V "HKEY"') <span class="keyword">DO</span> <span class="built_in">ECHO</span> yes | reg add "HKEY_CURRENT_USER\Software\JavaSoft\Prefs\<span class="number">3</span>t\mongochef\enterprise" /v <span class="variable">%%i</span> /t REG_SZ /d ""</span><br><span class="line"><span class="built_in">ECHO</span> 重置完成, 按任意键退出......</span><br><span class="line"><span class="built_in">pause</span>&gt;<span class="built_in">nul</span></span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="mac-破解"><a href="#mac-破解" class="headerlink" title="mac 破解"></a>mac 破解</h4><!-- \# [mongodb可视化工具 mac版 Studio 3T破解 (永久版)](https://www.jianshu.com/p/038fe91affa2) -->
 <p><code>sudo spctl --master-disable</code></p>
-<h2 id="MongoDB-Compass"><a href="#MongoDB-Compass" class="headerlink" title="MongoDB Compass"></a>MongoDB Compass</h2><p>连接mongod<br><code>mongodb://root:123456@127.0.0.1:27017/admin</code> </p>
-<h2 id="mongodVU"><a href="#mongodVU" class="headerlink" title="mongodVU"></a>mongodVU</h2><p style="text-align:right"> </p>
+<p>需要2019.3.0版本，但是该版本的<a href="https://download.studio3t.com/studio-3t/mac/2019.3.0/Studio-3T.dmg" target="_blank" rel="noopener">下载地址</a>已经失效了</p>
+<h2 id="Robomongo"><a href="#Robomongo" class="headerlink" title="Robomongo"></a>Robomongo</h2><p>Robomongo是一个开源的,基于Shell的MongoDB图形化客户端管理软件,主要由C++语言编写成,可运行在Windows,Linux和Mac OS X系统上.由于它内置了JavaScript引擎,所以在MongoShell中执行的任何操作都可以同样的在Robomongo的Shell中执行,最值得一提的是,它支持直接对数据以json方式浏览和修改,非常方便.<br>&lt;!– </p>
+<h2 id="MongoDB-Compass"><a href="#MongoDB-Compass" class="headerlink" title="MongoDB Compass"></a>MongoDB Compass</h2><p><a href="https://www.mongodb.com/download-center/compass" target="_blank" rel="noopener">https://www.mongodb.com/download-center/compass</a><br>连接mongod<br><code>mongodb://root:123456@127.0.0.1:27017/admin</code><br>$_PS: 没有连接成功<br> –&gt;</p>
+<h2 id="mongodVU"><a href="#mongodVU" class="headerlink" title="mongodVU"></a>mongodVU</h2><h2 id="web界面adminMongo"><a href="#web界面adminMongo" class="headerlink" title="web界面adminMongo"></a>web界面adminMongo</h2><p>2.mongodb可视化界面的操作:<br>首先你需要在github上拉取一个项目,这个就是一个前端的界面,但是确实挺好用,下面就教大家怎么用,在自己本地一个文件夹中拉取github中的项目:</p>
+<p>git clone <a href="https://github.com/mrvautin/adminMongo" target="_blank" rel="noopener">https://github.com/mrvautin/adminMongo</a>  </p>
+<p style="text-align:right"> </p>
 
 <!-- 
 [设置文件直接以管理员权限运行](http://blog.sina.com.cn/s/blog_69e8e64e0102yoaj.html)
@@ -560,6 +567,14 @@ HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\La
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mongo/" rel="tag"><i class="fa fa-tag"></i> mongo</a>
+          
+            <a href="/tags/sql/" rel="tag"><i class="fa fa-tag"></i> sql</a>
+          
+        </div>
       
 
       
@@ -694,7 +709,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">269</span>
+                  <span class="site-state-item-count">270</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -716,7 +731,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -737,7 +752,7 @@ var jiathis_config={
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="mailto:yalhuu@gmail.com" target="_blank" title="E-Mail">
+                    <a href="mailto:yalhu@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>
@@ -799,7 +814,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装和启动-mac"><span class="nav-text">安装和启动(mac)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-mac"><span class="nav-text">安装-mac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fork"><span class="nav-text">fork</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew安装区别"><span class="nav-text">brew安装区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动-mac"><span class="nav-text">启动-mac</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装和启动-windows"><span class="nav-text">安装和启动(windows)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-text">启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加auth权限"><span class="nav-text">添加auth权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库同步"><span class="nav-text">数据库同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、冷拷贝"><span class="nav-text">1、冷拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、使用mongodump"><span class="nav-text">2、使用mongodump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、增量备份"><span class="nav-text">3、增量备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实操"><span class="nav-text">实操</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bosn"><span class="nav-text">bosn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bson-和json"><span class="nav-text">bson 和json</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-text">其他</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工具-可视化"><span class="nav-text">工具(可视化)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Studio-3T-for-MongoDB"><span class="nav-text">Studio 3T for MongoDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB-Compass"><span class="nav-text">MongoDB Compass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodVU"><span class="nav-text">mongodVU</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装和启动-mac"><span class="nav-text">安装和启动(mac)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-mac"><span class="nav-text">安装-mac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#fork"><span class="nav-text">fork</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brew安装区别"><span class="nav-text">brew安装区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动-mac"><span class="nav-text">启动-mac</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装和启动-windows"><span class="nav-text">安装和启动(windows)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-text">启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加auth权限"><span class="nav-text">添加auth权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库同步"><span class="nav-text">数据库同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、冷拷贝"><span class="nav-text">1、冷拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、使用mongodump"><span class="nav-text">2、使用mongodump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、增量备份"><span class="nav-text">3、增量备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实操"><span class="nav-text">实操</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bosn"><span class="nav-text">bosn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bson-和json"><span class="nav-text">bson 和json</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-text">其他</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工具-可视化"><span class="nav-text">工具(可视化)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Studio-3T-for-MongoDB"><span class="nav-text">Studio 3T for MongoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#studio-3T-破解"><span class="nav-text">studio 3T 破解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#windows-破解"><span class="nav-text">windows 破解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mac-破解"><span class="nav-text">mac 破解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Robomongo"><span class="nav-text">Robomongo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB-Compass"><span class="nav-text">MongoDB Compass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodVU"><span class="nav-text">mongodVU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web界面adminMongo"><span class="nav-text">web界面adminMongo</span></a></li></ol></li></div>
             
 
           </div>
@@ -833,7 +848,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">450.4k</span>
+    <span title="Site words total count">453.3k</span>
   
 </div>
 
