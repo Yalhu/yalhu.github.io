@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="文档：https://www.iterm2.com/documentation.html 2020.9 星期    启动一个连接到远程server的终端：选择“Preferences-&amp;gt;Profiles”，新增一个profile，并设置启动的快捷键和command命令，如图： 按”cmd+;”可以弹出自动完成提示。调出复制过的文本历史 “^+cmd+h”。  command + d：垂直分屏">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-11T10:40:32.133Z">
+<meta property="og:updated_time" content="2021-01-23T08:29:21.729Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Item2 使用">
 <meta name="twitter:description" content="文档：https://www.iterm2.com/documentation.html 2020.9 星期    启动一个连接到远程server的终端：选择“Preferences-&amp;gt;Profiles”，新增一个profile，并设置启动的快捷键和command命令，如图： 按”cmd+;”可以弹出自动完成提示。调出复制过的文本历史 “^+cmd+h”。  command + d：垂直分屏">
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-11T18:40:32+08:00">
-                2020-10-11
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-23T16:29:21+08:00">
+                2021-01-23
               </time>
             
           </span>
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  292
+                  539
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -470,7 +470,11 @@
 <p>command + alt + b：快照回放。很有意思的功能，你可以对你的操作根据时间轴进行回放。可以拖动下方的时间轴，也可以按左右方向键</p>
 <p>shift + command + s：保存当前窗口快照。<br>$_PS: 不知道干嘛的</p>
 <p>快速打开profile或者切换到指定tab: 快捷键“^+cmd+o”。<br>显示命令执行时间、高亮显示光标所在行<br>标记（mark）</p>
-<h2 id="标题栏显示当前所在路径"><a href="#标题栏显示当前所在路径" class="headerlink" title="标题栏显示当前所在路径"></a>标题栏显示当前所在路径</h2><p>打开~/.bash_profile，添加对PROMPT_COMMAND的配置<br>export PROMPT_COMMAND=’echo -ne “\033]0;$PWD\007”‘</p>
+<h2 id="合并tab"><a href="#合并tab" class="headerlink" title="合并tab"></a>合并tab</h2><!-- [iTerm2怎样合并tab？](https://www.xiebruce.top/603.html) -->
+<p>iTerm2 是Mac上一个很好用的开源免费的终端工具，但是可能很多人都遇到过一个问题，就是多个tab的时候，有时不小心拖出来，但却放不回去，主要是因为，单一窗口没有标签栏，所以没法拽标签栏，所以我们要做的就是设置成单一窗口的时候也有标签栏，其实很简单，<code>Preferences→Appearance→show tab bar even when there is only one tab</code>，然后就可以拽标签栏回去了，请看下图：</p>
+<p>另一种是分割窗口的情况，也是很多人都不知道怎么把分割窗口变成标签，其实很简单，按住快捷键<code>command+shift+option</code>，鼠标就会变成小手，这时你就可以直接拖着分割的窗口合并到标签里（但前提是你已经设置过单窗口时也显示标签栏，否则虽然能拖动，但是无法合并到标签里）：</p>
+<p>右键 - Move Session to Split Pane</p>
+<h2 id="标题栏显示当前所在路径"><a href="#标题栏显示当前所在路径" class="headerlink" title="标题栏显示当前所在路径"></a>标题栏显示当前所在路径</h2><p>打开~/.bash_profile，添加对PROMPT_COMMAND的配置<br><!-- export PROMPT_COMMAND='echo -ne "\033]0;$PWD\007"' --></p>
 <p style="text-align:right"></p>
       
     </div>
@@ -653,7 +657,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">270</span>
+                  <span class="site-state-item-count">298</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -664,7 +668,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -675,7 +679,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -758,7 +762,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#标题栏显示当前所在路径"><span class="nav-text">标题栏显示当前所在路径</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#合并tab"><span class="nav-text">合并tab</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标题栏显示当前所在路径"><span class="nav-text">标题栏显示当前所在路径</span></a></li></ol></div>
             
 
           </div>
@@ -778,7 +782,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2021-->2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -792,7 +796,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">453.3k</span>
+    <span title="Site words total count">496.1k</span>
   
 </div>
 

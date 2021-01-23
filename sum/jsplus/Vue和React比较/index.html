@@ -95,13 +95,13 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="原文：关于Vue和React区别的一些笔记 这篇文章记录我在使用Vue和React的时候，对他们的不同之处的一些思考，不仅局限于他们本身，也会包括比如 Vuex/Redux 等经常搭配使用的工具。因为涉及到的内容很多，可能下面的每一个点都能写成一篇文章，这次先简单做一个概要，等我有空做一个详细的专题出来。 监听数据变化的实现原理不同 Vue 通过 getter/setter 以及一些函数的劫持，能">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/vue-vs-react-data-flow.png?e=1603016372&token=your qiniu access key:dDdZRhUp_vodccWw_dctRlvHME8=">
-<meta property="og:image" content="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/message.png?e=1603016372&token=your qiniu access key:OiYlgHbT_0g2gebrA2efX2NJjFg=">
+<meta property="og:image" content="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/vue-vs-react-data-flow.png?e=1611385518&token=your qiniu access key:_esuRQpO1gdO1LDts4uHcMfkLks=">
+<meta property="og:image" content="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/message.png?e=1611385518&token=your qiniu access key:F4siPj1a2gR20uY4YQNs1DbShi0=">
 <meta property="og:updated_time" content="2020-05-17T05:18:12.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue和React比较">
 <meta name="twitter:description" content="原文：关于Vue和React区别的一些笔记 这篇文章记录我在使用Vue和React的时候，对他们的不同之处的一些思考，不仅局限于他们本身，也会包括比如 Vuex/Redux 等经常搭配使用的工具。因为涉及到的内容很多，可能下面的每一个点都能写成一篇文章，这次先简单做一个概要，等我有空做一个详细的专题出来。 监听数据变化的实现原理不同 Vue 通过 getter/setter 以及一些函数的劫持，能">
-<meta name="twitter:image" content="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/vue-vs-react-data-flow.png?e=1603016372&token=your qiniu access key:dDdZRhUp_vodccWw_dctRlvHME8=">
+<meta name="twitter:image" content="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/vue-vs-react-data-flow.png?e=1611385518&token=your qiniu access key:_esuRQpO1gdO1LDts4uHcMfkLks=">
 
 
 
@@ -468,7 +468,7 @@
 </ul>
 <p>为什么 React 不精确监听数据变化呢？这是因为 Vue 和 React 设计理念上的区别，Vue 使用的是可变数据，而React更强调数据的不可变。所以应该说没有好坏之分，Vue更加简单，而React构建大型应用的时候更加鲁棒。    </p>
 <p>因为一般都会用一个数据层的框架比如 Vuex 和 Redux，所以这部分不作过多解释，在最后的 vuex 和 redux的区别 中也会讲到。</p>
-<h2 id="数据流的不同"><a href="#数据流的不同" class="headerlink" title="数据流的不同"></a>数据流的不同</h2><p><img src="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/vue-vs-react-data-flow.png?e=1603016372&token=your qiniu access key:dDdZRhUp_vodccWw_dctRlvHME8=" alt="vue和react数据流"></p>
+<h2 id="数据流的不同"><a href="#数据流的不同" class="headerlink" title="数据流的不同"></a>数据流的不同</h2><p><img src="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/vue-vs-react-data-flow.png?e=1611385518&token=your qiniu access key:_esuRQpO1gdO1LDts4uHcMfkLks=" alt="vue和react数据流"></p>
 <p>大家都知道Vue中默认是支持双向绑定的。在Vue1.0中我们可以实现两种双向绑定：</p>
 <ol>
 <li>父子组件之间，props 可以双向绑定</li>
@@ -481,7 +481,7 @@
 <p>React 最早也是使用 mixins 的，不过后来他们觉得这种方式对组件侵入太强会导致很多问题，就弃用了 mixinx 转而使用 HoC，关于mixin究竟哪里不好，可以参考React官方的这篇文章 <a href="https://reactjs.org/blog/2016/07/13/mixins-considered-harmful.html" target="_blank" rel="noopener">Mixins Considered Harmful</a>  </p>
 <p>而 Vue 一直是使用 mixin 来实现的。<br>为什么 Vue 不采用 HoC 的方式来实现呢？<br>高阶组件本质就是高阶函数，React 的组件是一个纯粹的函数，所以高阶函数对React来说非常简单。<br>但是Vue就不行了，Vue中组件是一个被包装的函数，并不简单的就是我们定义组件的时候传入的对象或者函数。比如我们定义的模板怎么被编译的？比如声明的props怎么接收到的？这些都是vue创建组件实例的时候隐式干的事。由于vue默默帮我们做了这么多事，所以我们自己如果直接把组件的声明包装一下，返回一个高阶组件，那么这个被包装的组件就无法正常工作了。   </p>
 <p>推荐一篇很棒的文章讲的是vue中如何实现高阶组件 <a href="http://hcysun.me/2018/01/05/%E6%8E%A2%E7%B4%A2Vue%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6/" target="_blank" rel="noopener">探索Vue高阶组件</a></p>
-<h2 id="组件通信的区别"><a href="#组件通信的区别" class="headerlink" title="组件通信的区别"></a>组件通信的区别</h2><p><img src="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/message.png?e=1603016372&token=your qiniu access key:OiYlgHbT_0g2gebrA2efX2NJjFg=" alt="vue和react组件通信">  </p>
+<h2 id="组件通信的区别"><a href="#组件通信的区别" class="headerlink" title="组件通信的区别"></a>组件通信的区别</h2><p><img src="http://you img base url/https://raw.githubusercontent.com/lihongxun945/myblog/master/images/message.png?e=1611385518&token=your qiniu access key:F4siPj1a2gR20uY4YQNs1DbShi0=" alt="vue和react组件通信">  </p>
 <p>其实这部分两个比较相似。    </p>
 <p>在Vue 中有三种方式可以实现组件通信：    </p>
 <ul>
@@ -717,7 +717,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">270</span>
+                  <span class="site-state-item-count">298</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -728,7 +728,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -739,7 +739,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -842,7 +842,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2021-->2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -856,7 +856,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">453.3k</span>
+    <span title="Site words total count">496.1k</span>
   
 </div>
 

@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2019.2.12 星期二    JS ~~等价于Math.floor. ~~3.6=3(=~(~3.6)=~(-4+1)); ~3.6 = -4 (-(3+1)) 反码(~)：二进制进行反码计算时。1变成0，0变成1。 举例子~6,6的二进制是110在机器上补足32位在110之前补码0。那么反码为111…..001，此时的反码减去1得111…..111000，那么原反码减去相减的码得到0000…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-03T15:29:58.385Z">
+<meta property="og:updated_time" content="2021-01-23T10:41:03.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Js使用记录2">
 <meta name="twitter:description" content="2019.2.12 星期二    JS ~~等价于Math.floor. ~~3.6=3(=~(~3.6)=~(-4+1)); ~3.6 = -4 (-(3+1)) 反码(~)：二进制进行反码计算时。1变成0，0变成1。 举例子~6,6的二进制是110在机器上补足32位在110之前补码0。那么反码为111…..001，此时的反码减去1得111…..111000，那么原反码减去相减的码得到0000…">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-03T23:29:58+08:00">
-                2020-10-03
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-23T18:41:03+08:00">
+                2021-01-23
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  765
+                  1,020
                 </span>
               
 
@@ -437,7 +437,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -471,13 +471,21 @@
 <li>单例/字面量 定义时无法使用单例的方法   </li>
 <li>未定义的全局变量不可以直接使用，需要用window.varity,比如定义对象的属性值时   </li>
 <li>int,long,float,double的 +, -, *  运算性能是一样的，除法运算比较慢，占用时间较多，要尽量避免除法。<br>即：加，减，乘的运算时间与数据类型无关，所以可以随意使用更精确的float、double型，不影响程序速度。   </li>
-<li>console.log(3+2?’1’:’2’)  //1<br> console.log(3+2&amp;&amp;4) // 4<br> console.log(3+2) // 5</li>
+<li>console.log(3+2?’1’:’2’)  //1<br> console.log(3+2&amp;&amp;4) // 4<br> console.log(3+2) // 5 <!-- + 运算符优先级高于 &&; && 运算符优先级 > ?: -->
+</li>
 </ol>
+<ol>
+<li><code>(0, function)()</code><br>() 运算并返回内部表达式的结果。<br>第一个写法里面包含一个逗号表达式”,”。 它会运算每个被逗号分开的表达式并返回最后一个表达式的结果。这种写法会先计算“0”，再计算匿名函数，并返回函数引用。<!-- [javascript_冷知识之_(0, function)(param)](https://blog.csdn.net/qq_39446719/article/details/103838706) -->
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">0</span>, dog.run)();</span><br><span class="line"><span class="comment">// 左边先用逗号操作符从左到右执行并取值，最终返回</span></span><br><span class="line">dog.run: <span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'I\'m running'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于如下，此时的 this 就是 全局对象 了</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'I\'m running'</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>为什么源码要用这种 (0, function)(param) 方式去绑定 this，而不是 function.call()/apply() 的形式呢？<br>那是因为这些源码中有时会修改 prototype ，将 call/apply 指向成自己的函数，甚至改变prototype 的指向，这样就会导致原型链上方法不可用，那就只好(0, function)(param ) 了。我理解这有点亡羊补牢的感觉。。。</p>
 <ol start="6">
 <li><p>对象数组去重<br> <a href="https://blog.csdn.net/cheeso/article/details/83348710" target="_blank" rel="noopener">js 删除两个数组中id相同的对象</a>   </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = res.data</span><br><span class="line"><span class="keyword">let</span> arr1 = [...this.list]</span><br><span class="line">arr = arr.filter(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> arrlist = arr1.map(<span class="function"><span class="params">v</span> =&gt;</span> v.id)</span><br><span class="line">    <span class="keyword">return</span> !arrlist.includes(item.id)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">this</span>.data2 = arr</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>获取月份最后一天。比如2月最后一天, <code>new Date(2019,2,0).getDate()</code></p>
+<!-- new Date().toLocaleDateString() // 2021/1/23  -->
 </li>
 </ol>
 <ol>
@@ -683,7 +691,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">270</span>
+                  <span class="site-state-item-count">298</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -694,7 +702,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -705,7 +713,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -808,7 +816,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2021-->2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -822,7 +830,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">453.3k</span>
+    <span title="Site words total count">496.1k</span>
   
 </div>
 

@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2018.8.9   基础123456789101112131415161718192021222324252627282930313233343536## 配置信息### 获取  npm config list     npm config ls -l # 全部信息   npm config get registry # 特定/指定设置### 设置npm config set proxy htt">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-05T09:38:48.341Z">
+<meta property="og:updated_time" content="2021-01-23T12:10:42.571Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Npm使用">
 <meta name="twitter:description" content="2018.8.9   基础123456789101112131415161718192021222324252627282930313233343536## 配置信息### 获取  npm config list     npm config ls -l # 全部信息   npm config get registry # 特定/指定设置### 设置npm config set proxy htt">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-05T17:38:48+08:00">
-                2020-10-05
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-23T20:10:42+08:00">
+                2021-01-23
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,730
+                  3,148
                 </span>
               
 
@@ -437,7 +437,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  13
                 </span>
               
             </div>
@@ -491,6 +491,44 @@
 <p><code>npm info gulp</code>查看本地安装包的版本信息</p>
 <p><code>npm ls pkg</code> 查看某个项目下包pkg的版本信息,注意该命令需要在某个项目下执行<br>npm ls webpack<br><a href="mailto:webapp_backend@1.0.0" target="_blank" rel="noopener">webapp_backend@1.0.0</a> /本地的项目路径<br>└── <a href="mailto:webpack@3.12.0" target="_blank" rel="noopener">webpack@3.12.0</a> </p>
 <p><code>npm ls pkg -g</code> 查看本地全局安装的pkg版本<br>npm ls webpack -g<br>/Users/mac/.nvm/versions/node/v8.8.0/lib<br>└── <a href="mailto:webpack@4.29.6" target="_blank" rel="noopener">webpack@4.29.6</a> </p>
+<h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><p>一般不要通过<code>npm unpublsh -f</code> 删除发布的包<!-- 同名的包24h 后才可以再次发布 --><br>可以通过设置tag的方式去及时更新<br><!-- x-cli 更新到wx-betat. 切换tag-0.0.79后，重新安装也会报错 --></p>
+<h3 id="npm-tag"><a href="#npm-tag" class="headerlink" title="npm tag"></a>npm tag</h3><p>发布测试包，不希望检测更新，或避免用户安装测试包。<br><!-- \# [npm之version和tag](https://www.jianshu.com/p/91902bae5572) --></p>
+<blockquote>
+<p>不小心把测试版发布成了正式版，我该怎么办？只能跑路了吗？<br><!-- 虽然自从leftpad事件之后，NPM取消了npm unpublish和npm publish -f操作，但是我们错误地把测试版发布成正式版之后，不要惊慌，要稳住，因为我们能赢。 --><br>version：<br>发布到npm后，每一个版本号都对应了其资源文件，而且是不可修改的。npm中的版本号类似于git中的tag。</p>
+</blockquote>
+<p>tag：<br>一般情况下，我们可以不指定tag，<strong>这时默认就会用latest这个tag</strong>，所有发布或者安装都是最新的正式版。<br>而指定tag之后，我们可以在这个tag上发布一个更新的版本，用户安装的时候如果也指定这个tag，则会安装这个tag下的最新版。<br><!-- 因此，npm中的tag类似于git中的branch。 --></p>
+<!-- 总结一下
+version一旦发布，是不可变的；
+而tag更像一个渠道，只要用户选择了这个渠道，就可以一直更新这个渠道的最新版。
+也因此，version和tag是相互独立的。 -->
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看当前的tag和对应的version。</span></span><br><span class="line">npm dist-tag ls</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看my-package发布过的所有版本号。</span></span><br><span class="line">npm view my-package versions</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给my-package设置tag，对应到版本version。</span></span><br><span class="line">npm dist-tag add my-package@version tag</span><br></pre></td></tr></table></figure>
+<h2 id="npm发包"><a href="#npm发包" class="headerlink" title="npm发包"></a>npm发包</h2><h3 id="执行脚本"><a href="#执行脚本" class="headerlink" title="执行脚本"></a>执行脚本</h3><!-- $_PS: package.json:script -> prepublish -->
+<p>可以通过设置prepublish在发布前执行脚本<br><!-- [NPM-脚本](https://cloud.tencent.com/developer/section/1490270) --><br>对于以下脚本，npm 支持 package.json 文件的“scripts”属性：</p>
+<p>prepublish：在包打包和发布之前运行，以及在npm install没有任何参数的本地运行。（见下文）<br>prepare：在打包和发布包之前运行，在npm install没有任何参数的本地运行（见下文）。这是在之后运行prepublish，但是之前prepublishOnly。<br>prepublishOnly：在准备和包装之前运行，仅打开npm publish。（见下文。）<br>prepack：前运行压缩包包装（上npm pack，npm publish并安装git的依赖时）<br>postpack：在生成tarball之后运行并移动到其最终目标。<br>publish，postpublish：发布包后运行。<br>preinstall：在安装软件包之前运行<br>install，postinstall：安装软件包后运行。<br>preuninstall，uninstall：在卸载软件包之前运行。<br>postuninstall：在卸载软件包后运行。<br>preversion：在碰撞包版本之前运行。<br>version：运行AFTER碰撞包版本，但提交之前。<br>postversion：运行AFTER碰撞包版本，然后提交。<br>pretest，test，posttest：由npm test命令运行。<br>prestop，stop，poststop：由npm stop命令运行。<br>prestart，start，poststart：由npm start命令运行。<br>prerestart，restart，postrestart：按npm restart命令运行。注意：npm restart如果没有restart提供脚本，将运行停止和启动脚本。<br>preshrinkwrap，shrinkwrap，postshrinkwrap：由npm shrinkwrap命令运行。</p>
+<p>此外，可以通过运行执行任意脚本<code>npm run-script &lt;stage&gt;</code>。前置和后名称匹配的命令将这些运行以及（例如premyscript，myscript， postmyscript）。可以运行依赖项的脚本<code>npm explore &lt;pkg&gt; -- npm run &lt;stage&gt;</code>。</p>
+<h3 id="忽略文件"><a href="#忽略文件" class="headerlink" title="忽略文件"></a>忽略文件</h3><!-- [npm publish过滤部分文件](https://blog.csdn.net/add_you/article/details/88828561)
+[npm publish过滤部分文件](https://www.jianshu.com/p/6c2f5c31bfe6)
+ -->
+<p>方法一：使用 .gitignore 设置忽略哪些文件</p>
+<p>方法二：使用 .npmignore设置忽略哪些文件<br>.npmignore的写法跟.gitignore 的规则完全一样。<br>若同时使用了.npmignore和.gitignore，只有.npmignore会生效，优先级比较高。</p>
+<p>方法三：使用package.json的files字段选择发布哪些文件<br>直接在package.json中files字段设置发布哪些文件或目录。<br>这个优先级高于.npmignore和.gitignore。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 默认被忽略：</span><br><span class="line">.*.swp</span><br><span class="line">._*</span><br><span class="line">.DS_Store</span><br><span class="line">.git</span><br><span class="line">.hg</span><br><span class="line">.npmrc</span><br><span class="line">.lock-wscript</span><br><span class="line">.svn</span><br><span class="line">.wafpickle-*</span><br><span class="line">config.gypi</span><br><span class="line">CVS</span><br><span class="line">npm-debug.log</span><br><span class="line">node_modules/</span><br><span class="line"></span><br><span class="line"># 默认被包含，即便设置忽略也无效</span><br><span class="line">package.json</span><br><span class="line">README (and its variants)</span><br><span class="line">CHANGELOG (and its variants)</span><br></pre></td></tr></table></figure>
+<h3 id="发包异常"><a href="#发包异常" class="headerlink" title="发包异常"></a>发包异常</h3><p>Error: 402 Payment Required</p>
+<p>换了个名字，想起了自己见过的库，就模仿加了个 @ 前缀的包，再次发布的时候，报了下面的错误：</p>
+<p>Error: 402 Payment Required - PUT <a href="https://registry.npmjs.org/@xx/xx" target="_blank" rel="noopener">https://registry.npmjs.org/@xx/xx</a> - You must sign up for private packages<br>查看文档，发现 @npm/package-name 这种形式的包名，是有作用域的包名形式，执行 npm publish 的时候默认是发布私有的包。因此，第一种方式是花钱买私有包的服务，另外一种方式就是指定参数，表示公开：<br>npm publish –access public</p>
+<p>需要注意的是这种形式的包名跟 npm 账户有对应关系，不能随便填写。<br>npm init --scope=@my-org</p>
+<p>这种形式表示是一个组织，my-org 对应是 npm 中的组织名。<br>npm init --scope=@my-username</p>
+<h2 id="安装npm包"><a href="#安装npm包" class="headerlink" title="安装npm包"></a>安装npm包</h2><h3 id="windows-安装node-sass"><a href="#windows-安装node-sass" class="headerlink" title="windows 安装node-sass"></a>windows 安装node-sass</h3><p>使用node-sass模块，npm install安装一直失败，尝试了很多方法，最终找到了这个方法，简直棒极了！<br>两种方法：</p>
+<p>第一种：<br>1.先检查项目的node_modules文件夹是否存在node-sass文件夹，存在，删掉，不存在，执行第二步；<br>2.打开cmd，在项目根目录下输入以下代码<br><code>npm install node-sass --sass-binary-site=http://npm.taobao.org/mirrors/node-sass</code></p>
+<p>或<br><code>SASS_BINARY_SITE=https://npm.taobao.org/mirrors/node-sass/ npm install node-sass</code><br><code>set SASS_BINARY_SITE=https://npm.taobao.org/mirrors/node-sass/</code></p>
+<p>或者<br>在你的project下创建一个 .npmrc 文件<br>在文件中添加 sass_binary_site=<a href="https://npm.taobao.org/mirrors/node-sass/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/node-sass/</a></p>
+<p>第二种：<br>进入项目的node_modules目录下；<br>2.使用git克隆node-sass源码：Git路径为：git clone <a href="https://github.com/sass/node-sass.git" target="_blank" rel="noopener">https://github.com/sass/node-sass.git</a><br>3.使用编辑器，进入node_modules/node-sass/package.json文件中；<br>4.使用编辑器，将package.json文件中nodeSassConfig&gt;binarySite的值修改为淘宝镜像地址；</p>
+<p>5.在cmd进入node-sass文件夹中，执行以下命令：npm install<br>即可等待node-sass安装成功</p>
+<p><code>node-sass -v</code></p>
+<h3 id="electron安装"><a href="#electron安装" class="headerlink" title="electron安装"></a>electron安装</h3><!-- [使用淘宝npm源加速Electron依赖安装](https://www.jianshu.com/p/f1e3f07ff3a9) -->
+<!-- 开发Electron的时候，每次执行“npm i -D electron”，等得我都快哭了，还不一定能下得下来。 -->
+<p>在你的npmrc文件里添加淘宝npm源，Windows用户可以参考下面的路径：<br><!-- `C:\Users\[User name]\AppData\Roaming\npm\node_modules\npm\npmrc` --><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">registry=https://registry.npm.taobao.org/</span><br><span class="line">ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/</span><br></pre></td></tr></table></figure></p>
+<p>也可以使用下面命令：<br><code>ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install --save-dev electron</code></p>
 <h2 id="npm安装出错"><a href="#npm安装出错" class="headerlink" title="npm安装出错"></a>npm安装出错</h2><h3 id="SSL-Error-CERT-UNTRUSTED-while-using-npm-command"><a href="#SSL-Error-CERT-UNTRUSTED-while-using-npm-command" class="headerlink" title="SSL Error: CERT_UNTRUSTED while using npm command"></a>SSL Error: CERT_UNTRUSTED while using npm command</h3><p># 实际<br>通过安装n包，更新node成功了。之后出现问题是退出当前工作目录，重新进入就好了。（服务端同学，把工作目录全量更新了，然后npm命令就不可以执行了，不知道他全量更新做了什么）<br># <a href="https://sre.ink/node-npm-install-error-cert_untrusted/" target="_blank" rel="noopener">node npm install Error: CERT_UNTRUSTED</a><br>ssl验证问题，使用下面的命令取消ssl验证即可解决<br>npm config set strict-ssl false</p>
 <p>错误error-code-ELIFECYCLE，执行如下命令<br>npm cache clear –force<br>npm install -g npm</p>
 <p># <a href="https://stackoverflow.com/questions/21855035/ssl-error-cert-untrusted-while-using-npm-command" target="_blank" rel="noopener">SSL Error: CERT_UNTRUSTED while using npm command</a><br>### 1<br>You can bypass https using below commands:<br><code>npm config set strict-ssl false</code><br>or set the registry URL from https or http like below:<br><code>npm config set registry=&quot;http://registry.npmjs.org/&quot;</code></p>
@@ -504,6 +542,7 @@ https://www.cnblogs.com/zjfjava/p/10392150.html
 https://blog.csdn.net/it_liuchengli/article/details/77040806 -->
 <h3 id="command-not-found"><a href="#command-not-found" class="headerlink" title="command not found"></a>command not found</h3><p><a href="https://blog.csdn.net/EDDYCJY/article/details/77892446" target="_blank" rel="noopener">bash: vue: command not found</a><br>npm 全局路径不对或 node_modules 的路径未设置<br>三、查看npm全局路径：<br><code>npm root -g</code><br>得出/usr/local/node/lib/node_modules，检查是否正确的路径。<br>若存在问题可重新指定：</p>
 <p><code>npm config set prefix /usr/local</code>   </p>
+<h3 id="MSBUILD-error-MSB3428-未能加载-Visual-C-组件“VCBuild-exe”"><a href="#MSBUILD-error-MSB3428-未能加载-Visual-C-组件“VCBuild-exe”" class="headerlink" title="MSBUILD : error MSB3428: 未能加载 Visual C++ 组件“VCBuild.exe”"></a>MSBUILD : error MSB3428: 未能加载 Visual C++ 组件“VCBuild.exe”</h3><p>错误原因：缺少windows构建插件；<br>全局安装windows构建工具，执行如下命令即可！<br><code>npm install --global --production windows-build-tools</code></p>
 
       
     </div>
@@ -568,8 +607,8 @@ https://blog.csdn.net/it_liuchengli/article/details/77040806 -->
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sum/others/程序签名/" rel="next" title="程序签名">
-                <i class="fa fa-chevron-left"></i> 程序签名
+              <a href="/sum/ser/node配置相关/" rel="next" title="Node配置相关">
+                <i class="fa fa-chevron-left"></i> Node配置相关
               </a>
             
           </div>
@@ -578,8 +617,8 @@ https://blog.csdn.net/it_liuchengli/article/details/77040806 -->
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/sum/ser/node使用/" rel="prev" title="Node使用">
-                Node使用 <i class="fa fa-chevron-right"></i>
+              <a href="/sum/ser/node服务端开发/" rel="prev" title="Node服务端开发">
+                Node服务端开发 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -692,7 +731,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">270</span>
+                  <span class="site-state-item-count">298</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -703,7 +742,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -714,7 +753,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -797,7 +836,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node多版本控制"><span class="nav-text">node多版本控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改变全局模块-缓存路劲"><span class="nav-text">改变全局模块/缓存路劲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置cnpm"><span class="nav-text">设置cnpm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置镜像"><span class="nav-text">设置镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为Npm设代理"><span class="nav-text">为Npm设代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NPM查看包的版本信息"><span class="nav-text">NPM查看包的版本信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看npmjs服务器上的包的版本信息"><span class="nav-text">查看npmjs服务器上的包的版本信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm安装出错"><span class="nav-text">npm安装出错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL-Error-CERT-UNTRUSTED-while-using-npm-command"><span class="nav-text">SSL Error: CERT_UNTRUSTED while using npm command</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC-failed，curl-18-transfer-closed-with-outstanding-read-data-remaining"><span class="nav-text">-RPC failed，curl 18 transfer closed with outstanding read data remaining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#command-not-found"><span class="nav-text">command not found</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node多版本控制"><span class="nav-text">node多版本控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改变全局模块-缓存路劲"><span class="nav-text">改变全局模块/缓存路劲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置cnpm"><span class="nav-text">设置cnpm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置镜像"><span class="nav-text">设置镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为Npm设代理"><span class="nav-text">为Npm设代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NPM查看包的版本信息"><span class="nav-text">NPM查看包的版本信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看npmjs服务器上的包的版本信息"><span class="nav-text">查看npmjs服务器上的包的版本信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tag"><span class="nav-text">tag</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#npm-tag"><span class="nav-text">npm tag</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm发包"><span class="nav-text">npm发包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#执行脚本"><span class="nav-text">执行脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#忽略文件"><span class="nav-text">忽略文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发包异常"><span class="nav-text">发包异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装npm包"><span class="nav-text">安装npm包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows-安装node-sass"><span class="nav-text">windows 安装node-sass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#electron安装"><span class="nav-text">electron安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm安装出错"><span class="nav-text">npm安装出错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL-Error-CERT-UNTRUSTED-while-using-npm-command"><span class="nav-text">SSL Error: CERT_UNTRUSTED while using npm command</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC-failed，curl-18-transfer-closed-with-outstanding-read-data-remaining"><span class="nav-text">-RPC failed，curl 18 transfer closed with outstanding read data remaining</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#command-not-found"><span class="nav-text">command not found</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MSBUILD-error-MSB3428-未能加载-Visual-C-组件“VCBuild-exe”"><span class="nav-text">MSBUILD : error MSB3428: 未能加载 Visual C++ 组件“VCBuild.exe”</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -817,7 +856,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2021-->2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -831,7 +870,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">453.3k</span>
+    <span title="Site words total count">496.1k</span>
   
 </div>
 

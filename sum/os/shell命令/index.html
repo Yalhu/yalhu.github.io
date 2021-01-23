@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="实用删除乱码/中文文件或目录ls -i //列出文件节点find ./ -inum XXX（节点号） -print -exec rm -rf {} \;    //删除节点号文件find . -inum XXXX（节点号） -exec mv {} file.txt \；   //其实我们还可以执行这个命令，修改乱码文件名为正常文件名   grep查找文件中内容grep -nir “.top-bg”">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-18T09:03:22.175Z">
+<meta property="og:updated_time" content="2021-01-23T13:27:36.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell命令">
 <meta name="twitter:description" content="实用删除乱码/中文文件或目录ls -i //列出文件节点find ./ -inum XXX（节点号） -print -exec rm -rf {} \;    //删除节点号文件find . -inum XXXX（节点号） -exec mv {} file.txt \；   //其实我们还可以执行这个命令，修改乱码文件名为正常文件名   grep查找文件中内容grep -nir “.top-bg”">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-18T17:03:22+08:00">
-                2020-10-18
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-23T21:27:36+08:00">
+                2021-01-23
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,594
+                  5,588
                 </span>
               
 
@@ -437,7 +437,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  14
+                  23
                 </span>
               
             </div>
@@ -465,8 +465,14 @@
 <h3 id="mac-刷新dns缓存"><a href="#mac-刷新dns缓存" class="headerlink" title="mac 刷新dns缓存"></a>mac 刷新dns缓存</h3><!-- [Mac 刷新 DNS 缓存](https://www.jianshu.com/p/f2b040521426) -->
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># OS X Yosemite and later</span></span><br><span class="line"><span class="comment"># Use the following Terminal command to reset the DNS cache in OS X v10.10.4 or later:</span></span><br><span class="line">sudo killall -HUP mDNSResponder</span><br><span class="line"></span><br><span class="line"><span class="comment"># Use the following Terminal command to reset the DNS cache in OS X v10.10 through v10.10.3:</span></span><br><span class="line">sudo discoveryutil mdnsflushcache</span><br><span class="line"></span><br><span class="line"><span class="comment"># OS X Mavericks, Mountain Lion, and Lion</span></span><br><span class="line"><span class="comment"># Use the following Terminal command to reset the DNS cache in OS X v10.9.5 and earlier:</span></span><br><span class="line">sudo killall -HUP mDNSResponder</span><br><span class="line"></span><br><span class="line"><span class="comment"># Mac OS X Snow Leopard</span></span><br><span class="line"><span class="comment"># Use the following Terminal command to reset the DNS cache in OS X v10.6 through v10.6.8:</span></span><br><span class="line">sudo dscacheutil -flushcache</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo killall -HUP mDNSResponder</span><br></pre></td></tr></table></figure>
 <p>chrome浏览器：chrome://net-internals/#sockets<br>$_PS: 有时强制刷新页面dns也不刷新，老吃亏了</p>
-<h3 id="查看端口号（进程）"><a href="#查看端口号（进程）" class="headerlink" title="查看端口号（进程）"></a>查看端口号（进程）</h3><p>在Linux 上的 /etc/services 文件可以查看到更多关于保留端口的信息。<br>可以使用以下六种方法查看端口信息。<br>ss：可以用于转储套接字统计信息。<br>netstat：可以显示打开的套接字列表。<br>lsof：可以列出打开的文件。<br>nmap：是网络检测工具和端口扫描程序。<br>systemctl：是systemd 系统的控制管理器和服务管理器。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 1、使用lsof 命令来查看端口是否开放</span></span><br><span class="line">lsof -i:6379 <span class="comment"># //如果有显示说明已经开放了，如果没有显示说明没有开放</span></span><br><span class="line"><span class="comment">## 2、使用netstat 命令来查看端口是否开放</span></span><br><span class="line">netstat -aptn |grep -i 6379 <span class="comment"># //查看是否监听在0.0.0.0:6379</span></span><br><span class="line">netstat -lptn |grep -i 6379 //查看TCP类型的端口</span><br><span class="line">netstat -lpun |grep -i 6379 //查看UDP类型的端口</span><br><span class="line"><span class="comment">## 3、使用telnet方式测试远程主机端口是否打开</span></span><br><span class="line">telnet 127.0.0.1 6379 //telnet IP 端口号</span><br></pre></td></tr></table></figure>
+<h3 id="查看端口号（进程）"><a href="#查看端口号（进程）" class="headerlink" title="查看端口号（进程）"></a>查看端口号（进程）</h3><p>在Linux 上的 /etc/services 文件可以查看到更多关于保留端口的信息。<br>可以使用以下六种方法查看端口信息。<br>ss：可以用于转储套接字统计信息。<br>netstat：可以显示打开的套接字列表。<br>lsof：可以列出打开的文件。<br>nmap：是网络检测工具和端口扫描程序。<br>systemctl：是systemd 系统的控制管理器和服务管理器。<br><!-- 
+windows `telnet 192.168.1.166 3306`
+Linux
+wget ip:port
+1、ssh -v -p [端口号] [用户名]@[IP地址]
+2、curl [IP地址]:[端口号]
+ --><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 1、使用lsof 命令来查看端口是否开放</span></span><br><span class="line">lsof -i:6379 <span class="comment"># //如果有显示说明已经开放了，如果没有显示说明没有开放</span></span><br><span class="line"><span class="comment">## 2、使用netstat 命令来查看端口是否开放</span></span><br><span class="line">netstat -aptn |grep -i 6379 <span class="comment"># //查看是否监听在0.0.0.0:6379</span></span><br><span class="line">netstat -lptn |grep -i 6379 //查看TCP类型的端口</span><br><span class="line">netstat -lpun |grep -i 6379 //查看UDP类型的端口</span><br><span class="line"><span class="comment">## 3、使用telnet方式测试远程主机端口是否打开</span></span><br><span class="line">telnet 127.0.0.1 6379 //telnet IP 端口号</span><br></pre></td></tr></table></figure></p>
+<p>###<br>netstat npl |grep nginx<br>ps -ef | grep nginx | grep -v grep<br>ps aux | grep nginx</p>
 <h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><!-- [Xshell常用命令及使用教程](https://www.2cto.com/kf/201711/696431.html)    -->
 <!-- \# [Linux系统下常见的Xshell运行命令——Xshell入门必看](https://blog.csdn.net/u013058618/article/details/55006518)      -->
 <h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><p>查看的命令是cat host.xml；      </p>
@@ -479,15 +485,28 @@
 <p>文件夹及文件夹下的所有文件的复制【cp -r 源文件目录 目标文件目录】<br>[root@localhost /]# cp -r /soft/bak/* /home/bak</p>
 <h3 id="文件编辑"><a href="#文件编辑" class="headerlink" title="文件编辑"></a>文件编辑</h3><p>编辑的命令是vi host.xml，然后按下i，进入修改模式，要不然就只是看，<br>如果我们突然不想修改时，按下ESC 然后在命令行中写下 :q! ? 然后回车就接触编辑，<br>如果我们是编辑完了需要保存，也需要按下ESC，然后输入 :wq 回车。<br>总结一下就是：编辑文件 vi，按下i进行编辑 ??保存结束编辑 ESC :wq 回车 ??不保存结束编辑 ESC :q! 回车</p>
 <p>$PS: 使用vim  </p>
-<p>设置编码格式：工具条上有个地球的图标 可以设置，可能需要重启   </p>
+<p>设置编码格式：工具条上有个地球的图标 可以设置，可能需要重启<br><!-- [VIM 自动配置（代码补全，代码高亮，符号补全等等）](https://www.cnblogs.com/write-hua/p/7697762.html) --></p>
 <h3 id="文件统计"><a href="#文件统计" class="headerlink" title="文件统计"></a>文件统计</h3><p><a href="https://www.linuxidc.com/Linux/2011-02/32390.htm" target="_blank" rel="noopener">Linux获取一个文件的行数或者字符数</a><br>wc命令主要对文件中的行数、字符数、字节数进行计数</p>
 <p>-c     统计字节数，除非指定 -k 标志。如果指定 -k 标志，wc 命令统计字符数。<br>-k     统计字符数。指定 -k 标志等同于指定 -klwc 标志。如果把 -k 标志同其它标志一起使用，那么必须包含 -c 标志。否则，将会忽略 -k 标志。<br>-l     统计行数。<br>-m     统计字符数。这个标志不能与 -c 标志一起使用。<br>-w     统计字数。一个字被定义为由空白、跳格或换行字符分隔的字符串。</p>
 <p>1字节（Byte）= 8位（bit）<br>在ASCII码中，一个英文字母（不分大小写）占一个字节的空间，<br>中文字符占两个字节</p>
 <h3 id="文件压缩-解压"><a href="#文件压缩-解压" class="headerlink" title="文件压缩/解压"></a>文件压缩/解压</h3><p>tar -czvf file file.tar.gz<br>tar -xzvf file.tar.gz</p>
 <p>$_PS: 压缩比例大致为1/10</p>
+<p>解压 <em>.tar.xz 文件`xz -d </em>.tar.xz`</p>
 <h2 id="grep命令"><a href="#grep命令" class="headerlink" title="grep命令"></a>grep命令</h2><p>1.作用<br>Linux系统中grep命令是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹 配的行打印出来。grep全称是Global Regular Expression Print，表示全局正则表达式版本，它的使用权限是所有用户。 </p>
 <p>2.格式<br>grep [options]  </p>
+<h2 id="别名设置"><a href="#别名设置" class="headerlink" title="别名设置"></a>别名设置</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看已经设置的别名</span></span><br><span class="line"><span class="built_in">alias</span> -p</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置</span></span><br><span class="line"><span class="comment">## 1. 进入用户bash_profile文件</span></span><br><span class="line">vi ~/.bash_profile</span><br><span class="line"></span><br><span class="line"><span class="comment">## 2. 添加如下命令</span></span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">'ls -l'</span></span><br><span class="line"><span class="built_in">alias</span> la=<span class="string">'ls -A'</span></span><br><span class="line"><span class="built_in">alias</span> l=<span class="string">'ls -CF'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 3. 刷新文件使生效</span></span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line"><span class="built_in">unalias</span> l</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置在 .bashrc 中  | 可能重启电脑后，ll又会失效了，</span></span><br><span class="line"><span class="comment">## 因为.bashrc文件开机时没有启用，只有.bash_profile会自动加载，所以可以在.bash_profile里面加入一行命令，其实也可以把自定命令写在.bash_profile里面</span></span><br><span class="line">vim ~/.bashrc</span><br><span class="line"><span class="built_in">source</span> ~./bashrc</span><br></pre></td></tr></table></figure>
+<p>直接在命令行配置，只在当前shell/tab 有效</p>
 <h2 id="磁盘使用情况"><a href="#磁盘使用情况" class="headerlink" title="磁盘使用情况"></a>磁盘使用情况</h2><p>du -sh /var/www/*<br>df -h </p>
+<h2 id="查看系统信息"><a href="#查看系统信息" class="headerlink" title="查看系统信息"></a>查看系统信息</h2><!-- [linux查看操作系统版本信息](https://www.cnblogs.com/vaelailai/p/7545166.html) -->
+<p>一、linux下如何查看已安装的centos版本信息：<br>1.Linux查看当前操作系统版本信息  <code>cat /proc/version</code><br>Linux version 2.6.32-696.el6.x86_64 (<a href="mailto:mockbuild@c1bm.rdu2.centos.org" target="_blank" rel="noopener">mockbuild@c1bm.rdu2.centos.org</a>) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-18) (GCC) ) #1 SMP Tue Mar 21 19:29:05 UTC 2017<br>2.Linux查看版本当前操作系统内核信息 <code>uname -a</code><br>Linux localhost.localdomain 2.4.20-8 #1 Thu Mar 13 17:54:28 EST 2003 i686 athlon i386 GNU/Linux<br>3.linux查看版本当前操作系统发行信息 <code>cat /etc/issue</code> 或 <code>cat /etc/centos-release</code><br>4.Linux查看cpu相关信息，包括型号、主频、内核信息等 <code>cat /etc/cpuinfo</code></p>
+<p>5.Linux查看版本说明当前CPU运行在32bit模式下(但不代表CPU不支持64bit) <code>getconf LONG_BIT</code></p>
+<p>二、uname的使用<br>uname命令用于打印当前系统相关信息（内核版本号、硬件架构、主机名称和操作系统类型等）。<br>三、查看Linux版本<br>1.查看系统版本信息的命令 <code>lsb_release -a</code><br>(使用命令时提示command not found,需要安装yum install redhat-lsb -y)<br>2.查看centos版本号 <code>cat /etc/issue</code><br>CentOS release 6.9 (Final)<br>3.使用 file /bin/ls</p>
+<h2 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h2><p>开启关闭服务器防火墙：</p>
+<p>查看防火墙是否开启（如果显示running，则防火墙为开启状态）： </p>
+<p>firewall-cmd –state<br>关闭防火墙：<br> systemctl stop firewalld.service<br>开启防火墙： </p>
+<p>systemctl start firewalld.service<br>关闭开机自启动： </p>
+<p>systemctl disable firewalld.service<br>开启开机自启动：<br>systemctl enable firewalld.service</p>
+<p>开放3306端口开启3306 端口<br>firewall-cmd –zone=public –add-port=3306/tcp –permanent<br>重启防火墙<br>firewall-cmd –reload<br>查看防火墙状态 显示success 即成功开启<br>systemctl status firewalld<br>查看指定端口状态 显示 success 即端口成功开启<br>firewall-cmd –query-port=6379/tcp</p>
 <p style="text-align:right">2019.6.26 星期三 23：21 $1</p>
 
 <h2 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h2><p>在Linux下使用Crontab来添加定时任务执行shell文件．shell文件有数据库备份命令<br>查看/etc/crontab文件: vim  /etc/crontab     </p>
@@ -527,6 +546,43 @@
 <p>3，通过网络同步时间<br>（1）首先安装 ntpdate 命令：<br>yum install -y ntpdate</p>
 <p>（2）接着执行如下命令开始同步：<br>ntpdate 0.asia.pool.ntp.org<br>若上面的时间服务器不可用，也可以改用如下服务器进行同步：<br>time.nist.gov<br>time.nuri.net<br>0.asia.pool.ntp.org<br>1.asia.pool.ntp.org<br>2.asia.pool.ntp.org<br>3.asia.pool.ntp.org</p>
 <p>（3）最后执行如下命令将系统时间同步到硬件，防止系统重启后时间被还原。<br>hwclock –systohc</p>
+<h2 id="用户相关"><a href="#用户相关" class="headerlink" title="用户相关"></a>用户相关</h2><h3 id="查看用户信息"><a href="#查看用户信息" class="headerlink" title="查看用户信息"></a>查看用户信息</h3><p>用户可以在shell中登录，修改<code>vi /etc/passwd</code> 最后一个 :/bin/bash.<br><!-- $_PS: 禁止在shell中切换(仅支持sftp或其他功能时)。则 :/bin/bash --><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user1:x:1003:1004::/home/user1:/bin/bash</span><br></pre></td></tr></table></figure></p>
+<!-- user1:x:1003:1004::/home/user1:/bin/false -->
+<p>Linux修改密码用 passwd 命令，用root用户运行passwd ，passwd user_name可以设置或修改任何用户的密码，普通用户运行passwd只能修改它自己的密码。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Linux下查看用户列表</span></span><br><span class="line">cat /etc/passwd</span><br><span class="line"><span class="comment"># 查看用户组</span></span><br><span class="line">cat /etc/group</span><br><span class="line"><span class="comment"># 查看当前活跃的用户列表</span></span><br><span class="line">w</span><br><span class="line"><span class="comment">## 但是，你会发现，在使用上面的 cat 命令所打印出来的东西太杂乱了，于是网上找到下面的这个命令：</span></span><br><span class="line"><span class="comment">### 对于 cat /etc/passwd 的替换</span></span><br><span class="line">cat /etc/passwd|grep -v nologin|grep -v halt|grep -v shutdown|awk -F<span class="string">":"</span> <span class="string">'&#123; print $1"|"$3"|"$4 &#125;'</span>|more</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看登录情况</span></span><br><span class="line">lastlog</span><br></pre></td></tr></table></figure></p>
+<!-- \# [Linux 创建新的用户并设置密钥SSH远程登录](https://blog.csdn.net/qq_15504597/article/details/82839414) -->
+<p>密钥生成<br>创建角色<br>开启SSH远程登录<br>端口开启</p>
+<h3 id="创建用户（组）"><a href="#创建用户（组）" class="headerlink" title="创建用户（组）"></a>创建用户（组）</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 1 root权限设置 ##</span></span><br><span class="line"><span class="comment"># 0 创建一个组（拥有sftp）</span></span><br><span class="line">sudo groupadd sftp-users</span><br><span class="line">sudo useradd -g sftp-users -m admin</span><br><span class="line"><span class="comment">## 如果该用户已存在，但是不在sftp-users组中，可以移动用户到改组</span></span><br><span class="line">usermod –g sftp_users admin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1 添加用户</span></span><br><span class="line">sudo  useradd  zero -d /home/zero</span><br><span class="line"><span class="comment">## 设定sudo密码</span></span><br><span class="line">sudo  passwd  zero</span><br><span class="line"><span class="comment">#请输入新用户sudo密码</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2 创建目录及文件</span></span><br><span class="line">sudo mkdir /home/zero/.ssh</span><br><span class="line">sudo touch /home/zero/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"><span class="comment">## 修正所有者</span></span><br><span class="line">sudo chown -R zero. /home/zero/.ssh</span><br><span class="line"></span><br><span class="line"><span class="comment">### 可以直接在机器上生成到.ssh目录下。然后把id_rsa.pub 复制为authorized_keys ###</span></span><br><span class="line"><span class="comment">### ssh 密钥设置</span></span><br><span class="line">sudo ssh-keygen -t rsa -b 2048</span><br><span class="line"><span class="comment">##########</span></span><br><span class="line">sudo  rz  -<span class="built_in">bye</span></span><br><span class="line"><span class="comment">#选择zero_rsa.pub  等待上传完成 （如何生成rsa密钥对，参考ssh密钥对生成）</span></span><br><span class="line">sudo sh -c <span class="string">'cat zero_rsa.pub &gt;&gt; /home/zero/.ssh/authorized_keys'</span></span><br><span class="line"><span class="comment">#检查确认</span></span><br><span class="line">sudo cat /home/zero/.ssh/authorized_keys</span><br><span class="line"><span class="comment">############</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#修改权限 # 写入ssh public key 后</span></span><br><span class="line">sudo chmod 700 /home/zero/.ssh</span><br><span class="line">sudo chmod 600 /home/zero/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设定sudo权限</span></span><br><span class="line">sudo  visudo</span><br><span class="line">找到root ALL=(ALL) ALL那一段，在其后添加</span><br><span class="line">zero  ALL=(ALL) NOPASSWD:ALL</span><br></pre></td></tr></table></figure>
+<!-- $_PS: 之前不可以用ssh登录，然后去修改了sshd_config. 可能并不是这个原因
+  开始建立的用户，并不能用shell 登录。后修改为·`user1:x:1003:1004::/home/user1:/bin/bash` 就可以登录了
+  此时，已然重命名了authorized_keys。 (这里的配置走了吗？)
+  开发机已经配置好了，还需要再走ssh-keygen 吗？
+ -->
+<h3 id="开启SSH远程登录"><a href="#开启SSH远程登录" class="headerlink" title="开启SSH远程登录"></a>开启SSH远程登录</h3><p>在服务器的/etc/ssh/sshd_cinfig文件下可以管理ssh服务：<br><code>vim /etc/ssh/sshd_config</code><br><code>service sshd restart</code> 或者<code>/etc/init.d/ssh restart</code>或者<code>sudo systemctl restart sshd</code><br><!-- ` /etc/init.d/sshd start`  
+` /etc/init.d/sshd stop ` --></p>
+<p>PasswordAuthentication yes/on ———————-&gt; 开启或者关闭密码连接<br>PermitRootLogin yes/no —————————–&gt;允许超级用户登录<br>AllowUsers student—————————–&gt;只允许登录的用户<br>DenyUsers student————————–&gt;不允许登录的用户<br>(也可以添加用户组:AllowGroups:group1 group2)<br>DenyGroups:groupname</p>
+<p>整个系列配置的优先级:DenyUsers&gt;AllowUsers&gt;DenyGroups&gt;AllowGroups</p>
+<!-- $_PS: 开发机默认用户dev。只添加了student，导致跳板机登录不上去了 -->
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh [-l login_name] [-p port] [user@]hostname</span><br><span class="line">ssh -p 12333 192.168.0.11</span><br><span class="line">ssh -l root -p 12333 216.230.230.114</span><br><span class="line">ssh -p 12333 root@216.230.230.114</span><br></pre></td></tr></table></figure>
+<h3 id="端口开启"><a href="#端口开启" class="headerlink" title="端口开启"></a>端口开启</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/sysconfig/iptables</span><br><span class="line"><span class="comment">#添加 如419端口</span></span><br><span class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 419 -j ACCEPT</span><br><span class="line"><span class="comment">#重启</span></span><br><span class="line">sudo service iptables restart</span><br></pre></td></tr></table></figure>
+<h3 id="sftp开启"><a href="#sftp开启" class="headerlink" title="sftp开启"></a>sftp开启</h3><!-- [Linux 配置SFTP，配置用户访问权限](https://blog.csdn.net/yanzhenjie1003/article/details/70184221) -->
+<p>一般我们需要安装openssh-server、openssh-sftp-server，所以我们检查是否安装了SSH。</p>
+<p>Ubuntu检查是否安装了OpenSSH<br><code>dpkg --get-selections | grep openssh</code><br>CentOS检查是否安装了OpenSSH<br> 以yum方式安装的：yum list installed openssh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Ubuntu</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install openssh-client openssh-server openssh-sftp-server</span><br><span class="line"># CentOS</span><br><span class="line">sudo yum install openssh-client openssh-server openssh-sftp-server</span><br></pre></td></tr></table></figure></p>
+<p><code>vi /etc/ssh/sshd_config</code><br>修改X11Forwarding的值为no #这两行，如果不希望该用户能使用端口转发的话就加上，否则删掉<br>修改AllowTcpForwarding的值为no #这两行，如果不希望该用户能使用端口转发的话就加上，否则删掉<br>修改Subsystem sftp为internal-sftp  #指定使用sftp服务使用系统自带的internal-sftp $_PS: 会影响ssh登录<br>然后再到文件最尾处增加配置设定属于用户组sftpusers的用户都只能访问他们自己的home文件夹<br>Match Group sftp-users<br>ChrootDirectory %h<br>ForceCommand internal-sftp #指定sftp命令 $_PS: 会影响ssh登录</p>
+<p>这里要特别注意，因为ChrootDirectory %h模式，所以我们等下要设置sftp-users中的所有用户的用户目录权限为root拥有，否则sftp-users组中的用户无法用sftp登录。</p>
+<p>sftp登录www用户，进入ui目录，即可在/home/www/ui下，对文件进行添加、修改、删除的操作</p>
+<h2 id="su、sudo"><a href="#su、sudo" class="headerlink" title="su、sudo"></a>su、sudo</h2><p>$_TODO: 整理。<br><!-- [Linux命令su、sudo、sudo su、sudo -i使用和区别](https://www.21ic.com/article/874773.html) --></p>
+<p>root 安装的软件/指令 如何让其他用户可以使用</p>
+<h3 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h3><p>可以使用sudo命令，sudo命令就是为了让普通用户可以在不知道root密码的情况下使用root的操作权限。<br>但是，你会发现这样执行会提示用户没有sudo的权限，所以我们需要先简单配置一下。</p>
+<p><code>visudo</code> 修改用户可以执行sudo 指令。且不需要输入密码<br><!-- /etc/sudoers --></p>
+<pre><code>jumpadmin   ALL=(ALL)       NOPASSWD:ALL
+dev ALL=(ALL) NOPASSWD: /bin/su
+user1 ALL=(ALL) NOPASSWD: ALL
+user1 ALL=(ALL) NOPASSWD: /bin/su
+## 2、如果不想testuser04用户能使用所有root才能执行的命令，只能执行某个root才能执行的命令，比如ls命令，那么我们就需要：
+
+</code></pre><h3 id="su"><a href="#su" class="headerlink" title="su"></a>su</h3><p>su命令用于切换当前用户身份到其他用户身份，变更时须输入所要变更的用户帐号与密码。<br>命令su的格式为：<code>su [-] username</code></p>
+<p>1、后面可以跟 ‘-‘ 也可以不跟，普通用户su不加username时就是切换到root用户，当然root用户同样可以su到普通用户。 ‘-‘ 这个字符的作用是，加上后会初始化当前用户的各种环境变量。</p>
+<p>root用户切换到普通用户无需输入密码，普通用户切换到root用户需要密码。</p>
 
       
     </div>
@@ -715,7 +771,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">270</span>
+                  <span class="site-state-item-count">298</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -726,7 +782,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -737,7 +793,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -820,7 +876,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实用"><span class="nav-text">实用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#删除乱码-中文文件或目录"><span class="nav-text">删除乱码/中文文件或目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grep"><span class="nav-text">grep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络相关"><span class="nav-text">网络相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mac-刷新dns缓存"><span class="nav-text">mac 刷新dns缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看端口号（进程）"><span class="nav-text">查看端口号（进程）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件操作"><span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本操作"><span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件上传"><span class="nav-text">文件上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件下载"><span class="nav-text">文件下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件编辑"><span class="nav-text">文件编辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件统计"><span class="nav-text">文件统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件压缩-解压"><span class="nav-text">文件压缩/解压</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grep命令"><span class="nav-text">grep命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘使用情况"><span class="nav-text">磁盘使用情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时任务"><span class="nav-text">定时任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后台运行"><span class="nav-text">后台运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步时间"><span class="nav-text">同步时间</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实用"><span class="nav-text">实用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#删除乱码-中文文件或目录"><span class="nav-text">删除乱码/中文文件或目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grep"><span class="nav-text">grep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络相关"><span class="nav-text">网络相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mac-刷新dns缓存"><span class="nav-text">mac 刷新dns缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看端口号（进程）"><span class="nav-text">查看端口号（进程）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件操作"><span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本操作"><span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件上传"><span class="nav-text">文件上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件下载"><span class="nav-text">文件下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件编辑"><span class="nav-text">文件编辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件统计"><span class="nav-text">文件统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件压缩-解压"><span class="nav-text">文件压缩/解压</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grep命令"><span class="nav-text">grep命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#别名设置"><span class="nav-text">别名设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘使用情况"><span class="nav-text">磁盘使用情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看系统信息"><span class="nav-text">查看系统信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防火墙"><span class="nav-text">防火墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定时任务"><span class="nav-text">定时任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后台运行"><span class="nav-text">后台运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步时间"><span class="nav-text">同步时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户相关"><span class="nav-text">用户相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看用户信息"><span class="nav-text">查看用户信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户（组）"><span class="nav-text">创建用户（组）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启SSH远程登录"><span class="nav-text">开启SSH远程登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端口开启"><span class="nav-text">端口开启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sftp开启"><span class="nav-text">sftp开启</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#su、sudo"><span class="nav-text">su、sudo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sudo"><span class="nav-text">sudo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#su"><span class="nav-text">su</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -840,7 +896,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2021-->2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -854,7 +910,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">453.3k</span>
+    <span title="Site words total count">496.1k</span>
   
 </div>
 

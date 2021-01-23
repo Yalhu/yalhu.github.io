@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="2018.7.18 星期三 17:30  git –versiongit init     github Page好像还区分大小写  配置git config –list （全局，本地）git config  user.name user （修改本地/当前项目）git config user.email user@fenhao.doulougit config  –global user.name">
+<meta name="description" content="2018.7.18 星期三 17:30  git –versiongit init     github Page好像还区分大小写  配置12345678910git config --list （全局，本地）git config  user.name user （修改本地/当前项目）git config user.email user@fenhao.doulougit config  --glo">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git操作">
 <meta property="og:url" content="http://yoursite.com/sum/jsplus/git操作/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2018.7.18 星期三 17:30  git –versiongit init     github Page好像还区分大小写  配置git config –list （全局，本地）git config  user.name user （修改本地/当前项目）git config user.email user@fenhao.doulougit config  –global user.name">
+<meta property="og:description" content="2018.7.18 星期三 17:30  git –versiongit init     github Page好像还区分大小写  配置12345678910git config --list （全局，本地）git config  user.name user （修改本地/当前项目）git config user.email user@fenhao.doulougit config  --glo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-18T09:13:30.290Z">
+<meta property="og:updated_time" content="2021-01-22T15:37:44.793Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git操作">
-<meta name="twitter:description" content="2018.7.18 星期三 17:30  git –versiongit init     github Page好像还区分大小写  配置git config –list （全局，本地）git config  user.name user （修改本地/当前项目）git config user.email user@fenhao.doulougit config  –global user.name">
+<meta name="twitter:description" content="2018.7.18 星期三 17:30  git –versiongit init     github Page好像还区分大小写  配置12345678910git config --list （全局，本地）git config  user.name user （修改本地/当前项目）git config user.email user@fenhao.doulougit config  --glo">
 
 
 
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-18T17:13:30+08:00">
-                2020-10-18
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-22T23:37:44+08:00">
+                2021-01-22
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  7,236
+                  8,111
                 </span>
               
 
@@ -437,7 +437,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  30
+                  33
                 </span>
               
             </div>
@@ -462,12 +462,14 @@
 
 <p>git –version<br>git init    </p>
 <p>github Page好像还区分大小写 </p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>git config –list （全局，本地）<br>git config  user.name user （修改本地/当前项目）<br>git config user.email <a href="mailto:user@fenhao.doulou" target="_blank" rel="noopener">user@fenhao.doulou</a><br>git config  –global user.name user<br>git config –global –unset user.name</p>
-<p>cat .git/config     </p>
-<p>git config –global core.quotepath false<br><!-- git status 在git bash 窗口中文转义了(/u223/2342/asdf/234s--类似)
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git config --list （全局，本地）</span><br><span class="line">git config  user.name user （修改本地/当前项目）</span><br><span class="line">git config user.email user@fenhao.doulou</span><br><span class="line">git config  --global user.name user</span><br><span class="line">git config --global --<span class="built_in">unset</span> user.name</span><br><span class="line"></span><br><span class="line"><span class="comment">## 修改默认分支main</span></span><br><span class="line">`git config --global init.defaultBranch main`</span><br><span class="line"></span><br><span class="line">cat .git/config</span><br></pre></td></tr></table></figure>
+<!-- 
+`git config --global core.quotepath false`
+
+git status 在git bash 窗口中文转义了(/u223/2342/asdf/234s--类似)
 尝试修改 右键 -- Options -- Text --Character set 选中UTF-8 无效
 上述指令可行
- --></p>
+ -->
 <h2 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h2><p>git add .<br>git add -A<br>git add –all   </p>
 <p>git commit -m ‘mssd’<br>git am -m ‘sdfsf’s    </p>
 <h2 id="status"><a href="#status" class="headerlink" title="status"></a>status</h2><p>On branch master<br>### “Changes not staged for commit:”<br>git 分为工作区和版本库，工作区是你的代码，版本库就是git记录了。<br>在修改进入版本库前有一个暂存区也叫索引，就是做git add 操作后记录的区域。<br>当commit的时候是将暂存区的记录添加到版本数据库。    </p>
@@ -482,6 +484,30 @@
 <!-- 新项目第一次添加远程报错:Not a git repository (or any of the parent directories): .git  
 需要执行命令 git init    -->
 <h3 id="远程分支同步本地"><a href="#远程分支同步本地" class="headerlink" title="远程分支同步本地"></a>远程分支同步本地</h3><p>git远程删除分支后，本地git branch -a 依然能看到的解决办法。<br>使用命令 git remote show origin，可以查看remote地址，远程分支，还有本地分支与之相对应关系等信息。<br>根据提示，使用 git remote prune origin 命令：</p>
+<h3 id="拉取远程分支"><a href="#拉取远程分支" class="headerlink" title="拉取远程分支"></a>拉取远程分支</h3><p>获取远程分支到本地<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 采用此种方法建立的本地分支会和远程分支建立映射关系。</span></span><br><span class="line">git checkout -b 本地分支名x origin/远程分支名x</span><br><span class="line"></span><br><span class="line"><span class="comment"># 采用此种方法建立的本地分支不会和远程分支建立映射关系。</span></span><br><span class="line">git fetch origin 远程分支名x:本地分支名x</span><br><span class="line"></span><br><span class="line">git branch --<span class="built_in">set</span>-upstream-to origin/远程分支名  本地分支名</span><br></pre></td></tr></table></figure></p>
+<h2 id="git-对比两个分支差异"><a href="#git-对比两个分支差异" class="headerlink" title="git 对比两个分支差异"></a>git 对比两个分支差异</h2><p><a href="https://www.jianshu.com/p/bb97fabb475e" target="_blank" rel="noopener">git 对比两个分支差异</a></p>
+<ol>
+<li><p>显示出branch1和branch2中差异的部分<br>git diff branch1 branch2 –stat</p>
+</li>
+<li><p>显示指定文件的详细差异<br>git diff branch1 branch2 具体文件路径</p>
+</li>
+<li><p>显示出所有有差异的文件的详细差异</p>
+</li>
+</ol>
+<p>git diff branch1 branch2</p>
+<ol start="4">
+<li><p>查看branch1分支有，而branch2中没有的log<br>git log branch1 ^branch2</p>
+</li>
+<li><p>查看branch2中比branch1中多提交了哪些内容<br>git log branch1..branch2<br>注意，列出来的是两个点后边（此处即dev）多提交的内容。</p>
+</li>
+<li><p>不知道谁提交的多谁提交的少，单纯想知道有是吗不一样<br>git log branch1…branch2</p>
+</li>
+<li><p>在上述情况下，在显示出没个提交是在哪个分支上</p>
+</li>
+</ol>
+<p>git log –lefg-right branch1…branch2<br>注意 commit 后面的箭头，根据我们在 –left-right branch1…branch2 的顺序，左箭头 &lt; 表示是 branch1 的，右箭头 &gt; 表示是branch2的。</p>
+<h3 id="本地仓库和远程仓库的差异"><a href="#本地仓库和远程仓库的差异" class="headerlink" title="本地仓库和远程仓库的差异"></a>本地仓库和远程仓库的差异</h3><p><a href="https://blog.csdn.net/meng19910117/article/details/84402456" target="_blank" rel="noopener">git比较本地仓库和远程仓库的差异</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新本地的远程分支</span></span><br><span class="line">git fetch origin</span><br><span class="line"><span class="comment"># 2.本地与远程的差集 :（显示远程有而本地没有的commit信息）</span></span><br><span class="line"></span><br><span class="line">git <span class="built_in">log</span> master..origin/master</span><br><span class="line"><span class="comment"># 3.统计文件的改动</span></span><br><span class="line"><span class="comment"># git diff &lt;local branch&gt; &lt;remote&gt;/&lt;remote branch&gt;</span></span><br><span class="line">git diff --<span class="built_in">stat</span> master origin/master</span><br></pre></td></tr></table></figure></p>
+<!-- $_PS: ... 和空格 意思好像一样 -->
 <h2 id="clone两种方式-ssh和http"><a href="#clone两种方式-ssh和http" class="headerlink" title="clone两种方式:ssh和http"></a>clone两种方式:ssh和http</h2><p>git clone支持多种协议，除了HTTP(s)以外，还支持SSH、Git、本地文件协议等，通常来说，Git协议下载速度最快，SSH协议用于需要用户认证的场合。<br><!-- 参考：[git远程操作](https://www.jianshu.com/p/e78b28081a44)    --></p>
 <!-- \### git Blit      -->
 <p>git clone ssh:<a href="mailto://user@192.168.1.5" target="_blank" rel="noopener">//user@192.168.1.5</a>:29418/cloudclass.git<br>git clone <a href="http://user@192.168.1.5:10001/r/cloudclass.git" target="_blank" rel="noopener">http://user@192.168.1.5:10001/r/cloudclass.git</a><br>git clone git://192.168.1.5/cloudclass.git      </p>
@@ -555,14 +581,45 @@ git  push  origin  本地分支A : 远程分支B
 <h2 id="git-revert-和-git-reset-的区别"><a href="#git-revert-和-git-reset-的区别" class="headerlink" title="git revert 和 git reset 的区别"></a>git revert 和 git reset 的区别</h2><!-- \# [Git 回滚代码的正确姿势](https://www.jianshu.com/p/f7451177476a)        -->
 <p>sourceTree 中 revert 译为提交回滚，作用为忽略你指定的版本，然后提交一个新的版本。新的版本中已近删除了你所指定的版本。   </p>
 <p>reset 为 重置到这次提交，将内容重置到指定的版本。git reset 命令后面是需要加2种参数的：–-hard 和 –-soft。这条命令默认情况下是 -–soft。   </p>
-<p>执行上述命令时，这该条commit号之 后（时间作为参考点）的所有commit的修改都会退回到git缓冲区中。使用git status 命令可以在缓冲区中看到这些修改。而如果加上-–hard参数，则缓冲区中不会存储这些修改，git会直接丢弃这部分内容。可以使用 git push origin HEAD –force 强制将分区内容推送到远程服务器。</p>
+<p>执行上述命令时，这该条commit号之 后（时间作为参考点）的所有commit的修改都会退回到git缓冲区中。使用git status 命令可以在缓冲区中看到这些修改。<br>而如果加上-–hard参数，则缓冲区中不会存储这些修改，git会直接丢弃这部分内容。<br>可以使用 git push origin HEAD –force 强制将分区内容推送到远程服务器。</p>
 <p>默认参数 -soft,所有commit的修改都会退回到git缓冲区<br>参数–hard，所有commit的修改直接丢弃<br>推送到远程 <code>$ git push origin HEAD --force</code>  </p>
 <!--
 其它:  
 [Git撤销&回滚操作](https://blog.csdn.net/ligang2585116/article/details/71094887)
 --->
-<h2 id="储藏与清理"><a href="#储藏与清理" class="headerlink" title="储藏与清理"></a>储藏与清理</h2><p><a href="https://git-scm.com/book/zh/v2/Git-工具-储藏与清理" target="_blank" rel="noopener">7.3 Git 工具 - 储藏与清理</a>  </p>
-<p>现在想要切换分支，但是还不想要提交之前的工作；所以储藏修改。 将新的储藏推送到栈上，运行 <code>git stash 或 git stash save</code>   </p>
+<h2 id="修改-撤销-远程的提交"><a href="#修改-撤销-远程的提交" class="headerlink" title="修改/撤销 远程的提交"></a>修改/撤销 远程的提交</h2><!-- [Git撤销对远程仓库的push&commit提交](https://www.cnblogs.com/chaoxiZ/p/9714085.html) -->
+<h3 id="撤销push"><a href="#撤销push" class="headerlink" title="撤销push"></a>撤销push</h3><ol>
+<li>执行  git log查看日志，获取需要回退的版本号 </li>
+<li>执行 git reset –-soft &lt;版本号&gt; ，如 <code>git reset --soft 4f5e9a90edeadcc45d85f43bd861a837fa7ce4c7</code> ，重置至指定版本的提交，达到撤销提交的目的</li>
+</ol>
+<p>然后执行 git log 查看<br>此时，已重置至指定版本的提交，log中已经没有了需要撤销的提交</p>
+<blockquote>
+<p>git reset 命令分为两种： git reset –-soft 与 git reset –-hard ，区别是：<br>   前者表示只是改变了HEAD的指向，本地代码不会变化，我们使用git status依然可以看到，同时也可以git commit提交。后者直接回改变本地源码，不仅仅指向变化了，代码也回到了那个版本时的代码。</p>
+<ol start="3">
+<li>执行 <code>git push origin 分支名 –-force</code> ，强制提交当前版本号。</li>
+</ol>
+</blockquote>
+<p>至此，撤销push提交完成。</p>
+<h3 id="撤销commit"><a href="#撤销commit" class="headerlink" title="撤销commit"></a>撤销commit</h3><ol>
+<li>执行 git log 查看需要撤销的commit的前面一个提交版本的id；</li>
+<li>执行 git reset –hard commit_id ，该commit_id为需要撤销的commit的提交的前面一个提交的版本，即需要恢复到的提交的id，重置至指定版本的提交，达到撤销提交的目的</li>
+<li>执行 git log 查看，commit提交已撤销</li>
+</ol>
+<!-- $_PS: end -->
+<!-- ### 实际遇到的问题
+同事把某次release 上放弃的修改，又给改回去了
+（在release-my）使用rebase release ，然后再merge回release 发现log 重复了。
+紧接着撤销merge，但是失败了。（上述rebase 操作就是错误的）
+
+所以需要修复远程release-my 到rebase之前。
+直接提交merge 是WIP（work in process），并没有新的提交。
+接着在release中做一次提交，~~添加注释~~，把应该放弃的修改删除掉。
+再次commit，push 就可以了merge了。
+最后发布
+
+但是release 的commit记录还可以看到 最开始rebase 操作后的合并记录
+ -->
+<h3 id="revert和reset"><a href="#revert和reset" class="headerlink" title="revert和reset"></a>revert和reset</h3><p>注意，revert和reset的区别:<br>revert是放弃指定提交的修改，但是会生成一次新的提交，需要填写提交注释，以前的历史记录都在，<br>而reset是指将HEAD指针指到指定提交，历史记录中不会出现放弃的提交记录。</p>
 <h2 id="tags"><a href="#tags" class="headerlink" title="tags"></a>tags</h2><h3 id="修改标签名"><a href="#修改标签名" class="headerlink" title="修改标签名"></a>修改标签名</h3><p><a href="https://www.iisns.com/p/1097" target="_blank" rel="noopener">Git 修改 tag 名称</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git tag new old</span><br><span class="line">git tag -d old</span><br><span class="line">git push origin :refs/tags/old</span><br><span class="line">git push --tags</span><br></pre></td></tr></table></figure></p>
 <h2 id="merge操作"><a href="#merge操作" class="headerlink" title="merge操作"></a>merge操作</h2><ol>
 <li>不希望合并进去,公开 给 其他人的 文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.xml merge=ours</span><br></pre></td></tr></table></figure>
@@ -572,11 +629,20 @@ git  push  origin  本地分支A : 远程分支B
 <blockquote>
 <p>只有先修改的往后来修改的合并的时候才会生效。        </p>
 </blockquote>
-<h2 id="（Git代码冲突）"><a href="#（Git代码冲突）" class="headerlink" title="（Git代码冲突）"></a>（Git代码冲突）</h2><p>Git出现error: Your local changes to the following files would be overwritten by merge: … Please, commit your changes or stash them before you can merge.  </p>
+<h2 id="储藏与清理"><a href="#储藏与清理" class="headerlink" title="储藏与清理"></a>储藏与清理</h2><p><a href="https://git-scm.com/book/zh/v2/Git-工具-储藏与清理" target="_blank" rel="noopener">7.3 Git 工具 - 储藏与清理</a>  </p>
+<p>现在想要切换分支，但是还不想要提交之前的工作；所以储藏修改。 将新的储藏推送到栈上，运行 <code>git stash 或 git stash save</code>   </p>
+<p><code>git stash save &quot;messeag&quot;</code></p>
+<h3 id="stash（Git代码冲突）"><a href="#stash（Git代码冲突）" class="headerlink" title="stash（Git代码冲突）"></a>stash（Git代码冲突）</h3><p>Git出现error: Your local changes to the following files would be overwritten by merge: … Please, commit your changes or stash them before you can merge.  </p>
 <p>If you want remove all local changes from your working copy, simply stash them:<br>1、如果希望保留生产服务器上所做的改动,仅仅并入新配置项, 处理方法如下:<br>git stash    |git stash save –keep-index<br>git pull<br>git stash pop   |git stash drop<br>然后可以使用Git diff -w +文件名来确认代码自动合并的情况。   </p>
 <p>2、如果要直接使用服务器上最新版本，那么可以选择直接覆盖<br>git reset –hard<br>git pull<br>其中git reset是针对版本。,如果想针对文件回退本地修改,使用<br>git checkout HEAD file/to/overwrite<br>git pull    </p>
 <p>If you want to overwrite only specific parts of your local changes, there are two possibilities:<br>1. Commit everything you don’t want to overwrite and use the method above for the rest.<br>2. Use <code>git checkout path/to/file/to/revert</code> for the changes you wish to overwrite. Make sure that file is not staged via <code>git reset HEAD path/to/file/to/revert</code>.</p>
+<h3 id="找回丢失的stash"><a href="#找回丢失的stash" class="headerlink" title="找回丢失的stash"></a>找回丢失的stash</h3><p><a href="https://git-scm.com/docs/git-fsck" target="_blank" rel="noopener">git-fsck</a><br><!-- [git fsck](https://cloud.tencent.com/developer/section/1138642) --><br><!-- [Git——找回丢失的git stash内容](https://blog.csdn.net/wangxiuyan0228/article/details/88241787) --></p>
+<p>由于git stash pop恢复的同时把stash内容也删掉, 所以stash list不再会有之前的stash。<br>但是git stash pop出的change是可以找回的，因为每次git stash都会生成一个新的commit，只要知道commitID, 通过git stash apply commitID 就可以应用之前的stash</p>
+<p>寻找commitID有两种方法:<br>1、git stash pop 最后会打印出pop掉的commitid值，若这个记录还存在直接使用即可。<br>2、git fsck –lost-found, 会打印出所有dangling commit，<br>这里面大概有三种类型的内容，blob、tree和commit。<br>但是这些id所对应的记录并不是有序的，如果想要找到之前误删的内容，需要我们一条条的去show出这些内容，然后判断是否是要找回的。<br>可以关注以下两点内容，快速找出你需要的commitId：<br>（1）修改内容<br>（2）日期<br>找到commitID之后就去执行git stash apply commitID恢复你的工作区吧~<br><!-- $_PS: 去文件夹（.git/lost-found/commit）下查看最近的commit --><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git fsck --lost-found</span><br><span class="line">$ git show commitId</span><br><span class="line">$ git stash apply commitID</span><br><span class="line"><span class="comment"># git merge + id</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="clean"><a href="#clean" class="headerlink" title="clean"></a>clean</h2><p>git clean  -d  -fx “”<br>其中<br>x  —–删除忽略文件已经对git来说不识别的文件<br>d  —–删除未被添加到git的路径中的文件<br>f  —–强制运行</p>
+<h2 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h2><p>在rebase的过程中，也许会出现冲突(conflict)。在这种情况，Git会停止rebase并会让你去解决冲突；在解决完冲突后，用”git add“命令去更新这些内容的索引(index), 然后，你无需执行 git commit,只要执行:<br><code>$ git rebase --continue</code><br>这样git会继续应用(apply)余下的补丁。<br>在任何时候，可以用–abort参数来终止rebase的操作，并且”mywork“ 分支会回到rebase开始前的状态。<br><code>$ git rebase --abort</code></p>
+<h3 id="合并两条commit记录"><a href="#合并两条commit记录" class="headerlink" title="合并两条commit记录"></a>合并两条commit记录</h3><p>合并两条commit记录<code>git rebase -i HEAD~2</code><br>（i的意思是：interactive，HEAD~2为在历史的前两个提交，同理，HEAD~4就是历史的前四个提交。）</p>
+<p>将第二行的pick改成s, 也就是squash(挤压合并)，作用是：使用提交，将此提交与之前的提交合并。   然后保存文件退出vim。<br>将之前的两条提交描述信息，修改合并为一条，然后保存退出vim</p>
 <h2 id="添加多个远程仓库"><a href="#添加多个远程仓库" class="headerlink" title="添加多个远程仓库"></a>添加多个远程仓库</h2><p># <a href="https://blog.csdn.net/mengzuchao/article/details/80489864" target="_blank" rel="noopener">git 本地项目添加多个远程仓库</a><br>第一种方式：</p>
 <ol>
 <li>添加一个远程库 名字不能是origin<br>git remote add 17MOX  <a href="http://git.17byh.com/17MOX/mxhy.git" target="_blank" rel="noopener">http://git.17byh.com/17MOX/mxhy.git</a>   </li>
@@ -597,22 +663,10 @@ git  push  origin  本地分支A : 远程分支B
 <p>而用 rm 命令直接删除的文件，单纯执行 git commit -m “abc” 提交时，则不会将删除该文件的操作提交上去，需要在执行commit的时候，多加一个-a参数，<br>即rm删除后，需要使用git commit -am “abc”提交才会将删除文件的操作提交上去。</p>
 <h2 id="git-remote-HTTP-Basic-Access-denied"><a href="#git-remote-HTTP-Basic-Access-denied" class="headerlink" title="git remote: HTTP Basic: Access denied"></a>git remote: HTTP Basic: Access denied</h2><p>原因：远程服务端的用户名和密码与当前系统中git保存的用户名和密码有冲突<br>git config –system –unset credential.helper命令，作用就是清空本地保存的用户名和密码<br>但后面发现每次操作远程仓库都需要重新输入用户名和密码，这个命令清空gitconfig里的自动保存用户名和密码配置，找到本地的gitconfig文件，写入：<br>如果不想保存，则删除即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[credential]</span><br><span class="line">    helper = store</span><br></pre></td></tr></table></figure></p>
 <p>可能原因是在远端/浏览器修改了密码，而本地存储的仍是就密码不一致。<br>可以删除（网站）用户凭证（window；mac好像没成功）。</p>
-<p>\=====================================\<br># <a href="https://help.github.com/articles/connecting-to-github-with-ssh/" target="_blank" rel="noopener">Connecting to GitHub with SSH</a>    </p>
-<h2 id="SSH-key与公钥"><a href="#SSH-key与公钥" class="headerlink" title="SSH key与公钥"></a>SSH key与公钥</h2><p>## 一 About SSH<br>## 二 Checking for existing SSH keys<br>$ ls -al ~/.ssh      </p>
-<p>$ ssh-add -l  // 可以通过 ssh-add -l 来确私钥列表<br>可以通过 ssh-add -D 来清空私钥列表<br>$ ssh-add -D<br>## 三 Generating a new SSH key and adding it to the ssh-agent<br>### 3.1 Generating a new SSH key<br>$ ssh-keygen -t rsa -b 4096 -C “<a href="mailto:your_email@example.com" target="_blank" rel="noopener">your_email@example.com</a>“     </p>
-<p>Generating public/private rsa key pair.<br>Enter a file in which to save the key (/c/Users/you/.ssh/id_rsa):[Press enter]<br>Enter passphrase (empty for no passphrase): [Type a passphrase]<br>Enter same passphrase again: [Type passphrase again]   </p>
-<p>默认在 /c/users/administartor/.ssh/…<br>id_rsa:<br>id_rsa.pub: ssh-rsa AAAAB3NzaC1yc2E…<br>known_hosts:github添加成功后会写入：github.com,13.229.188.59 ssh-rsa AAAAB3NzaC1yc…<br>### 3.2 Adding your SSH key to the ssh-agent<br>$ eval $(ssh-agent -s)<br>$ ssh-add ~/.ssh/id_rsa     </p>
-<p>$PS: 如果多添加了没关系，反正关掉之后都没有了。需要重新启动ssh-agent, 执行ssh-add ~/.ssh/*/id_rsa</p>
-<p>## 四 Adding a new SSH key to your GitHub account<br>$ clip &lt; ~/.ssh/id_rsa.pub<br>然后去github/gitblit等git服务器添加SSH key      </p>
-<p>## 五 Testing your SSH connection<br>$ ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>   </p>
-<p>The authenticity of host ‘github.com (IP ADDRESS)’ can’t be established.<br>RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.<br>Are you sure you want to continue connecting (yes/no)?   </p>
-<p>Hi username! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
-<p>## 六 Working with SSH key passphrases    </p>
 <p style="text-align:right">18:52</p>
 
-
-<p>## $PS ssh-keygen删除旧密钥<br>linux 系统上使用ssh工具远程登录设备时，如果之前保存过该设备的密钥，之后该设备密钥更新，此时需执行以下命令才能后续的ssh正常登录。<br>ssh-keygen -f  “/root/.ssh/known_hosts” -R 192.168.0.1<br>其中 -f filename     指定密钥文件名。<br>     -R hostname   从 known_hosts 文件中删除所有属于 hostname 的密钥。</p>
-<h2 id="配置多个ssh"><a href="#配置多个ssh" class="headerlink" title="配置多个ssh"></a>配置多个ssh</h2><p>新建config文件,指定HostName对应的IdentityFile<br>$PS: github的Host 和 HostName 必须都是github.com; 上面那个不一样也没事<br>或者都在C:/Users/Administrator/.ssh/下,命名不同的id_rsa文件名, id_work1/work2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 该文件用于配置私钥对应的服务器</span><br><span class="line"># Default github user(first@mail.com)</span><br><span class="line">Host compa</span><br><span class="line">HostName 192.168.1.5</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">User xxxxx</span><br><span class="line">IdentityFile C:/Users/Administrator/.ssh/compa/id_rsa</span><br><span class="line"># Port 443</span><br><span class="line"># UserKnownHostsFile /dev/null</span><br><span class="line"># StrictHostKeyChecking no/ask/yes</span><br><span class="line"></span><br><span class="line"># second user(second@mail.com)</span><br><span class="line"># 建一个github别名，新建的帐号使用这个别名做克隆和更新</span><br><span class="line">Host github.com</span><br><span class="line">HostName github.com  </span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">User xxxxx</span><br><span class="line">IdentityFile D:/ablob/.ssh/github/id_rsa</span><br><span class="line"># UserKnownHostsFile /dev/null</span><br><span class="line"># StrictHostKeyChecking no</span><br></pre></td></tr></table></figure></p>
+<h2 id="SSH-key与公钥"><a href="#SSH-key与公钥" class="headerlink" title="SSH key与公钥"></a>SSH key与公钥</h2><p><a href="../others/ssh基础">[ssh基础]</a></p>
+<h3 id="配置多个ssh"><a href="#配置多个ssh" class="headerlink" title="配置多个ssh"></a>配置多个ssh</h3><p>新建config文件,指定HostName对应的IdentityFile<br>$PS: github的Host 和 HostName 必须都是github.com; 上面那个不一样也没事<br>或者都在C:/Users/Administrator/.ssh/下,命名不同的id_rsa文件名, id_work1/work2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 该文件用于配置私钥对应的服务器</span><br><span class="line"># Default github user(first@mail.com)</span><br><span class="line">Host compa</span><br><span class="line">HostName 192.168.1.5</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">User xxxxx</span><br><span class="line">IdentityFile C:/Users/Administrator/.ssh/compa/id_rsa</span><br><span class="line"># Port 443</span><br><span class="line"># UserKnownHostsFile /dev/null</span><br><span class="line"># StrictHostKeyChecking no/ask/yes</span><br><span class="line"></span><br><span class="line"># second user(second@mail.com)</span><br><span class="line"># 建一个github别名，新建的帐号使用这个别名做克隆和更新</span><br><span class="line">Host github.com</span><br><span class="line">HostName github.com  </span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">User xxxxx</span><br><span class="line">IdentityFile D:/ablob/.ssh/github/id_rsa</span><br><span class="line"># UserKnownHostsFile /dev/null</span><br><span class="line"># StrictHostKeyChecking no</span><br></pre></td></tr></table></figure></p>
 <p>Host 表示来源地址匹配字段<br>HostName表示源地址<br>IdentityFile 则为私匙文件地址<br>PreferredAuthentications 权限<br>User 配置私匙的用户名称<br>多个账号可以写相同的Host User不要一样</p>
 <p>$PS: compd的gitlib配置了config没有成功，发现是没有开启ssh，并不是配置失败（换成http， clone可以成功，如果是ssh就不可以）<br>$PS: compd的gitlib 换了http 提交(强制)也没有成功，把项目(pazhihu) 删除，重新建立就正常了。（也不是私有权限的原因，新建仓库切换成私有也可以提交成功）  </p>
 <h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>#### 1 下面几种写法都可以<br>C:\Users\xxxxx\.ssh\github\id_rsa<br>C:/Users/xxxxx/.ssh/reader/id_rsa<br>C:\Users\xxxxx.ssh\compd\id_rsa    </p>
@@ -629,8 +683,11 @@ git  push  origin  本地分支A : 远程分支B
 <p>$PS: 余下都是一些设置ssh的教程,没有设置密码.可能不设置密码可以push成功<br><!-- 其它:   
 [vsCode 使用git问题](https://segmentfault.com/q/1010000013809777)
  --></p>
-<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><h2 id="sourceTree"><a href="#sourceTree" class="headerlink" title="sourceTree"></a>sourceTree</h2><p>破解: 需要认证时退出，修改以下文件后，重新启动。<br>C:\Users\xxxxx\AppData\Local\Atlassian\SourceTree\account.json<br>C:\Users\xxxxx\AppData\Local\Atlassian\SourceTree.exe_Url_1kidzh22pwslluf1rgjympiqlohmf5ps\3.1.3.3158\user.config<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;setting name=&quot;DiffContext&quot; serializeAs=&quot;String&quot;&gt;</span><br><span class="line">	&lt;value&gt;3&lt;/value&gt;</span><br><span class="line">&lt;/setting&gt;</span><br><span class="line">&lt;setting name=&quot;DiffWhiteSpaceIgnored&quot; serializeAs=&quot;String&quot;&gt;</span><br><span class="line">	&lt;value&gt;False&lt;/value&gt;</span><br><span class="line">&lt;/setting&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><h2 id="sourceTree"><a href="#sourceTree" class="headerlink" title="sourceTree"></a>sourceTree</h2><p>破解: 需要认证时退出，修改以下文件后，重新启动。<br>C:\Users\xxxxx\AppData\Local\Atlassian\SourceTree\account.json<br>C:\Users\xxxxx\AppData\Local\Atlassian\SourceTree.exe_Url_1kidzh22pwslluf1rgjympiqlohmf5ps\3.1.3.3158\user.config<br><!-- 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;setting name=&quot;DiffContext&quot; serializeAs=&quot;String&quot;&gt;</span><br><span class="line">	&lt;value&gt;3&lt;/value&gt;</span><br><span class="line">&lt;/setting&gt;</span><br><span class="line">&lt;setting name=&quot;DiffWhiteSpaceIgnored&quot; serializeAs=&quot;String&quot;&gt;</span><br><span class="line">	&lt;value&gt;False&lt;/value&gt;</span><br><span class="line">&lt;/setting&gt;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;$id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;$type&quot;: &quot;SourceTree.Api.Host.Identity.Model.IdentityAccount, SourceTree.Api.Host.Identity&quot;,</span><br><span class="line">    &quot;Authenticate&quot;: true,</span><br><span class="line">    &quot;HostInstance&quot;: &#123;</span><br><span class="line">      &quot;$id&quot;: &quot;2&quot;,</span><br><span class="line">      &quot;$type&quot;: &quot;SourceTree.Host.Atlassianaccount.AtlassianAccountInstance, SourceTree.Host.AtlassianAccount&quot;,</span><br><span class="line">      &quot;Host&quot;: &#123;</span><br><span class="line">        &quot;$id&quot;: &quot;3&quot;,</span><br><span class="line">        &quot;$type&quot;: &quot;SourceTree.Host.Atlassianaccount.AtlassianAccountHost, SourceTree.Host.AtlassianAccount&quot;,</span><br><span class="line">        &quot;Id&quot;: &quot;atlassian account&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;BaseUrl&quot;: &quot;https://id.atlassian.com/&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;Credentials&quot;: &#123;</span><br><span class="line">      &quot;$id&quot;: &quot;4&quot;,</span><br><span class="line">      &quot;$type&quot;: &quot;SourceTree.Model.BasicAuthCredentials, SourceTree.Api.Account&quot;,</span><br><span class="line">      &quot;Username&quot;: &quot;&quot;,</span><br><span class="line">      &quot;Email&quot;: null</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;IsDefault&quot;: false</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p> –&gt;</p>
+--></p>
       
     </div>
     
@@ -694,8 +751,8 @@ git  push  origin  本地分支A : 远程分支B
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sum/js/onclick参数传递/" rel="next" title="Onclick参数传递">
-                <i class="fa fa-chevron-left"></i> Onclick参数传递
+              <a href="/sum/jsplus/git文件忽略/" rel="next" title="Git文件忽略">
+                <i class="fa fa-chevron-left"></i> Git文件忽略
               </a>
             
           </div>
@@ -704,8 +761,8 @@ git  push  origin  本地分支A : 远程分支B
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/sum/jsplus/git文件忽略/" rel="prev" title="Git文件忽略">
-                Git文件忽略 <i class="fa fa-chevron-right"></i>
+              <a href="/w3/ser/python3-runoob/" rel="prev" title="Python3-Runoob">
+                Python3-Runoob <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -818,7 +875,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">270</span>
+                  <span class="site-state-item-count">298</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -829,7 +886,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -840,7 +897,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -919,7 +976,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交"><span class="nav-text">提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#status"><span class="nav-text">status</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支"><span class="nav-text">分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log"><span class="nav-text">log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找删除文件"><span class="nav-text">查找删除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-text">远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#远程分支同步本地"><span class="nav-text">远程分支同步本地</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clone两种方式-ssh和http"><span class="nav-text">clone两种方式:ssh和http</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh-YX-006"><span class="nav-text">ssh(YX:006)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pull-push"><span class="nav-text">pull/push</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache相关-gitignore"><span class="nav-text">cache相关/.gitignore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-push-origin-master"><span class="nav-text">git push origin master</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-fetch"><span class="nav-text">git fetch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fetch和pull的区别-001"><span class="nav-text">[fetch和pull的区别 001]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销和回滚-版本回退"><span class="nav-text">撤销和回滚/版本回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-revert-和-git-reset-的区别"><span class="nav-text">git revert 和 git reset 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#储藏与清理"><span class="nav-text">储藏与清理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tags"><span class="nav-text">tags</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改标签名"><span class="nav-text">修改标签名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge操作"><span class="nav-text">merge操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（Git代码冲突）"><span class="nav-text">（Git代码冲突）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clean"><span class="nav-text">clean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加多个远程仓库"><span class="nav-text">添加多个远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置多个仓库，想提交不同的gitignore"><span class="nav-text">配置多个仓库，想提交不同的gitignore</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-remote-HTTP-Basic-Access-denied"><span class="nav-text">git remote: HTTP Basic: Access denied</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH-key与公钥"><span class="nav-text">SSH key与公钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置多个ssh"><span class="nav-text">配置多个ssh</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vscode-配置git-ssh"><span class="nav-text">vscode 配置git/ssh</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sourceTree"><span class="nav-text">sourceTree</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提交"><span class="nav-text">提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#status"><span class="nav-text">status</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支"><span class="nav-text">分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log"><span class="nav-text">log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找删除文件"><span class="nav-text">查找删除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-text">远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#远程分支同步本地"><span class="nav-text">远程分支同步本地</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉取远程分支"><span class="nav-text">拉取远程分支</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-对比两个分支差异"><span class="nav-text">git 对比两个分支差异</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地仓库和远程仓库的差异"><span class="nav-text">本地仓库和远程仓库的差异</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clone两种方式-ssh和http"><span class="nav-text">clone两种方式:ssh和http</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh-YX-006"><span class="nav-text">ssh(YX:006)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pull-push"><span class="nav-text">pull/push</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache相关-gitignore"><span class="nav-text">cache相关/.gitignore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-push-origin-master"><span class="nav-text">git push origin master</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-fetch"><span class="nav-text">git fetch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fetch和pull的区别-001"><span class="nav-text">[fetch和pull的区别 001]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤销和回滚-版本回退"><span class="nav-text">撤销和回滚/版本回退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-revert-和-git-reset-的区别"><span class="nav-text">git revert 和 git reset 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-撤销-远程的提交"><span class="nav-text">修改/撤销 远程的提交</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销push"><span class="nav-text">撤销push</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销commit"><span class="nav-text">撤销commit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#revert和reset"><span class="nav-text">revert和reset</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tags"><span class="nav-text">tags</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改标签名"><span class="nav-text">修改标签名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge操作"><span class="nav-text">merge操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#储藏与清理"><span class="nav-text">储藏与清理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stash（Git代码冲突）"><span class="nav-text">stash（Git代码冲突）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#找回丢失的stash"><span class="nav-text">找回丢失的stash</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clean"><span class="nav-text">clean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rebase"><span class="nav-text">rebase</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#合并两条commit记录"><span class="nav-text">合并两条commit记录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加多个远程仓库"><span class="nav-text">添加多个远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置多个仓库，想提交不同的gitignore"><span class="nav-text">配置多个仓库，想提交不同的gitignore</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-remote-HTTP-Basic-Access-denied"><span class="nav-text">git remote: HTTP Basic: Access denied</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH-key与公钥"><span class="nav-text">SSH key与公钥</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置多个ssh"><span class="nav-text">配置多个ssh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vscode-配置git-ssh"><span class="nav-text">vscode 配置git/ssh</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sourceTree"><span class="nav-text">sourceTree</span></a></li></ol></li></div>
             
 
           </div>
@@ -939,7 +996,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2021-->2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -953,7 +1010,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">453.3k</span>
+    <span title="Site words total count">496.1k</span>
   
 </div>
 

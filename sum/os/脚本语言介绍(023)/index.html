@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="cmd，bat/sh.ini,   .vbs,    .nsi,    A 命令行/脚本批处理.bat      .sh      常用指令cd,mv,cp,ls,rm,cat,vi,echo    bat：start,call,     bat中代码可以多行复制到命令行直接执行，但是好像到 timeout 3 &amp;gt; NUL就停了     win和linus指令对比 ### 相同cd,exit">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-05T07:09:05.882Z">
+<meta property="og:updated_time" content="2020-12-05T07:46:08.965Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="脚本语言介绍">
 <meta name="twitter:description" content="cmd，bat/sh.ini,   .vbs,    .nsi,    A 命令行/脚本批处理.bat      .sh      常用指令cd,mv,cp,ls,rm,cat,vi,echo    bat：start,call,     bat中代码可以多行复制到命令行直接执行，但是好像到 timeout 3 &amp;gt; NUL就停了     win和linus指令对比 ### 相同cd,exit">
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-05T15:09:05+08:00">
-                2020-10-05
+              <time title="更新于" itemprop="dateModified" datetime="2020-12-05T15:46:08+08:00">
+                2020-12-05
               </time>
             
           </span>
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,856
+                  1,982
                 </span>
               
 
@@ -479,6 +479,12 @@
 <p>编辑器有三种模式：1、命令行模式 2、末行模式 3、输入模式。<br>5、按Esc 就可以进入命令行模式，也是系统默认模式。<br>6、输入模式可以按 o i a 都可以进入，退出可以进入末行和命令行模式。<br>7、末行模式可以按ctrl+；它的主要功能是退出编辑器，也可以保存退出文档。      </p>
 <p>8、q! 【强制退出不保存】，q【退出不保存】，wq【退出并保存后面也可以加个！】。   </p>
 <p>9、在输入模式和命令行模式命令很多。<br>10、如复制（yy）、粘贴（p)、删除（d）等等   </p>
+<h3 id="vim-设置"><a href="#vim-设置" class="headerlink" title="vim 设置"></a>vim 设置</h3><h4 id="缩进"><a href="#缩进" class="headerlink" title="缩进"></a>缩进</h4><!-- [Vim自动缩进配置、原理和tab键制表符替换空格-Vim使用技巧(4)](https://vimjc.com/vim-indent.html) -->
+<p>“To change the number of space characters inserted for indentation”<br>set shiftwidth=4</p>
+<p>如果希望在Vim插入模式下按下 Tab 键时，输入到Vim中的都是空格，可通过设置 expandtab 选项实现<br>“set expandtab option to insert space characters whenever the tab key is pressed “<br>set expandtab</p>
+<p>如果需要设置按下 Tab 键时输入的空格个数，可以使用 tabstop 选项，以下Vim设置使用4个空格替代 Tab 键<br>“insert 4 spaces for a tab”<br>set tabstop=4<br>（不能有空格）</p>
+<p>set autoindent</p>
+<p>set smartindent</p>
 <h1 id="bat-cmd"><a href="#bat-cmd" class="headerlink" title="bat/cmd"></a>bat/cmd</h1><h2 id="cmd和-bat"><a href="#cmd和-bat" class="headerlink" title=".cmd和.bat"></a><em>.cmd和</em>.bat</h2><p># <a href="https://blog.csdn.net/bingjie1217/article/details/12947327" target="_blank" rel="noopener">windows批处理(cmd/bat)编程详解</a><br>开始之前先简单说明下cmd文件和bat文件的区别：在本质上两者没有区别，<br>都是简单的文本编码方式，都可以用记事本创建、编辑和查看。两者所用的命令行代码也是共用的，</p>
 <p>只是cmd文件中允许使用的命令要比bat文件多。cmd文件只有在windows2000以上的系统中才能运行，而bat文件则没有这个限制。<br>从它们的文件描述中也可以看出以上的区别：cmd文件的描述是“windows nt命令脚本”， bat文件的描述是“ms dos批处理文件”</p>
 <p>如果没有一定的相关知识恐怕不容易看懂和理解批处理文件，也就更谈不上自己动手编写了.批处理文件是无格式的文本文件，它包含一条或多条命令。它的文件扩展名为 .bat 或 .cmd。在命令提示下键入批处理文件的名称，或者双击该批处理文件，系统就会调用cmd.exe按照该文件中各个命令出现的顺序来逐个运行它们。使用批处理文件（也被称为批处理程序或脚本），可以简化日常或重复性任务。当然我们的这个版本的主要内容是介绍批处理在入侵中一些实际运用，例如我们后面要提到的用批处理文件来给系统打补丁、批量植入后门程序等。下面就开始我们批处理学习之旅吧。</p>
@@ -692,7 +698,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">270</span>
+                  <span class="site-state-item-count">298</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -703,7 +709,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -714,7 +720,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -793,7 +799,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-命令行-脚本"><span class="nav-text">A 命令行/脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用指令"><span class="nav-text">常用指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#win和linus指令对比"><span class="nav-text">win和linus指令对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-查看进程"><span class="nav-text">linux 查看进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑模式-vim"><span class="nav-text">编辑模式 vim</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bat-cmd"><span class="nav-text">bat/cmd</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cmd和-bat"><span class="nav-text">.cmd和.bat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bat注释"><span class="nav-text">bat注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bat结束后窗口不退出"><span class="nav-text">bat结束后窗口不退出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-脚本语言024-VBS"><span class="nav-text">B 脚本语言024  VBS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bat和vbs比较一"><span class="nav-text">bat和vbs比较一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vbs"><span class="nav-text">vbs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-text">其它</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-命令行-脚本"><span class="nav-text">A 命令行/脚本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用指令"><span class="nav-text">常用指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#win和linus指令对比"><span class="nav-text">win和linus指令对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-查看进程"><span class="nav-text">linux 查看进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑模式-vim"><span class="nav-text">编辑模式 vim</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vim-设置"><span class="nav-text">vim 设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#缩进"><span class="nav-text">缩进</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bat-cmd"><span class="nav-text">bat/cmd</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cmd和-bat"><span class="nav-text">.cmd和.bat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bat注释"><span class="nav-text">bat注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bat结束后窗口不退出"><span class="nav-text">bat结束后窗口不退出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-脚本语言024-VBS"><span class="nav-text">B 脚本语言024  VBS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bat和vbs比较一"><span class="nav-text">bat和vbs比较一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vbs"><span class="nav-text">vbs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-text">其它</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -813,7 +819,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2020-->2020</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2021-->2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -827,7 +833,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">453.3k</span>
+    <span title="Site words total count">496.1k</span>
   
 </div>
 
