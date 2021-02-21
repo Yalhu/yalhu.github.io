@@ -465,7 +465,7 @@
 <p>官方描述特征是：<br>. Virtual DOM<br>. Async rendering (inspired by React Fiber)<br>. Reactive data-binding<br>. TypeScript<br>. JSX</p>
 <!-- \# [胶水（框架） Stencil.js](https://zhuanlan.zhihu.com/p/84465089) -->
 <p>而 Stencil.js 已经在今年（2019 ）的 6 月份，推出了 1.0 正式版<br><!-- $_PS: 17年底，18年初的时候已经有了 --></p>
-<h2 id="SMTC"><a href="#SMTC" class="headerlink" title="SMTC"></a>SMTC</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span><br><span class="line"> tag: <span class="string">'my-component'</span>,</span><br><span class="line"> styleUrl: <span class="string">'my-component.css'</span>,</span><br><span class="line"> shadow: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> </span>&#123;</span><br><span class="line"> @Prop() first: string;</span><br><span class="line"></span><br><span class="line"> private getText(): string &#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="keyword">this</span>.first;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> render() &#123;</span><br><span class="line"> <span class="keyword">return</span> &lt;div&gt;Hello, World! I'm &#123;this.getText()&#125;&lt;/div&gt;;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="SMTC"><a href="#SMTC" class="headerlink" title="SMTC"></a>SMTC</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span><br><span class="line"> tag: <span class="string">'my-component'</span>,</span><br><span class="line"> styleUrl: <span class="string">'my-component.css'</span>,</span><br><span class="line"> shadow: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> </span>&#123;</span><br><span class="line"> @Prop() first: string;</span><br><span class="line"></span><br><span class="line"> private getText(): string &#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="keyword">this</span>.first;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> render() &#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello, World! I'm &#123;this.getText()&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>由于使用 Stencil 开发的组件只是 Web Components，所以这些组件可以运行在所有的主流框架（AVR）中，也可以独立地运行。这一特质使它可以成为新的前端容器框架——毕竟 Web Components 是一个新的前端容器。</p>
 <h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>用途一：开发前端应用<br>用途二：连接混合应用<br>用途三：连接其它前端框架<br>用途四：构建跨框架的 UI 库 / 设计系统<br>用途五：微前端应用</p>
 <p>结论：胶水框架<br>Web Components 大法虽好，但是你还是需要一个快速开发 Web Components 的框架/工具。</p>
@@ -672,7 +672,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">298</span>
+                  <span class="site-state-item-count">304</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -694,7 +694,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -811,7 +811,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">496.1k</span>
+    <span title="Site words total count">502.1k</span>
   
 </div>
 

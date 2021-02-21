@@ -9,9 +9,9 @@
 <pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">Greeting</span>(<span class="params">props</span>) </span>{
   <span class="keyword">const</span> isLoggedIn = props.isLoggedIn;
   <span class="keyword">if</span> (isLoggedIn) {
-    <span class="keyword">return</span> &lt;UserGreeting /&gt;;
+    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">UserGreeting</span> /&gt;</span></span>;
   }
-  <span class="keyword">return</span> &lt;GuestGreeting /&gt;;
+  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">GuestGreeting</span> /&gt;</span></span>;
 }
 ReactDOM.render(
   <span class="comment">// Try changing to isLoggedIn={true}:</span>

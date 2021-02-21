@@ -95,13 +95,13 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="# B 深入了解组件   组件注册  Prop  自定义事件  插槽: 作用域插槽  动态组件 &amp;amp; 异步组件  处理边界情况# C 过渡 &amp;amp; 动画  进入/离开 &amp;amp; 列表过渡  状态过渡# D 可复用性 &amp;amp; 组合  混入  自定义指令  渲染函数 &amp;amp; JSX  插件 [x] 过滤器  [ ] 风格指南       2018.9.3 星期一2018.11.2">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://you img base url/https://cn.vuejs.org/images/lifecycle.png?e=1611385518&token=your qiniu access key:1k0M4ZngetWELIyIg3n07afe0-I=">
-<meta property="og:image" content="http://you img base url/https://cn.vuejs.org/images/data.png?e=1611385518&token=your qiniu access key:w1LbQtLm8sHIwjGR0FUMXW081NQ=">
+<meta property="og:image" content="http://you img base url/https://cn.vuejs.org/images/lifecycle.png?e=1613925705&token=your qiniu access key:MK6DrE1c9NFByqsFs5IL80bM2OI=">
+<meta property="og:image" content="http://you img base url/https://cn.vuejs.org/images/data.png?e=1613925705&token=your qiniu access key:d_OB1feWXdgdX6vwoOK3upjccno=">
 <meta property="og:updated_time" content="2020-02-04T09:13:55.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue文档-基础">
 <meta name="twitter:description" content="# B 深入了解组件   组件注册  Prop  自定义事件  插槽: 作用域插槽  动态组件 &amp;amp; 异步组件  处理边界情况# C 过渡 &amp;amp; 动画  进入/离开 &amp;amp; 列表过渡  状态过渡# D 可复用性 &amp;amp; 组合  混入  自定义指令  渲染函数 &amp;amp; JSX  插件 [x] 过滤器  [ ] 风格指南       2018.9.3 星期一2018.11.2">
-<meta name="twitter:image" content="http://you img base url/https://cn.vuejs.org/images/lifecycle.png?e=1611385518&token=your qiniu access key:1k0M4ZngetWELIyIg3n07afe0-I=">
+<meta name="twitter:image" content="http://you img base url/https://cn.vuejs.org/images/lifecycle.png?e=1613925705&token=your qiniu access key:MK6DrE1c9NFByqsFs5IL80bM2OI=">
 
 
 
@@ -500,7 +500,7 @@
 $PS: react使用ES6 class定义,this指向当前实例. vue通过new Vue()创建一个vue实例.单文件组件中this指当前组件. react事件绑定中要通过箭头函数让this指向定义时上下文即实例,否则值向当前react元素/dom    
 $PS: vue的组件和react的组件有什么区别: vue.component('',{}); extends React.Component{},还有vue的单文件组件. react每个组件都有一个render函数,最后通过根 ReactDOM.render(<App/>,id)挂载;    
 $PS: vue 是 new Vue({el:id,data,..}). 可以有创建多个vue实例  
- --><br><img src="http://you img base url/https://cn.vuejs.org/images/lifecycle.png?e=1611385518&token=your qiniu access key:1k0M4ZngetWELIyIg3n07afe0-I=" alt="生命周期图示"><br>beforeCreate,created,  beforeMount,mounted,   beforeDestroy,destroyed<br>beforeUpdate,updated     </p>
+ --><br><img src="http://you img base url/https://cn.vuejs.org/images/lifecycle.png?e=1613925705&token=your qiniu access key:MK6DrE1c9NFByqsFs5IL80bM2OI=" alt="生命周期图示"><br>beforeCreate,created,  beforeMount,mounted,   beforeDestroy,destroyed<br>beforeUpdate,updated     </p>
 </blockquote>
 <p>$PS_react生命周期: constructor,getDerivedStateFromProps,render,componentDidMount,componentWillUnmount,  shouldComponentUpdate,getSnapsBeforeUpdate,componentDidUpdate   </p>
 <h2 id="模板语法"><a href="#模板语法" class="headerlink" title="模板语法"></a>模板语法</h2><h2 id="计算属性和侦听器"><a href="#计算属性和侦听器" class="headerlink" title="计算属性和侦听器"></a>计算属性和侦听器</h2><h2 id="Class-与-Style-绑定"><a href="#Class-与-Style-绑定" class="headerlink" title="Class 与 Style 绑定"></a>Class 与 Style 绑定</h2><h2 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h2><h2 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h2><h2 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h2><h2 id="表单输入绑定"><a href="#表单输入绑定" class="headerlink" title="表单输入绑定"></a>表单输入绑定</h2><h2 id="组件基础"><a href="#组件基础" class="headerlink" title="组件基础"></a>组件基础</h2><p>组件是可复用的 Vue 实例，所以它们与 new Vue 接收相同的选项，例如 data、computed、watch、methods 以及生命周期钩子等。仅有的例外是像 el 这样根实例特有的选项。        </p>
@@ -547,7 +547,7 @@ $PS: vue 是 new Vue({el:id,data,..}). 可以有创建多个vue实例
 <h2 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h2><p>类 Flux 状态管理的官方实现:vuex<br>Redux 事实上无法感知视图层，所以它能够轻松的通过一些简单绑定和 Vue 一起使用。Vuex 区别在于它是一个专门为 Vue 应用所设计。这使得它能够更好地和 Vue 进行整合，同时提供简洁的 API 和改善过的开发体验。     </p>
 <p>1) vue 应用中原始数据对象的实际来源 - 当访问数据对象时，一个 Vue 实例只是简单的代理访问。所以，如果你有一处需要被多个实例间共享的状态，可以简单地通过维护一份数据来实现共享<br>2) 为了解决这个问题，我们采用一个简单的 store 模式：<br>此外，每个实例/组件仍然可以拥有和管理自己的私有状态：   </p>
 <p>2) 接着我们继续延伸约定，组件不允许直接修改属于 store 实例的 state，而应执行 action 来分发 (dispatch) 事件通知 store 去改变，我们<strong>最终达成了 Flux 架构</strong>。这样约定的好处是，我们能够记录所有 store 中发生的 state 改变，同时实现能做到记录变更 (mutation)、保存状态快照、历史回滚/时光旅行的先进的调试工具。</p>
-<h2 id="服务端渲染"><a href="#服务端渲染" class="headerlink" title="服务端渲染"></a><del>服务端渲染</del></h2><h1 id="G-内在"><a href="#G-内在" class="headerlink" title="G 内在"></a>G 内在</h1><h2 id="深入响应式原理"><a href="#深入响应式原理" class="headerlink" title="深入响应式原理"></a>深入响应式原理</h2><p>$BLOB: vuejs文档-深入响应式原理<br><img src="http://you img base url/https://cn.vuejs.org/images/data.png?e=1611385518&token=your qiniu access key:w1LbQtLm8sHIwjGR0FUMXW081NQ=" alt="如何追踪变化.png">   </p>
+<h2 id="服务端渲染"><a href="#服务端渲染" class="headerlink" title="服务端渲染"></a><del>服务端渲染</del></h2><h1 id="G-内在"><a href="#G-内在" class="headerlink" title="G 内在"></a>G 内在</h1><h2 id="深入响应式原理"><a href="#深入响应式原理" class="headerlink" title="深入响应式原理"></a>深入响应式原理</h2><p>$BLOB: vuejs文档-深入响应式原理<br><img src="http://you img base url/https://cn.vuejs.org/images/data.png?e=1613925705&token=your qiniu access key:d_OB1feWXdgdX6vwoOK3upjccno=" alt="如何追踪变化.png">   </p>
 <p>### 检测变化的注意事项<br>受现代 JavaScript 的限制 (而且 Object.observe 也已经被废弃)，Vue 不能检测到对象属性的添加或删除。由于 Vue 会在初始化实例时对属性执行 getter/setter 转化过程，所以属性必须在 data 对象上存在才能让 Vue 转换它，这样才能让它是响应的。<br>### 声明响应式属性<br>由于 Vue 不允许动态添加根级响应式属性，所以你必须在初始化实例前声明根级响应式属性，哪怕只是一个空值：<br>### 异步更新队列<br>Vue 异步执行 DOM 更新。只要观察到数据变化，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据改变。如果同一个 watcher 被多次触发，只会被推入到队列中一次。<br>Vue 在内部尝试对异步队列使用原生的 Promise.then 和 MessageChannel，如果执行环境不支持，会采用 setTimeout(fn, 0) 代替。</p>
 <p>1) 全局 $PS: 不采用<br>2) 在组件内使用 vm.$nextTick() 实例方法特别方便，因为它不需要全局 Vue ，并且回调函数中的 this 将自动绑定到当前的 Vue 实例上：<br>$PS: angularjs: <code>$scope.$apply(function(){$scope.data=newData})</code><br>3) 因为 $nextTick() 返回一个 Promise 对象，所以你可以使用新的 ES2016 async/await 语法完成相同的事情<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'example'</span>, &#123;</span><br><span class="line">  template: <span class="string">'&lt;span&gt;&#123;&#123; message &#125;&#125;&lt;/span&gt;'</span>,</span><br><span class="line">  data: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      message: <span class="string">'没有更新'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123; <span class="comment">// 2 this.$nextTick(callback)</span></span><br><span class="line">    updateMessage: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.message = <span class="string">'更新完成'</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.$el.textContent) <span class="comment">// =&gt; '没有更新'</span></span><br><span class="line">      <span class="keyword">this</span>.$nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.$el.textContent) <span class="comment">// =&gt; '更新完成'</span></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123; <span class="comment">// 3 async/await  </span></span><br><span class="line">    <span class="keyword">async</span> updateMessage: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.message = <span class="string">'updated'</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.$el.textContent) <span class="comment">// =&gt; '未更新'</span></span><br><span class="line">        <span class="keyword">await</span> <span class="keyword">this</span>.$nextTick()</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.$el.textContent) <span class="comment">// =&gt; '已更新'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 <h1 id="H-迁移"><a href="#H-迁移" class="headerlink" title="H 迁移"></a>H 迁移</h1><h2 id="从-Vue-1-x-迁移"><a href="#从-Vue-1-x-迁移" class="headerlink" title="从 Vue 1.x 迁移"></a>从 Vue 1.x 迁移</h2><h2 id="从-Vue-Router-0-7-x-迁移"><a href="#从-Vue-Router-0-7-x-迁移" class="headerlink" title="从 Vue Router 0.7.x 迁移"></a>从 Vue Router 0.7.x 迁移</h2><h2 id="从-Vuex-0-6-x-迁移到-1-0"><a href="#从-Vuex-0-6-x-迁移到-1-0" class="headerlink" title="从 Vuex 0.6.x 迁移到 1.0"></a>从 Vuex 0.6.x 迁移到 1.0</h2><h1 id="I-更多"><a href="#I-更多" class="headerlink" title="I 更多"></a>I 更多</h1><h2 id="对比其他框架"><a href="#对比其他框架" class="headerlink" title="对比其他框架"></a>对比其他框架</h2><h2 id="加入-Vue-js-社区"><a href="#加入-Vue-js-社区" class="headerlink" title="加入 Vue.js 社区"></a>加入 Vue.js 社区</h2><h2 id="认识团队"><a href="#认识团队" class="headerlink" title="认识团队"></a>认识团队</h2>
@@ -732,7 +732,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">298</span>
+                  <span class="site-state-item-count">304</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -754,7 +754,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -867,7 +867,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">496.1k</span>
+    <span title="Site words total count">502.1k</span>
   
 </div>
 

@@ -74,3 +74,40 @@ $_PS: 两篇文章4种解决方案一样 -->
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.multiple-line &#123;</span><br><span class="line">      overflow: hidden;</span><br><span class="line">      text-overflow: ellipsis;</span><br><span class="line">      display: -webkit-box; // 而且-webkit-box已经被flex替代,但是不能用flex代替</span><br><span class="line">      -webkit-line-clamp: 2;</span><br><span class="line">      -webkit-box-orient: vertical;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="滚动穿透"><a href="#滚动穿透" class="headerlink" title="滚动穿透"></a>滚动穿透</h3><!-- [移动端滚动穿透问题完美解决方案](https://segmentfault.com/a/1190000005617307) -->
+<p>css 之 overflow: hidden<br>js 之 touchmove + preventDefault<br>解决方案 position: fixed<br>所以如果需要保持滚动条的位置需要用 js 保存滚动条位置关闭的时候还原滚动位置<br><!-- [纯CSS属性pointer-events：none解决滚动穿透问题](https://www.cnblogs.com/ygunoil/p/12765420.html) --></p>
+<blockquote>
+<p>元素永远不会成为鼠标事件的target。但是，当其后代元素的pointer-events属性指定其他值时，鼠标事件可以指向后代元素，在这种情况下，鼠标事件将在捕获或冒泡阶段触发父元素的事件侦听器。<br>简而言之，我们想让哪层不滚动，只需要给这层设置 pointer-events: none 。</p>
+</blockquote>
+<p>配合弹窗的状态，当弹窗显示的时候，给位于遮罩层底下的图层设置  pointer-events: none ，当弹窗隐藏/关闭的时候，设置  pointer-events: auto ，或者干脆移除这个属性。</p>
+<!-- [这一次，彻底解决滚动穿透 ](https://www.sohu.com/a/286604987_495695) -->
+<p>阻止冒泡？事实上，这并没有什么卵用。<br>只加 overflow:hidden对移动端是无效的！<br>该方案会让浏览器的滚动条默认重置于初始位置<br>阻止body的默认滚动？<br>直接阻止 document的 touchmove事件：<br><!-- 看起来好像非常严格，将整个页面的滚动全部禁止，但实践后发现： --></p>
+<!-- 
+[滚动穿透的6种解决方案【已自测】](https://cloud.tencent.com/developer/article/1405979)
+[滚动穿透的6种解决方案【已自测】](https://www.cnblogs.com/padding1015/p/10568070.html)
+一、body无滚动 + 弹层无滚动[css-超出隐藏]
+解决方案：
+弹层出现时，用css给body设置固定定位和超出隐藏。
+二、body无滚动 + 弹层内部滚动[css-弹框超出滚动|真机有bug]
+解决方案：
+弹层出现时，用css给body设置固定定位和超出隐藏。
+至于弹层内部的滚动，设置一个overflow: scroll;即可。
+
+不过为了流畅体验，可以加上-webkit-overflow-scrolling: touch，以解决在IOS上滚动惯性失效的问题，提高滚动的流畅度。
+
+三、body滚动 + 弹层无滚动[js-阻止弹层中touchmove的默认行为]
+解决方案：
+当弹层出现的时候不需要再禁掉body的滚动效果了，我们可以从弹层方面入手，阻止弹框的touchmove事件的默认行为。就能阻止滚动穿透。
+
+四、body滚动 + 弹层内部滚动[js-检测touchmove的target]
+简单粗暴，一针见血：谁能动谁动，谁不能动就禁止touchmove事件的preventEvent默认行为。
+解决方案：
+检测touchmove事件，如果touch的目标是弹窗不可滚动区域（背景蒙层）就禁掉默认事件，反之就不做控制。
+
+但是同样的问题是，需要判断滚动到顶部和滚动到底部的时候禁止滚动。否则，就和第二条一样，触碰到上下两端，弹窗可滚动区域的滚动条到了顶部或者底部，依旧穿透到body，使得body跟随弹窗滚动。
+所以依旧需要同样的代码，对可滚动区域的touchmove做监听：若到顶或到底，同样阻止默认事件。
+
+
+五、body滚动 + 弹层内部滚动[js-代码模拟上下滑动手势效果]
+具体制作思路写在js注释上。
+六、body滚动 + 弹层内部滚动[css+js-记录滚动位置] -->

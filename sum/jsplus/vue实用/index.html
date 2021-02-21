@@ -95,12 +95,12 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们可">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://you img base url/./logo.png?e=1611385518&token=your qiniu access key:ZsJPTVER6QIAqWeIoIXCBa-qjXU=">
+<meta property="og:image" content="http://you img base url/./logo.png?e=1613925705&token=your qiniu access key:TlmfKJMTp3blb2MaTPZExL0sDZI=">
 <meta property="og:updated_time" content="2020-12-05T08:20:17.385Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue实用">
 <meta name="twitter:description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们可">
-<meta name="twitter:image" content="http://you img base url/./logo.png?e=1611385518&token=your qiniu access key:ZsJPTVER6QIAqWeIoIXCBa-qjXU=">
+<meta name="twitter:image" content="http://you img base url/./logo.png?e=1613925705&token=your qiniu access key:TlmfKJMTp3blb2MaTPZExL0sDZI=">
 
 
 
@@ -499,7 +499,7 @@
 <p>背景图片和img标签引用资源方式<br>background的使用方式是引用的资源路径,并不是经过编译的模块, 所以上面使用资源路径的访问方式是正确的.下面出错,是因为访问的路径(webpack server提供的服务)下没有资源   </p>
 <p>img标签使用 相对路径的方式是会编译成模块,路径按当前文件的位置引用.而<code>/static</code>是绝对路径,使用资源路径(webpack server服务提供). dev访问正常, 如果build,网站配置并不会给dist配置<code>/</code>的访问路径,所以绝对路径<code>/static</code>并没有该资源.除非网站配置正确的访问路径,或者自己把资源添加到根目录.<br>所以推荐使用相对路径.配置build.assetsPublicPath的路径为<code>./</code>,非<code>/</code>,上面也可以使用绝对路径了.不过<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// ## background:Carousel.vue</span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(/static/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">el-carousel-item</span> <span class="attr">:style</span>=<span class="string">"&#123;background:'url(./static/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;"</span> <span class="attr">:key</span>=<span class="string">"index"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- blank --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(./images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(../assets/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(./assets/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"></span><br><span class="line">// ## img:Teachers.vue</span><br><span class="line"><span class="comment">&lt;!-- &lt;img src="/static/images/hamburger.png" class="image"&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/hamburger.png"</span> <span class="attr">class</span>=<span class="string">"image"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;img src="./images/hamburger.png" class="image"&gt; --&gt;</span></span><br></pre></td></tr></table></figure></p>
 <h1 id="其它-1"><a href="#其它-1" class="headerlink" title="其它"></a>其它</h1><h2 id="assets和static文件夹的区别"><a href="#assets和static文件夹的区别" class="headerlink" title="assets和static文件夹的区别"></a>assets和static文件夹的区别</h2><!-- [vue-cli 自定义路径别名 assets和static文件夹的区别 --save-dev和--save的区别](https://juejin.im/post/59be4d325188257e764c8485)   -->
-<p>相信有很多人知道vue-cli有两个放置静态资源的地方，分别是src/assets文件夹和static文件夹,这两者的区别很多人可能不太清楚。<br>assets目录中的文件会被webpack处理解析为模块依赖，只支持相对路径形式。例如，在 <img src="http://you img base url/./logo.png?e=1611385518&token=your qiniu access key:ZsJPTVER6QIAqWeIoIXCBa-qjXU=">和 background: url(./logo.png)中，”./logo.png” 是相对的资源路径，将由Webpack解析为模块依赖。</p>
+<p>相信有很多人知道vue-cli有两个放置静态资源的地方，分别是src/assets文件夹和static文件夹,这两者的区别很多人可能不太清楚。<br>assets目录中的文件会被webpack处理解析为模块依赖，只支持相对路径形式。例如，在 <img src="http://you img base url/./logo.png?e=1613925705&token=your qiniu access key:TlmfKJMTp3blb2MaTPZExL0sDZI=">和 background: url(./logo.png)中，”./logo.png” 是相对的资源路径，将由Webpack解析为模块依赖。</p>
 <p>static/ 目录下的文件并不会被Webpack处理：它们会直接被复制到最终的打包目录（默认是dist/static）下。必须使用绝对路径引用这些文件，这是通过在 config.js 文件中的 build.assetsPublicPath 和 build.assetsSubDirectory 连接来确定的。<br>任何放在 static/ 中文件需要以绝对路径的形式引用：/static/[filename]。</p>
 <p>在我们实际的开发中，总的来说：static放不会变动的文件 assets放可能会变动的文件。</p>
 <p>因为webpack会将图片当做模块来引用，所以在js中需要使用require将图片引用进来，不能直接以字符串的形式。   </p>
@@ -704,7 +704,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">298</span>
+                  <span class="site-state-item-count">304</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -726,7 +726,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -843,7 +843,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">496.1k</span>
+    <span title="Site words total count">502.1k</span>
   
 </div>
 

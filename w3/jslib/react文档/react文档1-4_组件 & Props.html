@@ -8,17 +8,17 @@
 <p>组件从概念上看就像是函数，它可以接收任意的输入值（称之为“props”），并返回一个需要在页面上展示的React元素。   </p>
 <h2 id="函数定义-类定义组件"><a href="#函数定义-类定义组件" class="headerlink" title="函数定义/类定义组件"></a>函数定义/类定义组件</h2><p>该函数是一个有效的React组件，它接收一个单一的“props”对象并返回了一个React元素。我们之所以称这种类型的组件为函数定义组件，是因为从字面上来看，它就是一个JavaScript函数。<br>$_PS: 注意区别 React元素和Dom元素/标签  </p>
 <pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">Welcome</span>(<span class="params">props</span>) </span>{
-  <span class="keyword">return</span> &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, {props.name}<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;
 }
 <span class="class"><span class="keyword">class</span> <span class="title">Welcome</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>{
   render() {
-    <span class="keyword">return</span> &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
+    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, {this.props.name}<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;
   }
 }
 <span class="comment">// React元素都只是DOM标签：</span>
-<span class="keyword">const</span> element = &lt;div /&gt;;
+<span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">div</span> /&gt;</span></span>;
 <span class="comment">// React元素也可以是用户自定义的组件</span>
-<span class="keyword">const</span> element = &lt;Welcome name="Sara" /&gt;;
+<span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">Welcome</span> <span class="attr">name</span>=<span class="string">"Sara"</span> /&gt;</span></span>;
 </code></pre>
 <h2 id="组件渲染"><a href="#组件渲染" class="headerlink" title="组件渲染"></a>组件渲染</h2><p>当React遇到的元素是用户自定义的组件，它会将JSX属性作为单个对象传递给该组件,这个对象称之为“props”。  </p>
 <blockquote>

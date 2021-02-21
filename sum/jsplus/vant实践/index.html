@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="2020.8.10 星期一  20：58   v-popup ios中弹窗出现（居中），页面滚动。跳到第二个页面，然后返回时弹窗位置不居中：在页面的底部可以在页面加载完成后通过js滚动到页面顶部 scrollTo(0,0)。或者弹窗出现后禁止滚动">
+<meta name="description" content="2020.8.10 星期一  20：58   v-popup ios中弹窗出现（居中），页面滚动。跳到第二个页面，然后返回时弹窗位置不居中：在页面的底部可以在页面加载完成后通过js滚动到页面顶部 scrollTo(0,0)。或者弹窗出现后禁止滚动     popup z-index每次点击都会+1.    popup弹窗不会出现滚动穿透">
 <meta name="keywords" content="ui-lib">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vant实践">
 <meta property="og:url" content="http://yoursite.com/sum/jsplus/vant实践/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2020.8.10 星期一  20：58   v-popup ios中弹窗出现（居中），页面滚动。跳到第二个页面，然后返回时弹窗位置不居中：在页面的底部可以在页面加载完成后通过js滚动到页面顶部 scrollTo(0,0)。或者弹窗出现后禁止滚动">
+<meta property="og:description" content="2020.8.10 星期一  20：58   v-popup ios中弹窗出现（居中），页面滚动。跳到第二个页面，然后返回时弹窗位置不居中：在页面的底部可以在页面加载完成后通过js滚动到页面顶部 scrollTo(0,0)。或者弹窗出现后禁止滚动     popup z-index每次点击都会+1.    popup弹窗不会出现滚动穿透">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-05T10:02:35.090Z">
+<meta property="og:updated_time" content="2021-02-21T15:23:18.242Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vant实践">
-<meta name="twitter:description" content="2020.8.10 星期一  20：58   v-popup ios中弹窗出现（居中），页面滚动。跳到第二个页面，然后返回时弹窗位置不居中：在页面的底部可以在页面加载完成后通过js滚动到页面顶部 scrollTo(0,0)。或者弹窗出现后禁止滚动">
+<meta name="twitter:description" content="2020.8.10 星期一  20：58   v-popup ios中弹窗出现（居中），页面滚动。跳到第二个页面，然后返回时弹窗位置不居中：在页面的底部可以在页面加载完成后通过js滚动到页面顶部 scrollTo(0,0)。或者弹窗出现后禁止滚动     popup z-index每次点击都会+1.    popup弹窗不会出现滚动穿透">
 
 
 
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-05T18:02:35+08:00">
-                2020-10-05
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-21T23:23:18+08:00">
+                2021-02-21
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  82
+                  105
                 </span>
               
 
@@ -463,6 +463,13 @@
 <h3 id="v-popup"><a href="#v-popup" class="headerlink" title="v-popup"></a>v-popup</h3><ol>
 <li>ios中弹窗出现（居中），页面滚动。跳到第二个页面，然后返回时弹窗位置不居中：在页面的底部<br>可以在页面加载完成后通过js滚动到页面顶部 scrollTo(0,0)。或者弹窗出现后禁止滚动<!-- [vux的popup组件的ios兼容问题](https://blog.csdn.net/shuxians/article/details/83834485) -->
 <!-- $_PS: 不是一个组件库啊vux 和 vant。 -->
+</li>
+</ol>
+<ol start="2">
+<li><p>popup z-index每次点击都会+1. </p>
+<!-- 所以需要设置一个更大的index，遮住vant popup。比如 2004 -》 4000 -->
+</li>
+<li><p>popup弹窗不会出现滚动穿透</p>
 </li>
 </ol>
 <p style="text-align:right"> </p>
@@ -655,7 +662,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">298</span>
+                  <span class="site-state-item-count">304</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -677,7 +684,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -794,7 +801,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">496.1k</span>
+    <span title="Site words total count">502.1k</span>
   
 </div>
 

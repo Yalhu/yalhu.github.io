@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2019.2.12 星期二    JS ~~等价于Math.floor. ~~3.6=3(=~(~3.6)=~(-4+1)); ~3.6 = -4 (-(3+1)) 反码(~)：二进制进行反码计算时。1变成0，0变成1。 举例子~6,6的二进制是110在机器上补足32位在110之前补码0。那么反码为111…..001，此时的反码减去1得111…..111000，那么原反码减去相减的码得到0000…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-01-23T10:41:03.362Z">
+<meta property="og:updated_time" content="2021-02-21T15:18:53.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Js使用记录2">
 <meta name="twitter:description" content="2019.2.12 星期二    JS ~~等价于Math.floor. ~~3.6=3(=~(~3.6)=~(-4+1)); ~3.6 = -4 (-(3+1)) 反码(~)：二进制进行反码计算时。1变成0，0变成1。 举例子~6,6的二进制是110在机器上补足32位在110之前补码0。那么反码为111…..001，此时的反码减去1得111…..111000，那么原反码减去相减的码得到0000…">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-23T18:41:03+08:00">
-                2021-01-23
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-21T23:18:53+08:00">
+                2021-02-21
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,020
+                  1,238
                 </span>
               
 
@@ -437,7 +437,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  5
                 </span>
               
             </div>
@@ -474,6 +474,11 @@
 <li>console.log(3+2?’1’:’2’)  //1<br> console.log(3+2&amp;&amp;4) // 4<br> console.log(3+2) // 5 <!-- + 运算符优先级高于 &&; && 运算符优先级 > ?: -->
 </li>
 </ol>
+<ol>
+<li>在try catch finally 中return使用注意<br>&lt;!–<br><del>注意：finally中最后不要有return语句，在编译器中会报警告。</del><br>$_PS: 代码检查工具会报错<br><a href="https://www.cnblogs.com/jing-tian/p/11074718.html" target="_blank" rel="noopener">js中try、catch、finally的执行规则</a></li>
+</ol>
+<p>try catch缺点：<br>1.try catch耗性能<br>2.try catch捕获不到异步错误<br>3.try catch可能会导致报错点更模糊</p>
+<p><a href="https://blog.csdn.net/kavensu/article/details/8067850" target="_blank" rel="noopener">有return的情况下try catch finally的执行顺序（最有说服力的总结）</a><br><a href="https://blog.csdn.net/qq_30816657/article/details/80297646" target="_blank" rel="noopener">try catch 语句中有return 的各类情况</a> –&gt;<br>总结：<br>在正常情况（即程序正常执行try catch finally语句块，不会在语句中出现退出程序、线程终止等特殊情况）下，都会执行finally语句块，如果finally中有return,则程序会走finally中的return，如果没有，则先执行try或者catch中的return,将其存入临时栈中，执行完finally语句后才返回临时栈中的值。</p>
 <ol>
 <li><code>(0, function)()</code><br>() 运算并返回内部表达式的结果。<br>第一个写法里面包含一个逗号表达式”,”。 它会运算每个被逗号分开的表达式并返回最后一个表达式的结果。这种写法会先计算“0”，再计算匿名函数，并返回函数引用。<!-- [javascript_冷知识之_(0, function)(param)](https://blog.csdn.net/qq_39446719/article/details/103838706) -->
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">0</span>, dog.run)();</span><br><span class="line"><span class="comment">// 左边先用逗号操作符从左到右执行并取值，最终返回</span></span><br><span class="line">dog.run: <span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'I\'m running'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 等价于如下，此时的 this 就是 全局对象 了</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'I\'m running'</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
@@ -691,7 +696,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">298</span>
+                  <span class="site-state-item-count">304</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -713,7 +718,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -830,7 +835,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">496.1k</span>
+    <span title="Site words total count">502.1k</span>
   
 </div>
 
