@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="2018.6.28 星期四 14：38     自定义log函数：区分命名空间，自定义输出；获得正确的行号，可以在控制台追踪； DebugView中特殊情况1. 不能输出object（函数定义 输出的是string，不确定能不能重定义）。2. 而且，用bind方法，无法获取正确的行号。3. 最后一点，可能需要区分命名空间，过滤需要的信息     MORE定义样式区分（颜色/背景色等）console">
+<meta name="description" content="function doDecrypt (pwd, onError) { 	console.log(&apos;in doDecrypt&apos;); 	const txt = document.getElementById(&apos;enc_content&apos;).innerHTML; 	let plantext; 	try { 		const bytes = CryptoJS.AES.decrypt(txt, pwd);">
 <meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Js自定义log函数">
 <meta property="og:url" content="http://yoursite.com/sum/js/js自定义log函数/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2018.6.28 星期四 14：38     自定义log函数：区分命名空间，自定义输出；获得正确的行号，可以在控制台追踪； DebugView中特殊情况1. 不能输出object（函数定义 输出的是string，不确定能不能重定义）。2. 而且，用bind方法，无法获取正确的行号。3. 最后一点，可能需要区分命名空间，过滤需要的信息     MORE定义样式区分（颜色/背景色等）console">
+<meta property="og:description" content="function doDecrypt (pwd, onError) { 	console.log(&apos;in doDecrypt&apos;); 	const txt = document.getElementById(&apos;enc_content&apos;).innerHTML; 	let plantext; 	try { 		const bytes = CryptoJS.AES.decrypt(txt, pwd);">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta property="og:updated_time" content="2021-04-10T04:04:45.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Js自定义log函数">
-<meta name="twitter:description" content="2018.6.28 星期四 14：38     自定义log函数：区分命名空间，自定义输出；获得正确的行号，可以在控制台追踪； DebugView中特殊情况1. 不能输出object（函数定义 输出的是string，不确定能不能重定义）。2. 而且，用bind方法，无法获取正确的行号。3. 最后一点，可能需要区分命名空间，过滤需要的信息     MORE定义样式区分（颜色/背景色等）console">
+<meta name="twitter:description" content="function doDecrypt (pwd, onError) { 	console.log(&apos;in doDecrypt&apos;); 	const txt = document.getElementById(&apos;enc_content&apos;).innerHTML; 	let plantext; 	try { 		const bytes = CryptoJS.AES.decrypt(txt, pwd);">
 
 
 
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2021-04-10T12:04:45+08:00">
+                2021-04-10
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  584
+                  375
                 </span>
               
 
@@ -437,7 +437,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  2
                 </span>
               
             </div>
@@ -458,15 +458,35 @@
       
 
       
-        <p style="text-align:right">2018.6.28 星期四 14：38</p>
-
-<!-- CEF中自定义log函数：cloudClass -->  
-<p>自定义log函数：区分命名空间，自定义输出；获得正确的行号，可以在控制台追踪；<br><!-- 不考虑debug.js 及debug.js的 blockboxing:blackbox方式获取正确行号   --></p>
-<h2 id="DebugView中特殊情况"><a href="#DebugView中特殊情况" class="headerlink" title="DebugView中特殊情况"></a>DebugView中特殊情况</h2><p>1. 不能输出object（函数定义 输出的是string，不确定能不能重定义）。<br>2. 而且，用bind方法，无法获取正确的行号。<br>3. 最后一点，可能需要区分命名空间，过滤需要的信息    </p>
-<h2 id="MORE"><a href="#MORE" class="headerlink" title="MORE"></a>MORE</h2><p>定义样式区分（颜色/背景色等）<br><code>console.log(&#39;%c &#39;+this.name+&#39;关闭.现在秒数：&#39;,&#39;background:#777;color:&#39;+this.name,new Date().getSeconds())</code><br>&lt;!–<br>参考：<br>[[042 深入浅出妙用 Javascript 中 apply、call、bind]]<br><a href="https://ask.helplib.com/javascript/post_723894" target="_blank" rel="noopener">javascript - 扩展 console.log 而不影响日志行</a></p>
-<p>其他：<br><a href="https://codeday.me/bug/20170813/57793.html" target="_blank" rel="noopener">javascript – console.log包装器,保留行号并支持大多数方法？</a><br><a href="https://cloud.tencent.com/developer/ask/97534" target="_blank" rel="noopener">正确的行号为console.log一个适当的包装？</a><br> –&gt;</p>
-<h2 id="SMTC"><a href="#SMTC" class="headerlink" title="SMTC"></a>SMTC</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// v1.0：cef中不能输出正确行号；写法也有些别扭</span></span><br><span class="line"><span class="keyword">var</span> log=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(IsCEF)&#123;</span><br><span class="line">        <span class="keyword">var</span> str=<span class="string">''</span>;</span><br><span class="line">        [...arguments].forEach(<span class="function"><span class="params">v</span>=&gt;</span>str+=(<span class="built_in">JSON</span>.stringify(v)+<span class="string">';'</span>))</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'h5Debug|'</span>+str);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">// console.log.apply(console,arguments) //不能正确显示行号</span></span><br><span class="line">        <span class="comment">// console.log.bind(this) 没有输出</span></span><br><span class="line">        log=<span class="built_in">console</span>.log.bind(<span class="keyword">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// v3（改进）： cef 输出正确行号和对象的字符串值</span></span><br><span class="line"><span class="keyword">if</span>(IsCEF)&#123;</span><br><span class="line">    <span class="comment">// log=console.log.bind(this,'h5Debug|') // if not need string info,but right num</span></span><br><span class="line">    log=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// if need sting info and right line num</span></span><br><span class="line">        <span class="keyword">var</span> str=<span class="string">''</span>;</span><br><span class="line">        [...arguments].forEach(<span class="function"><span class="params">v</span>=&gt;</span>str+=(<span class="built_in">JSON</span>.stringify(v)+<span class="string">';'</span>))</span><br><span class="line">        <span class="keyword">var</span> stack = <span class="keyword">new</span> <span class="built_in">Error</span>().stack;</span><br><span class="line">        <span class="keyword">var</span> arr=stack.split(<span class="string">"\n"</span>)[<span class="number">2</span>].split(<span class="string">":"</span>);</span><br><span class="line">        <span class="keyword">var</span> line = arr[arr.length<span class="number">-2</span>];</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'h5Debug('</span>+line+<span class="string">')|'</span>+str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    log=<span class="built_in">console</span>.log.bind(<span class="keyword">this</span>)</span><br><span class="line">    <span class="comment">// log=console.log.bind(this,'local|')</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// v2：基于v1的cef尝试：bind和立即执行函数。问题：cef 有行号没值/有值行号不正确。。 </span></span><br><span class="line">    <span class="comment">//和v1 写法上不同；</span></span><br><span class="line"><span class="keyword">if</span>(IsCEF)&#123;</span><br><span class="line">    <span class="comment">/* log=function()&#123; //不是正确行号</span></span><br><span class="line"><span class="comment">        var str='h5Debug|';</span></span><br><span class="line"><span class="comment">        [...arguments].forEach(v=&gt;str+=(JSON.stringify(v)+';'))</span></span><br><span class="line"><span class="comment">        console.log(str);</span></span><br><span class="line"><span class="comment">    &#125; */</span></span><br><span class="line">    <span class="comment">// log=console.log.bind(this,'h5Debug|') // 有行号只有 “h5Debug|”  没有对象的字符串值输出，</span></span><br><span class="line">    log=(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">// 有行号只有 “h5Debug|”  没有对象的字符串值输出;</span></span><br><span class="line">        <span class="comment">// 立即执行函数不是这么玩的，它只调用一次，以后的调用arguments为空，所以就只有h5Debug，和上面没有区别</span></span><br><span class="line">        <span class="keyword">var</span> str=<span class="string">'h5Debug|'</span>;</span><br><span class="line">        [...arguments].forEach(<span class="function"><span class="params">v</span>=&gt;</span>str+=(<span class="built_in">JSON</span>.stringify(v)+<span class="string">';'</span>))</span><br><span class="line">        <span class="built_in">console</span>.log(str); <span class="comment">// 只在开始定义时调用一次</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log.bind(<span class="keyword">this</span>,str)</span><br><span class="line">    &#125;)();</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    log=<span class="built_in">console</span>.log.bind(<span class="keyword">this</span>)</span><br><span class="line">    <span class="comment">// log=console.log.bind(this,'local|')</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <script src="/js/crypto-js.js"></script>
+<script>
+function doDecrypt (pwd, onError) {
+	console.log('in doDecrypt');
+	const txt = document.getElementById('enc_content').innerHTML;
+	let plantext;
+	try {
+		const bytes = CryptoJS.AES.decrypt(txt, pwd);
+		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+	} catch(err) {
+		if(onError) {
+			onError(err);
+		}
+		return;
+	}
+	document.getElementById('enc_content').innerHTML = plaintext;
+	document.getElementById('enc_content').style.display = 'block';
+	document.getElementById('enc_passwd').style.display = 'none';
+	if(typeof MathJax !== 'undefined') {
+		MathJax.Hub.Queue(
+			['resetEquationNumbers', MathJax.InputJax.TeX],
+			['PreProcess', MathJax.Hub],
+			['Reprocess', MathJax.Hub]
+		);
+	}
+}
+</script>
+<div id="enc_content" style="display:none">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</div>
+<div id="enc_passwd"> <input type="text" style=" border-radius: 5px; border-style: groove; height: 30px; width: 50%; cursor: auto; font-size: 102%; color: currentColor; outline: none; text-overflow: initial; padding-left: 5px;">   <input type="submit" value="decrypt" onclick="decrypt()" style=" width: 58px; height: 34px; border-radius: 5px; background-color: white; border-style: solid; color: currentColor; ">  <div id="enc_error" style=" display: inline-block; color: #d84527; font: large; "></div> <script>  var onError = function(error) {  $("#enc_error")[0].innerHTML = "password error!";  };  function decrypt() {  var passwd = $("#enc_passwd input")[0].value;  console.log(passwd);  doDecrypt(passwd, onError);  }  </script></div>
       
     </div>
     
@@ -627,17 +647,8 @@ var jiathis_config={
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -654,7 +665,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">304</span>
+                  <span class="site-state-item-count">322</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -665,7 +676,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -676,7 +687,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -697,7 +708,7 @@ var jiathis_config={
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="mailto:yalhu@gmail.com" target="_blank" title="E-Mail">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>
@@ -745,27 +756,6 @@ var jiathis_config={
       </section>
 
       
-      <!--noindex-->
-        
-          <style>
-            .post-toc .nav .nav-child { display: block; }
-          </style>
-        
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DebugView中特殊情况"><span class="nav-text">DebugView中特殊情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MORE"><span class="nav-text">MORE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMTC"><span class="nav-text">SMTC</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -779,7 +769,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2021-->2020</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -793,7 +783,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">502.1k</span>
+    <span title="Site words total count">529.7k</span>
   
 </div>
 

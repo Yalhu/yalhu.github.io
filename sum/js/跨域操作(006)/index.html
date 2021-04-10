@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="# [前端常见跨域解决方案（全）] 广义的跨域1.) 资源跳转： A链接、重定向、表单提交2.) 资源嵌入：&amp;lt;link&amp;gt;、&amp;lt;script&amp;gt;、&amp;lt;img&amp;gt;、&amp;lt;frame&amp;gt;等dom标签，还有样式中background:url()、@font-face()等文件外链3.) 脚本请求： js发起的ajax请求、dom和js对象的跨域操作等 其实我们通常所说的">
+<meta name="description" content="浏览器同源政策及其规避方法 # [前端常见跨域解决方案（全）] 广义的跨域1.) 资源跳转： A链接、重定向、表单提交2.) 资源嵌入：&amp;lt;link&amp;gt;、&amp;lt;script&amp;gt;、&amp;lt;img&amp;gt;、&amp;lt;frame&amp;gt;等dom标签，还有样式中background:url()、@font-face()等文件外链3.) 脚本请求： js发起的ajax请求、dom和js对象的跨">
 <meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="跨域操作">
 <meta property="og:url" content="http://yoursite.com/sum/js/跨域操作(006)/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="# [前端常见跨域解决方案（全）] 广义的跨域1.) 资源跳转： A链接、重定向、表单提交2.) 资源嵌入：&amp;lt;link&amp;gt;、&amp;lt;script&amp;gt;、&amp;lt;img&amp;gt;、&amp;lt;frame&amp;gt;等dom标签，还有样式中background:url()、@font-face()等文件外链3.) 脚本请求： js发起的ajax请求、dom和js对象的跨域操作等 其实我们通常所说的">
+<meta property="og:description" content="浏览器同源政策及其规避方法 # [前端常见跨域解决方案（全）] 广义的跨域1.) 资源跳转： A链接、重定向、表单提交2.) 资源嵌入：&amp;lt;link&amp;gt;、&amp;lt;script&amp;gt;、&amp;lt;img&amp;gt;、&amp;lt;frame&amp;gt;等dom标签，还有样式中background:url()、@font-face()等文件外链3.) 脚本请求： js发起的ajax请求、dom和js对象的跨">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta property="og:updated_time" content="2021-04-10T04:16:47.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跨域操作">
-<meta name="twitter:description" content="# [前端常见跨域解决方案（全）] 广义的跨域1.) 资源跳转： A链接、重定向、表单提交2.) 资源嵌入：&amp;lt;link&amp;gt;、&amp;lt;script&amp;gt;、&amp;lt;img&amp;gt;、&amp;lt;frame&amp;gt;等dom标签，还有样式中background:url()、@font-face()等文件外链3.) 脚本请求： js发起的ajax请求、dom和js对象的跨域操作等 其实我们通常所说的">
+<meta name="twitter:description" content="浏览器同源政策及其规避方法 # [前端常见跨域解决方案（全）] 广义的跨域1.) 资源跳转： A链接、重定向、表单提交2.) 资源嵌入：&amp;lt;link&amp;gt;、&amp;lt;script&amp;gt;、&amp;lt;img&amp;gt;、&amp;lt;frame&amp;gt;等dom标签，还有样式中background:url()、@font-face()等文件外链3.) 脚本请求： js发起的ajax请求、dom和js对象的跨">
 
 
 
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2021-04-10T12:16:47+08:00">
+                2021-04-10
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,330
+                  1,335
                 </span>
               
 
@@ -459,6 +459,7 @@
 
       
         <a id="more"></a>
+<p><a href="https://ruanyifeng.com/blog/2016/04/same-origin-policy.html" target="_blank" rel="noopener">浏览器同源政策及其规避方法</a></p>
 <p># [前端常见跨域解决方案（全）]</p>
 <h2 id="广义的跨域"><a href="#广义的跨域" class="headerlink" title="广义的跨域"></a>广义的跨域</h2><p>1.) 资源跳转： A链接、重定向、表单提交<br>2.) 资源嵌入：<code>&lt;link&gt;、&lt;script&gt;、&lt;img&gt;、&lt;frame&gt;</code>等dom标签，还有样式中background:url()、@font-face()等文件外链<br>3.) 脚本请求： js发起的ajax请求、dom和js对象的跨域操作等</p>
 <p>其实我们通常所说的跨域是狭义的，是由浏览器同源策略限制的一类请求场景。</p>
@@ -468,7 +469,7 @@
 <h2 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h2><p>服务端不能直接返回json字符串，会报错：Uncaught SyntaxError: Unexpected token :<br>正确格式参考（php版）：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$data=$_GET[<span class="string">'callback'</span>].<span class="string">'('</span>.json_encode($ret).<span class="string">')'</span>;</span><br><span class="line"><span class="keyword">echo</span> $data;</span><br></pre></td></tr></table></figure></p>
 <p>只能是get；jquery也是get，即使post也会转为get(和ajax没有半毛钱关系，jQuery只是伪装)<br>从原理分析；区分get/post请求         </p>
 <h2 id="postMessage"><a href="#postMessage" class="headerlink" title="postMessage"></a>postMessage</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//page</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">msgChatIfrm</span>(<span class="params">type,data</span>)</span>&#123; <span class="comment">// assume ifrm had loaded</span></span><br><span class="line">    <span class="comment">// chatIfrm.contentWindow.postMessage(JSON.stringify(&#123;type,data&#125;),chatServer); //ie limit</span></span><br><span class="line">    chatIfrm.contentWindow.postMessage(&#123;type,data&#125;,chatServer);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// <span class="doctag">NOTE:</span> 如果ifrm没有loaded 发送消息，报错：</span></span><br><span class="line">    <span class="comment">// Failed to execute 'postMessage' on 'DOMWindow': The target origin provided ('http://192.168.1.61') does not match the recipient window's origin ('null').</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.onmessage=<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    log(<span class="string">'on message:'</span>,event) <span class="comment">//</span></span><br><span class="line">    <span class="keyword">if</span>(event.origin!==chatServer) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> data=oData.data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// iframe</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">msgTop</span>(<span class="params">type,data</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(top==<span class="built_in">window</span>)<span class="keyword">return</span>;</span><br><span class="line">    top.postMessage(&#123;type,data&#125;,<span class="string">'*'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.onmessage=<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    log(event);</span><br><span class="line">    <span class="comment">/* 单独打开后iframe页面后，输出了undefined，undefined;  ff没有输出；估计是插件。另一个chrome也没事</span></span><br><span class="line"><span class="comment">    // <span class="doctag">NOTE:</span> 1.不知道为什么会接收到这样一条事件;不知道哪里发送了事件。</span></span><br><span class="line"><span class="comment">    // event:&#123;data:"",origin: "http://127.0.0.1:59353", lastEventId: "", source: Window&#125; //和本页面同</span></span><br><span class="line"><span class="comment">        // 正常发过来的是：&#123;data:"test",origin: "http://127.0.0.1:59353", lastEventId: "", source: Window&#125;</span></span><br><span class="line"><span class="comment">        // 所以，加了origin的判断</span></span><br><span class="line"><span class="comment">    // if(location.origin==event.origin) return; </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// if(event.origin!=top.location.origin) return; //top.location 会有跨域问题，取不到；本地文件也没有location</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// MDN example: 是监听到消息，得到source后再发送消息</span></span><br><span class="line">    <span class="comment">// 我们能信任信息来源吗？</span></span><br><span class="line">    <span class="keyword">if</span> (event.origin !== <span class="string">"http://example.com:8080"</span>) <span class="keyword">return</span>;</span><br><span class="line">    event.source.postMessage(<span class="string">"hi there yourself!"</span>,event.origin);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其他：<br><a href="https://github.com/Monine/monine.github.io/issues/2" target="_blank" rel="noopener">HTML5 跨域通信 API - window.postMessage()</a><br>通过<code>window.open()</code>打开的窗口</p>
+<p>其他：<br><!-- [HTML5 跨域通信 API - window.postMessage()](https://github.com/Monine/monine.github.io/issues/2)    --><br>通过<code>window.open()</code>打开的窗口</p>
 <blockquote>
 <p>在 var targetPage = window.open(‘<a href="http://target.com&#39;" target="_blank" rel="noopener">http://target.com&#39;</a>) 打开新页面之后需要等到 <a href="http://target.com" target="_blank" rel="noopener">http://target.com</a> 页面加载完成之后才能进行 postMessage 跨域通信，但是在跨域的情况下我们是无法对 targetPage 进行 onload 事件监听的，所以这里只能做 延迟 setTimeout 或者 定时 setInterval 处理。<br>同样的，在页面内嵌入 iframe 页面的情况下，我们也需要等到页面内的 iframe 加载完成之后进行 postMessage 跨域通信。</p>
 </blockquote>
@@ -673,7 +674,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">304</span>
+                  <span class="site-state-item-count">322</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -684,7 +685,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -695,7 +696,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -716,7 +717,7 @@ var jiathis_config={
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="mailto:yalhu@gmail.com" target="_blank" title="E-Mail">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>
@@ -794,7 +795,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2021-->2020</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -808,7 +809,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">502.1k</span>
+    <span title="Site words total count">529.7k</span>
   
 </div>
 

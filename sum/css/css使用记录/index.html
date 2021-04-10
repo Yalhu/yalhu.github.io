@@ -8,6 +8,35 @@ $_PS: 另一篇文章 -->
 <!-- [子元素使用position：fixed,导致他的宽度不能和父元素保持一致的解决方案](https://github.com/peng8/react-drag-sortable)
 $_PS: 两篇文章4种解决方案一样 -->
 <p>新的解决方案：<br>如果设置宽度width: inherit，会继承父元素宽度。<br>注意，父元素要显示设置width值，不能是100%</p>
+<ol start="3">
+<li>百分比小技巧：比如进度条需要图书的中间位置对齐刻度，而且100%的时候右边是对齐的。可以适当增加基数，比如：(x + .5)/ (6 + .5)</li>
+</ol>
+<h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3><p>env(): <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/env()" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/CSS/env()</a><br>env()和constant()，是IOS11新增特性，Webkit的css函数，用于设定安全区域与边界的距离，有4个预定义变量：<br><a href="https://blog.csdn.net/qq_21363577/article/details/109734506" target="_blank" rel="noopener">css属性——env()和constant()设置安全区域</a></p>
+<p>safe-area-inset-left：安全区域距离左边边界的距离<br>safe-area-inset-right：安全区域距离右边边界的距离<br>safe-area-inset-top：安全区域距离顶部边界的距离<br>safe-area-inset-bottom ：安全距离底部边界的距离<br>而env()和constant()函数有个必要的使用前提，H5网页设置viewport-fit=cover的时候才生效，小程序里的viewport-fit默认是cover。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 适配底部代码： */</span></span><br><span class="line">height: calc(96rpx+ constant(safe-area-inset-bottom));//兼容 IOS&lt;11.2</span><br><span class="line">height: calc(96rpx + env(safe-area-inset-bottom));//兼容 IOS&gt;11.2</span><br><span class="line"> </span><br><span class="line">padding-bottom: constant(safe-area-inset-bottom);//兼容 IOS&lt;11.2</span><br><span class="line">padding-bottom: env(safe-area-inset-bottom);//兼容 IOS&gt;11.2</span><br></pre></td></tr></table></figure></p>
+<h3 id="字体文件优化"><a href="#字体文件优化" class="headerlink" title="字体文件优化"></a>字体文件优化</h3><p>引入ttf文件，浏览器解析失败。<code>Failed to decode downloaded font:http://local.xxx.xxx.com:8080/static/fonts/%E6%96%B9%E6%AD%A3%E5%B0%91%E5%84%BF%E7%AE%80%E4%BD%93.cd7c372a.ttf</code><br>本地启的服务，也没有跨域。文件也加载了。<br><!-- vue-cli 默认对字体文件使用了 file-loader 不需要再添加了。 --></p>
+<p>解决：fontmin 包括压缩。原因是引入的字体文件不全, 有兼容性<!-- mac 不能只引入ttf文件 --><br><!-- 仍然有ttf黄色的警告，但是字体被引入了
+其他后端的问题：在maven的filter解析font文件时，它破坏了font文件的二进制文件格式，导致浏览器解析出错。
+ --></p>
+<!-- 1. font-spider 这个用不了 -->
+<p>Fontmin： <a href="http://ecomfe.github.io/fontmin/#banner" target="_blank" rel="noopener">http://ecomfe.github.io/fontmin/#banner</a><br>第一个纯 JavaScript 字体子集化方案<br>下载软件 <a href="http://ecomfe.github.io/fontmin/#app" target="_blank" rel="noopener">http://ecomfe.github.io/fontmin/#app</a><br>或者命令行<code>npm i -g fontmin</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -t, --text                          require glyphs by text</span></span><br><span class="line">$ text=`curl www.baidu.com` &amp;&amp; fontmin -t <span class="string">"<span class="variable">$text</span>"</span> font.ttf</span><br><span class="line"></span><br><span class="line">$ npm install -g html-to-text</span><br><span class="line">$ text=`curl www.baidu.com | html-to-text` &amp;&amp; fontmin -t <span class="string">"<span class="variable">$text</span>"</span> font.ttf</span><br></pre></td></tr></table></figure></p>
+<!-- 
+其他：
+还要得益于FontSpider。在FontSpider中一探究竟时，我们发现了它其实用的是fontmin。
+常用的工具是 fontsquirrel，一个字体生成器<!-- ，可以在线生成  eot 、woff、ttf、svg 格式的字体，相信很多前端用过 --!>
+
+基于 Fontmin 的工具
+fontmin-app - Fontmin 桌面版 App，需下载安装使用
+gulp-fontmin - Fontmin 的 Gulp 插件
+font-spider - 自动分析页面使用的 WebFont 并进行按需压缩
+
+
+Web-fontmin 不是什么高大上的东西，一个基于 Fontmin 构建的字体工具，它的用处只有两个：
+提取字体。字体格式转换
+通俗的理解，Web-fontmin 是一个这样的工具：Squirrel + fontmin-app，他是两者的结合体。
+Squirrel 只有单纯的生成不同格式的webfont，且不支持中文。Web-fontmin不单止可以转换格式同时支持中文，还可以提取字体，并且有更快的上传和转换速度。
+
+ -->
+<!-- 字加 -->
 <h2 id="二期"><a href="#二期" class="headerlink" title="二期"></a>二期</h2><ol>
 <li><a href="https://blog.csdn.net/yb305/article/details/72357010" target="_blank" rel="noopener">父容器display:flex后，子元素的内部元素height:100%无效解决方法</a><br>解救办法：父类容器position:relative;子元素：position:absolute;width:100%,height:100%;</li>
 <li>display：flex 的直接子元素，高度默认是100%； 如果设置 改元素<code>align-self:center</code>,元素就会变为行内块，高度就不是100%，可以设置垂直居中    </li>

@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="网页授权JS-SDK说明文档 如果用户在微信客户端中访问第三方网页，公众号可以通过微信网页授权机制，来获取用户基本信息，进而实现业务逻辑。  2020.8.10 星期一  20：34    通过config接口注入权限验证配置 123456789101112131415161718192021222324252627// 后端接口那会微信jssdk 配置信息，然后初始化 axios.post(th">
+<meta name="description" content="网页授权JS-SDK说明文档 如果用户在微信客户端中访问第三方网页，公众号可以通过微信网页授权机制，来获取用户基本信息，进而实现业务逻辑。  2020.8.10 星期一  20：34    通过config接口注入权限验证配置123456789101112131415161718192021222324252627// 后端接口那会微信jssdk 配置信息，然后初始化 axios.post(thi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微信H5开发实践">
 <meta property="og:url" content="http://yoursite.com/sum/jsplus/微信h5开发实践/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="网页授权JS-SDK说明文档 如果用户在微信客户端中访问第三方网页，公众号可以通过微信网页授权机制，来获取用户基本信息，进而实现业务逻辑。  2020.8.10 星期一  20：34    通过config接口注入权限验证配置 123456789101112131415161718192021222324252627// 后端接口那会微信jssdk 配置信息，然后初始化 axios.post(th">
+<meta property="og:description" content="网页授权JS-SDK说明文档 如果用户在微信客户端中访问第三方网页，公众号可以通过微信网页授权机制，来获取用户基本信息，进而实现业务逻辑。  2020.8.10 星期一  20：34    通过config接口注入权限验证配置123456789101112131415161718192021222324252627// 后端接口那会微信jssdk 配置信息，然后初始化 axios.post(thi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-11T10:41:24.757Z">
+<meta property="og:updated_time" content="2021-04-10T09:37:07.111Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微信H5开发实践">
-<meta name="twitter:description" content="网页授权JS-SDK说明文档 如果用户在微信客户端中访问第三方网页，公众号可以通过微信网页授权机制，来获取用户基本信息，进而实现业务逻辑。  2020.8.10 星期一  20：34    通过config接口注入权限验证配置 123456789101112131415161718192021222324252627// 后端接口那会微信jssdk 配置信息，然后初始化 axios.post(th">
+<meta name="twitter:description" content="网页授权JS-SDK说明文档 如果用户在微信客户端中访问第三方网页，公众号可以通过微信网页授权机制，来获取用户基本信息，进而实现业务逻辑。  2020.8.10 星期一  20：34    通过config接口注入权限验证配置123456789101112131415161718192021222324252627// 后端接口那会微信jssdk 配置信息，然后初始化 axios.post(thi">
 
 
 
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-11T18:41:24+08:00">
-                2020-10-11
+              <time title="更新于" itemprop="dateModified" datetime="2021-04-10T17:37:07+08:00">
+                2021-04-10
               </time>
             
           </span>
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,025
+                  1,024
                 </span>
               
 
@@ -462,11 +462,12 @@
 <p style="text-align:right"> 2020.8.10 星期一  20：34 </p>
 
 <ol start="0">
-<li><p>通过config接口注入权限验证配置</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 后端接口那会微信jssdk 配置信息，然后初始化</span></span><br><span class="line"> axios.post(<span class="keyword">this</span>.wxShareUrl).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="keyword">if</span> (res.data.sign == <span class="number">1</span>) &#123;</span><br><span class="line">         <span class="keyword">let</span> _config = res.data.msg.wxConf;</span><br><span class="line">         <span class="keyword">let</span> _debug = <span class="keyword">this</span>.wxDebug &amp;&amp; process.env.NODE_ENV == <span class="string">'development'</span>;</span><br><span class="line">         wx.config(&#123;</span><br><span class="line">             debug: _debug,</span><br><span class="line">             appId: _config.appId,</span><br><span class="line">             timestamp: _config.timeStamp,</span><br><span class="line">             nonceStr: _config.nonceStr,</span><br><span class="line">             signature: _config.signature,</span><br><span class="line">             jsApiList: <span class="keyword">this</span>.jsApiList <span class="comment">// 必填，需要使用的JS接口列表</span></span><br><span class="line">         &#125;);</span><br><span class="line">         <span class="comment">// 判断当前客户端版本是否支持指定JS接口</span></span><br><span class="line">         <span class="keyword">let</span> _this = <span class="keyword">this</span>;</span><br><span class="line">         wx.checkJsApi(&#123;</span><br><span class="line">             jsApiList: [<span class="string">'updateAppMessageShareData'</span>, <span class="string">'updateTimelineShareData'</span>],</span><br><span class="line">             success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                 <span class="comment">// 以键值对的形式返回，可用的api值true，不可用为false</span></span><br><span class="line">                 <span class="keyword">let</span> result = <span class="built_in">JSON</span>.parse(res.checkResult);</span><br><span class="line">                 <span class="keyword">if</span> (result.updateAppMessageShareData &amp;&amp; result.updateTimelineShareData) &#123;</span><br><span class="line">                     _this.wxUpdateStatus = <span class="literal">true</span>;</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+<li>通过config接口注入权限验证配置<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 后端接口那会微信jssdk 配置信息，然后初始化</span></span><br><span class="line"> axios.post(<span class="keyword">this</span>.wxShareUrl).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="keyword">if</span> (res.data.sign == <span class="number">1</span>) &#123;</span><br><span class="line">         <span class="keyword">let</span> _config = res.data.msg.wxConf;</span><br><span class="line">         <span class="keyword">let</span> _debug = <span class="keyword">this</span>.wxDebug &amp;&amp; process.env.NODE_ENV == <span class="string">'development'</span>;</span><br><span class="line">         wx.config(&#123;</span><br><span class="line">             debug: _debug,</span><br><span class="line">             appId: _config.appId,</span><br><span class="line">             timestamp: _config.timeStamp,</span><br><span class="line">             nonceStr: _config.nonceStr,</span><br><span class="line">             signature: _config.signature,</span><br><span class="line">             jsApiList: <span class="keyword">this</span>.jsApiList <span class="comment">// 必填，需要使用的JS接口列表</span></span><br><span class="line">         &#125;);</span><br><span class="line">         <span class="comment">// 判断当前客户端版本是否支持指定JS接口</span></span><br><span class="line">         <span class="keyword">let</span> _this = <span class="keyword">this</span>;</span><br><span class="line">         wx.checkJsApi(&#123;</span><br><span class="line">             jsApiList: [<span class="string">'updateAppMessageShareData'</span>, <span class="string">'updateTimelineShareData'</span>],</span><br><span class="line">             success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                 <span class="comment">// 以键值对的形式返回，可用的api值true，不可用为false</span></span><br><span class="line">                 <span class="keyword">let</span> result = <span class="built_in">JSON</span>.parse(res.checkResult);</span><br><span class="line">                 <span class="keyword">if</span> (result.updateAppMessageShareData &amp;&amp; result.updateTimelineShareData) &#123;</span><br><span class="line">                     _this.wxUpdateStatus = <span class="literal">true</span>;</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>微信分享设置失败。多个地方引入wx（index.html，xesShare），致使wx undefined</p>
-</li>
+</ol>
+<!-- [微信分享的那些坑](https://my.oschina.net/ihh/blog/4943085) -->
+<ol>
+<li>微信分享设置失败。多个地方引入wx（index.html，xesShare），致使wx undefined</li>
 <li>测试环境设置微信分享，需要先关注公众号。是微信api做了安全方面的限制，好比小程序的体验者</li>
 <li><p>微信分享设置（jssdk） ios 失败。<br>新增两个分享的接口，之前的4个即将废弃。<br>updateAppMessageShareData，updateTimelineShareData 这两接口设置是异步的。<br>所以最好提前设置。<br><a href="https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html#111" target="_blank" rel="noopener">分享接口</a></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">wx.ready(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;   <span class="comment">//需在用户可能点击分享按钮前就先调用</span></span><br><span class="line">wx.updateAppMessageShareData(&#123; </span><br><span class="line">    title: <span class="string">''</span>, <span class="comment">// 分享标题</span></span><br><span class="line">    desc: <span class="string">''</span>, <span class="comment">// 分享描述</span></span><br><span class="line">    link: <span class="string">''</span>, <span class="comment">// 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致</span></span><br><span class="line">    imgUrl: <span class="string">''</span>, <span class="comment">// 分享图标</span></span><br><span class="line">    success: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 设置成功</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -544,8 +545,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sum/js/video h5相关问题/" rel="next" title="Video H5相关问题">
-                <i class="fa fa-chevron-left"></i> Video H5相关问题
+              <a href="/sum/os/shell语法/" rel="next" title="Shell语法">
+                <i class="fa fa-chevron-left"></i> Shell语法
               </a>
             
           </div>
@@ -659,7 +660,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">304</span>
+                  <span class="site-state-item-count">322</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -670,7 +671,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -681,7 +682,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -702,7 +703,7 @@ var jiathis_config={
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="mailto:yalhu@gmail.com" target="_blank" title="E-Mail">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>
@@ -763,7 +764,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2021-->2020</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -777,7 +778,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">502.1k</span>
+    <span title="Site words total count">529.7k</span>
   
 </div>
 

@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="vue.js,">
 
 
 
@@ -89,18 +89,19 @@
 
 
 <meta name="description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们可">
+<meta name="keywords" content="vue.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue实用">
 <meta property="og:url" content="http://yoursite.com/sum/jsplus/vue实用/index.html">
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们可">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://you img base url/./logo.png?e=1613925705&token=your qiniu access key:TlmfKJMTp3blb2MaTPZExL0sDZI=">
-<meta property="og:updated_time" content="2020-12-05T08:20:17.385Z">
+<meta property="og:image" content="http://you img base url/./logo.png?e=1618062479&token=your qiniu access key:BQAt6DoQ4lQXvVdYGrzvjkQnJVY=">
+<meta property="og:updated_time" content="2021-04-10T12:46:16.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue实用">
 <meta name="twitter:description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们可">
-<meta name="twitter:image" content="http://you img base url/./logo.png?e=1613925705&token=your qiniu access key:TlmfKJMTp3blb2MaTPZExL0sDZI=">
+<meta name="twitter:image" content="http://you img base url/./logo.png?e=1618062479&token=your qiniu access key:BQAt6DoQ4lQXvVdYGrzvjkQnJVY=">
 
 
 
@@ -350,8 +351,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-12-05T16:20:17+08:00">
-                2020-12-05
+              <time title="更新于" itemprop="dateModified" datetime="2021-04-10T20:46:16+08:00">
+                2021-04-10
               </time>
             
           </span>
@@ -422,7 +423,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,919
+                  3,563
                 </span>
               
 
@@ -438,7 +439,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  12
+                  15
                 </span>
               
             </div>
@@ -467,7 +468,12 @@
 </blockquote>
 <p>2) 比如表单的数据v-model。定义表单自己的数据，然后在声明周期中把父组件的值赋给 表单自己定义的值    $danghao: ContenNav nav组件的active 值；帐号信息 申请描述  </p>
 <p>### 根/父组件 值为异步获取/更新<br>1) 如果要直接引用<code>$root.$data.userInfo</code> 或<code>$root.userInfo</code>, 属性的值，需要注意数据类型正确。不能直接给一个空值<code>userInfo: {}</code> 属性也需要赋值 <code>user:{tags:[]}</code>,因为使用了tags的值<br>2) 如果可以确定 子组件 装载时，根组件的异步获取的数据已经成功，可以在子组件的生命周期中重新赋值<br>3) 通过watch 监听数据的变化      </p>
-<p>？ 子组件直接使用的 父/根 组件的值 会不会 同步更新视图  </p>
+<!-- ~~？ 子组件直接使用的 父/根 组件的值 会不会 同步更新视图~~   -->
+<ol>
+<li>data下的字段无法通过表达式实现。所以只能通过条件判断了<code>key === &#39;grade0&#39; ? currWork_grade0 : currWork_grade1)[gkey].praiseCount</code><br>为了减少嵌套，修改currWork_grade0.low 数据方便。 <code>this.$set(this[</code>currWork_${key}<code>], gkey, data)</code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">    currWork_grade0: &#123; <span class="attr">low</span>: &#123;&#125;, <span class="attr">mid</span>: &#123;&#125;, <span class="attr">high</span>: &#123;&#125; &#125;,</span><br><span class="line">    currWork_grade1: &#123; <span class="attr">low</span>: &#123;&#125;, <span class="attr">mid</span>: &#123;&#125;, <span class="attr">high</span>: &#123;&#125; &#125;,</span><br><span class="line">    <span class="comment">// 对比</span></span><br><span class="line">    currWork: &#123;</span><br><span class="line">        currWork_grade0: &#123; <span class="attr">low</span>: &#123;&#125;, <span class="attr">mid</span>: &#123;&#125;, <span class="attr">high</span>: &#123;&#125; &#125;,</span><br><span class="line">        currWork_grade1: &#123; <span class="attr">low</span>: &#123;&#125;, <span class="attr">mid</span>: &#123;&#125;, <span class="attr">high</span>: &#123;&#125; &#125;,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"['home-works-group-praise', (key === 'grade0' ? currWork_grade0 : currWork_grade1)[gkey].isPraise  &amp;&amp; 'home-works-group-praise-light']"</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">img</span> @<span class="attr">click</span>=<span class="string">"praise(gkey)"</span> <span class="attr">src</span>=<span class="string">"https://mr.xesimg.com/biz-growth-storage/activity/upload/20210324/0a32e1d885645f2c5d4b88a6d415f28b.png"</span> <span class="attr">alt</span>=<span class="string">"点赞"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">output</span>&gt;</span>&#123;&#123;(key === 'grade0' ? currWork_grade0 : currWork_grade1)[gkey].praiseCount || 0 &#125;&#125;<span class="tag">&lt;/<span class="name">output</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>1） 为什么组件data是一个函数？多个/不同实例间 不共用相同的数据<br>2）data：组件数据。<br>computed：根据data或者其他数据 过滤的数据，可以缓存，只要源数据发生变动。<br>也可以有set方法     </p>
 <blockquote>
 <p>计算属性是基于它们的响应式依赖进行缓存的<br>method: 每次调用都会执行。如果你不希望有缓存，请用方法来替代。<br>watch(侦听属性): 数据变化时执行异步或开销较大的操作时    </p>
@@ -499,7 +505,7 @@
 <p>背景图片和img标签引用资源方式<br>background的使用方式是引用的资源路径,并不是经过编译的模块, 所以上面使用资源路径的访问方式是正确的.下面出错,是因为访问的路径(webpack server提供的服务)下没有资源   </p>
 <p>img标签使用 相对路径的方式是会编译成模块,路径按当前文件的位置引用.而<code>/static</code>是绝对路径,使用资源路径(webpack server服务提供). dev访问正常, 如果build,网站配置并不会给dist配置<code>/</code>的访问路径,所以绝对路径<code>/static</code>并没有该资源.除非网站配置正确的访问路径,或者自己把资源添加到根目录.<br>所以推荐使用相对路径.配置build.assetsPublicPath的路径为<code>./</code>,非<code>/</code>,上面也可以使用绝对路径了.不过<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// ## background:Carousel.vue</span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(/static/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">el-carousel-item</span> <span class="attr">:style</span>=<span class="string">"&#123;background:'url(./static/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;"</span> <span class="attr">:key</span>=<span class="string">"index"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- blank --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(./images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(../assets/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(./assets/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"></span><br><span class="line">// ## img:Teachers.vue</span><br><span class="line"><span class="comment">&lt;!-- &lt;img src="/static/images/hamburger.png" class="image"&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/hamburger.png"</span> <span class="attr">class</span>=<span class="string">"image"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;img src="./images/hamburger.png" class="image"&gt; --&gt;</span></span><br></pre></td></tr></table></figure></p>
 <h1 id="其它-1"><a href="#其它-1" class="headerlink" title="其它"></a>其它</h1><h2 id="assets和static文件夹的区别"><a href="#assets和static文件夹的区别" class="headerlink" title="assets和static文件夹的区别"></a>assets和static文件夹的区别</h2><!-- [vue-cli 自定义路径别名 assets和static文件夹的区别 --save-dev和--save的区别](https://juejin.im/post/59be4d325188257e764c8485)   -->
-<p>相信有很多人知道vue-cli有两个放置静态资源的地方，分别是src/assets文件夹和static文件夹,这两者的区别很多人可能不太清楚。<br>assets目录中的文件会被webpack处理解析为模块依赖，只支持相对路径形式。例如，在 <img src="http://you img base url/./logo.png?e=1613925705&token=your qiniu access key:TlmfKJMTp3blb2MaTPZExL0sDZI=">和 background: url(./logo.png)中，”./logo.png” 是相对的资源路径，将由Webpack解析为模块依赖。</p>
+<p>相信有很多人知道vue-cli有两个放置静态资源的地方，分别是src/assets文件夹和static文件夹,这两者的区别很多人可能不太清楚。<br>assets目录中的文件会被webpack处理解析为模块依赖，只支持相对路径形式。例如，在 <img src="http://you img base url/./logo.png?e=1618062479&token=your qiniu access key:BQAt6DoQ4lQXvVdYGrzvjkQnJVY=">和 background: url(./logo.png)中，”./logo.png” 是相对的资源路径，将由Webpack解析为模块依赖。</p>
 <p>static/ 目录下的文件并不会被Webpack处理：它们会直接被复制到最终的打包目录（默认是dist/static）下。必须使用绝对路径引用这些文件，这是通过在 config.js 文件中的 build.assetsPublicPath 和 build.assetsSubDirectory 连接来确定的。<br>任何放在 static/ 中文件需要以绝对路径的形式引用：/static/[filename]。</p>
 <p>在我们实际的开发中，总的来说：static放不会变动的文件 assets放可能会变动的文件。</p>
 <p>因为webpack会将图片当做模块来引用，所以在js中需要使用require将图片引用进来，不能直接以字符串的形式。   </p>
@@ -508,6 +514,24 @@
 <p>例如，url(./image.png) 会被转换为 require(‘./image.png’)，而</p>
 <p><code>&lt;img src=&quot;../image.png&quot;&gt;</code><br>将会编译为：<code>createElement(&#39;img&#39;, { attrs: { src: require(&#39;../image.png&#39;) }})</code><br>编译规则:<br>1) 如果路径是绝对路径，会原样保留。<br>2) 如果路径以 . 开头，将会被看作相对的模块依赖，并按照你的本地文件系统上的目录结构进行解析。<br>3) 如果路径以 ~ 开头，其后的部分将会被看作模块依赖。这意味着你可以用该特性来引用一个 node 依赖中的资源：<br>4) (13.7.0+) 如果路径以 @ 开头，也会被看作模块依赖。如果你的 webpack 配置中给 @ 配置了 alias，这就很有用了。所有 vue-cli 创建的项目都默认配置了将 @ 指向 /src。  </p>
 <h1 id="element-ui"><a href="#element-ui" class="headerlink" title="element ui"></a>element ui</h1><p>见<a href="./electron实践.md">element-ui 实践</a></p>
+<h1 id="swiper"><a href="#swiper" class="headerlink" title="swiper"></a>swiper</h1><h2 id="swiper-vue"><a href="#swiper-vue" class="headerlink" title="swiper/vue"></a>swiper/vue</h2><p>swiper文档: <a href="https://swiperjs.com/get-started" target="_blank" rel="noopener">https://swiperjs.com/get-started</a><br><!-- https://swiper.com.cn/demo/index.html --><br>&lt;!–<br>移动端滑动不流畅：<br>observer: true,//修改swiper自己或子元素时，自动初始化swiper<br>observeParents: true,//修改swiper的父元素时，自动初始化swiper<br>包括动态生产的swiper， 隐藏后出现。<br>多个swiper插件，出现混乱问题： 1. 实例化swiper时加上其父元素加以区分； 2.Swiper加上ID或Class区分，要保留默认的类名swiper-container</p>
+<p><a href="https://www.cnblogs.com/wangyihong/p/7055599.html" target="_blank" rel="noopener">swiper.js 碰到的坑</a><br><a href="https://blog.csdn.net/cx091/article/details/78280061" target="_blank" rel="noopener">关于swiper移动端的坑</a><br>为了提高移动端的加载速度，开发人员手动拿出需要的siwper的样式和js是ok的，<br>但是这里需要需要注意几点：<br>移动端上的卡顿问题：如果只引用了swiper的js而没有引入swiper.css和swiper.animate.js，移动端就会出现卡顿问题<br>官方建议代码： observer，observeParents。<br> –&gt;</p>
+<p>Swiper Vue.js Components: <a href="https://swiperjs.com/vue#virtual-slides" target="_blank" rel="noopener">https://swiperjs.com/vue#virtual-slides</a><br>如果只有一个可以把事件监听写在swiper上。否则需要利用this.$refs.swiper1 获取到swiper实例及其index</p>
+<blockquote>
+<p>Swiper Vue.js components are compatible only with new Vue.js version 3<br>swiper/vue exports 2 components: Swiper and SwiperSlide:</p>
+</blockquote>
+<h2 id="vue-awesome-swiper"><a href="#vue-awesome-swiper" class="headerlink" title="vue-awesome-swiper"></a>vue-awesome-swiper</h2><p>vue-awesome-swiper:<a href="https://github.com/surmon-china/vue-awesome-swiper/" target="_blank" rel="noopener">https://github.com/surmon-china/vue-awesome-swiper/</a></p>
+<ol start="0">
+<li>属性和事件监听 通过属性配置。</li>
+<li>事件。也可以在组件上写事件监听，但是有的事件好像没有（和swiper文档有出入）。<!-- slideChange。没有slideChangeEnd --><br>而且函数回调中参数：swiper并没有。所以只能写在on中监听（注意this）<!-- 通过v-for写了多个swiper，要利用refs去获取每个实例及对应的参数grade,group,activieIndex --></li>
+<li>属性。slidesPerView 会自动计算宽度根据屏幕，所以不能设置slide的宽度。<br>需要把值改为 <code>auto</code>。通过css调整宽度</li>
+<li>如果要居中对齐，且中间内容放大。可以通过设置<code>centeredSlides</code>。<!-- 每个滑块宽度设置50%（才可以保证有3个，两边占一半）
+两边内容缩小可以通过transform:scale(.8)。加过渡。
+此时滑块见的gap可以不设置。
+否则，第一次点击下面点赞按钮。引进重新计算位置，轮播区向左移动一下。 -->
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">swiperOptions: &#123;</span><br><span class="line">        <span class="comment">// autoplay: &#123;</span></span><br><span class="line">        <span class="comment">//   delay: 3000, //3秒切换一次</span></span><br><span class="line">        <span class="comment">//   disableOnInteraction: false,  //鼠标拖动后继续自动轮播</span></span><br><span class="line">        <span class="comment">// &#125;,</span></span><br><span class="line">        <span class="comment">// width: 300,</span></span><br><span class="line">        <span class="comment">// slidesPerView : 3,</span></span><br><span class="line">        slidesPerView: <span class="string">'auto'</span>,</span><br><span class="line">        centeredSlides: <span class="literal">true</span>,</span><br><span class="line">        <span class="comment">// spaceBetween: 10,</span></span><br><span class="line">        <span class="comment">// effect: 'fade'</span></span><br><span class="line">        on: &#123;</span><br><span class="line">          slideChange: <span class="function"><span class="keyword">function</span>(<span class="params">swiper</span>)</span>&#123;</span><br><span class="line">            <span class="comment">// console.log('过渡结束');</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'过渡结束'</span>, swiper, <span class="keyword">this</span>.$el[<span class="number">0</span>], <span class="keyword">this</span>.activeIndex)</span><br><span class="line">            <span class="keyword">const</span> dom = <span class="keyword">this</span>.$el[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">const</span> gkey = dom.dataset.gkey</span><br><span class="line">            _that.changeSlide(gkey,  <span class="keyword">this</span>.activeIndex)</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="comment">// slideChangeEnd: function(swiper)&#123;</span></span><br><span class="line">          <span class="comment">//   console.log('过渡结束', swiper);</span></span><br><span class="line">          <span class="comment">// &#125;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
 <p style="text-align:right">2019.4.14 星期日 17:30</p>
 
 <h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><p>Vuex:<a href="https://vuex.vuejs.org/zh/" target="_blank" rel="noopener">https://vuex.vuejs.org/zh/</a><br>## 一 安装<br>Vuex 依赖 Promise。如果你支持的浏览器并没有实现<br>## 二 vuex是什么   </p>
@@ -570,6 +594,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue-js/" rel="tag"><i class="fa fa-tag"></i> vue.js</a>
+          
+        </div>
       
 
       
@@ -704,7 +734,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">304</span>
+                  <span class="site-state-item-count">322</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -715,7 +745,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -726,7 +756,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -747,7 +777,7 @@ var jiathis_config={
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="mailto:yalhu@gmail.com" target="_blank" title="E-Mail">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>
@@ -809,7 +839,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue实用"><span class="nav-text">vue实用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#组件通信"><span class="nav-text">组件通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-text">其它</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#refs"><span class="nav-text">refs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#es模块使用"><span class="nav-text">es模块使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-es模块使用。兼容回退"><span class="nav-text">1. es模块使用。兼容回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-也可以从vue的components中导出具体的某一个方法。（非mixin方法）"><span class="nav-text">1. 也可以从vue的components中导出具体的某一个方法。（非mixin方法）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#骨架屏"><span class="nav-text">骨架屏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现思路"><span class="nav-text">实现思路</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-loader"><span class="nav-text">vue-loader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-cli"><span class="nav-text">vue-cli</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#路径"><span class="nav-text">路径</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其它-1"><span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#assets和static文件夹的区别"><span class="nav-text">assets和static文件夹的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源路径处理"><span class="nav-text">资源路径处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#element-ui"><span class="nav-text">element ui</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vuex"><span class="nav-text">vuex</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-router"><span class="nav-text">vue-router</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue实用"><span class="nav-text">vue实用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#组件通信"><span class="nav-text">组件通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-text">其它</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#refs"><span class="nav-text">refs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#es模块使用"><span class="nav-text">es模块使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-es模块使用。兼容回退"><span class="nav-text">1. es模块使用。兼容回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-也可以从vue的components中导出具体的某一个方法。（非mixin方法）"><span class="nav-text">1. 也可以从vue的components中导出具体的某一个方法。（非mixin方法）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#骨架屏"><span class="nav-text">骨架屏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现思路"><span class="nav-text">实现思路</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-loader"><span class="nav-text">vue-loader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-cli"><span class="nav-text">vue-cli</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#路径"><span class="nav-text">路径</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其它-1"><span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#assets和static文件夹的区别"><span class="nav-text">assets和static文件夹的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源路径处理"><span class="nav-text">资源路径处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#element-ui"><span class="nav-text">element ui</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#swiper"><span class="nav-text">swiper</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#swiper-vue"><span class="nav-text">swiper/vue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-awesome-swiper"><span class="nav-text">vue-awesome-swiper</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vuex"><span class="nav-text">vuex</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-router"><span class="nav-text">vue-router</span></a></li></ol></div>
             
 
           </div>
@@ -829,7 +859,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear"><!--2021-->2020</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -843,7 +873,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">502.1k</span>
+    <span title="Site words total count">529.7k</span>
   
 </div>
 
