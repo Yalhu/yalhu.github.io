@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="阿里云 cdn: https://help.aliyun.com/document_detail/27099.html  2020.2.23 星期 二 11：01    CDN新手指引产品简介工作原理工作原理 应用场景CDN的业务使用场景分为静态内容加速、动态内容加速和安全加速。阿里云CDN只用于加速静态内容，动态内容加速需使用阿里云全站加速，安全加速需使用阿里云安全加速。了解动态内容和静态内容，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-02-23T07:26:50.000Z">
+<meta property="og:updated_time" content="2021-04-10T13:21:17.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cdn实践">
 <meta name="twitter:description" content="阿里云 cdn: https://help.aliyun.com/document_detail/27099.html  2020.2.23 星期 二 11：01    CDN新手指引产品简介工作原理工作原理 应用场景CDN的业务使用场景分为静态内容加速、动态内容加速和安全加速。阿里云CDN只用于加速静态内容，动态内容加速需使用阿里云全站加速，安全加速需使用阿里云安全加速。了解动态内容和静态内容，">
@@ -333,7 +333,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-23T00:00:00Z">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-23T08:00:00+08:00">
                 2020-02-23
               </time>
             
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-02-23T07:26:50Z">
-                2021-02-23
+              <time title="更新于" itemprop="dateModified" datetime="2021-04-10T21:21:17+08:00">
+                2021-04-10
               </time>
             
           </span>
@@ -577,7 +577,6 @@
 </table>
 <p>例如：响应头x-swift为静态文件，在CDN上的缓存时间为0秒，说明CDN不缓存该文件，原因是响应头中没有带Etag和Last-modified。</p>
 <p>您可以通过如下方法，验证缓存是否命中。<br>在浏览器Chrome上，按F12。<br>选择Network。<br>查看指定URL的响应头信息中的X-Cache字段。<br>如果显示HIT，则说明命中CDN节点上的缓存资源。<br>如果显示MISS，则说明未命中CDN节点上的缓存资源，直接回源站获取。</p>
-<p># </p>
 <h1 id="CDN缓存策略解读和配置策略"><a href="#CDN缓存策略解读和配置策略" class="headerlink" title="CDN缓存策略解读和配置策略"></a>CDN缓存策略解读和配置策略</h1><p><a href="https://developer.aliyun.com/article/188495" target="_blank" rel="noopener">CDN 最佳实践】CDN缓存策略解读和配置策略</a><br><!-- [【CDN 最佳实践】CDN缓存策略解读和配置策略](https://www.jianshu.com/p/07cfa3ec67b8) --><br><!-- $_PS: 同一篇。上面为ali原文 --></p>
 <h3 id="CDN-的缓存适用范围"><a href="#CDN-的缓存适用范围" class="headerlink" title="CDN 的缓存适用范围"></a>CDN 的缓存适用范围</h3><p>CDN 对于常见的 HTTP 请求均是支持的，具体对不同请求方式的支持情况请参考表一。<br>但是有一点需要注意的是虽然对这些类型的 HTTP 请求均是支持的，但是并不是对所有请求方式都会进行缓存的。<br>CDN 仅会对于 GET 请求进行缓存，而对于其他的请求均不进行缓存，仅是起到中间代理、转发的功能。因此我们建议添加 CDN 的站点源站最好能够实现动静分离。将动态请求和静态请求的内容独立成两个站点，而 CDN 仅仅加速静态站点中的资源。</p>
 <h3 id="CDN缓存配置"><a href="#CDN缓存配置" class="headerlink" title="CDN缓存配置"></a>CDN缓存配置</h3><p>缓存配置包括目录和后缀名两种形式，并且可以针对不同的缓存配置设置不同的权重以决定其优先级。</p>
@@ -814,7 +813,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">322</span>
+                  <span class="site-state-item-count">321</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -953,7 +952,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">529.7k</span>
+    <span title="Site words total count">529.3k</span>
   
 </div>
 

@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2021.4.7 星期三  14：37    基础 二、数据库设计技巧和窍门2.1.规范化存储与非规范化存储所以在两种存储数据方式之间进行选择之前，先评估一下你的应用数据库的使用方式。 如果您有一个不需要频繁更新的数据，更新的即时一致性不是很重要，但是在读取时需要良好的性能，那么非规范化可能是明智的选择。（比如：我们博客的博文，作者一旦保存之后，几乎就不在进行频繁的修改，但是面临着读者频繁的读取">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-07T06:56:42.000Z">
+<meta property="og:updated_time" content="2021-04-10T13:20:38.406Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mongo数据库设计">
 <meta name="twitter:description" content="2021.4.7 星期三  14：37    基础 二、数据库设计技巧和窍门2.1.规范化存储与非规范化存储所以在两种存储数据方式之间进行选择之前，先评估一下你的应用数据库的使用方式。 如果您有一个不需要频繁更新的数据，更新的即时一致性不是很重要，但是在读取时需要良好的性能，那么非规范化可能是明智的选择。（比如：我们博客的博文，作者一旦保存之后，几乎就不在进行频繁的修改，但是面临着读者频繁的读取">
@@ -333,7 +333,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-07T00:00:00Z">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-07T08:00:00+08:00">
                 2021-04-07
               </time>
             
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-04-07T06:56:42Z">
-                2021-04-07
+              <time title="更新于" itemprop="dateModified" datetime="2021-04-10T21:20:38+08:00">
+                2021-04-10
               </time>
             
           </span>
@@ -516,7 +516,7 @@
 -->
 <h3 id="几个好处"><a href="#几个好处" class="headerlink" title="几个好处"></a>几个好处</h3><p>1、一次数据库查询可以得到整条记录。。<br>2、一条记录的所有信息都书存储在硬盘的的同一片区域，所以一次检索可以可以得到所有数据。<br>3、插入或更新单条属性时：<br>4、插入一条新属性不需要在硬盘上移动整条记录，Mongo有一个预留机制，预留出了一部分空间以适应数据对象的增长。也可以预防索引的增长等问题。 </p>
 <p>Embed vs. Reference<br>在Mongo数据库设计中关键的一句话是“比起嵌入到其他Collection中做一个子对象，每个对象值得拥有自己的Collection吗？”。在关系数据库中。每个有兴趣的子项目通常都会分离出来单独设计一张表（除非为了性能的考虑）。而在Mongo中，是不建议使用这种设计的，嵌入式的对象更高效。(这句不是很确定Data is then colocated on disk; client-server turnarounds to the database are eliminated)数据是即时同步到硬盘上的，客户端与服务器不必要在数据库上做周转。所以通常来说问题就是“为什么不使用嵌入式对象呢？”  </p>
-<h3 id="一些规则："><a href="#一些规则：" class="headerlink" title="一些规则："></a>一些规则：</h3><p>1、顶级对象，一般都有自己的Collection<br>2、线性细节对象，一般作为嵌入式的<br>3、一个对象和另一个对象是包含关系时通常采用嵌入式设计<br>4、多对多的关系通常采取引用设计<br>5、只含有几个简单对象的可以单独作为一个Collection，因为整个Collection可以很快的被缓存在应用程序服务器内存中。<br>6、在Collection中嵌入式对象比顶级对象更难引用。as you cannot have a DBRef to an embedded object (at least not yet).<br>7、It is more difficult to get a system-level view for embedded objects. For example, it would be easier to query the top 100 scores across all students if Scores were not embedded.<br>8、如果将要嵌入的数据量很大（很多M），你可以限制单个对象的大小<br>9、如果性能存在问题，请使用嵌入式设计<br><!-- #3 end --></p>
+<h3 id="一些规则"><a href="#一些规则" class="headerlink" title="一些规则"></a>一些规则</h3><p>1、顶级对象，一般都有自己的Collection<br>2、线性细节对象，一般作为嵌入式的<br>3、一个对象和另一个对象是包含关系时通常采用嵌入式设计<br>4、多对多的关系通常采取引用设计<br>5、只含有几个简单对象的可以单独作为一个Collection，因为整个Collection可以很快的被缓存在应用程序服务器内存中。<br>6、在Collection中嵌入式对象比顶级对象更难引用。as you cannot have a DBRef to an embedded object (at least not yet).<br>7、It is more difficult to get a system-level view for embedded objects. For example, it would be easier to query the top 100 scores across all students if Scores were not embedded.<br>8、如果将要嵌入的数据量很大（很多M），你可以限制单个对象的大小<br>9、如果性能存在问题，请使用嵌入式设计<br><!-- #3 end --></p>
 <!-- 
 ## 其他
 [MongoDB 数据库的命名、设计规范详解](https://www.jb51.net/article/179928.htm)
@@ -596,8 +596,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sum/jsplus/h5动画调研/" rel="next" title="H5动画调研">
-                <i class="fa fa-chevron-left"></i> H5动画调研
+              <a href="/sum/jsplus/indexedDB学习/" rel="next" title="indexedDB学习">
+                <i class="fa fa-chevron-left"></i> indexedDB学习
               </a>
             
           </div>
@@ -606,8 +606,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/sum/others/chrome插件整理/" rel="prev" title="Chrome插件整理">
-                Chrome插件整理 <i class="fa fa-chevron-right"></i>
+              <a href="/sum/jsplus/h5动画调研/" rel="prev" title="H5动画调研">
+                H5动画调研 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -720,7 +720,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">322</span>
+                  <span class="site-state-item-count">321</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -825,7 +825,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内嵌-vs-引用"><span class="nav-text">内嵌 vs 引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几个好处"><span class="nav-text">几个好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些规则："><span class="nav-text">一些规则：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内嵌-vs-引用"><span class="nav-text">内嵌 vs 引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几个好处"><span class="nav-text">几个好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些规则"><span class="nav-text">一些规则</span></a></li></ol></div>
             
 
           </div>
@@ -859,7 +859,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">529.7k</span>
+    <span title="Site words total count">529.3k</span>
   
 </div>
 
