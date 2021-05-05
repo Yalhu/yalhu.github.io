@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="function doDecrypt (pwd, onError) { 	console.log(&apos;in doDecrypt&apos;); 	const txt = document.getElementById(&apos;enc_content&apos;).innerHTML; 	let plantext; 	try { 		const bytes = CryptoJS.AES.decrypt(txt, pwd);">
+<meta name="description" content="2020.9.24 星期四  ：    ui uni uiDCloud官方出了一套扩展组件，即(uni-ui)[https://uniapp.dcloud.io/component/README?id=uniui] 插件市场更多组件uViewUI：整合了非常多组件，功能丰富、文档清晰，但不支持nvuecolorUI css库：颜值很高，css库而非组件unify UI：全端支持的组件库，侧重nv">
 <meta name="keywords" content="小程序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Uniapp使用">
 <meta property="og:url" content="http://yoursite.com/sum/jsplus/uniapp使用/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="function doDecrypt (pwd, onError) { 	console.log(&apos;in doDecrypt&apos;); 	const txt = document.getElementById(&apos;enc_content&apos;).innerHTML; 	let plantext; 	try { 		const bytes = CryptoJS.AES.decrypt(txt, pwd);">
+<meta property="og:description" content="2020.9.24 星期四  ：    ui uni uiDCloud官方出了一套扩展组件，即(uni-ui)[https://uniapp.dcloud.io/component/README?id=uniui] 插件市场更多组件uViewUI：整合了非常多组件，功能丰富、文档清晰，但不支持nvuecolorUI css库：颜值很高，css库而非组件unify UI：全端支持的组件库，侧重nv">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-05T09:58:29.113Z">
+<meta property="og:updated_time" content="2021-05-02T10:28:45.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Uniapp使用">
-<meta name="twitter:description" content="function doDecrypt (pwd, onError) { 	console.log(&apos;in doDecrypt&apos;); 	const txt = document.getElementById(&apos;enc_content&apos;).innerHTML; 	let plantext; 	try { 		const bytes = CryptoJS.AES.decrypt(txt, pwd);">
+<meta name="twitter:description" content="2020.9.24 星期四  ：    ui uni uiDCloud官方出了一套扩展组件，即(uni-ui)[https://uniapp.dcloud.io/component/README?id=uniui] 插件市场更多组件uViewUI：整合了非常多组件，功能丰富、文档清晰，但不支持nvuecolorUI css库：颜值很高，css库而非组件unify UI：全端支持的组件库，侧重nv">
 
 
 
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-05T17:58:29+08:00">
-                2020-10-05
+              <time title="更新于" itemprop="dateModified" datetime="2021-05-02T18:28:45+08:00">
+                2021-05-02
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  83
+                  184
                 </span>
               
 
@@ -458,35 +458,44 @@
       
 
       
-        <script src="/js/crypto-js.js"></script>
-<script>
-function doDecrypt (pwd, onError) {
-	console.log('in doDecrypt');
-	const txt = document.getElementById('enc_content').innerHTML;
-	let plantext;
-	try {
-		const bytes = CryptoJS.AES.decrypt(txt, pwd);
-		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-	} catch(err) {
-		if(onError) {
-			onError(err);
-		}
-		return;
-	}
-	document.getElementById('enc_content').innerHTML = plaintext;
-	document.getElementById('enc_content').style.display = 'block';
-	document.getElementById('enc_passwd').style.display = 'none';
-	if(typeof MathJax !== 'undefined') {
-		MathJax.Hub.Queue(
-			['resetEquationNumbers', MathJax.InputJax.TeX],
-			['PreProcess', MathJax.Hub],
-			['Reprocess', MathJax.Hub]
-		);
-	}
-}
-</script>
-<div id="enc_content" style="display:none">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</div>
-<div id="enc_passwd"> <input type="text" style=" border-radius: 5px; border-style: groove; height: 30px; width: 50%; cursor: auto; font-size: 102%; color: currentColor; outline: none; text-overflow: initial; padding-left: 5px;">   <input type="submit" value="decrypt" onclick="decrypt()" style=" width: 58px; height: 34px; border-radius: 5px; background-color: white; border-style: solid; color: currentColor; ">  <div id="enc_error" style=" display: inline-block; color: #d84527; font: large; "></div> <script>  var onError = function(error) {  $("#enc_error")[0].innerHTML = "password error!";  };  function decrypt() {  var passwd = $("#enc_passwd input")[0].value;  console.log(passwd);  doDecrypt(passwd, onError);  }  </script></div>
+        <p style="text-align:right"> 2020.9.24 星期四  ： </p>
+
+
+<h1 id="ui"><a href="#ui" class="headerlink" title="ui"></a>ui</h1><!-- \# [[关于uni-app的ui库、ui框架、ui组件 ]](https://ask.dcloud.net.cn/article/35489) -->
+<h2 id="uni-ui"><a href="#uni-ui" class="headerlink" title="uni ui"></a>uni ui</h2><p>DCloud官方出了一套扩展组件，即(uni-ui)[<a href="https://uniapp.dcloud.io/component/README?id=uniui]" target="_blank" rel="noopener">https://uniapp.dcloud.io/component/README?id=uniui]</a></p>
+<h2 id="插件市场更多组件"><a href="#插件市场更多组件" class="headerlink" title="插件市场更多组件"></a>插件市场更多组件</h2><p>uViewUI：整合了非常多组件，功能丰富、文档清晰，但不支持nvue<br>colorUI css库：颜值很高，css库而非组件<br>unify UI：全端支持的组件库，侧重nvue<br>mypUI：全端支持的组件库，侧重nvue<br>ThorUI组件库<br>graceUI商业支持库</p>
+<p>综上，官方对组件的使用建议是：<br>首先使用内置组件<br>然后使用uni ui扩展组件<br>其他需求依靠插件市场其他组件灵活补充</p>
+<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><table>
+<thead>
+<tr>
+<th>name</th>
+<th>stars</th>
+<th>issues</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uniui</td>
+<td>781</td>
+<td></td>
+</tr>
+<tr>
+<td>uViewUI</td>
+<td>1.6k</td>
+<td></td>
+</tr>
+<tr>
+<td>colorUI</td>
+<td>9.4k</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>colorUI用的多一些。</p>
+<p><a href="https://github.com/weilanwl/ColorUI" target="_blank" rel="noopener">https://github.com/weilanwl/ColorUI</a><br><a href="https://github.com/YanxinNet/uView" target="_blank" rel="noopener">https://github.com/YanxinNet/uView</a><br><a href="https://github.com/dcloudio/uni-ui" target="_blank" rel="noopener">https://github.com/dcloudio/uni-ui</a></p>
+<p style="text-align:right"> </p>
+
+
       
     </div>
     
@@ -647,8 +656,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -687,7 +705,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -756,6 +774,27 @@ var jiathis_config={
       </section>
 
       
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ui"><span class="nav-text">ui</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#uni-ui"><span class="nav-text">uni ui</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件市场更多组件"><span class="nav-text">插件市场更多组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对比"><span class="nav-text">对比</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -783,7 +822,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">529.3k</span>
+    <span title="Site words total count">530.0k</span>
   
 </div>
 

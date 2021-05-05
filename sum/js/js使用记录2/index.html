@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2019.2.12 星期二    JS ~~等价于Math.floor. ~~3.6=3(=~(~3.6)=~(-4+1)); ~3.6 = -4 (-(3+1)) 反码(~)：二进制进行反码计算时。1变成0，0变成1。 举例子~6,6的二进制是110在机器上补足32位在110之前补码0。那么反码为111…..001，此时的反码减去1得111…..111000，那么原反码减去相减的码得到0000…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-02-21T15:18:53.767Z">
+<meta property="og:updated_time" content="2021-05-05T08:02:20.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Js使用记录2">
 <meta name="twitter:description" content="2019.2.12 星期二    JS ~~等价于Math.floor. ~~3.6=3(=~(~3.6)=~(-4+1)); ~3.6 = -4 (-(3+1)) 反码(~)：二进制进行反码计算时。1变成0，0变成1。 举例子~6,6的二进制是110在机器上补足32位在110之前补码0。那么反码为111…..001，此时的反码减去1得111…..111000，那么原反码减去相减的码得到0000…">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-02-21T23:18:53+08:00">
-                2021-02-21
+              <time title="更新于" itemprop="dateModified" datetime="2021-05-05T16:02:20+08:00">
+                2021-05-05
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,238
+                  1,269
                 </span>
               
 
@@ -471,11 +471,12 @@
 <li>单例/字面量 定义时无法使用单例的方法   </li>
 <li>未定义的全局变量不可以直接使用，需要用window.varity,比如定义对象的属性值时   </li>
 <li>int,long,float,double的 +, -, *  运算性能是一样的，除法运算比较慢，占用时间较多，要尽量避免除法。<br>即：加，减，乘的运算时间与数据类型无关，所以可以随意使用更精确的float、double型，不影响程序速度。   </li>
-<li>console.log(3+2?’1’:’2’)  //1<br> console.log(3+2&amp;&amp;4) // 4<br> console.log(3+2) // 5 <!-- + 运算符优先级高于 &&; && 运算符优先级 > ?: -->
+<li>console.log(3+2 ? ‘1’ : ‘2’)  //1<br> console.log(3+2 &amp;&amp; 4) // 4<br> console.log(3+2) // 5 <!-- + 运算符优先级高于 &&; && 运算符优先级 > ?: --></li>
+<li><p>指定次数遍历</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render: <span class="function"><span class="keyword">function</span> (<span class="params">createElement</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> createElement(<span class="string">'div'</span>,</span><br><span class="line">    <span class="built_in">Array</span>.apply(<span class="literal">null</span>, &#123; <span class="attr">length</span>: <span class="number">20</span> &#125;).map(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> createElement(<span class="string">'p'</span>, <span class="string">'hi'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<ol>
-<li>在try catch finally 中return使用注意<br>&lt;!–<br><del>注意：finally中最后不要有return语句，在编译器中会报警告。</del><br>$_PS: 代码检查工具会报错<br><a href="https://www.cnblogs.com/jing-tian/p/11074718.html" target="_blank" rel="noopener">js中try、catch、finally的执行规则</a></li>
+<li><p>在try catch finally 中return使用注意<br>&lt;!–<br><del>注意：finally中最后不要有return语句，在编译器中会报警告。</del><br>$_PS: 代码检查工具会报错<br><a href="https://www.cnblogs.com/jing-tian/p/11074718.html" target="_blank" rel="noopener">js中try、catch、finally的执行规则</a></p>
+</li>
 </ol>
 <p>try catch缺点：<br>1.try catch耗性能<br>2.try catch捕获不到异步错误<br>3.try catch可能会导致报错点更模糊</p>
 <p><a href="https://blog.csdn.net/kavensu/article/details/8067850" target="_blank" rel="noopener">有return的情况下try catch finally的执行顺序（最有说服力的总结）</a><br><a href="https://blog.csdn.net/qq_30816657/article/details/80297646" target="_blank" rel="noopener">try catch 语句中有return 的各类情况</a> –&gt;<br>总结：<br>在正常情况（即程序正常执行try catch finally语句块，不会在语句中出现退出程序、线程终止等特殊情况）下，都会执行finally语句块，如果finally中有return,则程序会走finally中的return，如果没有，则先执行try或者catch中的return,将其存入临时栈中，执行完finally语句后才返回临时栈中的值。</p>
@@ -718,7 +719,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -835,7 +836,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">529.3k</span>
+    <span title="Site words total count">530.0k</span>
   
 </div>
 
