@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2018.4.28 星期六 9.40  技术/组织强壮；开发方便；搜索不做对比； 一 基本使用安装支持正版；其他平台下载的可能是国内版。        chrome://version正版：Google Inc.版权所有2018 Google Inc. 保留所有权利。  国内下载地址： https://www.google.cn/chrome国内地址可以打开：http://www.google.c">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-05-02T10:30:13.892Z">
+<meta property="og:updated_time" content="2021-09-04T08:40:47.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chrome简单实用">
 <meta name="twitter:description" content="2018.4.28 星期六 9.40  技术/组织强壮；开发方便；搜索不做对比； 一 基本使用安装支持正版；其他平台下载的可能是国内版。        chrome://version正版：Google Inc.版权所有2018 Google Inc. 保留所有权利。  国内下载地址： https://www.google.cn/chrome国内地址可以打开：http://www.google.c">
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-05-02T18:30:13+08:00">
-                2021-05-02
+              <time title="更新于" itemprop="dateModified" datetime="2021-09-04T16:40:47+08:00">
+                2021-09-04
               </time>
             
           </span>
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,617
+                  1,811
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  7
                 </span>
               
             </div>
@@ -471,6 +471,7 @@
 SameSite by default cookies 
 --></p>
 <p><a href="chrome://inspect/#devices" target="_blank" rel="noopener">chrome://inspect/#devices</a></p>
+<p><a href="chrome://extensions/shortcuts" target="_blank" rel="noopener">chrome://extensions/shortcuts</a><br>设置插件的快捷键</p>
 <p>清除chrome 缓存：<a href="chrome://net-internals/#dns" target="_blank" rel="noopener">chrome://net-internals/#dns</a><br><!-- $_PS: 有时强制刷新页面dns也不刷新，老吃亏了 --></p>
 <p>chrome://net-internals/#events</p>
 <h3 id="hsts"><a href="#hsts" class="headerlink" title="hsts"></a>hsts</h3><p>Chrome禁止http自动转为https<br>在Chrome浏览器地址栏输入chrome://net-internals/#hsts<br>在Delete domain security policies 中输入要删除自动转换的域名</p>
@@ -488,11 +489,20 @@ SameSite by default cookies
 [[程序员的基础生存技能：高效用Google]]
 **$_PS:** 上面两篇是相同的
 -->
-<h3 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h3>结合Vimium。</li>
+<h3 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h3>结合Vimium。<!--      
+其它参考：   
+[Chrome浏览器如何给一个书签增加快捷键？](https://www.zhihu.com/question/20827603)   
+[如何恢复误删的 Chrome 书签](https://jingyan.baidu.com/article/915fc414f638e251394b2022.html)   
+-->
+</li>
 </ol>
-<p>其它参考：<br><a href="https://www.zhihu.com/question/20827603" target="_blank" rel="noopener">Chrome浏览器如何给一个书签增加快捷键？</a><br><a href="https://jingyan.baidu.com/article/915fc414f638e251394b2022.html" target="_blank" rel="noopener">如何恢复误删的 Chrome 书签</a>   </p>
 <h3 id="开发者工具"><a href="#开发者工具" class="headerlink" title="开发者工具"></a>开发者工具</h3><p>开发者工具 windows-safari：偏好设置—-&gt;高级—-&gt;勾选</p>
-<p>参考：<br><a href>Chrome 开发者工具</a><a href="https://developers.google.cn/web/tools/chrome-devtools/?hl=zh-cn" target="_blank" rel="noopener">https://developers.google.cn/web/tools/chrome-devtools/?hl=zh-cn</a><br><a href="http://www.css88.com/doc/chrome-devtools/javascript/step-code/" target="_blank" rel="noopener">Chrome 开发者工具#如何遍历你的代码</a></p>
+<!-- ### DevTools -->
+<p>要在开发者工具的Settings界面中 Perference中找到DevTools，勾选Auto-open DevTools for popups就好了</p>
+<p>现在打开新窗口是 devtools 总是自动打开， 重置了浏览器设置也不行。（上面的也不行）<br>应该是浏览器坏掉了</p>
+<h4 id="chrome-console"><a href="#chrome-console" class="headerlink" title="chrome console"></a>chrome console</h4><!-- [chrome Network 过滤和高级过滤](https://blog.csdn.net/tengdazhang770960436/article/details/90644523) -->
+<p>一个字符 -（中划线），如下图所示：在Network这个选项卡的最左边有一个过滤的输入框，你只需要输入 - 就可以看到提示：<br>里面选项很多，不过你可以选中这些选项之后继续输入冒号查看当前选项内容提示：<br>注意这个表达式前面没有 -（中划线），输入 - 它的目的是为了 让你看到chrome提供了那些高级的选项。<br>但是它本身的含义是取反.我们可以通过使用 -.css -.js 来过滤掉css和js文件。-.css 和 -.js中间使用空格分开.</p>
+<p>参考：<br><a href>Chrome 开发者工具</a><a href="https://developers.google.cn/web/tools/chrome-devtools/?hl=zh-cn" target="_blank" rel="noopener">https://developers.google.cn/web/tools/chrome-devtools/?hl=zh-cn</a><br><!-- [Chrome 开发者工具#如何遍历你的代码](http://www.css88.com/doc/chrome-devtools/javascript/step-code/) --></p>
 <h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>设置，任务管理器，…  </p>
 <h3 id="谷歌浏览器自带截图功能"><a href="#谷歌浏览器自带截图功能" class="headerlink" title="谷歌浏览器自带截图功能"></a>谷歌浏览器自带截图功能</h3><!-- [谷歌浏览器自带截图功能](https://blog.csdn.net/weixin_41829196/article/details/82380351) -->
 <p>1) f12<br>2) 快捷键：<br>window:Ctrl + Shift + P<br>mac:command + Shift + P</p>
@@ -726,7 +736,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">321</span>
+                  <span class="site-state-item-count">339</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -748,7 +758,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -827,7 +837,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-基本使用"><span class="nav-number">1.</span> <span class="nav-text">一 基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他问题"><span class="nav-number">1.2.</span> <span class="nav-text">其他问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#url-list"><span class="nav-number">1.3.</span> <span class="nav-text">url list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hsts"><span class="nav-number">1.4.</span> <span class="nav-text">hsts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索"><span class="nav-number">1.5.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#书签"><span class="nav-number">1.6.</span> <span class="nav-text">书签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发者工具"><span class="nav-number">1.7.</span> <span class="nav-text">开发者工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它"><span class="nav-number">1.8.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#谷歌浏览器自带截图功能"><span class="nav-number">1.9.</span> <span class="nav-text">谷歌浏览器自带截图功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-快捷键"><span class="nav-number">2.</span> <span class="nav-text">二 快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-扩展程序"><span class="nav-number">3.</span> <span class="nav-text">三 扩展程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网页工具"><span class="nav-number">3.1.</span> <span class="nav-text">网页工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理工具"><span class="nav-number">3.2.</span> <span class="nav-text">管理工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome"><span class="nav-number">3.3.</span> <span class="nav-text">chrome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊介绍"><span class="nav-number">3.4.</span> <span class="nav-text">特殊介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它-1"><span class="nav-number">3.5.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未使用"><span class="nav-number">3.6.</span> <span class="nav-text">未使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome浏览器本地文件支持ajax请求"><span class="nav-number">5.</span> <span class="nav-text">chrome浏览器本地文件支持ajax请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Safari浏览器"><span class="nav-number">6.</span> <span class="nav-text">Safari浏览器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-基本使用"><span class="nav-number">1.</span> <span class="nav-text">一 基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他问题"><span class="nav-number">1.2.</span> <span class="nav-text">其他问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#url-list"><span class="nav-number">1.3.</span> <span class="nav-text">url list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hsts"><span class="nav-number">1.4.</span> <span class="nav-text">hsts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索"><span class="nav-number">1.5.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#书签"><span class="nav-number">1.6.</span> <span class="nav-text">书签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发者工具"><span class="nav-number">1.7.</span> <span class="nav-text">开发者工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#chrome-console"><span class="nav-number">1.7.1.</span> <span class="nav-text">chrome console</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它"><span class="nav-number">1.8.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#谷歌浏览器自带截图功能"><span class="nav-number">1.9.</span> <span class="nav-text">谷歌浏览器自带截图功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-快捷键"><span class="nav-number">2.</span> <span class="nav-text">二 快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-扩展程序"><span class="nav-number">3.</span> <span class="nav-text">三 扩展程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网页工具"><span class="nav-number">3.1.</span> <span class="nav-text">网页工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理工具"><span class="nav-number">3.2.</span> <span class="nav-text">管理工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome"><span class="nav-number">3.3.</span> <span class="nav-text">chrome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊介绍"><span class="nav-number">3.4.</span> <span class="nav-text">特殊介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它-1"><span class="nav-number">3.5.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未使用"><span class="nav-number">3.6.</span> <span class="nav-text">未使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">4.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome浏览器本地文件支持ajax请求"><span class="nav-number">5.</span> <span class="nav-text">chrome浏览器本地文件支持ajax请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Safari浏览器"><span class="nav-number">6.</span> <span class="nav-text">Safari浏览器</span></a></li></ol></div>
             
 
           </div>
@@ -861,7 +871,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">530.0k</span>
+    <span title="Site words total count">572.1k</span>
   
 </div>
 

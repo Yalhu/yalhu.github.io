@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="2021.4.6 星期二    chrome extendtion 开发https://developer.chrome.com/extensions/manifest360开发文档-书签[【干货】Chrome插件(扩展)开发全攻略]  manifest.json: name, icons, manifest_version, version, descriptionbrowser_action">
+<meta name="description" content="2021.4.6 星期二 ## chrome extendsion 开发https://developer.chrome.com/extensions/manifest360开发文档-书签manifest.json: name, icons, manifest_version, version, descriptionbrowser_actionpage_actionoptions_page/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器插件开发">
 <meta property="og:url" content="http://yoursite.com/sum/others/浏览器插件开发/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2021.4.6 星期二    chrome extendtion 开发https://developer.chrome.com/extensions/manifest360开发文档-书签[【干货】Chrome插件(扩展)开发全攻略]  manifest.json: name, icons, manifest_version, version, descriptionbrowser_action">
+<meta property="og:description" content="2021.4.6 星期二 ## chrome extendsion 开发https://developer.chrome.com/extensions/manifest360开发文档-书签manifest.json: name, icons, manifest_version, version, descriptionbrowser_actionpage_actionoptions_page/">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-10T13:38:52.202Z">
+<meta property="og:updated_time" content="2021-09-04T08:00:34.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器插件开发">
-<meta name="twitter:description" content="2021.4.6 星期二    chrome extendtion 开发https://developer.chrome.com/extensions/manifest360开发文档-书签[【干货】Chrome插件(扩展)开发全攻略]  manifest.json: name, icons, manifest_version, version, descriptionbrowser_action">
+<meta name="twitter:description" content="2021.4.6 星期二 ## chrome extendsion 开发https://developer.chrome.com/extensions/manifest360开发文档-书签manifest.json: name, icons, manifest_version, version, descriptionbrowser_actionpage_actionoptions_page/">
 
 
 
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-04-10T21:38:52+08:00">
-                2021-04-10
+              <time title="更新于" itemprop="dateModified" datetime="2021-09-04T16:00:34+08:00">
+                2021-09-04
               </time>
             
           </span>
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,099
+                  3,595
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  15
                 </span>
               
             </div>
@@ -457,11 +457,11 @@
       
 
       
-        <p style="text-align:right"> 2021.4.6 星期二 </p>
-
-
-<h2 id="chrome-extendtion-开发"><a href="#chrome-extendtion-开发" class="headerlink" title="chrome extendtion 开发"></a>chrome extendtion 开发</h2><p><a href="https://developer.chrome.com/extensions/manifest" target="_blank" rel="noopener">https://developer.chrome.com/extensions/manifest</a><br><a href="http://open.chrome.360.cn/extension_dev/bookmarks.html" target="_blank" rel="noopener">360开发文档-书签</a><br><a href="https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html" target="_blank" rel="noopener">[【干货】Chrome插件(扩展)开发全攻略]</a></p>
-<!-- 
+        <p style="text-align:right"> 2021.4.6 星期二 </p><br><!-- 
+Chrome插件有：extension，app， NaCl(Native Client)， PNaCl(Portable Native Client)等。但因为安全性，兼容性等各种原因，Chrome官方已经宣布：逐渐废弃其它类型的插件，只保留extension,文件扩展名为crx.
+ --><br><br>## chrome extendsion 开发<br><a href="https://developer.chrome.com/extensions/manifest" target="_blank" rel="noopener">https://developer.chrome.com/extensions/manifest</a><br><a href="http://open.chrome.360.cn/extension_dev/bookmarks.html" target="_blank" rel="noopener">360开发文档-书签</a><br><!-- [[【干货】Chrome插件(扩展)开发全攻略]](https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html) --><br><!-- Chrome 平台 API: <http://www.kkh86.com/it/chrome-extension-doc/extensions/api_index.html>
+$_PS: 非常全的api
+ --><br><br><!-- 
 [Chrome 扩展(插件) 开发教程](https://dev.crxhome.org/guide/user_interface.html#设计交互界面)
 vue-doc 文档方式。更友好。 推荐入门
 
@@ -469,43 +469,21 @@ vue-doc 文档方式。更友好。 推荐入门
 【干货】部分内容
 
 [Chrome 扩展开发文档](https://wizardforcel.gitbooks.io/chrome-doc/content/index.html)
-来源360 网页ui更简洁  
+来源360。 但网页ui更简洁  
 
--->
-<p>manifest.json: name, icons, manifest_version, version, description<br>browser_action<br>page_action<br>options_page/ options_ui<br>chrome_url_overrides<br>devtools_page</p>
-<p>background<br>content_scripts<br>web_accessible_resources</p>
-<p>permissions</p>
-<p>omnibox</p>
-<p>injected-script, event-page,</p>
-<h3 id="能力"><a href="#能力" class="headerlink" title="能力"></a>能力</h3><p>Chrome插件提供了很多实用API供我们使用，包括但不限于：<br>书签控制；<br>下载控制；<br>窗口控制；<br>标签控制；<br>网络请求控制，各类事件监听；<br>自定义原生菜单；<br>完善的通信机制；<br>等等；</p>
-<h3 id="api"><a href="#api" class="headerlink" title="api"></a>api</h3><!-- [浏览器插件开发-常用API](https://blog.csdn.net/mjzhang1993/article/details/84848985) -->
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">chrome.tabs</span><br><span class="line">chrome.runtime</span><br><span class="line">chrome.webRequest</span><br><span class="line">chrome.window</span><br><span class="line">chrome.storage</span><br><span class="line">chrome.contextMenus</span><br><span class="line">chrome.devtools</span><br><span class="line">chrome.extension</span><br></pre></td></tr></table></figure>
-<p>chrome.runtime.getBackgroundPage(background: Window =&gt; {…}) 返回当前扩展的 background 对象<br>chrome.runtime.ma 返回清单文件<br>chrome.runtime.getURL 返回扩展中文件相对于安装位置的路径<br>chrome.runtime.setUninstallURL 设置卸载时要访问的 URL<br>chrome.runtime.reload 重新加载扩展</p>
-<p>chrome.tabs.create(params, callback) 创建一个新的标签，以下是 params 参数<br>windowId 创建新标签的目标窗口，默认当前窗口<br>index 标签在窗口中的位置<br>url 标签导航的初始页面<br>selected 是否为选中的 默认是true<br>pinned 标签是否为固定<br>callback(tab) tab 是创建后的标签的细节，包括id<br>chrome.tabs.executeScript(tabId, details, callback) 向标签页注入脚本<br>tabId 标签页ID，默认为当前选中窗口<br>details.code 直接注入的脚本代码<br>details.file 也可以指定注入的脚本文件，与 details.code 二选一<br>chrome.tabs.get(tabId, callback) 获取指定标签页的细节<br>chrome.tabs.getSelected(windowId, callback) 获取特定窗口（windowId 默认为当前窗口） 的选中的标签<br>chrome.tabs.insertCSS(tabId, details, callback) 向页面注入样式<br>chrome.tabs.remove(tabId, callback) 移除标签</p>
-<p>chrome.extension</p>
-<blockquote>
-<p>主要被用于通信支持，提供 扩展与 content_script 之间， 扩展与扩展之间，与大多数 chrome.* API 不同，chrome.extension 部分功能可以直接在 content_script 中使用<br>注意 chrome.extension 与 chrome.runtime 由很多重叠的 api , chrome.extension 比较老旧，尽量使用 chrome.runtime</p>
-</blockquote>
-<p>chrome.extension.connect<br>chrome.extension.onConnect<br>chrome.extension.sendMessage<br>chrome.extension.onMessage<br>chrome.extension.getURL</p>
-<p>chrome.cookies<br><!-- [Chrome浏览器扩展开发系列之八：Chrome扩展的数据存储](https://www.cnblogs.com/champagne/p/4826611.html) --><br>chrome.cookies.onChanged.addListener(({removed, cookie}) =&gt; {…}) removed=true 表示的是cookie被删除的情况，否则表示被添加或者设置，cookie 表示操作的cookie<br>常规方法 get | remove | set | getAll 等除外，以下是可能会用到的 api</p>
-<!-- [14-chrome 扩展开发 - chrome.storage 本地存储](http://www.ptbird.cn/chrome-extensions-storage.html) -->
-<p>chrome.storage<br>Chrome 存储 API 提供了 2 种储存区域，分别是 sync 和 local。两种储存区域的区别在于，sync 储存的区域会根据用户当前在 Chrome 上登陆的 Google 账户自动同步数据，当无可用网络连接可用时，sync 区域对数据的读写和 local 区域对数据的读写行为一致。</p>
-<p>对于每种储存区域，Chrome 又提供了 5 个方法，分别是 get、getBytesInUse、set、remove 和 clear。</p>
-<!-- 其他
+--><br><br>manifest.json: name, icons, manifest_version, version, description<br>browser_action<br>page_action<br>options_page/ options_ui<br>chrome_url_overrides<br>devtools_page<br><br>background<br>content_scripts<br>web_accessible_resources<br><br>permissions<br><br>omnibox<br><br><br>injected-script, event-page,<br><br><br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 清单文件的版本，这个必须写，而且必须是2</span></span><br><span class="line">	<span class="attr">"manifest_version"</span>: <span class="number">2</span>,</span><br><span class="line">	<span class="comment">// 插件的名称</span></span><br><span class="line">	<span class="attr">"name"</span>: <span class="string">"demo"</span>,</span><br><span class="line">	<span class="comment">// 插件的版本</span></span><br><span class="line">	<span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">	<span class="comment">// 插件描述</span></span><br><span class="line">	<span class="attr">"description"</span>: <span class="string">"简单的Chrome扩展demo"</span>,</span><br><span class="line">	<span class="comment">// 图标，一般偷懒全部用一个尺寸的也没问题</span></span><br><span class="line">	<span class="attr">"icons"</span>:</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="attr">"16"</span>: <span class="string">"img/icon.png"</span>,</span><br><span class="line">		<span class="attr">"48"</span>: <span class="string">"img/icon.png"</span>,</span><br><span class="line">		<span class="attr">"128"</span>: <span class="string">"img/icon.png"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="comment">// 会一直常驻的后台JS或后台页面</span></span><br><span class="line">	<span class="attr">"background"</span>:</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 2种指定方式，如果指定JS，那么会自动生成一个背景页</span></span><br><span class="line">		<span class="attr">"page"</span>: <span class="string">"background.html"</span></span><br><span class="line">		<span class="comment">//"scripts": ["js/background.js"]</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="comment">// 浏览器右上角图标设置，browser_action、page_action、app必须三选一</span></span><br><span class="line">	<span class="attr">"browser_action"</span>: </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="attr">"default_icon"</span>: <span class="string">"img/icon.png"</span>,</span><br><span class="line">		<span class="comment">// 图标悬停时的标题，可选</span></span><br><span class="line">		<span class="attr">"default_title"</span>: <span class="string">"这是一个示例Chrome插件"</span>,</span><br><span class="line">		<span class="attr">"default_popup"</span>: <span class="string">"popup.html"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="comment">// 当某些特定页面打开才显示的图标</span></span><br><span class="line">	<span class="comment">/*"page_action":</span></span><br><span class="line"><span class="comment">	&#123;</span></span><br><span class="line"><span class="comment">		"default_icon": "img/icon.png",</span></span><br><span class="line"><span class="comment">		"default_title": "我是pageAction",</span></span><br><span class="line"><span class="comment">		"default_popup": "popup.html"</span></span><br><span class="line"><span class="comment">	&#125;,*/</span></span><br><span class="line">	<span class="comment">// 需要直接注入页面的JS</span></span><br><span class="line">	<span class="attr">"content_scripts"</span>: </span><br><span class="line">	[</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//"matches": ["http://*/*", "https://*/*"],</span></span><br><span class="line">			<span class="comment">// "&lt;all_urls&gt;" 表示匹配所有地址</span></span><br><span class="line">			<span class="attr">"matches"</span>: [<span class="string">"&lt;all_urls&gt;"</span>],</span><br><span class="line">			<span class="comment">// 多个JS按顺序注入</span></span><br><span class="line">			<span class="attr">"js"</span>: [<span class="string">"js/jquery-1.8.3.js"</span>, <span class="string">"js/content-script.js"</span>],</span><br><span class="line">			<span class="comment">// JS的注入可以随便一点，但是CSS的注意就要千万小心了，因为一不小心就可能影响全局样式</span></span><br><span class="line">			<span class="attr">"css"</span>: [<span class="string">"css/custom.css"</span>],</span><br><span class="line">			<span class="comment">// 代码注入的时间，可选值： "document_start", "document_end", or "document_idle"，最后一个表示页面空闲时，默认document_idle</span></span><br><span class="line">			<span class="attr">"run_at"</span>: <span class="string">"document_start"</span></span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="comment">// 这里仅仅是为了演示content-script可以配置多个规则</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="attr">"matches"</span>: [<span class="string">"*://*/*.png"</span>, <span class="string">"*://*/*.jpg"</span>, <span class="string">"*://*/*.gif"</span>, <span class="string">"*://*/*.bmp"</span>],</span><br><span class="line">			<span class="attr">"js"</span>: [<span class="string">"js/show-image-content-size.js"</span>]</span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">	<span class="comment">// 权限申请</span></span><br><span class="line">	<span class="attr">"permissions"</span>:</span><br><span class="line">	[</span><br><span class="line">		<span class="string">"contextMenus"</span>, <span class="comment">// 右键菜单</span></span><br><span class="line">		<span class="string">"tabs"</span>, <span class="comment">// 标签</span></span><br><span class="line">		<span class="string">"notifications"</span>, <span class="comment">// 通知</span></span><br><span class="line">		<span class="string">"webRequest"</span>, <span class="comment">// web请求</span></span><br><span class="line">		<span class="string">"webRequestBlocking"</span>,</span><br><span class="line">		<span class="string">"storage"</span>, <span class="comment">// 插件本地存储</span></span><br><span class="line">		<span class="string">"http://*/*"</span>, <span class="comment">// 可以通过executeScript或者insertCSS访问的网站</span></span><br><span class="line">		<span class="string">"https://*/*"</span> <span class="comment">// 可以通过executeScript或者insertCSS访问的网站</span></span><br><span class="line">	],</span><br><span class="line">	<span class="comment">// 普通页面能够直接访问的插件资源列表，如果不设置是无法直接访问的</span></span><br><span class="line">	<span class="attr">"web_accessible_resources"</span>: [<span class="string">"js/inject.js"</span>],</span><br><span class="line">	<span class="comment">// 插件主页，这个很重要，不要浪费了这个免费广告位</span></span><br><span class="line">	<span class="attr">"homepage_url"</span>: <span class="string">"https://www.baidu.com"</span>,</span><br><span class="line">	<span class="comment">// 覆盖浏览器默认页面</span></span><br><span class="line">	<span class="attr">"chrome_url_overrides"</span>:</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 覆盖浏览器默认的新标签页</span></span><br><span class="line">		<span class="attr">"newtab"</span>: <span class="string">"newtab.html"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="comment">// Chrome40以前的插件配置页写法</span></span><br><span class="line">	<span class="attr">"options_page"</span>: <span class="string">"options.html"</span>,</span><br><span class="line">	<span class="comment">// Chrome40以后的插件配置页写法，如果2个都写，新版Chrome只认后面这一个</span></span><br><span class="line">	<span class="attr">"options_ui"</span>:</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="attr">"page"</span>: <span class="string">"options.html"</span>,</span><br><span class="line">		<span class="comment">// 添加一些默认的样式，推荐使用</span></span><br><span class="line">		<span class="attr">"chrome_style"</span>: <span class="literal">true</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="comment">// 向地址栏注册一个关键字以提供搜索建议，只能设置一个关键字</span></span><br><span class="line">	<span class="attr">"omnibox"</span>: &#123; <span class="attr">"keyword"</span> : <span class="string">"go"</span> &#125;,</span><br><span class="line">	<span class="comment">// 默认语言</span></span><br><span class="line">	<span class="attr">"default_locale"</span>: <span class="string">"zh_CN"</span>,</span><br><span class="line">	<span class="comment">// devtools页面入口，注意只能指向一个HTML文件，不能是JS文件</span></span><br><span class="line">	<span class="attr">"devtools_page"</span>: <span class="string">"devtools.html"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br>### 能力<br>Chrome插件提供了很多实用API供我们使用，包括但不限于：<br>书签控制；<br>下载控制；<br>窗口控制；<br>标签控制；<br>网络请求控制，各类事件监听；<br>自定义原生菜单；<br>完善的通信机制；<br>等等；<br><br>#### override<br>书签管理器：从工具菜单上点击书签管理器时访问的页面，或者从地址栏直接输入 chrome://bookmarks。<br>历史记录：从工具菜单上点击历史记录时访问的页面，或者从地址栏直接输入 chrome://history。<br>新标签页：当创建新标签的时候访问的页面，或者从地址栏直接输入 chrome://newtab。<br>注意：一个扩展只能替代一个页面。<br><br>### api<br><!-- [浏览器插件开发-常用API](https://blog.csdn.net/mjzhang1993/article/details/84848985) --><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">chrome.tabs</span><br><span class="line">chrome.runtime</span><br><span class="line">chrome.webRequest</span><br><span class="line">chrome.window</span><br><span class="line">chrome.storage</span><br><span class="line">chrome.contextMenus</span><br><span class="line">chrome.devtools</span><br><span class="line">chrome.extension</span><br></pre></td></tr></table></figure><br><br>chrome.runtime.getBackgroundPage(background: Window =&gt; {…}) 返回当前扩展的 background 对象<br>chrome.runtime.ma 返回清单文件<br>chrome.runtime.getURL 返回扩展中文件相对于安装位置的路径<br>chrome.runtime.setUninstallURL 设置卸载时要访问的 URL<br>chrome.runtime.reload 重新加载扩展<br><br><br>chrome.tabs.create(params, callback) 创建一个新的标签，以下是 params 参数<br>windowId 创建新标签的目标窗口，默认当前窗口<br>index 标签在窗口中的位置<br>url 标签导航的初始页面<br>selected 是否为选中的 默认是true<br>pinned 标签是否为固定<br>callback(tab) tab 是创建后的标签的细节，包括id<br>chrome.tabs.executeScript(tabId, details, callback) 向标签页注入脚本<br>tabId 标签页ID，默认为当前选中窗口<br>details.code 直接注入的脚本代码<br>details.file 也可以指定注入的脚本文件，与 details.code 二选一<br>chrome.tabs.get(tabId, callback) 获取指定标签页的细节<br>chrome.tabs.getSelected(windowId, callback) 获取特定窗口（windowId 默认为当前窗口） 的选中的标签<br>chrome.tabs.insertCSS(tabId, details, callback) 向页面注入样式<br>chrome.tabs.remove(tabId, callback) 移除标签<br><br><br>chrome.extension<br>&gt; 主要被用于通信支持，提供 扩展与 content_script 之间， 扩展与扩展之间，与大多数 chrome.* API 不同，chrome.extension 部分功能可以直接在 content_script 中使用<br>&gt; 注意 chrome.extension 与 chrome.runtime 由很多重叠的 api , chrome.extension 比较老旧，尽量使用 chrome.runtime<br><br>chrome.extension.connect<br>chrome.extension.onConnect<br>chrome.extension.sendMessage<br>chrome.extension.onMessage<br>chrome.extension.getURL<br><br><!-- 
+\#1  [Chrome浏览器扩展开发系列之八：Chrome扩展的数据存储](https://www.cnblogs.com/champagne/p/4826611.html)
+[Chrome浏览器扩展开发系列之八：Chrome扩展的数据存储](https://huajiakeji.com/dev/2018-12/1754.html) --><br>#### chrome.cookies<br>在manifest.json文件中声明cookie权限以及要访问的域如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"permissions"</span>: [</span><br><span class="line">  <span class="string">"cookies"</span>,</span><br><span class="line">  <span class="string">"*://*.google.com"</span></span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br>chrome.cookies.CookieStore对象表示浏览器中的cookie仓库，常见的有正常模式的CookieStore和隐身模式的CookieStore。<br><br>常规方法 get | remove | set | getAll 等除外，以下是可能会用到的 api<br>chrome.cookies.get(object details, function(Cookie cookie) {…})<br>  url, name, storeId<br>chrome.cookies.getAll(object details, function(array of Cookie cookies) {…})<br>chrome.cookies.set(object details, function(Cookie cookie) {…})<br>chrome.cookies.remove(object details, function(object details) {…})<br>  url, name, storeId<br><br>chrome.cookies.getAllCookieStores(function(array of CookieStore cookieStores) {…})<br><br>chrome.cookies.onChanged.addListener(({removed, cookie}) =&gt; {…}) removed=true 表示的是cookie被删除的情况，否则表示被添加或者设置，cookie 表示操作的cookie<br><br><br><!-- End: #1 --><br><br>#### chrome.storage<br><!-- \#2 [14-chrome 扩展开发 - chrome.storage 本地存储](http://www.ptbird.cn/chrome-extensions-storage.html) 
+[Chrome storage存储 API使用详解](https://blog.csdn.net/sinat_36001828/article/details/104814507)
+--><br><br>Chrome 存储 API 提供了 2 种储存区域，分别是 sync 和 local。两种储存区域的区别在于，sync 储存的区域会根据用户当前在 Chrome 上登陆的 Google 账户自动同步数据，当无可用网络连接可用时，sync 区域对数据的读写和 local 区域对数据的读写行为一致。<br><br>对于每种储存区域，Chrome 又提供了 5 个方法，分别是 get、getBytesInUse、set、remove 和 clear。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">chrome.storage.local.set(&#123;<span class="attr">key</span>: value&#125;, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Value is set to '</span> + value);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">chrome.storage.local.get([<span class="string">'key'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Value currently is '</span> + result.key);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">chrome.storage.local.getBytesInUse(keys, <span class="function"><span class="keyword">function</span>(<span class="params">bytes</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(bytes);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">chrome.storage.onChanged.addListener(<span class="function"><span class="keyword">function</span>(<span class="params">changes, areaName</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Value in '</span>+areaName+<span class="string">' has been changed:'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(changes);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><br><br>在 get() 方法中 keys 可以是字符串、包含多个字符串的数组或对象。<br>如果 keys 是对象，则会先读取以这个对象属性名为键值的数据，如果这个数据不存在则返回 keys 对象的属性值（比如 keys 为 {‘name’:’Billy’}，如果 name 这个值存在，就返回 name 原有的值，如果不存在就返回 ‘Billy’）。<br><br>set() 方法为写入数据<br>items 为对象类型，形式为键/值对。items 的属性值如果是字符型、数字型和数组型，则储存的格式不会改变，但如果是对象型和函数型的，会被储存为 “{}”，如果是日期型和正则型的，会被储存为它们的字符串形式。<br><br>remove() 方法为删除数据，完整方法为：其中 keys 可以是字符串，也可以是包含多个字符串的数组。<br>clear() 方法为删除所有数据<br><br><br>getBytesInUse() 方法为获取一个数据或多个数据所占用的总空间，返回结果的单位是字节，完整方法为：<br><br>Chrome 同时还为存储 API 提供了一个 onChanged() 事件，当存储区的数据发生改变时，这个事件会被激发。<br>callback() 会接收到两个参数，第一个为 changes，第二个是 StorageArea。changes 是词典对象，键为更改的属性名称，值包含两个属性，分别为 oldValue 和 newValue；StorageArea 为 local 或 sync。<br><!-- End: #2 --><br><br><br><br><!-- 其他
 [谷歌(Chrome)浏览器插件开发教程](https://www.jianshu.com/p/51c650f98d9c)
 极简demo
- -->
-<h2 id="跨浏览器"><a href="#跨浏览器" class="headerlink" title="跨浏览器"></a>跨浏览器</h2><!-- [[苹果：你甚至可以在 Safari 中使用 Chrome 的插件]](https://www.infoq.cn/article/TdS104Q68yk3oLONlk9x) -->
-<!-- 2020 年 9 月 11 日 -->
-<p>为了让开发者不需要写多套代码，Mozilla 发布了 WebExtensions API。WebExtensions API 主要基于 JavaScript、HTML 和 CSS，可以重新打包并在 Chrome、Firefox 和 Edge 等其他浏览器中使用。</p>
-<p>6月27日消息，在WWDC2020，苹果宣布<br>近日，苹果宣布 Safari 也可以使用 WebExtensions API 了。苹果此前所使用的 Safari App Extensions 虽然在 macOS 应用程序和 Safari 之间共享代码很便捷，但无法将组件移植到其他浏览器，也无法将其他浏览器的组件移植到 Safari 中。</p>
-<p>值得注意的是，Safari Web 扩展需要在 macOS 11 及更高版本或者安装了 Safari 14 的 macOS 10.14.6 或 10.15.6 中使用。</p>
-<!-- [safari浏览器开发app插件_苹果新动作：Chrome插件可以移植到Safari浏览器了](https://blog.csdn.net/weixin_32446485/article/details/113581451) -->
-<h2 id="firefox"><a href="#firefox" class="headerlink" title="firefox"></a>firefox</h2><!-- [[利用Firefox开发者网站，转换Chrome插件为Firefox插件]](https://zhuanlan.zhihu.com/p/163535578)  
+
+[Chrome插件(扩展)开发全攻略](https://www.bookstack.cn/read/chrome-plugin-develop/spilt.9.8bdb1aac68bbdc44.md)
+$_PS: 一个文档网站。
+ --><br><br><br>#### bookmarks<br>对象和属性<br>书签是按照树状结构组织的，每个节点都是一个书签或者一组节点（每个书签夹可包含多个节点）。每个节点都对应一个 BookmarkTreeNode 对象。<br>可以通过 chrome.bookmarks API来使用BookmarkTreeNode的属性。例如，当调用函数 create()，可以传入参数新节点的父节点（父节点ID），以及可选的节点索引，标题和url属性。可参看 BookmarkTreeNode 来获取节点的信息。<br><br><br>方法<br>create<br>get<br>getChildren<br>getRecent<br>getTree<br>move<br>remove<br>removeTree<br>search<br>update<br><br>事件<br>onChanged<br>onChildrenReordered<br>onCreated<br>onImportBegan<br>onImportEnded<br>onMoved<br>onRemoved<br><br><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">chrome.bookmarks.create(&#123;</span><br><span class="line">    <span class="string">'parentId'</span>: bookmarkBar.id,</span><br><span class="line">    <span class="string">'title'</span>: <span class="string">'Extension bookmarks'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">newFolder</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"added folder: "</span> + newFolder.title);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><br><br><!-- 类型 --><br>##### BookmarkTreeNode<br>( object )<br>这个节点对象代表一个书签或者一个书签目录项。 节点对象有父子关系。<br>id ( string )<br>节点的唯一标识。IDs 在当前配置文件中是唯一的，浏览器重启后依然有效。<br>parentId ( optional string )<br>父节点的ID。根节点没有父节点。<br>index ( optional integer )<br>在父节点的书签夹范围内，该节点的索引，从0开始。<br>url ( optional string )<br>当用户点击书签时，浏览器访问的url。书签夹没有该属性 。<br>title ( string )<br>节点的说明文字。<br>dateAdded ( optional number )<br>节点创建时距纪元时间的毫秒数。 (new Date(dateAdded)).<br>dateGroupModified ( optional number )<br>书签夹内容的最后更新时间距纪元时间的毫秒数。<br>children ( optional array of BookmarkTreeNode )<br>节点的孩子的有序列表。<br><br><br><br>## 跨浏览器<br><!-- [[苹果：你甚至可以在 Safari 中使用 Chrome 的插件]](https://www.infoq.cn/article/TdS104Q68yk3oLONlk9x) --><br><!-- 2020 年 9 月 11 日 --><br>为了让开发者不需要写多套代码，Mozilla 发布了 WebExtensions API。WebExtensions API 主要基于 JavaScript、HTML 和 CSS，可以重新打包并在 Chrome、Firefox 和 Edge 等其他浏览器中使用。<br><br>6月27日消息，在WWDC2020，苹果宣布<br>近日，苹果宣布 Safari 也可以使用 WebExtensions API 了。苹果此前所使用的 Safari App Extensions 虽然在 macOS 应用程序和 Safari 之间共享代码很便捷，但无法将组件移植到其他浏览器，也无法将其他浏览器的组件移植到 Safari 中。<br><br>值得注意的是，Safari Web 扩展需要在 macOS 11 及更高版本或者安装了 Safari 14 的 macOS 10.14.6 或 10.15.6 中使用。<br><br><!-- [safari浏览器开发app插件_苹果新动作：Chrome插件可以移植到Safari浏览器了](https://blog.csdn.net/weixin_32446485/article/details/113581451) --><br><br>## chrome<br>位置：<br>Mac： ~/Library/Application Support/Google/Chrome/Default/Extensions/fmkxxxxxxxxxnihi/4.10.1_0<br><br>### 安装<br><br><br><br>## firefox<br><!-- [[利用Firefox开发者网站，转换Chrome插件为Firefox插件]](https://zhuanlan.zhihu.com/p/163535578)  
 发布于 2020-07-24
--->
-<p>1、提前准备好Chrome插件。<br>3、打开Firefox开发者网址<br><a href="https://addons.mozilla.org/zh-CN/firefox/" target="_blank" rel="noopener">https://addons.mozilla.org/zh-CN/firefox/</a><br>6、登录后，点击页面右上角“开发者中心”<br>7、点击右下角“提交新附加组件”<br>8、选择如何分发此版本。<br>因为我们上传的是别人开发的东西，只是用此方法来转换，所以一定请选“我自己托管”。不这样选，插件会出现在插件库中，全网可以搜索到。当然，大概率是你上传后根本审核不通过……<br>9、点击“选择文件”，选择刚才你准备好的插件文件。<br>10、选定你准备好的插件后，插件会自动上传并进行验证，<br>11、出现让你提交源代码的页面<br>13、找到你刚才提交的附加组件并点击</p>
-<!-- 
+--><br>1、提前准备好Chrome插件。<br>3、打开Firefox开发者网址<br><a href="https://addons.mozilla.org/zh-CN/firefox/" target="_blank" rel="noopener">https://addons.mozilla.org/zh-CN/firefox/</a><br>6、登录后，点击页面右上角“开发者中心”<br>7、点击右下角“提交新附加组件”<br>8、选择如何分发此版本。<br>因为我们上传的是别人开发的东西，只是用此方法来转换，所以一定请选“我自己托管”。不这样选，插件会出现在插件库中，全网可以搜索到。当然，大概率是你上传后根本审核不通过……<br>9、点击“选择文件”，选择刚才你准备好的插件文件。<br>10、选定你准备好的插件后，插件会自动上传并进行验证，<br>11、出现让你提交源代码的页面<br>13、找到你刚才提交的附加组件并点击<br><br><!-- 
 How to develop firefox extentions
 firefox插件开发教程
 
@@ -538,9 +516,24 @@ http://www.rietta.com/firefox/Tutorial/security.pdf
 
 
 Safari: http://develop.apple.com   (打不开)
-firefox: http://developer.mozilla.org/en/docs/Plugins-->
-<h2 id="safari"><a href="#safari" class="headerlink" title="safari"></a>safari</h2><p><a href="https://blog.csdn.net/mjzhang1993/article/details/106897673" target="_blank" rel="noopener">Safari 浏览器插件（扩展）开发</a><br><!--  2020-06-22 11:14:33 --></p>
-<p style="text-align:right"> </p>
+firefox: http://developer.mozilla.org/en/docs/Plugins--><br>## safari<br>### 文档<br><a href="https://developer.apple.com/videos/play/wwdc2020/10665/" target="_blank" rel="noopener">Meet Safari Web Extensions</a><br>视频教程，英文。<br><br>### 转化现有插件<br><!-- [How to convert Chrome extensions to run in Safari](https://forums.macrumors.com/threads/how-to-convert-chrome-extensions-to-run-in-safari.2247012/) --><br><code>xcrun safari-web-extension-converter</code><br>xcrun safari-web-extension-converter /big/ass/path/to/chrome/extensions/from/above/{EXTENSION ID}/{some version number}<br><br>1. First, you need to be on Big Sur with the latest Xcode (12) installed. But! There’s a big <strong>asterisk</strong> to this which I’ll get to later.<br><br>I’ve successfully converted extensions like Refind, Notion, DF Tube, the 33Msil extension, and a couple of others. From what I can tell extensions that change the page layout somehow or grab URLs work.<br><br><br><strong>Big asterisk</strong>: From the limited testing I’ve done you can’t convert extensions on Catalina with Xcode 12 installed BUT you can build them. What I’ve done is converted the extensions on my macOS 11 machine and then copied them over to my Catalina machine and built there. These extensions will run in the Safari 14 beta for Catalina.<br><br><br><br>#### 问题<br>1. <code>scrub: error: unable to find utility &quot;safari-web-extension-converter&quot;, not a developer tool or in PATH.</code><br>&gt; I originally tried this on Xcode 12.5 Beta.<br><br>Try launching the terminal and reselecting your Xcode install as the primary. Type:<br><code>sudo xcode-select -s /Applications/Xcode.app/Contents/Developer</code><br>or if you’re running a beta version,<br><code>sudo xcode-select -s /Applications/Xcode-beta.app/Contents/Developer</code><br><br><br><br><!--  
+其他：
+[Safari 浏览器插件（扩展）开发](https://blog.csdn.net/mjzhang1993/article/details/106897673)
+2020-06-22 11:14:33 
+swift 语言通过XCode 开发，打包
+--><br><br><br><br># 浏览器插件问题<br>## chrome<br>1. chrome 中可以设置和修改插件的  快捷键<br>chrome://extensions/shortcuts<br><br><br>## safari<br>### 安装<br>#### 官方<br><!-- [如何在 Mac 上安装 Safari 浏览器扩展](https://support.apple.com/zh-cn/HT203051) --><br>您需要 Safari 浏览器 12 或更高版本才能从 App Store 获取 Safari 浏览器扩展。<br><br>如上图所示，App Store 将打开并显示“Safari 浏览器扩展”页面。要下载并安装扩展，请点按“获取”或点按价格。系统可能会要求您使用 Apple ID 登录。<br><br><br><!-- 
+浏览器地址栏输入：<extensitions.apple.com>
+会唤起app store 
+ --><br><br>#### 自己安装<br><!-- \#1 [Mac的Safari安装油猴插件（Tampermonkey）](https://www.jianshu.com/p/7e3526f830a2) --><br>Safari浏览器 -》偏好设置 -》 菜单栏显示开发选项<br>菜单栏 -》 开发选项 -》 显示拓展构建器 -》 添加拓展<br><br><!-- 在提示框中输入开机密码，即可完成安装。 --><br><!-- 插件管理页会有黄色warning： `没有safari 浏览器扩展证书`。但是不影响使用 --><br><br><br><!-- 于是就会遇到这种情况: --><br>&gt; safari浏览器不再支持不安全的拓展，你可以在app store或Safari浏览器拓展库中查找经过apple审核的更新拓展。<br>将下载好的 tampermonkey.safariextz 改为 tampermonkey.zip。<br><!-- $_PS: 不要转为zip 文件 --><br>解压这个zip文件，我喜欢用 The Unarchiver解压，官方的默认解压工具容易陷入.cpgz与.zip的死循环之中。<br><!-- $_PS: 同时chrome 的插件也是这样，限于死循环 --><br><br>下载的源压缩文件：tampermonkey.safariextz<br>解压后文件：tampermonkey.safariextension<br><br><br>##### 其他评论：<br>求助：safari重启后tampermonkey和下载的插件就都不见了有解决方法吗？<br>你好 我在chrome浏览器安装成功 但电脑关机后油猴扩展就消失需要重新安装 请问有解决方案吗<br><br>safari13貌似没有扩展架构器了，你看看<br>这本来是给开发者开发完插件调试使用的，最新的Safari 13 是官方移除了这个选项，暂时无解。<br><br><!-- End: #1 --><br><br>### 使用<br><!-- \#2 [如何在苹果电脑Mac浏览器Safari中安装使用浏览器插件](https://blog.csdn.net/TheBeauty2016/article/details/83268553) 
+转自： [如何在苹果电脑Mac浏览器Safari中安装使用浏览器插件](https://huajiakeji.com/utilities/2018-10/1571.html)
+--><br>二、Safari浏览器启用safari插件<br>Safari 可能还会询问您是否想要信任该网站以使用该插件：<br>四、如何允许或阻止网站使用safari插件<br><br><br>以安全模式运行：如果您允许该插件以安全模式运行，Safari 会允许该网站使用该插件，并运行 Mac 内置的恶意软件安全检查。如果以不安全模式运行，Safari 会允许该网站使用该插件，但是不会运行恶意软件安全检查。这存在安全风险，因此除非您信任该网站，并且没有其他方式来查看内容，否则请勿停用安全模式。<br><!-- End: #2 --><br><br><br>### 插件<br><!-- 
+[Greasy Fork](https://greasyfork.org/zh-CN)
+
+https://safari.tampermonkey.net/tampermonkey.safariextz
+（旧版）
+https://www.tampermonkey.net/?browser=safari
+(新版)
+ --><br><br><br><p style="text-align:right"> </p>
 
 
       
@@ -697,17 +690,8 @@ var jiathis_config={
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -724,7 +708,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">321</span>
+                  <span class="site-state-item-count">339</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -746,7 +730,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -815,27 +799,6 @@ var jiathis_config={
       </section>
 
       
-      <!--noindex-->
-        
-          <style>
-            .post-toc .nav .nav-child { display: block; }
-          </style>
-        
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-extendtion-开发"><span class="nav-text">chrome extendtion 开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#能力"><span class="nav-text">能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#api"><span class="nav-text">api</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨浏览器"><span class="nav-text">跨浏览器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#firefox"><span class="nav-text">firefox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#safari"><span class="nav-text">safari</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -863,7 +826,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">530.0k</span>
+    <span title="Site words total count">572.1k</span>
   
 </div>
 

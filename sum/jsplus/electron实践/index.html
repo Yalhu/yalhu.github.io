@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="2020.4 星期  ：     开发者工具扩展添加chrome 扩展vue-devtools  1234567891011121314151617181920const &amp;#123; app, session &amp;#125; = require(&apos;electron&apos;)const path = require(&apos;path&apos;)// ### 方式零: onready:BrowserWindow.add">
+<meta name="description" content="2020.4     开发者工具扩展添加chrome 扩展vue-devtools  1234567891011121314151617181920const &amp;#123; app, session &amp;#125; = require(&apos;electron&apos;)const path = require(&apos;path&apos;)// ### 方式零: onready:BrowserWindow.addDevToo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Electron实践">
 <meta property="og:url" content="http://yoursite.com/sum/jsplus/electron实践/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2020.4 星期  ：     开发者工具扩展添加chrome 扩展vue-devtools  1234567891011121314151617181920const &amp;#123; app, session &amp;#125; = require(&apos;electron&apos;)const path = require(&apos;path&apos;)// ### 方式零: onready:BrowserWindow.add">
+<meta property="og:description" content="2020.4     开发者工具扩展添加chrome 扩展vue-devtools  1234567891011121314151617181920const &amp;#123; app, session &amp;#125; = require(&apos;electron&apos;)const path = require(&apos;path&apos;)// ### 方式零: onready:BrowserWindow.addDevToo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-08T01:18:18.133Z">
+<meta property="og:updated_time" content="2021-09-04T09:30:08.761Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Electron实践">
-<meta name="twitter:description" content="2020.4 星期  ：     开发者工具扩展添加chrome 扩展vue-devtools  1234567891011121314151617181920const &amp;#123; app, session &amp;#125; = require(&apos;electron&apos;)const path = require(&apos;path&apos;)// ### 方式零: onready:BrowserWindow.add">
+<meta name="twitter:description" content="2020.4     开发者工具扩展添加chrome 扩展vue-devtools  1234567891011121314151617181920const &amp;#123; app, session &amp;#125; = require(&apos;electron&apos;)const path = require(&apos;path&apos;)// ### 方式零: onready:BrowserWindow.addDevToo">
 
 
 
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-08T09:18:18+08:00">
-                2020-10-08
+              <time title="更新于" itemprop="dateModified" datetime="2021-09-04T17:30:08+08:00">
+                2021-09-04
               </time>
             
           </span>
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  158
+                  225
                 </span>
               
 
@@ -457,7 +457,7 @@
       
 
       
-        <p style="text-align:right"> 2020.4 星期  ： </p>
+        <p style="text-align:right"> 2020.4 </p>
 
 
 
@@ -465,6 +465,10 @@
 <!-- https://github.com/electron/electron/blob/master/docs/api/session.md#sesloadextensionpath -->
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; app, session &#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="comment">// ### 方式零: onready:BrowserWindow.addDevToolsExtension     $_Note: depreased</span></span><br><span class="line"><span class="comment">// ### 方式一： default session</span></span><br><span class="line">app.on(<span class="string">'ready'</span>, <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">await</span> session.defaultSession.loadExtension(path.join(__dirname, <span class="string">'react-devtools'</span>))</span><br><span class="line">  <span class="comment">// Note that in order to use the React DevTools extension, you'll need to</span></span><br><span class="line">  <span class="comment">// download and unzip a copy of the extension.</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// ### 方式二：window session</span></span><br><span class="line"><span class="built_in">window</span>.webContents.session.loadExtension(</span><br><span class="line">    path.join(os.homedir(), <span class="string">'/Library/Application Support/Google/Chrome/Default/Extensions/nhdogjmejiglipccpnnnanhbledajbpd/5.3.3_0'</span>)</span><br><span class="line">);</span><br><span class="line"><span class="comment">// ## 插件</span></span><br><span class="line"><span class="keyword">const</span> installer = <span class="built_in">require</span>(<span class="string">'electron-devtools-installer'</span>);</span><br><span class="line">installer.default(installer.VUEJS_DEVTOOLS).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  main.init();</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Unable to install `vue-devtools`: \n'</span>, err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>$_PS: 也可以放到项目目录devTools/vue-devtools</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 electron <code>npm i -g electron</code></p>
+<p>2、设置系统环境变量（设置 electron 使用淘宝源，很快）<br>// windows 请在环境变量里面设置，mac 请在环境变量文件中设置<br>ELECTRON_MIRROR=<a href="http://npm.taobao.org/mirrors/electron/" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/electron/</a></p>
+<!-- // mac  `~/.bash_profile ; source ./bash_profile` -->
+<p>同理npm 包也可以设置镜像。</p>
 <p style="text-align:right"> </p>
 
 
@@ -649,7 +653,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">321</span>
+                  <span class="site-state-item-count">339</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -671,7 +675,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -754,7 +758,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#开发者工具扩展"><span class="nav-text">开发者工具扩展</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#开发者工具扩展"><span class="nav-text">开发者工具扩展</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-text">安装</span></a></li></div>
             
 
           </div>
@@ -788,7 +792,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">530.0k</span>
+    <span title="Site words total count">572.1k</span>
   
 </div>
 

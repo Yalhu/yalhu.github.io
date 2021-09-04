@@ -10,6 +10,9 @@ $_PS: 两篇文章4种解决方案一样 -->
 <p>新的解决方案：<br>如果设置宽度width: inherit，会继承父元素宽度。<br>注意，父元素要显示设置width值，不能是100%</p>
 <ol start="3">
 <li>百分比小技巧：比如进度条需要图书的中间位置对齐刻度，而且100%的时候右边是对齐的。可以适当增加基数，比如：(x + .5)/ (6 + .5)</li>
+<li>移动端 a 标签点击会有蓝色的背景色<br>解决方案：<code>a { -webkit-tap-highlight-color:transparent; }</code></li>
+<li>calc(100vh - 60px) 。 算术操作符前后必须有空格。 否则会无效。 <!-- css 函数的问题。操作符必须有空格 -->
+</li>
 </ol>
 <h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3><p>env(): <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/env()" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/CSS/env()</a><br>env()和constant()，是IOS11新增特性，Webkit的css函数，用于设定安全区域与边界的距离，有4个预定义变量：<br><a href="https://blog.csdn.net/qq_21363577/article/details/109734506" target="_blank" rel="noopener">css属性——env()和constant()设置安全区域</a></p>
 <p>safe-area-inset-left：安全区域距离左边边界的距离<br>safe-area-inset-right：安全区域距离右边边界的距离<br>safe-area-inset-top：安全区域距离顶部边界的距离<br>safe-area-inset-bottom ：安全距离底部边界的距离<br>而env()和constant()函数有个必要的使用前提，H5网页设置viewport-fit=cover的时候才生效，小程序里的viewport-fit默认是cover。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 适配底部代码： */</span></span><br><span class="line">height: calc(96rpx+ constant(safe-area-inset-bottom));//兼容 IOS&lt;11.2</span><br><span class="line">height: calc(96rpx + env(safe-area-inset-bottom));//兼容 IOS&gt;11.2</span><br><span class="line"> </span><br><span class="line">padding-bottom: constant(safe-area-inset-bottom);//兼容 IOS&lt;11.2</span><br><span class="line">padding-bottom: env(safe-area-inset-bottom);//兼容 IOS&gt;11.2</span><br></pre></td></tr></table></figure></p>
@@ -37,6 +40,22 @@ Squirrel 只有单纯的生成不同格式的webfont，且不支持中文。Web-
 
  -->
 <!-- 字加 -->
+<h3 id="设置flex属性时-子元素宽度超出父元素"><a href="#设置flex属性时-子元素宽度超出父元素" class="headerlink" title="设置flex属性时 子元素宽度超出父元素"></a>设置flex属性时 子元素宽度超出父元素</h3><p>场景： 元素分为左右两块，左边元素定宽，右边元素自动充满屏幕。<br>右边多设置一个width:0或overflow:hiddlen后样式正常。</p>
+<p>为什么设置flex: 1可以实现宽度自适应？<br>这与flex属性的赋值语法有关，CSS属性 flex 规定了弹性元素如何伸长或缩短以适应flex容器中的可用空间。这是一个简写属性，用来设置 flex-grow, flex-shrink 与 flex-basis。具体的语法规则可以参考MDN</p>
+<p>三种属性比较好理解的分析参考：关于 Flex 中的 flex-grow、flex-shrink、flex-basis<br>flex: 1 = flex: 1 1 auto = flex-grow: 1</p>
+<p>flex-grow属性用于瓜分父容器的剩余空间，在上面例子中，只有right设置了flex：1，所以它占了剩余空间的所有比例，实现了宽度的自适应。</p>
+<p>对于为什么子元素宽度会溢出的问题，网上查了一下只说是弹性布局的特性以及父元素没有一个固定的长度进行限制这两个因素造成的，具体原因还不太清楚。。<br>&lt;!– </p>
+<p><a href="https://www.cnblogs.com/ygyy/p/13328310.html" target="_blank" rel="noopener">设置flex属性时子元素宽度超出父元素</a><br><a href="http://www.manongjc.com/detail/18-dycluubakqbfuso.html" target="_blank" rel="noopener">设置flex属性时子元素宽度超出父元素</a><br>$_PS: 内容一样 –&gt;</p>
+<h3 id="移动设备后退"><a href="#移动设备后退" class="headerlink" title="移动设备后退"></a>移动设备后退</h3><p>ios 低版本 微信下方 返回栏<br>复现：从首页跳转到其他页面后，页面的底部会出现一个带有前进和后退按钮工具栏<br>原因：当页面跳转时，微信浏览器会通过window.history读取到浏览的历史记录，此时便会在页面底部显示出前进后退按钮的工具栏，造成页面底部内容遮挡。<br>最终：不解决。底部操作栏 并没有影响页面展示（没有遮住内容）。</p>
+<!-- [iOS新版微信底部工具栏遮挡问题完美解决](https://www.jianshu.com/p/0a93944ed627) -->
+<p>（一）方案一：将页面的路由跳转方式更换为 “replace” 方式<br><!-- 
+[微信H5：IOS下的微信H5页面的底部前进后退横栏如何隐藏或者解决？](https://segmentfault.com/q/1010000015158396)
+无方案。没有解决掉
+[通过JS自动隐藏手机浏览器的地址栏](https://blog.csdn.net/hbcui1984/article/details/8350107)
+上方的地址栏：`window.scrollTo(0)`
+但是若你网页内容比较多，超过屏幕高度时，却会自动隐藏地址栏；
+如何解决在内容较少时，同样隐藏地址栏呢？需在滚动之前程序动态设置一下body的高度，增加如下代码：
+[移动端隐藏手机浏览器的地址栏一下底部的菜单栏](https://www.jianshu.com/p/1e5c8811aecf) --><br>全屏方案<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- webApp全屏显示，IOS设备 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">'apple-mobile-web-app-capable'</span> <span class="attr">content</span>=<span class="string">'yes'</span> /&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- 通用的浏览器 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">'full-screen'</span> <span class="attr">content</span>=<span class="string">'true'</span> /&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- QQ浏览器（X5内核）独有的META --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">'x5-fullscreen'</span> <span class="attr">content</span>=<span class="string">'true'</span> /&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- 360浏览器独有的 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">'360-fullscreen'</span> <span class="attr">content</span>=<span class="string">'true'</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="二期"><a href="#二期" class="headerlink" title="二期"></a>二期</h2><ol>
 <li><a href="https://blog.csdn.net/yb305/article/details/72357010" target="_blank" rel="noopener">父容器display:flex后，子元素的内部元素height:100%无效解决方法</a><br>解救办法：父类容器position:relative;子元素：position:absolute;width:100%,height:100%;</li>
 <li>display：flex 的直接子元素，高度默认是100%； 如果设置 改元素<code>align-self:center</code>,元素就会变为行内块，高度就不是100%，可以设置垂直居中    </li>

@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="sql,mysql,">
+  <meta name="keywords" content="mysql,sql,">
 
 
 
@@ -89,14 +89,14 @@
 
 
 <meta name="description" content="2019.5.5 星期日 21：00  语法基本数据类型CURD#### 更新字段值UPDATE book_comment SET title=left(content,10) WHERE product_id=24243060;          #### 查找有无数据Mysql判断记录是否存在select count(*) from tablename where col = ‘col’;se">
-<meta name="keywords" content="sql,mysql">
+<meta name="keywords" content="mysql,sql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql学习">
 <meta property="og:url" content="http://yoursite.com/sum/ser/mysql学习/index.html">
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2019.5.5 星期日 21：00  语法基本数据类型CURD#### 更新字段值UPDATE book_comment SET title=left(content,10) WHERE product_id=24243060;          #### 查找有无数据Mysql判断记录是否存在select count(*) from tablename where col = ‘col’;se">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-02-13T15:01:28.158Z">
+<meta property="og:updated_time" content="2021-07-17T09:26:29.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql学习">
 <meta name="twitter:description" content="2019.5.5 星期日 21：00  语法基本数据类型CURD#### 更新字段值UPDATE book_comment SET title=left(content,10) WHERE product_id=24243060;          #### 查找有无数据Mysql判断记录是否存在select count(*) from tablename where col = ‘col’;se">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-02-13T23:01:28+08:00">
-                2021-02-13
+              <time title="更新于" itemprop="dateModified" datetime="2021-07-17T17:26:29+08:00">
+                2021-07-17
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,960
+                  2,986
                 </span>
               
 
@@ -470,6 +470,13 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="keyword">PASSWORD</span> <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'localhost'</span> = <span class="keyword">PASSWORD</span>(<span class="string">'newpass'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="keyword">use</span> mysql;</span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">SET</span> <span class="keyword">Password</span> = <span class="keyword">PASSWORD</span>(<span class="string">'newpass'</span>) <span class="keyword">WHERE</span> <span class="keyword">user</span> = <span class="string">'root'</span>;</span><br><span class="line"><span class="keyword">FLUSH</span> <span class="keyword">PRIVILEGES</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 在丢失root密码的时候，可以这样</span></span><br><span class="line"><span class="comment"># `　mysqld_safe --skip-grant-tables &amp; mysql -u root mysql`</span></span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">SET</span> <span class="keyword">password</span>=<span class="keyword">PASSWORD</span>(<span class="string">"new password"</span>) <span class="keyword">WHERE</span> <span class="keyword">user</span>=<span class="string">'root'</span>;</span><br><span class="line"><span class="keyword">FLUSH</span> <span class="keyword">PRIVILEGES</span>;</span><br></pre></td></tr></table></figure>
 <h3 id="设置权限"><a href="#设置权限" class="headerlink" title="设置权限"></a>设置权限</h3><p>允许远程访问<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> mysql;</span><br><span class="line"><span class="keyword">select</span> host,<span class="keyword">user</span> <span class="keyword">from</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> host = <span class="string">'%'</span> <span class="keyword">where</span> <span class="keyword">user</span> = <span class="string">'root'</span>;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span>  <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'root'</span>@<span class="string">'%'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">grants</span> <span class="keyword">for</span> <span class="string">'root'</span>@<span class="string">'%'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 2. 如果想让授权的用户，也可以将这些权限 grant 给其他用户，需要选项 “grant option“ </span></span><br><span class="line"><span class="comment">-- 这个特性一般用不到。实际中，数据库权限最好由 DBA 来统一管理。</span></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> <span class="string">'root'</span>@<span class="string">'%'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'sql-0122'</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> <span class="keyword">OPTION</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--  grant, revoke 用户权限后，该用户只有重新连接 MySQL 数据库，权限才能生效。</span></span><br><span class="line"><span class="comment">### 撤销 只需要把关键字 to 换成 from 即可：</span></span><br><span class="line"><span class="keyword">revoke</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">from</span> dba@localhost;</span><br></pre></td></tr></table></figure></p>
 <p>因为新版的的mysql版本已经将创建账户和赋予权限的方式分开了<br>创建账户:create user ‘用户名‘@’访问主机’ identified by ‘密码’;<br>赋予权限:grant 权限列表 on 数据库 to ‘用户名‘@’访问主机’ ;(修改权限时在后面加with grant option)<br><code>grant select, insert, update, delete on testdb.* to common_user@&#39;%&#39;</code></p>
+<h2 id="时间自动更新"><a href="#时间自动更新" class="headerlink" title="时间自动更新"></a>时间自动更新</h2><!-- 当插入一条数据，createtime列和updatetime列由数据库获取当前时间自动创建时间;
+当修改一条记录时，updatetime列由数据库获取按当前时间自动更新时间。 -->
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">`creat_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP</span><br><span class="line">`update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON <span class="keyword">UPDATE</span> <span class="keyword">CURRENT_TIMESTAMP</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>MySQL5.6.5以上的版本、CURRENT_TIMESTAMP和ON UPDATE CURRENT_TIMESTAMP都适用于datetime、timestamp类型。</p>
+</blockquote>
+<p>上述在navicat中的操作：找到相应的表—右击—&gt;点击 设计表—&gt;<!-- 如下图 --> 选中 ‘根据当前时间戳更新’。<br><!-- [mysql中更新时间和创建时间的自动更新](https://blog.csdn.net/qq_35835624/article/details/79485609) --></p>
 <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p><a href="https://www.cnblogs.com/whgk/p/6179612.html" target="_blank" rel="noopener">[MySQL(五) MySQL中的索引详讲]</a><br>三、索引的分类　　<br>注意：索引是在存储引擎中实现的，也就是说不同的存储引擎，会使用不同的索引<br>　　　　　　　　　　　　MyISAM和InnoDB存储引擎：只支持BTREE索引， 也就是说默认使用BTREE，不能够更换<br>　　　　　　　　　　　　MEMORY/HEAP存储引擎：支持HASH和BTREE索引</p>
 <p>1、索引我们分为四类来讲 单列索引(普通索引，唯一索引，主键索引)、组合索引、全文索引、空间索引、      </p>
 <p>1.1、单列索引：一个索引只包含单个列，但一个表中可以有多个单列索引。 这里不要搞混淆了。<br>1.1.1、普通索引：MySQL中基本索引类型，没有什么限制，允许在定义索引的列中插入重复值和空值，纯粹为了查询数据更快一点。<br>1.1.2、唯一索引：索引列中的值必须是唯一的，但是允许为空值，<br>1.1.3、主键索引：是一种特殊的唯一索引，不允许有空值。</p>
@@ -507,9 +514,13 @@
 <li>Workbench</li>
 <li>Sequel Pro</li>
 </ol>
-<h2 id="Navicat"><a href="#Navicat" class="headerlink" title="Navicat"></a>Navicat</h2><h4 id="windows-1"><a href="#windows-1" class="headerlink" title="windows"></a>windows</h4><p><a href="https://defcon.cn/214.html" target="_blank" rel="noopener">Navicat Premium v15.0.21 中文最新破解版（附：激活工具）</a><br><a href="https://www.cnblogs.com/kkdaj/p/12794804.html" target="_blank" rel="noopener">Navicat Premium 15破解</a><br><a href="https://www.cnblogs.com/poloyy/p/12231357.html" target="_blank" rel="noopener">Navicat Premium 15 永久激活版安装教程</a></p>
-<p>链接：<a href="https://pan.baidu.com/s/1pGfZP9MssnaPEdI9Y3nK2Q" target="_blank" rel="noopener">https://pan.baidu.com/s/1pGfZP9MssnaPEdI9Y3nK2Q</a><br>提取码：btm7</p>
-<p>当然有的朋友在官网下载比较慢，我也为大家准备好了，Navicat premium 15安装包和破解工具<br>​    传送门： <a href="https://kkdaj.lanzous.com/ic03rbi" target="_blank" rel="noopener">Navicat15安装包和破解工具.zip</a></p>
+<h2 id="Navicat"><a href="#Navicat" class="headerlink" title="Navicat"></a>Navicat</h2><h4 id="windows-1"><a href="#windows-1" class="headerlink" title="windows"></a>windows</h4><!-- [Navicat Premium v15.0.21 中文最新破解版（附：激活工具）](https://defcon.cn/214.html)
+[Navicat Premium 15破解](https://www.cnblogs.com/kkdaj/p/12794804.html)
+[Navicat Premium 15 永久激活版安装教程](https://www.cnblogs.com/poloyy/p/12231357.html)
+
+链接：https://pan.baidu.com/s/1pGfZP9MssnaPEdI9Y3nK2Q 
+提取码：btm7 -->
+<p>当然有的朋友在官网下载比较慢，我也为大家准备好了，Navicat premium 15安装包和破解工具<br>​传送门： <a href="https://kkdaj.lanzous.com/ic03rbi" target="_blank" rel="noopener">Navicat15安装包和破解工具.zip</a></p>
 <p>在 1) Patch 中选择Backup、Host、Navicat v15这三个，默认也是选择了这三个；勾选这三个后点击Patch</p>
 <p>点击Patch按钮并找到Navicat Premium 15的安装目录的navicat.exe文件</p>
 <p>2.License. Product and Language</p>
@@ -594,9 +605,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/sql/" rel="tag"><i class="fa fa-tag"></i> sql</a>
-          
             <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
+          
+            <a href="/tags/sql/" rel="tag"><i class="fa fa-tag"></i> sql</a>
           
         </div>
       
@@ -609,8 +620,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sum/ser/mysql语法/" rel="next" title="Mysql语法">
-                <i class="fa fa-chevron-left"></i> Mysql语法
+              <a href="/sum/jsplus/前后端分离(023)/" rel="next" title="前后端分离">
+                <i class="fa fa-chevron-left"></i> 前后端分离
               </a>
             
           </div>
@@ -619,8 +630,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/sum/others/ssh基础/" rel="prev" title="Ssh基础">
-                Ssh基础 <i class="fa fa-chevron-right"></i>
+              <a href="/sum/ser/mysql语法/" rel="prev" title="Mysql语法">
+                Mysql语法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -733,7 +744,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">321</span>
+                  <span class="site-state-item-count">339</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -755,7 +766,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -834,7 +845,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#语法"><span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-text">基本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CURD"><span class="nav-text">CURD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查字段（名称，类型）"><span class="nav-text">查字段（名称，类型）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密码设置"><span class="nav-text">密码设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置权限"><span class="nav-text">设置权限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-text">索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引擎"><span class="nav-text">引擎</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows"><span class="nav-text">windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux"><span class="nav-text">linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异常"><span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#“Security”"><span class="nav-text">“Security”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql-sock"><span class="nav-text">mysql.sock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#远程连接"><span class="nav-text">远程连接</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Navicat"><span class="nav-text">Navicat</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#windows-1"><span class="nav-text">windows</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mac"><span class="nav-text">mac</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#语法"><span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-text">基本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CURD"><span class="nav-text">CURD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查字段（名称，类型）"><span class="nav-text">查字段（名称，类型）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密码设置"><span class="nav-text">密码设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置权限"><span class="nav-text">设置权限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间自动更新"><span class="nav-text">时间自动更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-text">索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引擎"><span class="nav-text">引擎</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows"><span class="nav-text">windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux"><span class="nav-text">linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异常"><span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#“Security”"><span class="nav-text">“Security”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql-sock"><span class="nav-text">mysql.sock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#远程连接"><span class="nav-text">远程连接</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Navicat"><span class="nav-text">Navicat</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#windows-1"><span class="nav-text">windows</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mac"><span class="nav-text">mac</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -868,7 +879,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">530.0k</span>
+    <span title="Site words total count">572.1k</span>
   
 </div>
 

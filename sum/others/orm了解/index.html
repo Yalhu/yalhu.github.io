@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="Sequelize是一个基于promise的nodejs ORM，目前支持Postgres、mysql、SQLite和Microsoft SQL Server。它具有强大的事务支持，关联关系，读取和复制等功能。 2021.2.21 星期日     对象关系映射（Object Relational Mapping，简称ORM）模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。简单的说">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-02-21T15:41:24.222Z">
+<meta property="og:updated_time" content="2021-07-11T12:43:38.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Orm了解">
 <meta name="twitter:description" content="Sequelize是一个基于promise的nodejs ORM，目前支持Postgres、mysql、SQLite和Microsoft SQL Server。它具有强大的事务支持，关联关系，读取和复制等功能。 2021.2.21 星期日     对象关系映射（Object Relational Mapping，简称ORM）模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。简单的说">
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-02-21T23:41:24+08:00">
-                2021-02-21
+              <time title="更新于" itemprop="dateModified" datetime="2021-07-11T20:43:38+08:00">
+                2021-07-11
               </time>
             
           </span>
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,164
+                  942
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  3
                 </span>
               
             </div>
@@ -469,8 +469,19 @@
 <!-- \#[什么是ORM？为什么要用ORM？](https://blog.csdn.net/u010947534/article/details/90669452) -->
 <p>为什么要做持久化和ORM设计(重要)<br>在目前的企业应用系统设计中，MVC，即 Model（模型）- View（视图）- Control（控制）为主要的系统架构模式。MVC 中的 Model 包含了复杂的业务逻辑和数据逻辑，以及数据存取机制（如 JDBC的连接、SQL生成和Statement创建、还有ResultSet结果集的读取等）等。将这些复杂的业务逻辑和数据逻辑分离，以将系统的紧耦 合关系转化为松耦合关系（即解耦合），是降低系统耦合度迫切要做的，也是持久化要做的工作。MVC 模式实现了架构上将表现层（即View）和数据处理层（即Model）分离的解耦合，而持久化的设计则实现了数据处理层内部的业务逻辑和数据逻辑分离的解耦合。 而 ORM 作为持久化设计中的最重要也最复杂的技术，也是目前业界热点技术。</p>
 <p><a href="http://www.ruanyifeng.com/blog/2019/02/orm-tutorial.html" target="_blank" rel="noopener">ORM 实例教程-ryf</a><br><!-- 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 --><br><!-- 简单说， -->ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是”对象-关系映射”（Object/Relational Mapping） 的缩写。</p>
-<p>一比较就可以发现，ORM 使用对象，封装了数据库操作，因此可以不碰 SQL 语言。开发者只使用面向对象编程，与数据对象直接交互，不用关心底层数据库。<br>&lt;!– 总结起来，ORM 有下面这些优点。<br>数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。<br>ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。<br>它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。<br>基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。<br>你不必编写性能不佳的 SQL。</p>
-<p>但是，ORM 也有很突出的缺点。<br>ORM 库不是轻量级工具，需要花很多精力学习和设置。<br>对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。<br>ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。<br> –&gt;</p>
+<p>一比较就可以发现，ORM 使用对象，封装了数据库操作，因此可以不碰 SQL 语言。开发者只使用面向对象编程，与数据对象直接交互，不用关心底层数据库。</p>
+<!-- 总结起来，ORM 有下面这些优点。
+数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。
+ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。
+它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。
+基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。
+你不必编写性能不佳的 SQL。
+
+但是，ORM 也有很突出的缺点。
+ORM 库不是轻量级工具，需要花很多精力学习和设置。
+对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。
+ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。
+ -->
 <!-- Comment -->
 <p>实用，现在 Node.js 使用最广泛的 ORM 库应该是 sequelize<br>sequelize 太重了，openrecord 就很轻量级。</p>
 
@@ -531,8 +542,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sum/others/sonarqube了解/" rel="next" title="Sonarqube了解">
-                <i class="fa fa-chevron-left"></i> Sonarqube了解
+              <a href="/sum/ser/koa实践/" rel="next" title="Koa实践">
+                <i class="fa fa-chevron-left"></i> Koa实践
               </a>
             
           </div>
@@ -646,7 +657,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">321</span>
+                  <span class="site-state-item-count">339</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -668,7 +679,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -764,7 +775,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">530.0k</span>
+    <span title="Site words total count">572.1k</span>
   
 </div>
 

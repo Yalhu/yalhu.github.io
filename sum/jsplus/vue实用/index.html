@@ -88,20 +88,18 @@
 
 
 
-<meta name="description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们可">
+<meta name="description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们">
 <meta name="keywords" content="vue.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue实用">
 <meta property="og:url" content="http://yoursite.com/sum/jsplus/vue实用/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们可">
+<meta property="og:description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://you img base url/./logo.png?e=1620206412&token=your qiniu access key:hFEKS84R4IPzJkTqJXdONF75KHM=">
-<meta property="og:updated_time" content="2021-05-05T07:57:45.932Z">
+<meta property="og:updated_time" content="2021-09-04T09:24:46.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue实用">
-<meta name="twitter:description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们可">
-<meta name="twitter:image" content="http://you img base url/./logo.png?e=1620206412&token=your qiniu access key:hFEKS84R4IPzJkTqJXdONF75KHM=">
+<meta name="twitter:description" content="vue组件写法/*.vue文件 ; Vue.component(), props    vue实用组件通信### 1 一般父子组件。1) 通过prop,和$emit  $danghao:ContentNav 切换2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布如何实时响应？如果修改父组件的值？ ### 2 在有些情况下，我们">
 
 
 
@@ -351,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-05-05T15:57:45+08:00">
-                2021-05-05
+              <time title="更新于" itemprop="dateModified" datetime="2021-09-04T17:24:46+08:00">
+                2021-09-04
               </time>
             
           </span>
@@ -423,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,965
+                  3,211
                 </span>
               
 
@@ -439,7 +437,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  16
+                  14
                 </span>
               
             </div>
@@ -460,7 +458,8 @@
       
 
       
-        <p>vue组件写法/*.vue文件 ; Vue.component(), props   </p>
+        <!-- Vue 文档：学习 -》 cookbook [Packaging Vue Components for npm](https://cn.vuejs.org/v2/cookbook/packaging-sfc-for-npm.html) -->
+<p>vue组件写法/*.vue文件 ; Vue.component(), props   </p>
 <h1 id="vue实用"><a href="#vue实用" class="headerlink" title="vue实用"></a>vue实用</h1><h2 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h2><p>### 1 一般父子组件。<br>1) 通过prop,和$emit  $danghao:ContentNav 切换<br>2) parent/root,children  或者父组件中可以用 $refs调用子组件  $danghao:定时发布<br>如何实时响应？<br>如果修改父组件的值？</p>
 <p>### 2 在有些情况下，我们可能需要对一个 prop 进行“双向绑定”<br>1) 为了方便起见，我们为这种模式提供一个缩写，即 .sync 修饰符：     </p>
 <blockquote>
@@ -469,11 +468,44 @@
 <p>2) 比如表单的数据v-model。定义表单自己的数据，然后在声明周期中把父组件的值赋给 表单自己定义的值    $danghao: ContenNav nav组件的active 值；帐号信息 申请描述  </p>
 <p>### 根/父组件 值为异步获取/更新<br>1) 如果要直接引用<code>$root.$data.userInfo</code> 或<code>$root.userInfo</code>, 属性的值，需要注意数据类型正确。不能直接给一个空值<code>userInfo: {}</code> 属性也需要赋值 <code>user:{tags:[]}</code>,因为使用了tags的值<br>2) 如果可以确定 子组件 装载时，根组件的异步获取的数据已经成功，可以在子组件的生命周期中重新赋值<br>3) 通过watch 监听数据的变化      </p>
 <!-- ~~？ 子组件直接使用的 父/根 组件的值 会不会 同步更新视图~~   -->
-<ol>
-<li>data下的字段无法通过表达式实现。所以只能通过条件判断了<code>key === &#39;grade0&#39; ? currWork_grade0 : currWork_grade1)[gkey].praiseCount</code><br>为了减少嵌套，修改currWork_grade0.low 数据方便。 <code>this.$set(this[</code>currWork_${key}<code>], gkey, data)</code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">    currWork_grade0: &#123; <span class="attr">low</span>: &#123;&#125;, <span class="attr">mid</span>: &#123;&#125;, <span class="attr">high</span>: &#123;&#125; &#125;,</span><br><span class="line">    currWork_grade1: &#123; <span class="attr">low</span>: &#123;&#125;, <span class="attr">mid</span>: &#123;&#125;, <span class="attr">high</span>: &#123;&#125; &#125;,</span><br><span class="line">    <span class="comment">// 对比</span></span><br><span class="line">    currWork: &#123;</span><br><span class="line">        currWork_grade0: &#123; <span class="attr">low</span>: &#123;&#125;, <span class="attr">mid</span>: &#123;&#125;, <span class="attr">high</span>: &#123;&#125; &#125;,</span><br><span class="line">        currWork_grade1: &#123; <span class="attr">low</span>: &#123;&#125;, <span class="attr">mid</span>: &#123;&#125;, <span class="attr">high</span>: &#123;&#125; &#125;,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><ol>
+<li><p>拿到的值是 <code>{__ob__: observer}</code>。 无法取到里边的值，进行后续操作<br>将返回的数据data先转换为JSON字符串形式，然后再从字符串形式转换成JSON格式JSON.parse(JSON.stringify(data))</p>
+<!-- __ob__: Observer这些数据是vue这个框架对数据设置的监控器，一般都是不可枚举的。
+网上有很多解决的方案：
+第一种：__ob__: Observer 是 Vue 对数据监控添加的属性，如果想去掉可以用赋值的方式。例如Object.assign({},this.owner)。 用这种方式也是可以解决。
+第二种：假设list里面存放的就是那些带有__ob__: Observer的可以用JSON.parse(JSON.stringify(this.list)）完美解决
+-->
+</li>
+<li><p>data下的字段无法通过表达式实现。所以只能通过条件判断了<code>key === &#39;grade0&#39; ? currWork_grade0 : currWork_grade1)[gkey].praiseCount</code><br>为了减少嵌套，修改currWork_grade0.low 数据方便。 <code>this.$set(this[</code>currWork_${key}<code>], gkey, data)</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">    currWork_grade0: &#123; <span class="attr">low</span>: &#123;&#125;, <span class="attr">mid</span>: &#123;&#125;, <span class="attr">high</span>: &#123;&#125; &#125;,</span><br><span class="line">    currWork_grade1: &#123; <span class="attr">low</span>: &#123;&#125;, <span class="attr">mid</span>: &#123;&#125;, <span class="attr">high</span>: &#123;&#125; &#125;,</span><br><span class="line">    <span class="comment">// 对比</span></span><br><span class="line">    currWork: &#123;</span><br><span class="line">        currWork_grade0: &#123; <span class="attr">low</span>: &#123;&#125;, <span class="attr">mid</span>: &#123;&#125;, <span class="attr">high</span>: &#123;&#125; &#125;,</span><br><span class="line">        currWork_grade1: &#123; <span class="attr">low</span>: &#123;&#125;, <span class="attr">mid</span>: &#123;&#125;, <span class="attr">high</span>: &#123;&#125; &#125;,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"['home-works-group-praise', (key === 'grade0' ? currWork_grade0 : currWork_grade1)[gkey].isPraise  &amp;&amp; 'home-works-group-praise-light']"</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">img</span> @<span class="attr">click</span>=<span class="string">"praise(gkey)"</span> <span class="attr">src</span>=<span class="string">"https://mr.xesimg.com/biz-growth-storage/activity/upload/20210324/0a32e1d885645f2c5d4b88a6d415f28b.png"</span> <span class="attr">alt</span>=<span class="string">"点赞"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">output</span>&gt;</span>&#123;&#123;(key === 'grade0' ? currWork_grade0 : currWork_grade1)[gkey].praiseCount || 0 &#125;&#125;<span class="tag">&lt;/<span class="name">output</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><p>如果有多种类型，有几种写法。第二种写法可能eslint 规则校验不过<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">props:&#123;</span><br><span class="line">  selectionFixed: &#123;</span><br><span class="line">    type: [<span class="built_in">String</span>, <span class="built_in">Boolean</span>],</span><br><span class="line">    <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">  &#125;,</span><br><span class="line">  isIndex: &#123;</span><br><span class="line">    type: <span class="built_in">Boolean</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  indexFixed: &#123;</span><br><span class="line">    type: <span class="built_in">String</span> | <span class="built_in">Boolean</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><!-- accountMonthForm.vue    before route enter
+accountCatMixin.js    MIXIN:before create|| 
+accountCatMixin.js    MIXIN: created|| [__ob__: Observer]
+accountCatMixin.js    MIXIN:get cat ||
+accountMonthForm.vue    Account: create || [__ob__: Observer]
+accountCatMixin.js    MIXIN:get cat || [__ob__: Observer]
+accountMonthForm.vue    Account: mounted || [__ob__: Observer]
+accountMonthForm.vue    next: before route enter VueComponent {_uid: 1068, _isVue: true, } [__ob__: Observer]
+ //<-!-- vm 实例catArr 有长度，但是实际输出的catArr 长度为0 --!>
+accountCatMixin.js    MIXIN:get cat - after || [{...}, {...}, {...}, __ob__: Observer]
+accountCatMixin.js    MIXIN:get cat - after || [{...}, {...}, {...}, __ob__: Observer]
+accountMonthForm.vue    Account: create|| [{...}, {...}, {...}, __ob__: Observer]
+
+总结： -->虽然生命周期可以写asycn/await 但是并不会等待。而是直接进行其他的主任务，比如mouted 等。主任务完成，才是async 中的微任务<br>router: before router enter<br>生命周期(mixin -&gt; 组件)：before create -&gt; created  -&gt; mounted<br>router: next(before router enter)<br>微任务：生命周期async 中的微任务执行，包括await及之后的 输出（此时才拿到接口中的数据）<br><!-- mixin 和 组件 生命周期中的方法getCat，调用了两次。 -->
+<p>beforeCreate 不能获取到this，包括this.methods调用</p>
+<h3 id="父子组件"><a href="#父子组件" class="headerlink" title="父子组件"></a>父子组件</h3><p>父：before Create -&gt; created -&gt; before mounted<br>子：before Create -&gt; created -&gt; before mounted -&gt; mounted<br>父：mounted</p>
+<h3 id="生命周期做了什么"><a href="#生命周期做了什么" class="headerlink" title="生命周期做了什么"></a>生命周期做了什么</h3><h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>但是，如果是在自己封装的组件或者是使用一些第三方的UI库时，会发现并不起效果，这时就需要用到.native修饰符了<br>如果遇到.native修饰符也无效的情况，可能就需要用到$listeners</p>
+<blockquote>
+<p>请注意修饰键与常规按键不同，在和 keyup 事件一起用时，事件触发时修饰键必须处于按下状态。换句话说，只有在按住 ctrl 的情况下释放其它按键，才能触发 keyup.ctrl。而单单释放 ctrl 也不会触发事件。如果你想要这样的行为，请为 ctrl 换用 keyCode：keyup.17。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 按下Alt + 释放C触发 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> @<span class="attr">keyup.alt.67</span>=<span class="string">"clear"</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">&lt;!-- 按下Alt + 释放任意键触发 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> @<span class="attr">keyup.alt</span>=<span class="string">"other"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 按下Ctrl + enter时触发 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> @<span class="attr">keydown.ctrl.13</span>=<span class="string">"submit"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>.exact 修饰符允许你控制由精确的系统修饰符组合触发的事件。</p>
+</blockquote>
 <h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>1） 为什么组件data是一个函数？多个/不同实例间 不共用相同的数据<br>2）data：组件数据。<br>computed：根据data或者其他数据 过滤的数据，可以缓存，只要源数据发生变动。<br>也可以有set方法     </p>
 <blockquote>
 <p>计算属性是基于它们的响应式依赖进行缓存的<br>method: 每次调用都会执行。如果你不希望有缓存，请用方法来替代。<br>watch(侦听属性): 数据变化时执行异步或开销较大的操作时    </p>
@@ -498,29 +530,34 @@
 <p>webpack.config.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: <span class="string">'./app.js'</span>,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'./dist'</span>),</span><br><span class="line">    publicPath: <span class="string">'/dist/'</span>,</span><br><span class="line">    filename: <span class="string">'build.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    <span class="comment">// add Babel here if needed</span></span><br><span class="line">  &#125;,</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    alias: &#123;</span><br><span class="line">      <span class="string">'./vue.js'</span>: <span class="string">'./node_modules/vue/dist/vue.esm.browser.js'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h3 id="1-也可以从vue的components中导出具体的某一个方法。（非mixin方法）"><a href="#1-也可以从vue的components中导出具体的某一个方法。（非mixin方法）" class="headerlink" title="1. 也可以从vue的components中导出具体的某一个方法。（非mixin方法）"></a>1. 也可以从vue的components中导出具体的某一个方法。（非mixin方法）</h3><p>   使用的时候，要注意绑定this</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* sharePanel.vue */</span></span><br><span class="line"><span class="keyword">const</span> app = &#123;</span><br><span class="line">  name: <span class="string">'sharePanel'</span>,</span><br><span class="line">  mixin: [],</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleShareClick() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> app</span><br><span class="line"><span class="keyword">const</span> shareClick = app.methods.handleShareClick</span><br><span class="line"><span class="keyword">export</span> &#123; shareClick &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* home.vue */</span></span><br><span class="line"><span class="keyword">import</span> sharePanel, &#123; shareClick &#125; <span class="keyword">from</span> <span class="string">'components/sharePanel'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'Home'</span>,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    shareClick.bind(<span class="keyword">this</span>, <span class="string">'wechat'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="骨架屏"><a href="#骨架屏" class="headerlink" title="骨架屏"></a>骨架屏</h2><ol>
-<li>[puppeteer构建骨架屏]<br>可以根据每一页不同的样式构建相应的骨架屏</li>
-<li>vue-skeleton-webpack-plugin<br><a href="https://xiaoiver.github.io/coding/2017/07/30/为vue项目添加骨架屏.html" target="_blank" rel="noopener">为vue项目添加骨架屏</a><br>可配置的骨架屏组件，利用ssr的预渲染。<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3>我将骨架屏也看成路由组件，在构建时使用 Vue 预渲染功能，将骨架屏组件的渲染结果 HTML 片段插入 HTML 页面模版的挂载点中，将样式内联到 head 标签中。这样等前端渲染完成时，Vue 将使用客户端混合，把挂载点中的骨架屏内容替换成真正的页面内容。</li>
-</ol>
-<p><a href="https://github.com/lavas-project/vue-skeleton-webpack-plugin" target="_blank" rel="noopener">vue-skeleton-webpack-plugin</a><br><!-- [[饿了么的 PWA 升级实践]](https://huangxuan.me/2017/07/12/upgrading-eleme-to-pwa/#) --></p>
+<h2 id="骨架屏"><a href="#骨架屏" class="headerlink" title="骨架屏"></a>骨架屏</h2><!-- 1. [puppeteer构建骨架屏]
+可以根据每一页不同的样式构建相应的骨架屏
+2. vue-skeleton-webpack-plugin
+[为vue项目添加骨架屏](https://xiaoiver.github.io/coding/2017/07/30/为vue项目添加骨架屏.html)
+可配置的骨架屏组件，利用ssr的预渲染。
+### 实现思路
+我将骨架屏也看成路由组件，在构建时使用 Vue 预渲染功能，将骨架屏组件的渲染结果 HTML 片段插入 HTML 页面模版的挂载点中，将样式内联到 head 标签中。这样等前端渲染完成时，Vue 将使用客户端混合，把挂载点中的骨架屏内容替换成真正的页面内容。
+
+[vue-skeleton-webpack-plugin](https://github.com/lavas-project/vue-skeleton-webpack-plugin)
+[[饿了么的 PWA 升级实践]](https://huangxuan.me/2017/07/12/upgrading-eleme-to-pwa/#)
+
+ -->
 <h1 id="vue-loader"><a href="#vue-loader" class="headerlink" title="vue-loader"></a>vue-loader</h1><p style="text-align:right">2018.11.21</p>
 
-<h1 id="vue-cli"><a href="#vue-cli" class="headerlink" title="vue-cli"></a>vue-cli</h1><p>webpack3配置,从定义环境/生产 变量使用插件,而非mode选项.<br>也是热更新,但是报错信息会一直累积(开始以为一直在出错,怎么出错这么多),应该可以配置<br>$TODO: 报错信息清空/不缓存  </p>
-<p>所以参照webpack,比如路径,模板,输出文件,脚本运行方式(npm run dev/build)等,也可以自己修改/添加(比如less)配置,或者用webpack重新配置   </p>
-<p>生成文件在dist下,build中build的相关配置,比如webpack的.(creat-react-app 生成的项目在build文件夹下)    </p>
-<h2 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h2><p>dev.assetsSubDirectory: 提供资源的目录/文件夹<br>dev.assetsPublicPath: 访问资源的路径,基于webpack server的.所以才有了下面的使用方式<br>build.assetsSubDirectory: 生成(build)资源存放目录/文件夹(dist/static),不能出现路径,编译会出错<br>build.assetsPublicPath:访问资源的路径.如果是<code>/</code>表示绝对路径,如果服务器没有提供当前根目录的服务或者根目录没有资源,会加载失败. 网上许多vue项目打开空白就是这个原因:编译生成的js,css等文件在dist目录,而dist目录并没有在根目录(<code>\</code>路径)中,所以没有加载到资源,页面是空白的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"><span class="comment">// Template version: 1.3.1</span></span><br><span class="line"><span class="comment">// see http://vuejs-templates.github.io/webpack for documentation.</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  dev: &#123;</span><br><span class="line">    <span class="comment">// Paths</span></span><br><span class="line">    assetsSubDirectory: <span class="string">'static'</span>,</span><br><span class="line">    assetsPublicPath: <span class="string">'/'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  build: &#123;</span><br><span class="line">    index: path.resolve(__dirname, <span class="string">'../dist/index.html'</span>), <span class="comment">// Template for index.html</span></span><br><span class="line">    assetsRoot: path.resolve(__dirname, <span class="string">'../dist'</span>), <span class="comment">// Paths</span></span><br><span class="line">    assetsSubDirectory:<span class="string">'static'</span>,</span><br><span class="line">    <span class="comment">// assetsPublicPath: '/', // 原始   </span></span><br><span class="line">    assetsPublicPath: <span class="string">'./'</span>, <span class="comment">// 推荐  </span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>背景图片和img标签引用资源方式<br>background的使用方式是引用的资源路径,并不是经过编译的模块, 所以上面使用资源路径的访问方式是正确的.下面出错,是因为访问的路径(webpack server提供的服务)下没有资源   </p>
-<p>img标签使用 相对路径的方式是会编译成模块,路径按当前文件的位置引用.而<code>/static</code>是绝对路径,使用资源路径(webpack server服务提供). dev访问正常, 如果build,网站配置并不会给dist配置<code>/</code>的访问路径,所以绝对路径<code>/static</code>并没有该资源.除非网站配置正确的访问路径,或者自己把资源添加到根目录.<br>所以推荐使用相对路径.配置build.assetsPublicPath的路径为<code>./</code>,非<code>/</code>,上面也可以使用绝对路径了.不过<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// ## background:Carousel.vue</span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(/static/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">el-carousel-item</span> <span class="attr">:style</span>=<span class="string">"&#123;background:'url(./static/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;"</span> <span class="attr">:key</span>=<span class="string">"index"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- blank --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(./images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(../assets/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;el-carousel-item :style="&#123;background:'url(./assets/images/'+img+(img=='banner3'?'.png':'.webp')+') no-repeat',backgroundSize:'cover'&#125;" :key="index"&gt; --&gt;</span></span><br><span class="line"></span><br><span class="line">// ## img:Teachers.vue</span><br><span class="line"><span class="comment">&lt;!-- &lt;img src="/static/images/hamburger.png" class="image"&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/hamburger.png"</span> <span class="attr">class</span>=<span class="string">"image"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;img src="./images/hamburger.png" class="image"&gt; --&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="其它-1"><a href="#其它-1" class="headerlink" title="其它"></a>其它</h1><h2 id="assets和static文件夹的区别"><a href="#assets和static文件夹的区别" class="headerlink" title="assets和static文件夹的区别"></a>assets和static文件夹的区别</h2><!-- [vue-cli 自定义路径别名 assets和static文件夹的区别 --save-dev和--save的区别](https://juejin.im/post/59be4d325188257e764c8485)   -->
-<p>相信有很多人知道vue-cli有两个放置静态资源的地方，分别是src/assets文件夹和static文件夹,这两者的区别很多人可能不太清楚。<br>assets目录中的文件会被webpack处理解析为模块依赖，只支持相对路径形式。例如，在 <img src="http://you img base url/./logo.png?e=1620206412&token=your qiniu access key:hFEKS84R4IPzJkTqJXdONF75KHM=">和 background: url(./logo.png)中，”./logo.png” 是相对的资源路径，将由Webpack解析为模块依赖。</p>
-<p>static/ 目录下的文件并不会被Webpack处理：它们会直接被复制到最终的打包目录（默认是dist/static）下。必须使用绝对路径引用这些文件，这是通过在 config.js 文件中的 build.assetsPublicPath 和 build.assetsSubDirectory 连接来确定的。<br>任何放在 static/ 中文件需要以绝对路径的形式引用：/static/[filename]。</p>
-<p>在我们实际的开发中，总的来说：static放不会变动的文件 assets放可能会变动的文件。</p>
-<p>因为webpack会将图片当做模块来引用，所以在js中需要使用require将图片引用进来，不能直接以字符串的形式。   </p>
-<h2 id="资源路径处理"><a href="#资源路径处理" class="headerlink" title="资源路径处理"></a>资源路径处理</h2><!-- [资源路径处理](https://vue-loader-v14.vuejs.org/zh-cn/configurations/asset-url.html)   -->
-<p>默认情况下，vue-loader 使用 css-loader 和 Vue 模版编译器自动处理样式和模版文件。在编译过程中，所有的资源路径例如 <code>&lt;img src=&quot;...&quot;&gt;、background: url(...) 和 @import</code> 会作为模块依赖。   </p>
-<p>例如，url(./image.png) 会被转换为 require(‘./image.png’)，而</p>
-<p><code>&lt;img src=&quot;../image.png&quot;&gt;</code><br>将会编译为：<code>createElement(&#39;img&#39;, { attrs: { src: require(&#39;../image.png&#39;) }})</code><br>编译规则:<br>1) 如果路径是绝对路径，会原样保留。<br>2) 如果路径以 . 开头，将会被看作相对的模块依赖，并按照你的本地文件系统上的目录结构进行解析。<br>3) 如果路径以 ~ 开头，其后的部分将会被看作模块依赖。这意味着你可以用该特性来引用一个 node 依赖中的资源：<br>4) (13.7.0+) 如果路径以 @ 开头，也会被看作模块依赖。如果你的 webpack 配置中给 @ 配置了 alias，这就很有用了。所有 vue-cli 创建的项目都默认配置了将 @ 指向 /src。  </p>
-<h1 id="element-ui"><a href="#element-ui" class="headerlink" title="element ui"></a>element ui</h1><p>见<a href="./electron实践.md">element-ui 实践</a></p>
+
+<h1 id="dev-tools"><a href="#dev-tools" class="headerlink" title="dev-tools"></a>dev-tools</h1><p>不生效<code>Vue.js Devtools inspection is not available because it&#39;s in production mode or explicitly disabled</code><br><strong>vue不是生成环境或压缩版的</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(process.env.NODE_ENV === <span class="string">'development'</span>)&#123;</span><br><span class="line">  Vue.config.devtools = <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<!-- 1、引入vue.min.js是不行的，引入vue.js才能使用vue-devtools。
+2、在chrome的扩展程序页面，需要勾选vue-devtools的“允许访问文件地址”项。
+3、如果你是在chrome商店里安装的vue-devtools，那么需要到这个扩展的安装路径下找到manifest.json文件，把其中的"persistent": false，需改为：true。
+4.在你的入口JS文件里加上一行Vue.config.devtools = true
+
+[Vue.js is detected on this page解决方法](https://blog.csdn.net/weixin_43520670/article/details/104716644)
+[vue调试工具Devtools不出现的解决方式](https://blog.csdn.net/przlovecsdn/article/details/82256558)
+[Vue.js devtool插件已经运行，但是调试窗口没有出现的原因](https://blog.csdn.net/weixin_45785873/article/details/103211026) 
+
+-->
+<h1 id="vue-cli"><a href="#vue-cli" class="headerlink" title="vue-cli"></a>vue-cli</h1><p>见<a href=".vue-cli实用.md">vue-cli实用</a></p>
+<h1 id="element-ui"><a href="#element-ui" class="headerlink" title="element ui"></a>element ui</h1><p>见<a href="./element-ui实践.md">element-ui 实践</a></p>
 <h1 id="swiper"><a href="#swiper" class="headerlink" title="swiper"></a>swiper</h1><h2 id="swiper-vue"><a href="#swiper-vue" class="headerlink" title="swiper/vue"></a>swiper/vue</h2><p>swiper文档: <a href="https://swiperjs.com/get-started" target="_blank" rel="noopener">https://swiperjs.com/get-started</a><br><!-- https://swiper.com.cn/demo/index.html --><br>&lt;!–<br>移动端滑动不流畅：<br>observer: true,//修改swiper自己或子元素时，自动初始化swiper<br>observeParents: true,//修改swiper的父元素时，自动初始化swiper<br>包括动态生产的swiper， 隐藏后出现。<br>多个swiper插件，出现混乱问题： 1. 实例化swiper时加上其父元素加以区分； 2.Swiper加上ID或Class区分，要保留默认的类名swiper-container</p>
 <p><a href="https://www.cnblogs.com/wangyihong/p/7055599.html" target="_blank" rel="noopener">swiper.js 碰到的坑</a><br><a href="https://blog.csdn.net/cx091/article/details/78280061" target="_blank" rel="noopener">关于swiper移动端的坑</a><br>为了提高移动端的加载速度，开发人员手动拿出需要的siwper的样式和js是ok的，<br>但是这里需要需要注意几点：<br>移动端上的卡顿问题：如果只引用了swiper的js而没有引入swiper.css和swiper.animate.js，移动端就会出现卡顿问题<br>官方建议代码： observer，observeParents。<br> –&gt;</p>
 <p>Swiper Vue.js Components: <a href="https://swiperjs.com/vue#virtual-slides" target="_blank" rel="noopener">https://swiperjs.com/vue#virtual-slides</a><br>如果只有一个可以把事件监听写在swiper上。否则需要利用this.$refs.swiper1 获取到swiper实例及其index</p>
@@ -553,7 +590,14 @@
 <h1 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h1><ol start="2">
 <li>vue-router url参数问题。  哈希qurey 和 路由query<br>activity/#/sharePage?env=sandbox: hash search。可以通过 this.$route.query 获取到<br> 而且href.search 是空的<br>activity/?source=h5&amp;from=app#/sharePage: url search。 不可以通过 route 获取。</li>
 </ol>
-
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h3 id="安装问题"><a href="#安装问题" class="headerlink" title="安装问题"></a>安装问题</h3><!-- 下面几个是因为用了yarn workspace。有的项目是老项目，有的目录下node_module没有删除干净 -->
+<p>#### <code>TypeError: Cannot read property ‘parseComponent‘ of undefined</code><br>原因：是vue-template-compiler 升级版本后 parseComponent函数已被删除，导致 component-compiler-utils报错。<br><!-- 原因：vue版本和vue-template-compiler版本不一致导致 --><br><!-- 本次是使用yarn workspace。删除项目里面node_modules 中 vue-template-compiler，保持和外部一致 --></p>
+<p>npm uninstall @vue/component-compiler-utils<br>npm install –dev @<a href="mailto:vue/component-compiler-utils@3.1.2" target="_blank" rel="noopener">vue/component-compiler-utils@3.1.2</a></p>
+<p>#### vue项目中使用/deep/报错<br>方法：降低sass-loader版本<br><!-- 使用yarn workspace。老项目不可以修改。直接删除node_modules 下目录不行。执行npm 指令重新安装就可以了 --><br>npm uninstall sass-loader<br>npm install <a href="mailto:sass-loader@7.0.0" target="_blank" rel="noopener">sass-loader@7.0.0</a><br>npm install node-sass<br><!-- 安装node-sass是因为安装低版本sass-loader需要引入node-sass依赖来支持，不然会报错 --></p>
+<p>#### core-js 报错<br><code>core-js/modules/es6.array.find-index in</code> 等<br><!-- 还是因为使用了yarn workspace --><br>core-js版本太高<br><code>npm install core-js@2</code></p>
+<h3 id="element"><a href="#element" class="headerlink" title="element"></a>element</h3><p>#### <code>Uncaught ReferenceError: element is not defined</code><br>cdn 方式引入element ui </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">externals: &#123;</span><br><span class="line">  <span class="string">'vue'</span>: <span class="string">'Vue'</span>,</span><br><span class="line">  <span class="string">'vue-router'</span>: <span class="string">'VueRouter'</span>,</span><br><span class="line">  <span class="string">'axios'</span>:<span class="string">'axios'</span>,</span><br><span class="line">  <span class="string">'element-ui'</span>: <span class="string">'ELEMENT'</span>, <span class="comment">// 之前是 ElementUI</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Message &#125; <span class="keyword">from</span> <span class="string">'element-ui'</span></span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line"><span class="keyword">const</span> &#123; Message &#125; = ELEMENT</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -627,8 +671,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/w3/jslib/vuejs文档/vuejs文档9-对比/" rel="prev" title="Vuejs文档9-对比">
-                Vuejs文档9-对比 <i class="fa fa-chevron-right"></i>
+              <a href="/sum/jsplus/vue-cli实用/" rel="prev" title="Vue-Cli实用">
+                Vue-Cli实用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -741,7 +785,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">321</span>
+                  <span class="site-state-item-count">339</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -763,7 +807,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -846,7 +890,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue实用"><span class="nav-text">vue实用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#组件通信"><span class="nav-text">组件通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-text">其它</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#refs"><span class="nav-text">refs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数式组件"><span class="nav-text">函数式组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#四：render函数"><span class="nav-text">四：render函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSX"><span class="nav-text">JSX</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#es模块使用"><span class="nav-text">es模块使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-es模块使用。兼容回退"><span class="nav-text">1. es模块使用。兼容回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-也可以从vue的components中导出具体的某一个方法。（非mixin方法）"><span class="nav-text">1. 也可以从vue的components中导出具体的某一个方法。（非mixin方法）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#骨架屏"><span class="nav-text">骨架屏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现思路"><span class="nav-text">实现思路</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-loader"><span class="nav-text">vue-loader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-cli"><span class="nav-text">vue-cli</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#路径"><span class="nav-text">路径</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其它-1"><span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#assets和static文件夹的区别"><span class="nav-text">assets和static文件夹的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源路径处理"><span class="nav-text">资源路径处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#element-ui"><span class="nav-text">element ui</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#swiper"><span class="nav-text">swiper</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#swiper-vue"><span class="nav-text">swiper/vue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-awesome-swiper"><span class="nav-text">vue-awesome-swiper</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vuex"><span class="nav-text">vuex</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-router"><span class="nav-text">vue-router</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue实用"><span class="nav-text">vue实用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#组件通信"><span class="nav-text">组件通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-text">数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#props"><span class="nav-text">props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期"><span class="nav-text">生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#父子组件"><span class="nav-text">父子组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期做了什么"><span class="nav-text">生命周期做了什么</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件"><span class="nav-text">事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-text">其它</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#refs"><span class="nav-text">refs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数式组件"><span class="nav-text">函数式组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#四：render函数"><span class="nav-text">四：render函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSX"><span class="nav-text">JSX</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#es模块使用"><span class="nav-text">es模块使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-es模块使用。兼容回退"><span class="nav-text">1. es模块使用。兼容回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-也可以从vue的components中导出具体的某一个方法。（非mixin方法）"><span class="nav-text">1. 也可以从vue的components中导出具体的某一个方法。（非mixin方法）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#骨架屏"><span class="nav-text">骨架屏</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-loader"><span class="nav-text">vue-loader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dev-tools"><span class="nav-text">dev-tools</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-cli"><span class="nav-text">vue-cli</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#element-ui"><span class="nav-text">element ui</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#swiper"><span class="nav-text">swiper</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#swiper-vue"><span class="nav-text">swiper/vue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-awesome-swiper"><span class="nav-text">vue-awesome-swiper</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vuex"><span class="nav-text">vuex</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-router"><span class="nav-text">vue-router</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装问题"><span class="nav-text">安装问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#element"><span class="nav-text">element</span></a></li></ol></li></div>
             
 
           </div>
@@ -880,7 +924,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">530.0k</span>
+    <span title="Site words total count">572.1k</span>
   
 </div>
 

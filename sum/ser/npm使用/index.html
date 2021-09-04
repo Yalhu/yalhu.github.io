@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="2018.8.9   基础123456789101112131415161718192021222324252627282930313233343536## 配置信息### 获取  npm config list     npm config ls -l # 全部信息   npm config get registry # 特定/指定设置### 设置npm config set proxy htt">
+<meta name="description" content="2018.8.9   基础123456789101112131415161718192021222324252627282930313233343536373839404142## 配置信息### 获取  npm config list     npm config ls -l # 全部信息   npm config get registry # 特定/指定设置### 设置npm config s">
 <meta name="keywords" content="nodejs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Npm使用">
 <meta property="og:url" content="http://yoursite.com/sum/ser/npm使用/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2018.8.9   基础123456789101112131415161718192021222324252627282930313233343536## 配置信息### 获取  npm config list     npm config ls -l # 全部信息   npm config get registry # 特定/指定设置### 设置npm config set proxy htt">
+<meta property="og:description" content="2018.8.9   基础123456789101112131415161718192021222324252627282930313233343536373839404142## 配置信息### 获取  npm config list     npm config ls -l # 全部信息   npm config get registry # 特定/指定设置### 设置npm config s">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-10T09:38:29.496Z">
+<meta property="og:updated_time" content="2021-09-04T09:36:24.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Npm使用">
-<meta name="twitter:description" content="2018.8.9   基础123456789101112131415161718192021222324252627282930313233343536## 配置信息### 获取  npm config list     npm config ls -l # 全部信息   npm config get registry # 特定/指定设置### 设置npm config set proxy htt">
+<meta name="twitter:description" content="2018.8.9   基础123456789101112131415161718192021222324252627282930313233343536373839404142## 配置信息### 获取  npm config list     npm config ls -l # 全部信息   npm config get registry # 特定/指定设置### 设置npm config s">
 
 
 
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-04-10T17:38:29+08:00">
-                2021-04-10
+              <time title="更新于" itemprop="dateModified" datetime="2021-09-04T17:36:24+08:00">
+                2021-09-04
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,167
+                  3,208
                 </span>
               
 
@@ -460,8 +460,8 @@
       
         <p style="text-align:right">2018.8.9 </p>
 
-<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 配置信息</span></span><br><span class="line"><span class="comment">### 获取  </span></span><br><span class="line">npm config list     </span><br><span class="line">npm config ls -l <span class="comment"># 全部信息   </span></span><br><span class="line">npm config get registry <span class="comment"># 特定/指定设置</span></span><br><span class="line"><span class="comment">### 设置</span></span><br><span class="line">npm config <span class="built_in">set</span> proxy http://proxy.company.com:8080 </span><br><span class="line">npm config <span class="built_in">set</span> https-proxy http://proxy.company.com:8080 </span><br><span class="line">npm config <span class="built_in">set</span> http-proxy http://proxy.company.com:8080</span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br><span class="line"><span class="comment">### 删除</span></span><br><span class="line">npm config delete proxy</span><br><span class="line">npm config delete http-proxy</span><br><span class="line">npm config delete https-proxy</span><br><span class="line"></span><br><span class="line"><span class="comment">## npm 安装/管理/升级包</span></span><br><span class="line">npm -g install npm@4.0.2</span><br><span class="line">npm install npm@latest -g <span class="comment"># latest</span></span><br><span class="line">npm i element-ui -S <span class="comment"># 简写</span></span><br><span class="line"><span class="comment">### 更新</span></span><br><span class="line"><span class="comment"># npm update [-g] [&lt;pkg&gt;...] # 更新</span></span><br><span class="line">npm install npm@latest -g <span class="comment"># npm 更新</span></span><br><span class="line">npm update @xes/x-cli -g --registry=https://npm.xesv5.com</span><br><span class="line"></span><br><span class="line"><span class="comment">### 包信息</span></span><br><span class="line"><span class="comment"># npm view &lt;packageName&gt; versions --json</span></span><br><span class="line">npm view @xes/x-cli version</span><br><span class="line">npm info express</span><br><span class="line"></span><br><span class="line"><span class="comment">## 发包</span></span><br><span class="line">npm login</span><br><span class="line">npm adduser</span><br><span class="line"></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="comment">### 缓存清除</span></span><br><span class="line">npm cache clear --force</span><br></pre></td></tr></table></figure>
-<h2 id="node多版本控制"><a href="#node多版本控制" class="headerlink" title="node多版本控制"></a>node多版本控制</h2><p>mac/lunix： nvm<br>windows: nvm-</p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 配置信息</span></span><br><span class="line"><span class="comment">### 获取  </span></span><br><span class="line">npm config list     </span><br><span class="line">npm config ls -l <span class="comment"># 全部信息   </span></span><br><span class="line">npm config get registry <span class="comment"># 特定/指定设置</span></span><br><span class="line"><span class="comment">### 设置</span></span><br><span class="line">npm config <span class="built_in">set</span> proxy http://proxy.company.com:8080 </span><br><span class="line">npm config <span class="built_in">set</span> https-proxy http://proxy.company.com:8080 </span><br><span class="line">npm config <span class="built_in">set</span> http-proxy http://proxy.company.com:8080</span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br><span class="line">npm config <span class="built_in">set</span> disturl https://npm.taobao.org/dist</span><br><span class="line"><span class="comment">### 删除</span></span><br><span class="line">npm config delete proxy</span><br><span class="line">npm config delete http-proxy</span><br><span class="line">npm config delete https-proxy</span><br><span class="line"></span><br><span class="line"><span class="comment">## npm 安装/管理/升级包</span></span><br><span class="line">npm -g install npm@4.0.2</span><br><span class="line">npm install npm@latest -g <span class="comment"># latest</span></span><br><span class="line">npm i element-ui -S <span class="comment"># 简写</span></span><br><span class="line"><span class="comment">### 更新</span></span><br><span class="line"><span class="comment"># npm update [-g] [&lt;pkg&gt;...] # 更新</span></span><br><span class="line">npm install npm@latest -g <span class="comment"># npm 更新</span></span><br><span class="line">npm update @xes/x-cli -g --registry=https://npm.xesv5.com</span><br><span class="line"></span><br><span class="line"><span class="comment">### 包信息</span></span><br><span class="line"><span class="comment"># npm view &lt;packageName&gt; versions --json</span></span><br><span class="line">npm view @xes/x-cli version</span><br><span class="line">npm info express</span><br><span class="line"></span><br><span class="line"><span class="comment">## 发包</span></span><br><span class="line">npm login</span><br><span class="line">npm adduser</span><br><span class="line"></span><br><span class="line"><span class="comment">## others</span></span><br><span class="line"><span class="comment">### 缓存</span></span><br><span class="line">npm cache clear --force</span><br><span class="line">npm get cache <span class="comment"># 获取缓存目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### </span></span><br><span class="line">npm config <span class="built_in">set</span> sass_binary_site https://npm.taobao.org/mirrors/node-sass/</span><br><span class="line">npm config <span class="built_in">set</span> unsafe-perm <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="node多版本控制"><a href="#node多版本控制" class="headerlink" title="node多版本控制"></a>node多版本控制</h2><p>mac/lunix： nvm<br>windows: nvm-<br>n</p>
 <h2 id="改变全局模块-缓存路劲"><a href="#改变全局模块-缓存路劲" class="headerlink" title="改变全局模块/缓存路劲"></a>改变全局模块/缓存路劲</h2><p># <a href="https://blog.csdn.net/Candy_mi/article/details/80764319" target="_blank" rel="noopener">安装npm cnpm踩坑记录</a><br>## 3. 改变原有的环境变量（配置npm的全局模块的存放路径以及cache的路径）<br>(1)先在C:\Program Files\nodejs目录下新建”global”和”cache”两个文件夹<br>(2)输入以下命令改变npm配置<br>npm config set prefix “C:\Program Files\nodejs\global”<br>npm config set cache “C:\Program Files\nodejs\cache”</p>
 <p>## 4.配置环境变量<br>(1）我的电脑右键点击属性进入该页面—点击高级系统设置—点击环境变量进入该页面<br>(2)修改用户变量PATH：把”C:\Program Files\nodejs\global”加到后面，用分号隔开。<br>(3)新增系统变量NODE_PATH：设置成“C:\Program Files\nodejs\node_global\node_modules”。<br>tip:由于前面已经更改了原有的环境变量，所以安装cnmp时会自己安装到C:\Program Files\nodejs\global\node_modules目录下面,所以cnpm的环境变量也许要更改（如下步骤很重要）<br>(4)修改系统变量path:把“C:\Program Files\nodejs\global\node_modules\cnpm“加到后面</p>
 <p>## 5.安装cnmp<br>安装命令：npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
@@ -732,7 +732,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">321</span>
+                  <span class="site-state-item-count">339</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -754,7 +754,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -871,7 +871,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">530.0k</span>
+    <span title="Site words total count">572.1k</span>
   
 </div>
 

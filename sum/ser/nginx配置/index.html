@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nginx,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -88,18 +88,17 @@
 
 
 
-<meta name="description" content="2019.12.16 星期一  2108   实际操作 nginx 配置和 cgi, fast cgi. 和php-fpm    cd /usr/local/nginx/config/site-enable nginx.conf  里面有include sites-enabled/* 可以配置访问日志，并定义格式；有变量可以使用。access_log，error log；log_format na">
-<meta name="keywords" content="nginx">
+<meta name="description" content="2021.7.12 星期一  ：     配置https rewrite方法123456789101112131415161718192021222324252627282930313233343536373839server &amp;#123;    listen 80;    server_name shfxx.test.com;    rewrite ^(.*)$  https://$host$">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nginx配置">
 <meta property="og:url" content="http://yoursite.com/sum/ser/nginx配置/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2019.12.16 星期一  2108   实际操作 nginx 配置和 cgi, fast cgi. 和php-fpm    cd /usr/local/nginx/config/site-enable nginx.conf  里面有include sites-enabled/* 可以配置访问日志，并定义格式；有变量可以使用。access_log，error log；log_format na">
+<meta property="og:description" content="2021.7.12 星期一  ：     配置https rewrite方法123456789101112131415161718192021222324252627282930313233343536373839server &amp;#123;    listen 80;    server_name shfxx.test.com;    rewrite ^(.*)$  https://$host$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-18T09:03:15.117Z">
+<meta property="og:updated_time" content="2021-09-04T08:06:52.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx配置">
-<meta name="twitter:description" content="2019.12.16 星期一  2108   实际操作 nginx 配置和 cgi, fast cgi. 和php-fpm    cd /usr/local/nginx/config/site-enable nginx.conf  里面有include sites-enabled/* 可以配置访问日志，并定义格式；有变量可以使用。access_log，error log；log_format na">
+<meta name="twitter:description" content="2021.7.12 星期一  ：     配置https rewrite方法123456789101112131415161718192021222324252627282930313233343536373839server &amp;#123;    listen 80;    server_name shfxx.test.com;    rewrite ^(.*)$  https://$host$">
 
 
 
@@ -333,8 +332,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-16T08:00:00+08:00">
-                2019-12-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-12T08:00:00+08:00">
+                2021-07-12
               </time>
             
 
@@ -349,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-18T17:03:15+08:00">
-                2020-10-18
+              <time title="更新于" itemprop="dateModified" datetime="2021-09-04T16:06:52+08:00">
+                2021-09-04
               </time>
             
           </span>
@@ -421,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  676
+                  1,384
                 </span>
               
 
@@ -437,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  7
                 </span>
               
             </div>
@@ -458,53 +457,72 @@
       
 
       
-        <p style="text-align:right">2019.12.16 星期一  2108 </p>
+        <p style="text-align:right"> 2021.7.12 星期一  ： </p>
 
-<h1 id="实际操作"><a href="#实际操作" class="headerlink" title="实际操作"></a>实际操作</h1><ol start="0">
-<li>nginx 配置和 cgi, fast cgi. 和php-fpm   </li>
-<li>cd /usr/local/nginx/config/site-enable<br> nginx.conf  里面有<code>include sites-enabled/*</code></li>
-<li>可以配置访问日志，并定义格式；有变量可以使用。access_log，error log；log_format name。<br> 然后可以根据日志，做一些其他操作。比如，pv，访问/接口，报错，统计等。    </li>
-<li><p>nginx （php项目）访问502，可能是 root 文件夹权限不够。<br> chmode 777 /var/www/html  </p>
-</li>
-<li><p>通过<code>service</code> 无法启动；改用nginx指令了。（php-fpm 可以）</p>
-</li>
-<li>在重启云主机（系统）之后，执行 nginx -t 是OK的，然而在执行 nginx -s reload 的时候报错<br>nginx: [error] invalid PID number “” in “/run/nginx.pid”</li>
-</ol>
-<p>经过查找，找到<a href="http://www.cnblogs.com/yuqianwen/p/4285686.html" target="_blank" rel="noopener">http://www.cnblogs.com/yuqianwen/p/4285686.html</a><br>需要先执行<br>nginx -c /etc/nginx/nginx.conf</p>
-<p>nginx.conf文件的路径可以从nginx -t的返回中找到。</p>
-<p>nginx -s reload</p>
-<ol start="5">
-<li><p>Nginx负载均衡的几种模式：轮询，权重轮询，IP_Hash（可以解决Session失效重新登录问题；配合upstream），Fair，Url_hash    </p>
-</li>
-<li><p>(ajax:post) 访问405： 因为用rewrite 重写了 host/mtouch/project.html  到/var/www/hosts<br> get请求是没问题的。用ajax 提交post请求报405.<br> 网上有说把，post 转为get 的。但是未采用，担心参数等问题。<br> 最后用proxy 代理，还需要设置头部。</p>
-<ul>
-<li>proxy_set_header  Host  $host;  作用web服务器上有多个站点时，用该参数header来区分反向代理哪个域名。比如下边的代码举例。</li>
-<li>proxy_set_header X-Forwarded-For  $remote_addr; 作用是后端服务器上的程序获取访客真实IP，从该header头获取。部分程序需要该功能。</li>
-</ul>
-</li>
-<li>X-Forwarded-For： 记录访问ip 来源/路径   </li>
-<li><p>rewrite 和proxy 的区别<br> rewrite        <regex>        <replacement>        <flag>;<br> IF判断和内置全局环境变量</flag></replacement></regex></p>
-</li>
-<li><p>在nginx中配置proxy_pass代理转发时<br>如果在proxy_pass后面的url加/，表示绝对根路径；如果没有/，表示相对路径，把匹配的路径部分也给代理走。</p>
-</li>
-</ol>
-<p>假设下面四种情况分别用 <a href="http://192.168.1.1/proxy/test.html" target="_blank" rel="noopener">http://192.168.1.1/proxy/test.html</a> 进行访问。<br>第一种：<br>location /proxy/ {<br>    proxy_pass <a href="http://127.0.0.1/" target="_blank" rel="noopener">http://127.0.0.1/</a>;<br>}<br>代理到URL：<a href="http://127.0.0.1/test.html" target="_blank" rel="noopener">http://127.0.0.1/test.html</a></p>
-<p>第二种（相对于第一种，最后少一个 / ）<br>location /proxy/ {<br>    proxy_pass <a href="http://127.0.0.1" target="_blank" rel="noopener">http://127.0.0.1</a>;<br>}<br>代理到URL：<a href="http://127.0.0.1/proxy/test.html" target="_blank" rel="noopener">http://127.0.0.1/proxy/test.html</a></p>
-<p>第三种：<br>location /proxy/ {<br>    proxy_pass <a href="http://127.0.0.1/aaa/" target="_blank" rel="noopener">http://127.0.0.1/aaa/</a>;<br>}<br>代理到URL：<a href="http://127.0.0.1/aaa/test.html" target="_blank" rel="noopener">http://127.0.0.1/aaa/test.html</a></p>
-<p>第四种（相对于第三种，最后少一个 / ）<br>location /proxy/ {<br>    proxy_pass <a href="http://127.0.0.1/aaa" target="_blank" rel="noopener">http://127.0.0.1/aaa</a>;<br>}<br>代理到URL：<a href="http://127.0.0.1/aaatest.html" target="_blank" rel="noopener">http://127.0.0.1/aaatest.html</a></p>
-<ol start="6">
-<li>alias。 阅读打卡，vue 单页应用 两个项目，使用同一域名。<br> 开始直接代码到 8088, js,css 文件的content-type错误，导致页面空白。<br> 添加/readingpunch_admin   alias  就好了。<!-- 
-readingpunch.conf
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  readingpunch.compd.com;</span><br><span class="line"></span><br><span class="line">    root /var/www/html/readingPunch;</span><br><span class="line">    index  index.php index.html index.htm;</span><br><span class="line"></span><br><span class="line">    location /readingpunch_admin&#123;  ## succ:  http://readingpunch.compd.com/readingpunch_admin </span><br><span class="line">        alias  /var/www/html/readingPunch_admin/readingpunch_admin/;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    location /activityData&#123; ## succ: http://readingpunch.compd.com/activityData</span><br><span class="line">        proxy_pass http://localhost:8088/activityData;  ## 不加/readingpunch_admin  alias   js,css 文件路径出错404，而且content-type不对</span><br><span class="line">    &#125;</span><br><span class="line">	location /experienceData&#123; ## succ: http://readingpunch.compd.com/experienceData</span><br><span class="line">        proxy_pass http://localhost:8088;   ## 不加/readingpunch_admin  alias   js,css 文件路径出错404，而且content-type不对</span><br><span class="line">    &#125;  </span><br><span class="line">	</span><br><span class="line">    location /activityStatic&#123; ## 路径问题：http://readingpunch.compd.com/activityStatic?a=2342  =》http://readingpunch.compd.com/activityStatic/?a=2342</span><br><span class="line">        alias  /var/www/html/readingPunch_admin/readingpunch_admin/;</span><br><span class="line">    &#125;</span><br><span class="line">    location /participantStatic&#123;  ## ## 路径问题：和上面一样</span><br><span class="line">        alias  /var/www/html/readingPunch_admin/readingpunch_admin;</span><br><span class="line">    &#125;</span><br><span class="line">    ## 正则有问题</span><br><span class="line">    location ^/(activityData|activityStatic|experienceData|participantStatic)&#123;</span><br><span class="line">        # proxy_pass http://localhost:8088;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ /readingpunch/?$query_string;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>reading_punch_admin.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       8088;</span><br><span class="line">    server_name  readingpunch.compd.com;</span><br><span class="line"></span><br><span class="line">    root /var/www/html/readingPunch_admin;</span><br><span class="line">    index  index.php index.html index.htm;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ /readingpunch_admin/?$query_string;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ .*\.php?$ &#123;</span><br><span class="line">        include     fastcgi.conf;</span><br><span class="line">        # access_log  /var/log/httpd/access_log ;</span><br><span class="line">        fastcgi_max_temp_file_size 0;</span><br><span class="line">        fastcgi_pass  127.0.0.1:9000;</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">        fastcgi_connect_timeout 3200;</span><br><span class="line">        fastcgi_send_timeout 3200;</span><br><span class="line">        fastcgi_read_timeout 3200;</span><br><span class="line">        gzip on;</span><br><span class="line"></span><br><span class="line">        # fastcgi_param RUNTIME_ENVIRONMENT &apos;develop&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>testreadingpunch.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  testreadingpunch.compd.com;</span><br><span class="line"></span><br><span class="line">    root /var/www/html/readingpunch_test;</span><br><span class="line">    index  index.php index.html index.htm;</span><br><span class="line"></span><br><span class="line">    rewrite /activityData /readingpunch_admin  break;  ## succ: </span><br><span class="line">    rewrite /activityStatic /readingpunch_admin break; ## error: 跳到readingpunch_admin，然后路由到了 activityData； 并不是当前路由</span><br><span class="line">    rewrite /participantStatic /readingpunch_admin/participantStatic break;  ## 错误： 404</span><br><span class="line"></span><br><span class="line">	### Uncaught SyntaxError: Unexpected token &apos;&lt;&apos;；</span><br><span class="line">	### Resource interpreted as Stylesheet but transferred with MIME type text/html: </span><br><span class="line">	location /experienceData &#123; </span><br><span class="line">        rewrite /experienceData  break;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    location /experienceData &#123;  ## 路径问题：http://readingpunch.compd.com/experienceData?a=2342  =》http://readingpunch.compd.com/experienceData/?a=2342</span><br><span class="line">        alias /var/www/html/readingpunch_test/readingpunch_admin;</span><br><span class="line">    &#125;</span><br><span class="line">	location /experienceData &#123;  ## 错误： 下面两个都是404</span><br><span class="line">        # rewrite /readingpunch_admin/ break;</span><br><span class="line">		rewrite /readingpunch_admin break;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	######  前台页面配置  #######</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	location / &#123;  ## succ：</span><br><span class="line">        try_files $uri $uri/ /readingpunch/?$query_string;</span><br><span class="line">        root /var/www/html/readingpunch_test;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	## error： js，css文件解析出错：（下面的配置应该写到 location  /上面，但是为了好看/区分配置  写到了下面）</span><br><span class="line">	### Uncaught SyntaxError: Unexpected token &apos;&lt;&apos;；</span><br><span class="line">	### Resource interpreted as Stylesheet but transferred with MIME type text/html: </span><br><span class="line">	location /activityList &#123; </span><br><span class="line">        rewrite /readingpunch  break;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p> –&gt;</p>
-<p>##<br><a href="https://www.jianshu.com/p/26b3d5fbddb8">nginx配置</a><br>作者：RiverSouthMan<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">service nginx reload <span class="comment"># 重新载入nginx配置</span></span><br><span class="line"><span class="comment">## 启动nginx</span></span><br><span class="line">service nginx restart <span class="comment"># 重启</span></span><br><span class="line">systemctl start nginx</span><br><span class="line"><span class="comment"># 设置开机启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> nginx</span><br><span class="line"><span class="comment"># 查看nginx 启动状态</span></span><br><span class="line">systemctl status nginx</span><br><span class="line"><span class="comment"># 查看是否监听</span></span><br><span class="line">ss -tnl | grep 80</span><br></pre></td></tr></table></figure></p>
-<h1 id="windows-实践"><a href="#windows-实践" class="headerlink" title="windows 实践"></a>windows 实践</h1><h2 id="几个命令"><a href="#几个命令" class="headerlink" title="几个命令"></a>几个命令</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">nginx -v</span><br><span class="line">nginx -V</span><br><span class="line"><span class="comment"># 进入到nginx 安装目录</span></span><br><span class="line"><span class="comment">## 启动nginx</span></span><br><span class="line">./nginx.exe <span class="comment"># 前台程序</span></span><br><span class="line">start nginx <span class="comment"># 进入到后台</span></span><br><span class="line">./nginx.exe -s reload  ：修改配置后重新加载生效</span><br><span class="line">./nginx.exe -s reopen  ：重新打开日志文件</span><br><span class="line">./nginx.exe -t -c /path/to/nginx.conf <span class="comment"># 测试nginx配置文件是否正确；## 不指定配置文件则为默认</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 关闭nginx：</span></span><br><span class="line">./nginx.exe -s stop  <span class="comment"># 快速停止nginx，可能并不保存相关信息</span></span><br><span class="line">./nginx.exe -s quit <span class="comment"># 完整有序的停止nginx，并保存相关信息</span></span><br></pre></td></tr></table></figure>
-<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>nginx.conf。<br>设置日志位置。（默认在nginx安装目录下）移到其他位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">error_log  D:/var/log/nginx-error.log;</span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</span><br><span class="line">                      &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</span><br><span class="line">                      &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</span><br><span class="line"></span><br><span class="line">    access_log  D:/var/log/nginx-access.log  main;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
---></li></ol>
+
+
+<h2 id="配置https"><a href="#配置https" class="headerlink" title="配置https"></a>配置https</h2><!-- \# [nginx配置http跳转https](https://www.cnblogs.com/is-possible/p/12524115.html)
+[Nginx的https配置记录以及http强制跳转到https的方法梳理](https://cloud.tencent.com/developer/article/1026994) -->
+<h3 id="rewrite方法"><a href="#rewrite方法" class="headerlink" title="rewrite方法"></a>rewrite方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name shfxx.test.com;</span><br><span class="line">    rewrite ^(.*)$  https://$host$1 permanent;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl;</span><br><span class="line">    ssl on;</span><br><span class="line">    ssl_certificate /usr/local/nginx/conf/ssl/START-smartcampus-org-cn.pem;</span><br><span class="line">    ssl_certificate_key /usr/local/nginx/conf/ssl/START-smartcampus-org-cn.key;</span><br><span class="line">    ssl_session_timeout 5m;</span><br><span class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line">    ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-RC4-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:RC4-SHA:!aNULL</span><br><span class="line">:!eNULL:!EXPORT:!DES:!3DES:!MD5:!DSS:!PKS;    ssl_session_cache builtin:1000 shared:SSL:10m;   </span><br><span class="line">    server_name shfxx.test.com;</span><br><span class="line">    access_log /data/wwwroot/sfzxxx/logs/access_campus.log combined;</span><br><span class="line">    error_log /data/wwwroot/sfzxxx/logs/error_campus.log;</span><br><span class="line">    root /data/wwwroot/sfzxxx/campus;</span><br><span class="line">    index index.html index.htm index.php;</span><br><span class="line">location / &#123;</span><br><span class="line">        if (!-e $request_filename) &#123;</span><br><span class="line">        rewrite ^/admin/(.*)$ /admin.php/$1 last;</span><br><span class="line">        rewrite ^/(.*)$ /index.php/$1 last;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">location ~ [^/]\.php(/|$) &#123;</span><br><span class="line">        #fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">        fastcgi_pass unix:/dev/shm/php-cgi.sock;</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">        fastcgi_split_path_info ^(.+\.php)(.*)$;</span><br><span class="line">        fastcgi_param PATH_INFO $fastcgi_path_info;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        include fastcgi.conf;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三、nginx的497状态码"><a href="#三、nginx的497状态码" class="headerlink" title="三、nginx的497状态码"></a>三、nginx的497状态码</h3><p>释：当此虚拟站点只允许https访问时，当用http访问时nginx会报出497错误码<br><!-- 思路 --><br>利用error_page命令将497状态码的链接重定向到<a href="https://test.com这个域名上" target="_blank" rel="noopener">https://test.com这个域名上</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">server &#123;  </span><br><span class="line">    listen       192.168.1.11:443;  #ssl端口  </span><br><span class="line">    listen       192.168.1.11:80;   #用户习惯用http访问，加上80，后面通过497状态码让它自动跳到443端口  </span><br><span class="line">    server_name  test.com;  </span><br><span class="line">    #为一个server&#123;......&#125;开启ssl支持  </span><br><span class="line">    ssl                  on;  </span><br><span class="line">    #指定PEM格式的证书文件   </span><br><span class="line">    ssl_certificate      /etc/nginx/test.pem;   </span><br><span class="line">    #指定PEM格式的私钥文件  </span><br><span class="line">    ssl_certificate_key  /etc/nginx/test.key;  </span><br><span class="line">      </span><br><span class="line">    #让http请求重定向到https请求   </span><br><span class="line">    error_page 497  https://$host$uri?$args;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="四、index-html刷新网页"><a href="#四、index-html刷新网页" class="headerlink" title="四、index.html刷新网页"></a>四、index.html刷新网页</h3><p>上述两种方法均会耗费服务器的资源，<!-- 我们用curl访问baidu.com试一下，看百度的公司是如何实现baidu.com向www.baidu.com的跳转 --><br><!-- 可以看到百度很巧妙的利用meta的刷新作用，将baidu.com跳转到www.baidu.com.因此我们可以基于http://test.com的虚拟主机路径下也写一个index.html，内容就是http向https的跳转  --></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"refresh"</span> <span class="attr">content</span>=<span class="string">"0;url=https://test.com/"</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;  </span><br><span class="line">    listen 192.168.1.11:80;  </span><br><span class="line">    server_name test.com;  </span><br><span class="line">      </span><br><span class="line">    location / &#123;  </span><br><span class="line">                #index.html放在虚拟主机监听的根目录下  </span><br><span class="line">        root /srv/www/http.test.com/;  </span><br><span class="line">    &#125;  </span><br><span class="line">        #将404的页面重定向到https的首页  </span><br><span class="line">    error_page  404 https://test.com/;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><h3 id="同一域名映射"><a href="#同一域名映射" class="headerlink" title="同一域名映射"></a>同一域名映射</h3><!-- \# [nginx目录路径重定向的方法，同一域名映射到其他目录](https://www.copylian.com/technology/332.html#) -->
+<p>1、nginx修改root映射<br>2、通过nginx rewrite内部跳转实现访问重定向<br>3、nginx设置别名alias映射实现<br>4、通过nginx的permanent 301绝对跳转实现<br>5、通过判断uri实现页面跳转</p>
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><h5 id="location路径设置"><a href="#location路径设置" class="headerlink" title="location路径设置"></a>location路径设置</h5><!-- \# [nginx 反向代理location路径设置](https://blog.csdn.net/king_way/article/details/94831420) -->
+<h5 id="一-location匹配路径末尾没有"><a href="#一-location匹配路径末尾没有" class="headerlink" title="一. location匹配路径末尾没有 /"></a>一. location匹配路径末尾没有 /</h5><p>此时proxy_pass后面的路径必须和location设置的路径一致：</p>
+<p>location /index<br>{<br>   proxy_redirect off;<br>   proxy_set_header        Host $host;<br>   proxy_set_header        X-Real-IP $remote_addr;<br>   proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;<br>   proxy_pass <a href="http://localhost:8080/index" target="_blank" rel="noopener">http://localhost:8080/index</a>;<br>}</p>
+<p>外面访问：<a href="http://romotehost/index/index.html" target="_blank" rel="noopener">http://romotehost/index/index.html</a><br>相当于访问：<a href="http://localhost:8080/index/index.html" target="_blank" rel="noopener">http://localhost:8080/index/index.html</a></p>
+<h5 id="二-location匹配路径末尾有"><a href="#二-location匹配路径末尾有" class="headerlink" title="二. location匹配路径末尾有 /"></a>二. location匹配路径末尾有 /</h5><p>此时proxy_pass后面的路径需要分为以下四种情况讨论：</p>
+<h6 id="proxy-pass后面的路径只有域名且最后没有-："><a href="#proxy-pass后面的路径只有域名且最后没有-：" class="headerlink" title="proxy_pass后面的路径只有域名且最后没有 /："></a>proxy_pass后面的路径只有域名且最后没有 /：</h6><p>location /index/<br>{<br>   proxy_redirect off;<br>   proxy_set_header        Host $host;<br>   proxy_set_header        X-Real-IP $remote_addr;<br>   proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;<br>   proxy_pass <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a>;<br>}</p>
+<p>外面访问：<a href="http://romotehost/index/index.html" target="_blank" rel="noopener">http://romotehost/index/index.html</a><br>相当于访问：<a href="http://localhost:8080/index/index.html" target="_blank" rel="noopener">http://localhost:8080/index/index.html</a></p>
+<h6 id="proxy-pass后面的路径只有域名同时最后有-："><a href="#proxy-pass后面的路径只有域名同时最后有-：" class="headerlink" title="proxy_pass后面的路径只有域名同时最后有 /："></a>proxy_pass后面的路径只有域名同时最后有 /：</h6><p>location /index/<br>{<br>   proxy_redirect off;<br>   proxy_set_header        Host $host;<br>   proxy_set_header        X-Real-IP $remote_addr;<br>   proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;<br>   proxy_pass <a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a>;<br>}</p>
+<p>外面访问：<a href="http://romotehost/index/index.html" target="_blank" rel="noopener">http://romotehost/index/index.html</a><br>相当于访问：<a href="http://localhost:8080/index.html" target="_blank" rel="noopener">http://localhost:8080/index.html</a></p>
+<h6 id="proxy-pass后面的路径还有其他路径但是最后没有-："><a href="#proxy-pass后面的路径还有其他路径但是最后没有-：" class="headerlink" title="proxy_pass后面的路径还有其他路径但是最后没有 /："></a>proxy_pass后面的路径还有其他路径但是最后没有 /：</h6><p>location /index/<br>{<br>   proxy_redirect off;<br>   proxy_set_header        Host $host;<br>   proxy_set_header        X-Real-IP $remote_addr;<br>   proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;<br>   proxy_pass <a href="http://localhost:8080/test" target="_blank" rel="noopener">http://localhost:8080/test</a>;<br>}</p>
+<p>外面访问：<a href="http://romotehost/index/index.html" target="_blank" rel="noopener">http://romotehost/index/index.html</a><br>相当于访问：<a href="http://localhost:8080/testindex.html" target="_blank" rel="noopener">http://localhost:8080/testindex.html</a></p>
+<h6 id="proxy-pass后面的路径还有其他路径同时最后有-："><a href="#proxy-pass后面的路径还有其他路径同时最后有-：" class="headerlink" title="proxy_pass后面的路径还有其他路径同时最后有 /："></a>proxy_pass后面的路径还有其他路径同时最后有 /：</h6><p>location /index/<br>{<br>   proxy_redirect off;<br>   proxy_set_header        Host $host;<br>   proxy_set_header        X-Real-IP $remote_addr;<br>   proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;<br>   proxy_pass <a href="http://localhost:8080/test/" target="_blank" rel="noopener">http://localhost:8080/test/</a>;<br>}</p>
+<p>外面访问：<a href="http://romotehost/index/index.html" target="_blank" rel="noopener">http://romotehost/index/index.html</a><br>相当于访问：<a href="http://localhost:8080/index/index.html" target="_blank" rel="noopener">http://localhost:8080/index/index.html</a></p>
+<!-- 
+软萌切黑:第一条，我就没设置成一致过10 月前回复
+软萌切黑:以我的经验，最后两种是没有区别的
+
+ -->
+<h2 id="跨域header"><a href="#跨域header" class="headerlink" title="跨域header"></a>跨域header</h2><!-- \#1 [Nginx配置跨域请求 Access-Control-Allow-Origin *](https://blog.csdn.net/qq_27008807/article/details/78877877) -->
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;  </span><br><span class="line">  add_header Access-Control-Allow-Origin *;</span><br><span class="line">    ; add_header &apos;Access-Control-Allow-Origin&apos; &apos;http://domain:port&apos; always;</span><br><span class="line">    ; add_header &apos;Access-Control-Allow-Credentials&apos; &apos;true&apos;;</span><br><span class="line">  add_header Access-Control-Allow-Headers &quot;Origin, X-Requested-With, Content-Type, Accept&quot;;</span><br><span class="line">  add_header Access-Control-Allow-Methods &quot;GET, POST, OPTIONS&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<!-- 
+2. Access-Control-Allow-Headers 是为了防止出现以下错误：
+`Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight response.`
+
+这个错误表示当前请求Content-Type的值不被支持。其实是我们发起了”application/json”的类型请求导致的。这里涉及到一个概念：预检请求（preflight request）,请看下面”预检请求”的介绍。
+
+3. Access-Control-Allow-Methods 是为了防止出现以下错误：
+`Content-Type is not allowed by Access-Control-Allow-Headers in preflight response.`
+
+发送”预检请求”时，需要用到方法 OPTIONS ,所以服务器需要允许该方法。 
+-->
+<!-- End: #1 -->
+<!-- \#2 [Nginx指定多个域名跨域配置](https://blog.csdn.net/u014589884/article/details/108041695) -->
+<h3 id="2-Nginx配置域名跨域多个域名"><a href="#2-Nginx配置域名跨域多个域名" class="headerlink" title="2.Nginx配置域名跨域多个域名"></a>2.Nginx配置域名跨域多个域名</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        set $cors &apos;&apos;;</span><br><span class="line">        if ($http_origin ~* &quot;^http://deomain01:port$&quot;) &#123;</span><br><span class="line">            set $cors $http_origin;</span><br><span class="line">        &#125;</span><br><span class="line">        if ($http_origin ~* &quot;^http://deomain02:port$&quot;) &#123;</span><br><span class="line">            set $cors $http_origin;</span><br><span class="line">        &#125;</span><br><span class="line">        if ($http_origin ~* &quot;^http://deomain002:port$&quot;) &#123;</span><br><span class="line">            set $cors $http_origin;</span><br><span class="line">        &#125;</span><br><span class="line">        location /live&#123;</span><br><span class="line">                  ...</span><br><span class="line">                add_header &apos;Access-Control-Allow-Origin&apos; &apos;$cors&apos;;</span><br><span class="line">                add_header &apos;Access-Control-Allow-Credentials&apos; &apos;true&apos;;</span><br><span class="line">                # 为预检请求加的header</span><br><span class="line">                add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, PUT, DELETE&apos;;</span><br><span class="line">                #为预检请求加的header</span><br><span class="line">                add_header &apos;Access-Control-Allow-Headers&apos; &apos;*&apos;;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<!-- $http_origin这个格式是nginx取请求中header的XXX的值的。
+这里取的是origin,而一般跨域请求都会将请求的来源放在origin中（浏览器会往跨域请求的header上面加origin这个header）
+$ cors 变量获取想要的跨域域名并赋值到 “add_header ‘Access-Control-Allow-Origin’ ‘$cors’”中。 -->
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">map $http_origin $cors_list&#123;</span><br><span class="line">    default  http://aaa.cn;</span><br><span class="line">    &quot;~ http://bbb.cn&quot;  http://bbb.cn;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">    listen       8089;</span><br><span class="line">    server_name  localhost;</span><br><span class="line">    location /live&#123;</span><br><span class="line">              ...</span><br><span class="line">            add_header &apos;Access-Control-Allow-Origin&apos; &apos;$cors_list&apos;;</span><br><span class="line">            add_header &apos;Access-Control-Allow-Credentials&apos; &apos;true&apos;;</span><br><span class="line">            # 为预检请求加的header</span><br><span class="line">            add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, PUT, DELETE&apos;;</span><br><span class="line">            #为预检请求加的header</span><br><span class="line">            add_header &apos;Access-Control-Allow-Headers&apos; &apos;*&apos;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>map指令是ngx_http_map_module模块提供的，默认情况下nginx有加载这个模块。</p>
+<p>语法: map $var1 $var2 {…}<br>默认值: -<br>配置段: http </p>
+<p>map为一个变量设置的映射表。映射表由两列组成，匹配模式和对应的值。<br>在map块里的参数指定了源变量值和结果值的对应关系。</p>
+<p>default: 没有匹配结果将使用的默认值。如果没有设置default，将会用一个空的字符串作为默认的结果。</p>
+<p>匹配模式可以是一个简单的字符串或者正则表达式，使用正则表达式要用(‘~’)。</p>
+<p>注意：在nginx.conf配置文件配置跨域时，记得清除客户端如浏览器缓存，否则会出现配置没生效的情况。<br><!-- End: #2 --></p>
+<h3 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h3><p>#3 <a href="https://blog.csdn.net/agonie201218/article/details/112562252" target="_blank" rel="noopener">Nginx配置跨域请求 Access-Control-Allow-Origin *</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line"></span><br><span class="line">                 if ($http_origin ~* (http?://.*\.aliuncle\.top$)) &#123;</span><br><span class="line">                        add_header Access-Control-Allow-Origin $http_origin;</span><br><span class="line">                &#125;</span><br><span class="line">                index index.php;</span><br><span class="line">                try_files $uri $uri/ /index.php?$args;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>正则匹配三级域名</p>
+<!-- 
+[Nginx配置跨域请求 Access-Control-Allow-Origin *](https://blog.csdn.net/agonie201218/article/details/112562252)
+$_PS: 上面3快内容的总和
+ -->
+<p style="text-align:right"> </p>
+
+
       
     </div>
     
@@ -553,12 +571,6 @@ readingpunch.conf
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/nginx/" rel="tag"><i class="fa fa-tag"></i> nginx</a>
-          
-        </div>
-      
 
       
       
@@ -568,8 +580,8 @@ readingpunch.conf
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/ins/ens/characters-2020/" rel="next" title="Ens-2020">
-                <i class="fa fa-chevron-left"></i> Ens-2020
+              <a href="/sum/jsplus/babel使用/" rel="next" title="Babel使用">
+                <i class="fa fa-chevron-left"></i> Babel使用
               </a>
             
           </div>
@@ -578,8 +590,8 @@ readingpunch.conf
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/sum/jsplus/页面可视化编辑器设计/" rel="prev" title="页面可视化编辑器设计">
-                页面可视化编辑器设计 <i class="fa fa-chevron-right"></i>
+              <a href="/sum/jsplus/iview实践/" rel="prev" title="Iview 实践">
+                Iview 实践 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -692,7 +704,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">321</span>
+                  <span class="site-state-item-count">339</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -714,7 +726,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -797,7 +809,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实际操作"><span class="nav-text">实际操作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置https"><span class="nav-text">配置https</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rewrite方法"><span class="nav-text">rewrite方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、nginx的497状态码"><span class="nav-text">三、nginx的497状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、index-html刷新网页"><span class="nav-text">四、index.html刷新网页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理"><span class="nav-text">代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同一域名映射"><span class="nav-text">同一域名映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向代理"><span class="nav-text">反向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#location路径设置"><span class="nav-text">location路径设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一-location匹配路径末尾没有"><span class="nav-text">一. location匹配路径末尾没有 /</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二-location匹配路径末尾有"><span class="nav-text">二. location匹配路径末尾有 /</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#proxy-pass后面的路径只有域名且最后没有-："><span class="nav-text">proxy_pass后面的路径只有域名且最后没有 /：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#proxy-pass后面的路径只有域名同时最后有-："><span class="nav-text">proxy_pass后面的路径只有域名同时最后有 /：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#proxy-pass后面的路径还有其他路径但是最后没有-："><span class="nav-text">proxy_pass后面的路径还有其他路径但是最后没有 /：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#proxy-pass后面的路径还有其他路径同时最后有-："><span class="nav-text">proxy_pass后面的路径还有其他路径同时最后有 /：</span></a></li></ol></li></ol></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域header"><span class="nav-text">跨域header</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Nginx配置域名跨域多个域名"><span class="nav-text">2.Nginx配置域名跨域多个域名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一"><span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二"><span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法三"><span class="nav-text">方法三</span></a></li></ol></li></div>
             
 
           </div>
@@ -831,7 +843,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">530.0k</span>
+    <span title="Site words total count">572.1k</span>
   
 </div>
 
