@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="javascript,">
 
 
 
@@ -89,13 +89,14 @@
 
 
 <meta name="description" content="2018.7.2 星期一 23:15  一 简介1.1 模式1.2 javascript：基本概念1.3 ECMAScript 51.4 JSLint1.5 Console二 基本技巧      编写可维护的代码尽量少用全局变量for循环for-in循环不要增加内置的原型switch模式避免使用隐式类型转换使用parseInt()的数值约定编码约定命名约定编写注释编写API文档编写可读性强的代码同">
+<meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS模式">
 <meta property="og:url" content="http://yoursite.com/pdf/js/JS模式/index.html">
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2018.7.2 星期一 23:15  一 简介1.1 模式1.2 javascript：基本概念1.3 ECMAScript 51.4 JSLint1.5 Console二 基本技巧      编写可维护的代码尽量少用全局变量for循环for-in循环不要增加内置的原型switch模式避免使用隐式类型转换使用parseInt()的数值约定编码约定命名约定编写注释编写API文档编写可读性强的代码同">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.399Z">
+<meta property="og:updated_time" content="2022-05-04T07:31:17.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS模式">
 <meta name="twitter:description" content="2018.7.2 星期一 23:15  一 简介1.1 模式1.2 javascript：基本概念1.3 ECMAScript 51.4 JSLint1.5 Console二 基本技巧      编写可维护的代码尽量少用全局变量for循环for-in循环不要增加内置的原型switch模式避免使用隐式类型转换使用parseInt()的数值约定编码约定命名约定编写注释编写API文档编写可读性强的代码同">
@@ -348,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-04T15:31:17+08:00">
+                2022-05-04
               </time>
             
           </span>
@@ -468,6 +469,7 @@
 ### 2. -->     
 <p>编写可维护的代码<br>尽量少用全局变量<br>for循环<br>for-in循环<br>不要增加内置的原型<br>switch模式<br>避免使用隐式类型转换<br>使用parseInt()的数值约定<br>编码约定<br>命名约定<br>编写注释<br>编写API文档<br>编写可读性强的代码<br>同行互查<br>在正式发布时精简代码<br>运行JSLint</p>
 <h2 id="三-字面量和构造函数"><a href="#三-字面量和构造函数" class="headerlink" title="三 字面量和构造函数"></a>三 字面量和构造函数</h2><h3 id="3-1-对象字面量"><a href="#3-1-对象字面量" class="headerlink" title="3.1 对象字面量"></a>3.1 对象字面量</h3><h3 id="3-2-自定义构造函数"><a href="#3-2-自定义构造函数" class="headerlink" title="3.2 自定义构造函数"></a>3.2 自定义构造函数</h3><h3 id="3-3-强制使用new的模式"><a href="#3-3-强制使用new的模式" class="headerlink" title="3.3 强制使用new的模式"></a>3.3 强制使用new的模式</h3><h3 id="3-4-数组字面量"><a href="#3-4-数组字面量" class="headerlink" title="3.4 数组字面量"></a>3.4 数组字面量</h3><h3 id="3-5-JSON"><a href="#3-5-JSON" class="headerlink" title="3.5 JSON"></a>3.5 JSON</h3><h3 id="3-6-正则表达式字面量"><a href="#3-6-正则表达式字面量" class="headerlink" title="3.6 正则表达式字面量"></a>3.6 正则表达式字面量</h3><h3 id="3-7-基本类型包装器"><a href="#3-7-基本类型包装器" class="headerlink" title="3.7 基本类型包装器"></a>3.7 基本类型包装器</h3><h3 id="3-8-错误对象"><a href="#3-8-错误对象" class="headerlink" title="3.8 错误对象"></a>3.8 错误对象</h3><h2 id="四-函数"><a href="#四-函数" class="headerlink" title="四 函数"></a>四 函数</h2><h3 id="4-1-背景"><a href="#4-1-背景" class="headerlink" title="4.1 背景"></a>4.1 背景</h3><h3 id="4-2-回调模式"><a href="#4-2-回调模式" class="headerlink" title="4.2 回调模式"></a>4.2 回调模式</h3><h3 id="4-3-返回函数"><a href="#4-3-返回函数" class="headerlink" title="4.3 返回函数"></a>4.3 返回函数</h3><h3 id="4-4-自定义函数"><a href="#4-4-自定义函数" class="headerlink" title="4.4 自定义函数"></a>4.4 自定义函数</h3><h3 id="4-5-即时函数"><a href="#4-5-即时函数" class="headerlink" title="4.5 即时函数"></a>4.5 即时函数</h3><h3 id="4-6-即时对象初始化"><a href="#4-6-即时对象初始化" class="headerlink" title="4.6 即时对象初始化"></a>4.6 即时对象初始化</h3><h3 id="4-7-初始化时分支"><a href="#4-7-初始化时分支" class="headerlink" title="4.7 初始化时分支"></a>4.7 初始化时分支</h3><h3 id="4-8-函数属性-备忘模式"><a href="#4-8-函数属性-备忘模式" class="headerlink" title="4.8 函数属性-备忘模式"></a>4.8 函数属性-备忘模式</h3><h3 id="4-9-配置对象"><a href="#4-9-配置对象" class="headerlink" title="4.9 配置对象"></a>4.9 配置对象</h3><h3 id="4-0-Curry"><a href="#4-0-Curry" class="headerlink" title="4.0 Curry"></a>4.0 Curry</h3><h2 id="五-对象创建模式"><a href="#五-对象创建模式" class="headerlink" title="五 对象创建模式"></a>五 对象创建模式</h2><h3 id="5-1-命名空间模式"><a href="#5-1-命名空间模式" class="headerlink" title="5.1 命名空间模式"></a>5.1 命名空间模式</h3><h3 id="5-2-声明依赖关系"><a href="#5-2-声明依赖关系" class="headerlink" title="5.2 声明依赖关系"></a>5.2 声明依赖关系</h3><h3 id="5-3-私有属性和方法"><a href="#5-3-私有属性和方法" class="headerlink" title="5.3 私有属性和方法"></a>5.3 私有属性和方法</h3><h3 id="5-4-模块模式"><a href="#5-4-模块模式" class="headerlink" title="5.4 模块模式"></a>5.4 模块模式</h3><h3 id="5-5-沙箱模式"><a href="#5-5-沙箱模式" class="headerlink" title="5.5 沙箱模式"></a>5.5 沙箱模式</h3><h3 id="5-6-静态成员"><a href="#5-6-静态成员" class="headerlink" title="5.6 静态成员"></a>5.6 静态成员</h3><h3 id="5-7-对象常量"><a href="#5-7-对象常量" class="headerlink" title="5.7 对象常量"></a>5.7 对象常量</h3><h3 id="5-8-链模式"><a href="#5-8-链模式" class="headerlink" title="5.8 链模式"></a>5.8 链模式</h3><h3 id="5-9-method-方法"><a href="#5-9-method-方法" class="headerlink" title="5.9 method()方法"></a>5.9 method()方法</h3><h2 id="六-代码复用模式"><a href="#六-代码复用模式" class="headerlink" title="六 代码复用模式"></a>六 代码复用模式</h2><h3 id="6-1-传统与现代继承模式的比较"><a href="#6-1-传统与现代继承模式的比较" class="headerlink" title="6.1 传统与现代继承模式的比较"></a>6.1 传统与现代继承模式的比较</h3><h3 id="6-2-使用类式继承时的预期结果"><a href="#6-2-使用类式继承时的预期结果" class="headerlink" title="6.2 使用类式继承时的预期结果"></a>6.2 使用类式继承时的预期结果</h3><h3 id="6-3-类式继承模式-1-默认模式"><a href="#6-3-类式继承模式-1-默认模式" class="headerlink" title="6.3 类式继承模式#1-默认模式"></a>6.3 类式继承模式#1-默认模式</h3><h3 id="6-4-类式继承模式-2-借用构造函数"><a href="#6-4-类式继承模式-2-借用构造函数" class="headerlink" title="6.4 类式继承模式#2-借用构造函数"></a>6.4 类式继承模式#2-借用构造函数</h3><h3 id="6-5-类式继承模式-3-借用和设置原型"><a href="#6-5-类式继承模式-3-借用和设置原型" class="headerlink" title="6.5 类式继承模式#3-借用和设置原型"></a>6.5 类式继承模式#3-借用和设置原型</h3><h3 id="6-6-类式继承模式-4-共享原型"><a href="#6-6-类式继承模式-4-共享原型" class="headerlink" title="6.6 类式继承模式#4-共享原型"></a>6.6 类式继承模式#4-共享原型</h3><h3 id="6-7-类式继承模式-5-临时构造函数"><a href="#6-7-类式继承模式-5-临时构造函数" class="headerlink" title="6.7 类式继承模式#5-临时构造函数"></a>6.7 类式继承模式#5-临时构造函数</h3><h3 id="6-8-Klass"><a href="#6-8-Klass" class="headerlink" title="6.8 Klass"></a>6.8 Klass</h3><h3 id="6-9-原型继承"><a href="#6-9-原型继承" class="headerlink" title="6.9 原型继承"></a>6.9 原型继承</h3><h3 id="6-0-通过复制属性实现继承"><a href="#6-0-通过复制属性实现继承" class="headerlink" title="6.0 通过复制属性实现继承"></a>6.0 通过复制属性实现继承</h3><h3 id="6-1-借用方法"><a href="#6-1-借用方法" class="headerlink" title="6.1 借用方法"></a>6.1 借用方法</h3><h2 id="七-设计模式"><a href="#七-设计模式" class="headerlink" title="七 设计模式"></a>七 设计模式</h2><h3 id="7-1-单体"><a href="#7-1-单体" class="headerlink" title="7.1 单体"></a>7.1 单体</h3><h3 id="7-2-工厂"><a href="#7-2-工厂" class="headerlink" title="7.2 工厂"></a>7.2 工厂</h3><h3 id="7-3-迭代器"><a href="#7-3-迭代器" class="headerlink" title="7.3 迭代器"></a>7.3 迭代器</h3><h3 id="7-4-装饰者"><a href="#7-4-装饰者" class="headerlink" title="7.4 装饰者"></a>7.4 装饰者</h3><h3 id="7-5-策略"><a href="#7-5-策略" class="headerlink" title="7.5 策略"></a>7.5 策略</h3><h3 id="7-6-外观"><a href="#7-6-外观" class="headerlink" title="7.6 外观"></a>7.6 外观</h3><h3 id="7-7-代理"><a href="#7-7-代理" class="headerlink" title="7.7 代理"></a>7.7 代理</h3><h3 id="7-8-中介者"><a href="#7-8-中介者" class="headerlink" title="7.8 中介者"></a>7.8 中介者</h3><h3 id="7-9-观察者"><a href="#7-9-观察者" class="headerlink" title="7.9 观察者"></a>7.9 观察者</h3><h2 id="八-DOM和浏览器模式"><a href="#八-DOM和浏览器模式" class="headerlink" title="八 DOM和浏览器模式"></a>八 DOM和浏览器模式</h2><h3 id="8-1-关注分离"><a href="#8-1-关注分离" class="headerlink" title="8.1 关注分离"></a>8.1 关注分离</h3><h3 id="8-2-DOM脚本"><a href="#8-2-DOM脚本" class="headerlink" title="8.2 DOM脚本"></a>8.2 DOM脚本</h3><h3 id="8-3-事件"><a href="#8-3-事件" class="headerlink" title="8.3 事件"></a>8.3 事件</h3><h3 id="8-4-长期运行脚本"><a href="#8-4-长期运行脚本" class="headerlink" title="8.4 长期运行脚本"></a>8.4 长期运行脚本</h3><h3 id="8-5-远程脚本"><a href="#8-5-远程脚本" class="headerlink" title="8.5 远程脚本"></a>8.5 远程脚本</h3><h3 id="8-6-配置javascript"><a href="#8-6-配置javascript" class="headerlink" title="8.6 配置javascript"></a>8.6 配置javascript</h3><h3 id="8-7-载入策略"><a href="#8-7-载入策略" class="headerlink" title="8.7 载入策略"></a>8.7 载入策略</h3><p style="text-align:right">23:27 </p>
+
       
     </div>
     
@@ -515,6 +517,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"><i class="fa fa-tag"></i> javascript</a>
+          
+        </div>
       
 
       
@@ -568,7 +576,7 @@
 <a class="jiathis_button_douban">豆瓣</a>
 <a class="jiathis_button_share">一键分享</a>
 
-<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
 <a class="jiathis_counter_style"></a>
 </div>
 <script type="text/javascript">
@@ -579,7 +587,7 @@ var jiathis_config={
   hideMore:false
 }
 </script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 <!-- JiaThis Button END -->
       
     </div>
@@ -649,7 +657,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">339</span>
+                  <span class="site-state-item-count">366</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -660,7 +668,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -671,7 +679,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -774,7 +782,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -788,7 +796,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">572.1k</span>
+    <span title="Site words total count">602.6k</span>
   
 </div>
 

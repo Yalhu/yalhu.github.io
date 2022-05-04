@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="javascript,">
 
 
 
@@ -89,13 +89,14 @@
 
 
 <meta name="description" content="2018.6.24 星期日 1:27   # 第一部分 一 我们在做什么1.1 介绍1.2 一个简单的例子二 一等公民的函数2.1 快速概览2.2 为何钟爱一等公民三 纯函数的好处3.1 再次强调“纯”3.2 副作用可能包括 。。3.3 八年级数学3.4 追求“纯”的理由四 柯里化 curry4.1 不可或缺的curry4.2 不仅仅是双关语/咖喱五 代码组合 compose5.1 函数饲养5.2">
+<meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="函数范式">
 <meta property="og:url" content="http://yoursite.com/pdf/js/函数范式/index.html">
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2018.6.24 星期日 1:27   # 第一部分 一 我们在做什么1.1 介绍1.2 一个简单的例子二 一等公民的函数2.1 快速概览2.2 为何钟爱一等公民三 纯函数的好处3.1 再次强调“纯”3.2 副作用可能包括 。。3.3 八年级数学3.4 追求“纯”的理由四 柯里化 curry4.1 不可或缺的curry4.2 不仅仅是双关语/咖喱五 代码组合 compose5.1 函数饲养5.2">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.401Z">
+<meta property="og:updated_time" content="2022-05-04T07:32:16.689Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="函数范式">
 <meta name="twitter:description" content="2018.6.24 星期日 1:27   # 第一部分 一 我们在做什么1.1 介绍1.2 一个简单的例子二 一等公民的函数2.1 快速概览2.2 为何钟爱一等公民三 纯函数的好处3.1 再次强调“纯”3.2 副作用可能包括 。。3.3 八年级数学3.4 追求“纯”的理由四 柯里化 curry4.1 不可或缺的curry4.2 不仅仅是双关语/咖喱五 代码组合 compose5.1 函数饲养5.2">
@@ -348,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-04T15:32:16+08:00">
+                2022-05-04
               </time>
             
           </span>
@@ -462,6 +463,7 @@
 <!-- 读:2016/2017 -->
 <p># 第一部分</p>
 <h2 id="一-我们在做什么"><a href="#一-我们在做什么" class="headerlink" title="一 我们在做什么"></a>一 我们在做什么</h2><h3 id="1-1-介绍"><a href="#1-1-介绍" class="headerlink" title="1.1 介绍"></a>1.1 介绍</h3><h3 id="1-2-一个简单的例子"><a href="#1-2-一个简单的例子" class="headerlink" title="1.2 一个简单的例子"></a>1.2 一个简单的例子</h3><h2 id="二-一等公民的函数"><a href="#二-一等公民的函数" class="headerlink" title="二 一等公民的函数"></a>二 一等公民的函数</h2><h3 id="2-1-快速概览"><a href="#2-1-快速概览" class="headerlink" title="2.1 快速概览"></a>2.1 快速概览</h3><h3 id="2-2-为何钟爱一等公民"><a href="#2-2-为何钟爱一等公民" class="headerlink" title="2.2 为何钟爱一等公民"></a>2.2 为何钟爱一等公民</h3><h2 id="三-纯函数的好处"><a href="#三-纯函数的好处" class="headerlink" title="三 纯函数的好处"></a>三 纯函数的好处</h2><h3 id="3-1-再次强调“纯”"><a href="#3-1-再次强调“纯”" class="headerlink" title="3.1 再次强调“纯”"></a>3.1 再次强调“纯”</h3><h3 id="3-2-副作用可能包括-。。"><a href="#3-2-副作用可能包括-。。" class="headerlink" title="3.2 副作用可能包括 。。"></a>3.2 副作用可能包括 。。</h3><h3 id="3-3-八年级数学"><a href="#3-3-八年级数学" class="headerlink" title="3.3 八年级数学"></a>3.3 八年级数学</h3><h3 id="3-4-追求“纯”的理由"><a href="#3-4-追求“纯”的理由" class="headerlink" title="3.4 追求“纯”的理由"></a>3.4 追求“纯”的理由</h3><h2 id="四-柯里化-curry"><a href="#四-柯里化-curry" class="headerlink" title="四 柯里化 curry"></a>四 柯里化 curry</h2><h3 id="4-1-不可或缺的curry"><a href="#4-1-不可或缺的curry" class="headerlink" title="4.1 不可或缺的curry"></a>4.1 不可或缺的curry</h3><h3 id="4-2-不仅仅是双关语-咖喱"><a href="#4-2-不仅仅是双关语-咖喱" class="headerlink" title="4.2 不仅仅是双关语/咖喱"></a>4.2 不仅仅是双关语/咖喱</h3><h2 id="五-代码组合-compose"><a href="#五-代码组合-compose" class="headerlink" title="五 代码组合 compose"></a>五 代码组合 compose</h2><h3 id="5-1-函数饲养"><a href="#5-1-函数饲养" class="headerlink" title="5.1 函数饲养"></a>5.1 函数饲养</h3><h3 id="5-2-pointfree"><a href="#5-2-pointfree" class="headerlink" title="5.2 pointfree"></a>5.2 pointfree</h3><h3 id="5-3-debug"><a href="#5-3-debug" class="headerlink" title="5.3 debug"></a>5.3 debug</h3><h3 id="5-4-范畴学"><a href="#5-4-范畴学" class="headerlink" title="5.4 范畴学"></a>5.4 范畴学</h3><h2 id="六-示例应用"><a href="#六-示例应用" class="headerlink" title="六 示例应用"></a>六 示例应用</h2><h3 id="6-1-声明式代码"><a href="#6-1-声明式代码" class="headerlink" title="6.1 声明式代码"></a>6.1 声明式代码</h3><h3 id="6-2-一个函数式的flickr"><a href="#6-2-一个函数式的flickr" class="headerlink" title="6.2 一个函数式的flickr"></a>6.2 一个函数式的flickr</h3><h3 id="6-3-有原则的重构"><a href="#6-3-有原则的重构" class="headerlink" title="6.3 有原则的重构"></a>6.3 有原则的重构</h3><h2 id="七-Hindley-Milner-类型签名"><a href="#七-Hindley-Milner-类型签名" class="headerlink" title="七 Hindley-Milner 类型签名"></a>七 Hindley-Milner 类型签名</h2><h3 id="7-1-初始类型"><a href="#7-1-初始类型" class="headerlink" title="7.1 初始类型"></a>7.1 初始类型</h3><h3 id="7-2-神秘的传奇故事"><a href="#7-2-神秘的传奇故事" class="headerlink" title="7.2 神秘的传奇故事"></a>7.2 神秘的传奇故事</h3><h3 id="7-3-缩小可能性范围"><a href="#7-3-缩小可能性范围" class="headerlink" title="7.3 缩小可能性范围"></a>7.3 缩小可能性范围</h3><h3 id="7-4-自有定理"><a href="#7-4-自有定理" class="headerlink" title="7.4 自有定理"></a>7.4 自有定理</h3><h2 id="八特百惠"><a href="#八特百惠" class="headerlink" title="八特百惠"></a>八特百惠</h2><h3 id="8-1-强大的容器"><a href="#8-1-强大的容器" class="headerlink" title="8.1 强大的容器"></a>8.1 强大的容器</h3><h3 id="8-2-第一个functor"><a href="#8-2-第一个functor" class="headerlink" title="8.2 第一个functor"></a>8.2 第一个functor</h3><h3 id="8-3-薛定谔的猫"><a href="#8-3-薛定谔的猫" class="headerlink" title="8.3 薛定谔的猫"></a>8.3 薛定谔的猫</h3><h3 id="8-4-“纯”错误处理"><a href="#8-4-“纯”错误处理" class="headerlink" title="8.4 “纯”错误处理"></a>8.4 “纯”错误处理</h3><h3 id="8-5-王老先生有作用。。。"><a href="#8-5-王老先生有作用。。。" class="headerlink" title="8.5 王老先生有作用。。。"></a>8.5 王老先生有作用。。。</h3><h3 id="8-6-异步任务"><a href="#8-6-异步任务" class="headerlink" title="8.6 异步任务"></a>8.6 异步任务</h3><h3 id="8-7-一点理论"><a href="#8-7-一点理论" class="headerlink" title="8.7 一点理论"></a>8.7 一点理论</h3><h2 id="九-Monad"><a href="#九-Monad" class="headerlink" title="九 Monad"></a>九 Monad</h2><h3 id="9-1-pointed-functor"><a href="#9-1-pointed-functor" class="headerlink" title="9.1 pointed functor"></a>9.1 pointed functor</h3><h3 id="9-2-混合比喻"><a href="#9-2-混合比喻" class="headerlink" title="9.2 混合比喻"></a>9.2 混合比喻</h3><h3 id="9-3-chain函数"><a href="#9-3-chain函数" class="headerlink" title="9.3 chain函数"></a>9.3 chain函数</h3><h3 id="9-4-理论"><a href="#9-4-理论" class="headerlink" title="9.4 理论"></a>9.4 理论</h3><h2 id="零-Applicative-Functor"><a href="#零-Applicative-Functor" class="headerlink" title="零 Applicative Functor"></a>零 Applicative Functor</h2><h3 id="0-1-应用applicative-functor"><a href="#0-1-应用applicative-functor" class="headerlink" title="0.1 应用applicative functor"></a>0.1 应用applicative functor</h3><h3 id="0-2-瓶中之船"><a href="#0-2-瓶中之船" class="headerlink" title="0.2 瓶中之船"></a>0.2 瓶中之船</h3><h3 id="0-3-协调与激励"><a href="#0-3-协调与激励" class="headerlink" title="0.3 协调与激励"></a>0.3 协调与激励</h3><h3 id="0-4-lift"><a href="#0-4-lift" class="headerlink" title="0.4 lift"></a>0.4 lift</h3><h3 id="0-5-免费开瓶器"><a href="#0-5-免费开瓶器" class="headerlink" title="0.5 免费开瓶器"></a>0.5 免费开瓶器</h3><h3 id="0-6-定律"><a href="#0-6-定律" class="headerlink" title="0.6 定律"></a>0.6 定律</h3><p style="text-align:right">1：43 </p>
+
       
     </div>
     
@@ -510,6 +512,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"><i class="fa fa-tag"></i> javascript</a>
+          
+        </div>
+      
 
       
       
@@ -519,8 +527,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/pdf/js/JS面向对象编程指南/" rel="next" title="JS面向对象编程指南">
-                <i class="fa fa-chevron-left"></i> JS面向对象编程指南
+              <a href="/pdf/js/高效JS简化版/" rel="next" title="高效JS简化版">
+                <i class="fa fa-chevron-left"></i> 高效JS简化版
               </a>
             
           </div>
@@ -529,8 +537,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/pdf/js/JS忍者秘籍/" rel="prev" title="JS忍者秘籍">
-                JS忍者秘籍 <i class="fa fa-chevron-right"></i>
+              <a href="/pdf/js/JS面向对象编程指南/" rel="prev" title="JS面向对象编程指南">
+                JS面向对象编程指南 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -562,7 +570,7 @@
 <a class="jiathis_button_douban">豆瓣</a>
 <a class="jiathis_button_share">一键分享</a>
 
-<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
 <a class="jiathis_counter_style"></a>
 </div>
 <script type="text/javascript">
@@ -573,7 +581,7 @@ var jiathis_config={
   hideMore:false
 }
 </script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 <!-- JiaThis Button END -->
       
     </div>
@@ -643,7 +651,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">339</span>
+                  <span class="site-state-item-count">366</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -654,7 +662,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -665,7 +673,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -768,7 +776,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -782,7 +790,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">572.1k</span>
+    <span title="Site words total count">602.6k</span>
   
 </div>
 

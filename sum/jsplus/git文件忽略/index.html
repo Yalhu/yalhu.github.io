@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="2018.7.18 星期四 17:03  #  忽略 本地项目  .git/info/exclude全局项目  .gitignore全局忽略    不需要在每一个仓库中添加 .gitignore 文件或者修改 exclude文件(毕竟在.git文件里乱动可能项目就没了), 只需要在用户账户文件夹下建立.gitignore_global文件就可以忽略我们想忽略的内容, 步骤如下:  在git bas">
+<meta name="description" content="2018.7.18 星期四 17:03   忽略文件但是不想在.gitignore 中，该文件已经在git中了。我们只是本地忽略了，不需要提交。有三种方法可以实现忽略Git中不想提交的文件。1、在Git项目中定义 .gitignore 文件2、在Git项目的设置中指定排除文件这种方式只是临时指定该项目的行为，需要编辑当前项目下的 .git/info/exclude 文件，然后将需要忽略提交的文件写">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git文件忽略">
 <meta property="og:url" content="http://yoursite.com/sum/jsplus/git文件忽略/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2018.7.18 星期四 17:03  #  忽略 本地项目  .git/info/exclude全局项目  .gitignore全局忽略    不需要在每一个仓库中添加 .gitignore 文件或者修改 exclude文件(毕竟在.git文件里乱动可能项目就没了), 只需要在用户账户文件夹下建立.gitignore_global文件就可以忽略我们想忽略的内容, 步骤如下:  在git bas">
+<meta property="og:description" content="2018.7.18 星期四 17:03   忽略文件但是不想在.gitignore 中，该文件已经在git中了。我们只是本地忽略了，不需要提交。有三种方法可以实现忽略Git中不想提交的文件。1、在Git项目中定义 .gitignore 文件2、在Git项目的设置中指定排除文件这种方式只是临时指定该项目的行为，需要编辑当前项目下的 .git/info/exclude 文件，然后将需要忽略提交的文件写">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta property="og:updated_time" content="2022-05-03T08:06:07.457Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git文件忽略">
-<meta name="twitter:description" content="2018.7.18 星期四 17:03  #  忽略 本地项目  .git/info/exclude全局项目  .gitignore全局忽略    不需要在每一个仓库中添加 .gitignore 文件或者修改 exclude文件(毕竟在.git文件里乱动可能项目就没了), 只需要在用户账户文件夹下建立.gitignore_global文件就可以忽略我们想忽略的内容, 步骤如下:  在git bas">
+<meta name="twitter:description" content="2018.7.18 星期四 17:03   忽略文件但是不想在.gitignore 中，该文件已经在git中了。我们只是本地忽略了，不需要提交。有三种方法可以实现忽略Git中不想提交的文件。1、在Git项目中定义 .gitignore 文件2、在Git项目的设置中指定排除文件这种方式只是临时指定该项目的行为，需要编辑当前项目下的 .git/info/exclude 文件，然后将需要忽略提交的文件写">
 
 
 
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
-                2020-02-04
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-03T16:06:07+08:00">
+                2022-05-03
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,738
+                  1,954
                 </span>
               
 
@@ -460,15 +460,17 @@
       
         <p style="text-align:right">2018.7.18 星期四 17:03</p>
 
-<p># </p>
-<h3 id="忽略"><a href="#忽略" class="headerlink" title="忽略"></a>忽略</h3><ol>
-<li>本地项目  .git/info/exclude<br>全局项目  .gitignore<br>全局忽略    不需要在每一个仓库中添加 .gitignore 文件或者修改 exclude文件(毕竟在.git文件里乱动可能项目就没了), 只需要在用户账户文件夹下建立.gitignore_global文件就可以忽略我们想忽略的内容, 步骤如下:</li>
-</ol>
-<p>在git bash下执行命令 git config –global core.excludesfile ~/.gitignore_global, 然后你会发现, ~/.gitconfig 文件里多了一行<br>git_config里的变化<br>创建 .gitignore_global 文件, 在里面写上规则就好了</p>
-<h1 id="git-文件忽略"><a href="#git-文件忽略" class="headerlink" title="git 文件忽略"></a>git 文件忽略</h1><p>原文：<a href="https://segmentfault.com/a/1190000013776387" target="_blank" rel="noopener">https://segmentfault.com/a/1190000013776387</a><br>$_PS: YX一直同步失败</p>
+
+<h1 id="忽略文件"><a href="#忽略文件" class="headerlink" title="忽略文件"></a>忽略文件</h1><p>但是不想在.gitignore 中，该文件已经在git中了。我们只是本地忽略了，不需要提交。<br><!-- [Git忽略提交的3种方法及Git忽略规则](https://juejin.cn/post/7024399374016839717) --><br>有三种方法可以实现忽略Git中不想提交的文件。<br>1、在Git项目中定义 .gitignore 文件<br>2、在Git项目的设置中指定排除文件<br>这种方式只是临时指定该项目的行为，需要编辑当前项目下的 .git/info/exclude 文件，然后将需要忽略提交的文件写入其中。<br>需要注意的是，这种方式指定的忽略文件的根目录是项目根目录。<br>3、定义Git全局的 .gitignore 文件<br>除了可以在项目中定义 .gitignore 文件外，还可以设置全局的 git .gitignore 文件来管理所有Git项目的行为。这种方式在不同的项目开发者之间是不共享的，是属于项目之上Git应用级别的行为。<br>这种方式也需要创建相应的 .gitignore 文件，可以放在任意位置。然后在使用以下命令配置Git：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># *nix or Windows git bash:</span></span><br><span class="line">git config --global core.excludesfile ~/.gitignore</span><br><span class="line"><span class="comment"># Windows cmd:</span></span><br><span class="line">git config --global core.excludesFile <span class="string">"%USERPROFILE%\.gitignore"</span></span><br><span class="line"><span class="comment"># Windows PowerShell:</span></span><br><span class="line">git config --global core.excludesFile <span class="string">"<span class="variable">$Env</span>:USERPROFILE\.gitignore"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#### 自己不需要的全局的ignore文件 ####</span><br><span class="line"># .gitignore</span><br><span class="line">yarn.lock</span><br><span class="line"># package.json</span><br><span class="line">package-lock.json</span><br><span class="line">build/config.gypi</span><br><span class="line">### 常规文件 ###</span><br><span class="line">*.local.*</span><br><span class="line">*-mock*</span><br><span class="line">*-org*</span><br><span class="line">* copy.*</span><br><span class="line">*-backup*</span><br><span class="line">*开发.md</span><br></pre></td></tr></table></figure>
+<p>用2和3的方法，在全局和项目中排除。</p>
+<h1 id="git-文件忽略"><a href="#git-文件忽略" class="headerlink" title="git 文件忽略"></a>git 文件忽略</h1><!-- 原文：<https://segmentfault.com/a/1190000013776387> 
+$_PS: YX一直同步失败 -->
 <p>在使用git进行版本管理时，有一些不需要提交到版本库里的文件和文件夹，或者在管理一个实际应用的开源项目的时候，不可以把带有数据库信息的文件上传到开源平台当中，此时就需要让git自动忽略掉一下文件。文件忽略有几种方式：</p>
 <h2 id="一-没有被track的文件"><a href="#一-没有被track的文件" class="headerlink" title="一 没有被track的文件"></a>一 没有被track的文件</h2><p>我们需要在项目的根目录当中创建.gitignore文件。 .gitignore 的格式规范如下：</p>
-<p>1. 所有空行或者以注释符号 ＃ 开头的行都会被 Git 忽略;<br>1. 匹配模式最后跟反斜杠（/）说明要忽略的是目录;<br>1. 要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反;<br>1. 可以使用标准的 glob 模式匹配;　<br>所谓的 glob 模式是指 shell 所使用的简化了的正则表达式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">*星 　 匹配零个或多个任意字符；</span><br><span class="line">?　 　 只匹配一个任意字符；</span><br><span class="line">[abc]　匹配任何一个列在方括号中的字符（这个例子要么匹配一个 a，要么匹配一个 b，要么匹配一个 c）；</span><br><span class="line">[0-9]　表示匹配所有 0 到 9 的数字；</span><br><span class="line">*？    代表任意的一个字符</span><br><span class="line">**    代表任意数目的字符</span><br><span class="line">*&#123;!ab&#125;    必须不是此类型</span><br><span class="line">*&#123;ab,bb,cx&#125;    代表ab,bb,cx中任一类型即可</span><br><span class="line">*[ ^abc]    代表必须不是a,b,c中任一字符</span><br><span class="line"></span><br><span class="line">由于git不会加入空目录，所以下面做法会导致tmp不会存在</span><br><span class="line">tmp/* //忽略tmp文件夹所有文件</span><br><span class="line">改下方法，在tmp下也加一个.gitignore,内容为</span><br><span class="line"></span><br><span class="line">*</span><br><span class="line">!.gitignore</span><br><span class="line">注意：.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的</span><br></pre></td></tr></table></figure></p>
+<p>1. 所有空行或者以注释符号 ＃ 开头的行都会被 Git 忽略;<br>1. 匹配模式最后跟反斜杠（/）说明要忽略的是目录;<br>1. 要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反;<br>1. 可以使用标准的 glob 模式匹配;　</p>
+<p>所谓的 glob 模式是指 shell 所使用的简化了的正则表达式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">*星 　 匹配零个或多个任意字符；</span><br><span class="line">?　 　 只匹配一个任意字符；</span><br><span class="line">[abc]　匹配任何一个列在方括号中的字符（这个例子要么匹配一个 a，要么匹配一个 b，要么匹配一个 c）；</span><br><span class="line">[0-9]　表示匹配所有 0 到 9 的数字；</span><br><span class="line">*？    代表任意的一个字符</span><br><span class="line">**    代表任意数目的字符</span><br><span class="line">*&#123;!ab&#125;    必须不是此类型</span><br><span class="line">*&#123;ab,bb,cx&#125;    代表ab,bb,cx中任一类型即可</span><br><span class="line">*[ ^abc]    代表必须不是a,b,c中任一字符</span><br><span class="line"></span><br><span class="line">由于git不会加入空目录，所以下面做法会导致tmp不会存在</span><br><span class="line">tmp/* //忽略tmp文件夹所有文件</span><br><span class="line">改下方法，在tmp下也加一个.gitignore,内容为</span><br><span class="line"></span><br><span class="line">*</span><br><span class="line">!.gitignore</span><br><span class="line">注意：.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的</span><br></pre></td></tr></table></figure></p>
 <h2 id="二-另外-git-还提供了另一种-exclude-的方式来做同样的事情。"><a href="#二-另外-git-还提供了另一种-exclude-的方式来做同样的事情。" class="headerlink" title="二 另外 git 还提供了另一种 exclude 的方式来做同样的事情。"></a>二 另外 git 还提供了另一种 exclude 的方式来做同样的事情。</h2><p>不同的是 .gitignore 这个文件本身会提交到版本库中去，用来保存的是公共的需要排除的文件。<br>而 .git/info/exclude 这里设置的则是你自己本地需要排除的文件,不会提交到版本库，只对本地副本有效， 他不会影响到其他人。</p>
 <p>exclude 文件所在位置.git/info/exclude , 每个项目下都有自己的exclude<br>vim .git/info/exclude</p>
 <p>全局ignore方法，唯一，本地所有git repo有效。~/.gitconfig/core.excludesfile<br>1.账户文件夹下新建一个.gitignore_global文件<br>2.直接修改.gitconfig的内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[core]</span><br><span class="line">excludesfile = c:/Users/你的账户文件夹/.gitignore_global</span><br><span class="line">或者，在Git的命令行里输入：</span><br><span class="line"></span><br><span class="line">$ git config --global core.excludesfile ~/.gitignore_global</span><br><span class="line">注意：exclude 忽略的也是未tract的文件。</span><br></pre></td></tr></table></figure></p>
@@ -476,9 +478,9 @@
 <p>按照上面的方法，当你push之后，服务器的config.xml文件将被删除。本地存在可使用, 只是文件不被版本控制（如果没有更新 .gitignore, 会提示有untrack文件）。<br>有一点需要注意的，git rm –cached 不会删除本地的物理文件；如果你真的是彻底不想要了，你也可以直接 rm＋忽略＋提交,即不要 –cached 参数。</p>
 <h2 id="四-只是想在本地忽略某文件的修改，但是服务器保存一份副本。"><a href="#四-只是想在本地忽略某文件的修改，但是服务器保存一份副本。" class="headerlink" title="四 只是想在本地忽略某文件的修改，但是服务器保存一份副本。"></a>四 只是想在本地忽略某文件的修改，但是服务器保存一份副本。</h2><p>正确的做法是在每个clone下来的仓库中手动设置不要检查特定文件的更改情况。 </p>
 <p>对于所有协同开发人员以及任何新加入的开发人员执行：</p>
-<p>$ git update-index –assume-unchanged FILE 在FILE处输入要忽略的文件. 假设未更改<br>查看忽略的文件列表</p>
-<p>$ git ls-files -v|grep h\ // \后面有空格<br>如果要还原的话，使用命令：</p>
-<p>$ git update-index –no-assume-unchanged FILE<br>这样就可以在本地版本库中忽略FILE文件的修改。但是，切记一点，这样做必须保证协同开发的所有人都执行此命令，但凡有一个人不执行，则FILE文件的更改等到commit和push的时候便会更新到服务器而导致不愿发生的情形出现。 亲手实验结果：如果本地执行假设未更改的命令，其他人修改了文件并推送后，本地git pull提示：error: Your local changes to the following files would be overwritten by merge: FILE。git status，nothing to commit, working tree clean。如果没有更改，可以正常git pull合并，但会失去忽略状态。</p>
+<p>git update-index –assume-unchanged FILE 在FILE处输入要忽略的文件. 假设未更改<br>查看忽略的文件列表</p>
+<p>git ls-files -v|grep h\ // \后面有空格<br>如果要还原的话，使用命令：</p>
+<p>git update-index –no-assume-unchanged FILE<br>这样就可以在本地版本库中忽略FILE文件的修改。但是，切记一点，这样做必须保证协同开发的所有人都执行此命令，但凡有一个人不执行，则FILE文件的更改等到commit和push的时候便会更新到服务器而导致不愿发生的情形出现。 亲手实验结果：如果本地执行假设未更改的命令，其他人修改了文件并推送后，本地git pull提示：error: Your local changes to the following files would be overwritten by merge: FILE。git status，nothing to commit, working tree clean。如果没有更改，可以正常git pull合并，但会失去忽略状态。</p>
 <h2 id="五-gitignore-还有个有意思的小功能"><a href="#五-gitignore-还有个有意思的小功能" class="headerlink" title="五 .gitignore 还有个有意思的小功能"></a>五 .gitignore 还有个有意思的小功能</h2><p>一个空的 .gitignore 文件 可以当作是一个 placeholder 。当你需要为项目创建一个空的 log 目录时， 这就变的很有用。 你可以创建一个 log 目录 在里面放置一个空的 .gitignore 文件。这样当你 clone 这个 repo 的时候 git 会自动的创建好一个空的 log 目录了。</p>
 <p style="text-align:right">17:17</p>
 
@@ -605,7 +607,7 @@
 <a class="jiathis_button_douban">豆瓣</a>
 <a class="jiathis_button_share">一键分享</a>
 
-<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
 <a class="jiathis_counter_style"></a>
 </div>
 <script type="text/javascript">
@@ -616,7 +618,7 @@ var jiathis_config={
   hideMore:false
 }
 </script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 <!-- JiaThis Button END -->
       
     </div>
@@ -686,7 +688,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">339</span>
+                  <span class="site-state-item-count">366</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -697,7 +699,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -708,7 +710,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -787,7 +789,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#忽略"><span class="nav-text">忽略</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#git-文件忽略"><span class="nav-text">git 文件忽略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-没有被track的文件"><span class="nav-text">一 没有被track的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-另外-git-还提供了另一种-exclude-的方式来做同样的事情。"><span class="nav-text">二 另外 git 还提供了另一种 exclude 的方式来做同样的事情。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-文件已被track"><span class="nav-text">三 文件已被track</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-只是想在本地忽略某文件的修改，但是服务器保存一份副本。"><span class="nav-text">四 只是想在本地忽略某文件的修改，但是服务器保存一份副本。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-gitignore-还有个有意思的小功能"><span class="nav-text">五 .gitignore 还有个有意思的小功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排除忽略"><span class="nav-text">排除忽略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#you-can-skip-this-first-one-if-it-is-not-already-excluded-by-prior-patterns-application"><span class="nav-text">you can skip this first one if it is not already excluded by prior patterns !application/</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#忽略文件"><span class="nav-text">忽略文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-文件忽略"><span class="nav-text">git 文件忽略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-没有被track的文件"><span class="nav-text">一 没有被track的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-另外-git-还提供了另一种-exclude-的方式来做同样的事情。"><span class="nav-text">二 另外 git 还提供了另一种 exclude 的方式来做同样的事情。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-文件已被track"><span class="nav-text">三 文件已被track</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-只是想在本地忽略某文件的修改，但是服务器保存一份副本。"><span class="nav-text">四 只是想在本地忽略某文件的修改，但是服务器保存一份副本。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-gitignore-还有个有意思的小功能"><span class="nav-text">五 .gitignore 还有个有意思的小功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排除忽略"><span class="nav-text">排除忽略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#you-can-skip-this-first-one-if-it-is-not-already-excluded-by-prior-patterns-application"><span class="nav-text">you can skip this first one if it is not already excluded by prior patterns !application/</span></a></li></ol></div>
             
 
           </div>
@@ -807,7 +809,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -821,7 +823,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">572.1k</span>
+    <span title="Site words total count">602.6k</span>
   
 </div>
 

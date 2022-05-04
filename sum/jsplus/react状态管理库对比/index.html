@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="react,">
+  <meta name="keywords" content="react.js,">
 
 
 
@@ -89,14 +89,14 @@
 
 
 <meta name="description" content="2020.12.13 星期日  21：35   实际状态管理项目实际使用了redux，也是得益于其“啰嗦”的设计，把所有reducer 定义于一处，包括定义action。清晰，方便查找/追踪state没有使用immutable。但是确实做了一些性能优化的处理，包括state及某个属性如何更新等。 没使用dva，因为是一个框架，内置了router等，并不需要，仅是一个简单的状态管理。redux 简">
-<meta name="keywords" content="react">
+<meta name="keywords" content="react.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React状态管理库对比">
 <meta property="og:url" content="http://yoursite.com/sum/jsplus/react状态管理库对比/index.html">
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2020.12.13 星期日  21：35   实际状态管理项目实际使用了redux，也是得益于其“啰嗦”的设计，把所有reducer 定义于一处，包括定义action。清晰，方便查找/追踪state没有使用immutable。但是确实做了一些性能优化的处理，包括state及某个属性如何更新等。 没使用dva，因为是一个框架，内置了router等，并不需要，仅是一个简单的状态管理。redux 简">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-10T12:45:12.702Z">
+<meta property="og:updated_time" content="2022-05-04T07:27:37.840Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React状态管理库对比">
 <meta name="twitter:description" content="2020.12.13 星期日  21：35   实际状态管理项目实际使用了redux，也是得益于其“啰嗦”的设计，把所有reducer 定义于一处，包括定义action。清晰，方便查找/追踪state没有使用immutable。但是确实做了一些性能优化的处理，包括state及某个属性如何更新等。 没使用dva，因为是一个框架，内置了router等，并不需要，仅是一个简单的状态管理。redux 简">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-04-10T20:45:12+08:00">
-                2021-04-10
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-04T15:27:37+08:00">
+                2022-05-04
               </time>
             
           </span>
@@ -502,7 +502,7 @@
 $_PS: 通过第二篇文档，基本用法已了解。高阶/详细 需要使用的时候再次确认。
 有时间，学习官方文档 -->
 <p>MobX 以前叫做 Mobservable</p>
-<h2 id="SMTC"><a href="#SMTC" class="headerlink" title="SMTC"></a>SMTC</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 我们定义一个可观测的store</span></span><br><span class="line"><span class="keyword">import</span> &#123; observable &#125; <span class="keyword">from</span> <span class="string">'mobx'</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppStore</span> </span>&#123;</span><br><span class="line">  @observable number = <span class="number">0</span>;</span><br><span class="line">  changeNumber()&#123;</span><br><span class="line">      <span class="keyword">this</span>.number++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> AppStore;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 我们再定义观测store的组件</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; observer &#125; <span class="keyword">from</span> <span class="string">'mobx-react'</span>;</span><br><span class="line">@observer</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span>&#123;store&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">onClick</span>=<span class="string">&#123;store.changeNumber.bind(store)&#125;</span>&gt;</span></span></span><br><span class="line"><span class="xml">        &#123;store.number&#125;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最终我们把store注入进去，然后把组件渲染出来</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; render &#125; <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> AppStore();</span><br><span class="line">render(</span><br><span class="line">  &lt;App store=&#123;store&#125; /&gt;</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="SMTC"><a href="#SMTC" class="headerlink" title="SMTC"></a>SMTC</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 我们定义一个可观测的store</span></span><br><span class="line"><span class="keyword">import</span> &#123; observable &#125; <span class="keyword">from</span> <span class="string">'mobx'</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppStore</span> </span>&#123;</span><br><span class="line">  @observable number = <span class="number">0</span>;</span><br><span class="line">  changeNumber()&#123;</span><br><span class="line">      <span class="keyword">this</span>.number++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> AppStore;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 我们再定义观测store的组件</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; observer &#125; <span class="keyword">from</span> <span class="string">'mobx-react'</span>;</span><br><span class="line">@observer</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span>&#123;store&#125; = <span class="keyword">this</span>.props;</span><br><span class="line">    <span class="keyword">return</span> &lt;div onClick=&#123;store.changeNumber.bind(store)&#125;&gt;</span><br><span class="line">        &#123;store.number&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最终我们把store注入进去，然后把组件渲染出来</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; render &#125; <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> AppStore();</span><br><span class="line">render(</span><br><span class="line">  &lt;App store=&#123;store&#125; /&gt;</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <h1 id="mobx-react"><a href="#mobx-react" class="headerlink" title="mobx-react"></a>mobx-react</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><!-- [mobx-react 原理解析(一)](https://zhuanlan.zhihu.com/p/27448262) -->
 <!-- [mobx-react 原理解析(二)](https://zhuanlan.zhihu.com/p/27551105) -->
 <h3 id="REDUX的好处"><a href="#REDUX的好处" class="headerlink" title="REDUX的好处"></a>REDUX的好处</h3><p>通过action,reducer来完成应用的数据流管理，逻辑简单清晰<br>reducer函数式的设计，让我们代码变得可观测，可回溯<br>action的设计，特别适用于多数据联动的场景<br>REDUX的弊端</p>
@@ -573,7 +573,7 @@ $_PS: 通过第二篇文档，基本用法已了解。高阶/详细 需要使用
       
         <div class="post-tags">
           
-            <a href="/tags/react/" rel="tag"><i class="fa fa-tag"></i> react</a>
+            <a href="/tags/react-js/" rel="tag"><i class="fa fa-tag"></i> react.js</a>
           
         </div>
       
@@ -586,8 +586,8 @@ $_PS: 通过第二篇文档，基本用法已了解。高阶/详细 需要使用
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/w3/es/ECMAScript6入门/15-Reflect/" rel="next" title="ES6 - Reflect">
-                <i class="fa fa-chevron-left"></i> ES6 - Reflect
+              <a href="/w3/ecmascript/ECMAScript6入门/14-Proxy/" rel="next" title="ES6 - Proxy">
+                <i class="fa fa-chevron-left"></i> ES6 - Proxy
               </a>
             
           </div>
@@ -629,7 +629,7 @@ $_PS: 通过第二篇文档，基本用法已了解。高阶/详细 需要使用
 <a class="jiathis_button_douban">豆瓣</a>
 <a class="jiathis_button_share">一键分享</a>
 
-<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
 <a class="jiathis_counter_style"></a>
 </div>
 <script type="text/javascript">
@@ -640,7 +640,7 @@ var jiathis_config={
   hideMore:false
 }
 </script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 <!-- JiaThis Button END -->
       
     </div>
@@ -710,7 +710,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">339</span>
+                  <span class="site-state-item-count">366</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -721,7 +721,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -732,7 +732,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -835,7 +835,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -849,7 +849,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">572.1k</span>
+    <span title="Site words total count">602.6k</span>
   
 </div>
 

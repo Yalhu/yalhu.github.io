@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="markdown,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="区块语法的介绍/使用 http://wowubuntu.com/markdown/#block 2017.9.11 一 am">
+<meta name="keywords" content="markdown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown 语法说明(简体中文版) 二 区块">
+<meta property="og:url" content="http://yoursite.com/w3/markdown/2_qukuai/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="区块语法的介绍/使用 http://wowubuntu.com/markdown/#block 2017.9.11 一 am">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.451Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Markdown 语法说明(简体中文版) 二 区块">
+<meta name="twitter:description" content="区块语法的介绍/使用 http://wowubuntu.com/markdown/#block 2017.9.11 一 am">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/w3/markdown/2_qukuai/">
+
+
+
+
+
+  <title>Markdown 语法说明(简体中文版) 二 区块 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/w3/markdown/2_qukuai/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Markdown 语法说明(简体中文版) 二 区块</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-11T00:00:00Z">
+                2017-09-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T09:13:55Z">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/w3/" itemprop="url" rel="index">
+                    <span itemprop="name">w3</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/w3/markdown/" itemprop="url" rel="index">
+                    <span itemprop="name">markdown</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+
+          
+          
+             <span id="/w3/markdown/2_qukuai/" class="leancloud_visitors" data-flag-title="Markdown 语法说明(简体中文版) 二 区块">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,437
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- # Markdown 语法说明(简体中文版) -->
+<p>区块语法的介绍/使用</p>
+<p><a href="http://wowubuntu.com/markdown/#block" target="_blank" rel="noopener">http://wowubuntu.com/markdown/#block</a></p>
+<p></p><p style="text-align:right">2017.9.11 一 am</p><br><a id="more"></a> <p></p>
+<p>## 一、概述<br>### 1 宗旨<br>### 2 兼容HTML<br>### 3 特殊字符自动转换</p>
+<h2 id="二、区块元素"><a href="#二、区块元素" class="headerlink" title="二、区块元素"></a>二、区块元素</h2><h3 id="1-段落和换行"><a href="#1-段落和换行" class="headerlink" title="1 段落和换行"></a>1 段落和换行</h3><h4 id="1-一个-Markdown-段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行（空行的定义是显示上看起来像是空的，便会被视为空行。比方说，若某一行只包含空格和制表符，则该行也会被视为空行）。普通段落不该用空格或制表符来缩进。"><a href="#1-一个-Markdown-段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行（空行的定义是显示上看起来像是空的，便会被视为空行。比方说，若某一行只包含空格和制表符，则该行也会被视为空行）。普通段落不该用空格或制表符来缩进。" class="headerlink" title="1.一个 Markdown 段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行（空行的定义是显示上看起来像是空的，便会被视为空行。比方说，若某一行只包含空格和制表符，则该行也会被视为空行）。普通段落不该用空格或制表符来缩进。"></a>1.一个 Markdown 段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行（空行的定义是显示上看起来像是空的，便会被视为空行。比方说，若某一行只包含空格和制表符，则该行也会被视为空行）。普通段落不该用空格或制表符来缩进。</h4><h4 id="2-「由一个或多个连续的文本行组成」这句话其实暗示了-Markdown-允许段落内的强迫换行（插入换行符），这个特性和其他大部分的-text-to-HTML-格式不一样（包括-Movable-Type-的「Convert-Line-Breaks」选项），其它的格式会把每个换行符都转成-lt-br-gt-标签。"><a href="#2-「由一个或多个连续的文本行组成」这句话其实暗示了-Markdown-允许段落内的强迫换行（插入换行符），这个特性和其他大部分的-text-to-HTML-格式不一样（包括-Movable-Type-的「Convert-Line-Breaks」选项），其它的格式会把每个换行符都转成-lt-br-gt-标签。" class="headerlink" title="2.「由一个或多个连续的文本行组成」这句话其实暗示了 Markdown 允许段落内的强迫换行（插入换行符），这个特性和其他大部分的 text-to-HTML 格式不一样（包括 Movable Type 的「Convert Line Breaks」选项），其它的格式会把每个换行符都转成 &lt;br /&gt; 标签。"></a>2.「由一个或多个连续的文本行组成」这句话其实暗示了 Markdown 允许段落内的强迫换行（插入换行符），这个特性和其他大部分的 text-to-HTML 格式不一样（包括 Movable Type 的「Convert Line Breaks」选项），其它的格式会把每个换行符都转成 <code>&lt;br /&gt;</code> 标签。</h4><h4 id="3-如果你确实想要依赖-Markdown-来插入-lt-br-gt-标签的话，在插入处先按入两个以上的空格然后回车。"><a href="#3-如果你确实想要依赖-Markdown-来插入-lt-br-gt-标签的话，在插入处先按入两个以上的空格然后回车。" class="headerlink" title="3.如果你确实想要依赖 Markdown 来插入 &lt;br /&gt;标签的话，在插入处先按入两个以上的空格然后回车。"></a>3.如果你确实想要依赖 Markdown 来插入 <code>&lt;br /&gt;</code>标签的话，在插入处先按入两个以上的空格然后回车。</h4><p>的确，需要多费点事（多加空格）来产生 <code>&lt;br /&gt;</code> ，但是简单地「每个换行都转换为 <code>&lt;br /&gt;</code>」的方法在 Markdown 中并不适合， Markdown 中 email 式的 区块引用 和多段落的 列表 在使用换行来排版的时候，不但更好用，还更方便阅读。</p>
+<hr>
+<hr>
+<h3 id="2-标题"><a href="#2-标题" class="headerlink" title="2 标题"></a>2 标题</h3><p>Markdown 支持两种标题的语法，类 Setext 和类 atx 形式。</p>
+<h4 id="1-类-Setext-形式是用底线的形式，利用-（最高阶标题）和-（第二阶标题），例如："><a href="#1-类-Setext-形式是用底线的形式，利用-（最高阶标题）和-（第二阶标题），例如：" class="headerlink" title="1.类 Setext 形式是用底线的形式，利用 = （最高阶标题）和 - （第二阶标题），例如："></a>1.类 Setext 形式是用底线的形式，利用 = （最高阶标题）和 - （第二阶标题），例如：</h4><h1 id="This-is-an-H1"><a href="#This-is-an-H1" class="headerlink" title="This is an H1"></a>This is an H1</h1><h2 id="This-is-an-H2"><a href="#This-is-an-H2" class="headerlink" title="This is an H2"></a>This is an H2</h2><p>任何数量的 = 和 - 都可以有效果。</p>
+<h4 id="2-类-Atx-形式则是在行首插入-1-到-6-个-，对应到标题-1-到-6-阶，例如："><a href="#2-类-Atx-形式则是在行首插入-1-到-6-个-，对应到标题-1-到-6-阶，例如：" class="headerlink" title="2.类 Atx 形式则是在行首插入 1 到 6 个 # ，对应到标题 1 到 6 阶，例如："></a>2.类 Atx 形式则是在行首插入 1 到 6 个 # ，对应到标题 1 到 6 阶，例如：</h4><h1 id="这是-H1"><a href="#这是-H1" class="headerlink" title="这是 H1"></a>这是 H1</h1><h2 id="这是-H2"><a href="#这是-H2" class="headerlink" title="这是 H2"></a>这是 H2</h2><h6 id="这是-H6"><a href="#这是-H6" class="headerlink" title="这是 H6"></a>这是 H6</h6><p>你可以选择性地「闭合」类 atx 样式的标题，这纯粹只是美观用的，若是觉得这样看起来比较舒适，你就可以在行尾加上 #，而行尾的 # 数量也不用和开头一样（行首的井字符数量决定标题的阶数）：</p>
+<h1 id="这是-H1-1"><a href="#这是-H1-1" class="headerlink" title="这是 H1"></a>这是 H1</h1><h2 id="这是-H2-1"><a href="#这是-H2-1" class="headerlink" title="这是 H2"></a>这是 H2</h2><h3 id="这是-H3"><a href="#这是-H3" class="headerlink" title="这是 H3"></a>这是 H3</h3><hr>
+<hr>
+<h3 id="3-区块引用Blockquotes"><a href="#3-区块引用Blockquotes" class="headerlink" title="3 区块引用Blockquotes"></a>3 区块引用Blockquotes</h3><p>打一段字，后面可以加空格接引用 &gt; 这里是行内的引用 ??并不好使</p>
+<blockquote>
+<p>This is a b,<br>This is a b,.<br>This is a b,</p>
+</blockquote>
+<h4 id="1-偷懒"><a href="#1-偷懒" class="headerlink" title="1.偷懒"></a>1.偷懒</h4><blockquote>
+<p>只在整个段落的第一行加<br>这里是第二行</p>
+</blockquote>
+<blockquote>
+<p>又一个段落了</p>
+</blockquote>
+<h4 id="2-嵌套引用"><a href="#2-嵌套引用" class="headerlink" title="2.嵌套引用"></a>2.嵌套引用</h4><blockquote>
+<p>This is the first level of quoting.</p>
+<blockquote>
+<p>This is nested blockquote.</p>
+</blockquote>
+<p>Back to the first level.</p>
+</blockquote>
+<h4 id="3-引用的区块内也可以使用其他的-Markdown-语法，包括标题、列表、代码区块等："><a href="#3-引用的区块内也可以使用其他的-Markdown-语法，包括标题、列表、代码区块等：" class="headerlink" title="3.引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等："></a>3.引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等：</h4><blockquote>
+<h2 id="这是一个标题。"><a href="#这是一个标题。" class="headerlink" title="这是一个标题。"></a>这是一个标题。</h2><ol>
+<li>这是第一行列表项。</li>
+<li>这是第二行列表项。</li>
+</ol>
+<p>给出一些例子代码：</p>
+<pre><code>return shell_exec(&quot;echo $input | $markdown_script&quot;);
+</code></pre><p>再加一点，看着上面的代码块，颜色突然结束，怪怪的</p>
+</blockquote>
+<hr>
+<hr>
+<h3 id="4-列表"><a href="#4-列表" class="headerlink" title="4 列表"></a>4 列表</h3><p><code>2017.9.14 四 15:30</code><br>无序：星号、加号、减号<br>有序：数字接英文句点</p>
+<h4 id="1-也可以html标记"><a href="#1-也可以html标记" class="headerlink" title="1.也可以html标记"></a>1.也可以html标记</h4><ol><br>    <li>无序ol</li><br>    <li>li，</li><br>    <li>这里 数字 排序了</li><br>    <li>一段markdown结束，最好加空行加以区分</li><br></ol>
+
+<h4 id="2-数字不影响排序"><a href="#2-数字不影响排序" class="headerlink" title="2.数字不影响排序"></a>2.数字不影响排序</h4><ol>
+<li>bird</li>
+<li>数字是几不重要</li>
+<li>比如这个的数字是：1，3，5</li>
+<li>这个数字是二，但排序仍是4</li>
+</ol>
+<p>懒惰的写法，建议第一个项目最好还是从 1. 开始，因为 Markdown 未来可能会支持有序列表的 start 属性。</p>
+<h4 id="3-列表项目标记通常是放在最左边，但是其实也可以缩进，最多-3-个空格，项目标记后面则一定要接着至少一个空格或制表符。"><a href="#3-列表项目标记通常是放在最左边，但是其实也可以缩进，最多-3-个空格，项目标记后面则一定要接着至少一个空格或制表符。" class="headerlink" title="3.列表项目标记通常是放在最左边，但是其实也可以缩进，最多 3 个空格，项目标记后面则一定要接着至少一个空格或制表符。"></a>3.列表项目标记通常是放在最左边，但是其实也可以缩进，最多 3 个空格，项目标记后面则一定要接着至少一个空格或制表符。</h4><ul>
+<li>前面三个空格<br>第二行，后面没有空格 ，一个空格不会换行</li>
+<li>前面三个空格，后面一个空格<br>第二行了。。有tab的可以换行</li>
+<li>都是三个缩进，好看</li>
+<li>三个缩进<br>第二行没空格， markdown不好看 </li>
+</ul>
+<h4 id="4-列表项目间用空行分开，内容用-标签包起来"><a href="#4-列表项目间用空行分开，内容用-标签包起来" class="headerlink" title="4.列表项目间用空行分开，内容用  标签包起来"></a>4.列表项目间用空行分开，内容用 <p> 标签包起来</p></h4><ul>
+<li>bird</li>
+<li><p>前面没有空行</p>
+</li>
+<li><p>前面加了一个空行，</p>
+</li>
+<li>只加了一个，就都有空行了</li>
+</ul>
+<h4 id="5-列表项目可以包含多个段落，每个项目下的段落都必须缩进-4-个空格或是-1-个制表符："><a href="#5-列表项目可以包含多个段落，每个项目下的段落都必须缩进-4-个空格或是-1-个制表符：" class="headerlink" title="5.列表项目可以包含多个段落，每个项目下的段落都必须缩进 4 个空格或是 1 个制表符："></a>5.列表项目可以包含多个段落，每个项目下的段落都必须缩进 4 个空格或是 1 个制表符：</h4><ol>
+<li><p>第一项，第一段，第一行<br>第一项，第一段，第二行</p>
+<p>第一项，第二段，第一行。。段落间前面要有空行<br>第一项，第二段，第二行。。段落间前面要有空行</p>
+</li>
+<li><p>第二项，第一段，第一行。。前面没有空行–不需要要你过来区分段落  。加不加空行，输出是一致的  </p>
+<p>第二项，第二段，第一行。。每行都有缩进，看起来比第一段，没有所经的好看点<br>sdfsfsf算法</p>
+</li>
+</ol>
+<p>你每行都有缩进，看起来会看好很多</p>
+<h4 id="6-如果要在列表项目内放进引用，那-gt-就需要缩进："><a href="#6-如果要在列表项目内放进引用，那-gt-就需要缩进：" class="headerlink" title="6.如果要在列表项目内放进引用，那 &gt; 就需要缩进："></a>6.如果要在列表项目内放进引用，那 &gt; 就需要缩进：</h4><ul>
+<li><p>项目列表里有引用了</p>
+<blockquote>
+<p>这里需要缩进<br>这里需要缩进，符号后面的空格好像不重要</p>
+</blockquote>
+<blockquote>
+<p>前面没有换行。所以这一个前面加了空行<br>前面没有换行。所以这一个前面加了空行，或者上一个加了一个制表符</p>
+</blockquote>
+<blockquote>
+<p>tab的是一个引用，空行就换成另一个引用了</p>
+</blockquote>
+<h4 id="7-如果要放代码区块的话，该区块就需要缩进两次，也就是-8-个-空-格或是-2-个制表符："><a href="#7-如果要放代码区块的话，该区块就需要缩进两次，也就是-8-个-空-格或是-2-个制表符：" class="headerlink" title="7.如果要放代码区块的话，该区块就需要缩进两次，也就是 8 个        空 格或是 2 个制表符："></a>7.如果要放代码区块的话，该区块就需要缩进两次，也就是 8 个        空 格或是 2 个制表符：</h4><p>===============  </p>
+<p>  /*</p>
+<pre><code>* 这个符号前面也要加空格
+&gt;这个引用的符号，前面 竟然 不需要加空格
+</code></pre><p>  */</p>
+</li>
+<li>这个符号前面也要加空格<blockquote>
+<p>这个引用的符号，前面 竟然 不需要加空格</p>
+</blockquote>
+</li>
+<li>星号加空格可以知道是一个markdown标签；可以没有回车换行。<blockquote>
+<p>这个引用的符号，前面 竟然 不需要加空格</p>
+</blockquote>
+</li>
+</ul>
+<ol start="3">
+<li>这是个数字列表没有表现出来</li>
+<li>这是个数字列表没有表现出来<blockquote>
+<p>这个引用的符号，前面 竟然 不需要加空格   </p>
+</blockquote>
+</li>
+<li><p>这是个数字列表没有表现出来。加tab换行，只是换了一行，还是一个引用。。</p>
+</li>
+<li><p>加了一个空行——回车换行就表现出来了</p>
+</li>
+<li>加了一个空行——回车换行就表现出来了</li>
+</ol>
+<p>================</p>
+<ul>
+<li>代码块列表项，2个tab</li>
+<li>代码块列表项，2个tab<br>斯蒂芬森斯蒂芬森<br>斯蒂芬</li>
+<li>斯蒂芬 斯蒂芬森</li>
+</ul>
+<h4 id="8-项目列表很可能会不小心产生：1986-What-a-great-season"><a href="#8-项目列表很可能会不小心产生：1986-What-a-great-season" class="headerlink" title="8.项目列表很可能会不小心产生：1986. What a great season."></a>8.项目列表很可能会不小心产生：1986. What a great season.</h4><ol start="1986">
+<li>What a great season.</li>
+<li>What a great season.<br>1986.符号后面的空格还是很有用的。<br>1986.符号后面的空格还是很有用的。前面那句话加了一个tab</li>
+</ol>
+<p>============</p>
+<pre><code>/*
+1986.符号后面的空格还是很有用的。前面那句话加了换行，所以是又一个markdown了。（没有空格，不是列表了）
+*/
+</code></pre><p>前面说的增量已经有了，（文档有些过时 -<em>-|-</em>-，我的哭脸呢）</p>
+<p>1986.   wahts sd s d<br>1986.   wahts sd s d </p>
+<pre><code>/* 
+1、发现：回车换行，相当与 p  标签，1加了换行，和间距，也就是段落的区分。2区分不同markdown语言   
+tab也是换行，只是没有间距，同一个段落的换行
+
+这个是回车换行，有间距，也就是段落的区分
+2、markdown也有标签，和文本输出的概念。第一个/*  */，因为是直接在 语法####的下面，所以可以没有回车换行；后面两个必须加回车换行，和前面的文本（输出内容）做区分；和html表现一致
+3、可能回车换行，换段落；tab，回车换行稍微有些绕。语法下直接写文本，好像也是markdown语法----html中直接输出文本。md中，要换另一个markdown，需要回车加一个空行，不然还会认为是直接输出文本....
+4、tab====&lt;br&gt;  空行=====&lt;p&gt;  回车======html中的回车，并不会产出换行。。所以，tab 空行相当于markdown的标签
+从这里面的颜色，也可以看出那些是markdown的语法----标签；
+tab，空行，代码块，分隔符等，还有一些看不出来  
+*/
+</code></pre><p>====================    </p>
+<h3 id="5-代码区块"><a href="#5-代码区块" class="headerlink" title="5 代码区块"></a>5 代码区块</h3><p>缩进 4 个空格或是 1 个制表符<br>1.这个每行一阶的缩进（4 个空格或是 1 个制表符），都会被移除</p>
+<pre><code>前面四个缩进
+    前面又加了四个缩进，第一个四个缩进被当做markdown语法识别了。代码里缩进一致，显得好看
+    回车换了一行
+
+    如果前面加了一个空行，，就变成段落了
+前面还是四个缩进 。下面不加换行也是可以的，加换行代码清晰
+</code></pre><p>2.一个代码区块会一直持续到没有缩进的那一行。<code>（所以上面的代码快就可以不用加换行来区分了）（后面没有tab换行，下面的代码会接上来，成为一段内容）</code><br>3.在代码区块里面， &amp; 、 &lt; 和 &gt; 会自动转成 HTML 实体，这样的方式让你非常容易使用 Markdown 插入范例用的 HTML 原始码，只需要复制贴上，再加上缩进就可以了，剩下的 Markdown 都会帮你处理<br>&copy;    &amp;   &nbsp; &nbsp; &nbsp; &nbsp;  &gt;<br>&amp;  &lt;             &gt;</p>
+<pre><code>&amp;copy; &amp; &gt; &lt;      &gt;   
+</code></pre><p>4.代码区块中，一般的 Markdown 语法不会被转换，像是星号便只是星号，这表示你可以很容易地以 Markdown 语法撰写 Markdown 语法相关的文件。</p>
+<pre><code>***
+</code></pre><h3 id="6-分隔线"><a href="#6-分隔线" class="headerlink" title="6 分隔线"></a>6 分隔线</h3><p>三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<p>前后都有段落时</p>
+<hr>
+<p>前后都有段落时</p>
+<p>## 三、区段元素<br>### 1 链接<br>### 2 强调<br>### 3 代码<br>### 4 图片</p>
+<p>## 四、其他<br>### 1 反斜杠<br>### 2 自动链接</p>
+<p>## 五、感谢<br>## 六、Markdown免费编辑器</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/markdown/" rel="tag"><i class="fa fa-tag"></i> markdown</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/w3/markdown/3_quduan/" rel="next" title="Markdown 语法说明(简体中文版) 三 区段元素">
+                <i class="fa fa-chevron-left"></i> Markdown 语法说明(简体中文版) 三 区段元素
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/w3/markdown/1_gaishu/" rel="prev" title="Markdown 语法说明(简体中文版) 一 概述">
+                Markdown 语法说明(简体中文版) 一 概述 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">366</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二、区块元素"><span class="nav-text">二、区块元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-段落和换行"><span class="nav-text">1 段落和换行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-一个-Markdown-段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行（空行的定义是显示上看起来像是空的，便会被视为空行。比方说，若某一行只包含空格和制表符，则该行也会被视为空行）。普通段落不该用空格或制表符来缩进。"><span class="nav-text">1.一个 Markdown 段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行（空行的定义是显示上看起来像是空的，便会被视为空行。比方说，若某一行只包含空格和制表符，则该行也会被视为空行）。普通段落不该用空格或制表符来缩进。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-「由一个或多个连续的文本行组成」这句话其实暗示了-Markdown-允许段落内的强迫换行（插入换行符），这个特性和其他大部分的-text-to-HTML-格式不一样（包括-Movable-Type-的「Convert-Line-Breaks」选项），其它的格式会把每个换行符都转成-lt-br-gt-标签。"><span class="nav-text">2.「由一个或多个连续的文本行组成」这句话其实暗示了 Markdown 允许段落内的强迫换行（插入换行符），这个特性和其他大部分的 text-to-HTML 格式不一样（包括 Movable Type 的「Convert Line Breaks」选项），其它的格式会把每个换行符都转成 &lt;br /&gt; 标签。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-如果你确实想要依赖-Markdown-来插入-lt-br-gt-标签的话，在插入处先按入两个以上的空格然后回车。"><span class="nav-text">3.如果你确实想要依赖 Markdown 来插入 &lt;br /&gt;标签的话，在插入处先按入两个以上的空格然后回车。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-标题"><span class="nav-text">2 标题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-类-Setext-形式是用底线的形式，利用-（最高阶标题）和-（第二阶标题），例如："><span class="nav-text">1.类 Setext 形式是用底线的形式，利用 = （最高阶标题）和 - （第二阶标题），例如：</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#This-is-an-H1"><span class="nav-text">This is an H1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#This-is-an-H2"><span class="nav-text">This is an H2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-类-Atx-形式则是在行首插入-1-到-6-个-，对应到标题-1-到-6-阶，例如："><span class="nav-text">2.类 Atx 形式则是在行首插入 1 到 6 个 # ，对应到标题 1 到 6 阶，例如：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#这是-H1"><span class="nav-text">这是 H1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#这是-H2"><span class="nav-text">这是 H2</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#这是-H6"><span class="nav-text">这是 H6</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#这是-H1-1"><span class="nav-text">这是 H1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#这是-H2-1"><span class="nav-text">这是 H2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#这是-H3"><span class="nav-text">这是 H3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-区块引用Blockquotes"><span class="nav-text">3 区块引用Blockquotes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-偷懒"><span class="nav-text">1.偷懒</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-嵌套引用"><span class="nav-text">2.嵌套引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-引用的区块内也可以使用其他的-Markdown-语法，包括标题、列表、代码区块等："><span class="nav-text">3.引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#这是一个标题。"><span class="nav-text">这是一个标题。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-列表"><span class="nav-text">4 列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-也可以html标记"><span class="nav-text">1.也可以html标记</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-数字不影响排序"><span class="nav-text">2.数字不影响排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-列表项目标记通常是放在最左边，但是其实也可以缩进，最多-3-个空格，项目标记后面则一定要接着至少一个空格或制表符。"><span class="nav-text">3.列表项目标记通常是放在最左边，但是其实也可以缩进，最多 3 个空格，项目标记后面则一定要接着至少一个空格或制表符。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-列表项目间用空行分开，内容用-标签包起来"><span class="nav-text">4.列表项目间用空行分开，内容用  标签包起来</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-列表项目可以包含多个段落，每个项目下的段落都必须缩进-4-个空格或是-1-个制表符："><span class="nav-text">5.列表项目可以包含多个段落，每个项目下的段落都必须缩进 4 个空格或是 1 个制表符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-如果要在列表项目内放进引用，那-gt-就需要缩进："><span class="nav-text">6.如果要在列表项目内放进引用，那 &gt; 就需要缩进：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-如果要放代码区块的话，该区块就需要缩进两次，也就是-8-个-空-格或是-2-个制表符："><span class="nav-text">7.如果要放代码区块的话，该区块就需要缩进两次，也就是 8 个        空 格或是 2 个制表符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-项目列表很可能会不小心产生：1986-What-a-great-season"><span class="nav-text">8.项目列表很可能会不小心产生：1986. What a great season.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-代码区块"><span class="nav-text">5 代码区块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-分隔线"><span class="nav-text">6 分隔线</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">602.6k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

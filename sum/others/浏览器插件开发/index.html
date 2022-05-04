@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2021.4.6 星期二 ## chrome extendsion 开发https://developer.chrome.com/extensions/manifest360开发文档-书签manifest.json: name, icons, manifest_version, version, descriptionbrowser_actionpage_actionoptions_page/">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-09-04T08:00:34.363Z">
+<meta property="og:updated_time" content="2021-09-04T16:02:33.965Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器插件开发">
 <meta name="twitter:description" content="2021.4.6 星期二 ## chrome extendsion 开发https://developer.chrome.com/extensions/manifest360开发文档-书签manifest.json: name, icons, manifest_version, version, descriptionbrowser_actionpage_actionoptions_page/">
@@ -348,7 +348,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-09-04T16:00:34+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-09-05T00:02:33+08:00">
                 2021-09-04
               </time>
             
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,595
+                  3,589
                 </span>
               
 
@@ -516,7 +516,8 @@ http://www.rietta.com/firefox/Tutorial/security.pdf
 
 
 Safari: http://develop.apple.com   (打不开)
-firefox: http://developer.mozilla.org/en/docs/Plugins--><br>## safari<br>### 文档<br><a href="https://developer.apple.com/videos/play/wwdc2020/10665/" target="_blank" rel="noopener">Meet Safari Web Extensions</a><br>视频教程，英文。<br><br>### 转化现有插件<br><!-- [How to convert Chrome extensions to run in Safari](https://forums.macrumors.com/threads/how-to-convert-chrome-extensions-to-run-in-safari.2247012/) --><br><code>xcrun safari-web-extension-converter</code><br>xcrun safari-web-extension-converter /big/ass/path/to/chrome/extensions/from/above/{EXTENSION ID}/{some version number}<br><br>1. First, you need to be on Big Sur with the latest Xcode (12) installed. But! There’s a big <strong>asterisk</strong> to this which I’ll get to later.<br><br>I’ve successfully converted extensions like Refind, Notion, DF Tube, the 33Msil extension, and a couple of others. From what I can tell extensions that change the page layout somehow or grab URLs work.<br><br><br><strong>Big asterisk</strong>: From the limited testing I’ve done you can’t convert extensions on Catalina with Xcode 12 installed BUT you can build them. What I’ve done is converted the extensions on my macOS 11 machine and then copied them over to my Catalina machine and built there. These extensions will run in the Safari 14 beta for Catalina.<br><br><br><br>#### 问题<br>1. <code>scrub: error: unable to find utility &quot;safari-web-extension-converter&quot;, not a developer tool or in PATH.</code><br>&gt; I originally tried this on Xcode 12.5 Beta.<br><br>Try launching the terminal and reselecting your Xcode install as the primary. Type:<br><code>sudo xcode-select -s /Applications/Xcode.app/Contents/Developer</code><br>or if you’re running a beta version,<br><code>sudo xcode-select -s /Applications/Xcode-beta.app/Contents/Developer</code><br><br><br><br><!--  
+firefox: http://developer.mozilla.org/en/docs/Plugins--><br>## safari<br>### 文档<br>[Meet Safari Web Extensions]<br><!-- [Meet Safari Web Extensions](https://developer.apple.com/videos/play/wwdc2020/10665/)
+视频教程，英文。 --><br><br>### 转化现有插件<br><!-- [How to convert Chrome extensions to run in Safari](https://forums.macrumors.com/threads/how-to-convert-chrome-extensions-to-run-in-safari.2247012/) --><br><code>xcrun safari-web-extension-converter</code><br>xcrun safari-web-extension-converter /big/ass/path/to/chrome/extensions/from/above/{EXTENSION ID}/{some version number}<br><br>1. First, you need to be on Big Sur with the latest Xcode (12) installed. But! There’s a big <strong>asterisk</strong> to this which I’ll get to later.<br><br>I’ve successfully converted extensions like Refind, Notion, DF Tube, the 33Msil extension, and a couple of others. From what I can tell extensions that change the page layout somehow or grab URLs work.<br><br><br><strong>Big asterisk</strong>: From the limited testing I’ve done you can’t convert extensions on Catalina with Xcode 12 installed BUT you can build them. What I’ve done is converted the extensions on my macOS 11 machine and then copied them over to my Catalina machine and built there. These extensions will run in the Safari 14 beta for Catalina.<br><br><br><br>#### 问题<br>1. <code>scrub: error: unable to find utility &quot;safari-web-extension-converter&quot;, not a developer tool or in PATH.</code><br>&gt; I originally tried this on Xcode 12.5 Beta.<br><br>Try launching the terminal and reselecting your Xcode install as the primary. Type:<br><code>sudo xcode-select -s /Applications/Xcode.app/Contents/Developer</code><br>or if you’re running a beta version,<br><code>sudo xcode-select -s /Applications/Xcode-beta.app/Contents/Developer</code><br><br><br><br><!--  
 其他：
 [Safari 浏览器插件（扩展）开发](https://blog.csdn.net/mjzhang1993/article/details/106897673)
 2020-06-22 11:14:33 
@@ -636,7 +637,7 @@ https://www.tampermonkey.net/?browser=safari
 <a class="jiathis_button_douban">豆瓣</a>
 <a class="jiathis_button_share">一键分享</a>
 
-<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
 <a class="jiathis_counter_style"></a>
 </div>
 <script type="text/javascript">
@@ -647,7 +648,7 @@ var jiathis_config={
   hideMore:false
 }
 </script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 <!-- JiaThis Button END -->
       
     </div>
@@ -708,7 +709,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">339</span>
+                  <span class="site-state-item-count">366</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -719,7 +720,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -730,7 +731,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -812,7 +813,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -826,7 +827,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">572.1k</span>
+    <span title="Site words total count">602.6k</span>
   
 </div>
 

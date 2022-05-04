@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="2020. 星期  ：      插件性能分析官方：performance，stats ProgressBarPluginnpm i progress-bar-webpack-plugin SpeedMeasurePluginnpm i speed-measure-webpack-pluginhttps://github.com/stephencookdev/speed-measure-webp">
+<meta name="description" content="2020.11.22 星期  ：   webpack-chainwebpack-chain: https://github.com/neutrinojs/webpack-chain/tree/v4 配置public path可以修改运行时路径 - 动态资源路径。webpack_public_path: https://webpack.docschina.org/guides/public-pat">
 <meta name="keywords" content="webpack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Webpack实践">
 <meta property="og:url" content="http://yoursite.com/sum/jsplus/webpack实践/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2020. 星期  ：      插件性能分析官方：performance，stats ProgressBarPluginnpm i progress-bar-webpack-plugin SpeedMeasurePluginnpm i speed-measure-webpack-pluginhttps://github.com/stephencookdev/speed-measure-webp">
+<meta property="og:description" content="2020.11.22 星期  ：   webpack-chainwebpack-chain: https://github.com/neutrinojs/webpack-chain/tree/v4 配置public path可以修改运行时路径 - 动态资源路径。webpack_public_path: https://webpack.docschina.org/guides/public-pat">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-04-10T11:24:01.890Z">
+<meta property="og:updated_time" content="2022-05-03T09:12:09.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Webpack实践">
-<meta name="twitter:description" content="2020. 星期  ：      插件性能分析官方：performance，stats ProgressBarPluginnpm i progress-bar-webpack-plugin SpeedMeasurePluginnpm i speed-measure-webpack-pluginhttps://github.com/stephencookdev/speed-measure-webp">
+<meta name="twitter:description" content="2020.11.22 星期  ：   webpack-chainwebpack-chain: https://github.com/neutrinojs/webpack-chain/tree/v4 配置public path可以修改运行时路径 - 动态资源路径。webpack_public_path: https://webpack.docschina.org/guides/public-pat">
 
 
 
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-04-10T19:24:01+08:00">
-                2021-04-10
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-03T17:12:09+08:00">
+                2022-05-03
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  54
+                  1,295
                 </span>
               
 
@@ -437,7 +437,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  6
                 </span>
               
             </div>
@@ -458,12 +458,56 @@
       
 
       
-        <p style="text-align:right"> 2020. 星期  ： </p>
+        <p style="text-align:right"> 2020.11.22 星期  ： </p>
 
-
-
-
-<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><h2 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h2><p>官方：performance，stats<br><!-- [[你值得拥有的几款实用webpack4性能分析插件【测评与推荐】]](https://juejin.cn/post/6844904040128577549) --></p>
+<h1 id="webpack-chain"><a href="#webpack-chain" class="headerlink" title="webpack-chain"></a>webpack-chain</h1><p>webpack-chain: <a href="https://github.com/neutrinojs/webpack-chain/tree/v4" target="_blank" rel="noopener">https://github.com/neutrinojs/webpack-chain/tree/v4</a><br><!-- [webpack-chain 文档](https://drylint.com/Webpack/webpack-chain.html#介绍)
+PS: webpack-chai 文档。介绍，每个配置的缩写等。 
+ --><br><!-- 
+[Webpack-chain 从入门到深入](https://juejin.cn/post/6947851867422621733)
+\$_PS: 基础/教程。
+[使用 webpack-chain 来创建 webpack 配置](https://juejin.cn/post/6866756948704886791)
+\$_PS: 结合源码解析。
+[前端工程：webpack-chain](http://www.zyiz.net/tech/detail-130942.html)
+\$_PS: 常用配置，所有配置。
+[vue-cli中webpack-chain的链式操作个人理解（解决90%的疑问）](https://blog.csdn.net/weixin_34384681/article/details/91369707)
+`vue inspect module.rules`
+ --></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="public-path"><a href="#public-path" class="headerlink" title="public path"></a>public path</h2><p>可以修改运行时路径 - 动态资源路径。<br><strong>webpack_public_path</strong>: <a href="https://webpack.docschina.org/guides/public-path/" target="_blank" rel="noopener">https://webpack.docschina.org/guides/public-path/</a></p>
+<p><a href="https://qiankun.umijs.org/zh/faq#a-使用-webpack-运行时-publicpath-配置" target="_blank" rel="noopener">qiankun.js: 使用 webpack 运行时 publicPath 配置</a></p>
+<blockquote>
+<p>runtime publicPath 主要解决的是微应用动态载入的 脚本、样式、图片 等地址不正确的问题。</p>
+</blockquote>
+<!-- 解决taro 项目动态引入的chunk。 -->
+<!-- [动态修改webpack中的publicPath](https://juejin.cn/post/7004472324976017439) 
+最近接到一个需求，比如项目本来的访问地址是 https://juejin.cn/pro/index.html,
+现在要针对某个商户配置的访问地址是https://juejin.cn/pro/xxx/index.html, 多了一层上下文xxx,
+代码都是同一套代码，只是后者会根据localtion.pathname做一个特定的主题配置，展示不同的风格。
+所以问题就是怎么让https://juejin.cn/pro/xxx/index.html 指向
+https://juejin.cn/pro/index.html。
+-->
+<blockquote>
+<p>动态修改publicPath 只需要在入口文件顶一下<strong>webpack_require</strong>.p这个变量值即可，webpack在做ast解析的时候会特殊处理这个<strong>webpack_require</strong>这个变量，</p>
+</blockquote>
+<p>场景一：<br>静态资源都上传到oss。在webpack.config.js 文件中定义好publicPath 就没问题了。<br>但是taro项目/平台的云构建，并没有替换掉chunck 文件的路径。<br>所以，需要我们修改运行时public path;</p>
+<p>场景二：<br>资源文件添加了域名兜底处理onrrror=”__reloadResource(this)”;<br>app.js 可以加载新域名。但是chunk 文件并没 添加onrrror（webpack-html-plugin）；<!-- 不用再加载发生问题的域名 -->直接加载兜底域名的资源就可以了。<br><!-- PS: 不要问为什么要加兜底域名。 --><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 兜底域名reload resouce 处理。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAsyncPublicPath</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// console.log('get AsyncPublic Path', location)</span></span><br><span class="line">    <span class="keyword">if</span> (process.env.TARO_ENV === <span class="string">"h5"</span> &amp;&amp; process.env.NODE_ENV === <span class="string">"production"</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> appjss = <span class="built_in">document</span>.querySelectorAll(<span class="string">"[src*='app.']"</span>);</span><br><span class="line">        <span class="keyword">if</span> (appjss.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            __webpack_public_path__ = <span class="string">"//jstatic2.3.cn/"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">getAsyncPublicPath();</span><br></pre></td></tr></table></figure></p>
+<p>Note: 需要在app.js 的顶部引入。</p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h3 id="html-webpack-plugin"><a href="#html-webpack-plugin" class="headerlink" title="html-webpack-plugin"></a>html-webpack-plugin</h3><p>html-webpack-plugin: <a href="https://github.com/jantimon/html-webpack-plugin#options" target="_blank" rel="noopener">https://github.com/jantimon/html-webpack-plugin#options</a></p>
+<ol>
+<li>单页应用需要生成多个html（url访问），可以添加多个插件实例。</li>
+<li>filename 可以写路径，会把文件写到对应路径下面，比如<code>my/cart/main.shtml</code></li>
+<li>在资源标签上添加onerror属性。<code>&lt;script src=&quot;//xxx.m.cn/js/app.8b9dbe4febbbf0233339.js&quot; onerror=&quot;__reloadResource(this)&quot;&gt;&lt;/script&gt;</code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基于html-webpack-plugin。</span></span><br><span class="line"><span class="comment"> * 在资源标签上添加onerror属性。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HtmlAssetsReload</span> </span>&#123;</span><br><span class="line">    apply (compiler) &#123;</span><br><span class="line">      compiler.hooks.compilation.tap(<span class="string">'HtmlAssetsReload'</span>, (compilation) =&gt; &#123;</span><br><span class="line">        HtmlWebpackPlugin.getHooks(compilation).alterAssetTags.tapAsync(<span class="string">"HtmlAssetsReload"</span>, (data, cb) =&gt; &#123;</span><br><span class="line">            <span class="keyword">const</span>  &#123;<span class="attr">assetTags</span>: &#123;scripts, styles&#125;&#125; = data;</span><br><span class="line">            <span class="comment">// console.log('HtmlAssetsReload:', scripts, styles)</span></span><br><span class="line">            scripts.forEach(<span class="function"><span class="params">v</span> =&gt;</span> v.attributes.onerror = <span class="string">"__reloadResource(this)"</span>)</span><br><span class="line">            styles.forEach(<span class="function"><span class="params">v</span> =&gt;</span> v.attributes.onerror = <span class="string">"__reloadResource(this)"</span>)</span><br><span class="line">            cb(<span class="literal">null</span>, data)</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = HtmlAssetsReload</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<!-- 
+报错：`this.htmlWebpackPlugin.getHooks is not a function`
+taro 构建的。需要指定/手动安装webpack `npm i --save-dev html-webpack-plugin@4`
+同时手动指明html-webpack 插件；否则默认生成的html不会有上面属性。
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    h5: &#123;</span><br><span class="line">        publicPath: <span class="string">"//jstatic.3.cn/order/"</span>,</span><br><span class="line">        path: path.resolve(__dirname, <span class="string">"./"</span>),</span><br><span class="line">        output: &#123;</span><br><span class="line">            filename: <span class="string">'js/[name].[hash].js'</span>,</span><br><span class="line">            chunkFilename: <span class="string">'js/[name].[chunkhash].js'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">// imageUrlLoaderOption: &#123;</span></span><br><span class="line">        <span class="comment">//     limit: 5000,</span></span><br><span class="line">        <span class="comment">//     name: 'static/images/[name].[hash].[ext]'</span></span><br><span class="line">        <span class="comment">// &#125;,</span></span><br><span class="line">        miniCssExtractPluginOption: &#123;</span><br><span class="line">            filename: <span class="string">'css/[name].[hash].css'</span>,</span><br><span class="line">            chunkFilename: <span class="string">'css/[name].[chunkhash].css'</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        webpackChain (chain) &#123;</span><br><span class="line">            chain.plugin(<span class="string">"HtmlAssetsReload"</span>)</span><br><span class="line">                .use(<span class="keyword">new</span> HtmlAssetsReload());</span><br><span class="line">            chain.plugin(<span class="string">"HtmlWebpackPlugin"</span>)</span><br><span class="line">                .use(<span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">                    title: <span class="string">"订单"</span>,</span><br><span class="line">                    filename: <span class="string">"index.html"</span>,</span><br><span class="line">                    template: <span class="string">"src/index.html"</span>,</span><br><span class="line">                    minify: <span class="literal">false</span>,</span><br><span class="line">                &#125;))</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 如果h5端编译后体积过大，可以使用webpack-bundle-analyzer插件对打包体积进行分析。</span></span><br><span class="line"><span class="comment">         * 参考代码如下：</span></span><br><span class="line"><span class="comment">         * webpackChain (chain) &#123;</span></span><br><span class="line"><span class="comment">         *   chain.plugin('analyzer')</span></span><br><span class="line"><span class="comment">         *     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin, [])</span></span><br><span class="line"><span class="comment">         * &#125;</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> –&gt;</p>
+<h3 id="ssi"><a href="#ssi" class="headerlink" title="ssi"></a>ssi</h3><p>Webpack SSI Include Loader: <a href="https://www.npmjs.com/package/webpack-ssi-include-loader">https://www.npmjs.com/package/webpack-ssi-include-loader</a><br>this package was created to help dev that have to work on with SSI and webpack. it will help for setting a dev environment.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">webpackChain (config) &#123;</span><br><span class="line">    config.module</span><br><span class="line">        .rule(<span class="string">'ssi'</span>)</span><br><span class="line">            .test(<span class="regexp">/\.html$/</span>)</span><br><span class="line">            .use(<span class="string">'html-loader'</span>)</span><br><span class="line">            .loader(<span class="string">'html-loader'</span>)</span><br><span class="line">            .end()</span><br><span class="line">            .use(<span class="string">'ssi-loader'</span>)</span><br><span class="line">            .loader(<span class="string">'webpack-ssi-include-loader'</span>)</span><br><span class="line">            .options(&#123;</span><br><span class="line">                <span class="comment">// localPath: path.resolve(__dirname, '../../sinclude'),</span></span><br><span class="line">                location: <span class="string">'https://app.domain.com/'</span>, <span class="comment">// http url where the file </span></span><br><span class="line">            &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>ssi-compile-webpack-plugin: <a href="https://www.npmjs.com/package/ssi-compile-webpack-plugin">https://www.npmjs.com/package/ssi-compile-webpack-plugin</a><br>静态编译ssi资源<br><!-- PS: 这两个看着差不多。都是2017年左右的 --><br>ssi-mini-webpack-plugin: <a href="https://www.npmjs.com/package/ssi-webpack-plugin/v/1.0.8" target="_blank" rel="noopener">https://www.npmjs.com/package/ssi-webpack-plugin/v/1.0.8</a><br>静态编译ssi资源<p></p>
+<h3 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h3><p>官方：performance，stats<br><!-- [[你值得拥有的几款实用webpack4性能分析插件【测评与推荐】]](https://juejin.cn/post/6844904040128577549) --></p>
 <p>ProgressBarPlugin<br>npm i progress-bar-webpack-plugin</p>
 <p>SpeedMeasurePlugin<br>npm i speed-measure-webpack-plugin<br><a href="https://github.com/stephencookdev/speed-measure-webpack-plugin" target="_blank" rel="noopener">https://github.com/stephencookdev/speed-measure-webpack-plugin</a></p>
 <p>BundleAnalyzerPlugin<br>npm i webpack-bundle-analyzer</p>
@@ -472,6 +516,29 @@
 <!-- [浅谈 webpack 性能优化（内附 webpack 学习笔记）](https://zhuanlan.zhihu.com/p/139498741) 
 [webpack 学习整理文档](https://github.com/darrell0904/webpack-doc)
 -->
+<h3 id="忽略一些特定warnings"><a href="#忽略一些特定warnings" class="headerlink" title="忽略一些特定warnings"></a>忽略一些特定warnings</h3><!-- 
+taro 多文件跨端埋点，在某一端会少埋点。即缺少export 。但是文件中仍然有import
+ -->
+<p><code>&quot;export &#39;W_jdgwxcx_BannerExpo&#39; (imported as &#39;wEPoint&#39;) was not found in &#39;@/points/epoint-follow&#39;</code></p>
+<h4 id="webpack配置。"><a href="#webpack配置。" class="headerlink" title="webpack配置。"></a>webpack配置。</h4><p>大多是webapck5支持。<br>taro3.4 还没有<code>complie: webpack5</code>(3.6)支持。默认是webpack4.<br>所以配置还是失败了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">      <span class="comment">// ## 4 难道是devServer 中的配置吗？ build时候没有</span></span><br><span class="line">      devServer: &#123;</span><br><span class="line">            quiet: <span class="literal">true</span>,</span><br><span class="line">            noInfo: <span class="literal">true</span>,</span><br><span class="line">            stats: <span class="string">'errors-only'</span>,</span><br><span class="line">            <span class="comment">// 新版本有的</span></span><br><span class="line">            client: &#123;</span><br><span class="line">                logging: <span class="string">'error'</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">      webpackChain (chain, webpack) &#123;</span><br><span class="line">            <span class="comment">// chain.plugin('webpackHotMiddleware')</span></span><br><span class="line">            <span class="comment">//     .tap(args =&gt; &#123;</span></span><br><span class="line">            <span class="comment">//         console.log('plugin ', args)</span></span><br><span class="line">            <span class="comment">//          // 该插件这么修改会报错</span></span><br><span class="line">            <span class="comment">//         // args.push(&#123;log: false&#125;)</span></span><br><span class="line">            <span class="comment">//         return [&#123;log: false&#125;]</span></span><br><span class="line">            <span class="comment">//     &#125;)</span></span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            <span class="comment">// ## 0 报错不会运行</span></span><br><span class="line">            <span class="comment">// chain.plugin('FilterWarningsPlugin')</span></span><br><span class="line">            <span class="comment">// .use(FilterWarningsPlugin, &#123;</span></span><br><span class="line">            <span class="comment">//     exclude: /export 'W_jdgwxcx_.*was not found in .*/,</span></span><br><span class="line">            <span class="comment">// &#125;)</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">// ## 7 清空所有error： `clear:true`。不符合</span></span><br><span class="line">            <span class="comment">// chain.plugin('FriendlyErrorsWebpackPlugin')</span></span><br><span class="line">            <span class="comment">//     .use(FriendlyErrorsWebpackPlugin)</span></span><br><span class="line">            </span><br><span class="line">            chain.merge(&#123;</span><br><span class="line">                <span class="comment">// module: &#123;</span></span><br><span class="line">                <span class="comment">//     // ## 1 webpack5 支持。但是是所有</span></span><br><span class="line">                <span class="comment">//     strictExportPresence: false,</span></span><br><span class="line">                <span class="comment">//     parser: &#123;</span></span><br><span class="line">                <span class="comment">//         javascript: &#123;</span></span><br><span class="line">                <span class="comment">//             reexportExportsPresence: false,</span></span><br><span class="line">                <span class="comment">//             importExportsPresence: false,</span></span><br><span class="line">                <span class="comment">//             exportsPresence: false,</span></span><br><span class="line">                <span class="comment">//         &#125;,</span></span><br><span class="line">                <span class="comment">//     &#125;,</span></span><br><span class="line">                <span class="comment">// &#125;,</span></span><br><span class="line">                <span class="comment">// ## 3 stats 设置，并没有阻止掉dev时候的输出。</span></span><br><span class="line">                stats: &#123;</span><br><span class="line">                    <span class="comment">// ### 3-1</span></span><br><span class="line">                    warnings: <span class="literal">false</span>,</span><br><span class="line">                    <span class="comment">// ### 3-2</span></span><br><span class="line">                    logging: <span class="string">'none'</span>,</span><br><span class="line">                    <span class="comment">// ## 3-3 excludeModules/exclude 设置</span></span><br><span class="line">                    excludeModules: [</span><br><span class="line">                        /ea-point-.*<span class="regexp">/,</span></span><br><span class="line"><span class="regexp">                        /</span>reports\/ea-points\/ea-point-.*<span class="regexp">/,</span></span><br><span class="line"><span class="regexp">                    ],</span></span><br><span class="line"><span class="regexp">                    /</span><span class="regexp">/ ## 2-1 stats.warningsFilter 已被弃用，请改用 ignoreWarnings。</span></span><br><span class="line"><span class="regexp">                    warningsFilter: [</span></span><br><span class="line"><span class="regexp">                        /ea-point-.*/,</span></span><br><span class="line"><span class="regexp">                        /reports\/ea-points\/ea-point-.*/,</span></span><br><span class="line"><span class="regexp">                    ],</span></span><br><span class="line"><span class="regexp">                &#125;,</span></span><br><span class="line"><span class="regexp">                /</span><span class="regexp">/ ### 3-0 </span></span><br><span class="line"><span class="regexp">                /</span><span class="regexp">/ stats: 'errors-only',</span></span><br><span class="line"><span class="regexp">                /</span><span class="regexp">/ ## 2 忽略掉特定的警告。</span></span><br><span class="line"><span class="regexp">                /</span><span class="regexp">/ ignoreWarnings: [</span></span><br><span class="line"><span class="regexp">                //     /ea-point-.*/,</span></span><br><span class="line"><span class="regexp">                //     /reports\/ea-points\/ea-point-.*/,</span></span><br><span class="line"><span class="regexp">                // ],</span></span><br><span class="line"><span class="regexp">            &#125;)</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>FINALLY：解决上面问题(trao 多文件导出)，用了最笨的方式：乖乖的导出。</p>
+<h4 id="webpack-filter-warnings-plugin"><a href="#webpack-filter-warnings-plugin" class="headerlink" title="webpack-filter-warnings-plugin"></a>webpack-filter-warnings-plugin</h4><p>webpack-filter-warnings-plugin: <a href="https://github.com/mattlewis92/webpack-filter-warnings-plugin/issues/35" target="_blank" rel="noopener">https://github.com/mattlewis92/webpack-filter-warnings-plugin/issues/35</a></p>
+<blockquote>
+<p>@iegik Webpack 5 doesn’t need this plugin anymore. You can use ignoreWarnings:</p>
+</blockquote>
+<p>PS: taro3.4 的版本中失效了。应该是指定的webapck 版本才支持。 用webpack chain 的写法，运行失败了。<br><!-- [Fix warn chunk commons [mini-css-extract-plugin] error in Gatsby JS](https://robertmarshall.dev/blog/fix-warn-chunk-commons-mini-css-extract-plugin-error-in-gatsby-js/) --><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> FilterWarningsPlugin = <span class="built_in">require</span>(<span class="string">"webpack-filter-warnings-plugin"</span>);</span><br><span class="line"></span><br><span class="line">exports.onCreateWebpackConfig = <span class="function">(<span class="params">&#123; actions &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  actions.setWebpackConfig(&#123;</span><br><span class="line">    plugins: [</span><br><span class="line">      <span class="keyword">new</span> FilterWarningsPlugin(&#123;</span><br><span class="line">        exclude:</span><br><span class="line">          /mini-css-extract-plugin[^]*Conflicting order. Following <span class="built_in">module</span> has been added:<span class="regexp">/,</span></span><br><span class="line"><span class="regexp">      &#125;),</span></span><br><span class="line"><span class="regexp">    ],</span></span><br><span class="line"><span class="regexp">  &#125;);</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="FriendlyErrorsWebpackPlugin"><a href="#FriendlyErrorsWebpackPlugin" class="headerlink" title="FriendlyErrorsWebpackPlugin"></a>FriendlyErrorsWebpackPlugin</h4><p>friendly-errors-webpack-plugin: <a href="https://www.npmjs.com/package/friendly-errors-webpack-plugin" target="_blank" rel="noopener">https://www.npmjs.com/package/friendly-errors-webpack-plugin</a><br><!-- [清理webpack编译时输出的无用信息](https://blog.csdn.net/FAITHZK/article/details/80919424) --><br><!-- 最近在使用webpack重新搭建项目，在启动了webpack之后发现在终端输出了很多信息，看着很别扭，效果如下： --><br>于是参考了vue-cli的配置，使用FriendlyErrorsWebpackPlugin插件来解决这个问题<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> FriendlyErrorsWebpackPlugin = <span class="built_in">require</span>(<span class="string">'friendly-errors-webpack-plugin'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    devServer: &#123;</span><br><span class="line">      quiet: <span class="literal">true</span>, <span class="comment">// 如果使用webpack-dev-server，需要设为true，禁止显示devServer的console信息</span></span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        <span class="keyword">new</span> FriendlyErrorsWebpackPlugin(&#123;</span><br><span class="line">            compilationSuccessInfo: &#123;</span><br><span class="line">                messages: [<span class="string">`Your application is running here: <span class="subst">$&#123;config.dev.https ? <span class="string">'https'</span> : <span class="string">'http'</span>&#125;</span>://<span class="subst">$&#123;config.dev.host&#125;</span>:<span class="subst">$&#123;config.dev.port&#125;</span>`</span>],</span><br><span class="line">            &#125;,</span><br><span class="line">            onErrors: config.dev.notifyOnErrors</span><br><span class="line">                ? utils.createNotifierCallback()</span><br><span class="line">                : <span class="literal">undefined</span>,</span><br><span class="line">            clearConsole: <span class="literal">true</span>,</span><br><span class="line">        &#125;),</span><br><span class="line">    ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="mini-css-extract-plugin"><a href="#mini-css-extract-plugin" class="headerlink" title="mini-css-extract-plugin"></a>mini-css-extract-plugin</h3><p><code>Conflicting order. Following module has been added:</code><br>此警告意思为在不同的js中引用相同的css时，先后顺序不一致。也就是说，在1.js中先后引入a.css和b.css，而在2.js中引入的却是b.css和a.css，此时会有这个warning。</p>
+<p>直接修改顺序可以避免这个警告，但是后期所有的文件顺序都得按照这个来，有些繁琐。<br>增加ignoreOrder: true配置，如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> MiniCssExtractPlugin(&#123;</span><br><span class="line">    <span class="comment">// ......</span></span><br><span class="line">    ignoreOrder: <span class="literal">true</span></span><br><span class="line">&#125;),</span><br><span class="line"><span class="comment">// webpack chain</span></span><br><span class="line">webpackChain (chain) &#123;</span><br><span class="line">    chain.plugin(<span class="string">'miniCssExtractPlugin'</span>)</span><br><span class="line">        .tap(<span class="function"><span class="params">args</span> =&gt;</span> &#123;</span><br><span class="line">            args[<span class="number">0</span>].ignoreOrder = <span class="literal">true</span></span><br><span class="line">            <span class="keyword">return</span> args</span><br><span class="line">        &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<!-- [Fix warn chunk commons [mini-css-extract-plugin] error in Gatsby JS](https://robertmarshall.dev/blog/fix-warn-chunk-commons-mini-css-extract-plugin-error-in-gatsby-js/) -->
+<!-- 
+[Conflicting order. Following module has been added:](https://blog.csdn.net/qianxing111/article/details/107379683)
+[Conflicting order. Following module has been added](https://www.cxyzjd.com/article/qianxing111/107379683) 
+-->
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ol>
+<li><code>Conflicting order. Following module has been added:</code><br>见插件：mini-css-extract-plugin</li>
+</ol>
 <p style="text-align:right"> </p>
 
 
@@ -538,8 +605,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sum/jsplus/webpack5新特性/" rel="next" title="Webpack5新特性">
-                <i class="fa fa-chevron-left"></i> Webpack5新特性
+              <a href="/w3/git/git文档/git文档 10 - Git 内部原理/" rel="next" title="Git文档10 - Git 内部原理">
+                <i class="fa fa-chevron-left"></i> Git文档10 - Git 内部原理
               </a>
             
           </div>
@@ -548,8 +615,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/w3/es/ECMAScript6入门/26-读懂 ECMAScript 规格/" rel="prev" title="ES6 - 读懂 ECMAScript 规格">
-                ES6 - 读懂 ECMAScript 规格 <i class="fa fa-chevron-right"></i>
+              <a href="/sum/jsplus/webpack原理/" rel="prev" title="Webpack原理">
+                Webpack原理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -581,7 +648,7 @@
 <a class="jiathis_button_douban">豆瓣</a>
 <a class="jiathis_button_share">一键分享</a>
 
-<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
 <a class="jiathis_counter_style"></a>
 </div>
 <script type="text/javascript">
@@ -592,7 +659,7 @@ var jiathis_config={
   hideMore:false
 }
 </script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 <!-- JiaThis Button END -->
       
     </div>
@@ -662,7 +729,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">339</span>
+                  <span class="site-state-item-count">366</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -673,7 +740,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -684,7 +751,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -767,7 +834,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#插件"><span class="nav-text">插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#性能分析"><span class="nav-text">性能分析</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#webpack-chain"><span class="nav-text">webpack-chain</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#public-path"><span class="nav-text">public path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件"><span class="nav-text">插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#html-webpack-plugin"><span class="nav-text">html-webpack-plugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能分析"><span class="nav-text">性能分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#忽略一些特定warnings"><span class="nav-text">忽略一些特定warnings</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#webpack配置。"><span class="nav-text">webpack配置。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#webpack-filter-warnings-plugin"><span class="nav-text">webpack-filter-warnings-plugin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FriendlyErrorsWebpackPlugin"><span class="nav-text">FriendlyErrorsWebpackPlugin</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mini-css-extract-plugin"><span class="nav-text">mini-css-extract-plugin</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-text">问题</span></a></li></ol></div>
             
 
           </div>
@@ -787,7 +854,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -801,7 +868,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">572.1k</span>
+    <span title="Site words total count">602.6k</span>
   
 </div>
 

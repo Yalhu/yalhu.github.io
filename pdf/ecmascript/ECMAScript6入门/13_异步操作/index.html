@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ecmascript,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="三 异步操作2018.1.28 星期日 22:18p171-P194异步编程对JavaScript语言太重要。JavaScript只有一根线程，如果没有异步编程，根本没法用，非卡死不可。ES6诞生以前，异步编程的方法，大概有下面四种。1. 回调函数2. 事件监听3. 发布/订阅4. Promise 对象ES6将JavaScript异步编程带入了一个全新的阶段。### 3.1 基本概念1. 异步2.">
+<meta name="keywords" content="ecmascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ECMAScript 6入门-13_异步操作">
+<meta property="og:url" content="http://yoursite.com/pdf/ecmascript/ECMAScript6入门/13_异步操作/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="三 异步操作2018.1.28 星期日 22:18p171-P194异步编程对JavaScript语言太重要。JavaScript只有一根线程，如果没有异步编程，根本没法用，非卡死不可。ES6诞生以前，异步编程的方法，大概有下面四种。1. 回调函数2. 事件监听3. 发布/订阅4. Promise 对象ES6将JavaScript异步编程带入了一个全新的阶段。### 3.1 基本概念1. 异步2.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-05-04T07:35:00.522Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ECMAScript 6入门-13_异步操作">
+<meta name="twitter:description" content="三 异步操作2018.1.28 星期日 22:18p171-P194异步编程对JavaScript语言太重要。JavaScript只有一根线程，如果没有异步编程，根本没法用，非卡死不可。ES6诞生以前，异步编程的方法，大概有下面四种。1. 回调函数2. 事件监听3. 发布/订阅4. Promise 对象ES6将JavaScript异步编程带入了一个全新的阶段。### 3.1 基本概念1. 异步2.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/pdf/ecmascript/ECMAScript6入门/13_异步操作/">
+
+
+
+
+
+  <title>ECMAScript 6入门-13_异步操作 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/pdf/ecmascript/ECMAScript6入门/13_异步操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ECMAScript 6入门-13_异步操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-28T00:00:00Z">
+                2018-01-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-04T07:35:00Z">
+                2022-05-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pdf/" itemprop="url" rel="index">
+                    <span itemprop="name">pdf</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pdf/ecmascript/" itemprop="url" rel="index">
+                    <span itemprop="name">ecmascript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pdf/ecmascript/ECMAScript6入门/" itemprop="url" rel="index">
+                    <span itemprop="name">ECMAScript6入门</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/pdf/ecmascript/ECMAScript6入门/13_异步操作/" class="leancloud_visitors" data-flag-title="ECMAScript 6入门-13_异步操作">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,944
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="三-异步操作"><a href="#三-异步操作" class="headerlink" title="三 异步操作"></a>三 异步操作</h2><p style="text-align:right">2018.1.28 星期日 22:18</p><br>p171-P194<br><br>异步编程对JavaScript语言太重要。JavaScript只有一根线程，如果没有异步编程，根本没法用，非卡死不可。<br><br>ES6诞生以前，异步编程的方法，大概有下面四种。<br>1. 回调函数<br>2. 事件监听<br>3. 发布/订阅<br>4. Promise 对象<br>ES6将JavaScript异步编程带入了一个全新的阶段。<br>### 3.1 基本概念<br>1. 异步<br>2. 回调函数<br><br>        fs.readFile(‘/etc/passwd’, function (err, data) {<br>            if (err) throw err;<br>            console.log(data);<br>        });<br>    /<strong><em>EXTERNAL</em></strong>/ 一个有趣的问题是，为什么Node.js约定，回调函数的第一个参数，必须是错误对象err（如果没有错误，该参数就是null）？原因是执行分成两段，在这两段之间抛出的错误，程序无法捕捉，只能当作参数，传入第二段。<br>3. Promise<br>    /<strong><em>BACKGROUND</em></strong>/ 回调函数本身并没有问题，它的问题出现在多个回调函数嵌套。假定读取A文件之后，再读取B文件，不难想象，如果依次读取多个文件，就会出现多重嵌套。代码不是纵向发展，而是横向发展，很快就会乱成一团，无法管理。这种情况就称为<strong>“回调函数噩梦”（callback hell）。</strong><br><br>    /<strong><em>RESOLVE</em></strong>/ Promise就是为了解决这个问题而提出的。它<strong>不是新的语法功能，而是一种新的写法*</strong>，允许将回调函数的横向加载，改成纵向加载。<br><br>    可以看到，Promise 的写法只是回调函数的改进，使用then方法以后，异步任务的两段执行看得更清楚了，除此以外，并无新意。<br>    /<strong><em>PROBLEMS</em></strong>/ Promise 的最大问题是代码冗余，原来的任务被Promise 包装了一下，不管什么操作，一眼看去都是一堆then，原来的语义变得很不清楚。<br>4. 那么，有没有更好的写法呢<br>### 3.2 Generator函数<br>#### 1 协程<br>传统的编程语言，早有异步编程的解决方案（其实是多任务的解决方案）。其中有一种叫做”协程”（coroutine），意思是多个线程互相协作，完成异步任务。<br>协程有点像函数，又有点像线程。它的运行流程大致如下。<br>。。<br>    function asnycJob() {<br>        // …其他代码<br>        var f = yield readFile(fileA);<br>        // …其他代码<br>    }<br>上面代码的函数asyncJob是一个协程，它的奥妙就在其中的yield命令。它表示执行到此处，执行权将交给其他协程。也就是说，yield命令是异步两个阶段的分界线。<br>协程遇到 yield 命令就暂停，等到执行权返回，再从暂停的地方继续往后执行。它的最大优点，就是代码的写法非常像同步操作，如果去除yield命令，简直一模一样。<br>#### 2 Generator函数的概念<br>Generator函数是协程在ES6的实现，最大特点就是可以交出函数的执行权（即暂停执行）。<br><br>整个Generator函数就是<strong>一个封装的异步任务，或者说是异步任务的容器</strong>。异步操作需要暂停的地方，都用yield语句注明。<br><br>    function<em> gen(x){<br>        var y = yield x + 2;<br>        return y;<br>    }<br>    var g = gen(1);<br>    g.next() // { value: 3, done: false }<br>    g.next() // { value: undefined, done: true }<br>上面代码中，调用Generator函数，<strong>会返回一个内部指针（即遍历器）g</strong> 。这是Generator函数不同于普通函数的另一个地方，<strong>即执行它不会返回结果，返回的是指针对象。调用指针g的next方法，会移动内部指针</strong>（即执行异步任务的第一段），指向第一个遇到的yield语句，上例是执行到 x + 2 为止。<br>换言之，next方法的作用是分阶段执行Generator函数。每次调用next方法，<strong>会返回一个对象，表示当前阶段的信息（value属性和done属性）。</strong>value属性是yield语句后面表达式的值，表示当前阶段的值；done属性是一个布尔值，表示Generator函数是否执行完毕，即是否还有下一个阶段。<br>#### 3 Generator函数的数据交换和错误处理<br>Generator函数可以暂停执行和恢复执行，这是它能封装异步任务的根本原因。除此之外，它还有两个特性，使它可以作为异步编程的完整解决方案：函数体内外的数据交换和错误处理机制。<br>1. next方法返回值的value属性，是Generator函数向外输出数据；next方法还可以接受参数，这是向Generator函数体内输入数据。<br><br>        function</em> gen(x){<br>            var y = yield x + 2;<br>            return y;<br>        }<br>        var g = gen(1);<br>        g.next() // { value: 3, done: false }<br>        g.next(2) // { value: 2, done: true }<br>    作为上个阶段异步任务的返回结果，被函数体内的变量y接收。因此，这一步的 value 属性，返回的就是2（变量y的值）。<br>2. Generator 函数内部还可以部署错误处理代码，捕获函数体外抛出的错误。<br><br>        function<em> gen(x){<br>            try {<br>                var y = yield x + 2;<br>            } catch (e){<br>                console.log(e);<br>            }<br>            return y;<br>        }<br>        var g = gen(1);<br>        g.next();<br>        g.throw（’出错了’）;<br>        // 出错了<br>    上面代码的最后一行，Generator函数体外，<strong>使用指针对象的throw方法抛出的错误</strong>，可以被函数体内的try …catch代码块捕获。这意味着，出错的代码与处理错误的代码，实现了时间和空间上的分离，这对于异步编程无疑是很重要的<br>#### 4 异步任务的封装<br>1. 下面看看如何使用 Generator 函数，执行一个真实的异步任务。<br><br>        var fetch = require(‘node-fetch’);<br>        function</em> gen(){<br>            var url = ‘<a href="https://api.github.com/users/github&#39;" target="_blank" rel="noopener">https://api.github.com/users/github&#39;</a>;<br>            var result = yield fetch(url);<br>            console.log(result.bio);<br>        }<br>    上面代码中，Generator函数封装了一个异步操作，该操作先读取一个远程接口，然后从JSON格式的数据解析信息。就像前面说过的，这段代码非常像同步操作，除了加上了yield命令。<br><br>2. 执行这段代码的方法如下。<br><br>        var g = gen();<br>        var result = g.next();<br>        result.value.then(function(data){<br>            return data.json();<br>        }).then(function(data){<br>            g.next(data);<br>        });<br>    上面代码中，首先执行Generator函数，获取遍历器对象，然后使用next 方法（第二行），执行异步任务的第一阶段。由于Fetch模块返回的是一个Promise对象，因此要用then方法调用下一个next 方法。<br><br>/PROBLEMS/ 可以看到，虽然 Generator 函数将异步操作表示得很简洁，但是流程管理却不方便（即何时执行第一阶段、何时执行第二阶段）。<br>### 3.3 Thunk函数<br>    var x = 1;<br>    function f(m){<br>        return m <em> 2;<br>    }<br>    f(x + 5)<br>#### 1 参数的求值策略<br>1. 一种意见是”传值调用”（call by value），即在进入函数体之前，就计算 x + 5 的值（等于6），再将这个值传入函数f 。C语言就采用这种策略。<br>    <code>f(6)</code><br>2. 另一种意见是”传名调用”（call by name），即直接将表达式 x + 5 传入函数体，只在用到它的时候求值。Hskell语言采用这种策略。<br>    `(x + 5) </em> 2`<br>3. 传值调用和传名调用，哪一种比较好？回答是各有利弊。传值调用比较简单，但是对参数求值的时候，实际上还没用到这个参数，有可能造成性能损失。<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function f(a, b)&#123;</span><br><span class="line">    return b;</span><br><span class="line">&#125;</span><br><span class="line">f(3 * x * x - 2 * x - 1, x);</span><br></pre></td></tr></table></figure><br><br>#### 2 Thunk函数的含义<br>编译器的”传名调用”实现，往往是将参数放到一个临时函数之中，再将这个临时函数传入函数体。<strong>这个临时函数就叫做Thunk函数</strong>。<br>    function f(m){<br>        return m <em> 2;<br>    }<br>    f(x + 5);<br>    // 等同于<br>    var thunk = function () {<br>        return x + 5;<br>    };<br>    function f(thunk){<br>        return thunk() </em> 2;<br>    }<br><p style="text-align:right">2018.1.29 01：10</p><br><p style="text-align:right">2018.1.29 星期一 21:53</p>
+
+<h4 id="3-JavaScript语言的Thunk函数"><a href="#3-JavaScript语言的Thunk函数" class="headerlink" title="3 JavaScript语言的Thunk函数"></a>3 JavaScript语言的Thunk函数</h4><p>JavaScript语言是传值调用，它的Thunk函数含义有所不同。在JavaScript语言中，<strong>Thunk函数替换的不是表达式，而是多参数函数，将其替换成单参数的版本，且只接受回调函数作为参数</strong>。<br>    // 正常版本的readFile（多参数版本）<br>    fs.readFile(fileName, callback);<br>    // Thunk版本的readFile（单参数版本）<br>    var readFileThunk = Thunk(fileName);<br>    readFileThunk(callback);<br>        var Thunk = function (fileName){<br>        return function (callback){<br>            return fs.readFile(fileName, callback);<br>        };<br>    };<br>上面代码中，fs模块的readFile方法是一个多参数函数，两个参数分别为文件名和回调函数。经过转换器处理，它变成了一个单参数函数，只接受回调函数作为参数。这个单参数版本，就叫做Thunk函数。</p>
+<p>任何函数，只要参数有回调函数，就能写成Thunk函数的形式。下面是一个简单的Thunk函数转换器。<br>    var Thunk = function(fn){<br>    return function (){<br>        var args = Array.prototype.slice.call(arguments);<br>        return function (callback){<br>            args.push(callback);<br>            return fn.apply(this, args);<br>        }<br>        };<br>    };<br>使用上面的转换器，生成 fs.readFile 的Thunk函数。</p>
+<pre><code>var readFileThunk = Thunk(fs.readFile);
+readFileThunk(fileA)(callback);
+</code></pre><h4 id="4-Thunkify模块"><a href="#4-Thunkify模块" class="headerlink" title="4 Thunkify模块"></a>4 Thunkify模块</h4><p>生产环境的转换器，建议使用Thunkify模块。</p>
+<p>Thunkify的源码与上一节那个简单的转换器非常像。<br>它的源码主要多了一个检查机制，变量called确保回调函数只运行一次。这样的设计与下文的Generator函数相关</p>
+<h4 id="5-Generator-函数的流程管理"><a href="#5-Generator-函数的流程管理" class="headerlink" title="5 Generator 函数的流程管理"></a>5 Generator 函数的流程管理</h4><p>你可能会问， Thunk函数有什么用？回答是以前确实没什么用，但是ES6有了Generator函数，<strong>Thunk函数现在可以用于Generator函数的自动流程管理</strong>。<br>以读取文件为例。下面的Generator函数封装了两个异步操作。</p>
+<pre><code>var fs = require(&apos;fs&apos;);
+var thunkify = require(&apos;thunkify&apos;);
+var readFile = thunkify(fs.readFile);
+var gen = function* (){
+    var r1 = yield readFile(&apos;/etc/fstab&apos;);
+    console.log(r1.toString());
+    var r2 = yield readFile(&apos;/etc/shells&apos;);
+    console.log(r2.toString());
+};
+</code></pre><p>上面代码中，yield命令用于将程序的执行权移出Generator函数，那么就需要一种方法，将执行权再交还给Generator函数。<br>这种方法就是Thunk函数，因为它可以在回调函数里，将执行权交还给Generator函数。为了便于理解，我们先看如何手动执行上面这个Generator函数。</p>
+<h4 id="6-Thunk函数的自动流程管理"><a href="#6-Thunk函数的自动流程管理" class="headerlink" title="6 Thunk函数的自动流程管理"></a>6 Thunk函数的自动流程管理</h4><p>Thunk函数真正的威力，在于可以自动执行Generator函数。<br><strong>$_EXCLUDE:</strong>略过，Thunk  没有感觉到目前的需要；</p>
+<h3 id="3-4-co模块"><a href="#3-4-co模块" class="headerlink" title="3.4 co模块"></a>3.4 co模块</h3><h4 id="1-基本用法"><a href="#1-基本用法" class="headerlink" title="1 基本用法"></a>1 基本用法</h4><p>用于Generator函数的自动执行。<br>co模块可以让你不用编写Generator函数的执行器。</p>
+<pre><code>var co = require(&apos;co&apos;);
+co(gen);
+</code></pre><p>co函数返回一个Promise对象，因此可以用then方法添加回调函数。</p>
+<h4 id="2-co模块的原理"><a href="#2-co模块的原理" class="headerlink" title="2 co模块的原理"></a>2 co模块的原理</h4><p>Generator就是一个异步操作的容器。它的自动执行需要一种机制，当异步操作有了结果，能够自动交回执行权。<br>两种方法可以做到这一点。<br>（1）回调函数。将异步操作包装成Thunk函数，在回调函数里面交回执行权。<br>（2）Promise 对象。将异步操作包装成Promise对象，用then方法交回执行权。<br>co模块其实就是将两种自动执行器（Thunk函数和Promise对象），包装成一个模块。使用co的前提条件是，Generator函数的yield命令后面，只能是Thunk函数或Promise对象。</p>
+<p>上一节已经介绍了基于Thunk函数的自动执行器。下面来看，基于Promise对象的自动执行器。这是理解co模块必须的。</p>
+<h4 id="3-基于Promise对象的自动执行"><a href="#3-基于Promise对象的自动执行" class="headerlink" title="3 基于Promise对象的自动执行"></a>3 基于Promise对象的自动执行</h4><h4 id="4-co模块的源码"><a href="#4-co模块的源码" class="headerlink" title="4 co模块的源码"></a>4 co模块的源码</h4><h4 id="5-处理并发的异步操作"><a href="#5-处理并发的异步操作" class="headerlink" title="5 处理并发的异步操作"></a>5 处理并发的异步操作</h4><p><strong>$_EXCLUDE:</strong>知道上面两个都是用来自动执行Generator函数的。。慢慢理解吧</p>
+<h3 id="3-5-async函数"><a href="#3-5-async函数" class="headerlink" title="3.5 async函数"></a>3.5 async函数</h3><h4 id="1-含义"><a href="#1-含义" class="headerlink" title="1 含义"></a>1 含义</h4><p>Generator函数的语法糖。</p>
+<pre><code>var fs = require(&apos;fs&apos;);
+    var readFile = function (fileName){
+    return new Promise(function (resolve, reject){
+        fs.readFile(fileName, function(error, data){
+        if (error) reject(error);
+        resolve(data);
+        });
+    });
+};
+var gen = function* (){
+    var f1 = yield readFile(&apos;/etc/fstab&apos;);
+    var f2 = yield readFile(&apos;/etc/shells&apos;);
+    console.log(f1.toString());
+    console.log(f2.toString());
+};
+</code></pre><p>写成 async 函数</p>
+<pre><code>var asyncReadFile = async function (){
+    var f1 = await readFile(&apos;/etc/fstab&apos;);
+    var f2 = await readFile(&apos;/etc/shells&apos;);
+    console.log(f1.toString());
+    console.log(f2.toString());
+};
+</code></pre><p>async 函数对 Generator 函数的改进，体现在以下三点。<br>（1）内置执行器。Generator函数的执行必须靠执行器，所以才有了co模块，而async 函数自带执行器。也就是说，async函数的执行，与普通函数一模一样，只要一行。</p>
+<pre><code>var result = asyncReadFile();
+</code></pre><p>（2）更好的语义。async和await，比起星号和yield，语义更清楚了。async表示函数里有异步操作，await 表示紧跟在后面的表达式需要等待结果。<br>（3）更广的适用性。 co模块约定，yield命令后面只能是Thunk函数或Promise对象，而async函数的await命令后面，可以跟Promise对象和原始类型的值（数值、字符串和布尔值，但这时等同于同步操作）。</p>
+<h4 id="2-async函数的实现"><a href="#2-async函数的实现" class="headerlink" title="2 async函数的实现"></a>2 async函数的实现</h4><p>async 函数的实现，就是将 Generator 函数和自动执行器，包装在一个函数里。</p>
+<p>spawn 函数的实现，基本就是前文自动执行器的翻版。<br><strong>$_FALLBACK:</strong>前面介绍的两个chunk,co；主角终于出场了</p>
+<p>而是属于 ES7。目前，它仍处于提案阶段，但是转码器 Babel 和 regenerator 都已经支持，转码后就能使用。</p>
+<h4 id="3-async-函数的用法"><a href="#3-async-函数的用法" class="headerlink" title="3 async 函数的用法"></a>3 async 函数的用法</h4><p>同Generator函数一样，async函数返回一个Promise对象，可以使用then方法添加回调函数。当函数执行的时候，一旦遇到 await 就会先返回，等到触发的异步操作完成，再接着执行函数体内后面的语句。</p>
+<ol>
+<li><p>下面是一个例子。</p>
+<pre><code>async function getStockPriceByName(name) {
+    var symbol = await getStockSymbol(name);
+    var stockPrice = await getStockPrice(symbol);
+    return stockPrice;
+}
+getStockPriceByName(&apos;goog&apos;).then(function (result){
+    console.log(result);
+});
+</code></pre></li>
+<li><p>下面的例子，指定多少毫秒后输出一个值</p>
+<pre><code>function timeout(ms) {
+    return new Promise((resolve) =&gt; {
+        setTimeout(resolve, ms);
+    });
+}
+async function asyncPrint(value, ms) {
+    await timeout(ms);
+    console.log(value)
+}
+asyncPrint(&apos;hello world&apos;, 50);         
+</code></pre><h4 id="4-注意点"><a href="#4-注意点" class="headerlink" title="4 注意点"></a>4 注意点</h4></li>
+<li><p>await命令后面的Promise对象，运行结果可能是rejected，所以最好把await命令放在try…catch代码块中。</p>
+<pre><code>async function myFunction() {
+try {
+    await somethingThatReturnsAPromise();
+} catch (err) {
+    console.log(err);
+}
+}
+// 另一种写法
+async function myFunction() {
+await somethingThatReturnsAPromise().catch(function (err){
+    console.log(err);
+};
+}
+</code></pre></li>
+<li>await命令只能用在async函数之中，如果用在普通函数，就会报错。</li>
+<li><p>但是，如果将forEach方法的参数改成async函数，也有问题。</p>
+<pre><code>async function dbFuc(db) {
+    let docs = [{}, {}, {}];
+    // 可能得到错误结果
+    docs.forEach(async function (doc) {
+        await db.post(doc);
+    });
+}
+</code></pre><p> 上面代码可能不会正常工作，原因是这时三个 db.post 操作将是并发执行，也就是同时执行，而不是继发执行。正确的写法是采用for循环。</p>
+</li>
+<li>如果确实希望多个请求并发执行，可以使用 Promise.all 方法。    <h4 id="5-与Promise、Generator的比较"><a href="#5-与Promise、Generator的比较" class="headerlink" title="5 与Promise、Generator的比较"></a>5 与Promise、Generator的比较</h4>假定某个DOM元素上面，部署了一系列的动画，前一个动画结束，才能开始后一个。如果当中有一个动画出错，就不再往下执行，返回上一个成功执行的动画的返回值。</li>
+<li><p>首先是Promise的写法。</p>
+<pre><code>function chainAnimationsPromise(elem, animations) {
+    // 变量ret用来保存上一个动画的返回值
+    var ret = null;
+    // 新建一个空的Promise
+    var p = Promise.resolve();
+    // 使用then方法，添加所有动画
+    for(var anim in animations) {
+        p = p.then(function(val) {
+            ret = val;
+            return anim(elem);
+        })
+    }
+    // 返回一个部署了错误捕捉机制的Promise
+    return p.catch(function(e) {
+        /* 忽略错误，继续执行 */
+    }).then(function() {
+        return ret;
+    });
+}
+</code></pre></li>
+<li><p>接着是Generator函数的写法。</p>
+<pre><code>function chainAnimationsGenerator(elem, animations) {
+    return spawn(function*() {
+        var ret = null;
+        try {
+            for(var anim of animations) {
+                ret = yield anim(elem);
+            }
+        } catch(e) {
+            /* 忽略错误，继续执行 */
+        }
+        return ret;
+    });
+}
+</code></pre></li>
+<li>最后是Async函数的写法。<pre><code>async function chainAnimationsAsync(elem, animations) {
+    var ret = null;
+    try {
+        for(var anim of animations) {
+            ret = await anim(elem);
+        }
+    } catch(e) {
+        /* 忽略错误，继续执行 */
+    }
+    return ret;
+}        
+</code></pre></li>
+</ol>
+<p style="text-align:right">2018.1.30 0：24 </p>
+
+<p>读后总结：</p>
+<ol>
+<li>整个章节是在讲异步；</li>
+<li>但是理解的不是很深入，只是”知道了”；</li>
+<li>截止到目前，实际工作中接触的少；以后肯定要多接触</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ecmascript/" rel="tag"><i class="fa fa-tag"></i> ecmascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/pdf/ecmascript/ECMAScript6入门/12_Promise对象/" rel="next" title="ECMAScript 6入门-12_Promise对象">
+                <i class="fa fa-chevron-left"></i> ECMAScript 6入门-12_Promise对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/js/js代码规范(001)/" rel="prev" title="Js代码规范">
+                Js代码规范 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">366</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#三-异步操作"><span class="nav-text">三 异步操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-JavaScript语言的Thunk函数"><span class="nav-text">3 JavaScript语言的Thunk函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Thunkify模块"><span class="nav-text">4 Thunkify模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Generator-函数的流程管理"><span class="nav-text">5 Generator 函数的流程管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Thunk函数的自动流程管理"><span class="nav-text">6 Thunk函数的自动流程管理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-co模块"><span class="nav-text">3.4 co模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基本用法"><span class="nav-text">1 基本用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-co模块的原理"><span class="nav-text">2 co模块的原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-基于Promise对象的自动执行"><span class="nav-text">3 基于Promise对象的自动执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-co模块的源码"><span class="nav-text">4 co模块的源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-处理并发的异步操作"><span class="nav-text">5 处理并发的异步操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-async函数"><span class="nav-text">3.5 async函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-含义"><span class="nav-text">1 含义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-async函数的实现"><span class="nav-text">2 async函数的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-async-函数的用法"><span class="nav-text">3 async 函数的用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-注意点"><span class="nav-text">4 注意点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-与Promise、Generator的比较"><span class="nav-text">5 与Promise、Generator的比较</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">602.6k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

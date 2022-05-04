@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="function doDecrypt (pwd, onError) { 	console.log(&apos;in doDecrypt&apos;); 	const txt = document.getElementById(&apos;enc_content&apos;).innerHTML; 	let plantext; 	try { 		const bytes = CryptoJS.AES.decrypt(txt, pwd);">
+<meta name="description" content="http://www.zsh.org/  2020.12.14 星期一  21：11    Oh-My-Zsh bash这个是目前大多数Linux系统默认使用的shell，全名是BourneAgain Shell，一共有40个命令。包含的功能几乎可以涵盖shell所具有的功能，所以一般的shell脚本都会指定它为执行路径。 在 Linux 里执行这个命令和 Mac 略有不同，你会发现 Mac 多了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ohmyshell">
 <meta property="og:url" content="http://yoursite.com/sum/os/ohmyshell/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="function doDecrypt (pwd, onError) { 	console.log(&apos;in doDecrypt&apos;); 	const txt = document.getElementById(&apos;enc_content&apos;).innerHTML; 	let plantext; 	try { 		const bytes = CryptoJS.AES.decrypt(txt, pwd);">
+<meta property="og:description" content="http://www.zsh.org/  2020.12.14 星期一  21：11    Oh-My-Zsh bash这个是目前大多数Linux系统默认使用的shell，全名是BourneAgain Shell，一共有40个命令。包含的功能几乎可以涵盖shell所具有的功能，所以一般的shell脚本都会指定它为执行路径。 在 Linux 里执行这个命令和 Mac 略有不同，你会发现 Mac 多了">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-01-23T10:24:14.010Z">
+<meta property="og:updated_time" content="2022-05-04T08:04:41.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ohmyshell">
-<meta name="twitter:description" content="function doDecrypt (pwd, onError) { 	console.log(&apos;in doDecrypt&apos;); 	const txt = document.getElementById(&apos;enc_content&apos;).innerHTML; 	let plantext; 	try { 		const bytes = CryptoJS.AES.decrypt(txt, pwd);">
+<meta name="twitter:description" content="http://www.zsh.org/  2020.12.14 星期一  21：11    Oh-My-Zsh bash这个是目前大多数Linux系统默认使用的shell，全名是BourneAgain Shell，一共有40个命令。包含的功能几乎可以涵盖shell所具有的功能，所以一般的shell脚本都会指定它为执行路径。 在 Linux 里执行这个命令和 Mac 略有不同，你会发现 Mac 多了">
 
 
 
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-23T18:24:14+08:00">
-                2021-01-23
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-04T16:04:41+08:00">
+                2022-05-04
               </time>
             
           </span>
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  390
+                  797
                 </span>
               
 
@@ -436,7 +436,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  4
                 </span>
               
             </div>
@@ -457,35 +457,36 @@
       
 
       
-        <script src="/js/crypto-js.js"></script>
-<script>
-function doDecrypt (pwd, onError) {
-	console.log('in doDecrypt');
-	const txt = document.getElementById('enc_content').innerHTML;
-	let plantext;
-	try {
-		const bytes = CryptoJS.AES.decrypt(txt, pwd);
-		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-	} catch(err) {
-		if(onError) {
-			onError(err);
-		}
-		return;
-	}
-	document.getElementById('enc_content').innerHTML = plaintext;
-	document.getElementById('enc_content').style.display = 'block';
-	document.getElementById('enc_passwd').style.display = 'none';
-	if(typeof MathJax !== 'undefined') {
-		MathJax.Hub.Queue(
-			['resetEquationNumbers', MathJax.InputJax.TeX],
-			['PreProcess', MathJax.Hub],
-			['Reprocess', MathJax.Hub]
-		);
-	}
-}
-</script>
-<div id="enc_content" style="display:none">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</div>
-<div id="enc_passwd"> <input type="text" style=" border-radius: 5px; border-style: groove; height: 30px; width: 50%; cursor: auto; font-size: 102%; color: currentColor; outline: none; text-overflow: initial; padding-left: 5px;">   <input type="submit" value="decrypt" onclick="decrypt()" style=" width: 58px; height: 34px; border-radius: 5px; background-color: white; border-style: solid; color: currentColor; ">  <div id="enc_error" style=" display: inline-block; color: #d84527; font: large; "></div> <script>  var onError = function(error) {  $("#enc_error")[0].innerHTML = "password error!";  };  function decrypt() {  var passwd = $("#enc_passwd input")[0].value;  console.log(passwd);  doDecrypt(passwd, onError);  }  </script></div>
+        <p><a href="http://www.zsh.org/" target="_blank" rel="noopener">http://www.zsh.org/</a></p>
+<p style="text-align:right"> 2020.12.14 星期一  21：11 </p>
+
+
+<h1 id="Oh-My-Zsh"><a href="#Oh-My-Zsh" class="headerlink" title="Oh-My-Zsh"></a>Oh-My-Zsh</h1><!-- [Oh-My-Zsh的配置与使用](https://www.cnblogs.com/monsterdev/p/11166720.html) -->
+<p>bash这个是目前大多数Linux系统默认使用的shell，全名是BourneAgain Shell，一共有40个命令。包含的功能几乎可以涵盖shell所具有的功能，所以一般的shell脚本都会指定它为执行路径。</p>
+<p>在 Linux 里执行这个命令和 Mac 略有不同，你会发现 Mac 多了一个 zsh，也就是说 OS X 系统预装了个 zsh，它是什么呢？</p>
+<p>zsh介绍#</p>
+<p>zsh 是一款功能强大的 shell 软件，它可以兼容 bash，并且提供了很多高效的改进。它是Linux里最庞大的一种shell，它有84个内部命令，也提供了更为强大的功能:<br>更好的自动补全<br>更好的文件名展开<br>丰富的插件<br>强大的定制性</p>
+<h2 id="推荐插件"><a href="#推荐插件" class="headerlink" title="推荐插件"></a>推荐插件</h2><p>git<br><code>~/.oh-my-zsh/plugins/git/git.plugin.zsh</code><br><!-- [zsh 下 git 别名（alias） 和 oh-my-zsh git 插件](https://blog.csdn.net/lihe460186709/article/details/78321989) --><br>默认安装且开启的。可以去目录下”~/.oh-my-zsh/plugins/git”查看alias</p>
+<p>z<br>这个是oh-my-zsh默认就装好的，需要自己开启。还有一个autojump的插件和z功能差不多，autojump需要单独装<br><!-- $_PS: 还是用了autojump。可能需要输入的命令有点多。autojump很实用了 --></p>
+<p>zsh-autosuggestions<br><code>git clone git://github.com/zsh-users/zsh-autosuggestions</code><br><a href="https://github.com/zsh-users/zsh-autosuggestions" target="_blank" rel="noopener">https://github.com/zsh-users/zsh-autosuggestions</a><br>卸载<code>rm -rf ~/.zsh/zsh-autosuggestions # Or wherever you installed</code></p>
+<p>zsh-syntax-highlighting<br><code>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git</code></p>
+<p>autojump<br><a href="https://github.com/wting/autojump" target="_blank" rel="noopener">https://github.com/wting/autojump</a></p>
+<p><code>brew install autojump</code><br>$_PS: 未成功。等待时间长<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git://github.com/wting/autojump.git</span><br><span class="line"><span class="built_in">cd</span> autojump</span><br><span class="line">./install.py  <span class="comment"># or ./uninstall.py</span></span><br></pre></td></tr></table></figure></p>
+<p>vscode<br>git clone <a href="https://github.com/valentinocossar/vscode.git" target="_blank" rel="noopener">https://github.com/valentinocossar/vscode.git</a> ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/vscode</p>
+<p>sudo<br>偶尔输入某个命令，提示没有权限，需要加sudo，这个时候按两下ESC，就会在命令行头部加上sudo</p>
+<!-- 自动补全：zsh-autosuggestions -->
+<p>一键google：<br><!-- z命令快速跳转目录(根据记录): --><br>x命令自动解压各种压缩文件，不用再牢记繁杂的解压命令！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># z命令快速跳转目录     x命令解压一切文件         命令行可以直接google  </span><br><span class="line">plugins=(</span><br><span class="line">  git z zsh-autosuggestions extract web-search zsh-syntax-highlighting vscode</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<h2 id="sh相关"><a href="#sh相关" class="headerlink" title="sh相关"></a>sh相关</h2><p>zsh ,oh<br><a href="https://ohmyz.sh" target="_blank" rel="noopener">ohmyz</a><br>ohmyzsh: <a href="https://github.com/ohmyzsh/ohmyzsh/wiki" target="_blank" rel="noopener">https://github.com/ohmyzsh/ohmyzsh/wiki</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统有几种shell</span></span><br><span class="line">cat /etc/shells</span><br><span class="line"><span class="comment">## Sh,  Bash,  Zsh,  Csh,  Ash,  Fish</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更改你的默认 Shell</span></span><br><span class="line">chsh -s /bin/zsh</span><br><span class="line"></span><br><span class="line"><span class="comment"># zsh 查看</span></span><br><span class="line">ls /Users/用户/.oh-my-zsh/themes</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$ZSH_THEME</span></span><br><span class="line"></span><br><span class="line"><span class="comment">##### oh-my-shell</span></span><br><span class="line"><span class="comment">## 安装</span></span><br><span class="line"><span class="comment">### curl</span></span><br><span class="line">$ sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span> </span><br><span class="line"><span class="comment">### wget</span></span><br><span class="line">sh -c <span class="string">"<span class="variable">$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 插件安装</span></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 更新配置</span></span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>P.S. 这些主题都保存在 “~/.oh-my-zsh/themes” 目录中<br>比如你看中了 ys 主题（我的最爱）</p>
+<p>如果你需要安装第三方插件和主题，你可以在 “~/.zshrc” 的某一行（比如末尾）加入 source /path/to/plugin<br>在配置文件结束添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME=&quot;ys&quot;</span><br><span class="line"></span><br><span class="line"># 如果你发现切换了shell之后，以前的配置的环境变量不生效了</span><br><span class="line">source ~/.bash_profile</span><br><span class="line"></span><br><span class="line"># 插件</span><br><span class="line">source $ZSH/custom/plugins/incr/incr*.zsh</span><br><span class="line">source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh</span><br><span class="line">source $ZSH/custom/plugins/vscode/vscode.plugin</span><br><span class="line"></span><br><span class="line">plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</span><br></pre></td></tr></table></figure></p>
+<h1 id="不借助oh-my-shell"><a href="#不借助oh-my-shell" class="headerlink" title="不借助oh-my-shell"></a>不借助oh-my-shell</h1><p>配置比较麻烦。不然都是ohmyshell。<br>但是也可以找到直接配置好的文件。<br><!-- [[强大的zsh配置文件]](https://www.cnblogs.com/ma6174/archive/2012/05/08/2490921.html) --><br><!-- [我的zsh简单设置](https://www.cnblogs.com/bamanzi/p/zsh-simple-guide.html)
+autojump [z.sh](https://github.com/rupa/z/blob/master/z.sh) （这个文件名跟zsh没有必然联系）
+也不是ohmyshell的插件
+ --></p>
+<p style="text-align:right"> 22:03 </p>
+
+
       
     </div>
     
@@ -586,7 +587,7 @@ function doDecrypt (pwd, onError) {
 <a class="jiathis_button_douban">豆瓣</a>
 <a class="jiathis_button_share">一键分享</a>
 
-<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
 <a class="jiathis_counter_style"></a>
 </div>
 <script type="text/javascript">
@@ -597,7 +598,7 @@ var jiathis_config={
   hideMore:false
 }
 </script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 <!-- JiaThis Button END -->
       
     </div>
@@ -640,8 +641,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -658,7 +668,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">339</span>
+                  <span class="site-state-item-count">366</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -669,7 +679,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -680,7 +690,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -749,6 +759,27 @@ var jiathis_config={
       </section>
 
       
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Oh-My-Zsh"><span class="nav-text">Oh-My-Zsh</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐插件"><span class="nav-text">推荐插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sh相关"><span class="nav-text">sh相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不借助oh-my-shell"><span class="nav-text">不借助oh-my-shell</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -762,7 +793,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -776,7 +807,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">572.1k</span>
+    <span title="Site words total count">602.6k</span>
   
 </div>
 

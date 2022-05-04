@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="jslib,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2021.11.28 星期日 19:44    实际需要区分gis（webGIS）和 地图库/javascript api, 工具包，地图组件的区别。 腾讯位置服务JavaScript API: https://lbs.qq.com/webApi/javascriptV2/jsGuide/jsOverviewJavaScript API GL: https://lbs.qq.com/webAp">
+<meta name="keywords" content="jslib">
+<meta property="og:type" content="article">
+<meta property="og:title" content="地图库调研">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/地图库调研/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2021.11.28 星期日 19:44    实际需要区分gis（webGIS）和 地图库/javascript api, 工具包，地图组件的区别。 腾讯位置服务JavaScript API: https://lbs.qq.com/webApi/javascriptV2/jsGuide/jsOverviewJavaScript API GL: https://lbs.qq.com/webAp">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-05-03T05:25:34.612Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="地图库调研">
+<meta name="twitter:description" content="2021.11.28 星期日 19:44    实际需要区分gis（webGIS）和 地图库/javascript api, 工具包，地图组件的区别。 腾讯位置服务JavaScript API: https://lbs.qq.com/webApi/javascriptV2/jsGuide/jsOverviewJavaScript API GL: https://lbs.qq.com/webAp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/地图库调研/">
+
+
+
+
+
+  <title>地图库调研 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/地图库调研/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">地图库调研</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-28T08:00:00+08:00">
+                2021-11-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-03T13:25:34+08:00">
+                2022-05-03
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/jsplus/" itemprop="url" rel="index">
+                    <span itemprop="name">jsplus</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/地图库调研/" class="leancloud_visitors" data-flag-title="地图库调研">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,527
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p style="text-align:right"> 2021.11.28 星期日 19:44 </p>
+
+
+<h1 id="实际"><a href="#实际" class="headerlink" title="实际"></a>实际</h1><p>需要区分gis（webGIS）和 地图库/javascript api, 工具包，地图组件的区别。</p>
+<h2 id="腾讯位置服务"><a href="#腾讯位置服务" class="headerlink" title="腾讯位置服务"></a>腾讯位置服务</h2><p>JavaScript API: <a href="https://lbs.qq.com/webApi/javascriptV2/jsGuide/jsOverview" target="_blank" rel="noopener">https://lbs.qq.com/webApi/javascriptV2/jsGuide/jsOverview</a><br>JavaScript API GL: <a href="https://lbs.qq.com/webApi/javascriptGL/glGuide/glOverview" target="_blank" rel="noopener">https://lbs.qq.com/webApi/javascriptGL/glGuide/glOverview</a></p>
+<p>有微信小程序的项目，所以使用了腾讯位置服务。（优先使用国内库）<br>h5项目（旧）就是JavaScript API，可以缩小（新老）差异，快速重构。<br>其他就是性能和能力上差异。<br>都是免费开放，包括工具库。</p>
+<p>两者实现是不一样的。<br>JavaScript API 兼容性更好一些，偏向底层js/浏览器，包括移动设备。<br>提供的图片格式：<a href="https://m3.map.gtimg.com/hwap?z=14&amp;x=26510&amp;y=20073&amp;styleid=1000&amp;scene=0&amp;version=957" target="_blank" rel="noopener">https://m3.map.gtimg.com/hwap?z=14&amp;x=26510&amp;y=20073&amp;styleid=1000&amp;scene=0&amp;version=957</a><br><!-- 加载视图内的图片，包括边角多出部分。 --></p>
+<p>Javascript API GL 基于WebGL，3D的。效果更炫酷，也不用担心性能/渲染/计算的问题。而且不必须熟悉WebGL知识，api。</p>
+<blockquote>
+<p>JavaScript API V2可用于在网站中加入交互性强的街景、地图，能很好地支持PC及手机设备，身材小巧，动画效果顺滑流畅，动感十足，提供地图操作、标注、地点搜索、出行规划、地址解析、街景等接口，功能丰富，并免费开放各种附加工具库。JavaScript API V2是免费服务，任何提供免费访问的网站都可以调用，请参见 使用条款 。<br>Javascript API GL是基于WebGL技术打造的3D版地图API，3D化的视野更为自由，交互更加流畅。</p>
+</blockquote>
+<h2 id="lib价值方式"><a href="#lib价值方式" class="headerlink" title="lib价值方式"></a>lib价值方式</h2><h3 id="常规"><a href="#常规" class="headerlink" title="常规"></a>常规</h3><p>同步和异步（动态）。</p>
+<h3 id="封装组件"><a href="#封装组件" class="headerlink" title="封装组件"></a>封装组件</h3><p>react-amap: <a href="https://github.com/ElemeFE/react-amap/blob/v1.0.1/components/utils/APILoader.js" target="_blank" rel="noopener">https://github.com/ElemeFE/react-amap/blob/v1.0.1/components/utils/APILoader.js</a></p>
+<blockquote>
+<p>是一个基于 React 封装的高德地图组件。<br>提供了APILoader.js， 还是动态加载，但是在windows.callback 加入Promise。<br>包括script.async, script.defer。</p>
+</blockquote>
+<h3 id="框架中"><a href="#框架中" class="headerlink" title="框架中"></a>框架中</h3><p>主要指react，vue 等mvc框架，涉及到动态/异步加载，包括mounted后才可以有真实dom，还需要refs。<br>1) 定义callback：window.apiLoaded = setMap();<br>2) 所以需要先提供setMap函数。<br>3) 最后动态加载api。但是不需要放在mounted生命周期内。</p>
+<p>以react-hooks 为例。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">h5Map</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> mapDomRef = useRef(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">const</span> qqMap, mapCenter;</span><br><span class="line">  <span class="keyword">let</span> setMap = useCallback(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> mapEl = mapDomRef.current;</span><br><span class="line">    <span class="comment">// 设置地图中心点</span></span><br><span class="line">    mapCenter = <span class="keyword">new</span> <span class="built_in">window</span>.qq.maps.LatLng(latitude, longitude);</span><br><span class="line">    qqMap = <span class="keyword">new</span> <span class="built_in">window</span>.qq.maps.Map(mapEl, &#123;</span><br><span class="line">        center: mapCenter,</span><br><span class="line">        zoom: mapInfo.scale || <span class="number">14</span>,</span><br><span class="line">        <span class="comment">// 启用缩放控件</span></span><br><span class="line">        zoomControl: <span class="literal">false</span>,</span><br><span class="line">        <span class="comment">// 地图类型控件，若为false则停用状态地图类型控件</span></span><br><span class="line">        mapTypeControl: <span class="literal">false</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;, [mapDomRef]);</span><br><span class="line">  <span class="built_in">window</span>.loadedMapApi = setMapImgNew;</span><br><span class="line">  loadScript();</span><br><span class="line">  <span class="keyword">return</span> (<span class="xml"><span class="tag">&lt;<span class="name">View</span>&gt;</span><span class="tag">&lt;<span class="name">View</span> <span class="attr">ref</span>=<span class="string">&#123;mapDomRef&#125;</span> <span class="attr">style</span>=<span class="string">&#123;mapStyle&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">View</span>&gt;</span><span class="tag">&lt;/<span class="name">View</span>&gt;</span></span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="库资源"><a href="#库资源" class="headerlink" title="库资源"></a>库资源</h1><h2 id="常用的前端地图框架"><a href="#常用的前端地图框架" class="headerlink" title="常用的前端地图框架"></a>常用的前端地图框架</h2><p># <a href="https://blog.csdn.net/nju_zjy/article/details/109858715" target="_blank" rel="noopener">常用的前端地图框架（WebGIS框架）</a><br># <a href="https://juejin.cn/post/6989552050820349988" target="_blank" rel="noopener">常用的前端地图框架（WebGIS框架）</a></p>
+<ol>
+<li><p>Leaflet<br>Leaflet 是最著名的前端地图可视化库，它开源、体积小、结构清晰、简单易用。</p>
+</li>
+<li><p>Mapbox GL JS<br>Mapbox GL JS 是目前最新潮的前端地图库，它的矢量压缩、动态样式和三维性能令人印象深刻。它本身是开源的，但一般依赖于Mapbox公司提供的底图服务。</p>
+</li>
+<li><p>ArcGIS API for JS<br>ArcGIS API for JS 是较为学院派的前端地图库，它是ArcGIS开发套件中的一部分，和桌面端和服务器端ArcGIS软件有较好的协作。它不开源且收费不低，在学术场景下较为常用。</p>
+</li>
+<li><p>Openlayers<br>Openlayers 也是常用的前端地图库，它开源，相比于Leaflet更加复杂和完备。</p>
+</li>
+<li><p>Cesium<br>Cesium 是三维地理可视化的常用库，在大尺度的可视化（地形、建筑、地球）中十分常用。</p>
+</li>
+<li><p>百度地图 JS API /百度地图 API GL<br>百度地图 JS API 是传统的二维地图，百度地图 API GL 是三维地图，它们依赖百度地图提供的后台服务。除了地图服务外还有检索、导航、实时交通等关联服务。开发者有免费的限额。</p>
+</li>
+<li><p>高德地图 JS API<br>高德地图 JS API 与百度类似。</p>
+</li>
+<li><p>Google Maps JS API<br>谷歌地图 JS API 在境外有更好的数据。</p>
+</li>
+<li><p>AntV L7<br>AntV L7 是空间数据可视化库，它可以使用高德地图等协作构建地图可视化。</p>
+</li>
+<li><p>Mapbox.js<br>Mapbox.js 是 Leaflet 的一个扩展插件（与 Mapbox GL JS 不同）。</p>
+</li>
+</ol>
+<h2 id="8款地图API和javascript库"><a href="#8款地图API和javascript库" class="headerlink" title="8款地图API和javascript库"></a>8款地图API和javascript库</h2><p><a href="https://juejin.cn/post/6871889981116252173" target="_blank" rel="noopener">「开源项目」8款最受欢迎的地图API和javascript库</a><br>使用javascript函数库对地图进行分类<br>如何选择有效的解决方案<br>版本和升级<br>地图工具和库<br>Leafletjs<br>Openlayers<br>Mapbox<br>Google Maps API<br>Datamaps<br>Bing Maps<br>ArcGIS<br>Zeemaps<br>写在最后</p>
+<h2 id="WebGIS-前端框架"><a href="#WebGIS-前端框架" class="headerlink" title="WebGIS 前端框架"></a>WebGIS 前端框架</h2><p><a href="https://zhuanlan.zhihu.com/p/408253695" target="_blank" rel="noopener">WebGIS 前端框架</a></p>
+<blockquote>
+<p>WebGIS（网络地理信息系统）是指工作在Web网上的GIS,是传统的GIS在网络上的延伸和发展，具有传统GIS的特点，可以实现空间数据的检索、查询、制图输出、编辑等GIS基本功能，同时也是Internet 上地理信息发布、共享和交流协作的基础。</p>
+</blockquote>
+<p>四个常见的webGIS JS API。</p>
+<p>Openlayers</p>
+<blockquote>
+<p>OpenLayers 是一个高性能、功能丰富的库，用于在 Web 上创建交互式地图。它可以显示从任何来源加载的地图图块、矢量数据和标记。</p>
+</blockquote>
+<p>Leaflet</p>
+<blockquote>
+<p>Leaflet 是用于移动友好型交互式地图的领先开源 JavaScript 库。 JS 的重量仅为 39 KB，它具有大多数开发人员需要的所有映射功能。</p>
+</blockquote>
+<p>ArcGIS js API</p>
+<p>SuperMap iClient JavaScript</p>
+<blockquote>
+<p>superMap作为国内的gis的领头羊，其技术实力还是很强的，尤其是桌面版的软件核心代码从头用c++来进行重写，性能上还是很高的，很看好其发展潜力。<br>闲话不再多说，言归正传，SuperMap的js api其核心还是前面的讲的leaflet和openlayers等之类的开源代码，它进行了二次封装，详见下图：</p>
+</blockquote>
+<h1 id="地图相关知识"><a href="#地图相关知识" class="headerlink" title="地图相关知识"></a>地图相关知识</h1><p><a href="https://segmentfault.com/a/1190000037611134" target="_blank" rel="noopener">记一次前端”揭开绘制地图的神秘面纱”分享会</a></p>
+<p>四.geojson数据到底是什么<br>geojson是用json的语法表达和存储地理数据，可以说是json的子集, 它不是专门js使用的这点要清楚.<br>地图上有山川, 河流, 海洋等等的地理信息, 那么如何描述一条河? 这个时候就要使用geojson格式的文件来描绘.<br>并不是必须用geojson, geojson只是一套规范, 各大解析器用这套规范来解析生成对应的景色, 我们完全可以制定自己的规范来实现这些, 无非是兼容性不好需要自己写绘制的解析器.<br>五.geojson详细介绍</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 描述多个点(FeatureCollection)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"FeatureCollection"</span>,</span><br><span class="line">  <span class="attr">"features"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"Feature"</span>,</span><br><span class="line">      <span class="attr">"properties"</span>: &#123;&#125;,</span><br><span class="line">      <span class="attr">"geometry"</span>: &#123;</span><br><span class="line">        <span class="comment">// "type": "Point",  // 专指画点</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"MultiPoint"</span>, <span class="comment">// 多点, 也就是连续画多个同样的点</span></span><br><span class="line">        <span class="attr">"coordinates"</span>: [[<span class="number">105.380859375</span>, <span class="number">31.57853542647338</span>],</span><br><span class="line">        [<span class="number">105.580859375</span>, <span class="number">31.52853542647338</span>]</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 4. 描述一条线(LineString)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"FeatureCollection"</span>,</span><br><span class="line">  <span class="attr">"features"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"Feature"</span>,</span><br><span class="line">      <span class="attr">"properties"</span>: &#123;&#125;,</span><br><span class="line">      <span class="attr">"geometry"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"LineString"</span>, <span class="comment">// 这里所有的点会连接在一起形成线</span></span><br><span class="line">        <span class="attr">"coordinates"</span>: [[<span class="number">105.6005859375</span>, <span class="number">30.65681556429287</span>],</span><br><span class="line">        [<span class="number">107.95166015624999</span>, <span class="number">31.98944183792288</span>],</span><br><span class="line">        [<span class="number">109.3798828125</span>, <span class="number">30.031055426540206</span>],</span><br><span class="line">        [<span class="number">107.7978515625</span>, <span class="number">29.935895213372444</span>]]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>六. geojson的相关网站与工具的使用<br>七.自制geojson解析绘制工具的思路</p>
+<p>八.地图的基本概念 (瓦片地图, 矢量地图)<br><strong> 有没有发现咱们使用的地图在放大的时候,区域都是一个方块一个方块的被加载成图像的.
+</strong> 如果你打开控制台的network还可以看到有好多png的请求.<br><strong> 地图这种超大的数据, 超多细节是如何做到快速渲染的?
+</strong> 下面是现在比较主流的两种地图的绘制模式.</p>
+<p>栅格瓦片地图<br>顾名思义图片像是瓦片一样堆叠起来的格子状成为地图, 有点像拼图, 是不是感觉一点也不高大上….<br>但这里也是有很多问题要解决的, </p>
+<p>矢量地图<br>顾名思义就是矢量绘制出图形, 只要不是照片肯定会小很多, 对于矢量为什么轻量并且不失真可以参考的上篇文章svg的分享svg实战</p>
+<p>矢量瓦片采用和栅格瓦片相同的分级切割方案，不同的是，瓦片数据传输的是地理数据，包括道路、土地、建筑等，通过在前端做地图的渲染，具有如下优势：</p>
+<p>极少占用服务器空间，降低网络开销，本地化部署只需5G空间(中国)。<br>地图的底图样式更换简单.<br>因为具有了地理数据本身，可在数据基础上做三维空间的延伸，例如 3D 建筑。<br>数据保密性强。</p>
+<p>九.不同的坐标系<br>** 地球本身是个椭球体, 要把它以平面的方式绘制在一个矩形上也真的不好办, 现在有不少绘制的方式但是都有各自的优缺点, 感兴趣的朋友可以查查看具体的细节, 我这里就简单介绍下比较常见的方式.</p>
+<p>经纬度EPSG：4326 也就是地图的默认坐标<br>现在球体上定义好经纬度, 然后在正方形纸上画出刻度, 对应的绘制<br>墨卡托投影(EPSG：3785 )<br>把地球放在一个圆筒里面, 假设地球内部有个光源, 那么地球在圆柱上的投影就是地图<br>火星坐标系<br>火星坐标是国家测绘局为了国家安全在原始坐标的基础上进行偏移得到的坐标，基本国内的电子地图、导航设备都是采用的这一坐标系或在这一坐标的基础上进行二次加密得到的。<br>火星坐标的真实名称应该是 GCJ-02 坐标，基本上所有的国内的电子地图采用的都是火星坐标系甚至 Google 地图中国部分都特意为中国政府做了偏移。</p>
+<p>百度坐标系</p>
+<p>十.更快的前端数据 -&gt; WebAssembly<br>十一. hello 级别的WebAssembly</p>
+<p>十二.(组内篇)我写的2d与3d工程的代码介绍</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jslib/" rel="tag"><i class="fa fa-tag"></i> jslib</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/jsplus/react hooks使用记录/" rel="next" title="React使用记录">
+                <i class="fa fa-chevron-left"></i> React使用记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/jsplus/Jest使用/" rel="prev" title="Jest使用">
+                Jest使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">366</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实际"><span class="nav-text">实际</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#腾讯位置服务"><span class="nav-text">腾讯位置服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lib价值方式"><span class="nav-text">lib价值方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常规"><span class="nav-text">常规</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封装组件"><span class="nav-text">封装组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#框架中"><span class="nav-text">框架中</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#库资源"><span class="nav-text">库资源</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的前端地图框架"><span class="nav-text">常用的前端地图框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8款地图API和javascript库"><span class="nav-text">8款地图API和javascript库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebGIS-前端框架"><span class="nav-text">WebGIS 前端框架</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#地图相关知识"><span class="nav-text">地图相关知识</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">602.6k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

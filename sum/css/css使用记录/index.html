@@ -1,9 +1,41 @@
-<h2 id="三期"><a href="#三期" class="headerlink" title="三期"></a>三期</h2><ol>
+<ol>
 <li>svg 修改颜色。 除了写好在svg 标签的属性中，还可以通过css属性（fill） 修改，包括背景色。<br>fill 属性不必须写在svg标签；父元素也可以。<br>移动端滚动dom抖动：比如定时器组件，视频播放器。<br>滚动到顶部的时候阻止滚动：e.stopProprogation</li>
-<li>子元素使用position：fixed,导致他的宽度不能和父元素保持一致的解决方案<!-- [子元素使用position：fixed,导致他的宽度不能和父元素保持一致的解决方案子元素使用position：fixed,导致他的宽度不能和父元素保持一致的解决方案](https://www.cnblogs.com/inkwind/p/11549919.html) -->
-他就默认相对于window去定位了，就相当与你将这个元素相对于window加上了position:absolute的属性，所以给他加百分比长度的话就是相对于window的百分比。<br>1、left：0；right:0;因为fixed也相当于是定位的一种，所以我们当然也可以用left和right来进行定位了，然后将left的值扩大，同时将width的百分比减少，从而使得son和demo的宽度达到一致，从而起到一种视觉上的欺骗效果。（PS：请谨慎使用）<br>2、calc();关于calc的具体使用将在我后面的播客中提出，在这里，我们可以将son的width由100%改为calc(100%-324px)，这里这个长度不知道是否有规律，还是要自己找，相对来说适应性就不是很好。<!-- calc();关于calc的具体使用将在我后面的播客中提出，在这里，我们可以将son的width由100%改为calc(100%)，即可实现son相对于他的父级元素的定位，因为calc计算的就是元素相对于他的父级元素的一个动态大小，即一直是相对于父级来进行计算的，当你指定calc(100%)的时候，就是说他的宽度将和他的父级保持一致。（PS：该方法亲测靠谱）
+</ol>
+<ol start="2">
+<li>css伪类 :first-child<!-- [CSS3的first-child和last-child选择器用法总结（很容易犯才错误，有几个坑！）](https://blog.csdn.net/weixin_43343144/article/details/88787613) -->
+务必注意：你的这组兄弟元素节点必须在同一个父元素节点的第一个位置(first-child)或最后一个位置(last-child)<br>（一个很大的坑！）使用伪类或伪元素很容易犯的一个错误（尤其在使用scss编写代码时）<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这种写法是标准情况：作用在同一个父节点下的所有</span></span><br><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">:first-child</span>&#123;&#125;</span><br><span class="line"><span class="comment">// 这种写法是标准情况：作用在同一个父节点下的所有</span></span><br><span class="line"><span class="comment">// 这种写法等价于css的【p :first-child&#123;&#125;】 p后面是一个空格,也就是p的后代元素的</span></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="selector-pseudo">:first-child</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>p:last-child</code> 可以实现一个很巧妙的效果：如果p不是最后一个字元素就不会命中。<br><!-- 
+$_PS: 物流追踪。(个人强行解释)
+最后一个元素是【展示更多】，
+如果都展开（展示更多 不出现页面）。p就是最后一个，左边的竖线就会消失；
+如果有展示更多，p就不是最后一个。左边的竖线就会在（造成下面还有数据的视觉效果）。
+ --></p>
+<ol>
+<li><p>fixed 并不总是相对于视窗进行定位的。会受到父元素的影响，而出现不能以窗口进行定位。</p>
+<blockquote>
+<p>fixed不为元素预留空间，而是通过<strong>指定元素相对于屏幕视口（viewport）的位置</strong>来指定元素位置。元素的位置在屏幕滚动时不会改变。打印时，元素会出现在的每页的固定位置。<br>fixed 属性会创建新的层叠上下文。当元素祖先的 transform, perspective 或 filter 属性非 none 时，容器由视口改为该祖先。</p>
+</blockquote>
+<p>1) 给父元素加上 transform: scale(1,1) 或者是别的,只要transform 的属性不是none就行<br>2)虽然position:fixed是对于浏览器窗口定位的，但是只要不设置fixed元素的top，bottom，left，right，此时该元素就是相对于父元素进行定位的。如果要移动元素的位置，可以通过margin来实现。</p>
+<!-- 
+如果父级元素的z-index的层次比同级元素低，就算fixed的z-index比父级高，也会被父级同级元素遮挡。
+
+因此，position:fixed元素若要以窗口进行定位，最好是放在body根标签下 
+-->
+<p>如果父级元素设置了transform属性，position:relative/absolute/fixed会基于此定位.</p>
+<blockquote>
+<p>relative 该关键字下，元素先放置在未添加定位时的位置，再在不改变页面布局的前提下调整元素位置（因此会在此元素未添加定位时所在位置留下空白）。position:relative 对 table-*-group, table-row, table-column, table-cell, table-caption 元素无效。</p>
+</blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/position" target="_blank" rel="noopener">position</a></p>
+</li>
+<li><p>子元素使用position：fixed,导致他的宽度不能和父元素保持一致的解决方案</p>
+<!-- [子元素使用position：fixed,导致他的宽度不能和父元素保持一致的解决方案子元素使用position：fixed,导致他的宽度不能和父元素保持一致的解决方案](https://www.cnblogs.com/inkwind/p/11549919.html) -->
+<p>他就默认相对于window去定位了，就相当与你将这个元素相对于window加上了position:absolute的属性，所以给他加百分比长度的话就是相对于window的百分比。<br>1、left：0；right:0;因为fixed也相当于是定位的一种，所以我们当然也可以用left和right来进行定位了，然后将left的值扩大，同时将width的百分比减少，从而使得son和demo的宽度达到一致，从而起到一种视觉上的欺骗效果。（PS：请谨慎使用）<br>2、calc();关于calc的具体使用将在我后面的播客中提出，在这里，我们可以将son的width由100%改为calc(100%-324px)，这里这个长度不知道是否有规律，还是要自己找，相对来说适应性就不是很好。</p>
+<!-- calc();关于calc的具体使用将在我后面的播客中提出，在这里，我们可以将son的width由100%改为calc(100%)，即可实现son相对于他的父级元素的定位，因为calc计算的就是元素相对于他的父级元素的一个动态大小，即一直是相对于父级来进行计算的，当你指定calc(100%)的时候，就是说他的宽度将和他的父级保持一致。（PS：该方法亲测靠谱）
 $_PS: 另一篇文章 -->
-3、absolute改造；<br>4、给fathor加fixed属性；</li>
+<p>3、absolute改造；<br>4、给fathor加fixed属性；</p>
+</li>
 </ol>
 <!-- [子元素使用position：fixed,导致他的宽度不能和父元素保持一致的解决方案](https://github.com/peng8/react-drag-sortable)
 $_PS: 两篇文章4种解决方案一样 -->

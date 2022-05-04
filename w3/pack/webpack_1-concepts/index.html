@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="webpack,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="cc.https://doc.webpack-china.org/concepts/ 2018.1.22 星期三 15:30">
+<meta name="keywords" content="webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Webpack_1-Concepts">
+<meta property="og:url" content="http://yoursite.com/w3/pack/webpack_1-concepts/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="cc.https://doc.webpack-china.org/concepts/ 2018.1.22 星期三 15:30">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://you img base url/...?e=1651651637&token=your qiniu access key:fTbBN8ruLIN1WKDF_kzOYfl2Jq0=">
+<meta property="og:updated_time" content="2021-01-23T06:12:40.205Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Webpack_1-Concepts">
+<meta name="twitter:description" content="cc.https://doc.webpack-china.org/concepts/ 2018.1.22 星期三 15:30">
+<meta name="twitter:image" content="http://you img base url/...?e=1651651637&token=your qiniu access key:fTbBN8ruLIN1WKDF_kzOYfl2Jq0=">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/w3/pack/webpack_1-concepts/">
+
+
+
+
+
+  <title>Webpack_1-Concepts | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/w3/pack/webpack_1-concepts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Webpack_1-Concepts</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T00:00:00Z">
+                2018-01-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-23T06:12:40Z">
+                2021-01-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/w3/" itemprop="url" rel="index">
+                    <span itemprop="name">w3</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/w3/pack/" itemprop="url" rel="index">
+                    <span itemprop="name">pack</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+
+          
+          
+             <span id="/w3/pack/webpack_1-concepts/" class="leancloud_visitors" data-flag-title="Webpack_1-Concepts">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,872
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  15
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>cc.<br><a href="https://doc.webpack-china.org/concepts/" target="_blank" rel="noopener">https://doc.webpack-china.org/concepts/</a></p>
+<p style="text-align:right">2018.1.22 星期三 15:30</p>
+
+<a id="more"></a>
+<p style="text-align:right">2018.2.9 星期五 15:30</p>
+
+<h2 id="一-概念"><a href="#一-概念" class="headerlink" title="一 概念"></a>一 概念</h2><p>本质上，webpack 是<strong>一个现代 JavaScript 应用程序的静态模块打包器(module bundler)</strong>。当 webpack 处理应用程序时，它会递归地构建一个依赖关系图(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 bundle。</p>
+<p>它是高度可配置的，但是，在开始前你需要先理解四个核心概念：<br>入口(entry),输出(output),loader,插件(plugins)  </p>
+<p>本文档旨在给出这些概念的高度概述，同时提供具体概念的详尽相关用例。</p>
+<h3 id="1-1-入口-entry"><a href="#1-1-入口-entry" class="headerlink" title="1.1 入口(entry)"></a>1.1 入口(entry)</h3><p>入口起点(entry point)指示 webpack 应该使用哪个模块，来作为构建其内部依赖图的开始。进入入口起点后，webpack 会找出有哪些模块和库是入口起点（直接和间接）依赖的。</p>
+<p>每个依赖项随即被处理，最后输出到称之为 bundles 的文件中，我们将在下一章节详细讨论这个过程。</p>
+<p>可以通过在 webpack 配置中配置 entry 属性，来指定一个入口起点（或多个入口起点）。</p>
+<h3 id="1-2-出口-output"><a href="#1-2-出口-output" class="headerlink" title="1.2 出口(output)"></a>1.2 出口(output)</h3><p>output 属性告诉 webpack 在哪里输出它所创建的 bundles，以及如何命名这些文件。你可以通过在配置中指定一个 output 字段，来配置这些处理过程：</p>
+<h3 id="1-3-loader"><a href="#1-3-loader" class="headerlink" title="1.3 loader"></a>1.3 loader</h3><p><strong>loader 让 webpack 能够去处理那些非 JavaScript 文件（webpack 自身只理解 JavaScript）。loader 可以将所有类型的文件转换为 webpack 能够处理的有效模块，然后你就可以利用 webpack 的打包能力，对它们进行处理</strong>。</p>
+<p>本质上，webpack loader 将所有类型的文件，转换为应用程序的依赖图可以直接引用的模块。</p>
+<blockquote>
+<p><strong>注意，loader 能够 import 导入任何类型的模块（例如 .css 文件），这是 webpack 特有的功能，其他打包程序或任务执行器的可能并不支持。我们认为这种语言扩展是有很必要的，因为这可以使开发人员创建出更准确的依赖关系图</strong>。</p>
+</blockquote>
+<p>在更高层面，在 webpack 的配置中 loader 有两个目标。</p>
+<ol>
+<li>识别出应该被对应的 loader 进行转换的那些文件。(使用 test 属性)</li>
+<li><p>转换这些文件，从而使其能够被添加到依赖图中（并且最终添加到 bundle 中）(use 属性)<br>webpack.config.js</p>
+<p> const path = require(‘path’);<br> const config = {</p>
+<pre><code>entry: &apos;./path/to/my/entry/file.js&apos;,
+output: {
+    path: path.resolve(__dirname, &apos;dist&apos;),
+    filename: &apos;my-first-webpack.bundle.js&apos;
+},
+module: {
+    rules: [
+    { test: /\.txt$/, use: &apos;raw-loader&apos; }
+    ]
+}
+</code></pre><p> };</p>
+<p> module.exports = config;<br>以上配置中，对一个单独的 module 对象定义了 rules 属性，里面包含两个必须属性：test 和 use。这告诉 webpack 编译器(compiler) 如下信息：<br>“嘿，webpack 编译器，当你碰到「在 require()/import 语句中被解析为 ‘.txt’ 的路径」时，在你对它打包之前，先使用 raw-loader 转换一下。”</p>
+</li>
+</ol>
+<blockquote>
+<p>重要的是要记得，在 webpack 配置中定义 loader 时，要定义在 module.rules 中，而不是 rules。然而，在定义错误时 webpack 会给出严重的警告。为了使你受益于此，如果没有按照正确方式去做，webpack 会“给出严重的警告”<br>loader 还有更多我们尚未提到的具体配置属性。</p>
+</blockquote>
+<h3 id="1-4-插件-plugins"><a href="#1-4-插件-plugins" class="headerlink" title="1.4 插件(plugins)"></a>1.4 插件(plugins)</h3><p>//webpack.config.js</p>
+<pre><code>const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;); // 通过 npm 安装
+const webpack = require(&apos;webpack&apos;); // 用于访问内置插件
+const path = require(&apos;path&apos;);
+
+const config = {
+    entry: &apos;./path/to/my/entry/file.js&apos;,
+    output: {
+        path: path.resolve(__dirname, &apos;dist&apos;),
+        filename: &apos;my-first-webpack.bundle.js&apos;
+    },
+    module: {
+        rules: [
+        { test: /\.txt$/, use: &apos;raw-loader&apos; }
+        ]
+    },
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin(),
+        new HtmlWebpackPlugin({template: &apos;./src/index.html&apos;})
+    ]
+};
+
+module.exports = config;
+</code></pre><h2 id="二-入口起点-Entry-Points"><a href="#二-入口起点-Entry-Points" class="headerlink" title="二 入口起点(Entry Points)"></a>二 入口起点(Entry Points)</h2><h3 id="2-1-单个入口（简写）语法"><a href="#2-1-单个入口（简写）语法" class="headerlink" title="2.1 单个入口（简写）语法"></a>2.1 单个入口（简写）语法</h3><h3 id="2-2-对象语法"><a href="#2-2-对象语法" class="headerlink" title="2.2 对象语法"></a>2.2 对象语法</h3><h3 id="2-3-常见场景"><a href="#2-3-常见场景" class="headerlink" title="2.3 常见场景"></a>2.3 常见场景</h3><h4 id="1-分离应用程序"><a href="#1-分离应用程序" class="headerlink" title="1 分离应用程序"></a>1 分离应用程序</h4><h4 id="2-多页面应用程序"><a href="#2-多页面应用程序" class="headerlink" title="2 多页面应用程序"></a>2 多页面应用程序</h4><h2 id="三-输出-Output"><a href="#三-输出-Output" class="headerlink" title="三 输出(Output)"></a>三 输出(Output)</h2><p>配置 output 选项可以控制 webpack 如何向硬盘写入编译文件。注意，即使可以存在多个入口起点，但只指定一个输出配置。</p>
+<h3 id="3-1-用法"><a href="#3-1-用法" class="headerlink" title="3.1 用法"></a>3.1 用法</h3><p>在 webpack 中配置 output 属性的最低要求是，将它的值设置为一个对象，包括以下两点：</p>
+<ul>
+<li>filename 用于输出文件的文件名。</li>
+<li><p>目标输出目录 path 的绝对路径。</p>
+<h3 id="3-2-多个入口起点"><a href="#3-2-多个入口起点" class="headerlink" title="3.2 多个入口起点"></a>3.2 多个入口起点</h3><p>如果配置创建了多个单独的 “chunk”（例如，使用多个入口起点或使用像 CommonsChunkPlugin 这样的插件），则应该使用占位符(substitutions)来确保每个文件具有唯一的名称。</p>
+<h3 id="3-3-高级进阶"><a href="#3-3-高级进阶" class="headerlink" title="3.3 高级进阶"></a>3.3 高级进阶</h3><p>以下是使用 CDN 和资源 hash 的复杂示例：<br>config.js</p>
+<p>  output: {</p>
+<pre><code>path: &quot;/home/proj/cdn/assets/[hash]&quot;,
+publicPath: &quot;http://cdn.example.com/assets/[hash]/&quot;
+</code></pre><p>  }<br>在编译时不知道最终输出文件的 publicPath 的情况下，publicPath 可以留空，并且在入口起点文件运行时动态设置。如果你在编译时不知道 publicPath，你可以先忽略它，并且在入口起点设置 <strong>webpack_public_path</strong>。</p>
+<p>  <strong>webpack_public_path</strong> = myRuntimePublicPath<br>  // 剩余的应用程序入口</p>
+</li>
+</ul>
+<h2 id="四-Loader"><a href="#四-Loader" class="headerlink" title="四 Loader"></a>四 Loader</h2><p><strong>loader 用于对模块的源代码进行转换。loader 可以使你在 import 或”加载”模块时预处理文件</strong>。因此，loader 类似于其他构建工具中“任务(task)”，并提供了处理前端构建步骤的强大方法。loader 可以将文件从不同的语言（如 TypeScript）转换为 JavaScript，或将内联图像转换为 data URL。loader 甚至允许你直接在 JavaScript 模块中 import CSS文件！</p>
+<h3 id="4-1-示例"><a href="#4-1-示例" class="headerlink" title="4.1 示例"></a>4.1 示例</h3><h3 id="4-2-使用Loader"><a href="#4-2-使用Loader" class="headerlink" title="4.2 使用Loader"></a>4.2 使用Loader</h3><h4 id="1-配置"><a href="#1-配置" class="headerlink" title="1 配置"></a>1 配置</h4><h4 id="2-内联"><a href="#2-内联" class="headerlink" title="2 内联"></a>2 内联</h4><pre><code>import Styles from &apos;style-loader!css-loader?modules!./styles.css&apos;;
+</code></pre><h4 id="3-CLI"><a href="#3-CLI" class="headerlink" title="3 CLI"></a>3 CLI</h4><pre><code>webpack --module-bind jade-loader --module-bind &apos;css=style-loader!css-loader&apos;
+</code></pre><h3 id="4-3-Loader特性"><a href="#4-3-Loader特性" class="headerlink" title="4.3 Loader特性"></a>4.3 Loader特性</h3><h3 id="4-4-解析Loader"><a href="#4-4-解析Loader" class="headerlink" title="4.4 解析Loader"></a>4.4 解析Loader</h3><h2 id="五-插件-Plugins"><a href="#五-插件-Plugins" class="headerlink" title="五 插件(Plugins)"></a>五 插件(Plugins)</h2><p>插件是 wepback 的支柱功能。webpack 自身也是构建于，你在 webpack 配置中用到的相同的插件系统之上！</p>
+<p><strong>插件目的在于解决 loader 无法实现的其他事</strong>。</p>
+<h3 id="5-1-剖析"><a href="#5-1-剖析" class="headerlink" title="5.1 剖析"></a>5.1 剖析</h3><h3 id="5-2-用法"><a href="#5-2-用法" class="headerlink" title="5.2 用法"></a>5.2 用法</h3><h3 id="5-3-配置"><a href="#5-3-配置" class="headerlink" title="5.3 配置"></a>5.3 配置</h3><h3 id="5-4-Node-API"><a href="#5-4-Node-API" class="headerlink" title="5.4 Node API"></a>5.4 Node API</h3><h2 id="六-配置-Configuration"><a href="#六-配置-Configuration" class="headerlink" title="六 配置(Configuration)"></a>六 配置(Configuration)</h2><p>你可能已经注意到，很少有 webpack 配置看起来很完全相同。这是因为 <strong>webpack 的配置文件，是导出一个对象的 JavaScript 文件</strong>。此对象，由 webpack 根据对象定义的属性进行解析。</p>
+<p><strong>因为 webpack 配置是标准的 Node.js CommonJS 模块，你可以做到以下事情：</strong></p>
+<ol>
+<li>通过 require(…) 导入其他文件</li>
+<li>通过 require(…) 使用 npm 的工具函数</li>
+<li>使用 JavaScript 控制流表达式，例如 ?: 操作符</li>
+<li>对常用值使用常量或变量</li>
+<li>编写并执行函数来生成部分配置</li>
+</ol>
+<p>请在合适的时机使用这些特性。<br>虽然技术上可行，但应避免以下做法：</p>
+<ul>
+<li>在使用 webpack 命令行接口(CLI)（应该编写自己的命令行接口(CLI)，或使用 –env）时，访问命令行接口(CLI)参数</li>
+<li>导出不确定的值（调用 webpack 两次应该产生同样的输出文件）</li>
+<li>编写很长的配置（应该将配置拆分为多个文件）</li>
+</ul>
+<blockquote>
+<p>你需要从这份文档中收获最大的点，就是你的 webpack 配置，可以有很多种的格式和风格。但为了你和你的团队能够易于理解和维护，你们要始终采取同一种用法、格式和风格。</p>
+</blockquote>
+<p>接下来的例子展示了 webpack 配置对象(webpack configuration object)如何即具有表现力，又具有可配置性，这是因为配置对象即是代码：</p>
+<h3 id="6-1-最简单的配置"><a href="#6-1-最简单的配置" class="headerlink" title="6.1 最简单的配置"></a>6.1 最简单的配置</h3><h3 id="6-2-多个Target"><a href="#6-2-多个Target" class="headerlink" title="6.2 多个Target"></a>6.2 多个Target</h3><h3 id="6-3-使用其他配置语言"><a href="#6-3-使用其他配置语言" class="headerlink" title="6.3 使用其他配置语言"></a>6.3 使用其他配置语言</h3><h2 id="七-模块-Modules"><a href="#七-模块-Modules" class="headerlink" title="七 模块(Modules)"></a>七 模块(Modules)</h2><p>在模块化编程中，开发者将程序分解成离散功能块(discrete chunks of functionality)，并称之为模块。</p>
+<p>每个模块具有比完整程序更小的接触面，使得校验、调试、测试轻而易举。 精心编写的模块提供了可靠的抽象和封装界限，使得应用程序中每个模块都具有条理清楚的设计和明确的目的。</p>
+<p>Node.js 从最一开始就支持模块化编程。然而，在 web，模块化的支持正缓慢到来。在 web 存在多种支持 JavaScript 模块化的工具，这些工具各有优势和限制。<strong>webpack 基于从这些系统获得的经验教训，并将模块的概念应用于项目中的任何文件</strong>。</p>
+<h3 id="7-1-什么是webpack模块"><a href="#7-1-什么是webpack模块" class="headerlink" title="7.1 什么是webpack模块"></a>7.1 什么是webpack模块</h3><p>对比 Node.js 模块，webpack 模块能够以各种方式表达它们的依赖关系，几个例子如下：</p>
+<ol>
+<li>ES2015 import 语句</li>
+<li>CommonJS require() 语句</li>
+<li>AMD define 和 require 语句</li>
+<li>css/sass/less 文件中的 @import 语句。</li>
+<li>样式(url(…))或 HTML 文件(<img src="http://you img base url/...?e=1651651637&token=your qiniu access key:fTbBN8ruLIN1WKDF_kzOYfl2Jq0=">)中的图片链接(image url)<blockquote>
+<p>webpack 1 需要特定的 loader 来转换 ES6 2015 import，然而通过 webpack 2 可以开箱即用。</p>
+</blockquote>
+<h3 id="7-2-支持的模块类型"><a href="#7-2-支持的模块类型" class="headerlink" title="7.2 支持的模块类型"></a>7.2 支持的模块类型</h3><strong>webpack 通过 loader 可以支持各种语言和预处理器编写模块</strong>。loader 描述了 webpack 如何处理 非 JavaScript(non-JavaScript) 模块，并且在bundle中引入这些依赖。 webpack 社区已经为各种流行语言和语言处理器构建了 loader，包括：<br>CoffeeScript,TypeScript,ESNext (Babel),Sass,Less,Stylus  </li>
+</ol>
+<p>总的来说，webpack 提供了可定制的、强大和丰富的 API，允许任何技术栈使用 webpack，保持了在你的开发、测试和生成流程中无侵入性(non-opinionated)。</p>
+<p>有关完整列表，请参考 loader 列表 或 自己编写。</p>
+<h2 id="八-模块解析-Module-Resolution"><a href="#八-模块解析-Module-Resolution" class="headerlink" title="八 模块解析(Module Resolution)"></a>八 模块解析(Module Resolution)</h2><p>resolver 是一个库(library)，用于帮助找到模块的绝对路径。一个模块可以作为另一个模块的依赖模块，然后被后者引用，如下：</p>
+<pre><code>import foo from &apos;path/to/module&apos;
+// 或者
+require(&apos;path/to/module&apos;)
+</code></pre><p>所依赖的模块可以是来自应用程序代码或第三方的库(library)。resolver 帮助 webpack 找到 bundle 中需要引入的模块代码，这些代码在包含在每个 require/import 语句中。 当打包模块时，webpack 使用 enhanced-resolve 来解析文件路径</p>
+<h3 id="8-1-webpack中的解析规则"><a href="#8-1-webpack中的解析规则" class="headerlink" title="8.1 webpack中的解析规则"></a>8.1 webpack中的解析规则</h3><p>使用 enhanced-resolve，webpack 能够解析三种文件路径：</p>
+<h4 id="1-绝对路径"><a href="#1-绝对路径" class="headerlink" title="1 绝对路径"></a>1 绝对路径</h4><pre><code>import &quot;/home/me/file&quot;;
+import &quot;C:\\Users\\me\\file&quot;;
+</code></pre><p>由于我们已经取得文件的绝对路径，因此不需要进一步再做解析。</p>
+<h4 id="2-相对路径"><a href="#2-相对路径" class="headerlink" title="2 相对路径"></a>2 相对路径</h4><pre><code>import &quot;../src/file1&quot;;
+import &quot;./file2&quot;;
+</code></pre><p>在这种情况下，使用 import 或 require 的资源文件(resource file)所在的目录被认为是上下文目录(context directory)。在 import/require 中给定的相对路径，会添加此上下文路径(context path)，以产生模块的绝对路径(absolute path)。</p>
+<h4 id="3-模块路径"><a href="#3-模块路径" class="headerlink" title="3 模块路径"></a>3 模块路径</h4><pre><code>import &quot;module&quot;;
+import &quot;module/lib/file&quot;;
+</code></pre><p>模块将在 resolve.modules 中指定的所有目录内搜索。 你可以替换初始模块路径，此替换路径通过使用 resolve.alias 配置选项来创建一个别名。</p>
+<ol>
+<li>一旦根据上述规则解析路径后，解析器(resolver)将检查路径是否指向文件或目录。如果路径指向一个文件：<ol>
+<li>如果路径具有文件扩展名，则被直接将文件打包。</li>
+<li>否则，将使用 [resolve.extensions] 选项作为文件扩展名来解析，此选项告诉解析器在解析中能够接受哪些扩展名（例如 .js, .jsx）。</li>
+</ol>
+</li>
+<li>如果路径指向一个文件夹，则采取以下步骤找到具有正确扩展名的正确文件：<ol>
+<li>如果文件夹中包含 package.json 文件，则按照顺序查找 resolve.mainFields 配置选项中指定的字段。并且 package.json 中的第一个这样的字段    确定文件路径。</li>
+<li>如果 package.json 文件不存在或者 package.json 文件中的 main 字段没有返回一个有效路径，则按照顺序查找 resolve.mainFiles 配置选项中指定的文件名，看是否能在 import/require 目录下匹配到一个存在的文件名。</li>
+<li>文件扩展名通过 resolve.extensions 选项采用类似的方法进行解析。<br>webpack 根据构建目标(build target)为这些选项提供了合理的默认配置。<h3 id="8-2-解析Loader-Resolving-Loader"><a href="#8-2-解析Loader-Resolving-Loader" class="headerlink" title="8.2 解析Loader(Resolving Loader)"></a>8.2 解析Loader(Resolving Loader)</h3>Loader 解析遵循与文件解析器指定的规则相同的规则。但是 resolveLoader 配置选项可以用来为 Loader 提供独立的解析规则。<h3 id="8-3-缓存"><a href="#8-3-缓存" class="headerlink" title="8.3 缓存"></a>8.3 缓存</h3>每个文件系统访问都被缓存，以便更快触发对同一文件的多个并行或串行请求。在观察模式下，只有修改过的文件会从缓存中摘出。如果关闭观察模式，在每次编译前清理缓存。</li>
+</ol>
+</li>
+</ol>
+<p>有关上述配置的更多信息，请查看解析 API学习。</p>
+<h2 id="九-依赖图-Dependency-Graph"><a href="#九-依赖图-Dependency-Graph" class="headerlink" title="九 依赖图(Dependency Graph)"></a>九 依赖图(Dependency Graph)</h2><p>任何时候，一个文件依赖于另一个文件，webpack 就把此视为文件之间有依赖关系。这使得 webpack 可以接收非代码资源(non-code asset)（例如图像或 web 字体），并且可以把它们作为依赖提供给你的应用程序。</p>
+<p>webpack 从命令行或配置文件中定义的一个模块列表开始，处理你的应用程序。 从这些入口起点开始，webpack 递归地构建一个依赖图，这个依赖图包含着应用程序所需的每个模块，然后将所有这些模块打包为少量的 bundle - 通常只有一个 - 可由浏览器加载。</p>
+<blockquote>
+<p>对于 HTTP/1.1 客户端，由 webpack 打包你的应用程序会尤其强大，因为在浏览器发起一个新请求时，它能够减少应用程序必须等待的时间。对于 HTTP/2，你还可以使用代码拆分(Code Splitting)以及通过 webpack 打包来实现最佳优化。</p>
+</blockquote>
+<h2 id="零-构建目标-Targets"><a href="#零-构建目标-Targets" class="headerlink" title="零 构建目标(Targets)"></a>零 构建目标(Targets)</h2><p>因为服务器和浏览器代码都可以用 JavaScript 编写，所以 webpack 提供了多种构建目标(target)，你可以在你的 webpack 配置中设置。</p>
+<blockquote>
+<p>webpack 的 target 属性不要和 output.libraryTarget 属性混淆。有关 output 属性的更多信息，请查看我们的指南。</p>
+</blockquote>
+<h3 id="0-1-用法"><a href="#0-1-用法" class="headerlink" title="0.1 用法"></a>0.1 用法</h3><p>要设置 target 属性，只需要在你的 webpack 配置中设置 target 的值。<br>webpack.config.js</p>
+<pre><code>module.exports = {
+    target: &apos;node&apos;
+};
+</code></pre><p>在上面例子中，使用 node webpack 会编译为用于「类 Node.js」环境（使用 Node.js 的 require ，而不是使用任意内置模块（如 fs 或 path）来加载 chunk）。</p>
+<p>每个target都有各种部署(deployment)/环境(environment)特定的附加项，以支持满足其需求。查看target 的可用值。</p>
+<h3 id="0-2-多个Target"><a href="#0-2-多个Target" class="headerlink" title="0.2 多个Target"></a>0.2 多个Target</h3><p>尽管 webpack 不支持向 target 传入多个字符串，你可以通过打包两份分离的配置来创建同构的库：<br>webpack.config.js</p>
+<pre><code>var path = require(&apos;path&apos;);
+var serverConfig = {
+    target: &apos;node&apos;,
+    output: {
+        path: path.resolve(__dirname, &apos;dist&apos;),
+        filename: &apos;lib.node.js&apos;
+    }
+    //…
+};
+
+var clientConfig = {
+    target: &apos;web&apos;, // &lt;=== 默认是 &apos;web&apos;，可省略
+    output: {
+        path: path.resolve(__dirname, &apos;dist&apos;),
+        filename: &apos;lib.js&apos;
+    }
+    //…
+};
+
+module.exports = [ serverConfig, clientConfig ];
+</code></pre><p>上面的例子将在你的 dist 文件夹下创建 lib.js 和 lib.node.js 文件。</p>
+<h3 id="0-3-资源"><a href="#0-3-资源" class="headerlink" title="0.3 资源"></a>0.3 资源</h3><h2 id="一-Manifest"><a href="#一-Manifest" class="headerlink" title="一 Manifest"></a>一 Manifest</h2><p>在使用 webpack 构建的典型应用程序或站点中，有三种主要的代码类型：</p>
+<ol>
+<li>你或你的团队编写的源码。</li>
+<li>你的源码会依赖的任何第三方的 library 或 “vendor” 代码。</li>
+<li>webpack 的 runtime 和 manifest，管理所有模块的交互。<br>本文将重点介绍这三个部分中的最后部分，runtime 和 manifest。<h3 id="1-1-Runtime"><a href="#1-1-Runtime" class="headerlink" title="1.1 Runtime"></a>1.1 Runtime</h3><h3 id="1-2-Manifest"><a href="#1-2-Manifest" class="headerlink" title="1.2 Manifest"></a>1.2 Manifest</h3><h3 id="1-3-问题"><a href="#1-3-问题" class="headerlink" title="1.3 问题"></a>1.3 问题</h3></li>
+</ol>
+<h2 id="二-模块热替换-Hot-Module-Replace"><a href="#二-模块热替换-Hot-Module-Replace" class="headerlink" title="二 模块热替换(Hot Module Replace)"></a>二 模块热替换(Hot Module Replace)</h2><h3 id="2-1-这一切是如何运行的？"><a href="#2-1-这一切是如何运行的？" class="headerlink" title="2.1 这一切是如何运行的？"></a>2.1 这一切是如何运行的？</h3><h3 id="2-2-在应用程序中"><a href="#2-2-在应用程序中" class="headerlink" title="2.2 在应用程序中"></a>2.2 在应用程序中</h3><h3 id="2-3-在编译器中"><a href="#2-3-在编译器中" class="headerlink" title="2.3 在编译器中"></a>2.3 在编译器中</h3><h3 id="2-4-在HMT-Runtime中"><a href="#2-4-在HMT-Runtime中" class="headerlink" title="2.4 在HMT Runtime中"></a>2.4 在HMT Runtime中</h3><h3 id="2-5-入门"><a href="#2-5-入门" class="headerlink" title="2.5 入门"></a>2.5 入门</h3><p style="text-align:right">2.9 18:22</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack/" rel="tag"><i class="fa fa-tag"></i> webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/pdf/jslib/犀利开发-jQuery内核详解与实践/第 9 章 jQ辅助工具/" rel="next" title="犀利开发—jQuery内核详解与实践-9_jQ辅助工具">
+                <i class="fa fa-chevron-left"></i> 犀利开发—jQuery内核详解与实践-9_jQ辅助工具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/w3/pack/webpack_4-guides/" rel="prev" title="Webpack_4-Guides">
+                Webpack_4-Guides <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">366</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-概念"><span class="nav-text">一 概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-入口-entry"><span class="nav-text">1.1 入口(entry)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-出口-output"><span class="nav-text">1.2 出口(output)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-loader"><span class="nav-text">1.3 loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-插件-plugins"><span class="nav-text">1.4 插件(plugins)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-入口起点-Entry-Points"><span class="nav-text">二 入口起点(Entry Points)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-单个入口（简写）语法"><span class="nav-text">2.1 单个入口（简写）语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-对象语法"><span class="nav-text">2.2 对象语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-常见场景"><span class="nav-text">2.3 常见场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-分离应用程序"><span class="nav-text">1 分离应用程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-多页面应用程序"><span class="nav-text">2 多页面应用程序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-输出-Output"><span class="nav-text">三 输出(Output)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-用法"><span class="nav-text">3.1 用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-多个入口起点"><span class="nav-text">3.2 多个入口起点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-高级进阶"><span class="nav-text">3.3 高级进阶</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-Loader"><span class="nav-text">四 Loader</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-示例"><span class="nav-text">4.1 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-使用Loader"><span class="nav-text">4.2 使用Loader</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-配置"><span class="nav-text">1 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-内联"><span class="nav-text">2 内联</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-CLI"><span class="nav-text">3 CLI</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-Loader特性"><span class="nav-text">4.3 Loader特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-解析Loader"><span class="nav-text">4.4 解析Loader</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-插件-Plugins"><span class="nav-text">五 插件(Plugins)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-剖析"><span class="nav-text">5.1 剖析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-用法"><span class="nav-text">5.2 用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-配置"><span class="nav-text">5.3 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-Node-API"><span class="nav-text">5.4 Node API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-配置-Configuration"><span class="nav-text">六 配置(Configuration)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-最简单的配置"><span class="nav-text">6.1 最简单的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-多个Target"><span class="nav-text">6.2 多个Target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-使用其他配置语言"><span class="nav-text">6.3 使用其他配置语言</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七-模块-Modules"><span class="nav-text">七 模块(Modules)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-什么是webpack模块"><span class="nav-text">7.1 什么是webpack模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-支持的模块类型"><span class="nav-text">7.2 支持的模块类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八-模块解析-Module-Resolution"><span class="nav-text">八 模块解析(Module Resolution)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-webpack中的解析规则"><span class="nav-text">8.1 webpack中的解析规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-绝对路径"><span class="nav-text">1 绝对路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-相对路径"><span class="nav-text">2 相对路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-模块路径"><span class="nav-text">3 模块路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-解析Loader-Resolving-Loader"><span class="nav-text">8.2 解析Loader(Resolving Loader)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-缓存"><span class="nav-text">8.3 缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九-依赖图-Dependency-Graph"><span class="nav-text">九 依赖图(Dependency Graph)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零-构建目标-Targets"><span class="nav-text">零 构建目标(Targets)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1-用法"><span class="nav-text">0.1 用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-2-多个Target"><span class="nav-text">0.2 多个Target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-3-资源"><span class="nav-text">0.3 资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-Manifest"><span class="nav-text">一 Manifest</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Runtime"><span class="nav-text">1.1 Runtime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Manifest"><span class="nav-text">1.2 Manifest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-问题"><span class="nav-text">1.3 问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-模块热替换-Hot-Module-Replace"><span class="nav-text">二 模块热替换(Hot Module Replace)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-这一切是如何运行的？"><span class="nav-text">2.1 这一切是如何运行的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-在应用程序中"><span class="nav-text">2.2 在应用程序中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-在编译器中"><span class="nav-text">2.3 在编译器中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-在HMT-Runtime中"><span class="nav-text">2.4 在HMT Runtime中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-入门"><span class="nav-text">2.5 入门</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">602.6k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="proxy,">
 
 
 
@@ -89,13 +89,14 @@
 
 
 <meta name="description" content="文档：https://www.charlesproxy.com/documentation/configuration/external-proxies/  2020.9.16 星期三  11：18    设置Setup Charles Proxy on MacCharles使用详解 实际设备连接同一局域网 证书安装地址: chls.pro/ssl不同手机代理安装方式不一样，基本大同小异.下载证书">
+<meta name="keywords" content="proxy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Charles使用">
 <meta property="og:url" content="http://yoursite.com/sum/others/charles使用/index.html">
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="文档：https://www.charlesproxy.com/documentation/configuration/external-proxies/  2020.9.16 星期三  11：18    设置Setup Charles Proxy on MacCharles使用详解 实际设备连接同一局域网 证书安装地址: chls.pro/ssl不同手机代理安装方式不一样，基本大同小异.下载证书">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-05T10:02:35.243Z">
+<meta property="og:updated_time" content="2022-05-04T07:28:45.998Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Charles使用">
 <meta name="twitter:description" content="文档：https://www.charlesproxy.com/documentation/configuration/external-proxies/  2020.9.16 星期三  11：18    设置Setup Charles Proxy on MacCharles使用详解 实际设备连接同一局域网 证书安装地址: chls.pro/ssl不同手机代理安装方式不一样，基本大同小异.下载证书">
@@ -348,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-05T18:02:35+08:00">
-                2020-10-05
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-04T15:28:45+08:00">
+                2022-05-04
               </time>
             
           </span>
@@ -420,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  185
+                  217
                 </span>
               
 
@@ -475,6 +476,24 @@
 <h2 id="基本设置"><a href="#基本设置" class="headerlink" title="基本设置"></a>基本设置</h2><p>ssl,https<br>view–&gt; focus Hosts<br>tools –&gt; no caching<br>tools –&gt; map remote</p>
 <p>Help –&gt; local IP Adress</p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>把url参数（json）拿到 json在线格式化，会有字段丢失。（可能是找的转化工具有问题）</p>
+<h2 id="https-乱码"><a href="#https-乱码" class="headerlink" title="https/乱码"></a>https/乱码</h2><!-- 
+#### mac
+然后第一步：在导航栏选择Proxy->ProxySettings 或者在界面工具栏选择设置（齿轮图标）->ProxySettings --如图修改，完事点击OK
+  enable socks proxy
+第二步，配置并且安装 -  手机
+第三步：在浏览器输入chls.pro/ssl地址后
+第四步：安装描述文件--点击安装->安装->完成
+第五步：选择设置->通用->关于本机->证书信任设置->如图-打开开关选择信任
+第六步:安装证书到当前电脑-输入钥匙串密码
+第七步：打开钥匙串，选择刚刚的证书 Charles 开头的-> 双击证书-然后如图修改，之后点击关闭->弹窗输入密码完成
+第八步:SSL Proxying Settings SSL端口号设置
+  client certificates: host: *.* -->
+<p>#### 乱码<!-- (Mac 等需要添加SSL setting -> location) --><br>一般出现乱码的原因就是没有设置这个:<br>SSL Proxying Settings -&gt; SSL Proxying:  enable ssl proxying; location: *:443<br><!-- [Charles https抓包乱码解决(Mac版本)](https://www.jianshu.com/p/0caaea590c8c) --></p>
+<!-- 
+## 破解
+Registered Name: https://zhile.io
+License Key: 48891cf209c6d32bf4
+-->
 <p style="text-align:right"> </p>
 
 
@@ -526,6 +545,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/proxy/" rel="tag"><i class="fa fa-tag"></i> proxy</a>
+          
+        </div>
+      
 
       
       
@@ -535,7 +560,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sum/ser/node(服务端)常用npm包/" rel="next" title="Node(服务端)常用npm包">
+              <a href="/sum/server/node(服务端)常用npm包/" rel="next" title="Node(服务端)常用npm包">
                 <i class="fa fa-chevron-left"></i> Node(服务端)常用npm包
               </a>
             
@@ -578,7 +603,7 @@
 <a class="jiathis_button_douban">豆瓣</a>
 <a class="jiathis_button_share">一键分享</a>
 
-<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
 <a class="jiathis_counter_style"></a>
 </div>
 <script type="text/javascript">
@@ -589,7 +614,7 @@ var jiathis_config={
   hideMore:false
 }
 </script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 <!-- JiaThis Button END -->
       
     </div>
@@ -659,7 +684,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">339</span>
+                  <span class="site-state-item-count">366</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -670,7 +695,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -681,7 +706,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -764,7 +789,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置"><span class="nav-text">设置</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#实际"><span class="nav-text">实际</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设备连接"><span class="nav-text">设备连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证书安装"><span class="nav-text">证书安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本设置"><span class="nav-text">基本设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-text">使用</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置"><span class="nav-text">设置</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#实际"><span class="nav-text">实际</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设备连接"><span class="nav-text">设备连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证书安装"><span class="nav-text">证书安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本设置"><span class="nav-text">基本设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-text">使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#https-乱码"><span class="nav-text">https/乱码</span></a></li></ol></li></div>
             
 
           </div>
@@ -784,7 +809,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -798,7 +823,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">572.1k</span>
+    <span title="Site words total count">602.6k</span>
   
 </div>
 

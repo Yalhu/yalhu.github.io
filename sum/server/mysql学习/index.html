@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="sql,mysql,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2019.5.5 星期日 21：00  语法基本数据类型CURD#### 更新字段值UPDATE book_comment SET title=left(content,10) WHERE product_id=24243060;          #### 查找有无数据Mysql判断记录是否存在select count(*) from tablename where col = ‘col’;se">
+<meta name="keywords" content="sql,mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql学习">
+<meta property="og:url" content="http://yoursite.com/sum/server/mysql学习/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2019.5.5 星期日 21：00  语法基本数据类型CURD#### 更新字段值UPDATE book_comment SET title=left(content,10) WHERE product_id=24243060;          #### 查找有无数据Mysql判断记录是否存在select count(*) from tablename where col = ‘col’;se">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-09-04T16:03:28.825Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mysql学习">
+<meta name="twitter:description" content="2019.5.5 星期日 21：00  语法基本数据类型CURD#### 更新字段值UPDATE book_comment SET title=left(content,10) WHERE product_id=24243060;          #### 查找有无数据Mysql判断记录是否存在select count(*) from tablename where col = ‘col’;se">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/server/mysql学习/">
+
+
+
+
+
+  <title>Mysql学习 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/server/mysql学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mysql学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-05T00:00:00Z">
+                2019-05-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-09-04T16:03:28Z">
+                2021-09-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/server/mysql学习/" class="leancloud_visitors" data-flag-title="Mysql学习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,973
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p style="text-align:right">2019.5.5 星期日 21：00</p>
+
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><h3 id="CURD"><a href="#CURD" class="headerlink" title="CURD"></a>CURD</h3><p>#### 更新字段值<br>UPDATE book_comment SET title=left(content,10) WHERE product_id=24243060;         </p>
+<p>#### 查找有无数据<br><a href="https://blog.csdn.net/linshichen/article/details/52919383" target="_blank" rel="noopener">Mysql判断记录是否存在</a><br>select count(*) from tablename where col = ‘col’;<br>select 1 from tablename where col = ‘col’ limit 1;<br>执行这条sql语句，所影响的行数不是0就是1。<br>特别解释下limit 1，mysql在找到一条记录后就不会往下继续找了。性能提升很多。</p>
+<p>#### 查看<br>select * from book_comment limit 10\G       </p>
+<h3 id="查字段（名称，类型）"><a href="#查字段（名称，类型）" class="headerlink" title="查字段（名称，类型）"></a>查字段（名称，类型）</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">columns</span> <span class="keyword">from</span> site_book_comment;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> column_name,column_comment,data_type <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name=<span class="string">'查询表名称'</span> <span class="keyword">and</span> table_schema=<span class="string">'数据库名称'</span></span><br><span class="line"><span class="keyword">select</span> COLUMN_NAME,DATA_TYPE,COLUMN_COMMENT <span class="keyword">from</span> information_schema.COLUMNS <span class="keyword">where</span> table_name = <span class="string">'表名'</span> <span class="keyword">and</span> table_schema = <span class="string">'数据库名称'</span>;</span><br></pre></td></tr></table></figure>
+<p>2) mysql 查看表中字段的数据类型<br><!-- // 2) [mysql 查看表中字段的数据类型](https://blog.csdn.net/god_wen/article/details/79271032) --><br>// 2_1 查询结果显示<br>desc 表名;<br>show columns from 表名;<br>describe 表名;<br>// 2_2 sql语句显示<br>show create table 表名;<br>// 2_3:还可以通过专门的管理表来查看<br>use information_schema<br>select * from columns where table_name=’表名’;</p>
+<h3 id="密码设置"><a href="#密码设置" class="headerlink" title="密码设置"></a>密码设置</h3><!-- [Mysql 免安装版 root@localhost第一次密码设置](https://cloud.tencent.com/developer/article/1501816) -->
+<p>设置密码：<code>./bin/mysqladmin -u root password 123456</code><br><!-- `mysqladmin -u root password oldpass "newpass"` --><br><code>mysqladmin -u root -p password</code> 回车后直接输入新密码</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="keyword">PASSWORD</span> <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'localhost'</span> = <span class="keyword">PASSWORD</span>(<span class="string">'newpass'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">## </span></span><br><span class="line"><span class="keyword">use</span> mysql;</span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">SET</span> <span class="keyword">Password</span> = <span class="keyword">PASSWORD</span>(<span class="string">'newpass'</span>) <span class="keyword">WHERE</span> <span class="keyword">user</span> = <span class="string">'root'</span>;</span><br><span class="line"><span class="keyword">FLUSH</span> <span class="keyword">PRIVILEGES</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 在丢失root密码的时候，可以这样</span></span><br><span class="line"><span class="comment"># `　mysqld_safe --skip-grant-tables &amp; mysql -u root mysql`</span></span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">SET</span> <span class="keyword">password</span>=<span class="keyword">PASSWORD</span>(<span class="string">"new password"</span>) <span class="keyword">WHERE</span> <span class="keyword">user</span>=<span class="string">'root'</span>;</span><br><span class="line"><span class="keyword">FLUSH</span> <span class="keyword">PRIVILEGES</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="设置权限"><a href="#设置权限" class="headerlink" title="设置权限"></a>设置权限</h3><p>允许远程访问<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> mysql;</span><br><span class="line"><span class="keyword">select</span> host,<span class="keyword">user</span> <span class="keyword">from</span> <span class="keyword">user</span>;</span><br><span class="line"><span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> host = <span class="string">'%'</span> <span class="keyword">where</span> <span class="keyword">user</span> = <span class="string">'root'</span>;</span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span>  <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">'root'</span>@<span class="string">'%'</span>;</span><br><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">grants</span> <span class="keyword">for</span> <span class="string">'root'</span>@<span class="string">'%'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 2. 如果想让授权的用户，也可以将这些权限 grant 给其他用户，需要选项 “grant option“ </span></span><br><span class="line"><span class="comment">-- 这个特性一般用不到。实际中，数据库权限最好由 DBA 来统一管理。</span></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> <span class="string">'root'</span>@<span class="string">'%'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'sql-0122'</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> <span class="keyword">OPTION</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--  grant, revoke 用户权限后，该用户只有重新连接 MySQL 数据库，权限才能生效。</span></span><br><span class="line"><span class="comment">### 撤销 只需要把关键字 to 换成 from 即可：</span></span><br><span class="line"><span class="keyword">revoke</span> <span class="keyword">all</span> <span class="keyword">on</span> *.* <span class="keyword">from</span> dba@localhost;</span><br></pre></td></tr></table></figure></p>
+<p>因为新版的的mysql版本已经将创建账户和赋予权限的方式分开了<br>创建账户:create user ‘用户名‘@’访问主机’ identified by ‘密码’;<br>赋予权限:grant 权限列表 on 数据库 to ‘用户名‘@’访问主机’ ;(修改权限时在后面加with grant option)<br><code>grant select, insert, update, delete on testdb.* to common_user@&#39;%&#39;</code></p>
+<h2 id="时间自动更新"><a href="#时间自动更新" class="headerlink" title="时间自动更新"></a>时间自动更新</h2><!-- 当插入一条数据，createtime列和updatetime列由数据库获取当前时间自动创建时间;
+当修改一条记录时，updatetime列由数据库获取按当前时间自动更新时间。 -->
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">`creat_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP</span><br><span class="line">`update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON <span class="keyword">UPDATE</span> <span class="keyword">CURRENT_TIMESTAMP</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>MySQL5.6.5以上的版本、CURRENT_TIMESTAMP和ON UPDATE CURRENT_TIMESTAMP都适用于datetime、timestamp类型。</p>
+</blockquote>
+<p>上述在navicat中的操作：找到相应的表—右击—&gt;点击 设计表—&gt;<!-- 如下图 --> 选中 ‘根据当前时间戳更新’。<br><!-- [mysql中更新时间和创建时间的自动更新](https://blog.csdn.net/qq_35835624/article/details/79485609) --></p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p><a href="https://www.cnblogs.com/whgk/p/6179612.html" target="_blank" rel="noopener">[MySQL(五) MySQL中的索引详讲]</a><br>三、索引的分类　　<br>注意：索引是在存储引擎中实现的，也就是说不同的存储引擎，会使用不同的索引<br>　　　　　　　　　　　　MyISAM和InnoDB存储引擎：只支持BTREE索引， 也就是说默认使用BTREE，不能够更换<br>　　　　　　　　　　　　MEMORY/HEAP存储引擎：支持HASH和BTREE索引</p>
+<p>1、索引我们分为四类来讲 单列索引(普通索引，唯一索引，主键索引)、组合索引、全文索引、空间索引、      </p>
+<p>1.1、单列索引：一个索引只包含单个列，但一个表中可以有多个单列索引。 这里不要搞混淆了。<br>1.1.1、普通索引：MySQL中基本索引类型，没有什么限制，允许在定义索引的列中插入重复值和空值，纯粹为了查询数据更快一点。<br>1.1.2、唯一索引：索引列中的值必须是唯一的，但是允许为空值，<br>1.1.3、主键索引：是一种特殊的唯一索引，不允许有空值。</p>
+<p>1.2、组合索引<br>在表中的多个字段组合上创建的索引，只有在查询条件中使用了这些字段的左边字段时，索引才会被使用，使用组合索引时遵循最左前缀集合。这个如果还不明白，等后面举例讲解时在细说　</p>
+<p>1.3、全文索引<br>全文索引，只有在MyISAM引擎上才能使用，只能在CHAR,VARCHAR,TEXT类型字段上使用全文索引，介绍了要求，说说什么是全文索引，就是在一堆文字中，通过其中的某个关键字等，就能找到该字段所属的记录行，比如有”你是个大煞笔，二货 …” 通过大煞笔，可能就可以找到该条记录。这里说的是可能，因为全文索引的使用涉及了很多细节，我们只需要知道这个大概意思，如果感兴趣进一步深入使用它，那么看下面测试该索引时，会给出一个博文，供大家参考。</p>
+<p>1.4、空间索引<br>空间索引是对空间数据类型的字段建立的索引，MySQL中的空间数据类型有四种，GEOMETRY、POINT、LINESTRING、POLYGON。<br>在创建空间索引时，使用SPATIAL关键字。</p>
+<p>要求，引擎为MyISAM，创建空间索引的列，必须将其声明为NOT NULL。具体细节看下面　　　</p>
+<h2 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h2><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">MySQL Community Downloads</a><br><a href="https://downloads.mysql.com/archives/community/" target="_blank" rel="noopener">MySQL Product Archives</a></p>
+<h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><p>安装mysql服务，命令行必须以管理员身份打开（同mongo）<br>  记得关闭开机自动启动（同mongo服务）。<br>  net start mysql 必须管理员。否则提示发生系统错误 5；拒绝访问！<br>环境变量配置  可选。<br><!-- mysqld --initialize --lower-case-table-names=1 --><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mysqld --defaults-file="D:\server\mysql-8.0.21\mysql.ini" --initialize-insecure --user=root --console</span></span><br><span class="line">mysqld --defaults-file=<span class="string">"D:\server\mysql-8.0.21\mysql.ini"</span> --initialize --user=root --console</span><br><span class="line"></span><br><span class="line">mysqld --install MySQL --defaults-file=<span class="string">"D:\server\mysql-8.0.21\mysql.ini"</span> <span class="comment">## 安装服务</span></span><br><span class="line">mysqld --remove <span class="comment">## 删除服务</span></span><br><span class="line">net start mysql <span class="comment">## 启动。 或者 mysqld --defaults-flie="D:\server\mysql-8.0.21\mysql.ini" --console</span></span><br><span class="line">net stop MySQL <span class="comment">## 关闭。或者 mysqladmin -uroot shutdown</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 连接mysql</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 如果使用--initialize-insecure 需要设置密码</span></span><br><span class="line">mysql -u root -p <span class="comment"># （第一次登录没有密码，直接按回车过）</span></span><br><span class="line"><span class="comment">## 修改密码。（注意不是sql语句，是命令行）</span></span><br><span class="line">mysqladmin -u root -p password <span class="comment"># 修改密码；输入密码时回车，然后才输入新的密码123456；确认</span></span><br><span class="line">mysql -u root -p <span class="comment">## 设置密码后。用密码登录</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 如果使用--initialize ；会打印一个密码；然后去修改</span></span><br><span class="line">mysql -u root -p <span class="built_in">pwd</span></span><br><span class="line">ALTER USER <span class="string">'root'</span>@<span class="string">'localhost'</span> IDENTIFIED BY <span class="string">'123456'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> <span class="comment"># 退出</span></span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>–defaults-file 必须放置第一个位置。否则会报错</li>
+<li>–console 是输出过程。否则中间报错，并不清楚</li>
+<li>-insecure 初次设置和用户密码有关。设置或修改<br>mysqld –initialize-insecure自动生成无密码的root用户，<br>mysqld –initialize自动生成带随机密码的root用户。</li>
+<li>如果出错/初始化的时候，要清空data文件夹</li>
+<li>先启动mysqld –defaults-file 和 mysqld install 先后位置应该可以换</li>
+</ol>
+<p>mysql.ini<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[mysql]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置mysql客户端默认字符集</span></span><br><span class="line"><span class="attr">default-character-set</span>=utf8 </span><br><span class="line"></span><br><span class="line"><span class="section">[mysqld]</span></span><br><span class="line"><span class="comment">#设置3306端口</span></span><br><span class="line"><span class="attr">port</span> = <span class="number">3306</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置mysql的安装目录</span></span><br><span class="line"><span class="attr">basedir</span>=<span class="string">"D:/Server/mysql-8.0.21"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置mysql数据库的数据的存放目录</span></span><br><span class="line"><span class="attr">datadir</span>=<span class="string">"D:/data/mysql"</span></span><br><span class="line"><span class="attr">log-error</span>=<span class="string">"D:/var/log/mysql_err.log"</span></span><br><span class="line"><span class="comment"># 允许最大连接数</span></span><br><span class="line"><span class="attr">max_connections</span>=<span class="number">200</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 服务端使用的字符集默认为8比特编码的latin1字符集</span></span><br><span class="line"><span class="attr">character-set-server</span>=utf8</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新表时将使用的默认存储引擎</span></span><br><span class="line"><span class="attr">default-storage-engine</span>=INNODB</span><br></pre></td></tr></table></figure></p>
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><h4 id="“Security”"><a href="#“Security”" class="headerlink" title="“Security”"></a>“Security”</h4><p><code>Fatal error: Please read “Security” section of the manual to find out how to run mysqld as root</code><br>需要指定user <code>mysqld --defaults-file=/etc/mysql.conf --user=root</code></p>
+<h4 id="mysql-sock"><a href="#mysql-sock" class="headerlink" title="mysql.sock"></a>mysql.sock</h4><p><code>Can&#39;t connect to local MySQL server through socket &#39;/tmp/mysql.sock&#39; (2)</code><br>登录需要指定host  <code>mysql -u root -h 127.0.0.1</code>。<br>或者指定 mysql sock的地址，并创建软链接在 /etc/mysql.conf<br><code>ln -s /usr/local/mysql-8.0/mysql.socket /tmp/mysql.sock</code></p>
+<h4 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h4><p>设置运行连接权限。 host-&gt; %, 权限：all等<br>防火墙</p>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><p>实际用了MySQL-Front，sqlYog，还有基于php的mysql-admin<br><!-- 
+\# [MySQL客户端工具的选择](https://www.cnblogs.com/william-lee/p/7065061.html)      
+\# [[大家常用哪个MySQL客户端工具，除了命令行那个mysql之外？]](https://www.zhihu.com/question/20423448)     
+ --><br><!-- \# [[7款经典的MySQL客户端软件]](https://blog.csdn.net/lidujun1028/article/details/54616000)    --></p>
+<ol>
+<li>EMS MySQL Manager<br>　　强大的mysql管理工具，允许用户通过图形界面创建或编辑数据库对象，并提供通过sql语句管理用户和权限，通过图形界面建立sql语句，自动生成html格式的数据库文档，导入/导出数据，查看/编辑blob字段等功能。     </li>
+<li><p>MySQL-Front<br>　　mysql数据库的图形工具，主要特性包括多文档界面，语法突出，拖拽方式的数据库和表格，可编辑/可增加/删除的域，可编辑/可插入/删除的记录，可显示的成员，可执行的SQL 脚本，提供与外程序接口，保存数据到CSV文件等。</p>
+</li>
+<li><p>Navicat for MySQL<br>　　一套适用于MySQL数据库系统地图形化数据库管理、报告以及监控的工具。新版本具有高性能的、具有商业智能的、强大的备份功能，此外还有许多的改进。含简体中文文件。</p>
+</li>
+<li><p>MySqlYog<br>　　MySqlYog软件是纯JAVA编写的软件，可以运行于WINDOWS，LINUX，UNIX系统，基本版本可以实现对数据库的基本管理，可视化创建表，视图，触发器，数据库的热备份，恢复,可远程管理系统等功能。</p>
+</li>
+<li><p>MySQL Browser</p>
+</li>
+<li>Workbench</li>
+<li>Sequel Pro</li>
+</ol>
+<h2 id="Navicat"><a href="#Navicat" class="headerlink" title="Navicat"></a>Navicat</h2><h4 id="windows-1"><a href="#windows-1" class="headerlink" title="windows"></a>windows</h4><!-- [Navicat Premium v15.0.21 中文最新破解版（附：激活工具）](https://defcon.cn/214.html)
+[Navicat Premium 15破解](https://www.cnblogs.com/kkdaj/p/12794804.html)
+[Navicat Premium 15 永久激活版安装教程](https://www.cnblogs.com/poloyy/p/12231357.html)
+
+链接：https://pan.baidu.com/s/1pGfZP9MssnaPEdI9Y3nK2Q 
+提取码：btm7 -->
+<p>当然有的朋友在官网下载比较慢，我也为大家准备好了，Navicat premium 15安装包和破解工具<br><!-- ​传送门： [Navicat15安装包和破解工具.zip](https://kkdaj.lanzous.com/ic03rbi) --></p>
+<p>在 1) Patch 中选择Backup、Host、Navicat v15这三个，默认也是选择了这三个；勾选这三个后点击Patch</p>
+<p>点击Patch按钮并找到Navicat Premium 15的安装目录的navicat.exe文件</p>
+<p>2.License. Product and Language</p>
+<p>License里选中Enterprise、在Produce里选择Premium、在Languages里选择Simplified Chinese(简体中文)</p>
+<p>3.Resale License</p>
+<p>保持默认选择即可</p>
+<p>4.Keygen / Offline Activation</p>
+<p>点击Generate按钮就会生成一个许可证秘钥，将许可证秘钥复制后就打开Navicat Premium 15</p>
+<h4 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h4><!-- 
+<!-- [Navicat Premium 15.0.14 macOS 官方中文原版使用Navicat 15 keygen注册激活](https://www.52pojie.cn/thread-1213276-1-1.html) 
+[[Navicat 15 keygen for Mac 安装教程 ]](https://www.52pojie.cn/thread-1101529-1-1.html) 
+-->
+<!-- $_PS: 下面指令需要root权限 -->
+<ol>
+<li>下载 navicat150_premium_cs.dmg 后打开并将 Navicat Premium 拖放到 /Application (即 应用程序) 中</li>
+<li>通过如下命令，使用 navicat-patcher 替换掉公钥<br><code>./navicat-patcher /Applications/Navicat\ Premium.app/</code></li>
+<li>生成一份自签名的代码证书，并总是信任该证书。这一步非常重要<br>按步骤生成了Navicat证书，也选择了“始终信任”，可是提示<br>&lt;!–<br><code>error: The specified item could not be found in the keychain.</code></li>
+</ol>
+<p>意思是钥匙串里没有证书，，搜索才知道，，要把证书拖动到“系统”下</p>
+<p>参考：刚刚也碰到了这个问题，创建证书到系统最后会报未知错误。网上找了一下解决方法：指定用于该证书的位置时先选择登录，创建成功后，这个证书显示在登录选项里面。选中这个证书直接拉到系统选项上，然后系统选项里也有了这个证书，最后删除登录里面的这个证书，就OK了。</p>
+<p>然后运行就可以了，会提示<br> –&gt;</p>
+<ol start="4">
+<li>用 codesign 对 libcc-premium.dylib （如果有的话） 和 Navicat Premium.app 重签名。</li>
+</ol>
+<p>如果你的Navicat Premium版本号高于15.0.0，<br>你必须先签名 libcc-premium.dylib，再签名 Navicat Premium.app。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">codesign -f -s Navicat /Applications/Navicat\ Premium.app/Contents/Frameworks/libcc-premium.dylib</span><br><span class="line">codesign -f -s Navicat /Applications/Navicat\ Premium.app/</span><br></pre></td></tr></table></figure>
+<p>5 接下来使用 navicat-keygen 来生成 序列号 和 激活码。</p>
+<ol start="6">
+<li>断开网络 并打开 Navicat<br>找到注册窗口，填入注册机给你的序列号。然后点击激活按钮。</li>
+<li>一般来说在线激活肯定会失败，这时候Navicat会询问你是否手动激活，直接选吧。</li>
+<li>在手动激活窗口你会得到一个请求码，复制它并把它粘贴到keygen里。最后别忘了连按至少两下回车结束输入。</li>
+<li>如果不出意外，你会得到一个看似用Base64编码的激活码。<br>直接复制它，并把它粘贴到Navicat的手动激活窗口，最后点激活按钮。<br>如果没什么意外的话应该能成功激活。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sql/" rel="tag"><i class="fa fa-tag"></i> sql</a>
+          
+            <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/server/mysql语法/" rel="next" title="Mysql语法">
+                <i class="fa fa-chevron-left"></i> Mysql语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/others/ssh基础/" rel="prev" title="Ssh基础">
+                Ssh基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">366</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#语法"><span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-text">基本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CURD"><span class="nav-text">CURD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查字段（名称，类型）"><span class="nav-text">查字段（名称，类型）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密码设置"><span class="nav-text">密码设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置权限"><span class="nav-text">设置权限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间自动更新"><span class="nav-text">时间自动更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-text">索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引擎"><span class="nav-text">引擎</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows"><span class="nav-text">windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux"><span class="nav-text">linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异常"><span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#“Security”"><span class="nav-text">“Security”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql-sock"><span class="nav-text">mysql.sock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#远程连接"><span class="nav-text">远程连接</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Navicat"><span class="nav-text">Navicat</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#windows-1"><span class="nav-text">windows</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mac"><span class="nav-text">mac</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">602.6k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

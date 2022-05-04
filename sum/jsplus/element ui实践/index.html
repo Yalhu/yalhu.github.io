@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2020.6.17 星期三  17：03   基础 可以按需引入,也可以全部引入     改变/自定义 element ui 样式:需要在全局中修改(style标签不加 scoped),比如 .el-carousel__button, 或者单独引入css文件,即使是在本模块import; 添加className 提高权重,即使!import 也不会生效(如果样式不是全局的话).$PS:听说可以在">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-09-04T09:12:58.309Z">
+<meta property="og:updated_time" content="2021-09-04T15:59:46.813Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Element-Ui 实践">
 <meta name="twitter:description" content="2020.6.17 星期三  17：03   基础 可以按需引入,也可以全部引入     改变/自定义 element ui 样式:需要在全局中修改(style标签不加 scoped),比如 .el-carousel__button, 或者单独引入css文件,即使是在本模块import; 添加className 提高权重,即使!import 也不会生效(如果样式不是全局的话).$PS:听说可以在">
@@ -349,7 +349,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-09-04T17:12:58+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-09-04T23:59:46+08:00">
                 2021-09-04
               </time>
             
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,097
+                  2,096
                 </span>
               
 
@@ -484,10 +484,9 @@
 <h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p>后台返回数据为0（为选择），如果options 中没有，会显示没有的id。<br>解决：可以手动添加一行（for 循环外）为0的情况。<code>&lt;el-option label=&quot;请选择&quot; :value=&quot;0&quot;&gt;&lt;/el-option&gt;</code><br>同理提交的时候，可以默认值为0，而不是空字符串。 （后端强类型，一定要）<br>&lt;!–<br>但是：上面添加的请选择就成为了一个选项 出现在了 下拉选择列表中了。<br>并不想要，只好再改回去。手动修改数据了。</p>
 <p>也不能把‘请选择’ 换为‘全部’。因为这里就是 请选择。<br>最后，筛选区可以把placeholder 改成 ‘全部’。<br>提交的时候也可以是0（需要和后端统一）<br> –&gt;</p>
 <h2 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h2><ol>
-<li>手动展开/收起 全部。<br><code>:default-expand-all=&quot;treeExpand&quot;</code> 只能设置默认状态。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">expandAll(bool) &#123;</span><br><span class="line">  <span class="keyword">var</span> nodes = <span class="keyword">this</span>.$refs.ProjectTree.store.nodesMap;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> nodes) &#123;</span><br><span class="line">    nodes[i].expanded = bool;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 或者</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="keyword">this</span>.$refs.tree.store._getAllNodes().length;i++)&#123;</span><br><span class="line">    <span class="keyword">this</span>.$refs.tree.store._getAllNodes()[i].expanded=<span class="keyword">this</span>.isexpand;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>手动展开/收起 全部。<br><code>:default-expand-all=&quot;treeExpand&quot;</code> 只能设置默认状态。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">expandAll(bool) &#123;</span><br><span class="line">  <span class="keyword">var</span> nodes = <span class="keyword">this</span>.$refs.ProjectTree.store.nodesMap;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> nodes) &#123;</span><br><span class="line">    nodes[i].expanded = bool;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 或者</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="keyword">this</span>.$refs.tree.store._getAllNodes().length;i++)&#123;</span><br><span class="line">    <span class="keyword">this</span>.$refs.tree.store._getAllNodes()[i].expanded=<span class="keyword">this</span>.isexpand;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<h2 id="tree-1"><a href="#tree-1" class="headerlink" title="tree"></a>tree</h2><ol>
 <li><p>props：curr-course-id 变化并不会引起css高亮。 #/17246<br>需要监听变化，然后调用api：setCurrentKey。或者</p>
  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.$refs.tree.store.nodesMap[oldValue].isCurrent = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">this</span>.$refs.tree.store.nodesMap[value].isCurrent = <span class="literal">true</span>;</span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -623,7 +622,7 @@ new Date().toLocaleDateString() 返回时间格式 2021/1/20
 <a class="jiathis_button_douban">豆瓣</a>
 <a class="jiathis_button_share">一键分享</a>
 
-<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
 <a class="jiathis_counter_style"></a>
 </div>
 <script type="text/javascript">
@@ -634,7 +633,7 @@ var jiathis_config={
   hideMore:false
 }
 </script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
 <!-- JiaThis Button END -->
       
     </div>
@@ -704,7 +703,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">339</span>
+                  <span class="site-state-item-count">366</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -715,7 +714,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -726,7 +725,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -809,7 +808,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#el-form"><span class="nav-text">el-form</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#el-form-item"><span class="nav-text">el-form-item</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表单验证"><span class="nav-text">表单验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select"><span class="nav-text">select</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tree"><span class="nav-text">tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tree-1"><span class="nav-text">tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#datePicker"><span class="nav-text">datePicker</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#el-form"><span class="nav-text">el-form</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#el-form-item"><span class="nav-text">el-form-item</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表单验证"><span class="nav-text">表单验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select"><span class="nav-text">select</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tree"><span class="nav-text">tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#datePicker"><span class="nav-text">datePicker</span></a></li></ol></div>
             
 
           </div>
@@ -829,7 +828,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -843,7 +842,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">572.1k</span>
+    <span title="Site words total count">602.6k</span>
   
 </div>
 

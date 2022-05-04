@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="taro.js,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2021.11.3 星期三 17:00    基础语法生命周期每次进入小程序首页的时候有时候会先执行onlaunch方法，有时又会先执行首页的onload的方法，最后经过确定，在微信小程序中这两个方法并没有执行先后的顺序，因为他们都是异步执行的。 问题： 本来按照事件顺序，小程序初始化时触发App里的onLaunch，后面再执行页面Page里的onLoad，但是在onLaunch里请求获取是否">
+<meta name="keywords" content="taro.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Taro使用记录">
+<meta property="og:url" content="http://yoursite.com/sum/miniapp/taro使用记录/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2021.11.3 星期三 17:00    基础语法生命周期每次进入小程序首页的时候有时候会先执行onlaunch方法，有时又会先执行首页的onload的方法，最后经过确定，在微信小程序中这两个方法并没有执行先后的顺序，因为他们都是异步执行的。 问题： 本来按照事件顺序，小程序初始化时触发App里的onLaunch，后面再执行页面Page里的onLoad，但是在onLaunch里请求获取是否">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-05-04T07:01:34.260Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Taro使用记录">
+<meta name="twitter:description" content="2021.11.3 星期三 17:00    基础语法生命周期每次进入小程序首页的时候有时候会先执行onlaunch方法，有时又会先执行首页的onload的方法，最后经过确定，在微信小程序中这两个方法并没有执行先后的顺序，因为他们都是异步执行的。 问题： 本来按照事件顺序，小程序初始化时触发App里的onLaunch，后面再执行页面Page里的onLoad，但是在onLaunch里请求获取是否">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/miniapp/taro使用记录/">
+
+
+
+
+
+  <title>Taro使用记录 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/miniapp/taro使用记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Taro使用记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-03T08:00:00+08:00">
+                2021-11-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-04T15:01:34+08:00">
+                2022-05-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/miniapp/" itemprop="url" rel="index">
+                    <span itemprop="name">miniapp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/miniapp/taro使用记录/" class="leancloud_visitors" data-flag-title="Taro使用记录">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,043
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p style="text-align:right"> 2021.11.3 星期三 17:00 </p>
+
+
+<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>每次进入小程序首页的时候有时候会先执行onlaunch方法，有时又会先执行首页的onload的方法，最后经过确定，在微信小程序中这两个方法并没有执行先后的顺序，因为他们都是异步执行的。</p>
+<p>问题： 本来按照事件顺序，小程序初始化时触发App里的onLaunch，后面再执行页面Page里的onLoad，但是在onLaunch里请求获取是否有权限，等待返回值的时候Page里的onLoad事件就已经执行了。</p>
+<h3 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h3><!-- [taro 全局变量四种方法](https://www.jianshu.com/p/0d39404a1dea) 
+[Taro -- 定义全局变量](https://www.cnblogs.com/juewuzhe/p/11097146.html)
+[taro中定义以及使用全局变量](https://cloud.tencent.com/developer/article/1444359)
+上面两个内容相同。第一个有配置的变量。
+-->
+<p>方法1：在taro中 getApp()只能取到一开始定义的值，并不能取到改变后的值<br>要在构造函数中创建，或者在函数外定义，如果在componentDidMount()函数中定义无效。<br>PS: 如果是混合到原生小程序中，同样取不到Taro小程序里定义的变量。</p>
+<p>方法2：新增一个自行命名的 JS 文件，例如 global.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> globalData = &#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">setGlobalData</span> (<span class="params">key, val</span>) </span>&#123;</span><br><span class="line">  globalData[key] = val</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getGlobalData</span> (<span class="params">key</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> globalData[key]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>方法3：使用 Redux 来进行全局变量的管理</p>
+<p>方法4：使用配置。<br>使用config下的env<br>使用config下的defineConstants</p>
+<h3 id="dom-相关"><a href="#dom-相关" class="headerlink" title="dom 相关"></a>dom 相关</h3><p><code>const observer = Taro.createIntersectionObserver(this, { thresholds: [0], observeAll: true })</code></p>
+<blockquote>
+<p>创建并返回一个 IntersectionObserver 对象实例。<br>监听文档/dom的变化以他用<!-- 比如：添加埋点 --></p>
+</blockquote>
+<p>#### </p>
+<ol>
+<li>获取输入标签的值<code>Input</code> <code>Textarea</code> 通过<code>event.detail.value</code>。<!-- 
+ 通过event.target.value 取不到值，设置值的时候也不准确。
+ event.target 是容器标签里面的target，并没有最新的值。
+ [h5 的textarea组件,oninput的e.detail.value获取不到值 ](https://github.com/NervJS/taro/issues/1713)
+ -->
+为防止按钮提交的时候，onblur 还没有设置好值。提前函数可以添加延时setTimeout。</li>
+</ol>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><p><a href="https://nervjs.github.io/taro/docs/children#children" target="_blank" rel="noopener">Children 与组合</a><br><code>this.props.children</code>, <code>this.props.renderHeader</code></p>
+<!-- <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dialog</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;View className=<span class="string">'dialog'</span>&gt;</span><br><span class="line">        &lt;View className=<span class="string">'header'</span>&gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.props.renderHeader&#125;</span><br><span class="line">        &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">        &lt;View className='body'&gt;</span></span><br><span class="line"><span class="regexp">          &#123;this.props.children&#125;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>View&gt;</span><br><span class="line">        &lt;View className=<span class="string">'footer'</span>&gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.props.renderFooter&#125;</span><br><span class="line">        &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>View&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;View className=<span class="string">'container'</span>&gt;</span><br><span class="line">        &lt;Dialog</span><br><span class="line">          renderHeader=&#123;</span><br><span class="line">            &lt;View className=<span class="string">'welcome-message'</span>&gt;Welcome!&lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">          &#125;</span></span><br><span class="line"><span class="regexp">          renderFooter=&#123;</span></span><br><span class="line"><span class="regexp">            &lt;Button className='close'&gt;Close&lt;/</span>Button&gt;</span><br><span class="line">          &#125;</span><br><span class="line">        &gt;</span><br><span class="line">          &lt;View className=<span class="string">"dialog-message"</span>&gt;</span><br><span class="line">            Thank you <span class="keyword">for</span> using Taro.</span><br><span class="line">          &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>Dialog&gt;</span><br><span class="line">      &lt;<span class="regexp">/View&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<h5 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h5><p>请不要对 this.props.children 进行任何操作。Taro 在小程序中实现这个功能使用的是小程序的 slot 功能，也就是说你可以把 this.props.children 理解为 slot 的语法糖，this.props.children 在 Taro 中并不是 React 的 ReactElement 对象，因此形如 this.props.children &amp;&amp; this.props.children、this.props.children[0] 在 Taro 中都是非法的。</p>
+<p>this.props.children 无法用 defaultProps 设置默认内容。由于小程序的限制，Taro 也无法知道组件的消费者是否传入内容，所以无法应用默认内容。</p>
+<p>不能把 this.props.children 分解为变量再使用。由于普通的 props 有一个确切的值，所以当你把它们分解为变量运行时可以处理，this.props.children 则不能这样操作，你必须显性地把 this.props.children 全部都写完整才能实现它的功能。</p>
+<p> –&gt;</p>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><h4 id="修改路径-url"><a href="#修改路径-url" class="headerlink" title="修改路径-url"></a>修改路径-url</h4><p>在现有路径上面添加参数。<br>（h5）使用<code>new URI</code>可以获取路径，但是修改hash的时候报错了：不可以修改。<br>正确方式：需要获取路径（小程序），然后调用路由跳转方式。<br><code>getCurrentInstance().router</code>和<code>getCurrentPages</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = Taro.getCurrentInstance().router || &#123; <span class="attr">params</span>: &#123;&#125;, <span class="attr">path</span>: <span class="string">''</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> go2CouponList = useCallback(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// location.hash = 'jdyushouquan';</span></span><br><span class="line">    <span class="comment">// history.pushState('couponList', '', null)</span></span><br><span class="line">    <span class="keyword">let</span> path = router.path;</span><br><span class="line">    <span class="keyword">const</span> url = path.replace(<span class="regexp">/#.*/g</span>, <span class="string">''</span>) + <span class="string">'#jdyushouquan'</span></span><br><span class="line">    <span class="comment">// console.log('url', url)</span></span><br><span class="line">    gotoUrl(&#123;url&#125;);</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure></p>
+<p>在旧版本中可以通过 this.$router 访问当前组件/页面路由的详情。在 Taro Next 对应的 API 是在 @tarojs/taro 中的 getCurrentInstance().router，两者的属性一模一样。</p>
+<p>### </p>
+<p> // useEffect(() =&gt; {<br>    //     history.pushState(‘couponList’, ‘’, null)<br>    //     return () =&gt; {<br>    //         if(!history.state.couponList) {<br>    //             Taro.removeStorageSync(‘bl_confirm_cids’);<br>    //         }<br>    //     }<br>    // }, []);</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>v3.4.1 版本默认使用webpack 4.x。 后续版本可以指定webpack 版本。</p>
+<h3 id="h5"><a href="#h5" class="headerlink" title="h5"></a>h5</h3><ol>
+<li>静态资源hash，解决cdn缓存问题。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    path.join(process.cwd(), <span class="string">"/plugins/events/index.ts"</span>),</span><br><span class="line">    path.join(process.cwd(), <span class="string">"/plugins/move/index.js"</span>),</span><br><span class="line">    <span class="string">"@tarojs/plugin-indie"</span></span><br><span class="line">  ],</span><br><span class="line">  h5: &#123;</span><br><span class="line">    <span class="comment">// NOTE H5 打包静态资源时带 hash 值，方便缓存、版本管理</span></span><br><span class="line">    publicPath: <span class="string">'/'</span>,</span><br><span class="line">    staticDirectory: <span class="string">'static'</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">      filename: <span class="string">'js/[name].[hash].js'</span>,</span><br><span class="line">      chunkFilename: <span class="string">'js/[name].[chunkhash].js'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    imageUrlLoaderOption: &#123;</span><br><span class="line">      limit: <span class="number">5000</span>,</span><br><span class="line">      name: <span class="string">'static/images/[name].[hash].[ext]'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    miniCssExtractPluginOption: &#123;</span><br><span class="line">      filename: <span class="string">'css/[name].[hash].css'</span>,</span><br><span class="line">      chunkFilename: <span class="string">'css/[name].[chunkhash].css'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="build"><a href="#build" class="headerlink" title="build"></a>build</h3><h4 id="devbd-wx"><a href="#devbd-wx" class="headerlink" title="devbd:wx"></a>devbd:wx</h4><p>执行小程序的dev，<code>process.env.NOTE_ENV = &#39;development&#39;</code>。</p>
+<h4 id="build-h5"><a href="#build-h5" class="headerlink" title="build:h5"></a>build:h5</h4><p>build:h5 的时候，生成html 应该是使用的html-webpack-plugin。<br>如果要生成多个html页面，添加多个插件实例，需要手动引入依赖<code>npm i --save-dev html-webpack-plugin@4</code></p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><ol>
+<li>读取根路径的上一级（混合项目需要）, <code>const rootPath = path.resolve(__dirname, &quot;../../..&quot;);</code><!-- 不通：`const mProjectPath = path.resolve("../", appPath);`  -->
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> copyHtmlFiles = <span class="function">(<span class="params">ctx</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// console.log('copy html files', ctx);</span></span><br><span class="line">        <span class="keyword">const</span> &#123; <span class="attr">paths</span>: &#123; outputPath &#125;, initialConfig &#125; = ctx;</span><br><span class="line">        <span class="comment">// console.log('copy html files', ctx);</span></span><br><span class="line">        <span class="comment">// m_static 中html文件夹路径</span></span><br><span class="line">        <span class="comment">// const destPath = path.resolve(__dirname, "../../../../m_static/html");</span></span><br><span class="line">        <span class="keyword">const</span> rootPath = path.resolve(__dirname, <span class="string">"../../.."</span>);</span><br><span class="line">        <span class="comment">// const mProjectPath = path.resolve("../", appPath);</span></span><br><span class="line">        <span class="keyword">const</span> destPath = path.join(mProjectPath, <span class="string">"m_static/html"</span>);</span><br><span class="line">        <span class="keyword">const</span> customRoutes = initialConfig?.h5?.router?.customRoutes;</span><br><span class="line">        <span class="comment">// console.log('bjdi', mProjectPath, destPath, customRoutes)</span></span><br><span class="line">        <span class="built_in">Object</span>.values(customRoutes).map(<span class="function"><span class="params">route</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// html文件路径</span></span><br><span class="line">            <span class="keyword">const</span> filePath = path.join(destPath, route);</span><br><span class="line">            <span class="keyword">if</span> (fs.existsSync(filePath)) fs.removeSync(filePath);</span><br><span class="line">            fs.copyFileSync(outputPath + <span class="string">"/index.html"</span>, filePath);</span><br><span class="line">            <span class="comment">// # 写入特定html片</span></span><br><span class="line">            <span class="keyword">const</span> pos = <span class="string">`        &lt;div id="app"&gt;&lt;/div&gt;`</span>;</span><br><span class="line">            <span class="keyword">const</span> inc0 = <span class="string">`        &lt;!--#include virtual="/sinclude/common/spdtimming_foot.shtml"--&gt;`</span></span><br><span class="line">            <span class="keyword">const</span> inc1 = <span class="string">`        &lt;!--#include virtual="/sinclude/common/cart_link_guide.shtml" --&gt; &lt;!-- 结算链接灰度控制ppms --&gt;`</span></span><br><span class="line">            <span class="keyword">const</span> inc2 = <span class="string">`        &lt;!--#include virtual="/sinclude/update/wx/2016/5/cartlock.html"--&gt;  &lt;!-- 购物车lock 灰度ppms--&gt;`</span></span><br><span class="line">            <span class="keyword">if</span> ([<span class="string">"/order/orderlist_jdm.shtml"</span>].includes(route)) &#123;</span><br><span class="line">                <span class="keyword">const</span> data = fs.readFileSync(filePath, <span class="string">"utf8"</span>);</span><br><span class="line">                <span class="keyword">const</span> html = data.replace(pos, [inc1, pos, inc0].join(<span class="string">"\r\n"</span>));</span><br><span class="line">                fs.writeFileSync(filePath, html);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"拷贝html结束！"</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"拷贝html失败！"</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="ISSUES"><a href="#ISSUES" class="headerlink" title="ISSUES"></a>ISSUES</h1><h2 id="build-1"><a href="#build-1" class="headerlink" title="build"></a>build</h2><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><h4 id="watch-文件修改没有更新"><a href="#watch-文件修改没有更新" class="headerlink" title="watch 文件修改没有更新"></a>watch 文件修改没有更新</h4><p><code>npm run build dev:h5</code><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"dev:h5": "cross-env NODE_ENV=development CLIENT_ENV=h5 taro build --type h5 --watch",</span><br></pre></td></tr></table></figure></p>
+<p>app.config.js 中pages配置和文件夹名 大小写不一致。</p>
+<h3 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h3><p>在windows中转化后的路径 taro-cli 不能正确编译<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">编译失败...</span><br><span class="line">./src/app.tsx</span><br><span class="line">untime&apos; in &apos;E:\order\src\&apos;resolve &apos;E:orderpluginsevents</span><br></pre></td></tr></table></figure></p>
+<p>windows 的路径是<code>\\</code>，build的时候找不到；而且把\r也转义了。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">injectRuntimePath</span>(<span class="params">platform</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// const injectedPath = path.join(__dirname, "./runtime"); // windows 有问题</span></span><br><span class="line">  <span class="keyword">const</span> injectedPath = path.normalize(path.join(__dirname, <span class="string">"./runtime"</span>));</span><br><span class="line">  <span class="keyword">if</span> (isArray(platform.runtimePath)) &#123;</span><br><span class="line">    platform.runtimePath.push(injectedPath);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isString(platform.runtimePath)) &#123;</span><br><span class="line">    platform.runtimePath = [platform.runtimePath, injectedPath];</span><br><span class="line">    <span class="comment">// windows 有问题，手动修改路径</span></span><br><span class="line">    <span class="comment">// platform.runtimePath = [platform.runtimePath, 'E:/order/plugins/events/runtime'];</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装问题"><a href="#安装问题" class="headerlink" title="安装问题"></a>安装问题</h2><h3 id="版本不一致"><a href="#版本不一致" class="headerlink" title="版本不一致"></a>版本不一致</h3><p>大概率所有问题都可以通过版本一致去解决。<br>包括：路由问题，。。。等<br>涉及到依赖：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"@tarojs/components"</span>: <span class="string">"3.3.12"</span>,</span><br><span class="line">		<span class="attr">"@tarojs/react"</span>: <span class="string">"3.3.12"</span>,</span><br><span class="line">		<span class="attr">"@tarojs/runtime"</span>: <span class="string">"3.3.12"</span>,</span><br><span class="line">		<span class="attr">"@tarojs/taro"</span>: <span class="string">"3.3.12"</span>,</span><br><span class="line">    <span class="attr">"@tarojs/cli"</span>: <span class="string">"3.3.12"</span>,</span><br><span class="line">		<span class="attr">"@tarojs/mini-runner"</span>: <span class="string">"3.3.12"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="gyp-ERR-find-VS-gyp-ERR-find-VS-msvs-version"><a href="#gyp-ERR-find-VS-gyp-ERR-find-VS-msvs-version" class="headerlink" title="gyp ERR! find VS gyp ERR! find VS msvs_version"></a>gyp ERR! find VS gyp ERR! find VS msvs_version</h3><h4 id="windows-安装"><a href="#windows-安装" class="headerlink" title="windows 安装"></a>windows 安装</h4><p><code>gyp ERR! find VS gyp ERR! find VS msvs_version not set from command line or npm config gyp ERR! find</code><br><code>error gyp ERR! stack Error: Could not find any Visual Studio installation to use</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install --global --production windows-build-tools</span><br><span class="line">npm config <span class="built_in">set</span> python python3.9</span><br><span class="line">npm config <span class="built_in">set</span> msvs_version 2019</span><br><span class="line"><span class="comment"># npm config set registry https://registry.npm.taobao.org</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.org</span><br></pre></td></tr></table></figure>
+<p>解决问题步骤：<br><!-- 0）windows-build-tools 执行了。（不确定会有影响） --><br>0) 手动安装了python3.8. (版本保持是一致的)<br>1） 设置了msvs_version 的版本 2019<br><!-- 1） 开始设置成VS Code 版本2021 是错误的。 --><br><!-- 2）虽然把全局改回了2019,但是当前项目还是错误的2021. 再次修改本地的配置  --><br>2) 手动安装了visual studio 的相关应用(web, Linux, node, .net, C++ 等).<br><!-- 仍然不可以,不确定是否有影响 --><br>3) 最后设置了npm registry 为原始地址.<!-- 之前修改全局为公司内部地址 --></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/taro-js/" rel="tag"><i class="fa fa-tag"></i> taro.js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/jsplus/iview实践/" rel="next" title="Iview 实践">
+                <i class="fa fa-chevron-left"></i> Iview 实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/others/请求如何代理端口号/" rel="prev" title="请求如何代理端口号">
+                请求如何代理端口号 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">366</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#语法"><span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局变量"><span class="nav-text">全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dom-相关"><span class="nav-text">dom 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件"><span class="nav-text">组件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ISSUES"><span class="nav-text">ISSUES</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#build-1"><span class="nav-text">build</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-text">启动</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#watch-文件修改没有更新"><span class="nav-text">watch 文件修改没有更新</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平台"><span class="nav-text">平台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装问题"><span class="nav-text">安装问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本不一致"><span class="nav-text">版本不一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gyp-ERR-find-VS-gyp-ERR-find-VS-msvs-version"><span class="nav-text">gyp ERR! find VS gyp ERR! find VS msvs_version</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#windows-安装"><span class="nav-text">windows 安装</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">602.6k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
