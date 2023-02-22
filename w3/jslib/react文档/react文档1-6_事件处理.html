@@ -1,0 +1,113 @@
+<p>title: react文档1-6_事件处理<br>date: 2018.9.14<br>tags: </p>
+<ul>
+<li>react.js<br>toc_fold: unfold</li>
+</ul>
+<hr>
+<p style="text-align:right">2018.9.14 星期五 22:39</p>
+
+<p>React 元素的事件处理和 DOM元素的很相似。但是有一点语法上的不同:     </p>
+<ul>
+<li>React事件绑定属性的命名采用驼峰式写法，而不是小写。</li>
+<li>如果采用 JSX 的语法你需要传入一个函数作为事件处理函数，而不是一个字符串(DOM元素的写法)</li>
+</ul>
+<p>在 React 中另一个不同是你不能使用返回 false 的方式阻止默认行为。你必须明确的使用 preventDefault。   </p>
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">ActionLink</span>(<span class="params"></span>) </span>{
+  <span class="function"><span class="keyword">function</span> <span class="title">handleClick</span>(<span class="params">e</span>) </span>{
+    e.preventDefault();
+    <span class="built_in">console</span>.log(<span class="string">'The link was clicked.'</span>);
+  }
+
+  <span class="keyword">return</span> (
+    &lt;a href=<span class="string">"#"</span> onClick={handleClick}&gt;
+      Click me
+    &lt;<span class="regexp">/a&gt;</span>
+<span class="regexp">  );</span>
+<span class="regexp">}</span>
+</code></pre>
+<p>e 是一个合成事件。React 根据 W3C spec 来定义这些合成事件，所以你不需要担心跨浏览器的兼容性问题      </p>
+<p>使用 React 的时候通常你不需要使用 addEventListener 为一个已创建的 DOM 元素添加监听器。你仅仅需要在这个元素初始渲染的时候提供一个监听器。<br>当你使用 ES6 class 语法来定义一个组件的时候，事件处理器会成为类的一个方法。例如，下面的 Toggle 组件渲染一个让用户切换开关状态的按钮：   </p>
+<pre><code class="javascript"><span class="class"><span class="keyword">class</span> <span class="title">Toggle</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>{
+  <span class="keyword">constructor</span>(props) {
+    <span class="keyword">super</span>(props);
+    <span class="keyword">this</span>.state = {<span class="attr">isToggleOn</span>: <span class="literal">true</span>};
+
+    <span class="comment">// $1 This binding is necessary to make `this` work in the callback</span>
+    <span class="keyword">this</span>.handleClick = <span class="keyword">this</span>.handleClick.bind(<span class="keyword">this</span>);
+
+  }
+
+  handleClick() {
+    <span class="keyword">this</span>.setState(<span class="function"><span class="params">prevState</span> =&gt;</span> ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+  }
+  <span class="comment">// $2 :使用实验性的属性初始化器语法</span>
+  <span class="comment">// This syntax ensures `this` is bound within handleClick.</span>
+  <span class="comment">// Warning: this is *experimental* syntax.</span>
+  handleClick = <span class="function"><span class="params">()</span> =&gt;</span> {
+    <span class="built_in">console</span>.log(<span class="string">'this is:'</span>, <span class="keyword">this</span>);
+  }
+  <span class="comment">// $3: 回调函数中使用 箭头函数 </span>
+  <span class="comment">// $3 This syntax ensures `this` is bound within handleClick</span>
+  <span class="keyword">return</span> (
+        &lt;button onClick={(e) =&gt; <span class="keyword">this</span>.handleClick(e)}&gt;
+        Click me
+        &lt;<span class="regexp">/button&gt;</span>
+<span class="regexp">  );</span>
+<span class="regexp"></span>
+<span class="regexp">  render() {</span>
+<span class="regexp">    return (</span>
+<span class="regexp">      &lt;button onClick={this.handleClick}&gt;</span>
+<span class="regexp">        {this.state.isToggleOn ? 'ON' : 'OFF'}</span>
+<span class="regexp">      &lt;/</span>button&gt;
+    );
+  }
+}
+
+ReactDOM.render(
+  &lt;Toggle /&gt;,
+  <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>)
+);
+</code></pre>
+<p>你必须谨慎对待 JSX 回调函数中的 this，类的方法默认是不会绑定this 的。如果你忘记绑定 this.handleClick 并把它传入 onClick, 当你调用这个函数的时候 this 的值会是 undefined。<br>$_PS: 注意这里是 回调函数 中,参见最后的$PS 。<br>这并不是 React 的特殊行为；它是<a href="https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/">函数如何在 JavaScript 中运行</a>的一部分。通常情况下，如果你没有在方法后面添加 () ，例如 onClick={this.handleClick}，你应该为这个方法绑定 this.  </p>
+<p>如果使用 bind 让你很困惑，这里有两种方式可以解决。<br>$2: 如果你正在使用实验性的属性初始化器语法，你可以使用属性初始化器来正确的绑定回调函数：    </p>
+<p>$3: 如果你没有使用属性初始化器语法，你可以在回调函数中使用 箭头函数：<br>使用这个语法有个问题就是每次 LoggingButton 渲染的时候都会创建一个不同的回调函数。在大多数情况下，这没有问题。然而如果这个回调函数作为一个属性值传入低阶组件，这些组件可能会进行额外的重新渲染。我们通常建议在构造函数中绑定或使用属性初始化器语法来避免这类性能问题。   </p>
+<h2 id="将参数传递给事件处理程序"><a href="#将参数传递给事件处理程序" class="headerlink" title="将参数传递给事件处理程序"></a>将参数传递给事件处理程序</h2><p>$_PS: org.cn 是没有该段落的     </p>
+<pre><code class="javascript"><span class="comment">// 分别使用 arrow functions 和 Function.prototype.bind 。</span>
+&lt;button onClick={(e) =&gt; <span class="keyword">this</span>.deleteRow(id, e)}&gt;Delete Row&lt;<span class="regexp">/button&gt;</span>
+<span class="regexp">&lt;button onClick={this.deleteRow.bind(this, id)}&gt;Delete Row&lt;/</span>button&gt;
+</code></pre>
+<p>上面两个例子中，参数 e 作为 React 事件对象将会被作为第二个参数进行传递。<br>通过箭头函数的方式，事件对象必须显式的进行传递，<br>但是通过 bind 的方式，事件对象以及更多的参数将会被隐式的进行传递。  </p>
+<h2 id="PS-函数如何在-JavaScript-中运行"><a href="#PS-函数如何在-JavaScript-中运行" class="headerlink" title="$_PS: 函数如何在 JavaScript 中运行"></a>$_PS: 函数如何在 JavaScript 中运行</h2><!-- What Problem Are We Actually Looking To Solve? -->
+<pre><code class="javascript"><span class="keyword">var</span> myObj = {
+    specialFunction: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+
+    },
+
+    anotherSpecialFunction: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+
+    },
+
+    getAsyncData: <span class="function"><span class="keyword">function</span> (<span class="params">cb</span>) </span>{
+        cb();
+    },
+
+    render: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+        <span class="keyword">var</span> that = <span class="keyword">this</span>;
+        <span class="keyword">this</span>.getAsyncData(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+            that.specialFunction();
+            that.anotherSpecialFunction();
+        });
+    }
+};
+myObj.render();
+<span class="comment">// Uncaught TypeError: Object [object global] has no method 'specialFunction'</span>
+<span class="comment">// rewrite  </span>
+render: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">this</span>.getAsyncData(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+        <span class="keyword">this</span>.specialFunction();
+        <span class="keyword">this</span>.anotherSpecialFunction();
+    }.bind(<span class="keyword">this</span>));
+}
+</code></pre>
+<p style="text-align:right">2018.9.14 星期五 23:11</p>

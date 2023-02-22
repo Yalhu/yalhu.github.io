@@ -1,0 +1,29 @@
+<script src=/js/crypto-js.js></script>
+<script>
+function doDecrypt (pwd, onError) {
+	console.log('in doDecrypt');
+	const txt = document.getElementById('enc_content').innerHTML;
+	let plantext;
+	try {
+		const bytes = CryptoJS.AES.decrypt(txt, pwd);
+		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+	} catch(err) {
+		if(onError) {
+			onError(err);
+		}
+		return;
+	}
+	document.getElementById('enc_content').innerHTML = plaintext;
+	document.getElementById('enc_content').style.display = 'block';
+	document.getElementById('enc_passwd').style.display = 'none';
+	if(typeof MathJax !== 'undefined') {
+		MathJax.Hub.Queue(
+			['resetEquationNumbers', MathJax.InputJax.TeX],
+			['PreProcess', MathJax.Hub],
+			['Reprocess', MathJax.Hub]
+		);
+	}
+}
+</script>
+<div id="enc_content" style="display:none">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</div>
+<div id="enc_passwd"> <input type="text" style=" border-radius: 5px; border-style: groove; height: 30px; width: 50%; cursor: auto; font-size: 102%; color: currentColor; outline: none; text-overflow: initial; padding-left: 5px;"> <input type="submit" value="decrypt" onclick="decrypt()" style=" width: 58px; height: 34px; border-radius: 5px; background-color: white; border-style: solid; color: currentColor; "> <div id="enc_error" style=" display: inline-block; color: #d84527; font: large; "></div> <script> var onError = function(error) { $("#enc_error")[0].innerHTML = "password error!"; }; function decrypt() { var passwd = $("#enc_passwd input")[0].value; console.log(passwd); doDecrypt(passwd, onError); } </script></div>

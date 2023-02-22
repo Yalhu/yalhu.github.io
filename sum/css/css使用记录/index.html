@@ -1,0 +1,201 @@
+<ol>
+<li><p>特殊字符<code>@@</code>底部被截展示不完全。但是同行的正常汉字没有缺失，高度也够。<br>设置了flex布局，调整为居中对齐。同时把line-height上下同时加了高度。<!-- 然后调整其他的距离，保证ui不变 --></p>
+<!-- 没有确认是居中对齐(align-items)，还是line-height 生效的。 居中对齐，是否可以调整vertical-align
+     - 只调节vertical-align 不能适配所有机型。
+     - 直接设置flex布局，align-items:center 就可以兼容手机了。
+     - 小程序开发中，荣耀play， iphone5,13等手机。
+ -->
+</li>
+<li><p>svg 修改颜色。 除了写好在svg 标签的属性中，还可以通过css属性（fill） 修改，包括背景色。<br>fill 属性不必须写在svg标签；父元素也可以。<br>移动端滚动dom抖动：比如定时器组件，视频播放器。<br>滚动到顶部的时候阻止滚动：e.stopProprogation</p>
+</li>
+</ol>
+<ol start="2">
+<li>css伪类 :first-child<!-- [CSS3的first-child和last-child选择器用法总结（很容易犯才错误，有几个坑！）](https://blog.csdn.net/weixin_43343144/article/details/88787613) -->
+务必注意：你的这组兄弟元素节点必须在同一个父元素节点的第一个位置(first-child)或最后一个位置(last-child)<br>（一个很大的坑！）使用伪类或伪元素很容易犯的一个错误（尤其在使用scss编写代码时）<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这种写法是标准情况：作用在同一个父节点下的所有</span></span><br><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">:first-child</span>&#123;&#125;</span><br><span class="line"><span class="comment">// 这种写法是标准情况：作用在同一个父节点下的所有</span></span><br><span class="line"><span class="comment">// 这种写法等价于css的【p :first-child&#123;&#125;】 p后面是一个空格,也就是p的后代元素的</span></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="selector-pseudo">:first-child</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>p:last-child</code> 可以实现一个很巧妙的效果：如果p不是最后一个字元素就不会命中。<br><!-- 
+$_PS: 物流追踪。(个人强行解释)
+最后一个元素是【展示更多】，
+如果都展开（展示更多 不出现页面）。p就是最后一个，左边的竖线就会消失；
+如果有展示更多，p就不是最后一个。左边的竖线就会在（造成下面还有数据的视觉效果）。
+ --></p>
+<ol>
+<li><p>fixed 并不总是相对于视窗进行定位的。会受到父元素的影响，而出现不能以窗口进行定位。</p>
+<blockquote>
+<p>fixed不为元素预留空间，而是通过<strong>指定元素相对于屏幕视口（viewport）的位置</strong>来指定元素位置。元素的位置在屏幕滚动时不会改变。打印时，元素会出现在的每页的固定位置。<br>fixed 属性会创建新的层叠上下文。当元素祖先的 transform, perspective 或 filter 属性非 none 时，容器由视口改为该祖先。</p>
+</blockquote>
+<p>1) 给父元素加上 transform: scale(1,1) 或者是别的,只要transform 的属性不是none就行<br>2)虽然position:fixed是对于浏览器窗口定位的，但是只要不设置fixed元素的top，bottom，left，right，此时该元素就是相对于父元素进行定位的。如果要移动元素的位置，可以通过margin来实现。</p>
+<!-- 
+如果父级元素的z-index的层次比同级元素低，就算fixed的z-index比父级高，也会被父级同级元素遮挡。
+
+因此，position:fixed元素若要以窗口进行定位，最好是放在body根标签下 
+-->
+<p>如果父级元素设置了transform属性，position:relative/absolute/fixed会基于此定位.</p>
+<blockquote>
+<p>relative 该关键字下，元素先放置在未添加定位时的位置，再在不改变页面布局的前提下调整元素位置（因此会在此元素未添加定位时所在位置留下空白）。position:relative 对 table-*-group, table-row, table-column, table-cell, table-caption 元素无效。</p>
+</blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/position" target="_blank" rel="noopener">position</a></p>
+</li>
+<li><p>子元素使用position：fixed,导致他的宽度不能和父元素保持一致的解决方案</p>
+<!-- [子元素使用position：fixed,导致他的宽度不能和父元素保持一致的解决方案子元素使用position：fixed,导致他的宽度不能和父元素保持一致的解决方案](https://www.cnblogs.com/inkwind/p/11549919.html) -->
+<p>他就默认相对于window去定位了，就相当与你将这个元素相对于window加上了position:absolute的属性，所以给他加百分比长度的话就是相对于window的百分比。<br>1、left：0；right:0;因为fixed也相当于是定位的一种，所以我们当然也可以用left和right来进行定位了，然后将left的值扩大，同时将width的百分比减少，从而使得son和demo的宽度达到一致，从而起到一种视觉上的欺骗效果。（PS：请谨慎使用）<br>2、calc();关于calc的具体使用将在我后面的播客中提出，在这里，我们可以将son的width由100%改为calc(100%-324px)，这里这个长度不知道是否有规律，还是要自己找，相对来说适应性就不是很好。</p>
+<!-- calc();关于calc的具体使用将在我后面的播客中提出，在这里，我们可以将son的width由100%改为calc(100%)，即可实现son相对于他的父级元素的定位，因为calc计算的就是元素相对于他的父级元素的一个动态大小，即一直是相对于父级来进行计算的，当你指定calc(100%)的时候，就是说他的宽度将和他的父级保持一致。（PS：该方法亲测靠谱）
+$_PS: 另一篇文章 -->
+<p>3、absolute改造；<br>4、给fathor加fixed属性；</p>
+</li>
+</ol>
+<!-- [子元素使用position：fixed,导致他的宽度不能和父元素保持一致的解决方案](https://github.com/peng8/react-drag-sortable)
+$_PS: 两篇文章4种解决方案一样 -->
+<p>新的解决方案：<br>如果设置宽度width: inherit，会继承父元素宽度。<br>注意，父元素要显示设置width值，不能是100%</p>
+<ol start="3">
+<li>百分比小技巧：比如进度条需要图书的中间位置对齐刻度，而且100%的时候右边是对齐的。可以适当增加基数，比如：(x + .5)/ (6 + .5)</li>
+<li>移动端 a 标签点击会有蓝色的背景色<br>解决方案：<code>a { -webkit-tap-highlight-color:transparent; }</code></li>
+<li>calc(100vh - 60px) 。 算术操作符前后必须有空格。 否则会无效。 <!-- css 函数的问题。操作符必须有空格 -->
+</li>
+</ol>
+<h3 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h3><p>env(): <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/env()" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/CSS/env()</a><br>env()和constant()，是IOS11新增特性，Webkit的css函数，用于设定安全区域与边界的距离，有4个预定义变量：<br><a href="https://blog.csdn.net/qq_21363577/article/details/109734506" target="_blank" rel="noopener">css属性——env()和constant()设置安全区域</a></p>
+<p>safe-area-inset-left：安全区域距离左边边界的距离<br>safe-area-inset-right：安全区域距离右边边界的距离<br>safe-area-inset-top：安全区域距离顶部边界的距离<br>safe-area-inset-bottom ：安全距离底部边界的距离<br>而env()和constant()函数有个必要的使用前提，H5网页设置viewport-fit=cover的时候才生效，小程序里的viewport-fit默认是cover。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 适配底部代码： */</span></span><br><span class="line">height: calc(96rpx+ constant(safe-area-inset-bottom));//兼容 IOS&lt;11.2</span><br><span class="line">height: calc(96rpx + env(safe-area-inset-bottom));//兼容 IOS&gt;11.2</span><br><span class="line"> </span><br><span class="line">padding-bottom: constant(safe-area-inset-bottom);//兼容 IOS&lt;11.2</span><br><span class="line">padding-bottom: env(safe-area-inset-bottom);//兼容 IOS&gt;11.2</span><br></pre></td></tr></table></figure></p>
+<h3 id="字体文件优化"><a href="#字体文件优化" class="headerlink" title="字体文件优化"></a>字体文件优化</h3><p>引入ttf文件，浏览器解析失败。<code>Failed to decode downloaded font:http://local.xxx.xxx.com:8080/static/fonts/%E6%96%B9%E6%AD%A3%E5%B0%91%E5%84%BF%E7%AE%80%E4%BD%93.cd7c372a.ttf</code><br>本地启的服务，也没有跨域。文件也加载了。<br><!-- vue-cli 默认对字体文件使用了 file-loader 不需要再添加了。 --></p>
+<p>解决：fontmin 包括压缩。原因是引入的字体文件不全, 有兼容性<!-- mac 不能只引入ttf文件 --><br><!-- 仍然有ttf黄色的警告，但是字体被引入了
+其他后端的问题：在maven的filter解析font文件时，它破坏了font文件的二进制文件格式，导致浏览器解析出错。
+ --></p>
+<!-- 1. font-spider 这个用不了 -->
+<p>Fontmin： <a href="http://ecomfe.github.io/fontmin/#banner" target="_blank" rel="noopener">http://ecomfe.github.io/fontmin/#banner</a><br>第一个纯 JavaScript 字体子集化方案<br>下载软件 <a href="http://ecomfe.github.io/fontmin/#app" target="_blank" rel="noopener">http://ecomfe.github.io/fontmin/#app</a><br>或者命令行<code>npm i -g fontmin</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -t, --text                          require glyphs by text</span></span><br><span class="line">$ text=`curl www.baidu.com` &amp;&amp; fontmin -t <span class="string">"<span class="variable">$text</span>"</span> font.ttf</span><br><span class="line"></span><br><span class="line">$ npm install -g html-to-text</span><br><span class="line">$ text=`curl www.baidu.com | html-to-text` &amp;&amp; fontmin -t <span class="string">"<span class="variable">$text</span>"</span> font.ttf</span><br></pre></td></tr></table></figure></p>
+<!-- 
+其他：
+还要得益于FontSpider。在FontSpider中一探究竟时，我们发现了它其实用的是fontmin。
+常用的工具是 fontsquirrel，一个字体生成器<!-- ，可以在线生成  eot 、woff、ttf、svg 格式的字体，相信很多前端用过 --!>
+
+基于 Fontmin 的工具
+fontmin-app - Fontmin 桌面版 App，需下载安装使用
+gulp-fontmin - Fontmin 的 Gulp 插件
+font-spider - 自动分析页面使用的 WebFont 并进行按需压缩
+
+
+Web-fontmin 不是什么高大上的东西，一个基于 Fontmin 构建的字体工具，它的用处只有两个：
+提取字体。字体格式转换
+通俗的理解，Web-fontmin 是一个这样的工具：Squirrel + fontmin-app，他是两者的结合体。
+Squirrel 只有单纯的生成不同格式的webfont，且不支持中文。Web-fontmin不单止可以转换格式同时支持中文，还可以提取字体，并且有更快的上传和转换速度。
+
+ -->
+<!-- 字加 -->
+<h3 id="设置flex属性时-子元素宽度超出父元素"><a href="#设置flex属性时-子元素宽度超出父元素" class="headerlink" title="设置flex属性时 子元素宽度超出父元素"></a>设置flex属性时 子元素宽度超出父元素</h3><p>场景： 元素分为左右两块，左边元素定宽，右边元素自动充满屏幕。<br>右边多设置一个width:0或overflow:hiddlen后样式正常。</p>
+<p>为什么设置flex: 1可以实现宽度自适应？<br>这与flex属性的赋值语法有关，CSS属性 flex 规定了弹性元素如何伸长或缩短以适应flex容器中的可用空间。这是一个简写属性，用来设置 flex-grow, flex-shrink 与 flex-basis。具体的语法规则可以参考MDN</p>
+<p>三种属性比较好理解的分析参考：关于 Flex 中的 flex-grow、flex-shrink、flex-basis<br>flex: 1 = flex: 1 1 auto = flex-grow: 1</p>
+<p>flex-grow属性用于瓜分父容器的剩余空间，在上面例子中，只有right设置了flex：1，所以它占了剩余空间的所有比例，实现了宽度的自适应。</p>
+<p>对于为什么子元素宽度会溢出的问题，网上查了一下只说是弹性布局的特性以及父元素没有一个固定的长度进行限制这两个因素造成的，具体原因还不太清楚。。<br>&lt;!– </p>
+<p><a href="https://www.cnblogs.com/ygyy/p/13328310.html" target="_blank" rel="noopener">设置flex属性时子元素宽度超出父元素</a><br><a href="http://www.manongjc.com/detail/18-dycluubakqbfuso.html" target="_blank" rel="noopener">设置flex属性时子元素宽度超出父元素</a><br>$_PS: 内容一样 –&gt;</p>
+<h3 id="移动设备后退"><a href="#移动设备后退" class="headerlink" title="移动设备后退"></a>移动设备后退</h3><p>ios 低版本 微信下方 返回栏<br>复现：从首页跳转到其他页面后，页面的底部会出现一个带有前进和后退按钮工具栏<br>原因：当页面跳转时，微信浏览器会通过window.history读取到浏览的历史记录，此时便会在页面底部显示出前进后退按钮的工具栏，造成页面底部内容遮挡。<br>最终：不解决。底部操作栏 并没有影响页面展示（没有遮住内容）。</p>
+<!-- [iOS新版微信底部工具栏遮挡问题完美解决](https://www.jianshu.com/p/0a93944ed627) -->
+<p>（一）方案一：将页面的路由跳转方式更换为 “replace” 方式<br><!-- 
+[微信H5：IOS下的微信H5页面的底部前进后退横栏如何隐藏或者解决？](https://segmentfault.com/q/1010000015158396)
+无方案。没有解决掉
+[通过JS自动隐藏手机浏览器的地址栏](https://blog.csdn.net/hbcui1984/article/details/8350107)
+上方的地址栏：`window.scrollTo(0)`
+但是若你网页内容比较多，超过屏幕高度时，却会自动隐藏地址栏；
+如何解决在内容较少时，同样隐藏地址栏呢？需在滚动之前程序动态设置一下body的高度，增加如下代码：
+[移动端隐藏手机浏览器的地址栏一下底部的菜单栏](https://www.jianshu.com/p/1e5c8811aecf) --><br>全屏方案<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- webApp全屏显示，IOS设备 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">'apple-mobile-web-app-capable'</span> <span class="attr">content</span>=<span class="string">'yes'</span> /&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- 通用的浏览器 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">'full-screen'</span> <span class="attr">content</span>=<span class="string">'true'</span> /&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- QQ浏览器（X5内核）独有的META --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">'x5-fullscreen'</span> <span class="attr">content</span>=<span class="string">'true'</span> /&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- 360浏览器独有的 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">'360-fullscreen'</span> <span class="attr">content</span>=<span class="string">'true'</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="二期"><a href="#二期" class="headerlink" title="二期"></a>二期</h2><ol>
+<li><a href="https://blog.csdn.net/yb305/article/details/72357010" target="_blank" rel="noopener">父容器display:flex后，子元素的内部元素height:100%无效解决方法</a><br>解救办法：父类容器position:relative;子元素：position:absolute;width:100%,height:100%;</li>
+<li>display：flex 的直接子元素，高度默认是100%； 如果设置 改元素<code>align-self:center</code>,元素就会变为行内块，高度就不是100%，可以设置垂直居中    </li>
+<li>display:flex 下的子元素，比如div的宽度会撑开父元素宽度，出现横向滚动条；此时可以给改元素添加 <code>heigth:0%</code> 消除影响</li>
+<li>iconfont transform 失效，需要改为inline-block/block<blockquote>
+<p>transform适用于：所有块级元素及某些内联元素<br> <a href="https://blog.csdn.net/promiseCao/article/details/82757251" target="_blank" rel="noopener">transform失效了？iconfont字体图标无法旋转，无法缩放？的解决办法</a></p>
+</blockquote>
+</li>
+<li><p>【CSS】文字旋转90度<br> <a href="https://blog.csdn.net/weixin_41728561/article/details/84373347" target="_blank" rel="noopener">【CSS】文字旋转90度</a>   </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* 方法一**/</span><br><span class="line">.xuanzhuan &#123;</span><br><span class="line">    -moz-transform: rotate(90deg);</span><br><span class="line">    -webkit-transform: rotate(90deg);  </span><br><span class="line">    display: block;</span><br><span class="line">    position: absolute;</span><br><span class="line">    filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3)</span><br><span class="line">    text-transform: uppercase;</span><br><span class="line">&#125;</span><br><span class="line">/* 方法二**/</span><br><span class="line">writing-mode: vertical-rl;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>网页强制横屏。或者js实现方式<code>document.documentElement.requestFullscreen();screen.orientation.lock(&quot;portrait-primary&quot;);</code><br><a href="http://www.cnblogs.com/blfshiye/p/4937293.html" target="_blank" rel="noopener">[HTML5: Screen Orientation API]</a><br><a href="http://www.php.cn/css-tutorial-360008.html" target="_blank" rel="noopener">[页面强制横屏]</a>    </p>
+<p><a href="https://www.jb51.net/css/663929.html" target="_blank" rel="noopener">[Css实现手机端页面强制横屏的方法示例]</a>      </p>
+<blockquote>
+<p>P.S. 如果你的页面里有from表单要填的话，应该用 「弹出遮罩层让用户旋转手机」 的解决方案。检测手机竖屏下，提示用关闭屏幕旋转锁定，并横置手机。想想手机浏览器还是竖屏，而内容却被强制横屏的画面有多奇怪吧…</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*-- css单位：vmin/vmax, vh/vw --*/</span></span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">orientation:</span> portrait) &#123;</span><br><span class="line">    <span class="selector-tag">html</span>&#123;</span><br><span class="line">        <span class="attribute">width </span>: <span class="number">100vmin</span>; </span><br><span class="line">        <span class="attribute">height </span>: <span class="number">100vmax</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">width </span>: <span class="number">100vmin</span>;</span><br><span class="line">        <span class="attribute">height </span>: <span class="number">100vmax</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-id">#gyroContain</span>&#123;</span><br><span class="line">        <span class="attribute">width </span>: <span class="number">100vmax</span>;</span><br><span class="line">        <span class="attribute">height </span>: <span class="number">100vmin</span>;</span><br><span class="line">        <span class="attribute">transform-origin</span>: top left;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">90deg</span>) <span class="built_in">translate</span>(<span class="number">0</span>,-<span class="number">100vmin</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">orientation:</span> landscape) &#123;</span><br><span class="line">    <span class="selector-tag">html</span>&#123;</span><br><span class="line">        <span class="attribute">width </span>: <span class="number">100vmax</span>;</span><br><span class="line">        <span class="attribute">height </span>: <span class="number">100vmin</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">body</span>&#123;</span><br><span class="line">        <span class="attribute">width </span>: <span class="number">100vmax</span>;</span><br><span class="line">        <span class="attribute">height </span>: <span class="number">100vmin</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-id">#gyroContain</span>&#123;</span><br><span class="line">        <span class="attribute">width </span>: <span class="number">100vmax</span>;</span><br><span class="line">        <span class="attribute">height </span>: <span class="number">100vmin</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p> $PS: 当时是解决ppt在线浏览横屏，结果office文档在线浏览url跳转了，跳出当前页面了。反而使loading横屏了    </p>
+<h2 id="一期"><a href="#一期" class="headerlink" title="一期"></a>一期</h2></li>
+<li>css是区分大小的，而html不区分大小写  </li>
+<li>icon-font 不闪烁且只加载一次:本地加载(file:///D:/dev/…/html)不需要crossorigin;如果是服务器加载，需要添加属性：crossorigin。<br><code>&lt;link rel=&quot;preload&quot; as=&quot;font&quot; type=&quot;font/ttf&quot; crossorigin href=&quot;font/iconfont.ttf&quot;&gt;</code>   </li>
+<li>绝对定位后，父元素会失去高度<br>解决，1。Overflow：hidden，2。设置高度</li>
+<li>float 撑开父元素高度<ol>
+<li>父元素设置高度</li>
+<li>父元素后添加元素，clear:both; 可以利用 :after,再添加overflow，zoom</li>
+<li>父元素 overflow:hidden</li>
+<li>父元素也设置float，但是要设置宽度。 和overflow是一个原理</li>
+</ol>
+</li>
+<li>BFC   左右布局中margin, overflow</li>
+<li>多个块内元素 中间会有莫名的留白<br> 1)行内元素设置：vertial-align:bottom；2)父元素设置font-size:0;3)line-height足够小也可以;4)margin<br> div中img—inline-block和文本:img-display:block<br> ul下li:取消li之间的空格/破坏html的结构<br> inline-block有overflow-（只要不是visible—）: 上面img也是inline-block    </li>
+<li><p>图片自适应–缩放，最大限度充满容器</p>
+<pre><code>.wrapper{
+    width:300px;  
+    height:300px;  
+    border:solid 1px #000;  
+    background-color:red;  
+    background-image:url(images/donghua1.jpg); /*图片地址*/  
+    background-image:url(images/donghua3.jpg); /*图片地址*/  
+    background-origin:content;  /*从content区域开始显示背景*/
+    background-position:50% 50%;  /*图片上下左右居中*/  
+    background-size:contain;    /*保持图像本身的宽高比例，将图片缩放到宽度或高度正好适应定义背景的区域*/  
+    background-repeat:no-repeat; /*图像不重复显示*/  
+}
+</code></pre></li>
+<li><p>重复嵌套的两个style，第一个定义样式不生效</p>
+<pre><code>&lt;style&gt;
+&lt;style&gt;
+    .outer{
+        //这里的样式不生效    
+    }
+    .inner{
+        // 有效
+    }
+&lt;/style&gt;
+&lt;/style&gt;
+</code></pre></li>
+<li>style标签结合属性contenteditable*,可以在页面直接显示样式表，并且可编辑</li>
+<li><p>tr,td 是table元素定义height无效，改写display，或者嵌套div ;<br> table设置layout:fixed 可以限定宽高</p>
+</li>
+<li><p>搜索结果展示，超出隐藏/… 。包括垂直方向     </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.serch-description&#123;/*\\*/</span><br><span class="line">    max-width: 150px;// 垂直方向 max-height:95px;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">    text-overflow: ellipsis;</span><br><span class="line">    white-space: nowrap;</span><br><span class="line">&#125;</span><br><span class="line">.serch-description:hover&#123;</span><br><span class="line">    max-height:none;</span><br><span class="line">    white-space: unset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 多行文字:<br> 在webkit内核的浏览器中，多行文字省略可以采用CSS属性-webkit-line-clamp实现。<br> 方案二：clamp.js</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.multiple-line &#123;</span><br><span class="line">      overflow: hidden;</span><br><span class="line">      text-overflow: ellipsis;</span><br><span class="line">      display: -webkit-box; // 而且-webkit-box已经被flex替代,但是不能用flex代替</span><br><span class="line">      -webkit-line-clamp: 2;</span><br><span class="line">      -webkit-box-orient: vertical;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="滚动穿透"><a href="#滚动穿透" class="headerlink" title="滚动穿透"></a>滚动穿透</h3><!-- [移动端滚动穿透问题完美解决方案](https://segmentfault.com/a/1190000005617307) -->
+<p>css 之 overflow: hidden<br>js 之 touchmove + preventDefault<br>解决方案 position: fixed<br>所以如果需要保持滚动条的位置需要用 js 保存滚动条位置关闭的时候还原滚动位置<br><!-- [纯CSS属性pointer-events：none解决滚动穿透问题](https://www.cnblogs.com/ygunoil/p/12765420.html) --></p>
+<blockquote>
+<p>元素永远不会成为鼠标事件的target。但是，当其后代元素的pointer-events属性指定其他值时，鼠标事件可以指向后代元素，在这种情况下，鼠标事件将在捕获或冒泡阶段触发父元素的事件侦听器。<br>简而言之，我们想让哪层不滚动，只需要给这层设置 pointer-events: none 。</p>
+</blockquote>
+<p>配合弹窗的状态，当弹窗显示的时候，给位于遮罩层底下的图层设置  pointer-events: none ，当弹窗隐藏/关闭的时候，设置  pointer-events: auto ，或者干脆移除这个属性。</p>
+<!-- [这一次，彻底解决滚动穿透 ](https://www.sohu.com/a/286604987_495695) -->
+<p>阻止冒泡？事实上，这并没有什么卵用。<br>只加 overflow:hidden对移动端是无效的！<br>该方案会让浏览器的滚动条默认重置于初始位置<br>阻止body的默认滚动？<br>直接阻止 document的 touchmove事件：<br><!-- 看起来好像非常严格，将整个页面的滚动全部禁止，但实践后发现： --></p>
+<!-- 
+[滚动穿透的6种解决方案【已自测】](https://cloud.tencent.com/developer/article/1405979)
+[滚动穿透的6种解决方案【已自测】](https://www.cnblogs.com/padding1015/p/10568070.html)
+一、body无滚动 + 弹层无滚动[css-超出隐藏]
+解决方案：
+弹层出现时，用css给body设置固定定位和超出隐藏。
+二、body无滚动 + 弹层内部滚动[css-弹框超出滚动|真机有bug]
+解决方案：
+弹层出现时，用css给body设置固定定位和超出隐藏。
+至于弹层内部的滚动，设置一个overflow: scroll;即可。
+
+不过为了流畅体验，可以加上-webkit-overflow-scrolling: touch，以解决在IOS上滚动惯性失效的问题，提高滚动的流畅度。
+
+三、body滚动 + 弹层无滚动[js-阻止弹层中touchmove的默认行为]
+解决方案：
+当弹层出现的时候不需要再禁掉body的滚动效果了，我们可以从弹层方面入手，阻止弹框的touchmove事件的默认行为。就能阻止滚动穿透。
+
+四、body滚动 + 弹层内部滚动[js-检测touchmove的target]
+简单粗暴，一针见血：谁能动谁动，谁不能动就禁止touchmove事件的preventEvent默认行为。
+解决方案：
+检测touchmove事件，如果touch的目标是弹窗不可滚动区域（背景蒙层）就禁掉默认事件，反之就不做控制。
+
+但是同样的问题是，需要判断滚动到顶部和滚动到底部的时候禁止滚动。否则，就和第二条一样，触碰到上下两端，弹窗可滚动区域的滚动条到了顶部或者底部，依旧穿透到body，使得body跟随弹窗滚动。
+所以依旧需要同样的代码，对可滚动区域的touchmove做监听：若到顶或到底，同样阻止默认事件。
+
+
+五、body滚动 + 弹层内部滚动[js-代码模拟上下滑动手势效果]
+具体制作思路写在js注释上。
+六、body滚动 + 弹层内部滚动[css+js-记录滚动位置] -->

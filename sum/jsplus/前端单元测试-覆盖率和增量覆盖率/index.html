@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="test,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2022.1.19 星期三 :    # 覆盖率报告我在jest环境中工作，在寻找test coverage时，它显示在一行中，用符号E，这是什么？我发现，E代表else path not taken，这意味着对于标记的if/else语句，if路径已经过测试，而不是else。 报告结果分析  通过 Istanbul 得到的测试覆盖率报告 四个测量维度行覆盖率（line coverage）：每个">
+<meta name="keywords" content="test">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端单元测试-覆盖率和增量覆盖率">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/前端单元测试-覆盖率和增量覆盖率/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2022.1.19 星期三 :    # 覆盖率报告我在jest环境中工作，在寻找test coverage时，它显示在一行中，用符号E，这是什么？我发现，E代表else path not taken，这意味着对于标记的if/else语句，if路径已经过测试，而不是else。 报告结果分析  通过 Istanbul 得到的测试覆盖率报告 四个测量维度行覆盖率（line coverage）：每个">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2023-02-22T14:01:19.452Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端单元测试-覆盖率和增量覆盖率">
+<meta name="twitter:description" content="2022.1.19 星期三 :    # 覆盖率报告我在jest环境中工作，在寻找test coverage时，它显示在一行中，用符号E，这是什么？我发现，E代表else path not taken，这意味着对于标记的if/else语句，if路径已经过测试，而不是else。 报告结果分析  通过 Istanbul 得到的测试覆盖率报告 四个测量维度行覆盖率（line coverage）：每个">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/前端单元测试-覆盖率和增量覆盖率/">
+
+
+
+
+
+  <title>前端单元测试-覆盖率和增量覆盖率 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/前端单元测试-覆盖率和增量覆盖率/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端单元测试-覆盖率和增量覆盖率</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-19T08:00:00+08:00">
+                2022-01-19
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-02-22T22:01:19+08:00">
+                2023-02-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/jsplus/" itemprop="url" rel="index">
+                    <span itemprop="name">jsplus</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/前端单元测试-覆盖率和增量覆盖率/" class="leancloud_visitors" data-flag-title="前端单元测试-覆盖率和增量覆盖率">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,579
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p style="text-align:right"> 2022.1.19 星期三 : </p>
+
+<!-- 
+在Jasmine之上构建的Javascript Jest测试框架中是否有代码覆盖的方法？ 内部框架does not打印出它获得的代码覆盖范围。我也尝试过使用Istanbul，blanket和JSCover，但没有一个能够工作。
+
+试试Chutzpah。我刚刚用过它。我在博客上写了关于如何在Visual Studio中集成的内容。 这就是我使用Chutzpah进行代码覆盖的方法：http://francorobles.wordpress.com/2014/09/14/code-coverage-with-chutzpah/
+
+FROM: [Jest的代码覆盖率](https://oomake.com/question/7263206) 
+-->
+<p># 覆盖率报告<br>我在jest环境中工作，在寻找test coverage时，它显示在一行中，用符号E，这是什么？<br>我发现，E代表else path not taken，这意味着对于标记的if/else语句，if路径已经过测试，而不是else。</p>
+<h2 id="报告结果分析"><a href="#报告结果分析" class="headerlink" title="报告结果分析"></a>报告结果分析</h2><!-- \# 1 [看懂「测试覆盖率报告」 #49](https://github.com/JChehe/blog/issues/49) -->
+<!-- TODO: ablob -->
+<p>通过 Istanbul 得到的测试覆盖率报告</p>
+<h3 id="四个测量维度"><a href="#四个测量维度" class="headerlink" title="四个测量维度"></a>四个测量维度</h3><p>行覆盖率（line coverage）：每个可执行代码行是否都执行了？<br>函数覆盖率（function coverage）：每个函数是否都调用了？<br>分支覆盖率（branch coverage）：每个流程控制的各个分支是否都执行了？<br>语句覆盖率（statement coverage）：每个语句是否都执行了？</p>
+<h3 id="行（Lines-of-Source-Code）-vs-可执行代码行（Lines-of-Executable-Code）"><a href="#行（Lines-of-Source-Code）-vs-可执行代码行（Lines-of-Executable-Code）" class="headerlink" title="行（Lines of Source Code） vs 可执行代码行（Lines of Executable Code）"></a>行（Lines of Source Code） vs 可执行代码行（Lines of Executable Code）</h3><p>“行覆盖率”中的行是指可执行代码行（Lines of Executable Code），而不是源文件中所有的行（含空行）——（Lines of Source Code）。</p>
+<p>可执行代码行：<br>一般来说，包含语句的每一行都应被视为可执行行。而复合语句（简称为语句块，用 {} 括起来）会被忽略（但其内容除外）。</p>
+<p>注：对于可执行行的定义，不同覆盖率引擎可能会存在一些差异。</p>
+<p>具体以下东西会被忽略（即视为非可执行行，+0）：</p>
+<ul>
+<li>非语句<br>一些覆盖率引擎会将以下两点视为可执行行，而 Istanbul 会忽略它们：<ul>
+<li>该行只包含标点符号：}、});、;</li>
+<li>定义时的方法（函数）名</li>
+</ul>
+</li>
+<li>import、声明<br>import、声明都被视为非可执行行（+0），require、赋值等语句视为可执行行（+1）<br>如果某行存在可执行代码，则这一整行会被视为可执行代码行。<br>而如果一个语句被拆分为多行，则该可执行代码块中，仅第一行被会视为可执行行。<!-- 另外，不管嵌套语句横跨多少行，可执行行的数目仅会加 1。 -->
+<!-- 
+细心的读者可能会发现，注释 // +1 的那些行，其左侧都是 Nx 或粉色色块（即这两者与底色——灰色不同）。所以
+可以不管以上那些概念，通过颜色的不同（非底色——灰色）即可看出哪些是可执行代码行： -->
+绿色方框的是 Lines of Source Code、红色红框内与底色不同的色块是 Lines of Executable Code<h3 id="可执行代码行-vs-语句"><a href="#可执行代码行-vs-语句" class="headerlink" title="可执行代码行 vs 语句"></a>可执行代码行 vs 语句</h3>一般情况下，如果我们遵守良好的代码规范，可执行代码行和语句的表现是一致的。然而当我们将两个语句放一行时，就会得到不同的结果。<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><h3 id="其他标识"><a href="#其他标识" class="headerlink" title="其他标识"></a>其他标识</h3>测试覆盖率报告出现的标识有：<br>‘E’：’else path not taken’，表示 if/else 语句的 if（含 else if）分支已测试，而 else 分支未测试。<br>‘I’：’if path not taken’，与上面的 ‘E’ 相反，即 if（含 else if） 分支未测试。<br>‘Nx’：表示当前可执行代码行被执行的总次数。<br>粉色（背景色）：语句/函数未覆盖。<br>黄色（背景色）：分支未覆盖。<!-- 
+### 通过注释语法忽略指定代码
+代码中的某些分支可能很难，甚至无法测试。故 Istanbul 提供 注释语法，使得某些代码不计入覆盖率。
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* istanbul ignore else */</span></span><br><span class="line"><span class="keyword">if</span> (foo.hasOwnProperty(<span class="string">'bar'</span>)) &#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* istanbul ignore if */</span></span><br><span class="line"><span class="keyword">if</span> (hardToReproduceError)) &#123;</span><br><span class="line">    <span class="keyword">return</span> callback(hardToReproduceError);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 忽略默认值 &#123;&#125;</span></span><br><span class="line"><span class="keyword">var</span> object = parameter || <span class="comment">/* istanbul ignore next */</span> &#123;&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>通过注释语法，将 funB 的 if 分支排除。故 Branches 由 2/4 变为 2/3，即总分支数由 4 减为 3。<br>PS: 在jest的单测中，并没有走通。还是统计到了。<br> –&gt;<br><!-- END: #1  --><p></p>
+<!-- 
+### 几个指标
+\# 000 [Jest单元测试的几个指标](https://www.jianshu.com/p/1a89b2df6423)
+%stmts是语句覆盖率（statement coverage）：是不是每个语句都执行了？
+%Branch分支覆盖率（branch coverage）：是不是每个if代码块都执行了？
+%Funcs函数覆盖率（function coverage）：是不是每个函数都调用了？
+%Lines行覆盖率（line coverage）：是不是每一行都执行了？
+END: #000 
+-->
+<p>html 报告效果：行覆盖（绿色），未覆盖（红色），半覆盖（黄色），无视（白色）</p>
+<p># 工具/手段</p>
+<h2 id="chrome-Dev-Tools"><a href="#chrome-Dev-Tools" class="headerlink" title="chrome Dev Tools"></a>chrome Dev Tools</h2><!-- \# 33 [什么是代码覆盖率？](https://www.zhihu.com/question/22244568)  -->
+<p>chrome 浏览器的 DevTools 给我们提供了度量页面代码（JS、CSS）覆盖率的工具 Coverage。<br>使用方式：Dev tools —— More tools —— Coverage</p>
+<ul>
+<li>可度量代码类型：JS CSS</li>
+<li>统计可视化形式：<ol>
+<li>使用率是以byte字节来计算的；</li>
+<li>当我们选择一段脚本资源即可在 Source 栏可以看到加载页面时当前资源 run过得代码（蓝色）和没有run过得代码（红色）；</li>
+</ol>
+</li>
+</ul>
+<p>缺点：显然，目前大部分网页上的JS脚本基本都是经过混淆压缩打包过后的产物，对于开发者而言，这种覆盖率可读性及参考价值不大。<br>TIPS：当然，如果在拥有 source map 的情况下也是可以用浏览器查看源代码的覆盖率的：</p>
+<ol>
+<li>在 source tab 中找到当前页面的 js 资源文件（当然已经被混淆的面目全非）</li>
+<li>输入 sourcemap URL（以 def 发布平台为例，在构建结果中可找到）</li>
+<li>在 webpack:// 目录下即可查看对应源码的大致覆盖率（不过没有什么消费价值）</li>
+</ol>
+<h2 id="Istanbul（NYC）"><a href="#Istanbul（NYC）" class="headerlink" title="Istanbul（NYC）"></a>Istanbul（NYC）</h2><blockquote>
+<p>Istanbul（NYC）这个软件以土耳其最大城市伊斯坦布尔命名，因为土耳其地毯世界闻名，而地毯则是用来覆盖的。<br>Istanbul或者 NYC(New York City，基于 istanbul 实现) 是度量 JavaScript 程序的代码覆盖率工具，目前绝大多数的node代码测试框架使用该工具来获得测试报告，其有四个测量维度：</p>
+<ul>
+<li>line coverage（行覆盖率-每一行是否都执行了） 【一般我们关注这个信息】</li>
+<li>function coverage（函数覆盖率-每个函数是否都调用了）</li>
+<li>branch coverage（分支覆盖率-是否每个 if 代码块都执行了）</li>
+<li>statement coverage（语句覆盖率-是否每个语句都执行了）<br>可以度量的代码类型：JS TS<br>统计可视化的形式：HTMLterminal</li>
+</ul>
+</blockquote>
+<p>缺点：目前使用 istanbul 度量网页前端JS代码覆盖率没有非侵入的方案，采用的是在编译构建时修改构建结果的方式埋入统计代码，再在运行时进行统计展示。 </p>
+<p>我们可以使用 babel-plugin-istanbul 插件在对源代码在 AST 级别进行包装重写，这种编译方式也叫 代码插桩 / 插桩构建（instrument）<br>&lt;!– </p>
+<h3 id="插桩构建"><a href="#插桩构建" class="headerlink" title="插桩构建"></a>插桩构建</h3><p>istabul 确实也是这么做的，babel-plugin-istanbul 在构建过程中分析 AST 并将相应统计单元（语句、函数、分支等）做装饰代码的添加，最终在代码运行之后，输出一份 json 格式的数据：<br>当我们在运行代码过后，得到了上面的 json 便可以消费它了。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">"/Users/xxx/test/istanbul.js"</span>:&#123;</span><br><span class="line">        <span class="attr">"path"</span>:<span class="string">"/Users/bairuobing/test/istanbul.js"</span>,</span><br><span class="line">        <span class="attr">"s"</span>:&#123;</span><br><span class="line">            <span class="attr">"1"</span>:<span class="number">1</span>,</span><br><span class="line">            <span class="attr">"2"</span>:<span class="number">0</span>,</span><br><span class="line">            <span class="attr">"3"</span>:<span class="number">1</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"b"</span>:&#123;</span><br><span class="line"></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"f"</span>:&#123;</span><br><span class="line">            <span class="attr">"1"</span>:<span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        <span class="attr">"fnMap"</span>:&#123; <span class="comment">// function 的开始结束位置信息</span></span><br><span class="line">            <span class="attr">"1"</span>:&#123;</span><br><span class="line">                <span class="attr">"name"</span>:<span class="string">"add"</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">--&gt;</span><br><span class="line">&lt;!-- </span><br><span class="line">## 线程池概述代码覆盖率在iHome Rax开发套件 Tbox 中的应用</span><br><span class="line">tips：tbox 每平每屋 消费者端 本地开发套件 既然我们知道了源代码的代码覆盖率，我们可以用它为性能优化做些什么贡献呢？</span><br><span class="line">当工程主 bundle 较大，那么采用拆包较大的/无用的前端组件来瘦身首屏主 JS 包不失为一种可行的选择，此时就可以根据代码覆盖率来决定优化哪些代码。</span><br><span class="line">### 代码分割</span><br><span class="line">React.lazy 已经为我们提供了一种不错的思路，就是利用动态加载模块规范 import() （webpack对import()解析为代码分割）的能力来实现前端组件代码懒加载/动态加载。 </span><br><span class="line"></span><br><span class="line">以此为灵感，那么为何不将某些组件通过动态引入的方式加载，来以此换取首页 bundle 的瘦身呢？</span><br><span class="line">### 下一步</span><br><span class="line">我们能通过代码覆盖率统计出哪些组件的代码首屏使用率为0（或者门槛值30%以下），并在项目工程中自动生成一个持久化的文件配置(app.json中)，之后依据配置将这些低使用率的组件代码在生产构建时将产物代码改写为动态引入。</span><br><span class="line"></span><br><span class="line">于是有了以下方案：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 写在最后</span><br><span class="line">istanbul 在 node 环境下跑测试用例代码能度量覆盖率是由于其对运行时模块加载器的源代码拦截，但是比较遗憾的是，本文介绍的代码插桩分析覆盖率这会引入一些多余的桩代码，或许采用 puppeteer 无头浏览器提供的Coverage api + sourceMap 逆编译的思路来进行度量是一种更加完美的方式，期待与诸君一起探索，继续努力！</span><br><span class="line"></span><br><span class="line">作者：阿里巴巴大淘宝技术</span><br><span class="line">链接：https://www.zhihu.com/question/22244568/answer/2516883782</span><br><span class="line"> --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- END: #33 --&gt;</span><br><span class="line">&lt;!-- 4. 条件加载被异步化的组件。 #41内容 --&gt;</span><br><span class="line">\# 意义</span><br><span class="line">&lt;!-- \# 41 [什么是代码覆盖率？](https://www.zhihu.com/question/22244568/answer/1284218505) --&gt;</span><br><span class="line">## 代码覆盖率的意义</span><br><span class="line">1. 分析未覆盖部分的代码，从而反推在前期测试设计是否充分，没有覆盖到的代码是否是测试设计的盲点，为什么没有考虑到？需求/设计不够清晰，测试设计的理解有误，工程方法应用后的造成的策略性放弃等等，之后进行补充测试用例设计。</span><br><span class="line">2. 检测出程序中的废代码，可以逆向反推在代码设计中思维混乱点，提醒设计/开发人员理清代码逻辑关系，提升代码质量。</span><br><span class="line">3. 代码覆盖率高不能说明代码质量高，但是反过来看，代码覆盖率低，代码质量不会高到哪里去，可以作为测试自我审视的重要工具之一。</span><br><span class="line">\## 最后</span><br><span class="line">覆盖率数据只能代表你测试过哪些代码，不能代表你是否测试好这些代码。不要过于相信覆盖率数据。不要只拿语句覆盖率(行覆盖率)来考核你的测试人员。测试人员不能盲目追求代码覆盖率，而应该想办法设计更多更好的案例，哪怕多设计出来的案例对覆盖率一点影响也没有。</span><br><span class="line">路径覆盖率 &gt; 判定覆盖 &gt; 语句覆盖</span><br><span class="line">&lt;!-- END: 41 --&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- \#222 [你需要知道的覆盖率 / 原理 / 解惑 / 增量覆盖率计算](https://testerhome.com/topics/15866) --&gt;</span><br><span class="line">## 高覆盖率</span><br><span class="line">Q: 精细的覆盖率统计真的比粗粒度的覆盖率统计好么？</span><br><span class="line">A: 未必，越精细意味着：1. 统计耗时越大 2. 牵涉到高覆盖率到底有什么意义（见下）</span><br><span class="line">### 高覆盖率真的很有用么？</span><br><span class="line">&lt;!-- 这是一个经典疑问（误解），看代码 --&gt;</span><br><span class="line">```js</span><br><span class="line">if (x &gt; 0)</span><br><span class="line">    y = 5 / x; // 没有除零错误</span><br><span class="line">else</span><br><span class="line">    y = 5 / (x + 1); // x==-1除零错误</span><br></pre></td></tr></table></figure></p>
+<p>显然两个 x 输入（测试用例）即可完全覆盖，x==2 和 x==-2，但是对找到 x==-1 除零错误没有卵用，以小见大，结论是：</p>
+<ul>
+<li>高覆盖的测试用例 != 测试用例有用</li>
+<li>没覆盖的分支 == 该分支上的任何错误肯定都测不到，注意错误不限于 Exception<!-- END: #222 -->
+</li>
+</ul>
+<p># 覆盖率原理</p>
+<h2 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h2><!-- \# 31 [“覆盖率检测”的实现原理，就这？](https://juejin.cn/post/7019161146347388959) -->
+<!-- \$_TODO: ablob.   -->
+<p>覆盖率检测是用来判断单测完整性的，jest 和 karma 都提供了这种功能：<br>jest 和 karama 都是基于 istanbul 做的覆盖率检测，我们来探究下 istanbul 的实现原理。</p>
+<p><code>npx istanbul instrument ./test.js -o ./out.js</code><br>instrument 是指<strong>函数插桩</strong>，也就是透明的给函数添加一些代码。<br>这就是转换后的代码，在每一个 statement，每一个 function、每一个 branch 都做了计数，分别是 s、f、b 属性。</p>
+<p>函数插桩是基于 AST，找到 statement、function、branch 的 AST，在前面插入插桩代码的 AST。</p>
+<p>istanbul 的源码: 通过 esprima（js parser）来把代码 parse 成 AST，然后对 AST 进行插桩。<br>插桩代码分为两部分，一部分是初始化全局对象的代码，一部分是每个分支、语句、函数的计数代码。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'test'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 转换后</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  AAAA.f[<span class="string">'1'</span>]++;</span><br><span class="line">  AAAA.s[<span class="string">'2'</span>]++;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'test'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>### istanbul 是怎么做到<strong>透明的插桩</strong>的呢？<br>看过之前一篇 <a href="https://juejin.cn/post/7012243156703903751" target="_blank" rel="noopener">require hook 的魔术</a>那篇文章的小伙伴知道，nodejs 的模块加载是分为 load、extension[‘.js’]、compile 这几步的。</p>
+<p>我们只需要重写 extension[‘.js’] 这一步，就能做到透明的代码转换。</p>
+<p>总结<br>jest 和 karma 都基于 istanbul 实现了覆盖率检测。覆盖率统计的原理就是函数插桩，基于 AST 在代码的 statement、function、branch 处插入计数代码，同时通过 require hook 实现了透明的转换。这样代码一执行就能拿到统计数据，自然就可以算出覆盖率了。</p>
+<!-- 
+[require hook 的魔术](https://juejin.cn/post/7012243156703903751)
+> 这玩意和 require.extensions 是同一个东西，而且require.extensions 在node v10.6 版本就弃用了（貌似后续会一直存在，不会被移除），官方说法是这东西很影响性能，副作用挺大的。
+> 但是 ts node，istanbul 都依赖这个.
+> 这种工具用还行. 副作用大小主要看代码怎么写的，合理利用缓存的话还好 -->
+<!-- End: #31 -->
+<h3 id="coverage命令"><a href="#coverage命令" class="headerlink" title="coverage命令"></a>coverage命令</h3><!-- \# 32 [Jest | 测试框架实战之-coverage命令实现原理](https://juejin.cn/post/7035139783911276551) -->
+<p>istanbul-lib-coverage：提供覆盖率信息的只读视图，能够合并和汇总覆盖率信息的api<br>istanbul-lib-report：istanbul库生成报告的核心程序<br>istanbul-reports：大体提供报告输出的公共能力api<br>这三个库使用围绕着istanbul，因此该库基本大概率提供了核心的覆盖率能力，下面去验证下。</p>
+<blockquote>
+<p>Istanbul instruments your ES5 and ES2015+ JavaScript code with line counters, so that you can track how well your unit-tests exercise your codebase.<br>istanbul，为ES5和ES2015+JavaScript代码插入行计数器，这样您就可以跟踪单元测试对代码库的运行情况。<br>&lt;!– <code>npm install -g istanbul</code><br>安装完成后，执行下<code>istanbul help</code>查看下它所支持的命名，所有核心命令如下：</p>
+</blockquote>
+<p>check-coverage：根据JSON文件的覆盖率阈值检查总体/每个文件的覆盖率。如果不满足阈值，则退出1，否则退出0。<br>cover：透明地将覆盖率信息添加到节点命令。在执行结束时保存coverage.json和报告。<br>instrument：插入文件或目录树，并将插入指令的代码写入所需的输出位置。<br>report：为上一次运行中生成的JSON对象写入覆盖率报告。</p>
+<h3 id="instrument命令"><a href="#instrument命令" class="headerlink" title="instrument命令"></a>instrument命令</h3><p><code>istanbul instrument ./test.js -o ./test-inst.js</code></p>
+<ol>
+<li>它创建了一个全局对象用于存储统计信息</li>
+<li>它往函数执行代码各个对应位置插入了统计代码，对应代码块执行就+1</li>
+<li>命名及其复杂防止与全局命名冲突。 这便是整个istanbul的流程，也是生成覆盖率的基本原理。<br>–&gt;</li>
+</ol>
+<!-- End: #32 -->
+<h2 id="Istanbul或nyc"><a href="#Istanbul或nyc" class="headerlink" title="Istanbul或nyc"></a>Istanbul或nyc</h2><p>nyc: <a href="https://github.com/istanbuljs/nyc" target="_blank" rel="noopener">https://github.com/istanbuljs/nyc</a><br>How Istanbul works</p>
+<blockquote>
+<p>Istanbul instruments your ES5 and ES2015+ JavaScript code with line counters, so that you can track how well your unit-tests exercise your codebase.</p>
+</blockquote>
+<blockquote>
+<p>The nyc command-line-client for Istanbul works well with most JavaScript testing frameworks: tap, mocha, AVA, etc.</p>
+</blockquote>
+<blockquote>
+<p> Note: jest or tap, you do not need to install nyc. Those runners already have the IstanbulJS libraries to provide coverage for you. Follow their documentation to enable and configure coverage reporting.</p>
+</blockquote>
+<h3 id="Using-Istanbul-With-Mocha"><a href="#Using-Istanbul-With-Mocha" class="headerlink" title="Using Istanbul With Mocha"></a>Using Istanbul With Mocha</h3><p>Integrating with Coveralls<br>coveralls.io is a great tool for adding coverage reporting to your continuous-integration flow. Here’s how to get Istanbul integrated with coveralls and travis-ci.org:</p>
+<p># 增量覆盖率<br>&lt;!–<br># 70 <a href="https://blog.csdn.net/qq744746842/article/details/114265353" target="_blank" rel="noopener">前端代码覆盖率增量计算</a><br>## 前端代码覆盖率增量覆盖的困难<br>针对前端代码覆盖率并不能像java那块那么简单，有专门的javascript的解析器，能够获取到这个js文件中所有的方法。所以套用原有的java那套逻辑基本是不太可行的。所以我们需要另辟蹊径来解决这个问题。</p>
+<p>java的增量代码diff 我们是从解析源码的文件入手的，那针对js既然这套不行，有没有方式能够从覆盖率结果数据入手，去解决这个事情呢?</p>
+<p>## 思路<br>那么是不是可以这么去考虑呢？从git diff中对比得到对应文件的改动行数，然后再对应到这块的数据上，如果修改的代码行 是在statemanMap/ fnMap/ branchMap 的覆盖范围的话就保留这块的数据，如果说改动行中，不存在有这块的内容则从对象中将这块的内容剔除掉。这样子就可以得到增量的数据了。</p>
+<p>但是我们是不是直接针对用户提交的coverage数据做处理呢？</p>
+<p>答案是不行的。 我们需要了解一个问题，之前我们在 <a href>聊聊前端代码覆盖率 (长文慎入)</a> 中提到过用户提交的coverage数据并不是完整的反应到原本的代码行上，主要是针对typescript这块，因为如果你的编译是经过ts-loader -&gt; babel-loader 处理的话。得到的coverage中的数据中的line的值，其实跟源码中的line会出现不一致的情况。而istanbul这块是会根据sourceMap 重新映射回去的。</p>
+<p>那哪里的数据才是正在正确的呢? 答案其实在<strong>通过nyc api生成的报告目录</strong>下, 当你的api指定了reporter包含有 json的情况下，就会在覆盖率报告的目录下生成有 coverage-final.json。 这里的数据其实<strong>跟coverage数据基本是一致的，并且这里的数据已经经过istanbul校正过</strong>。所以我们可以信任这块的数据。</p>
+<p>$_PS: 还在之前的逻辑（<a href>聊聊前端代码覆盖率 (长文慎入)</a>）里，包括浏览器提交的coverage，istanbul。大体思路是有的。<br> –&gt;</p>
+<h2 id="计算增量测试覆盖率"><a href="#计算增量测试覆盖率" class="headerlink" title="计算增量测试覆盖率"></a>计算增量测试覆盖率</h2><p># 71 <a href="https://zhuanlan.zhihu.com/p/158958885" target="_blank" rel="noopener">如何计算增量测试覆盖率</a><br>发布于 2020-07-12 20:54</p>
+<p>计算增量测试覆盖率，总共需要3步:<br>1) 计算出增量代码的所有行号<br>2) 计算出测试未覆盖的代码的所有行号<br>3) 对比计算增量代码被测试覆盖的比例，得出增量覆盖率</p>
+<h3 id="一、计算增量代码的所有行号"><a href="#一、计算增量代码的所有行号" class="headerlink" title="一、计算增量代码的所有行号"></a>一、计算增量代码的所有行号</h3><p>代码管理一般都会用到 GIT 这个工具，GIT提供了非常强大的管理增量代码的能力，因此，可以利用GIT这一特性，通过git diff(参考文献1) 这个命令获取增量代码。</p>
+<p>使用 <code>git diff --unified=0 master</code> 或 <code>git diff -U0 master</code>看运行结果</p>
+<p>数据结构与不带options的结果基本一致，只不过第2部分和第3部分作为一个整体可能会出现1次或多次，还有一点变化是第2部分行号信息的表达出现了三种格式。<br><code>git diff -U0 master | grep -Po &#39;^\+\+\+ ./\K.*|^@@ -[0-9]+(,[0-9]+)? \+\K[0-9]+(,[0-9]+)?(?= @@)&#39;</code></p>
+<!-- 
+[读懂diff](http://www.ruanyifeng.com/blog/2012/08/how_to_read_diff.html) 
+
+由于历史原因，diff有三种格式：
+　　* 正常格式（normal diff）
+　　* 上下文格式（context diff）
+　　* 合并格式（unified diff）
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正常 最早的Unix（即AT&amp;T版本的Unix），使用的就是这种格式的diff。</span></span><br><span class="line">　  <span class="number">4</span>c4</span><br><span class="line">　　&lt; a</span><br><span class="line">　　---</span><br><span class="line">　　&gt; b</span><br><span class="line"><span class="comment">// 最好加入上下文 - 结果分成四个部分</span></span><br><span class="line">  *** f1 <span class="number">2012</span><span class="number">-08</span><span class="number">-29</span> <span class="number">16</span>:<span class="number">45</span>:<span class="number">41.000000000</span> +<span class="number">0800</span></span><br><span class="line">　　--- f2 <span class="number">2012</span><span class="number">-08</span><span class="number">-29</span> <span class="number">16</span>:<span class="number">45</span>:<span class="number">51.000000000</span> +<span class="number">0800</span></span><br><span class="line">　　***************</span><br><span class="line">　　*** <span class="number">1</span>,<span class="number">7</span> ****</span><br><span class="line">　　 a</span><br><span class="line">　　!a</span><br><span class="line">　　 a</span><br><span class="line">　　 a</span><br><span class="line">　　--- <span class="number">1</span>,<span class="number">7</span> ----</span><br><span class="line">　　 a</span><br><span class="line">　　!b</span><br><span class="line">　　 a</span><br><span class="line">　　 a</span><br><span class="line"><span class="comment">// 五、合并格式的diff - 除了有变动的那些行以外，也是上下文各显示3行。</span></span><br><span class="line">--- f1 <span class="number">2012</span><span class="number">-08</span><span class="number">-29</span> <span class="number">16</span>:<span class="number">45</span>:<span class="number">41.000000000</span> +<span class="number">0800</span></span><br><span class="line">　　+++ f2 <span class="number">2012</span><span class="number">-08</span><span class="number">-29</span> <span class="number">16</span>:<span class="number">45</span>:<span class="number">51.000000000</span> +<span class="number">0800</span></span><br><span class="line">　　@@ <span class="number">-1</span>,<span class="number">7</span> +<span class="number">1</span>,<span class="number">7</span> @@</span><br><span class="line">　　 a</span><br><span class="line">　　-a</span><br><span class="line">　　+b</span><br><span class="line">　　 a</span><br><span class="line">　　 a</span><br></pre></td></tr></table></figure>
+<p>六、git格式的diff<br>版本管理系统git，使用的是合并格式diff的变体。<br>–&gt;</p>
+<h3 id="二、计算测试未覆盖的代码的所有行号"><a href="#二、计算测试未覆盖的代码的所有行号" class="headerlink" title="二、计算测试未覆盖的代码的所有行号"></a>二、计算测试未覆盖的代码的所有行号</h3><p>计算未被测试覆盖的行号，需要先在当前分支运行测试脚本生成对应的测试报告。<br>测试报告有很多种格式，其中<a href="http://lcov.info">Icov.info</a>是一种描述源码覆盖率的纯文本格式的文件，</p>
+<p>数据包含以下字段，因工具不同，字段出现的顺序会略有变化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">TN:&lt;test name&gt; 用例名称，[因工具不同，有的无法生成此字段]</span><br><span class="line">SF:&lt;path of the source file&gt; 源文件路径，[因工具不同，有的是绝对路径，有的是相对路径]</span><br><span class="line">FN:&lt;line number of function start&gt;,&lt;function name&gt; 函数起始行号，函数名称，[因工具不同，有的函数名无法生成]</span><br><span class="line">FNDA:&lt;execution count&gt;,&lt;function name&gt; 函数被执行次数，函数名称，[因工具不同，有的函数名无法生成]</span><br><span class="line">FNF:&lt;number of functions found&gt; 识别统计到的函数数量</span><br><span class="line">FNH:&lt;number of function hit&gt; 被测试覆盖的函数数量， FNH / FHF即函数覆盖率</span><br><span class="line">BRDA:&lt;line number&gt;,&lt;block number&gt;,&lt;branch number&gt;,&lt;taken&gt; 条件分支所在行号，块号，分支号，被执行的次数</span><br><span class="line">BRF:&lt;number of branches found&gt; 识别统计到的条件分支数量</span><br><span class="line">BRH:&lt;number of branches hit&gt; 被测试覆盖的条件分支数量 BRH / BRF 即分支覆盖率</span><br><span class="line">DA:&lt;line number&gt;,&lt;execution count&gt;[,&lt;checksum&gt;] 行号，执行次数， 检验和，[因工具不同，有的有校验和，有的没有]</span><br><span class="line">LH:&lt;number of lines with a non-zero execution count&gt; 被测试覆盖的行数量</span><br><span class="line">LF:&lt;number of instrumented lines&gt; 可被执行的行数量， LH / LF 即行覆盖率</span><br><span class="line">end_of_record 统计信息块结束符，一个文件一个块</span><br></pre></td></tr></table></figure></p>
+<p><code>cat coverage/lcov.info | grep -Po &#39;^SF:\K.*|^DA:\K[0-9]+(?=,0)&#39;</code></p>
+<p>cat ./test/coverage/lcov.info | grep -Po ‘^SF:\K.*|^DA:\K[0-9]+(?=,0)’</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><h3 id="node"><a href="#node" class="headerlink" title="node"></a>node</h3><p>inc-test-coverage: <a href="https://github.com/merfais/inc-test-coverage">https://github.com/merfais/inc-test-coverage</a><br>\$_PS: 上文。nodejs 方式，非cli。<br>emo-diff-cover: &lt;github.com/xwcoder/emo#readme&gt;</p>
+<blockquote>
+<p>A lib/tool to analyze test coverage of diff code lines, analyze from unified-diff content.<br><!-- PS: wangwei --><p></p>
+
+<h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><p>diff-cover: <a href="https://github.com/Bachmann1234/diff-cover" target="_blank" rel="noopener">https://github.com/Bachmann1234/diff-cover</a></p>
+<blockquote>
+<p>Automatically find diff lines that need test coverage. Also finds diff lines that have violations (according to tools such as pycodestyle, pyflakes, flake8, or pylint).</p>
+</blockquote>
+<blockquote>
+<p>The diff-cover command line tool compares an XML coverage report with the output of git diff. It then reports coverage information for lines in the diff.</p>
+</blockquote>
+<h3 id="增量质量"><a href="#增量质量" class="headerlink" title="增量质量"></a>增量质量</h3><p>diff内容是否都测试到了？</p>
+<p># 可选<br><del>Jest 原理/码研究</del><br>jest 和 karma 覆盖率窥探：如何使用<br>istanbul 覆盖率计算逻辑, 包括源码映射（sourceMap）</p>
+<p># locv</p>
+<h2 id="locv"><a href="#locv" class="headerlink" title="locv"></a>locv</h2><p>lcov geninfo: <a href="http://ltp.sourceforge.net/coverage/lcov/readme.php" target="_blank" rel="noopener">http://ltp.sourceforge.net/coverage/lcov/readme.php</a></p>
+<blockquote>
+<p>LCOV is an extension of GCOV, a GNU tool which provides information about<br>what parts of a program are actually executed (i.e. “covered”) while running<br>a particular test case.<br>&lt;!– The extension consists of a set of Perl scripts which build on the textual GCOV output to implement the following enhanced functionality:</p>
+<ul>
+<li>HTML based output: coverage rates are additionally indicated using bar graphs and specific colors.</li>
+<li>Support for large projects: overview pages allow quick browsing of coverage data by providing three levels of detail: directory view, file view and source code view.<br>–&gt;</li>
+</ul>
+</blockquote>
+<!-- 
+# gcov 和 lcov
+\# [关于代码覆盖lcov的使用](https://www.jianshu.com/p/a42bbd9de1b7)
+gcov是一个测试代码覆盖率的程序，正确地使用它搭配GCC可以分析、帮助你将代码写得更高效。帮助你优化程序。类似于一个profiling tool，使用gcov或者gprof，可以收集到一些基础的性能统计数据。比如：
+
+每一行代码执行的频度
+每个代码文件中实际被执行到的行数
+每一个代码块执行使用的时间
+
+
+lcov 是GCC 测试覆盖率的前端图形展示工具。它通过收集多个源文件的 行、函数和分支的代码覆盖信息（程序执行之后生成gcda、gcno文件，上面的链接有讲） 并且将收集后的信息生成HTML页面。生成HTML需要使用genhtml命令下文会解释。 
+
+
+\# [代码覆盖率生成工具gcov/lcov](https://www.jianshu.com/p/ef6aea555235)
+gcov是代码覆盖率测试工具，与GCC一同使用，且只能用于GCC编译程序，其具有以下功能。
+lcov是GCOV的图形化前端工具集，其主要包含工具如下：
+lcov - 获取LCOV覆盖率数据
+genhtml - 将LCOV覆盖率数据生成HTML文件
+
+-->
+<!-- 
+## gcc
+GCC（GNU Compiler Collection，GNU编译器套件）是由GNU开发的编程语言译器。GNU编译器套件包括C、C++、 Objective-C、 Fortran、Java、Ada和Go语言前端，也包括了这些语言的库（如libstdc++，libgcj等。） [1] 
+GCC的初衷是为GNU操作系统专门编写的一款编译器。GNU系统是彻底的自由软件。此处，“自由”的含义是它尊重用户的自由 [2]  。
+
+
+对于 GCC 的认知，很多读者还仅停留在“GCC 是一个C语言编译器”的层面，是很片面的。从本节开始，我将带领大家系统学习 GCC，本节先带领大家系统地了解一下 GCC。
+
+谈到 GCC，就不得不提 GNU 计划。GNU 全称 GNU's Not UNIX，又被称为“革奴计划”，由理查德·斯托曼于 1983 年发起。GNU 计划的最终目标是打造出一套完全自由（即自由使用、自由更改、自由发布）、开源的操作系统，并初步将其命名为 GNU 操作系统（其 logo 如图 1 所示）。 
+
+
+早期 GCC 的全拼为 GNU C Compiler，即 GUN 计划诞生的 C 语言编译器，显然最初 GCC 的定位确实只用于编译 C 语言。但经过这些年不断的迭代，GCC 的功能得到了很大的扩展，它不仅可以用来编译 C 语言程序，还可以处理 C++、Go、Objective -C 等多种编译语言编写的程序。与此同时，由于之前的 GNU C Compiler 已经无法完美诠释 GCC 的含义，所以其英文全称被重新定义为  GNU Compiler Collection，即 GNU 编译器套件。
+
+> 所谓编译器，可以简单地将其理解为“翻译器”。要知道，计算机只认识二进制指令（仅有 0 和 1 组成的指令），我们日常编写的 C 语言代码、C++ 代码、Go 代码等，计算机根本无法识别，只有将程序中的每条语句翻译成对应的二进制指令，计算机才能执行。
+
+
+> 我们知道，操作系统大致分为 2 大阵营，分别是 Windows 阵营和类 Unix 阵营（包括 Unix、Linux、Mac OS、安卓等）。通常情况下，Windows 系统下用户更习惯使用现有的 IDE 来编译程序；而类 Unix 系统下，用户更喜欢直接编写相应的 gcc 命令来编译程序。
+
+-->
+</li></ul>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/test/" rel="tag"><i class="fa fa-tag"></i> test</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/miniapp/小程序开发基础/" rel="next" title="小程序开发基础">
+                <i class="fa fa-chevron-left"></i> 小程序开发基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/jsplus/前端单元测试-order使用jest/" rel="prev" title="oder使用Jest进行单元测试">
+                oder使用Jest进行单元测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#报告结果分析"><span class="nav-text">报告结果分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#四个测量维度"><span class="nav-text">四个测量维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行（Lines-of-Source-Code）-vs-可执行代码行（Lines-of-Executable-Code）"><span class="nav-text">行（Lines of Source Code） vs 可执行代码行（Lines of Executable Code）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可执行代码行-vs-语句"><span class="nav-text">可执行代码行 vs 语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程控制"><span class="nav-text">流程控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他标识"><span class="nav-text">其他标识</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-Dev-Tools"><span class="nav-text">chrome Dev Tools</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Istanbul（NYC）"><span class="nav-text">Istanbul（NYC）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插桩构建"><span class="nav-text">插桩构建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理介绍"><span class="nav-text">原理介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#coverage命令"><span class="nav-text">coverage命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instrument命令"><span class="nav-text">instrument命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Istanbul或nyc"><span class="nav-text">Istanbul或nyc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Istanbul-With-Mocha"><span class="nav-text">Using Istanbul With Mocha</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算增量测试覆盖率"><span class="nav-text">计算增量测试覆盖率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、计算增量代码的所有行号"><span class="nav-text">一、计算增量代码的所有行号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python"><span class="nav-text">python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增量质量"><span class="nav-text">增量质量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#locv"><span class="nav-text">locv</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

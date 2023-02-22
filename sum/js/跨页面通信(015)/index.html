@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="javascript,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Z 实际一 acuviewer.php aculive.php localStorage：video播放速度，质量，字幕 iframe操作：全屏同源 postmessage：全屏跨域；其他大多通信，包括全屏聊天室通知 location.hash:聊天室全屏，为iframe中body添加样式  cookie：登陆状态，没有接触 server：直播状态及其他，没有接触">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跨页面通信">
+<meta property="og:url" content="http://yoursite.com/sum/js/跨页面通信(015)/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="Z 实际一 acuviewer.php aculive.php localStorage：video播放速度，质量，字幕 iframe操作：全屏同源 postmessage：全屏跨域；其他大多通信，包括全屏聊天室通知 location.hash:聊天室全屏，为iframe中body添加样式  cookie：登陆状态，没有接触 server：直播状态及其他，没有接触">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跨页面通信">
+<meta name="twitter:description" content="Z 实际一 acuviewer.php aculive.php localStorage：video播放速度，质量，字幕 iframe操作：全屏同源 postmessage：全屏跨域；其他大多通信，包括全屏聊天室通知 location.hash:聊天室全屏，为iframe中body添加样式  cookie：登陆状态，没有接触 server：直播状态及其他，没有接触">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/js/跨页面通信(015)/">
+
+
+
+
+
+  <title>跨页面通信 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/js/跨页面通信(015)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">跨页面通信</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T08:00:00+08:00">
+                2018-06-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/js/跨页面通信(015)/" class="leancloud_visitors" data-flag-title="跨页面通信">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,111
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- <p style="text-align:right">2018.2.24 星期六 15:46</p>   -->
+<h1 id="Z-实际"><a href="#Z-实际" class="headerlink" title="Z 实际"></a>Z 实际</h1><h2 id="一-acuviewer-php-aculive-php"><a href="#一-acuviewer-php-aculive-php" class="headerlink" title="一 acuviewer.php aculive.php"></a>一 acuviewer.php aculive.php</h2><ol>
+<li>localStorage：video播放速度，质量，字幕</li>
+<li>iframe操作：全屏同源</li>
+<li>postmessage：全屏跨域；其他大多通信，包括全屏聊天室通知</li>
+<li>location.hash:聊天室全屏，为iframe中body添加样式 </li>
+<li>cookie：登陆状态，没有接触</li>
+<li>server：直播状态及其他，没有接触</li>
+</ol>
+<!-- <p style="text-align:right">16:01</p>   -->
+<a id="more"></a> 
+<p style="text-align:right">2018.2.8 星期四 12:24</p>  
+
+<h1 id="A-跨页面通信的各种姿势"><a href="#A-跨页面通信的各种姿势" class="headerlink" title="A [跨页面通信的各种姿势]"></a>A [跨页面通信的各种姿势]</h1><p>链接：<a href="https://juejin.im/post/59bb7080518825396f4f5177" target="_blank" rel="noopener">https://juejin.im/post/59bb7080518825396f4f5177</a><br>作者简介：nekron 蚂蚁金服·数据体验技术团队  2017.9.15<br><strong>$_YX:</strong> [跨页面通信的各种姿势]   </p>
+<p>将跨页面通讯类比计算机进程间的通讯，其实方法无外乎那么几种，而web领域可以实现的技术方案主要是类似于以下两种原理：</p>
+<ul>
+<li>获取句柄，定向通讯</li>
+<li>共享内存，结合轮询或者事件通知来完成业务逻辑</li>
+</ul>
+<p>由于第二种原理更利于解耦业务逻辑，具体的实现方案比较多样。以下是具体的实现方案，简单介绍下，权当科普：</p>
+<h2 id="一-获取句柄"><a href="#一-获取句柄" class="headerlink" title="一 获取句柄"></a>一 获取句柄</h2><h3 id="1-1-具体方案"><a href="#1-1-具体方案" class="headerlink" title="1.1 具体方案"></a>1.1 具体方案</h3><p>父页面通过window.open(url, name)方式打开的子页面可以获取句柄，然后通过postMessage完成通讯需求。</p>
+<h3 id="1-2-tips"><a href="#1-2-tips" class="headerlink" title="1.2 tips"></a>1.2 tips</h3><h3 id="1-3-优劣"><a href="#1-3-优劣" class="headerlink" title="1.3 优劣"></a>1.3 优劣</h3><p>缺点是只能与自己打开的页面完成通讯，应用面相对较窄；但优点是在跨域场景中依然可以使用该方案。</p>
+<h2 id="二-localStorage"><a href="#二-localStorage" class="headerlink" title="二 localStorage"></a>二 localStorage</h2><h3 id="2-1-具体方案"><a href="#2-1-具体方案" class="headerlink" title="2.1 具体方案"></a>2.1 具体方案</h3><h3 id="2-2-tips"><a href="#2-2-tips" class="headerlink" title="2.2 tips"></a>2.2 tips</h3><h3 id="2-3-优劣"><a href="#2-3-优劣" class="headerlink" title="2.3 优劣"></a>2.3 优劣</h3><p>API简单直观，兼容性好，除了跨域场景下需要配合其他方案，无其他缺点</p>
+<h2 id="三-BroadcastChannel"><a href="#三-BroadcastChannel" class="headerlink" title="三 BroadcastChannel"></a>三 BroadcastChannel</h2><h3 id="3-1-具体方案"><a href="#3-1-具体方案" class="headerlink" title="3.1 具体方案"></a>3.1 具体方案</h3><p>和localStorage方案基本一致，额外需要初始化</p>
+<h3 id="3-2-优劣"><a href="#3-2-优劣" class="headerlink" title="3.2 优劣"></a>3.2 优劣</h3><p>和localStorage方案没特别区别，都是同域、API简单，BroadcastChannel方案兼容性差些（chrome &gt; 58），但比localStorage方案生命周期短（不会持久化），相对干净些。</p>
+<h2 id="四-SharedWorker"><a href="#四-SharedWorker" class="headerlink" title="四 SharedWorker"></a>四 SharedWorker</h2><h3 id="4-1-具体方案"><a href="#4-1-具体方案" class="headerlink" title="4.1 具体方案"></a>4.1 具体方案</h3><h3 id="4-2-优劣"><a href="#4-2-优劣" class="headerlink" title="4.2 优劣"></a>4.2 优劣</h3><h2 id="五-Cookie"><a href="#五-Cookie" class="headerlink" title="五 Cookie"></a>五 Cookie</h2><h3 id="5-1-具体方案"><a href="#5-1-具体方案" class="headerlink" title="5.1 具体方案"></a>5.1 具体方案</h3><p>一个古老的方案，有点localStorage的降级兼容版，我也是整理本文的时候才发现的，思路就是往document.cookie写入值，由于cookie的改变没有事件通知，所以只能采取轮询脏检查来实现业务逻辑。<br>方案比较丑陋，势必被淘汰的方案，贴一下原版思路地址，我就不写demo了。<br><a href="https://stackoverflow.com/questions/4079280/javascript-communication-between-browser-tabs-windows/4079423" target="_blank" rel="noopener">communication between browser windows (and tabs too) using cookies</a></p>
+<h3 id="5-2-优劣"><a href="#5-2-优劣" class="headerlink" title="5.2 优劣"></a>5.2 优劣</h3><p>相较于其他方案没有存在优势的地方，只能同域使用，而且污染cookie以后还额外增加AJAX的请求头内容。</p>
+<h2 id="六-Server"><a href="#六-Server" class="headerlink" title="六 Server"></a>六 Server</h2><p>之前的方案都是前端自行实现，势必受到浏览器限制，比如无法做到跨浏览器的消息通讯，比如大部分方案都无法实现跨域通讯（需要增加额外的postMessage逻辑才能实现）。通过借助服务端，还有很多增强方案，也一并说下。</p>
+<h3 id="6-1-乞丐版"><a href="#6-1-乞丐版" class="headerlink" title="6.1 乞丐版"></a>6.1 乞丐版</h3><h3 id="6-2-Server-sent-Events-Websocket"><a href="#6-2-Server-sent-Events-Websocket" class="headerlink" title="6.2 Server-sent Events / Websocket"></a>6.2 Server-sent Events / Websocket</h3><h3 id="6-3-消息队列"><a href="#6-3-消息队列" class="headerlink" title="6.3 消息队列"></a>6.3 消息队列</h3><p>其它：<br><strong>$_YX:</strong>  [015 跨页面通信的各种姿势 - 掘金]</p>
+<p>================  </p>
+<h1 id="B-使用Cookie做跨页面通信"><a href="#B-使用Cookie做跨页面通信" class="headerlink" title="B 使用Cookie做跨页面通信"></a>B 使用Cookie做跨页面通信</h1><p><a href="https://www.web-tinker.com/article/20122.html" target="_blank" rel="noopener">https://www.web-tinker.com/article/20122.html</a></p>
+<p>Cookie的存储在硬盘中的，而网页是运行在内存中的，他们会共用硬盘上的Cookie。而document.cookie这个属性不仅仅是一个Setter属性，还是个Getter属性。当我们访问这个属性时，它会从硬盘上保存的Cookie中读入数据。而Cookie是以域名和目录名来储存的，它没有精确到页面。这就意味着多个页面是共用一个Cookie的。既然页面之间有共同的数据存储区域，我们就可以利用它来实现跨页面的通信。</p>
+<p>但是Cookie并没有change之类的事件，我们只能使用一个计时器去扫描。计时器的时间间隔可以依据项目需求来设置。下面是例子</p>
+<pre><code>&lt;script&gt;
+    onload=function(){
+        //创建一个文本节点，用来显示当前数据
+        var t=document.createTextNode(&quot;&quot;);
+        document.body.appendChild(t);
+        //创建计时器来扫描Cookie，间隔是1秒
+        setInterval(function(){
+            //读取Cookie
+            var v=document.cookie.match(/data=(.+?)(?=;|$)/);
+            t.data=v?decodeURIComponent(v[1]):&quot;&quot;;
+        },1000);
+        //按钮点击时把文本框内的内容放入Cookie中
+        btn.onclick=function(){
+            document.cookie=&quot;data=&quot;+encodeURIComponent(inp.value);
+        };
+    };  
+&lt;/script&gt;
+&lt;input id=&quot;inp&quot; /&gt;&lt;br/&gt;
+&lt;input id=&quot;btn&quot; type=&quot;button&quot; value=&quot;设置&quot; /&gt;
+</code></pre><p><strong>$_PS:</strong> 上面那些都不是重点；</p>
+<ol>
+<li>A 内容丰富，但是华而不实；</li>
+<li>只有postmessage,localstorage</li>
+<li>勉强Server</li>
+<li>cookie已经是没落方案了    </li>
+</ol>
+<p>=================</p>
+<h1 id="C-跨浏览器tab页的通信解决方案尝试"><a href="#C-跨浏览器tab页的通信解决方案尝试" class="headerlink" title="C [跨浏览器tab页的通信解决方案尝试]"></a>C [跨浏览器tab页的通信解决方案尝试]</h1><p><a href="https://segmentfault.com/a/1190000011207317" target="_blank" rel="noopener">https://segmentfault.com/a/1190000011207317</a><br>RoyalRover 2017年09月17日发布</p>
+<p><strong>$_YX:</strong> [015【第1060期】跨浏览器tab页的通信解决方案尝试] </p>
+<h2 id="一-目标"><a href="#一-目标" class="headerlink" title="一 目标"></a>一 目标</h2><h2 id="二-畅想"><a href="#二-畅想" class="headerlink" title="二 畅想"></a>二 畅想</h2><h3 id="2-1-case-1"><a href="#2-1-case-1" class="headerlink" title="2.1 case 1"></a>2.1 case 1</h3><p>两个需要交互的tab页面具有依赖关系。</p>
+<p>如 A页面中通过JavaScript的window.open打开B页面，或者B页面通过iframe嵌入至A页面，此种情形最简单，可以通过HTML5的 window.postMessage API完成通信，由于postMessage函数是绑定在 window 全局对象下，因此通信的页面中必须有一个页面（如A页面）可以获取另一个页面（如B页面）的window对象，这样才可以完成单向通信；B页面无需获取A页面的window对象，如果需要B页面对A页面的通信，只需要在B页面侦听message事件，获取事件中传递的source对象，该对象即为A页面window对象的引用：</p>
+<h3 id="2-2-case-2"><a href="#2-2-case-2" class="headerlink" title="2.2 case 2"></a>2.2 case 2</h3><p>两个打开的页面属于同源范畴。<br>若要实现两个互不相关的通源tab页面通信，可以使用一种比较巧妙的方式：localstorage。localStorage的存储遵循同源策略，因此</p>
+<p>幸好，HTML5提供了storage事件，通过window对象侦听storage事件，</p>
+<h3 id="2-3-case-3"><a href="#2-3-case-3" class="headerlink" title="2.3 case 3"></a>2.3 case 3</h3><p>两个互不相关的tab页面通信。<br>这种情况才是最急需解决的问题，如何实现两个没有任何关系的tab页面通信，这需要一些技巧，而且需要有同时修改这两个tab页面的权限，否则根本不可能实现这两个tab页的能力。</p>
+<p>在上述条件满足的情况下，我们就可以使用case1 和 case2的技术完成case 3的需求，这需要我们巧妙的结合HTML5 postMessage API 和 storage事件实现这两个毫无关系的tab页面的连通。为此，我想到了iframe，通过在这两个tab页嵌入同一个iframe页实现“桥接”，最终完成通信：</p>
+<p>tab A —–&gt; iframe A[bridge.html]<br>                     |<br>                     |<br>                    |/<br>             iframe B[bridge.html] —–&gt;  tab B </p>
+<p>..</p>
+<h1 id="D-前端通信篇"><a href="#D-前端通信篇" class="headerlink" title="D [前端通信篇]"></a>D [前端通信篇]</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>什么是同源策略及限制？前后端通信的ajax用原生该如何写？跨域问题该如何解决？如果你有这个疑问，这篇文章很适合你。</p>
+<h2 id="什么是同源策略及限制"><a href="#什么是同源策略及限制" class="headerlink" title="什么是同源策略及限制"></a>什么是同源策略及限制</h2><p>同源的“源”包含3层意思：协议、域名和端口。三者之中只要有一个不一样，那就是可以称源不一样。</p>
+<p>同源策略限制从一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是浏览器发出的用于隔离潜在恶意文件的关键的安全机制。</p>
+<p>那么这个限制有哪些呢？主要有3个方面：</p>
+<ol>
+<li>Cookie、LocalStorage和IndexDB无法读取；</li>
+<li>DOM无法获得；</li>
+<li>AJAX请求不能发送；</li>
+</ol>
+<h2 id="前后端的通信方式"><a href="#前后端的通信方式" class="headerlink" title="前后端的通信方式"></a>前后端的通信方式</h2><p>Ajax<br>Websocket<br>CORS<br>Ajax是同源下的通信方式；Websocket不受同源策略的限制；CORS是新的通信标准，它支持跨域通信也支持同源通信。</p>
+<h2 id="如何创建一个Ajax"><a href="#如何创建一个Ajax" class="headerlink" title="如何创建一个Ajax"></a>如何创建一个Ajax</h2><h2 id="跨域通信的几种方式"><a href="#跨域通信的几种方式" class="headerlink" title="跨域通信的几种方式"></a>跨域通信的几种方式</h2><p>1. JSONP<br>jsonp解决跨域本质是通过script标签的异步加载实现的，使用script标签进行ajax传输，不受同源策略的影响。</p>
+<p>2. Hash<br>Hash就是url后面的#,hash改变页面是不会刷新的，所以这也是hash可以做跨域的原因。Search是url后面?后面的内容。所以search是不能做跨域通信的。</p>
+<p>3. postMessage<br>h5中新增的方法</p>
+<p>4. websocket<br>websocket可以做跨域，但是它出现的目的是为了解决实时通信的。</p>
+<p>5. 搭建web服务器，对跨域请求做一个node代理<br>现在前端很多公司都会进行单独的部署，最多的就是使用express快速构建一个web服务器，用中间件的方式写一个代理。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"><i class="fa fa-tag"></i> javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/js/页面中特殊字符的处理/" rel="next" title="页面中特殊字符的处理">
+                <i class="fa fa-chevron-left"></i> 页面中特殊字符的处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/js/跨域操作(006)/" rel="prev" title="跨域操作">
+                跨域操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Z-实际"><span class="nav-text">Z 实际</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-acuviewer-php-aculive-php"><span class="nav-text">一 acuviewer.php aculive.php</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A-跨页面通信的各种姿势"><span class="nav-text">A [跨页面通信的各种姿势]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-获取句柄"><span class="nav-text">一 获取句柄</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-具体方案"><span class="nav-text">1.1 具体方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-tips"><span class="nav-text">1.2 tips</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-优劣"><span class="nav-text">1.3 优劣</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-localStorage"><span class="nav-text">二 localStorage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-具体方案"><span class="nav-text">2.1 具体方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-tips"><span class="nav-text">2.2 tips</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-优劣"><span class="nav-text">2.3 优劣</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-BroadcastChannel"><span class="nav-text">三 BroadcastChannel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-具体方案"><span class="nav-text">3.1 具体方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-优劣"><span class="nav-text">3.2 优劣</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-SharedWorker"><span class="nav-text">四 SharedWorker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-具体方案"><span class="nav-text">4.1 具体方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-优劣"><span class="nav-text">4.2 优劣</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-Cookie"><span class="nav-text">五 Cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-具体方案"><span class="nav-text">5.1 具体方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-优劣"><span class="nav-text">5.2 优劣</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-Server"><span class="nav-text">六 Server</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-乞丐版"><span class="nav-text">6.1 乞丐版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-Server-sent-Events-Websocket"><span class="nav-text">6.2 Server-sent Events / Websocket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-消息队列"><span class="nav-text">6.3 消息队列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-使用Cookie做跨页面通信"><span class="nav-text">B 使用Cookie做跨页面通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-跨浏览器tab页的通信解决方案尝试"><span class="nav-text">C [跨浏览器tab页的通信解决方案尝试]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-目标"><span class="nav-text">一 目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-畅想"><span class="nav-text">二 畅想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-case-1"><span class="nav-text">2.1 case 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-case-2"><span class="nav-text">2.2 case 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-case-3"><span class="nav-text">2.3 case 3</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D-前端通信篇"><span class="nav-text">D [前端通信篇]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是同源策略及限制"><span class="nav-text">什么是同源策略及限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前后端的通信方式"><span class="nav-text">前后端的通信方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何创建一个Ajax"><span class="nav-text">如何创建一个Ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域通信的几种方式"><span class="nav-text">跨域通信的几种方式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

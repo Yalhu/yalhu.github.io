@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="miniapp,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2020.8    记录注意事项 text标签不知道哪里的行高，导致元素实际高度了。包括text内文本最好不要有换行，空行会单独占据一行。   全局globalData, 在app 中可以用this.globalData。在其他页面中不可以使用this app.globalData  console.error 不能使用占位符。没有console.time, console.timeEnd ge">
+<meta name="keywords" content="miniapp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小程序开发记录">
+<meta property="og:url" content="http://yoursite.com/sum/miniapp/小程序开发记录/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2020.8    记录注意事项 text标签不知道哪里的行高，导致元素实际高度了。包括text内文本最好不要有换行，空行会单独占据一行。   全局globalData, 在app 中可以用this.globalData。在其他页面中不可以使用this app.globalData  console.error 不能使用占位符。没有console.time, console.timeEnd ge">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2023-02-22T14:01:19.455Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小程序开发记录">
+<meta name="twitter:description" content="2020.8    记录注意事项 text标签不知道哪里的行高，导致元素实际高度了。包括text内文本最好不要有换行，空行会单独占据一行。   全局globalData, 在app 中可以用this.globalData。在其他页面中不可以使用this app.globalData  console.error 不能使用占位符。没有console.time, console.timeEnd ge">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/miniapp/小程序开发记录/">
+
+
+
+
+
+  <title>小程序开发记录 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/miniapp/小程序开发记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">小程序开发记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-10T08:00:00+08:00">
+                2020-08-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-02-22T22:01:19+08:00">
+                2023-02-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/miniapp/" itemprop="url" rel="index">
+                    <span itemprop="name">miniapp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/miniapp/小程序开发记录/" class="leancloud_visitors" data-flag-title="小程序开发记录">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,283
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p style="text-align:right"> 2020.8 </p>
+
+<!-- 一般指微信小程序。其他小程序没开发过 -->
+<h1 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h1><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>text标签不知道哪里的行高，导致元素实际高度了。<br>包括text内文本最好不要有换行，空行会单独占据一行。</p>
+<!-- 应该是小程序里有什么设置（但是开发者工具，也没看到任何设置）；
+ 用uniapp开发的时候，空白都没有。 
+ -->
+</li>
+<li><p>全局globalData, 在app 中可以用<code>this.globalData</code>。在其他页面中不可以使用this <code>app.globalData</code></p>
+</li>
+<li>console.error 不能使用占位符。<br>没有<code>console.time</code>, <code>console.timeEnd</code></li>
+<li>getRegExp() 函数用于 wxs 使用正则<!-- ；不能在 JS 文件中直接调用（JS 中可以直接 new RegExp() 生成使用正则） -->。</li>
+</ol>
+<ol start="5">
+<li>区分页面环境 微信或者小程序<!-- [微信内置浏览器和小程序的 User Agent 区别及判断方法](https://www.cnblogs.com/qianqiu-1026/p/8618353.html) -->
+微信内置浏览器与小程序中的 User Agent 对比</li>
+</ol>
+<!-- 以上两段字符串均为子凡自用 MI6 安卓设备中获得，可以看出 -->微信小程序的 UA 是和微信内置浏览器 UA 是不同的，后面会多出一小段，特别是最后的<strong>“miniProgram”</strong>字符串，就是小程序的特别的 UA，<br>而在 iPhone 系统设备中 UA 都是一致的，小程序和内置浏览器 UA 是没有区别的。<br><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// if(navigator.userAgent.match(/(MicroMessenger)/i))&#123;</span></span><br><span class="line"><span class="keyword">if</span>(<span class="regexp">/MicroMessenger/i</span>.test(navigator.userAgent))&#123;</span><br><span class="line">	alert(<span class="string">'你正在使用微信访问'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Android.*MicroMessenger.*miniProgram//安卓端的小程序</span></span><br><span class="line"><span class="comment">// iPhone.*MicroMessenger//苹果端微信或小程序</span></span><br></pre></td></tr></table></figure>
+<h3 id="路由-页面跳转"><a href="#路由-页面跳转" class="headerlink" title="路由/页面跳转"></a>路由/页面跳转</h3><ol>
+<li>监听/阻止返回操作。小程序没有该api阻止用户操作。<br>可以做到自定义顶部导航栏 返回 -》 主页。<!-- 监听unload/hide不可以，其他场景也会触发 -->
+<!-- 
+[教你怎么监听小程序的返回键](https://developers.weixin.qq.com/community/develop/article/doc/000844b537c230b04b999a54f56013)
+基础库2.12.0起，可以调用wx.enableAlertBeforeUnload监听原生右上角返回、物理返回以及wx.navigateBack时弹框提示
+监听物理返回: wx.onAppRoute、wx.showModal.
+     无法真正意义上的监听并拦截来阻止页面跳转，页面还是会返回上一页，而后重新载入刚刚的页面
+ --></li>
+<li><p>监听页面/路由跳转<code>wx.onAppRoute(res)</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">     openType: <span class="string">'navigateTo'</span>,</span><br><span class="line">     path: <span class="string">'pages/xx'</span>,</span><br><span class="line">     query: &#123;</span><br><span class="line"></span><br><span class="line">     &#125;,</span><br><span class="line">     page: &#123;</span><br><span class="line">         <span class="built_in">window</span>: &#123;</span><br><span class="line">             backgroundColor:<span class="string">''</span>,</span><br><span class="line">             navigatorBarTextStyle: <span class="string">''</span>,</span><br><span class="line">             <span class="comment">// ... </span></span><br><span class="line">         &#125;</span><br><span class="line">     &#125;,</span><br><span class="line">     webviewId: <span class="number">13</span></span><br><span class="line">     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<!-- 虽然你在文档里 搜不到。但是有。
+[小程序里面如何做全局页面切换监听呢？](https://developers.weixin.qq.com/community/develop/doc/000800ea3d83984dafc6d476551000)
+[微信小程序全局监听路由变化](https://blog.csdn.net/qq_35713752/article/details/123212435)
+[小程序全局监听应用内页面跳转](https://blog.csdn.net/assassin_0302/article/details/113104084) -->
+</li>
+<li><p>页面刷新<code>this.onLoad()</code> 或者<code>this.onReady() 或者 this.onShow()</code></p>
+<!-- [微信小程序重新加载当前页面](https://blog.csdn.net/liuzc0221/article/details/109399894)
+PS: 并没有验证。 但是从上一个页面传进来的数据会丢失（event chanle） --></li>
+<li>小程序分包加载时在ios和android 表现不一致。<br>android： 在当前页面loading； ios： 进入分包加载。</li>
+<li>小程序重启。目前没有该api。<!-- [怎么才能确保有效彻底的重启小程序？](https://developers.weixin.qq.com/community/develop/doc/0002428cac41182bd9dde967f5bc00?highLine=wx.reLaunch) -->
+<blockquote>
+<p>别跟我说wx.reLaunch。有用我就不会提这个问题了<br>右上角胶囊三个点—重新进入小程序<br>小游戏有。</p>
+</blockquote>
+<h3 id="分享"><a href="#分享" class="headerlink" title="分享"></a>分享</h3></li>
+<li>分享小程序卡片 尺寸限制 5:4 <blockquote>
+<p>imageUrl| 自定义图片路径，可以是本地文件或者网络图片。支持 PNG 及 JPG，显示图片长宽比是 1:1。| 默认使用小程序 Logo<br><a href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onshareappmessageobject-object" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html#onshareappmessageobject-object</a></p>
+</blockquote>
+</li>
+</ol>
+<ol start="6">
+<li>分享小程序路径<code>pages</code>前面斜杠不重要，路径要和app.mpx中路径一致。<!-- 而app.mpx 中的路径 不区分 文件夹目录的大小写，都是可以识别的 -->
+</li>
+</ol>
+<h3 id="滚动"><a href="#滚动" class="headerlink" title="滚动"></a>滚动</h3><p>滚动视图之滚动到指定元素位置<code>&lt;scroll-view scroll-y scroll-into-view=&quot;&quot; scroll-with-animation &gt;</code><br>页面滚动。<code>wx.pageScrollTo({ scrollTop: e.currentTarget.offsetTop, duration: 300, selector: &#39;&#39;, offsetTop: &#39;&#39;, complete: () =&gt; {} })</code><br>文档 pageScrollTo: <a href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/scroll/wx.pageScrollTo.html" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/api/ui/scroll/wx.pageScrollTo.html</a></p>
+<h3 id="可视区域判断"><a href="#可视区域判断" class="headerlink" title="可视区域判断"></a>可视区域判断</h3><p>dom.top 元素距离视窗顶部的距离 注意随着滚动变化。<br>dom.height 元素的高度。<br>windowHeight 视窗的高度。</p>
+<p>如果元素的top在视窗高度范围内 就证明在可见区域。<br><code>if( el.top&lt;windowHeight &amp;&amp; top&gt;0 ){ 就可以了判断了 }</code><br>再严谨一些 加上元素自身的高度。<br><code>if( el.top &lt;windowHeight &amp;&amp; el.top+el.height&gt;0 ){</code></p>
+<!-- 
+windowHeight = top 刚进入
+windowHeight - top = height  完全进入
+top = 0 刚离开
+top + height = 0 完全离开
+
+[微信小程序之判断目标元素是否在可视区域内](https://blog.csdn.net/qq_41548644/article/details/121210477)
+-->
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//屏幕的高度</span></span><br><span class="line"> <span class="keyword">var</span> SystemInfo = wx.getSystemInfoSync()</span><br><span class="line"><span class="built_in">console</span>.log(SystemInfo.windowHeight)</span><br><span class="line"></span><br><span class="line"> <span class="comment">//元素的高度 </span></span><br><span class="line"><span class="keyword">var</span> query = wx.createSelectorQuery();</span><br><span class="line"><span class="comment">//选择id</span></span><br><span class="line"><span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">query.select(<span class="string">'#yuyue'</span>).boundingClientRect(<span class="function"><span class="keyword">function</span> (<span class="params">rect</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'元素的：'</span>+rect.top)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ## 3 判断</span></span><br><span class="line"><span class="keyword">if</span> ( el.top &lt;windowHeight &amp;&amp; el.top+el.height&gt;<span class="number">0</span> )&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'可视区出现'</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'可视区消失'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="taro-react-实践"><a href="#taro-react-实践" class="headerlink" title="taro(react)实践"></a>taro(react)实践</h4><p>案例：底部提示条。点击滚动到目标元素位置。<br>刚进入页面获取目标元素的位置（top和height）。页面滚动时根据滚动高度判断目标元素是否在视图内。<br>而不需要每次滚动的时候去获取目标元素的位置。<br>&lt;!–<br>PS: <del>Taro.nextTick 获取的高度是0.</del> 添加定时器300ms，有时拿到的高度也是0.<br>top位置不保证很精确，但是页面效果很不错。</p>
+<blockquote>
+<p>3、在页面渲染完成OnReady回调，获取元素高度时，如果不加定时器，获取的元素的高度还是没渲染完异步数据前的高度。故需要加定时器<br><a href="https://www.php.cn/xiaochengxu-445803.html" target="_blank" rel="noopener">微信小程序如何获取元素的高度</a><br><a href="https://www.leemoo.top/archives/36.html" target="_blank" rel="noopener">微信小程序 获取元素高度（获取元素节点信息）</a><br><a href="https://www.yisu.com/zixun/325736.html" target="_blank" rel="noopener">微信小程序获取元素高度的方法</a></p>
+</blockquote>
+<blockquote>
+<p>一定要在 onReady、ready 生命周期中才能调用小程序 API 获取 DOM。<br>Taro获取节点信息需要在onReady事件中触发，即便如此，小程序模拟器中测试，也并不是每次都能获取到节点，经过测试，在Taro.nexkTick中可以正常获取。<br>PS: 本案例并不是onready或者nexkTick的问题。（能获取到节点，但是高度是0，top多少有些偏差。）<br> –&gt;</p>
+</blockquote>
+<!-- 
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> systemInfo = Taro.getSystemInfoSync() || &#123;&#125;</span><br><span class="line"><span class="keyword">const</span> &#123; windowHeight &#125; = systemInfo</span><br><span class="line"><span class="keyword">const</span> [isShow, setIsShow] = useState(<span class="literal">true</span>)</span><br><span class="line"><span class="keyword">const</span> [targetRect, setTargetRect] = useState()</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * # 滚动到目标元素。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">// const scrollTo = useCallback(() =&gt; &#123;</span></span><br><span class="line"><span class="comment">//     console.log('help scroll to targetRect', targetRect)</span></span><br><span class="line"><span class="comment">//     if (!targetRect) return</span></span><br><span class="line"><span class="comment">//     const &#123; top, height &#125; = targetRect</span></span><br><span class="line"><span class="comment">//     Taro.pageScrollTo(&#123;</span></span><br><span class="line"><span class="comment">//         scrollTop: top + height - windowHeight + navHeight,</span></span><br><span class="line"><span class="comment">//         complete: () =&gt; &#123;</span></span><br><span class="line"><span class="comment">//             console.log('滚动完成')</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//     &#125;)</span></span><br><span class="line"><span class="comment">// &#125;, [targetRect])</span></span><br><span class="line"><span class="keyword">const</span> scrollTo = useCallback(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'help scroll to targetRect'</span>, target)</span><br><span class="line">    <span class="keyword">if</span> (!target) <span class="keyword">return</span></span><br><span class="line">    Taro.pageScrollTo(&#123;</span><br><span class="line">        selector: target,</span><br><span class="line">        complete: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'滚动完成'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;, [target])</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * # 初始化目标元素位置</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'help effect - query target'</span>, target)</span><br><span class="line">    <span class="keyword">if</span> (!target) <span class="keyword">return</span></span><br><span class="line">    <span class="comment">// Taro.nextTick(() =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//     const query = Taro.createSelectorQuery()</span></span><br><span class="line">    <span class="comment">//     query.select(target).boundingClientRect((rect) =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//         console.log('help select result - rect', rect)</span></span><br><span class="line">    <span class="comment">//         setTargetRect(rect)</span></span><br><span class="line">    <span class="comment">//     &#125;).exec()</span></span><br><span class="line">    <span class="comment">// &#125;)</span></span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> query = Taro.createSelectorQuery()</span><br><span class="line">        query.select(target).boundingClientRect(<span class="function">(<span class="params">rect</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'help select result - rect'</span>, rect)</span><br><span class="line">            setTargetRect(rect)</span><br><span class="line">        &#125;).exec()</span><br><span class="line">    &#125;, <span class="number">300</span>)</span><br><span class="line">&#125;, [target])</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 计算目标元素是否在视图区内。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> calcTargetOnView = useCallback(<span class="function">(<span class="params">scrollTop</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!targetRect) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">let</span> result = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">let</span> &#123; top, height &#125; = targetRect</span><br><span class="line">    <span class="keyword">if</span> (height &lt; <span class="number">1</span>) height = <span class="number">170</span> <span class="comment">// 以防拿到的height是0</span></span><br><span class="line">    <span class="comment">// const winTop = scrollTop + (windowHeight - navHeight)</span></span><br><span class="line">    <span class="keyword">const</span> winTop = scrollTop + windowHeight</span><br><span class="line">    <span class="keyword">if</span> (top &gt; scrollTop &amp;&amp; (winTop &gt; (top + height))) &#123;</span><br><span class="line">        result = <span class="literal">true</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        result = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'help calc'</span>, scrollTop, windowHeight, top, height, navHeight, result)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;, [targetRect, navHeight])</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 监听页面滚动控制提示条是否展示</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">usePageScroll(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'help scroll'</span>, res)</span><br><span class="line">    <span class="keyword">if</span> (showStatus == <span class="string">"target"</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; scrollTop &#125; = res</span><br><span class="line">        setIsShow(!calcTargetOnView(scrollTop))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>–&gt;</p>
+<h3 id="web-view"><a href="#web-view" class="headerlink" title="web-view"></a>web-view</h3><ol start="4">
+<li><p>小程序中通过web-view 打开的h5页面，不能打开另一个小程序<!-- 不在第一个小程序中操作，完全在h5页面。 --><br>虽然小程序中有api<code>wx.navigateToMiniProgram({aapId, path, extraData,...})</code><br>网页sdk有<code>wx.miniProgram.navigateTo</code>，并无提到上面的api。<p></p>
+ <!-- JS-SDK说明文档: <https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html#63> -->
+<blockquote>
+<p>目前没有支持。如果这个能力支持了，那就疯狂了，不需要前几天发布的小程序无需管理公众号跳转10个小程序了。任意小程序都可以无限跳转了，，，</p>
+ <!-- [小程序内嵌套H5跳转到其他小程序，如何实现？求解官方解答！！！](https://developers.weixin.qq.com/community/develop/doc/000e6287f70e880ff0978d63056000) -->
+</blockquote>
+
+
+<ol start="5">
+<li>小程序web-view的src有长度限制吗？<!-- [小程序web-view的src有长度限制吗？](https://developers.weixin.qq.com/community/develop/doc/0002e04d560f8047b759bcaca51400) -->
+</li>
+</ol>
+<p>没仔细研究过：<br>先说一下各大浏览器url最大长度：<br>IE : 2803<br>Firefox:65536<br>Chrome:8182<br>Safari:80000<br>Opera:190000<br>微信使用的微信内置浏览器（X5内核），你就按照最低的Chrome 8182 也应该够用的吧。具体多少，不知道</p>
+<p>这种都有大小限制，建议大量数据通过接口获取，只传入关键参数即可</p>
+<ol start="4">
+<li>微信小程序页面跳转url传参，对象数据过长问题<!--[微信小程序页面跳转url传参，对象数据过长问题](https://www.jianshu.com/p/4edf6604e548) -->
+<!-- 小程序url传参如果是对象的话需要先用JSON.stringify()转换一下，接受页面在用JSON.parse()再转换回来。
+但这样传参有一个问题，当对象数据长度过大时会报错，因为url传参时程序把过长的那段数据给截取掉了，导致数据转换回来时格式不对而报错。
+这时可以再添加另一个API：encodeURIComponent(obj) 和 decodeURIComponent(options.obj)，在encodeURIComponent之前要用JSON.stringify()先转换数据，decodeURIComponent之后再用JSON.parse()转换回来。 -->
+</li>
+</ol>
+<p>是URL有特殊字符才截取的吧<br><!-- 并不是过长，是特殊字符串被截取 --></p>
+<ol start="4">
+<li><p>获取小程序页面路径</p>
+</li>
+<li><p>查看小程序页面路径（分享出错，页面打不开等时候排错）<br><a href="https://developers.weixin.qq.com/community/develop/doc/000aea7c9188688b1c0aed69d51409" target="_blank" rel="noopener">小程序跳转链接获取方式</a><br>1、登陆小程序管理后台，从上方“工具”入口进入“生成小程序码”：<br>2、添加需要获取页面跳转链接的小程序:appid 或者名称</p>
+<!-- 小程序appid 可以通过小程序头像 查看更多资料  中找 -->
+<p>3、添加项目成员微信号：<br>相应微信帐号即可在小程序上复制到页面跳转链接：</p>
+<!-- 小程序搜索:外链王，生成链接就可以了，希望能帮到你 --></li>
+<li>调试h5页面：&gt; 开发者工具上，可以在 web-view 组件上通过右键 - 调试，打开 web-view 组件的调试。<!-- 如果是web-view组件，开发者工具最下面工具条有一个 瓢虫🐞 按钮。-->
+</li>
+</ol>
+<h4 id="h5页面区分不同的小程序"><a href="#h5页面区分不同的小程序" class="headerlink" title="h5页面区分不同的小程序"></a>h5页面区分不同的小程序</h4><p>webview中如何获取小程序appId: <a href="https://opendocs.alipay.com/support/01rb3z" target="_blank" rel="noopener">https://opendocs.alipay.com/support/01rb3z</a></p>
+<ol>
+<li>url 后面携带 appId 参数</li>
+<li>小程序与webview交互方法<!-- web-view中document 并没有refer可以区分 -->
+</li>
+</ol>
+<h4 id="h5页面登录态-cookie同步"><a href="#h5页面登录态-cookie同步" class="headerlink" title="h5页面登录态/cookie同步"></a>h5页面登录态/cookie同步</h4><!-- \# 661 [小程序| 如何与web-view共享cookie](https://zhuanlan.zhihu.com/p/50910787)
+[Cookie中不能有空格_如何正确处理小程序和web-view之间cookie共享的问题](https://blog.csdn.net/weixin_39927799/article/details/110359207) 
+
+-->
+<!-- 
+> 目前我司准备在小程序里通过web-view嵌套h5,希望在小程序调用api(wx.request())，然后server端通过api的header设置cookie。因为cookie均是通过http设置或者携带，以为这样，就可以在web-view里通过http请求(xhr或者fetch)带上小程序请求的api中设置的cookie。事实证明too young too naive。 -->
+<p><strong>小程序没法设置cookie到web-view中</strong></p>
+<h5 id="web-view如何使用小程序中的cookie"><a href="#web-view如何使用小程序中的cookie" class="headerlink" title="web-view如何使用小程序中的cookie"></a>web-view如何使用小程序中的cookie</h5><p>wx.request会返回http header，取到Set-Cookie这个字段，然后使用encodeURIComponent编码一下，通过url传给web-view,在web-view中通过document.cookie赋值。</p>
+<p>小程序中如何模拟cookie<br>可以参考 <a href="https://github.com/charleslo1/weapp-cookie" target="_blank" rel="noopener">一行代码让微信小程序支持 cookie</a></p>
+<h5 id="为什么小程序与web-view与不能共享cookie"><a href="#为什么小程序与web-view与不能共享cookie" class="headerlink" title="为什么小程序与web-view与不能共享cookie"></a>为什么小程序与web-view与不能共享cookie</h5><p>小程序的wx.request()是通过jsCore调用系统原生api发起的请求，即便header里带有set-cookie，也不会在web-view对应的’浏览器’中设置cookie，而是由原生应用来处理这个header中的set-cookie，至于怎么操作，要看原生应用了。这个可以参考如何处理 iOS 原生网络请求中的 cookie ？。</p>
+<p>比较有趣的是，<strong>小程序中的web-view和微信中直接打开的h5，因为用的是同一个浏览器内核，所以，它们的cookie、storage是可以共享的</strong>。<br><!-- END: #661 --></p>
+<h5 id="SMTC"><a href="#SMTC" class="headerlink" title="SMTC"></a>SMTC</h5><!-- \# 662 [微信小程序中使用 <web-view> 内嵌 H5 时，登录问题的处理方法](https://www.cnblogs.com/sunLemon/p/9585532.html)
+[微信小程序中使用 <web-view> 内嵌 H5 时，登录问题的处理方法](https://www.programminghunter.com/article/94381325221/) -->
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">utils.request(&#123;</span><br><span class="line">　　url: url,</span><br><span class="line">   data: &#123;&#125;,</span><br><span class="line">   success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">   　　wx.setStorageSync(<span class="string">'cookie'</span>, res.header[<span class="string">"Set-Cookie"</span>]);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 在H5中的处理方法是： 获取 cookie 值并写入。</span></span><br><span class="line"><span class="comment">// let cookie = window.location.href.split('?')[1];</span></span><br><span class="line"><span class="comment">// document.cookie = `jxi-m-sid=$&#123;cookie&#125;;domain=$&#123;host&#125;;path=/`;</span></span><br><span class="line"><span class="built_in">document</span>.cookie = <span class="string">`cookie=<span class="subst">$&#123;history.location.query.cookie&#125;</span>`</span>;</span><br></pre></td></tr></table></figure>
+<!-- END#662 -->
+<p>二种方案：走统一页面。<br><!-- 服务端种cookie后，再跳转目标页面 --></p>
+<h4 id="cookie安全"><a href="#cookie安全" class="headerlink" title="cookie安全"></a>cookie安全</h4><!-- \# 522 [京东购物小程序cookie方案实践](https://juejin.cn/post/6844904045920911374#heading-9) -->
+<p>二、浏览器中的cookie<br>三、小程序中的cookie实现<br>四、Cookie 在网络中的传递<br>五、性能优化（高频读写）<br>六、单元测试<br>七、Cookie安全</p>
+<p>path、domin、HttpOnly、Secure、SameSite<br>小程序中已经做了一些安全措施，比如只能走HTTPS、合法域名需要管理员到微信后台进行配置、Storage只能由写入它的小程序中访问，等等。<br>因此path、domin、HttpOnly、Secure、SameSite这些字段在小程序环境下的价值没有浏览器环境大，本例中没有使用（懒..），而实际业务场景可以按自身情况决定是否要使用。<br>#### 白名单机制<br>前端维护（大小/数量）通常浏览器保持的Cookie数据不超过4k，部分浏览器限制同一站点最多cookie数为20个。<br>如果业务庞大的话，建议在Cookie基础库做一套「白名单」机制，在白名单内才可以写入，以此防止“非法写入”或“内容超大导致信息丢失”的问题。</p>
+<p>后台维护（网关白名单）同样的，建议从网关层面，建立一个“可信cookie”白名单，自动过滤请求中的“非法cookie”字段。</p>
+<p>#### 前端防篡改<br>小程序前端更多是防“误改”————即在操作Cookie过程中，发生了意料之外的修改。通常发生在JS“引用拷贝”特性上，比如前面提到的内存维护一个_Cookies，如果有一个APIgetAllCookies()直接将这份内存版cookies暴露出去，对象引用容易被连带修改。所以cookie基础库需要控制暴露API的能力范围，并对取值进行“深拷贝”。<br>#### Session<br>Session机制将用户状态放在了服务端维护，具备更好的安全性，而且目前各种后端对于session的存储和同步都有很成熟的技术方案，有条件的业务应以Session为主做会话保持。</p>
+<p>#### 指纹上报<br>用户访问时生成设备指纹并上报（通常是登录/结算等环节），业务后台配合风控系统，遇到异常请求时下发验证环节。<br>八、完整小程序实现Demo<br><!-- END:#522 --></p>
+<h5 id="百度小程序"><a href="#百度小程序" class="headerlink" title="百度小程序"></a>百度小程序</h5><p>小程序Cookie机制: <a href="https://smartprogram.baidu.com/docs/develop/api/net/cookie/" target="_blank" rel="noopener">https://smartprogram.baidu.com/docs/develop/api/net/cookie/</a></p>
+<p>小程序Cookie是小程序框架提供的一套完整的Cookie存储、匹配机制，保证小程序间Cookie数据隔离，并完全遵循 RFC6265规范 。小程序开发者服务器可在swan.request请求返回中，使用HTTP Set-Cookie首部HTTP Set-Cookie将相关name/value键值存储到小程序框架中，小程序框架会在相关API和组件进行网络请求时自动匹配并携带name/value键值信息。</p>
+<blockquote>
+<p>web-view网页容器不支持Cookie机制。</p>
+</blockquote>
+<!-- 
+其他：
+[你需要知道的在小程序中使用cookie](https://juejin.cn/post/6989917090152972324) -->
+<!-- 
+##### 关闭小程序，会清掉webview中的cookie吗？
+[关闭小程序，会清掉webview中的cookie吗？](https://developers.weixin.qq.com/community/develop/doc/00060c1cc3427892c2e992ed45c800)
+> 放个好几天不用，web-view的cookie都还在，必须退出微信重新登录进来才会清；根本不是按照浏览器的机制来的；比如设置会话结束后清除cookie，但是一直都不会被清除 -->
+<h3 id="判断小程序环境"><a href="#判断小程序环境" class="headerlink" title="判断小程序环境"></a>判断小程序环境</h3><!-- [如何 通过 userAgent 区别微信小程序](https://www.cnblogs.com/ooo0/p/8352432.html) -->
+<p>有micromessenger是微信内置浏览器,有micromessenger和miniprogram的是微信小程序.  (ios不适用)<br>在网页内可通过window.__wxjs_environment变量判断是否在小程序环境，建议在WeixinJSBridgeReady回调中使用，也可以使用JSSDK 1.3.2提供的getEnv接口。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// web-view下的页面内</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ready</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">window</span>.__wxjs_environment === <span class="string">'miniprogram'</span>) <span class="comment">// true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">window</span>.WeixinJSBridge || !WeixinJSBridge.invoke) &#123;</span><br><span class="line">  <span class="built_in">document</span>.addEventListener(<span class="string">'WeixinJSBridgeReady'</span>, ready, <span class="literal">false</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  ready()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line">wx.miniProgram.getEnv(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res.miniprogram) <span class="comment">// true</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="修改组件样式"><a href="#修改组件样式" class="headerlink" title="修改组件样式"></a>修改组件样式</h3><p>背景：覆盖#shadow-root 中的样式。像一般的框架组件那样通过css 继承/权重去重写组件的样式。<br>&lt;!– </p>
+<blockquote>
+<p>你这是使用了组件是吧，去组件里直接修改。没组件代码？那就看看他的文档有没有使用外部样式的方法。没有？那不好意思，没法改。 –&gt;</p>
+</blockquote>
+<!-- \# 11 [如何在＃shadow-root（shadow DOM）中重新设置元素的样式](https://www.thinbug.com/q/53431330) 
+ShadowDOM旨在防止CSS泄漏到shadowDOM之中或之外。它是`<iframe>`的替代品，它具有相同的限制。 `<iframe>`中的任何CSS都不会影响`<iframe>`之外的内容，而`<iframe>`之外的CSS不会影响`<iframe>`内的内容。
+
+但是您可以使用以下选项之一来影响内部CSS：
+第一种方法是将样式与内容一起放置在shadowDOM中。
+第二种更有限的方法是使用CSS变量：
+第三种方法（也有限制）是通过属性或属性：
+-->
+<!-- End:#11 -->
+<p>通过class或者style等变量的方式，去组件里面修改组件的样式。</p>
+<h3 id="小程序引流app"><a href="#小程序引流app" class="headerlink" title="小程序引流app"></a>小程序引流app</h3><p>小结：以上两种方式都是由app 主动发起的跳转，然后小程序才能返回打开app，如果不是由app主动发起的跳转，则不能由小程序直接打开app。所以想要由小程序给app 导量的风骚走位，可能就行不通了。</p>
+<!-- [小程序跳转APP](https://blog.csdn.net/chanshanliu/article/details/90516131) -->
+<p>小程序是不支持主动跳转app的，这个大家应该清楚。只有在场景值1036，1069，1038，1089和1090这几个中才有跳转app的权限。场景值我们可以在app.js的onLunch（options）和onShow（options）中获取，options.scene中获取。<br>根据场景值条件判断添加 跳转app 按钮。<br><code>&lt;button open-type=&quot;launchApp&quot; app-parameter=&quot;wechat&quot; binderror=&quot;launchAppError&quot;&gt;打开APP&lt;/button&gt;</code><br><!-- 1036:App 分享消息卡片; 1038:1038: 从小程序返回; 1069: 移动应用;1089: 微信聊天主界面下拉;1090:长按小程序右上角菜单唤出最近使用历史; --></p>
+<p><a href="../jsplus/%E5%BE%AE%E4%BF%A1%E6%88%96%E8%80%85h5%E9%A1%B5%E9%9D%A2%E5%94%A4%E8%B5%B7app.md">微信或者h5页面唤起app</a></p>
+<p>同理下载<br><!-- [小程序内引导下载app的几个方案](https://developers.weixin.qq.com/community/develop/article/doc/0004a49e34cda8f9fd4bb9ab751013) --></p>
+<!-- [微信小程序如何引导下载app系列二](https://developers.weixin.qq.com/community/develop/article/doc/000e6c48b04ad0eff94bb36a251413) 
+[微信小程序：如何跳转app方案及实现](https://www.jianshu.com/p/06030421ead3)
+关于小程序如何跳转app，常规思路有四种：
+
+利用官方api： 需要app接入开放平台，并且与小程序属于统一账号下，关键是该方案仅适用于通过app打开小程序，或者通过app分享的卡片打开小程序，其他情况无法跳转，故在常用的场景下，该方案基本不可行。
+利用webview网页跳转： 我们可以在手机默认浏览器中直接在一个网页中打开app；那么，在微信小程序web-view中是否可以呢？实际上web-view有大量权限限制，基本除了展示信息，其他交互都需要通过小程序原生代码实现。
+利用默认浏览器跳转： 我们知道，在手机默认浏览器中，我们可以直接在一个网页中打开app；但是，微信小程序做了限制，不允许跳转到默认浏览器，故该方案不可行（部分Android手机可以跳转，但随着微信小程序基础版本升级，这种情况越来越少了）。
+利用应用宝跳转： 应用宝是腾讯的，他们一家，是否可以跳转到应用宝，然后打开app或下载呢？然而，由于网页域名鉴权，除了腾讯自家的部分特殊小程序，其他小程序都是无法跳转的。
+利用微信未开放接口： 在github上了解到微信小程序api其实有一个openUrl的接口，据说以前是可以跳转到默认浏览器打开网页的；但是尝试后，提示无权使用...
+
+一次偶然的机会，看到了小程序客服这个功能，而小程序客服是微信中的一个类似于公众号的功能；
+我们知道，公众号是可以间接跳转到app的，那么跳转app的方案就出来了，
+小程序先打开客服页面，然后在客服页面通过关键字回复一个url（或卡片），点击url（或卡片）跳转到应用宝app推广链接，然后就可以打开或下载app了。（也可以客服卡片跳到自己的网页，然后打开app）
+-->
+<h1 id="开发者工具"><a href="#开发者工具" class="headerlink" title="开发者工具"></a>开发者工具</h1><h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h2 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h2><p>wxapp小程序网络请求默认走WebSockets，可以打开页面入参中配置debugChannel=httpDirect，让其走Http请求，从而方便调试。</p>
+<ol>
+<li>接口请求http<!-- 
+[微信开发者工具清除https状态](https://www.csdn.net/tags/Mtzagg1sMTE4MzctYmxvZwO0O0OO0O0O.html)
+最近做微信页面，服务器频繁改动http协议，结果微信开发者工具记住https，变不回来了.
+删除这个目录中所有东西可以清除
+`/Users/用户名/Library/Application Support/微信开发者工具/Default/Storage/ext`
+注：虽然清除了，但是这个目录中东西也不少，暂时没有深究，之后有时间再研究一下 
+PS: 未实践。
+-->
+</li>
+</ol>
+<p>PS: 必须是https，且域名访问。</p>
+<!-- 
+1. 微信开发者工具自动把HTTP请求307并发送成HTTPS
+[微信开发者工具自动把HTTP请求307并发送成HTTPS](https://developers.weixin.qq.com/community/develop/doc/000c247ee60b5035edb6dc03051c00)
+
+打开C:\Users\xxx\AppData\Local\微信开发者工具删除User Data 文件夹即可
+cd ~/Library/Application Support sudo rm -r -f ./微信开发者工具
+PS: 未实践
+-->
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="运行等"><a href="#运行等" class="headerlink" title="运行等"></a>运行等</h2><ol>
+<li><p><code>微信小程序提示 [渲染层错误] TypeError: Cannot read property ‘replace‘ of undefined</code></p>
+<blockquote>
+<p>升级开发工具不行，把 wxml/js 代码一个一个删除想排查问题,最后都删完了还是不行，然后百度发现一个跟我一样的情况的案例，发现人家选择【调试基础库 2.12.0版本】</p>
+</blockquote>
+</li>
+<li><p><code>./pages/index/index.wxml not found</code><br>同上。调试基础库 改为2.1.8.0 成功了。</p>
+</li>
+<li><p><code>[渲染层错误] Framework inner error (expect START descriptor with depth 3 but get FLOW_DEPTH)</code><br>估计也和小程序开发者工具有关系。目前页面展示正常，也有可能部分正常。</p>
+</li>
+<li><p><code>routeDone with a webviewId 1 that is not the current page</code><br>微信开发工具中把基础库版本有关。<br>后续不知怎么就好了。（解决了一些代码报错）</p>
+<!-- 
+> 不必惊慌，在微信开发者工具里点击编译即可，报错会消失，报错可能是版本库太高了导致。
+> 对于项目的运行暂时没什么影响，可以重新在小程序工具里面重新编译会暂时缓解问题，这个bug到后期会进行修复。
+> 
+[routeDone with a webviewId 133 that is not ?](https://developers.weixin.qq.com/community/develop/doc/000c6840800b68d5afde6b72f5b800)
+\-----
+[运行测试阶段没有问题，发行以后就出现：“routeDone with a webviewId 1 that is not the current page”](https://ask.dcloud.net.cn/question/157351)
+[routeDone with a webviewId 28 that is not the current page](https://blog.csdn.net/codercjw/article/details/128936760)
+> 可能是微信的问题，在微信开发工具中把基础库版本改为2.27.2以前的版本，就不会报这个错，从2.27.2就会有这个问题 -->
+</li>
+</ol>
+<p style="text-align:right"> </p>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/miniapp/" rel="tag"><i class="fa fa-tag"></i> miniapp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/js/video h5相关问题/" rel="next" title="Video H5相关问题">
+                <i class="fa fa-chevron-left"></i> Video H5相关问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/jsplus/微信h5开发实践/" rel="prev" title="微信H5开发实践">
+                微信H5开发实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#记录"><span class="nav-text">记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-text">注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#路由-页面跳转"><span class="nav-text">路由/页面跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分享"><span class="nav-text">分享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滚动"><span class="nav-text">滚动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可视区域判断"><span class="nav-text">可视区域判断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#taro-react-实践"><span class="nav-text">taro(react)实践</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#h5页面区分不同的小程序"><span class="nav-text">h5页面区分不同的小程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#h5页面登录态-cookie同步"><span class="nav-text">h5页面登录态/cookie同步</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#web-view如何使用小程序中的cookie"><span class="nav-text">web-view如何使用小程序中的cookie</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为什么小程序与web-view与不能共享cookie"><span class="nav-text">为什么小程序与web-view与不能共享cookie</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SMTC"><span class="nav-text">SMTC</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cookie安全"><span class="nav-text">cookie安全</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#百度小程序"><span class="nav-text">百度小程序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断小程序环境"><span class="nav-text">判断小程序环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改组件样式"><span class="nav-text">修改组件样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小程序引流app"><span class="nav-text">小程序引流app</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发者工具"><span class="nav-text">开发者工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置"><span class="nav-text">设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求"><span class="nav-text">请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行等"><span class="nav-text">运行等</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

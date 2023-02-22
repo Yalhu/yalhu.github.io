@@ -1,0 +1,93 @@
+<p>title: react文档1-11_组合 vs 继承<br>date: 2018.9.15<br>tags: </p>
+<ul>
+<li>react.js<br>toc_fold: unfold</li>
+</ul>
+<hr>
+<p><a href="http://react.css88.com/docs/thinking-in-react.html">http://react.css88.com/docs/thinking-in-react.html</a>  </p>
+<p style="text-align:right">2018.9.14 星期六 11:45</p>
+
+<p>React 拥有一个强大的组合模型，我们建议使用组合而不是继承以实现代码的重用。  </p>
+<h2 id="包含"><a href="#包含" class="headerlink" title="包含"></a>包含</h2><p>一些组件在设计前无法获知自己要使用什么子组件，尤其在 Sidebar 和 Dialog 等通用 “容器” 中比较常见。<br>我们建议这种组件使用特别的 children prop 来直接传递 子元素到他们的输出中：  </p>
+<p>然而这并不常见，有时候，在一个组件中你可能需要多个 “占位符” 。在这种情况下，你可以使用自定义的 prop(属性)，而不是使用 children ：   </p>
+<pre><code class="JavaScript"><span class="function"><span class="keyword">function</span> <span class="title">FancyBorder</span>(<span class="params">props</span>) </span>{
+    <span class="keyword">return</span> (
+      &lt;div className={<span class="string">'FancyBorder FancyBorder-'</span> + props.color}&gt;
+        {props.children}
+      &lt;<span class="regexp">/div&gt;</span>
+<span class="regexp">    );</span>
+<span class="regexp">}</span>
+<span class="regexp"></span>
+<span class="regexp">function WelcomeDialog() {</span>
+<span class="regexp">    return (</span>
+<span class="regexp">      &lt;FancyBorder color="blue"&gt;</span>
+<span class="regexp">        &lt;h1 className="Dialog-title"&gt;</span>
+<span class="regexp">          Welcome</span>
+<span class="regexp">        &lt;/</span>h1&gt;
+        &lt;p className=<span class="string">"Dialog-message"</span>&gt;
+          Thank you <span class="keyword">for</span> visiting our spacecraft!
+        &lt;<span class="regexp">/p&gt;</span>
+<span class="regexp">      &lt;/</span>FancyBorder&gt;
+    );
+}
+
+<span class="comment">// exam2 子定义 prop属性，非children</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Contacts</span>(<span class="params"></span>) </span>{
+    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"Contacts"</span> /&gt;</span></span>;
+}
+<span class="function"><span class="keyword">function</span> <span class="title">Chat</span>(<span class="params"></span>) </span>{
+    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"Chat"</span> /&gt;</span></span>;
+}
+
+<span class="function"><span class="keyword">function</span> <span class="title">SplitPane</span>(<span class="params">props</span>) </span>{
+    <span class="keyword">return</span> (
+      &lt;div className=<span class="string">"SplitPane"</span>&gt;
+        &lt;div className=<span class="string">"SplitPane-left"</span>&gt;
+          {props.left}
+        &lt;<span class="regexp">/div&gt;</span>
+<span class="regexp">        &lt;div className="SplitPane-right"&gt;</span>
+<span class="regexp">          {props.right}</span>
+<span class="regexp">        &lt;/</span>div&gt;
+      &lt;<span class="regexp">/div&gt;</span>
+<span class="regexp">    );</span>
+<span class="regexp">  }</span>
+<span class="regexp"></span>
+<span class="regexp">function App() {</span>
+<span class="regexp">    return (</span>
+<span class="regexp">      &lt;SplitPane</span>
+<span class="regexp">        left={</span>
+<span class="regexp">          &lt;Contacts /</span>&gt;
+        }
+        right={
+          &lt;Chat /&gt;
+        } /&gt;
+    );
+}
+</code></pre>
+<h2 id="特例"><a href="#特例" class="headerlink" title="特例"></a>特例</h2><p>有时候，我们考虑组件作为其它组件的“特殊情况”。例如，我们可能说一个 WelcomeDialog 是 Dialog 的一个特殊用例。<br>在React中，也可以使用组合来实现，一个偏“特殊”的组件渲染出一个偏“通用”的组件，通过 props(属性) 配置它：  </p>
+<pre><code class="JavaScript"><span class="function"><span class="keyword">function</span> <span class="title">Dialog</span>(<span class="params">props</span>) </span>{
+  <span class="keyword">return</span> (
+    &lt;FancyBorder color=<span class="string">"blue"</span>&gt;
+      &lt;h1 className=<span class="string">"Dialog-title"</span>&gt;
+        {props.title}
+      &lt;<span class="regexp">/h1&gt;</span>
+<span class="regexp">      &lt;p className="Dialog-message"&gt;</span>
+<span class="regexp">        {props.message}</span>
+<span class="regexp">      &lt;/</span>p&gt;
+    &lt;<span class="regexp">/FancyBorder&gt;</span>
+<span class="regexp">  );</span>
+<span class="regexp">}</span>
+<span class="regexp"></span>
+<span class="regexp">function WelcomeDialog() {</span>
+<span class="regexp">  return (</span>
+<span class="regexp">    &lt;Dialog</span>
+<span class="regexp">      title="Welcome"</span>
+<span class="regexp">      message="Thank you for visiting our spacecraft!" /</span>&gt;
+
+  );
+}
+</code></pre>
+<p>$_PS: 非继承：这里的<strong>包含</strong>不是继承，而是 组合</p>
+<h2 id="如何看待继？"><a href="#如何看待继？" class="headerlink" title="如何看待继？"></a>如何看待继？</h2><p>在 Facebook ，我们在千万的组件中使用 React，我们还没有发现任何用例，值得我们建议你用继承层次结构来创建组件。    </p>
+<p>使用 props(属性) 和 组合已经足够灵活来明确、安全的定制一个组件的外观和行为。切记，组件可以接受任意的 props(属性) ，包括原始值、React 元素，或者函数。   </p>
+<p>如果要在组件之间重用非 U I功能，我们建议将其提取到单独的 JavaScript 模块中。组件可以导入它并使用该函数，对象或类，而不扩展它。  </p>
+<p style="text-align:right">11:54</p>

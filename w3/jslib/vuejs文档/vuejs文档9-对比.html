@@ -1,0 +1,25 @@
+<p>title: vuejs文档9-对比<br>date: 2018.11.02<br>tags:</p>
+<h2 id="toc-fold-unfold"><a href="#toc-fold-unfold" class="headerlink" title="toc_fold: unfold"></a>toc_fold: unfold</h2><p>对比其他框架</p>
+<h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><p>React 和 Vue 有许多相似之处，它们都有：   </p>
+<ul>
+<li>使用 Virtual DOM</li>
+<li>提供了响应式 (Reactive) 和组件化 (Composable) 的视图组件。</li>
+<li>将注意力集中保持在核心库，而将其他功能如路由和全局状态管理交给相关的库。</li>
+</ul>
+<h3 id="运行时性能"><a href="#运行时性能" class="headerlink" title="运行时性能"></a>运行时性能</h3><p>在 React 应用中，当某个组件的状态发生变化时，它会以该组件为根，重新渲染整个组件子树。<br>如要避免不必要的子组件的重渲染，你需要在所有可能的地方使用 PureComponent，或是手动实现 shouldComponentUpdate 方法。同时你可能会需要使用不可变的数据结构来使得你的组件更容易被优化。      </p>
+<p>在 Vue 应用中，组件的依赖是在渲染过程中自动追踪的，所以系统能精确知晓哪个组件确实需要被重渲染。你可以理解为每一个组件都已经自动获得了 shouldComponentUpdate，并且没有上述的子树问题限制。   </p>
+<h3 id="HTML-amp-CSS"><a href="#HTML-amp-CSS" class="headerlink" title="HTML &amp; CSS"></a>HTML &amp; CSS</h3><p>#### JSX vs Templates<br>在 React 中，一切都是 JavaScript。不仅仅是 HTML 可以用 JSX 来表达，现在的潮流也越来越多地将 CSS 也纳入到 JavaScript 中来处理。<br>在 React 中，所有的组件的渲染功能都依靠 JSX。JSX 是使用 XML 语法编写 JavaScript 的一种语法糖。      </p>
+<p>事实上 Vue 也提供了渲染函数，甚至支持 JSX。然而，我们默认推荐的还是模板。任何合乎规范的 HTML 都是合法的 Vue 模板，这也带来了一些特有的优势：  </p>
+<p>####   组件作用域内的 CSS<br>除非你把组件分布在多个文件上 (例如 CSS Modules)，CSS 作用域在 React 中是通过 CSS-in-JS 的方案实现的 (比如 styled-components、glamorous 和 emotion)  </p>
+<p>如果你是一个 CSS-in-JS 的爱好者，许多主流的 CSS-in-JS 库也都支持 Vue (比如 styled-components-vue 和 vue-emotion)。这里 React 和 Vue 主要的区别是，Vue 设置样式的默认方法是单文件组件里类似 style 的标签。   </p>
+<p>单文件组件让你可以在同一个文件里完全控制 CSS，将其作为组件代码的一部分。<br>最后，Vue 的单文件组件里的样式设置是非常灵活的。通过 vue-loader，你可以使用任意预处理器、后处理器，甚至深度集成 CSS Modules——全部都在 <code>&lt;style&gt;</code> 标签内。      </p>
+<h3 id="规模"><a href="#规模" class="headerlink" title="规模"></a>规模</h3><h4 id="向上扩展"><a href="#向上扩展" class="headerlink" title="向上扩展"></a>向上扩展</h4><p>1) Vue 和 React 都提供了强大的路由来应对大型应用。<br>2) React (比如 Flux、Redux)，而这些状态管理模式甚至 Redux 本身也可以非常容易的集成在 Vue 应用中。实际上，Vue 更进一步地采用了这种模式 (Vuex)，     </p>
+<p>两者另一个重要差异是，Vue 的路由库和状态管理库都是由官方维护支持且与核心库同步更新的。React 则是选择把这些问题交给社区维护，   </p>
+<p>3) Vue 提供了 Vue-cli 脚手架，能让你非常容易地构建项目，包含了 Webpack，Browserify，甚至 no build system。React 在这方面也提供了 create-react-app，但是现在还存在一些局限性：<br>而要注意的是这些限制是故意设计的，  </p>
+<h4 id="向下扩展"><a href="#向下扩展" class="headerlink" title="向下扩展"></a>向下扩展</h4><p>React 学习曲线陡峭，  </p>
+<h3 id="原生渲染"><a href="#原生渲染" class="headerlink" title="原生渲染"></a>原生渲染</h3><p>React Native 能使你用相同的组件模型编写有本地渲染能力的 APP (iOS 和 Android)。能同时跨多平台开发，对开发者是非常棒的。相应地，Vue 和 Weex 会进行官方合作，   </p>
+<h2 id="AngularJS-Angular-1"><a href="#AngularJS-Angular-1" class="headerlink" title="AngularJS (Angular 1)"></a>AngularJS (Angular 1)</h2><p>在 API 与设计两方面上 Vue.js 都比 AngularJS 简单得多<br>Vue.js 是一个更加灵活开放的解决方案。它允许你以希望的方式组织应用程序，而不是在任何时候都必须遵循 AngularJS 制定的规则，   </p>
+<p>### 数据绑定<br>AngularJS 使用双向绑定，Vue 在不同组件间强制使用单向数据流。这使应用中的数据流更加清晰易懂。<br>### 指令与组件<br>在 Vue 中指令和组件分得更清晰。指令只封装 DOM 操作，而组件代表一个自给自足的独立单元——有自己的视图和数据逻辑。在 AngularJS 中，每件事都由指令来做，而组件只是一种特殊的指令。<br>$PS: angularjs有组件的概念吗,是module区分的<br>###  运行时性能<br>Vue 有更好的性能，并且非常非常容易优化，因为它不使用脏检查。</p>
+<h2 id="Angular-原本的-Angular-2"><a href="#Angular-原本的-Angular-2" class="headerlink" title="Angular (原本的 Angular 2)"></a>Angular (原本的 Angular 2)</h2><p>$PS: 没有多少实质内容;</p>
+<p>## MobX<br>Mobx 在 React 社区很流行，实际上在 Vue 也采用了几乎相同的反应系统。在有限程度上，React + Mobx 也可以被认为是更繁琐的 Vue，所以如果你习惯组合使用它们，那么选择 Vue 会更合理。   </p>
+<p>## Preact 和其它类 React 库<br>## Ember<br>## Knockout<br> MVVM 领域内的先驱，并且追踪依赖。  它最低能支持到 IE6      </p>

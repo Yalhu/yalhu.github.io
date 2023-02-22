@@ -1,0 +1,42 @@
+<p>title: typescript文档7-JavaScript<br>date: 2023.2.19<br>tags: </p>
+<ul>
+<li>typescript<br>toc_fold: unfold</li>
+</ul>
+<hr>
+<p><a href="https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html">https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html</a></p>
+<!-- 前面我们提到，一些语言根本不允许那些错误的程序运行。在不运行代码的情况下检测其中的错误称为 静态检查 。根据被操作的值的种类来确定是什么错误和什么不是错误，这称为静态 类型 检查。
+
+TypeScript 在执行之前，基于 值的类型 检查程序是否有错误。它是 静态类型检查器。例如，基于 obj 的 类型，TypeScript 在上面的最后一个示例中发现了一个错误： 
+-->
+<!-- more -->
+<p style="text-align:right">2023.2.19 星期日</p>
+
+<!-- # JavaScript -->
+<p>How to use TypeScript-powered JavaScript tooling.</p>
+<h2 id="JS-Projects-Utilizing-TypeScript"><a href="#JS-Projects-Utilizing-TypeScript" class="headerlink" title="JS Projects Utilizing TypeScript"></a>JS Projects Utilizing TypeScript</h2><p>The type system in TypeScript has different levels of strictness when working with a codebase:</p>
+<p>A type-system based only on inference with JavaScript code</p>
+<ul>
+<li>Incremental typing in JavaScript via JSDoc</li>
+<li>Using // @ts-check in a JavaScript file</li>
+<li>TypeScript code</li>
+<li>TypeScript with strict enabled<br>Each step represents a move towards a safer type-system, but not every project needs that level of verification.<h3 id="TypeScript-with-JavaScript"><a href="#TypeScript-with-JavaScript" class="headerlink" title="TypeScript with JavaScript"></a>TypeScript with JavaScript</h3><h3 id="Providing-Type-Hints-in-JS-via-JSDoc"><a href="#Providing-Type-Hints-in-JS-via-JSDoc" class="headerlink" title="Providing Type Hints in JS via JSDoc"></a>Providing Type Hints in JS via JSDoc</h3>In a .js file, types can often be inferred. When types can’t be inferred, they can be specified using JSDoc syntax.</li>
+</ul>
+<p>JSDoc annotations come before a declaration will be used to set the type of that declaration. For example:</p>
+<pre><code class="js"><span class="comment">/** <span class="doctag">@type <span class="type">{number}</span> </span>*/</span>
+<span class="keyword">var</span> x;
+
+x = <span class="number">0</span>; <span class="comment">// OK</span>
+x = <span class="literal">false</span>; <span class="comment">// OK?!</span>
+</code></pre>
+<h3 id="ts-check"><a href="#ts-check" class="headerlink" title="@ts-check"></a>@ts-check</h3><!-- The last line of the previous code sample would raise an error in TypeScript, but it doesn’t by default in a JS project.  -->To enable errors in your JavaScript files add: <code>// @ts-check</code> to the first line in your .js files to have TypeScript raise it as an error.<br><br>If you have a lot of JavaScript files you want to add errors to then you can switch to using a <a href="">jsconfig.json</a>. You can skip checking some files by adding a <code>// @ts-nocheck</code> comment to files.<br><br>TypeScript may offer you errors which you disagree with, in those cases you can ignore errors on specific lines by adding <code>// @ts-ignore</code> or<code>// @ts-expect-error</code>on the preceding line.<br><br><code>js
+// @ts-check
+/** @type {number} */
+var x;
+
+x = 0; // OK
+x = false; // Not OK
+// Type &#39;boolean&#39; is not assignable to type &#39;number&#39;.
+
+// @ts-expect-error
+x = false; // Not OK</code><br><br>## Type Checking JavaScript Files<br>## JSDoc Reference<br>The list below outlines which constructs are currently supported when using JSDoc annotations to provide type information in JavaScript files.<br><br><!-- Note any tags which are not explicitly listed below (such as @async) are not yet supported. -->
+<h2 id="Creating-d-ts-Files-from-js-files"><a href="#Creating-d-ts-Files-from-js-files" class="headerlink" title="Creating .d.ts Files from .js files"></a>Creating .d.ts Files from .js files</h2>

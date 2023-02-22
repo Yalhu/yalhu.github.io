@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="git,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="git hooks文档：https://git-scm.com/docs/githookshusky: https://github.com/typicode/huskylint-staged: https://github.com/okonet/lint-staged  2020.9.18 星期五  ：    做一些hooks相关的工作。比如：commit前 检查/格式化代码；规范提交信息/提交">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git Hooks及规范提交">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/git hooks及规范提交/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="git hooks文档：https://git-scm.com/docs/githookshusky: https://github.com/typicode/huskylint-staged: https://github.com/okonet/lint-staged  2020.9.18 星期五  ：    做一些hooks相关的工作。比如：commit前 检查/格式化代码；规范提交信息/提交">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2023-02-22T14:01:19.414Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git Hooks及规范提交">
+<meta name="twitter:description" content="git hooks文档：https://git-scm.com/docs/githookshusky: https://github.com/typicode/huskylint-staged: https://github.com/okonet/lint-staged  2020.9.18 星期五  ：    做一些hooks相关的工作。比如：commit前 检查/格式化代码；规范提交信息/提交">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/git hooks及规范提交/">
+
+
+
+
+
+  <title>Git Hooks及规范提交 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/git hooks及规范提交/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git Hooks及规范提交</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-18T08:00:00+08:00">
+                2020-09-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-02-22T22:01:19+08:00">
+                2023-02-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/jsplus/" itemprop="url" rel="index">
+                    <span itemprop="name">jsplus</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/git hooks及规范提交/" class="leancloud_visitors" data-flag-title="Git Hooks及规范提交">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,107
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>git hooks文档：<a href="https://git-scm.com/docs/githooks" target="_blank" rel="noopener">https://git-scm.com/docs/githooks</a><br>husky: <a href="https://github.com/typicode/husky" target="_blank" rel="noopener">https://github.com/typicode/husky</a><br>lint-staged: <a href="https://github.com/okonet/lint-staged" target="_blank" rel="noopener">https://github.com/okonet/lint-staged</a></p>
+<p style="text-align:right"> 2020.9.18 星期五  ： </p>
+
+
+<p>做一些hooks相关的工作。比如：commit前 检查/格式化代码；规范提交信息/提交信息模版；<br>CI/CD</p>
+<h1 id="git-hooks"><a href="#git-hooks" class="headerlink" title="git hooks"></a>git hooks</h1><p>在项目根目录的 .git/hooks 下面配置，配置文件的名称是固定的，使用shell语法编写。<br><!-- \# [一文带你彻底学会 Git Hooks 配置](https://segmentfault.com/a/1190000022970270?utm_source=tag-newest) --></p>
+<h2 id="Git-Hooks-介绍"><a href="#Git-Hooks-介绍" class="headerlink" title="Git Hooks 介绍"></a>Git Hooks 介绍</h2><p>.git/hooks文件下，保存了一些 shell 脚本，然后在对应的钩子中执行这些脚本就行了。<br>一个还没有配置 Git Hooks 的仓库，默认会有很多.sample结尾的文件，这些都是示例文件<br>这个脚本默认是不生效的，如果要生效，把文件名后缀去掉就可以了</p>
+<h3 id="not-set-as-executable"><a href="#not-set-as-executable" class="headerlink" title="not set as executable"></a>not set as executable</h3><p>问题： hint: The ‘.git/hooks/pre-commit’ hook was ignored because it’s not set as executable.<br><!-- [Why is my Git pre-commit hook not executable by default?](https://stackoverflow.com/questions/8598639/why-is-my-git-pre-commit-hook-not-executable-by-default) --><br><!-- [为什么我的Git预提交挂钩默认不可执行？](https://xbuba.com/questions/8598639)
+$_PS: 下面是中文翻译
+ --></p>
+<blockquote>
+<p>The sample files from a git init are all executable; if it’s copied or renamed to a non-sample file, it will retain the original file’s x flag.<br>New files will be created with current defaults. In your case, view those defaults with umask:<br>默认情况下，u+x除非明确设置为新文件，否则不会。<br><code>$ umask #0022</code><br>解决<br><code>chmod +x</code></p>
+</blockquote>
+<h5 id="自动化脚本"><a href="#自动化脚本" class="headerlink" title="自动化脚本"></a>自动化脚本</h5><p>就像附加答案一样，这里是函数，你可以用来初始化一个git存储库，它自动生成钩子可执行文件;<br>您应该将它放入.bashrc或在启动终端时从源文件中找到它。故事在下面:)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  ginit () &#123;</span><br><span class="line">    git init</span><br><span class="line">    gitpath=`git rev-parse --show-superproject-working-tree --show-toplevel | head -1` </span><br><span class="line">    chmod u+x &quot;$gitpath&quot;/.git/hooks/*</span><br><span class="line">    for submodule in &quot;$gitpath&quot;/.git/modules/*; do</span><br><span class="line">      chmod u+x &quot;$submodule&quot;/hooks/*  </span><br><span class="line">    done </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我和你一样生气。我不想记住每次初始化存储库时都必须创建所有挂钩可执行文件。<br>另外，当你使用子模块时，它们的钩子不在.git/hooks，<br>但是在.git/modules/NameOfSubmodule/hooks，并且这些钩子也应该是可执行的。</p>
+<h2 id="示例shell"><a href="#示例shell" class="headerlink" title="示例shell"></a>示例shell</h2><!-- $_PS：网上看了pre-commit,commit-msg 。没有一个可以正确执行 -->
+<h2 id="模版目录"><a href="#模版目录" class="headerlink" title="模版目录"></a>模版目录</h2><p>如果我们所有项目都需要一个通用的钩子，那么我们需要在所有的项目中都放置钩子文件。挨个复制显然不是一个可行的方案。<br>在 git init 或者 git clone时，如果指定有模板目录，会使用拷贝模板目录下的文件到 .git/ 目录下。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git init --template <span class="string">"path-to-template-dir"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> --template <span class="string">"path-to-template-dir"</span></span></span><br></pre></td></tr></table></figure></p>
+<h3 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h3><p>1.创建/usr/local/.git_template/.git_template目录<br>2.将第一步中创建的commit_msg文件拷贝至上方目录<br>3.使用该命令将git全局配置模版重定向到第一步中创建到目录<br><code>git config --global init.templatedit /usr/local/.git_template/.git_template</code><br>4.如上三步完成后即可在创建新的使用git管理的项目的时候自动将全局模版拷贝至项目根目录/.git/目录下，<br>如果完成如上三步后需要对已经存在对git项目使用该模版，可移动至目标项目根目录并执行git init即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 定义模板目录，模板目录下的钩子目录</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> template_dir=<span class="variable">$HOME</span>/.git-templates</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tempalte_hooks_dir=<span class="variable">$template_dir</span>/hooks</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> 拷贝全局钩子文件目录到模板目录下</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir -p <span class="variable">$template_dir</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cp -rf <span class="variable">$root_dir</span>/sample/git-template/hooks/ <span class="variable">$template_dir</span>/</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改模板目录下钩子目录权限</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod -R a+x <span class="variable">$tempalte_hooks_dir</span></span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置全局模板目录</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config --global init.templatedir <span class="variable">$template_dir</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="why-husky"><a href="#why-husky" class="headerlink" title="why husky"></a>why husky</h2><p>.git文件夹不会提交到git，这就导致一个问题，我们在本地配置好 Git Hook 后，怎么分享给其他小伙伴儿呢？copy 吗？<br>那未免太 low 了，都用 Git 了，还 copy，也太不优雅了。这时候，就轮到 </p>
+<!-- 
+## 参考
+[GitHook 工具 —— husky介绍及使用](http://www.mamicode.com/info-detail-2916910.html)
+$_PS: 有每个git hook的中文介绍。及husky
+[一文带你彻底学会 Git Hooks 配置](https://segmentfault.com/a/1190000022970270?utm_source=tag-newest) 
+-->
+<h1 id="scripts"><a href="#scripts" class="headerlink" title="scripts"></a>scripts</h1><p>package.json中也可以设置<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "dev": "wxxxx build --dev",</span><br><span class="line">    "preinstall": "node build/bin/reset-hooks",</span><br><span class="line">    "preparecommitmsg": "node build/bin/custom-lint -e $GIT_PARAMS",</span><br><span class="line">    "postcommit": "node build/bin/post-commit",</span><br><span class="line">    "prepush": "node build/bin/pre-push -e $GIT_PARAMS",</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="husky"><a href="#husky" class="headerlink" title="husky"></a>husky</h1><p>husky: <a href="https://typicode.github.io/husky/#/?id=add-a-hook" target="_blank" rel="noopener">https://typicode.github.io/husky/#/?id=add-a-hook</a><br>github: <a href="https://github.com/typicode/husky" target="_blank" rel="noopener">https://github.com/typicode/husky</a><br>Husky 是一个让配置 Git 钩子变得更简单的工具（题外话：Husky 是哈士奇的意思，我猜可能是作者养了条二哈）<br>下面这些流行的项目都在使用 Husky，可见它确实是一个非常好用的工具：webpack, babel, create-react-app</p>
+<!-- 
+> 注意：一定要使用 npm 安装 eslint 和 husky，因为在 windows 操作系统下, 用 yarn 安装依赖，不会触发 husky pre-commit 钩子命令。 -->
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install husky --save-dev</span><br><span class="line">npx husky install</span><br><span class="line">npm pkg <span class="built_in">set</span> scripts.prepare <span class="string">"husky install"</span></span><br><span class="line"></span><br><span class="line">git config --get core.hooksPath</span><br></pre></td></tr></table></figure>
+<!-- PS: 必须要执行npx husky install。否则从远端拿到代码也不会执行hooks。 -->
+<p>PS: 原理分析。执行<code>npx husky install</code>的时候，把git hooks 的路径指向.husky。<br><!-- \#1 [【工具推荐】使用 husky 避免糟糕的 git commit](https://zhuanlan.zhihu.com/p/35913229) --><br>package.json<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">   "prepare": "npx husky install",</span><br><span class="line">   "lint": "eslint src"</span><br><span class="line"> &#125;,</span><br><span class="line"> "husky": &#123;</span><br><span class="line">   "hooks": &#123;</span><br><span class="line">     "pre-commit": "npm run lint"</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure></p>
+<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><p>通过查看源码可以看到，在安装 husky 的时候，husky会根据 package.json里的配置，<br>在.git/hooks 目录生成所有的 hook 脚本（如果你已经自定义了一个hook脚本，husky不会覆盖它）</p>
+<h3 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h3><p>1、husky 使用了自定义的安装过程：<code>node lib/installer/bin install</code>（在node_modules/husky/package.json里）。<br>执行的时会在项目的.git/hooks 目录生成所有 hook 的脚本</p>
+<p>2、每个hook脚本都是一样的<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># husky</span></span><br><span class="line"><span class="comment"># v1.0.0-rc.1 darwin</span></span><br><span class="line"><span class="built_in">export</span> HUSKY_GIT_PARAMS=<span class="string">"$*"</span></span><br><span class="line">node_modules/run-node/run-node ./node_modules/husky/lib/runner/bin `basename <span class="string">"<span class="variable">$0</span>"</span>`</span><br></pre></td></tr></table></figure></p>
+<p>关键的部分是 <code>bashname &quot;$0&quot;</code>，这样可以拿到当前的 hook名，如pre-commit、pre-push 。</p>
+<p>3、最后根据package.json 的配置，执行我们定义相对应的hook脚本。<br><!-- ## 总结
+熟悉各种工具的暴露的接口，联合起来可以hack出非常方便的自动化工具。
+Hope you have fun! :)（题图侵删）
+更新：配合lint-staged，可以只检查 staged 文件，提高效率 --><br><!-- End: #1 --></p>
+<h1 id="lint-stage"><a href="#lint-stage" class="headerlink" title="lint-stage"></a>lint-stage</h1><p>lint-staged: <a href="https://github.com/okonet/lint-staged" target="_blank" rel="noopener">https://github.com/okonet/lint-staged</a></p>
+<p>用于实现每次提交只检查本次提交所修改的文件。</p>
+<h1 id="yorkie"><a href="#yorkie" class="headerlink" title="yorkie"></a>yorkie</h1><blockquote>
+<p>yorkie fork 自 husky 并且与后者不兼容。<br>Git hooks made easy<br>This is a fork of husky with a few changes:</p>
+</blockquote>
+<h2 id="vue-cli-serve"><a href="#vue-cli-serve" class="headerlink" title="vue-cli-serve"></a>vue-cli-serve</h2><blockquote>
+<p>在安装之后，@vue/cli-service 也会安装 <strong>yorkie</strong> ，它会让你在 package.json 的 gitHooks 字段中方便地指定 Git hook：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"serve"</span>: <span class="string">"vue-cli-service serve"</span>,</span><br><span class="line">    <span class="attr">"build"</span>: <span class="string">"vue-cli-service build"</span>,</span><br><span class="line">    <span class="attr">"lint"</span>: <span class="string">"vue-cli-service lint"</span>,</span><br><span class="line">    <span class="attr">"lintcss"</span>: <span class="string">"stylelint src/**/*.&#123;html,vue,css,less,scss&#125; --fix"</span>,</span><br><span class="line">    <span class="attr">"preparecommitmsg"</span>: <span class="string">"node build/bin/custom-lint -e $GIT_PARAMS"</span>,</span><br><span class="line">    <span class="attr">"postcommit"</span>: <span class="string">"node build/bin/post-commit"</span>,</span><br><span class="line">    <span class="attr">"analyz"</span>: <span class="string">"ANALYZ=true vue-cli-service build"</span>,</span><br><span class="line">    <span class="attr">"project"</span>: <span class="string">"node ./scripts/build/projectInit.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"gitHooks"</span>: &#123;</span><br><span class="line">    <span class="attr">"pre-commit"</span>: <span class="string">"lint-staged"</span>,</span><br><span class="line">    <span class="attr">"commit-msg"</span>: <span class="string">"node scripts/git/verify-commit-msg.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"lint-staged"</span>: &#123;</span><br><span class="line">    <span class="attr">"src/**/*.&#123;js,jsx,vue,ts,tsx&#125;"</span>: [</span><br><span class="line">      <span class="string">"vue-cli-service lint"</span>,</span><br><span class="line">      <span class="string">"git add"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"src/**/*.&#123;vue,less,scss&#125;"</span>: [</span><br><span class="line">      <span class="string">"npm run lintcss"</span>,</span><br><span class="line">      <span class="string">"git add"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"eslintIgnore"</span>: [</span><br><span class="line">    <span class="string">"/scripts/git/verify-commit-msg.js"</span>,</span><br><span class="line">    <span class="string">"/scripts/build/projectInit.js"</span>,</span><br><span class="line">    <span class="string">"/dist"</span>,</span><br><span class="line">    <span class="string">"/build"</span>,</span><br><span class="line">    <span class="string">"/vue.config.js"</span>,</span><br><span class="line">    <span class="string">"/tsconfig.json"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"stylelint"</span>: &#123;</span><br><span class="line">    <span class="attr">"extends"</span>: <span class="string">"@xes/stylelint-config-xes"</span>,</span><br><span class="line">    <span class="attr">"rules"</span>: &#123;</span><br><span class="line">      <span class="attr">"value-list-comma-newline-after"</span>: <span class="string">"always-multi-line"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"stylelintIgnore"</span>: [</span><br><span class="line">    <span class="string">"/src/layout/index.html"</span>,</span><br><span class="line">    <span class="string">"src/assets/less/utils"</span></span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h1 id="commitlint"><a href="#commitlint" class="headerlink" title="commitlint"></a>commitlint</h1><p>commitlint： <a href="https://commitlint.js.org/#/guides-local-setup" target="_blank" rel="noopener">https://commitlint.js.org/#/guides-local-setup</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add hook</span></span><br><span class="line">npx husky add .husky/pre-commit <span class="string">"npm test"</span></span><br><span class="line">npx husky add .husky/commit-msg <span class="string">"npx --no-install commitlint --edit <span class="variable">$1</span>"</span></span><br></pre></td></tr></table></figure></p>
+<!-- [前端提交信息规范——commitlint](https://www.cnblogs.com/qiqi715/p/12737297.html) -->
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev husky</span><br><span class="line">npm install --save-dev @commitlint/config-conventional @commitlint/cli</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成配置文件commitlint.config.js，当然也可以是 .commitlintrc.js</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"module.exports = &#123;extends: ['@commitlint/config-conventional']&#125;;"</span> &gt; commitlint.config.js</span><br><span class="line"></span><br><span class="line"><span class="comment">## 提交 </span></span><br><span class="line">git commit -m &lt;<span class="built_in">type</span>&gt;[optional scope]: &lt;description&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'foo: bar'</span> | commitlint</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"husky": &#123;</span><br><span class="line">    "hooks": &#123;</span><br><span class="line">      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<p>————其他————-</p>
+<h1 id="husky-lint-staged-commitlint"><a href="#husky-lint-staged-commitlint" class="headerlink" title="husky + lint-staged + commitlint"></a>husky + lint-staged + commitlint</h1><!-- \# [GitHook 工具 —— husky 配置](https://blog.csdn.net/huangpb123/article/details/102690412) -->
+<ol>
+<li>安装 husky，lint-staged，@commitlint/cli，@commitlint/config-conventional 依赖<br>lint-staged: 用于实现每次提交只检查本次提交所修改的文件。</li>
+<li><p>创建 .huskyrc</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"hooks"</span>: &#123;</span><br><span class="line">    <span class="attr">"pre-commit"</span>: <span class="string">"lint-staged"</span>,</span><br><span class="line">    <span class="attr">"commit-msg"</span>: <span class="string">"commitlint -E HUSKY_GIT_PARAMS"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建 .lintstagedrc</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  &#123;</span><br><span class="line">    <span class="attr">"src/**/*.js"</span>: <span class="string">"eslint"</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 设置 fix 可以自动修复错误：</span></span><br><span class="line">  &#123;</span><br><span class="line">     <span class="attr">"src/**/*.js"</span>: [<span class="string">"eslint --fix"</span>, <span class="string">"git add"</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 或者使用下面的配置，自动格式化代码（谨慎使用）</span></span><br><span class="line">  &#123;</span><br><span class="line">  <span class="attr">"src/**/*.js"</span>: [<span class="string">"prettier --write"</span>, <span class="string">"git add"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建 commitlint.config.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  extends: [&apos;@commitlint/config-conventional&apos;],</span><br><span class="line">  rules: &#123;</span><br><span class="line">    &apos;type-enum&apos;: [</span><br><span class="line">        2,</span><br><span class="line">        &apos;always&apos;,</span><br><span class="line">        [</span><br><span class="line">        &apos;feat&apos;, // 新功能（feature）</span><br><span class="line">        &apos;fix&apos;, // 修补bug</span><br><span class="line">        &apos;docs&apos;, // 文档（documentation）</span><br><span class="line">        &apos;style&apos;, // 格式（不影响代码运行的变动）</span><br><span class="line">        &apos;refactor&apos;, // 重构（即不是新增功能，也不是修改bug的代码变动）</span><br><span class="line">        &apos;test&apos;, // 增加测试</span><br><span class="line">        &apos;revert&apos;, // 回滚</span><br><span class="line">        &apos;config&apos;, // 构建过程或辅助工具的变动</span><br><span class="line">        &apos;chore&apos;, // 其他改动</span><br><span class="line">        ],</span><br><span class="line">    ],</span><br><span class="line">    &apos;type-empty&apos;: [2, &apos;never&apos;], // 提交不符合规范时,也可以提交,但是会有警告</span><br><span class="line">    &apos;subject-empty&apos;: [2, &apos;never&apos;], // 提交不符合规范时,也可以提交,但是会有警告</span><br><span class="line">    &apos;subject-full-stop&apos;: [0, &apos;never&apos;],</span><br><span class="line">    &apos;subject-case&apos;: [0, &apos;never&apos;],</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="eslint-prettier-husky"><a href="#eslint-prettier-husky" class="headerlink" title="eslint + prettier + husky"></a>eslint + prettier + husky</h1><!-- 
+[规范开发流程提升效率](https://ttc.zhiyinlou.com/#/articleDetail?id=993)
+$_PS: 下面内容从上面引出。其他内容：移动端px自动转vw —— 404
+[[GET STARTED WITH 'eslint + prettier + husky ']](https://ttc.zhiyinlou.com/#/articleDetail?id=600) 
+$_PS: 冯明祥
+-->
+<p>.eslintrc.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  root: <span class="literal">true</span>,</span><br><span class="line">  parserOptions: &#123;</span><br><span class="line">    parser: <span class="string">'babel-eslint'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  extends: [</span><br><span class="line">    <span class="string">'plugin:vue/essential'</span>,</span><br><span class="line">    <span class="string">'@xes/eslint-config-xes'</span>,</span><br><span class="line">    <span class="string">'plugin:prettier/recommended'</span></span><br><span class="line">  ],</span><br><span class="line">  plugins: [<span class="string">'html'</span>],</span><br><span class="line">  rules: &#123;</span><br><span class="line">    <span class="string">'arrow-parens'</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">'generator-star-spacing'</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">'no-debugger'</span>: process.env.NODE_ENV === <span class="string">'production'</span> ? <span class="number">2</span> : <span class="number">0</span>,</span><br><span class="line">    camelcase: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>package.json<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">        <span class="attr">"lint"</span>: <span class="string">"prettier --ignore-path --write './src/**/*.&#123;js,json,css,vue&#125;' &amp;&amp; eslint --ext .js,.vue src"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"husky"</span>: &#123;</span><br><span class="line">        <span class="attr">"hooks"</span>: &#123;</span><br><span class="line">          <span class="attr">"pre-commit"</span>: <span class="string">"lint-staged"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"lint-staged"</span>: &#123;</span><br><span class="line">        <span class="attr">"src/**/*.&#123;js,json,css,vue&#125;"</span>: [</span><br><span class="line">          <span class="string">"npm run lint"</span>,</span><br><span class="line">          <span class="string">"git add"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p style="text-align:right"> </p>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/jsplus/移动端h5页面调试/" rel="next" title="移动端H5页面调试">
+                <i class="fa fa-chevron-left"></i> 移动端H5页面调试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/js/观察者和发布订阅/" rel="prev" title="观察者和发布订阅">
+                观察者和发布订阅 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git-hooks"><span class="nav-text">git hooks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-Hooks-介绍"><span class="nav-text">Git Hooks 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#not-set-as-executable"><span class="nav-text">not set as executable</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#自动化脚本"><span class="nav-text">自动化脚本</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例shell"><span class="nav-text">示例shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模版目录"><span class="nav-text">模版目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局配置"><span class="nav-text">全局配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#why-husky"><span class="nav-text">why husky</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#scripts"><span class="nav-text">scripts</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#husky"><span class="nav-text">husky</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理分析"><span class="nav-text">原理分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#具体步骤"><span class="nav-text">具体步骤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lint-stage"><span class="nav-text">lint-stage</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#yorkie"><span class="nav-text">yorkie</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-cli-serve"><span class="nav-text">vue-cli-serve</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#commitlint"><span class="nav-text">commitlint</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#husky-lint-staged-commitlint"><span class="nav-text">husky + lint-staged + commitlint</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#eslint-prettier-husky"><span class="nav-text">eslint + prettier + husky</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

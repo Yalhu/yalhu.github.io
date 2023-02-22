@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="react.js,test,jest,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="推荐的工具：Jest ，React 测试库。如果你想断言或者操纵你的渲染组件，你可以使用react-testing-library, Enzyme, 或者React的 TestUtils。 react测试技巧: https://zh-hans.reactjs.org/docs/testing-recipes.htmljest-快照测试: https://jestjs.io/zh-Hans/docs">
+<meta name="keywords" content="react.js,test,jest">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端单元测试-React测试和快照">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/前端单元测试-react测试和快照/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="推荐的工具：Jest ，React 测试库。如果你想断言或者操纵你的渲染组件，你可以使用react-testing-library, Enzyme, 或者React的 TestUtils。 react测试技巧: https://zh-hans.reactjs.org/docs/testing-recipes.htmljest-快照测试: https://jestjs.io/zh-Hans/docs">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-09-02T05:51:20.922Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端单元测试-React测试和快照">
+<meta name="twitter:description" content="推荐的工具：Jest ，React 测试库。如果你想断言或者操纵你的渲染组件，你可以使用react-testing-library, Enzyme, 或者React的 TestUtils。 react测试技巧: https://zh-hans.reactjs.org/docs/testing-recipes.htmljest-快照测试: https://jestjs.io/zh-Hans/docs">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/前端单元测试-react测试和快照/">
+
+
+
+
+
+  <title>前端单元测试-React测试和快照 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/前端单元测试-react测试和快照/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端单元测试-React测试和快照</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-13T08:00:00+08:00">
+                2022-08-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-09-02T13:51:20+08:00">
+                2022-09-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/jsplus/" itemprop="url" rel="index">
+                    <span itemprop="name">jsplus</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/前端单元测试-react测试和快照/" class="leancloud_visitors" data-flag-title="前端单元测试-React测试和快照">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,565
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  23
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>推荐的工具：Jest ，React 测试库。<!-- react文档-测试概览 --><br>如果你想断言或者操纵你的渲染组件，你可以使用react-testing-library, Enzyme, 或者React的 TestUtils。<!-- jest 文档-react测试-DOM测试​ --></p>
+<p>react测试技巧: <a href="https://zh-hans.reactjs.org/docs/testing-recipes.html" target="_blank" rel="noopener">https://zh-hans.reactjs.org/docs/testing-recipes.html</a><br>jest-快照测试: <a href="https://jestjs.io/zh-Hans/docs/snapshot-testing" target="_blank" rel="noopener">https://jestjs.io/zh-Hans/docs/snapshot-testing</a><br>React 测试库: <a href="https://testing-library.com/docs/react-testing-library/intro/" target="_blank" rel="noopener">https://testing-library.com/docs/react-testing-library/intro/</a><br>Test Renderer: <a href="https://zh-hans.reactjs.org/docs/test-renderer.html" target="_blank" rel="noopener">https://zh-hans.reactjs.org/docs/test-renderer.html</a><br>Test Utilities: <a href="https://reactjs.org/docs/test-utils.html#act" target="_blank" rel="noopener">https://reactjs.org/docs/test-utils.html#act</a></p>
+<a id="more"></a>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* # utils */</span></span><br><span class="line"><span class="keyword">import</span> ReactTestUtils <span class="keyword">from</span> <span class="string">'react-dom/test-utils'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; act &#125; <span class="keyword">from</span> <span class="string">'react-dom/test-utils'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* # react-dom 的 render 在jest中也可以应用，结合act */</span></span><br><span class="line"><span class="keyword">import</span> &#123; render, unmountComponentAtNode &#125; <span class="keyword">from</span> <span class="string">"react-dom"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* # create react app 包含了jest可以使用的 react-test-renderer*/</span></span><br><span class="line"><span class="keyword">import</span> renderer <span class="keyword">from</span> <span class="string">'react-test-renderer'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* @testing-library/react */</span></span><br><span class="line"><span class="keyword">import</span> &#123; act, render, cleanup &#125; <span class="keyword">from</span> <span class="string">"@testing-library/react"</span>;</span><br><span class="line"><span class="comment">// &gt; This is a light wrapper around the react-dom/test-utils act function.</span></span><br></pre></td></tr></table></figure>
+<p>小结：</p>
+<ol>
+<li>单元测试都少不了jest 做断言，mock<!-- ，快照 -->等。</li>
+<li>快照可以用enzyme 和 testing-library。<br>如果不关心组件实现细节，遵从用户/浏览器可以用testing-library。<br>enzyme 老牌了。testing-library介绍：<blockquote>
+<p>The @testing-library family of packages helps you test UI components in a user-centric way.<br>enzyme 可以测组件实现细节，有3种渲染方式。而且都可以测其他框架ui/dom。</p>
+</blockquote>
+</li>
+</ol>
+<p style="text-align:right"> 2022.8.13 星期六 : </p>
+
+
+<p># w3<br># react文档 - API REFERENCE</p>
+<h2 id="1-1-Test-Utilities"><a href="#1-1-Test-Utilities" class="headerlink" title="1-1 Test Utilities"></a>1-1 Test Utilities</h2><p>Test Utilities: <a href="https://reactjs.org/docs/test-utils.html#act" target="_blank" rel="noopener">https://reactjs.org/docs/test-utils.html#act</a></p>
+<h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><p>ReactTestUtils 可搭配你所选的测试框架，轻松实现 React 组件测试。在 Facebook 内部，我们使用 Jest 来轻松实现 JavaScript 测试。你可以从 Jest 官网的 React 教程中了解如何开始使用它。</p>
+<blockquote>
+<p>我们推荐使用 React Testing Library，它使得针对组件编写测试用例就像终端用户在使用它一样方便。<br>当使用的 React 版本 &lt;= 16 时，可以使用 Enzyme 的测试工具，通过它能够轻松对 React 组件的输出进行断言、操控和遍历。</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom/client'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; act &#125; <span class="keyword">from</span> <span class="string">'react-dom/test-utils'</span>;</span><br><span class="line"><span class="keyword">import</span> Counter <span class="keyword">from</span> <span class="string">'./Counter'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> container;</span><br><span class="line"></span><br><span class="line">beforeEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  container = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(container);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">afterEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">document</span>.body.removeChild(container);</span><br><span class="line">  container = <span class="literal">null</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">it(<span class="string">'can render and update a counter'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="comment">// 首先测试 render 和 componentDidMount</span></span><br><span class="line">  act(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    ReactDOM.createRoot(container).render(<span class="xml"><span class="tag">&lt;<span class="name">Counter</span> /&gt;</span></span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">const</span> button = container.querySelector(<span class="string">'button'</span>);</span><br><span class="line">  <span class="keyword">const</span> label = container.querySelector(<span class="string">'p'</span>);</span><br><span class="line">  expect(label.textContent).toBe(<span class="string">'You clicked 0 times'</span>);</span><br><span class="line">  expect(<span class="built_in">document</span>.title).toBe(<span class="string">'You clicked 0 times'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 再测试 render 和 componentDidUpdate</span></span><br><span class="line">  act(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    button.dispatchEvent(<span class="keyword">new</span> MouseEvent(<span class="string">'click'</span>, &#123;<span class="attr">bubbles</span>: <span class="literal">true</span>&#125;));</span><br><span class="line">  &#125;);</span><br><span class="line">  expect(label.textContent).toBe(<span class="string">'You clicked 1 times'</span>);</span><br><span class="line">  expect(<span class="built_in">document</span>.title).toBe(<span class="string">'You clicked 1 times'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>### 参考<br>#### act()<br>为断言准备一个组件，包裹要渲染的代码并在调用 act() 时执行更新。这会使得测试更接近 React 在浏览器中的工作方式。</p>
+<blockquote>
+<p>如果你使用了 react-test-renderer，它也提供了与 act 行为相同的函数。</p>
+</blockquote>
+<p>### 其他工具方法<br>Simulate<br>使用可选的 eventData 事件数据来模拟在 DOM 节点上触发事件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">act()</span><br><span class="line">mockComponent()</span><br><span class="line">isElement()</span><br><span class="line">isElementOfType()</span><br><span class="line">isDOMComponent()</span><br><span class="line">isCompositeComponent()</span><br><span class="line">isCompositeComponentWithType()</span><br><span class="line">findAllInRenderedTree()</span><br><span class="line">scryRenderedDOMComponentsWithClass()</span><br><span class="line">findRenderedDOMComponentWithClass()</span><br><span class="line">scryRenderedDOMComponentsWithTag()</span><br><span class="line">findRenderedDOMComponentWithTag()</span><br><span class="line">scryRenderedComponentsWithType()</span><br><span class="line">findRenderedComponentWithType()</span><br><span class="line">renderIntoDocument()</span><br><span class="line">Simulate</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-Test-Renderer"><a href="#1-2-Test-Renderer" class="headerlink" title="1-2 Test Renderer"></a>1-2 Test Renderer</h2><p>Test Renderer: <a href="https://zh-hans.reactjs.org/docs/test-renderer.html" target="_blank" rel="noopener">https://zh-hans.reactjs.org/docs/test-renderer.html</a></p>
+<h3 id="概览-1"><a href="#概览-1" class="headerlink" title="概览"></a>概览</h3><p>这个 package 提供了一个 React 渲染器，用于将 React 组件渲染成纯 JavaScript 对象，无需依赖 DOM 或原生移动环境。<br>这个 package 提供的主要功能是在不依赖浏览器或 jsdom 的情况下，返回某个时间点由 React DOM 或者 React Native 平台渲染出的视图结构（类似与 DOM 树）快照。</p>
+<p>1-你可以使用 Jest 的快照测试功能来自动保存当前 JSON 树结构到一个文件中，并在测试中检查它是否被修改：了解更多。<br>2-你也可以通过遍历输出来查找特定节点，并对它们进行断言。<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> TestRenderer <span class="keyword">from</span> <span class="string">'react-test-renderer'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* ## 1 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Link</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#123;props.page&#125;</span>&gt;</span>&#123;props.children&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> testRenderer = TestRenderer.create(</span><br><span class="line">  &lt;Link page=<span class="string">"https://www.facebook.com/"</span>&gt;Facebook&lt;<span class="regexp">/Link&gt;</span></span><br><span class="line"><span class="regexp">);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">console.log(testRenderer.toJSON());</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ &#123; type: 'a',</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/   props: &#123; href: 'https:/</span><span class="regexp">/www.facebook.com/</span><span class="string">' &#125;,</span></span><br><span class="line"><span class="string">//   children: [ '</span>Facebook<span class="string">' ] &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">/* ## 2 */</span></span><br><span class="line"><span class="string">function MyComponent() &#123;</span></span><br><span class="line"><span class="string">  return (</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;SubComponent foo="bar" /&gt;</span></span><br><span class="line"><span class="string">      &lt;p className="my"&gt;Hello&lt;/p&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  )</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">function SubComponent() &#123;</span></span><br><span class="line"><span class="string">  return (</span></span><br><span class="line"><span class="string">    &lt;p className="sub"&gt;Sub&lt;/p&gt;</span></span><br><span class="line"><span class="string">  );</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">const testRenderer = TestRenderer.create(&lt;MyComponent /&gt;);</span></span><br><span class="line"><span class="string">const testInstance = testRenderer.root;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">expect(testInstance.findByType(SubComponent).props.foo).toBe('</span>bar<span class="string">');</span></span><br><span class="line"><span class="string">expect(testInstance.findByProps(&#123;className: "sub"&#125;).children).toEqual(['</span>Sub<span class="string">']);</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>TestRenderer.create()<br>通过传来的 React 元素创建一个 TestRenderer 实例。它并不使用真实的 DOM，但是它依然将组件树完整地渲染到内存，以便于你对它进行断言。此时将返回一个 TestRenderer 实例。</p>
+<p>TestRenderer.act()<br>与 react-dom/test-utils 中的 act() 相似，TestRender.act 为断言准备一个组件。可以使用 act() 来包装 TestRenderer.create 和 testRenderer.update。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">TestRenderer</span><br><span class="line">TestRenderer.create()</span><br><span class="line">TestRenderer.act()</span><br><span class="line">TestRenderer instance</span><br><span class="line">testRenderer.toJSON()</span><br><span class="line">testRenderer.toTree()</span><br><span class="line">testRenderer.update()</span><br><span class="line">testRenderer.unmount()</span><br><span class="line">testRenderer.getInstance()</span><br><span class="line">testRenderer.root</span><br><span class="line">TestInstance</span><br><span class="line">testInstance.find()</span><br><span class="line">testInstance.findByType()</span><br><span class="line">testInstance.findByProps()</span><br><span class="line">testInstance.findAll()</span><br><span class="line">testInstance.findAllByType()</span><br><span class="line">testInstance.findAllByProps()</span><br><span class="line">testInstance.instance</span><br><span class="line">testInstance.type</span><br><span class="line">testInstance.props</span><br><span class="line">testInstance.parent</span><br><span class="line">testInstance.children</span><br></pre></td></tr></table></figure>
+<h2 id="1-3-JavaScript-环境要求"><a href="#1-3-JavaScript-环境要求" class="headerlink" title="1-3 JavaScript 环境要求"></a>1-3 JavaScript 环境要求</h2><p># react文档 - 测试</p>
+<h2 id="0-1-测试概览"><a href="#0-1-测试概览" class="headerlink" title="0-1 测试概览"></a>0-1 测试概览</h2><p>测试概览: <a href="https://zh-hans.reactjs.org/docs/testing.html" target="_blank" rel="noopener">https://zh-hans.reactjs.org/docs/testing.html</a></p>
+<p>现在有许多种测试 React 组件的方法。大体上可以被分为两类：</p>
+<ul>
+<li>渲染组件树 在一个简化的测试环境中渲染组件树并对它们的输出做断言检查。</li>
+<li>运行完整应用 在一个真实的浏览器环境中运行整个应用（也被称为“端到端（end-to-end）”测试）。</li>
+</ul>
+<p>推荐的工具<br><a href="https://jestjs.io" target="_blank" rel="noopener"><strong>Jest</strong></a> 是一个 JavaScript 测试运行器。它允许你使用 jsdom 操作 DOM 。尽管 jsdom 只是对浏览器工作表现的一个近似模拟，对测试 React 组件来说它通常也已经够用了。Jest 有着十分优秀的迭代速度，同时还提供了若干强大的功能，比如它可以模拟 modules 和 timers 让你更精细的控制代码如何执行。</p>
+<p><a href="https://testing-library.com/docs/react-testing-library/intro/" target="_blank" rel="noopener"><strong>React 测试库</strong></a>是一组能让你不依赖 React 组件具体实现对他们进行测试的辅助工具。它让重构工作变得轻而易举，还会推动你拥抱有关无障碍的最佳实践。虽然它不能让你省略子元素来浅（shallowly）渲染一个组件，但像 Jest 这样的测试运行器可以通过 mocking 让你做到。</p>
+<h2 id="0-2-测试技巧"><a href="#0-2-测试技巧" class="headerlink" title="0-2 测试技巧"></a>0-2 测试技巧</h2><p>测试技巧: <a href="https://zh-hans.reactjs.org/docs/testing-recipes.html" target="_blank" rel="noopener">https://zh-hans.reactjs.org/docs/testing-recipes.html</a></p>
+<blockquote>
+<p>此章节假设你正在使用 Jest 作为测试运行器。如果你使用不同的测试运行器，你可能需要调整 API，但整体的解决方案是相同的。在测试环境章节阅读更多关于设置测试环境的细节。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">创建/清理</span><br><span class="line">act()</span><br><span class="line">渲染</span><br><span class="line">数据获取</span><br><span class="line">mock 模块</span><br><span class="line">事件</span><br><span class="line">计时器</span><br><span class="line">快照测试</span><br><span class="line">多渲染器</span><br><span class="line">缺少什么?</span><br></pre></td></tr></table></figure>
+<p>### 创建/清理<br>对于每个测试，我们通常希望将 React 树渲染给附加到 document的 DOM 元素。这点很重要，以便它可以接收 DOM 事件。当测试结束时，我们需要“清理”并从 document 中卸载树。<br>常见的方法是使用一对 beforeEach 和 afterEach 块，以便它们一直运行，并隔离测试本身造成的影响：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; unmountComponentAtNode &#125; <span class="keyword">from</span> <span class="string">"react-dom"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> container = <span class="literal">null</span>;</span><br><span class="line">beforeEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 创建一个 DOM 元素作为渲染目标</span></span><br><span class="line">  container = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(container);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">afterEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 退出时进行清理</span></span><br><span class="line">  unmountComponentAtNode(container);</span><br><span class="line">  container.remove();</span><br><span class="line">  container = <span class="literal">null</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>### act</p>
+<blockquote>
+<p>act 名称来自 Arrange-Act-Assert 模式。</p>
+</blockquote>
+<p>在编写 UI 测试时，可以将渲染、用户事件或数据获取等任务视为与用户界面交互的“单元”。react-dom/test-utils 提供了一个名为 <a href="https://zh-hans.reactjs.org/docs/test-utils.html#act" target="_blank" rel="noopener">act()</a> 的 helper，它确保在进行任何断言之前，与这些“单元”相关的所有更新都已处理并应用于 DOM：<br>这有助于使测试运行更接近真实用户在使用应用程序时的体验。</p>
+<p>你可能会发现直接使用 act() 有点过于冗长。为了避免一些样板代码，你可以使用 <a href="https://testing-library.com/docs/react-testing-library/intro/" target="_blank" rel="noopener">React 测试库</a>，这些 helper 是使用 act() 函数进行封装的。</p>
+<p>### 渲染<br>通常，你可能希望测试组件对于给定的 prop 渲染是否正确。</p>
+<p>### 数据获取<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; render, unmountComponentAtNode &#125; <span class="keyword">from</span> <span class="string">"react-dom"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; act &#125; <span class="keyword">from</span> <span class="string">"react-dom/test-utils"</span>;</span><br><span class="line"><span class="keyword">import</span> User <span class="keyword">from</span> <span class="string">"./user"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> container = <span class="literal">null</span>;</span><br><span class="line">beforeEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 创建一个 DOM 元素作为渲染目标</span></span><br><span class="line">  container = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(container);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">afterEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 退出时进行清理</span></span><br><span class="line">  unmountComponentAtNode(container);</span><br><span class="line">  container.remove();</span><br><span class="line">  container = <span class="literal">null</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">it(<span class="string">"渲染用户数据"</span>, <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> fakeUser = &#123;</span><br><span class="line">    name: <span class="string">"Joni Baez"</span>,</span><br><span class="line">    age: <span class="string">"32"</span>,</span><br><span class="line">    address: <span class="string">"123, Charming Avenue"</span></span><br><span class="line">  &#125;;</span><br><span class="line">  jest.spyOn(global, <span class="string">"fetch"</span>).mockImplementation(<span class="function"><span class="params">()</span> =&gt;</span></span><br><span class="line">    <span class="built_in">Promise</span>.resolve(&#123;</span><br><span class="line">      json: <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">Promise</span>.resolve(fakeUser)</span><br><span class="line">    &#125;)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 使用异步的 act 应用执行成功的 promise</span></span><br><span class="line">  <span class="keyword">await</span> act(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    render(<span class="xml"><span class="tag">&lt;<span class="name">User</span> <span class="attr">id</span>=<span class="string">"123"</span> /&gt;</span></span>, container);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  expect(container.querySelector(<span class="string">"summary"</span>).textContent).toBe(fakeUser.name);</span><br><span class="line">  expect(container.querySelector(<span class="string">"strong"</span>).textContent).toBe(fakeUser.age);</span><br><span class="line">  expect(container.textContent).toContain(fakeUser.address);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 清理 mock 以确保测试完全隔离</span></span><br><span class="line">  global.fetch.mockRestore();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>### mock 模块<br>有些模块可能在测试环境中不能很好地工作，或者对测试本身不是很重要。使用虚拟数据来 mock 这些模块可以使你为代码编写测试变得更容易。<br>考虑一个嵌入第三方 GoogleMap 组件的 Contact 组件：</p>
+<p>### 事件</p>
+<blockquote>
+<p>React 测试库为触发事件提供了一个更简洁 helper。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ... // 创建/清理</span></span><br><span class="line">it(<span class="string">"点击时更新值"</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> onChange = jest.fn();</span><br><span class="line">  act(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    render(<span class="xml"><span class="tag">&lt;<span class="name">Toggle</span> <span class="attr">onChange</span>=<span class="string">&#123;onChange&#125;</span> /&gt;</span></span>, container);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取按钮元素，并触发点击事件</span></span><br><span class="line">  <span class="keyword">const</span> button = <span class="built_in">document</span>.querySelector(<span class="string">"[data-testid=toggle]"</span>);</span><br><span class="line">  expect(button.innerHTML).toBe(<span class="string">"Turn on"</span>);</span><br><span class="line"></span><br><span class="line">  act(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    button.dispatchEvent(<span class="keyword">new</span> MouseEvent(<span class="string">"click"</span>, &#123; <span class="attr">bubbles</span>: <span class="literal">true</span> &#125;));</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  expect(onChange).toHaveBeenCalledTimes(<span class="number">1</span>);</span><br><span class="line">  expect(button.innerHTML).toBe(<span class="string">"Turn off"</span>);</span><br><span class="line"></span><br><span class="line">  act(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">      button.dispatchEvent(<span class="keyword">new</span> MouseEvent(<span class="string">"click"</span>, &#123; <span class="attr">bubbles</span>: <span class="literal">true</span> &#125;));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  expect(onChange).toHaveBeenCalledTimes(<span class="number">6</span>);</span><br><span class="line">  expect(button.innerHTML).toBe(<span class="string">"Turn on"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>### 计时器</p>
+<p>### 快照测试<br>像 Jest 这样的框架还允许你使用 toMatchSnapshot / toMatchInlineSnapshot 保存数据的“快照”。有了这些，我们可以“保存”渲染的组件输出，并确保对它的更新作为对快照的更新显式提交。</p>
+<p>在这个示例中，我们渲染一个组件并使用 pretty 包对渲染的 HTML 进行格式化，然后将其保存为内联快照：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">it(<span class="string">"应渲染问候语"</span>, () =&gt; &#123;</span><br><span class="line">  act(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    render(<span class="xml"><span class="tag">&lt;<span class="name">Hello</span> /&gt;</span></span>, container);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  expect(</span><br><span class="line">    pretty(container.innerHTML)</span><br><span class="line">  ).toMatchInlineSnapshot(); <span class="comment">/* ... 由 jest 自动填充 ... */</span></span><br><span class="line"></span><br><span class="line">  act(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    render(<span class="xml"><span class="tag">&lt;<span class="name">Hello</span> <span class="attr">name</span>=<span class="string">"Jenny"</span> /&gt;</span></span>, container);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  expect(</span><br><span class="line">    pretty(container.innerHTML)</span><br><span class="line">  ).toMatchInlineSnapshot(); <span class="comment">/* ... 由 jest 自动填充 ... */</span></span><br><span class="line"></span><br><span class="line">  act(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    render(<span class="xml"><span class="tag">&lt;<span class="name">Hello</span> <span class="attr">name</span>=<span class="string">"Margaret"</span> /&gt;</span></span>, container);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  expect(</span><br><span class="line">    pretty(container.innerHTML)</span><br><span class="line">  ).toMatchInlineSnapshot(); <span class="comment">/* ... 由 jest 自动填充 ... */</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>通常，进行具体的断言比使用快照更好。这类测试包括实现细节，因此很容易中断，并且团队可能对快照中断不敏感。选择性地 mock 一些子组件可以帮助减小快照的大小，并使它们在代码评审中保持可读性。</p>
+<p>### 多渲染器</p>
+<h2 id="3-1-jest-快照测试"><a href="#3-1-jest-快照测试" class="headerlink" title="3-1 jest-快照测试"></a>3-1 jest-快照测试</h2><p>jest-教程-快照测试: <a href="https://jestjs.io/zh-Hans/docs/snapshot-testing" target="_blank" rel="noopener">https://jestjs.io/zh-Hans/docs/snapshot-testing</a></p>
+<p>每当你想要确保你的UI不会有意外的改变，快照测试是非常有用的工具。</p>
+<p>典型的做法是在渲染了UI组件之后，保存一个快照文件， 检测他是否与保存在单元测试旁的快照文件相匹配。 若两个快照不匹配，测试将失败：有可能做了意外的更改，或者UI组件已经更新到了新版本。</p>
+<p>### Jest快照测试<br>测试React组件可以采用类似的方法。 你只需要测试对应的React树的序列号值即可，而不需要渲染整个React程序。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> renderer <span class="keyword">from</span> <span class="string">'react-test-renderer'</span>;</span><br><span class="line"><span class="keyword">import</span> Link <span class="keyword">from</span> <span class="string">'../Link'</span>;</span><br><span class="line"></span><br><span class="line">it(<span class="string">'renders correctly'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> tree = renderer</span><br><span class="line">    .create(<span class="xml"><span class="tag">&lt;<span class="name">Link</span> <span class="attr">page</span>=<span class="string">"http://www.facebook.com"</span>&gt;</span>Facebook<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span>)</span><br><span class="line">    .toJSON();</span><br><span class="line">  expect(tree).toMatchSnapshot();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>#### 更新快照<br><code>jest --updateSnapshot</code> 或<code>jest -u</code>.<br>如果你想限制只重新生成一部分的快照文件，你可以使用–testNamePattern 来正则匹配想要生成的快照名字。</p>
+<p>#### 交互式快照模式<br>进入交互式快照模式后，Jest会让你浏览失败的快照，并让你可以看到失败用例的输出日志。<br>这样，你就可以选择更新快照，或者跳至下一步。</p>
+<p>#### 内联快照<br>#### 属性匹配器</p>
+<p>### 最佳实践<br>#### 1. 视快照如代码<br>#### 2. 测试应是确定性的<br>#### 3. 使用合理的快照描述</p>
+<h2 id="3-2-jest-测试React程序"><a href="#3-2-jest-测试React程序" class="headerlink" title="3-2 jest-测试React程序"></a>3-2 jest-测试React程序</h2><p>jest-框架指南-测试React程序: <a href="https://jestjs.io/zh-Hans/docs/tutorial-react" target="_blank" rel="noopener">https://jestjs.io/zh-Hans/docs/tutorial-react</a><br>在Facebook，我们使用 Jest 测试 React 应用程序。</p>
+<!--
+\### 使用Create React Ap
+ 如果你是 React 新手，我们建议使用  -->Create React App。 它已经包含了 可用的 Jest！ 您只需要添加 react-test-renderer 来渲染快照。<br><!-- 
+\### 不使用Create React App​
+如果你已经有一个应用，你仅需要安装一些包来使他们运行起来。 我们使用babel-jest包和babel-preset-react，从而在测试环境中转换我们代码 -->
+<p>现在，使用React的test renderer和Jest的快照特性来和组件交互，获得渲染结果和生成快照文件：</p>
+<p>Link.test.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> renderer <span class="keyword">from</span> <span class="string">'react-test-renderer'</span>;</span><br><span class="line"><span class="keyword">import</span> Link <span class="keyword">from</span> <span class="string">'../Link'</span>;</span><br><span class="line"></span><br><span class="line">it(<span class="string">'changes the class when hovered'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> component = renderer.create(</span><br><span class="line">    &lt;Link page=<span class="string">"http://www.facebook.com"</span>&gt;Facebook&lt;<span class="regexp">/Link&gt;,</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">  let tree = component.toJSON();</span></span><br><span class="line"><span class="regexp">  expect(tree).toMatchSnapshot();</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ manually trigger the callback</span></span><br><span class="line"><span class="regexp">  renderer.act(() =&gt; &#123;</span></span><br><span class="line"><span class="regexp">    tree.props.onMouseEnter();</span></span><br><span class="line"><span class="regexp">  &#125;);</span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ re-rendering</span></span><br><span class="line"><span class="regexp">  tree = component.toJSON();</span></span><br><span class="line"><span class="regexp">  expect(tree).toMatchSnapshot();</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ manually trigger the callback</span></span><br><span class="line"><span class="regexp">  renderer.act(() =&gt; &#123;</span></span><br><span class="line"><span class="regexp">    tree.props.onMouseLeave();</span></span><br><span class="line"><span class="regexp">  &#125;);</span></span><br><span class="line"><span class="regexp">  /</span><span class="regexp">/ re-rendering</span></span><br><span class="line"><span class="regexp">  tree = component.toJSON();</span></span><br><span class="line"><span class="regexp">  expect(tree).toMatchSnapshot();</span></span><br><span class="line"><span class="regexp">&#125;);</span></span><br></pre></td></tr></table></figure></p>
+<p>Snapshot Testing with Mocks, Enzyme and React 16+​<br>快照测试在 Enzyme 和 React 16+ 中使用时有一个注意事项。 如果您使用以下方式模拟模块：</p>
+<h3 id="DOM测试​"><a href="#DOM测试​" class="headerlink" title="DOM测试​"></a>DOM测试​</h3><p>如果你想断言或者操纵你的渲染组件，你可以使用react-testing-library, Enzyme, 或者React的 TestUtils。 接下来我们讲两个 react-testing-library 和Enzyme的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// __tests__/CheckboxWithLabel-test.js</span></span><br><span class="line"><span class="keyword">import</span> Enzyme, &#123;shallow&#125; <span class="keyword">from</span> <span class="string">'enzyme'</span>;</span><br><span class="line"><span class="keyword">import</span> Adapter <span class="keyword">from</span> <span class="string">'enzyme-adapter-react-16'</span>;</span><br><span class="line"><span class="keyword">import</span> CheckboxWithLabel <span class="keyword">from</span> <span class="string">'../CheckboxWithLabel'</span>;</span><br><span class="line"></span><br><span class="line">Enzyme.configure(&#123;<span class="attr">adapter</span>: <span class="keyword">new</span> Adapter()&#125;);</span><br><span class="line"></span><br><span class="line">it(<span class="string">'CheckboxWithLabel changes the text after click'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="comment">// Render a checkbox with label in the document</span></span><br><span class="line">  <span class="keyword">const</span> checkbox = shallow(<span class="xml"><span class="tag">&lt;<span class="name">CheckboxWithLabel</span> <span class="attr">labelOn</span>=<span class="string">"On"</span> <span class="attr">labelOff</span>=<span class="string">"Off"</span> /&gt;</span></span>);</span><br><span class="line"></span><br><span class="line">  expect(checkbox.text()).toEqual(<span class="string">'Off'</span>);</span><br><span class="line"></span><br><span class="line">  checkbox.find(<span class="string">'input'</span>).simulate(<span class="string">'change'</span>);</span><br><span class="line"></span><br><span class="line">  expect(checkbox.text()).toEqual(<span class="string">'On'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>### 自定义转译器​</p>
+<p># enzyme 和 react-testing-library<br><!-- 
+[react前端自动化测试： jest + enzyme ](https://www.cnblogs.com/susu8/p/9512393.html)
+\$_PS: 介绍了react组件测试的各个情况，包括组件wrapper，方法，事件模拟，生命周期等 
+--></p>
+<h2 id="enzyme"><a href="#enzyme" class="headerlink" title="enzyme"></a>enzyme</h2><p>Enzyme: <a href="https://github.com/enzymejs/enzyme" target="_blank" rel="noopener">https://github.com/enzymejs/enzyme</a><br>Enzyme 文档: <a href="https://enzymejs.github.io/enzyme/" target="_blank" rel="noopener">https://enzymejs.github.io/enzyme/</a></p>
+<p><a href="https://www.piotrstaniow.pl/goodbye-enzyme" target="_blank" rel="noopener">Time to say goodbye - Enzyme.js</a><br><!-- [是时候说再见了，Enzyme.js](https://www.infoq.cn/article/1b1xze82hfssd168m2k7) --><br>最后，GitHub Insights 工具提供了有关两者使用情况的有趣统计数据。在撰写本文时，在 GitHub 上托管的开源存储库中：<br>354,059 个存储库依赖 Enzyme<br>2,440,909 个存储库依赖 React Testing Library</p>
+<!-- \#0 [【译】使用Enzyme和React Testing Library测试React Hooks](https://cloud.tencent.com/developer/article/1651156) -->
+<p><a href="https://css-tricks.com/testing-react-hooks-with-enzyme-and-react-testing-library/" target="_blank" rel="noopener">Testing React Hooks With Enzyme and React Testing Library</a><br><!-- \$_PS: 介绍了通过两个库进行react组件测试的详细。包括shadow/渲染，组件mount/生命周期，点击/事件等。 --></p>
+<!-- \#1 [【前端单元测试入门02】react的单元测试之Enzyme](https://www.cnblogs.com/vvjiang/p/8599980.html#shallow-render和mount的效率对比) -->
+<!-- 那么问题来了，mount存在的价值是什么，render就可以测试子组件，render还不需要jsdom和额外的配置。
+当然是有价值的，shallow和mount因为都是dom对象的缘故，所以都是可以模拟交互的，而render是不能的。 -->
+<p>简而言之，Enzyme主要包括三个测试：<br>一个是浅渲染的shallow，这个生成虚DOM对象，所以渲染最快，然而它并不能测试子组件的相关代码。<br>另一个是DOM渲染mount，它会生成完整的DOM节点，所以可以测试子组件。但是要依赖一个用jsdom模拟的浏览器环境。<br>最后一个是HTML文本渲染render，它会将react组件渲染为html文本，然后在内部通过Cheerio自动生成一个Cheerio对象。<br><!-- END: #1 --></p>
+<!-- \#2 [react dom交互测试(enzyme)以及快照测试(snapshot) #265](https://github.com/frontend9/fe9-library/issues/265) -->
+<!-- 
+### 渲染方式
+enzyme有3种渲染方式：render、mount、shallow，先了解下区别。
+
+render: render采用的是第三方库Cheerio的渲染，渲染结果是普通的html结构，对于snapshot使用render比较合适。
+
+### shallow和mount:
+shallow和mount对组件的渲染结果不是html的dom树，而是react树，如果你chrome装了react devtool插件，
+他的渲染结果就是react devtool tab下查看的组件结构，而render函数的结果是element tab下查看的结果。
+
+这些只是渲染结果上的差别，更大的差别是shallow和mount的结果是个被封装的 ReactWrapper，
+可以进行多种操作，譬如find()、parents()、children()等选择器进行元素查找；
+state()、props()进行数据查找，setState()、setprops()操作数据；
+simulate()模拟事件触发。 
+-->
+<h3 id="使用推荐"><a href="#使用推荐" class="headerlink" title="使用推荐:"></a>使用推荐:</h3><p>shallow只渲染当前组件，只能能对当前组件做断言；<br>mount会渲染当前组件以及所有子组件，对所有子组件也可以做上述操作。<br>一般交互测试都会关心到子组件，我使用的都是mount。<br>但是mount耗时更长，内存啥的也都占用的更多，如果没必要操作和断言子组件，可以使用shallow。</p>
+<!-- 三种渲染方式速度对比： -->
+<!-- END: #2 -->
+<!-- \#3 [组件测试](https://thinkbucket.github.io/docsite/docs/react/7.test/component-test/) -->
+<!-- ### 组测试基础概念
+#### 快照测试
+#### 浅渲染
+
+浅渲染（shallow rendering）意思就是只渲染组件中的第一层，这样测试执行器就不需要关心 DOM 和执行环境了。 -->
+<h4 id="全渲染"><a href="#全渲染" class="headerlink" title="全渲染"></a>全渲染</h4><p>全渲染（full rendering）就是完整渲染出当前组件及其所有子组件，就像在真实浏览器渲染那样，当组件内部直接改变了 DOM 时，就需要使用全渲染来测试。全渲染需要真实地模拟 DOM 环境，流行的做法有以下几种：</p>
+<p>使用 JSDOM：使用 JS 模拟 DOM 环境，能满足90%的使用场景。这是 Jest 内部所使用的全渲染框架。<br>使用 Cheerio：类似 JSDOM，更轻的实现，类似 jQuery 的语法。这是 Enzyme 内部使用的全渲染框架。<br>使用 Karma：在真实的浏览器中执行测试，也支持在多个浏览器中依次执行测试，使用的是真实DOM 环境，但速度稍慢。</p>
+<h3 id="组件测试框架"><a href="#组件测试框架" class="headerlink" title="组件测试框架"></a>组件测试框架</h3><h4 id="Jest-组件测试"><a href="#Jest-组件测试" class="headerlink" title="Jest 组件测试"></a>Jest 组件测试</h4><h4 id="Enzyme-组件测试"><a href="#Enzyme-组件测试" class="headerlink" title="Enzyme 组件测试"></a>Enzyme 组件测试</h4><p>Enzyme 提供 3 种不同的方式来测试组件：</p>
+<p>shallow：推荐的方式，浅渲染，只会渲染本地组件内容（只渲染不包含 children 的组件），引用的外部组件不会渲染，提供更好的隔离性。<br>render：如果 shallow 不能满足，才会使用它，能够渲染所有的子组件。基于 Cheerio 来模拟 DOM 环境（Cheerio 是类似 JSDOM 的另一框架）。<br>mount：类似 render，会做全渲染，对测试生命周期非常有用，能够访问到组件的生命周期方法，比如 componentDidUpdate 等。一般用于集成测试。<br>Enzyme Selector</p>
+<p>推荐：一般组件的快照测试使用 shallow 方法即可。<br>推荐：如果要测试子组件，并且对组件的生命周期等方法不怎么关注，使用 render 方法。<br>推荐：如果要测试组件生命周期方法、子组件，使用 mount 方法。</p>
+<h3 id="编写组件测试"><a href="#编写组件测试" class="headerlink" title="编写组件测试"></a>编写组件测试</h3><h4 id="测试-rendering"><a href="#测试-rendering" class="headerlink" title="测试 rendering"></a>测试 rendering</h4><h4 id="测试-props"><a href="#测试-props" class="headerlink" title="测试 props"></a>测试 props</h4><h4 id="测试-events"><a href="#测试-events" class="headerlink" title="测试 events"></a>测试 events</h4><h4 id="测试-event-handlers"><a href="#测试-event-handlers" class="headerlink" title="测试 event handlers"></a>测试 event handlers</h4><!-- END: #3 -->
+<h2 id="enzyme-VS-react-testing-library"><a href="#enzyme-VS-react-testing-library" class="headerlink" title="enzyme VS react-testing-library"></a>enzyme VS react-testing-library</h2><!-- [【翻译】enzyme 和 react-testing-library 之间的不同](https://evanhongyousan.github.io/2020/10/30/Difference-between-enzyme-and-react-testing-library/) -->
+<p>原文: # 71 <a href="https://techdoma.in/react-js-testing/difference-between-enzyme-and-react-testing-library" target="_blank" rel="noopener">Difference between enzyme and react-testing-library</a></p>
+<h3 id="Enzyme"><a href="#Enzyme" class="headerlink" title="Enzyme"></a>Enzyme</h3><p>Enzyme 是由 Airbnb 推出的流行的测试库。它已经发布了很长一段时间，且 react 官方文档建议减少使用 Enzyme 作为编写测试用例的模板。Enzyme 的 API 旨在通过模仿 jQuery 的 API 来实现直观和灵活的 DOM 操作和遍历。</p>
+<h3 id="React-Testing-Library"><a href="#React-Testing-Library" class="headerlink" title="React Testing Library"></a>React Testing Library</h3><p>React Testing Library – 一个非常通用的名字，它作为一个测试库，旨在解决与其他测试库不同的用例。React Testing Library 迫使你编写不脆弱的测试 – 测试并不是测试具体实现，而是测试组件的功能。它鼓励编写代码的最佳实践，并使代码具备可测试性，和测试正确的条件。</p>
+<blockquote>
+<p>更新–React Testing Library 现在改名为@testing-library/react。</p>
+</blockquote>
+<p>让我们来看看 Enzyme 与@testing-library/react 的一些区别。<br><!-- \$_PS: 从配置，概念（组件测试 or dom测试），渲染机制(enzyme 有3种方式)，强制更新组件，实例方法，约束性（组件内部方法） 等5个方面详细比较了区别。 --></p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>#### Case 1 - 设置<br>在 Enzyme 中，你需要配置适配器，使其与 React 16 一起工作。还有其他的第三方适配器可以使 Enzyme 与这些库一起工作。<br>在 @testing-library/react 中，不需要太多的设置。你必须安装 @testing-library/react npm 模块，然后就可以了。<code>npm install --save-dev react-testing-library</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mport Enzyme <span class="keyword">from</span> <span class="string">"enzyme"</span>;</span><br><span class="line"><span class="keyword">import</span> Adapter <span class="keyword">from</span> <span class="string">"enzyme-adapter-react-16"</span>;</span><br><span class="line"></span><br><span class="line">Enzyme.configure(&#123; <span class="attr">adapter</span>: <span class="keyword">new</span> Adapter() &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>#### Case 2 概念差异<br>当你在 Enzyme 中编写测试时，你有方法检查类的状态属性，检查传递给组件的 props 是什么。但是如果你是用道具和状态来测试组件，那就意味着你的测试很脆弱。如果明天有人改变了状态变量的名称，那么你的测试就会失败。即使组件的功能是一样的，只是因为组件中使用的状态变量名重名了，测试就会失败。由此可见单元测试的脆性。</p>
+<p>而@testing-library/react 没有测试状态或道具的方法。相反，它测试的是 dom，也就是用户正在与之交互的东西。</p>
+<p>@testing-library/react 的指导原则之一是<br>如果涉及到渲染组件，它处理的是 DOM 节点而不是组件实例，也不应该鼓励处理组件实例。</p>
+<p>所以，你没有得到组件实例的方法，也没有自己调用组件的方法。相反，你就像用户一样在 DOM 上工作。想测试对服务器的异步函数调用吗？从 DOM 中获取按钮，点击它，模拟 API，然后在 DOM 中检查结果。</p>
+<p>#### Case 3 没有强制更新()或强制重新渲染组件<br>在 Enzyme 中，你有 ForceUpdate 方法来重新渲染组件。如果你在组件内部窥探一些箭头函数（组件内部的箭头函数是错误的），那么你将不得不强制更新组件。</p>
+<p>在@testing-library/react 中，你没有任何这样的方法。相反，它只使用 DOM 进行测试。</p>
+<p>#### Case 4 没有浅层或深层的渲染<br>在@testing-library/react 中，你没有直接的方法来测试组件的实例。所以，在 React 测试库中，没有对组件进行浅层或深层的渲染。</p>
+<p>Case 5 约束性<br>Enzyme 不是一个强约束（opionated）的库，它提供了访问组件内部的方法，即组件的实例方法、状态和道具。它提供了访问组件内部的方法，即组件的方法、状态和属性。但是 Enzyme 也提供了访问组件的 DOM 的方法，所以通过使用 Enzyme，你可以选择测试组件的内部结构，即组件的方法，状态和属性。</p>
+<p>所以通过使用 Enzyme，你可以选择测试组件的内部，也可以选择不测试。Enzyme 并不强制执行任何关于你应该如何测试组件的意见。</p>
+<p>@testing-library/react 是强约束（opionated）的库。它只提供给你渲染组件和访问 DOM 的方法，不提供访问组件的方法。它不提供访问组件内部的方法。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>虽然@testing-library/react 的目标是与 Enzyme 竞争，并鼓励你从用户的角度编写可测试的代码和对应测试，但它们都有用例。你不能用一个代替另一个。有时你确实需要测试组件内部的状态变化或功能，尽管从用户的角度来看，它可能没有意义。在这些情况下，需要用 Enzyme 来测试实例方法。React Testing Library 很适合测试组件的 DOM，因为它允许你像用户使用它一样进行测试。</p>
+<!-- END: #71 -->
+<h3 id="＠testing-library-react"><a href="#＠testing-library-react" class="headerlink" title="＠testing-library/react"></a>＠testing-library/react</h3><!-- \# 72 [React单元测试--- 以Jest为例](https://www.cnblogs.com/SamWeb/p/13599947.html) -->
+<!-- 
+那怎么渲染？怎么查看渲染出来内容呢？因为我们是在命令行中跑测试，而不是在浏览器中进行测试？渲染的话，目前有两个测试库enzyme和@testing-library/react, 提供了渲染方法。查看内容，则是Jest内置了jsdom, jsdom提供了DOM的无头实现，也就是说在命令行中跑测试，在测试中仍然可以获取到document, document.body 等DOM 元素，也就可以使用documet.getElementId() 等DOM 方法来查出内容，也可以click 来测试浏览器的交互形为。jsdom也称为Jest浏览器环境。 -->
+<p>enzyme和@testing-library/react，怎么选择呢？<strong>现在倾向于＠testing-library/react</strong>,<br>－是因为它对react hooks支持比较好，<br>二是，它的测试更符合用户形为，渲染组件，查找元素，和用户使用浏览器没有什么区别。<br>＠testing-library/react也鼓励我们，写测试要把注意力放到用户身上，测试要模拟真实用户的形为，而不是测试组件的实现细节，<!-- 这样，测试完成后，对组件更有信心。什么是测试实现细节呢？就是测试组件状态是不是对的，直接调用组件中的方法。 --><br>如果你了解Enzyme的话，它就提供了wrapper.state方法，可以直接获取到组件的状态，wapper.instance可以直接调用组件的方法。<br><!-- 
+为什么不测试组件的实现细节？测试组件的实现细节有什么不好吗？
+有两个不好的地方，一是使用组件时，谁管你内部是怎么实现的，用户只管好不好用，有没有达到预期效果，测试实现细节显得没有什么意义。二是维护成本太高，今天组件的状态叫curValue, 明天可能叫currentValue, 这样测试就要改来改去，但这样的修改对组件来说，功能没有受到任何的影响，按理说，测试是不需要改的。
+＠testing-library/react并没有提供测试实现细节的功能，只提供了getByText()等测试dom的功能。 
+--><br><!-- 
+自己配置一个测试环境，稍微有点麻烦，幸好create-react-app内置了@test-library/react，使用它创建项目，可以直接写测试。使用create-react-app 创建项目后，就可以看一下@test-library/react库了。React单元测试，就是渲染，查找元素，进行判断，是不是符合预期，也就是断言。React test libaray 提供了render()方法进行渲染，它接受一个React element, 然后把它渲染成DOM, 插入到body元素上。提供了*Text()等方法来查找元素，jest-dom提供了断言。写一个简单的例子，组件加载的时候显示loading， 然后请求数据， 展示数据。App.js修改如下
+ --></p>
+<!-- END: #72 -->
+<!-- 
+# 其他
+[Unit Testing in React: Full Guide on Jest and Enzyme Testing](https://djangostars.com/blog/what-and-how-to-test-with-enzyme-and-jest-full-instruction-on-react-component-testing/)
+
+ -->
+<!-- 
+# react 测试
+### hooks 测试
+[如何对 react hooks 进行单元测试](https://segmentfault.com/a/1190000020058166) 
+
+-->
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/react-js/" rel="tag"><i class="fa fa-tag"></i> react.js</a>
+          
+            <a href="/tags/test/" rel="tag"><i class="fa fa-tag"></i> test</a>
+          
+            <a href="/tags/jest/" rel="tag"><i class="fa fa-tag"></i> jest</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/jsplus/CI和CD学习/" rel="next" title="CI/CD 学习">
+                <i class="fa fa-chevron-left"></i> CI/CD 学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/miniapp/微信h5开发记录/" rel="prev" title="微信H5开发记录">
+                微信H5开发记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Test-Utilities"><span class="nav-text">1-1 Test Utilities</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概览"><span class="nav-text">概览</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Test-Renderer"><span class="nav-text">1-2 Test Renderer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概览-1"><span class="nav-text">概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-JavaScript-环境要求"><span class="nav-text">1-3 JavaScript 环境要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-1-测试概览"><span class="nav-text">0-1 测试概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-2-测试技巧"><span class="nav-text">0-2 测试技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-jest-快照测试"><span class="nav-text">3-1 jest-快照测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-jest-测试React程序"><span class="nav-text">3-2 jest-测试React程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM测试​"><span class="nav-text">DOM测试​</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#enzyme"><span class="nav-text">enzyme</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用推荐"><span class="nav-text">使用推荐:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全渲染"><span class="nav-text">全渲染</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件测试框架"><span class="nav-text">组件测试框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Jest-组件测试"><span class="nav-text">Jest 组件测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Enzyme-组件测试"><span class="nav-text">Enzyme 组件测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写组件测试"><span class="nav-text">编写组件测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试-rendering"><span class="nav-text">测试 rendering</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试-props"><span class="nav-text">测试 props</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试-events"><span class="nav-text">测试 events</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试-event-handlers"><span class="nav-text">测试 event handlers</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#enzyme-VS-react-testing-library"><span class="nav-text">enzyme VS react-testing-library</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Enzyme"><span class="nav-text">Enzyme</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React-Testing-Library"><span class="nav-text">React Testing Library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区别"><span class="nav-text">区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#＠testing-library-react"><span class="nav-text">＠testing-library/react</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

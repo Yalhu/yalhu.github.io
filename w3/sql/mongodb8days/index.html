@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="mongo,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="文档：https://www.mongodb.org.cn/tutorial/9.htmlhttps://docs.mongodb.com/manual/菜鸟文档：https://www.runoob.com/mongodb/mongodb-tutorial.html toc and abstract of fore4days.&amp;lt;!–# 8天学通MongoDB 简单入门；简要抄了前四天。后四">
+<meta name="keywords" content="mongo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8天学通MongoDB">
+<meta property="og:url" content="http://yoursite.com/w3/sql/mongodb8days/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="文档：https://www.mongodb.org.cn/tutorial/9.htmlhttps://docs.mongodb.com/manual/菜鸟文档：https://www.runoob.com/mongodb/mongodb-tutorial.html toc and abstract of fore4days.&amp;lt;!–# 8天学通MongoDB 简单入门；简要抄了前四天。后四">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-10-18T07:56:24.643Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="8天学通MongoDB">
+<meta name="twitter:description" content="文档：https://www.mongodb.org.cn/tutorial/9.htmlhttps://docs.mongodb.com/manual/菜鸟文档：https://www.runoob.com/mongodb/mongodb-tutorial.html toc and abstract of fore4days.&amp;lt;!–# 8天学通MongoDB 简单入门；简要抄了前四天。后四">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/w3/sql/mongodb8days/">
+
+
+
+
+
+  <title>8天学通MongoDB | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/w3/sql/mongodb8days/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">8天学通MongoDB</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-22T08:00:00+08:00">
+                2017-09-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-18T15:56:24+08:00">
+                2020-10-18
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/w3/" itemprop="url" rel="index">
+                    <span itemprop="name">w3</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/w3/sql/" itemprop="url" rel="index">
+                    <span itemprop="name">sql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+
+          
+          
+             <span id="/w3/sql/mongodb8days/" class="leancloud_visitors" data-flag-title="8天学通MongoDB">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,850
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文档：<a href="https://www.mongodb.org.cn/tutorial/9.html" target="_blank" rel="noopener">https://www.mongodb.org.cn/tutorial/9.html</a><br><a href="https://docs.mongodb.com/manual/" target="_blank" rel="noopener">https://docs.mongodb.com/manual/</a><br><!-- $_PS: 有的内容（左侧目录）并没有 --><br>菜鸟文档：<a href="https://www.runoob.com/mongodb/mongodb-tutorial.html" target="_blank" rel="noopener">https://www.runoob.com/mongodb/mongodb-tutorial.html</a></p>
+<p>toc and abstract of fore4days.<br>&lt;!–<br># <a href="http://www.cnblogs.com/huangxincheng/archive/2012/02/18/2356595.html" target="_blank" rel="noopener">8天学通MongoDB</a></p>
+<p>简单入门；简要抄了前四天。后四天高级过了一下，理解没有不知道。反正没有实践过<br>这几天(2018年3月）掌握了一些简单API的高级操作，主要是操作符的使用；还是和php 搭配<br>从文章链接可以大概看到发表时间</p>
+<p>–&gt;</p>
+<p style="text-align:right">2017.9.22 星期五 17:24</p>
+
+<a id="more"></a> 
+<h2 id="Ⅰ-基础入门"><a href="#Ⅰ-基础入门" class="headerlink" title="Ⅰ 基础入门"></a>Ⅰ 基础入门</h2><h3 id="1-下载"><a href="#1-下载" class="headerlink" title="1 下载"></a>1 下载</h3><p>目录结构：mongodb   /bin/*.exe  GNU-AGPL–3.0  README  THIRD-PARTY-NOTICES </p>
+<h3 id="2-启动-mongod-–path-E-mongodb-db"><a href="#2-启动-mongod-–path-E-mongodb-db" class="headerlink" title="2 启动  mongod –path=E:mongodb/db"></a>2 启动  mongod –path=E:mongodb/db</h3><p>先建立数据存放文件夹 mongodb/db</p>
+<h3 id="3-基本操作"><a href="#3-基本操作" class="headerlink" title="3 基本操作"></a>3 基本操作</h3><ol>
+<li><p>insert</p>
+<pre><code>db.person.insert({&quot;name&quot;:&quot;jack&quot;,&quot;age&quot;:20})
+</code></pre></li>
+<li><p>find </p>
+<pre><code>db.person.find()
+</code></pre></li>
+<li><p>update</p>
+<pre><code>db.person.update({&quot;name&quot;:&quot;jack&quot;},{&quot;name&quot;:&quot;joe&quot;,&quot;age&quot;:30})        
+</code></pre></li>
+<li><p>remove    (count)</p>
+<pre><code>db.person.remove()
+db.person.find()
+db.person.count()
+</code></pre></li>
+</ol>
+<h2 id="Ⅱ-细说增删查改"><a href="#Ⅱ-细说增删查改" class="headerlink" title="Ⅱ 细说增删查改"></a>Ⅱ 细说增删查改</h2><p>插曲：打不开mongodbl–》干掉“lock file”文件（管理方式中分享）</p>
+<h3 id="一-insert操作"><a href="#一-insert操作" class="headerlink" title="一 insert操作"></a>一 insert操作</h3><p>JSON   BSON</p>
+<ol>
+<li><p>单条插入<br>mongo命令打开的是js shell,所以js语法同。  </p>
+<pre><code>var single={.. }       
+db.person.insert(single)
+</code></pre></li>
+<li>批量插入<br>没有提供给shell 这样的方法，可以自己写for循环,里面insert<h3 id="二-find操作"><a href="#二-find操作" class="headerlink" title="二 find操作"></a>二 find操作</h3></li>
+<li><p>$gt $gte $lt $lte $ne 无 =====  &gt;,&gt;=,&lt;,&lt;=,!=,=</p>
+<pre><code>db.mycol.find({&quot;likes&quot;:{$lt:50}})
+</code></pre></li>
+<li>无  $or  $in  $nin  ========and,or,in,notin</li>
+<li>正则</li>
+<li><p>$where</p>
+<pre><code>db.user.find({$where:function(){return this.name==&apos;jack&apos;}})
+</code></pre><h3 id="三-update操作"><a href="#三-update操作" class="headerlink" title="三 update操作"></a>三 update操作</h3></li>
+<li>整体更新<br>update （上一篇的）</li>
+<li><p>局部更新</p>
+<ol>
+<li><p>$inc   increase，没有就创建</p>
+<pre><code>db.user.update({&quot;name&quot;:&quot;jack},{$inc:{&quot;age&quot;:30}})
+</code></pre></li>
+<li><p>$set   </p>
+<pre><code>db.user.update({&quot;name&quot;:&quot;jack},{$set:{&quot;age&quot;:30}})
+</code></pre></li>
+</ol>
+</li>
+<li><p>upsert操作<br>没查到就新增一条,避免 update，add判断。。第三个参数设true</p>
+<pre><code>db.user.update({&quot;name&quot;:&quot;jack},{$inc:{&quot;age&quot;:30}},true)
+</code></pre></li>
+<li>批量更新<br>第四个参数设为true</li>
+</ol>
+<h3 id="四-remove操作"><a href="#四-remove操作" class="headerlink" title="四 remove操作"></a>四 remove操作</h3><p>上一篇讲了</p>
+<h2 id="Ⅲ-细说高级操作"><a href="#Ⅲ-细说高级操作" class="headerlink" title="Ⅲ 细说高级操作"></a>Ⅲ 细说高级操作</h2><p>主要包括：聚合，游标</p>
+<h3 id="一-聚合"><a href="#一-聚合" class="headerlink" title="一 聚合"></a>一 聚合</h3><p>count  distinct group mapReduce  </p>
+<ol>
+<li><p>count   </p>
+<pre><code>db.person.count()
+db.person.count({&quot;age&quot;:20})
+</code></pre></li>
+<li><p>distinct</p>
+<pre><code>db.person.distinct(&quot;age&quot;)
+</code></pre></li>
+<li><p>group<br>三个参数<br>过滤：两个可选参数:conditon  finalize</p>
+<pre><code>db.person.group({
+    &quot;key&quot;:{&quot;age&quot;:true},//分组的key
+    &quot;initial&quot;:{&quot;person&quot;:[]},//每组都分享一个“初始函数”:20一个，22一个
+    &quot;$reduce&quot;:function(cur,prev){
+        //cur当前文档对象，  
+        //prev上一次function操作的累计对象，第一次为{&quot;person&quot;:[]}。有多少文档，就调用继承
+        prev.person.push(cur.name)
+    },
+    &quot;finalize&quot;:function(){
+        out.count=out.person.length;
+    },
+    &quot;condition&quot;:{&quot;age&quot;:{$lt:25}}
+})
+//输出
+[
+    {
+        &quot;age&quot;:20,
+        &quot;person&quot;:[&quot;jack&quot;,&quot;mary&quot;],
+        &quot;count&quot;:2  //可选参数
+    },
+    {
+        &quot;age&quot;:22,
+        &quot;person&quot;:[&quot;jack2&quot;,&quot;mary2&quot;,&quot;fugui&quot;],
+        &quot;count&quot;:3   //可选参数
+    },
+    //过滤后下面的就没有了
+    {
+        &quot;age&quot;:26,
+        &quot;person&quot;:[&quot;jack11&quot;,&quot;mary&quot;]
+    }
+]
+</code></pre></li>
+<li><p>mapReduce<br> 这玩意算是聚合函数中最复杂的了，不过复杂也好，越复杂就越灵活。</p>
+<p> mapReduce其实是一种编程模型，用在分布式计算中，其中有一个“map”函数，一个”reduce“函数。</p>
+<ul>
+<li><p>map：<br>这个称为映射函数，里面会调用emit(key,value)，集合会按照你指定的key进行映射分组。</p>
+</li>
+<li><p>reduce：<br>这个称为简化函数，会对map分组后的数据进行分组简化，注意：在reduce(key,value)中的key就是</p>
+<p> emit中的key，vlaue为emit分组后的emit(value)的集合，这里也就是很多{“count”:1}的数组。</p>
+</li>
+<li><p>mapReduce:<br>这个就是最后执行的函数了，参数为map，reduce和一些可选参数。具体看图可知：  </p>
+<pre><code>function map(){
+   emit(this.name,{count:1});
+} 
+function reduce(key,value){
+   var result={count:0};
+   for(var i=0;i&lt;value.length;i++){
+       result.count+=value[i].count;
+   }
+   return result;
+}
+
+db.person.mapReduce(map,reduce,{&quot;out&quot;:&quot;collection&quot;})
+{
+   &quot;result&quot;:&quot;collection&quot;,//存放的集合名
+   &quot;timeMillis&quot;:14,//
+   &quot;counts&quot;:{
+       &quot;input&quot;:7,//传入文档的个数
+       &quot;emit&quot;:,7,//此函数被调用的次数
+       &quot;reduce&quot;:3,//此函数被调用的次数
+       &quot;output&quot;:4//最后返回文档的个数
+   },
+   &quot;ok&quot;:1,
+}
+//最后我们看一下“collecton”集合里面按姓名分组的情况。
+db.collection.find()
+
+</code></pre></li>
+</ul>
+</li>
+</ol>
+<h3 id="二-游标"><a href="#二-游标" class="headerlink" title="二 游标"></a>二 游标</h3><p>针对这样的操作，list其实并没有获取到person中的文档，<br>而是申明一个“查询结构”，<br>等我们需要的时候通过for或者next()一次性加载过来，然后让游标逐行读取，<br>当我们枚举完了之后，游标销毁，(之后我们在通过list获取时,发现没有数据返回了)</p>
+<pre><code>var list=db.person.find();
+list.forEach(function(x){
+    print(x.name)
+})
+//逐个输出后
+list
+//没有数据返回了
+</code></pre><p>当然我们的“查询构造”还可以搞的复杂点，比如分页，排序都可以加进去。<br>那么这样的“查询构造”可以在我们需要执行的时候执行，大大提高了不必要的花销。</p>
+<pre><code>var single=db.person.find().sort({&quot;name&quot;,1}).skip(2).limit(2);
+</code></pre><h2 id="Ⅳ-索引操作"><a href="#Ⅳ-索引操作" class="headerlink" title="Ⅳ 索引操作"></a>Ⅳ 索引操作</h2><p>CURD，通常我们又会花费50%的时间在R上面  </p>
+<p>5种经典的查找，包括我们今天所说的“索引查找”</p>
+<p>我们首先插入10w数据</p>
+<h3 id="一-性能分析函数-explain"><a href="#一-性能分析函数-explain" class="headerlink" title="一 性能分析函数 explain"></a>一 性能分析函数 explain</h3><p>仔细看红色区域，有几个我们关心的key:<br>   cursor:       这里出现的是”BasicCursor”,什么意思呢，就是说这里的查找采用的是“表扫描”，也就是顺序查找，很悲催啊。<br>   nscanned:  这里是10w，也就是说数据库浏览了10w个文档，很恐怖吧，这样玩的话让人受不了啊。<br>   n:  这里是1，也就是最终返回了1个文档。<br>   millis:        这个就是我们最最最….关心的东西，总共耗时114毫秒。 </p>
+<pre><code>db.person.find({&quot;name&quot;:&quot;hxc&quot;+1000}).explain()
+</code></pre><h3 id="二-建立索引-ensureIndex"><a href="#二-建立索引-ensureIndex" class="headerlink" title="二 建立索引 ensureIndex"></a>二 建立索引 ensureIndex</h3><pre><code>db.person.ensureIndex({&quot;name&quot;:1})  //-1降序
+db.person.find({&quot;name&quot;:&quot;hxc&quot;+1000}).explain()
+</code></pre><h3 id="三-唯一索引"><a href="#三-唯一索引" class="headerlink" title="三 唯一索引"></a>三 唯一索引</h3><pre><code>db.person.ensureIndex({&quot;name&quot;:1},{&quot;unique&quot;:true})
+db.person.insert({&quot;name&quot;:&quot;hxc&quot;,&quot;age&quot;:20})
+db.person.insert({&quot;name&quot;:&quot;hxc&quot;,&quot;age&quot;:22})//报错
+</code></pre><h3 id="四-组合索引"><a href="#四-组合索引" class="headerlink" title="四 组合索引"></a>四 组合索引</h3><ol>
+<li><p>有时候我们的查询不是单条件的，可能是多条件</p>
+<pre><code>db.person.ensureIndex({&quot;name&quot;:1,&quot;birthday&quot;:1}) 
+db.person.ensureIndex({&quot;birthday&quot;:1,&quot;name&quot;:1}) 
+</code></pre><p>看到上图，大家或者也知道name跟birthday的不同，建立的索引也不同，升序和降序的顺序不同都会产生不同的索引，</p>
+</li>
+<li><p>那么我们可以用getindexes来查看下person集合中到底生成了那些索引。</p>
+<pre><code>db.person.getIndexes()
+</code></pre></li>
+<li><p>此时我们肯定很好奇，到底查询优化器会使用哪个查询作为操作，呵呵，还是看看效果图：   </p>
+<pre><code>db.person.find({&quot;birthday&quot;:&quot;1989-3-2&quot;,&quot;name&quot;:&quot;jack&quot;}).explain()
+</code></pre><p> 看完上图我们要相信查询优化器，它给我们做出的选择往往是最优的，因为我们做查询时，查询优化器会使用我们建立的这些索引来创建查询方案，</p>
+<p> 如果某一个先执行完则其他查询方案被close掉，这种方案会被mongodb保存起来，</p>
+</li>
+<li><p>当然如果非要用自己指定的查询方案，这也是可以的，在mongodb中给我们提供了hint方法让我们可以暴力执行。</p>
+<pre><code>db.person.find({&quot;birthday&quot;:&quot;1989-3-2&quot;,&quot;name&quot;:&quot;jack&quot;}).hint({&quot;birthday&quot;:&quot;1989-3-2&quot;,&quot;name&quot;:&quot;jack&quot;}).explain()
+</code></pre></li>
+</ol>
+<h3 id="五-删除索引"><a href="#五-删除索引" class="headerlink" title="五 删除索引"></a>五 删除索引</h3><p>可能随着业务需求的变化，原先建立的索引可能没有存在的必要了，</p>
+<p>（可能有的人想说没必要就没必要呗，）<br>但是请记住，索引会降低CUD这三种操作的性能，因为这玩意需要实时维护，所以啥问题都要综合考虑一下，这里就把刚才建立的索引清空掉来演示一下:dropIndexes的使用。</p>
+<pre><code>db.person.dropIndexes(&quot;name_1&quot;)
+</code></pre><p style="text-align:right">长_天_B#805 2017.9.22五 19:24</p>
+
+<table>
+<thead>
+<tr>
+<th>章节</th>
+<th>学习情况</th>
+<th>截止日期</th>
+<th>后期安排</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noted</td>
+<td>前四天noted</td>
+<td>2017.9.22</td>
+<td>deSituation</td>
+</tr>
+<tr>
+<td>coded</td>
+<td>后四天coded</td>
+<td>2017.9.22</td>
+<td>deSituation</td>
+</tr>
+<tr>
+<td>八天全</td>
+<td>之前过了一遍</td>
+<td>2017.9.*</td>
+<td>———-</td>
+</tr>
+<tr>
+<td>前四天</td>
+<td>看了半块</td>
+<td>2017.9.22 5</td>
+<td>waitToWork</td>
+</tr>
+<tr>
+<td>后四天</td>
+<td>———</td>
+<td>———</td>
+<td>dework</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Ⅴ-主从复制"><a href="#Ⅴ-主从复制" class="headerlink" title="Ⅴ 主从复制"></a>Ⅴ 主从复制</h2><h2 id="Ⅵ-分片技术"><a href="#Ⅵ-分片技术" class="headerlink" title="Ⅵ 分片技术"></a>Ⅵ 分片技术</h2><h2 id="Ⅶ-运维技术"><a href="#Ⅶ-运维技术" class="headerlink" title="Ⅶ 运维技术"></a>Ⅶ 运维技术</h2><h2 id="Ⅷ-驱动实践"><a href="#Ⅷ-驱动实践" class="headerlink" title="Ⅷ 驱动实践"></a>Ⅷ 驱动实践</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mongo/" rel="tag"><i class="fa fa-tag"></i> mongo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/jsplus/vjsOnWork/" rel="next" title="videojs在play.asp使用过程中的坑">
+                <i class="fa fa-chevron-left"></i> videojs在play.asp使用过程中的坑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/w3/sql/SQL教程-w3c/" rel="prev" title="SQL 教程 （W3c）">
+                SQL 教程 （W3c） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅰ-基础入门"><span class="nav-text">Ⅰ 基础入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-下载"><span class="nav-text">1 下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-启动-mongod-–path-E-mongodb-db"><span class="nav-text">2 启动  mongod –path=E:mongodb/db</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-基本操作"><span class="nav-text">3 基本操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅱ-细说增删查改"><span class="nav-text">Ⅱ 细说增删查改</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-insert操作"><span class="nav-text">一 insert操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-find操作"><span class="nav-text">二 find操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-update操作"><span class="nav-text">三 update操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-remove操作"><span class="nav-text">四 remove操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅲ-细说高级操作"><span class="nav-text">Ⅲ 细说高级操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-聚合"><span class="nav-text">一 聚合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-游标"><span class="nav-text">二 游标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅳ-索引操作"><span class="nav-text">Ⅳ 索引操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-性能分析函数-explain"><span class="nav-text">一 性能分析函数 explain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-建立索引-ensureIndex"><span class="nav-text">二 建立索引 ensureIndex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-唯一索引"><span class="nav-text">三 唯一索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-组合索引"><span class="nav-text">四 组合索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五-删除索引"><span class="nav-text">五 删除索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅴ-主从复制"><span class="nav-text">Ⅴ 主从复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅵ-分片技术"><span class="nav-text">Ⅵ 分片技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅶ-运维技术"><span class="nav-text">Ⅶ 运维技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅷ-驱动实践"><span class="nav-text">Ⅷ 驱动实践</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

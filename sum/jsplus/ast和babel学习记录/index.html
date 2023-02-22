@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="babel,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Babel 中文网: https://www.babeljs.cn/docs/&amp;lt;!– Babel Handbook： https://github.com/jamiebuilds/babel-handbook?spm=a2c6h.12873639.article-detail.21.20ae2384l3nF8E   A guided handbook on how to use Babel">
+<meta name="keywords" content="babel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ast和babel学习记录">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/ast和babel学习记录/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="Babel 中文网: https://www.babeljs.cn/docs/&amp;lt;!– Babel Handbook： https://github.com/jamiebuilds/babel-handbook?spm=a2c6h.12873639.article-detail.21.20ae2384l3nF8E   A guided handbook on how to use Babel">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://you img base url/../assets/images/AST与%20V8%20引擎的编译过程.png?e=1677084656&token=your qiniu access key:BnrVVaovFXuytAjJDnEek6ihDD8=">
+<meta property="og:updated_time" content="2023-02-22T14:01:19.399Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ast和babel学习记录">
+<meta name="twitter:description" content="Babel 中文网: https://www.babeljs.cn/docs/&amp;lt;!– Babel Handbook： https://github.com/jamiebuilds/babel-handbook?spm=a2c6h.12873639.article-detail.21.20ae2384l3nF8E   A guided handbook on how to use Babel">
+<meta name="twitter:image" content="http://you img base url/../assets/images/AST与%20V8%20引擎的编译过程.png?e=1677084656&token=your qiniu access key:BnrVVaovFXuytAjJDnEek6ihDD8=">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/ast和babel学习记录/">
+
+
+
+
+
+  <title>Ast和babel学习记录 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/ast和babel学习记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ast和babel学习记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-01T08:00:00+08:00">
+                2022-09-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-02-22T22:01:19+08:00">
+                2023-02-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/jsplus/" itemprop="url" rel="index">
+                    <span itemprop="name">jsplus</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/ast和babel学习记录/" class="leancloud_visitors" data-flag-title="Ast和babel学习记录">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,122
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Babel 中文网: <a href="https://www.babeljs.cn/docs/" target="_blank" rel="noopener">https://www.babeljs.cn/docs/</a><br>&lt;!– Babel Handbook： <a href="https://github.com/jamiebuilds/babel-handbook?spm=a2c6h.12873639.article-detail.21.20ae2384l3nF8E" target="_blank" rel="noopener">https://github.com/jamiebuilds/babel-handbook?spm=a2c6h.12873639.article-detail.21.20ae2384l3nF8E</a> </p>
+<blockquote>
+<p>A guided handbook on how to use Babel and how to create plugins for Babel.<br>PS: 下面两个具体的手册内容。<br><a href="https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/README.md" target="_blank" rel="noopener">https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/README.md</a><br>–&gt;<br>Babel 用户手册： <a href="https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/user-handbook.md" target="_blank" rel="noopener">https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/user-handbook.md</a><br><!-- Babel 插件手册： https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md 
+PS: 下面的内容字 越来越小
+--><br>Babel 插件手册： <a href="https://github.com/jamiebuilds/babel-handbook/blob/master/translations/en/plugin-handbook.md#writing-your-first-babel-plugin" target="_blank" rel="noopener">https://github.com/jamiebuilds/babel-handbook/blob/master/translations/en/plugin-handbook.md#writing-your-first-babel-plugin</a></p>
+</blockquote>
+<p>@babel/types: <a href="https://babeljs.io/docs/en/babel-types" target="_blank" rel="noopener">https://babeljs.io/docs/en/babel-types</a></p>
+<p style="text-align:right"> 2022.9.1 星期  ： </p>
+
+<p># ast 介绍<br>&lt;!– # 1 <a href="https://juejin.cn/post/7078909564120203300" target="_blank" rel="noopener">babel和ast（实现简单的babel插件）</a> </p>
+<p>–&gt;</p>
+<h2 id="AST简介"><a href="#AST简介" class="headerlink" title="AST简介"></a>AST简介</h2><p>抽象语法树（abstract syntax trees），就是将代码转换成的⼀种抽象的树形结构，通常是 JSON描述。<br>AST 并不是哪个编程语⾔特有的概念，在前端领域，⽐较常⽤的 AST ⼯具如<a href="https://esprima.org/index.html" target="_blank" rel="noopener">esprima</a>,babel(babylon<br>) 的解析模块，其他如 Vue ⾃⼰实现的模板解析器。</p>
+<p>AST Explorer: <a href="https://astexplorer.net" target="_blank" rel="noopener">https://astexplorer.net</a><br>&lt;!–<br>推荐⼯具： <a href="https://astexplorer.net" target="_blank" rel="noopener">AST 在线学习</a> 和 <a href="https://resources.jointjs.com/demos/rappid/apps/Ast/index.html" target="_blank" rel="noopener">tokens 在线分析</a><br>PS: tokens 在线分析 打不开。<br>插件集合（注意，前端 AST 并不仅针对 JavaScript，CSS、HTML ⼀样具有相应的解析⼯具，JavaScript 重点关注）</p>
+<p>功能插件常用方法<br>ast 解析esprima @babel/parser recast.parse<br>ast 遍历estraverse @babel/traverserecast.visit<br>⽣成代码escodegen @babel/generatorrecast.print recast.prettyPrint</p>
+<p> –&gt;</p>
+<h2 id="代码的编译流程"><a href="#代码的编译流程" class="headerlink" title="代码的编译流程"></a>代码的编译流程</h2><p><img src="http://you img base url/../assets/images/AST与%20V8%20引擎的编译过程.png?e=1677084656&token=your qiniu access key:BnrVVaovFXuytAjJDnEek6ihDD8=" alt="AST与 V8 引擎的编译过程"><br>上述过程分为三部分：解析（parse），转换（transform），⽣成（generate），其中 scanner 部分叫做词法（syntax）分析，parser 部分叫做语法（grammar）分析。<br>显然，词法分析的结果是 tokens，语法分析得到的就是 AST。</p>
+<ul>
+<li>可⻅词法分析，旨在将源代码按照⼀定的分隔符（空格/tab/换⾏等）、注释进⾏分割，并将各个部分进⾏分类构造出⼀段 token 流。</li>
+<li>⽽语法分析，则基于 tokens 将源码语义化、结构化为⼀段 JOSN 描述（AST）。反之，如果给出⼀段代码的描述信息，我们也是可以还原源码的。<!-- 理论上，描述信息发⽣变化，⽣成的源码的对应信息也会发⽣变化。所以我们可以通过操作 AST 达到修改源码信息的⽬的，辅以⽂件的创建接⼝，这也是 babel 打包⽣成代码的基本原理。了解到这⼀层，便能想象 ES6 => ES5、ts => js、uglifyJS、样式预处理器、eslint、代码提示等⼯具的⼯作⽅式了。 --></li>
+</ul>
+<h2 id="AST-的节点类型"><a href="#AST-的节点类型" class="headerlink" title="AST 的节点类型"></a>AST 的节点类型</h2><p>在操作 AST 过程中，源码部分集中在 Program 对象的 body 属性下，每个节点有着统⼀固定的格式：<br>@babel/core 依赖了 parser、traverse、generator 模块，所以安装 @babel/core 即可。<!-- 下⽂均以 babel 作为⽰例⼯具，其他⼯具类似，不再赘述。 --></p>
+<!-- 
+由此可⻅，处理 AST 的过程就是对不同节点类型遍历和操作的过程，为简化操作，babel 提供了专⻔的接⼝，我们只需要提供相应类型的处理⽅法（visitor）即可。
+还是上⾯的需求（好⼀点的是所有的return 语句都会处理，即使是嵌套的函数）：
+ -->
+<p>traverse ⽅法帮我们处理了 ast 的遍历过程，对于不同节点的处理只需要维护⼀份 types 对应的⽅法即可。进⼀步的，构造 CONSOLE_AST 节点也有⼏种⽅式。先使⽤在线⼯具将 <code>console.log(&#39;函数执⾏完成&#39;);</code> 结构化（如果你已经⼗分熟悉这个过程，可以跳过）：</p>
+<ul>
+<li>基础⽅式——使⽤ @babel/types 来构造语句</li>
+<li>终极简化版——模板 API</li>
+</ul>
+<h2 id="AST-与-babel-插件"><a href="#AST-与-babel-插件" class="headerlink" title="AST 与 babel 插件"></a>AST 与 babel 插件</h2><p>官⽅插件<br>随着 ECMAScript 的发展，不断涌出⼀些新的语⾔特性（如管道操作符、可选链操作符、控制合并操作符……），也包括但不限于 JSX 语法等。遇到 babel 本身的解析引擎模块不能识别新特性的问题，可以由插件来处理。</p>
+<p>运⾏上⾯的代码会直接报错，源码（第 5 ⾏）使⽤的管道操作符处于提案中，需要借助插件来解析：</p>
+<ol>
+<li>@babel/parser 模块 + 内联配置（记得安装 @babel/plugin-proposal-pipeline-operator ）解析</li>
+<li>@babel/core模块 + ⽂件 babel.config.json 解析（babel 会⾃动到项⽬⽬录查找最近的）babel配置文件</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* ## 1  */</span></span><br><span class="line"><span class="keyword">const</span> ast = babel.parse(code, &#123;</span><br><span class="line">  sourceType: <span class="string">'module'</span>,</span><br><span class="line">  plugins:[</span><br><span class="line">    [<span class="string">"pipelineOperator"</span>, &#123;</span><br><span class="line">      <span class="string">"proposal"</span>: <span class="string">"hack"</span>,</span><br><span class="line">      <span class="string">"topicToken"</span>: <span class="string">"^^"</span></span><br><span class="line">    &#125;]</span><br><span class="line">  ]</span><br><span class="line">&#125;); </span><br><span class="line"><span class="comment">/* ## 2 */</span></span><br><span class="line"> &#123;</span><br><span class="line">     <span class="string">"plugins"</span>: [</span><br><span class="line">         [<span class="string">"@babel/plugin-proposal-pipeline-operator"</span>, &#123;</span><br><span class="line">             <span class="string">"proposal"</span>: <span class="string">"hack"</span>,</span><br><span class="line">             <span class="string">"topicToken"</span>: <span class="string">"^^"</span></span><br><span class="line">         &#125;]</span><br><span class="line">     ]</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">//输出</span></span><br><span class="line"><span class="keyword">const</span> square = <span class="function"><span class="params">x</span> =&gt;</span> x ** <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> sum = <span class="function"><span class="params">a</span> =&gt;</span> a + <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> list = sum(square(<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
+<p>当项⽬需要⽀持的语⾔特性越来越多， plugins 需要逐⼀添加，为了解决插件的管理与依赖问题，通过提供常⽤的环境配置。<br><!-- 因此 总能看到这样的配置 (React 项⽬)：
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">     <span class="string">"presets"</span>: [<span class="string">"@babel/preset-env"</span>, <span class="string">"@babel/preset-react"</span>]</span><br><span class="line">     <span class="string">"plugin"</span>: []</span><br><span class="line">&#125;</span><br><span class="line"><span class="string">``</span><span class="string">` --&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">1. 先执⾏完所有 plugins，再执⾏ presets。</span></span><br><span class="line"><span class="string">2. 多个 plugins，按照声明次序顺序执⾏。</span></span><br><span class="line"><span class="string">3. 多个 presets，按照声明次序逆序执⾏。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">\## 自定义插件</span></span><br><span class="line"><span class="string">以上⾯的源码为例，实现变量标识的重命名，源码及转换逻辑：</span></span><br><span class="line"><span class="string">\## 自定义try-catch插件</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;!-- END: #1 --&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">\## AST 概述</span></span><br><span class="line"><span class="string">&lt;!-- \# 2 [手把手带你走进Babel的编译世界](https://segmentfault.com/a/1190000041599576) </span></span><br><span class="line"><span class="string">[Babel AST代码转换、生成](https://blog.csdn.net/weixin_43294560/article/details/125443800)</span></span><br><span class="line"><span class="string">--&gt;</span></span><br><span class="line"><span class="string">&lt;!-- TODO: ablob --&gt;</span></span><br><span class="line"><span class="string">&gt; AST 全称是是 Abstract Syntax Tree，中文为抽象语法树，将我们所写的代码转换为机器能识别的一种树形结构。其本身是由一堆节点（Node）组成，每个节点都表示源代码中的一种结构。不同结构用类型（Type）来区分，常见的类型有：Identifier(标识符)，Expression(表达式)，VariableDeclaration(变量定义)，FunctionDeclaration(函数定义)等。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## AST 结构</span></span><br><span class="line"><span class="string">随着 JavaScript 的发展，为了统一ECMAScript标准的语法表达。社区中衍生出了ESTree Spec，是目前社区所遵循的一种语法表达标准。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;!-- ESTree 提供了例如Identifier、Literal等常见的节点类型。 --&gt;</span></span><br><span class="line"><span class="string">### 节点类型</span></span><br><span class="line"><span class="string">类型	说明</span></span><br><span class="line"><span class="string">File	文件 (顶层节点包含 Program)</span></span><br><span class="line"><span class="string">Program	整个程序节点 (包含 body 属性代表程序体)</span></span><br><span class="line"><span class="string">Directive	指令 (例如 "use strict")</span></span><br><span class="line"><span class="string">Comment	代码注释</span></span><br><span class="line"><span class="string">Statement	语句 (可独立执行的语句)</span></span><br><span class="line"><span class="string">Literal	字面量 (基本数据类型、复杂数据类型等值类型)</span></span><br><span class="line"><span class="string">Identifier	标识符 (变量名、属性名、函数名、参数名等)</span></span><br><span class="line"><span class="string">Declaration	声明 (变量声明、函数声明、Import、Export 声明等)</span></span><br><span class="line"><span class="string">Specifier	关键字 (ImportSpecifier、ImportDefaultSpecifier、ImportNamespaceSpecifier、ExportSpecifier)</span></span><br><span class="line"><span class="string">Expression	表达式</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">### 公共属性</span></span><br><span class="line"><span class="string">类型	说明</span></span><br><span class="line"><span class="string">type	AST 节点的类型</span></span><br><span class="line"><span class="string">start	记录该节点代码字符串起始下标</span></span><br><span class="line"><span class="string">end	记录该节点代码字符串结束下标</span></span><br><span class="line"><span class="string">loc	内含 line、column 属性，分别记录开始结束的行列号</span></span><br><span class="line"><span class="string">leadingComments	开始的注释</span></span><br><span class="line"><span class="string">innerComments	中间的注释</span></span><br><span class="line"><span class="string">trailingComments	结尾的注释</span></span><br><span class="line"><span class="string">extra	额外信息</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## Babel 概述</span></span><br><span class="line"><span class="string">Babel 是一个 JavaScript 编译器，在实际开发过程中通常借助Babel来完成相关 AST 的操作。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Babel 工作流程</span></span><br><span class="line"><span class="string">Babel AST</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Babel 解析代码后生成的 AST 是以ESTree作为基础，并略作修改。</span></span><br><span class="line"><span class="string">&gt; The Babel parser generates AST according to Babel AST format. It is based on ESTree spec with the following deviations:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## Babel 核心包</span></span><br><span class="line"><span class="string">工具包	说明</span></span><br><span class="line"><span class="string">@babel/core	Babel 转码的核心包,包括了整个 babel 工作流（已集成@babel/types）</span></span><br><span class="line"><span class="string">@babel/parser	解析器，将代码解析为 AST</span></span><br><span class="line"><span class="string">@babel/traverse	遍历/修改 AST 的工具</span></span><br><span class="line"><span class="string">@babel/generator	生成器，将 AST 还原成代码</span></span><br><span class="line"><span class="string">@babel/types	包含手动构建 AST 和检查 AST 节点类型的方法</span></span><br><span class="line"><span class="string">@babel/template	可将字符串代码片段转换为 AST 节点</span></span><br><span class="line"><span class="string">`</span>npm i @babel/parser @babel/traverse @babel/types @babel/generator @babel/template -D<span class="string">`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## Babel 插件</span></span><br><span class="line"><span class="string">Babel 插件大致分为两种：语法插件和转换插件。</span></span><br><span class="line"><span class="string">- 语法插件作用于 @babel/parser，负责将代码解析为抽象语法树（AST）（官方的语法插件以 babel-plugin-syntax 开头);</span></span><br><span class="line"><span class="string">- 转换插件作用于 @babel/core，负责转换 AST 的形态。绝大多数情况下我们都是在编写转换插件。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Babel 插件本质上就是编写各种 visitor 去访问 AST 上的节点，并进行 traverse。当遇到对应类型的节点，visitor 就会做出相应的处理，从而将原本的代码 transform 成最终的代码。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;!-- </span></span><br><span class="line"><span class="string">其实编写一个 Babel 插件很简单。我们要做的事情就是回传一个 visitor 对象，定义以Node Type为名称的函数。该函数接收path,state两个参数。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">其中path（路径）提供了访问/操作AST 节点的方法。path 本身表示两个节点之间连接的对象。例如path.node可以访问当前节点，path.parent可以访问父节点等。path.remove()可以移除当前节点。具体 API 见下图。其他可见</span></span><br><span class="line"><span class="string">handlebook。</span></span><br><span class="line"><span class="string"> --&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## Babel Types</span></span><br><span class="line"><span class="string">Babel Types 模块是一个用于 AST 节点的 Lodash 式工具库，它包含了构造、验证以及变换 AST 节点的方法。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">\### 类型判断</span></span><br><span class="line"><span class="string">Babel Types 提供了节点类型判断的方法，每一种类型的节点都有相应的判断方法。更多见babel-types API。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">\### 创建节点</span></span><br><span class="line"><span class="string">Babel Types 同样提供了各种类型节点的创建方法，详见下属示例。</span></span><br><span class="line"><span class="string">注: Babel Types 生成的 AST 节点需使用@babel/generator转换后得到相应代码。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line"><span class="comment">// ### 基本数据类型</span></span><br><span class="line">types.stringLiteral(<span class="string">"Hello World"</span>); <span class="comment">// string</span></span><br><span class="line">types.numericLiteral(<span class="number">100</span>); <span class="comment">// number</span></span><br><span class="line">types.booleanLiteral(<span class="literal">true</span>); <span class="comment">// boolean</span></span><br><span class="line">types.nullLiteral(); <span class="comment">// null</span></span><br><span class="line">types.identifier(); <span class="comment">// undefined</span></span><br><span class="line">types.regExpLiteral(<span class="string">"\\.js?$"</span>, <span class="string">"g"</span>); <span class="comment">// 正则</span></span><br><span class="line"><span class="comment">// ### 复杂数据类型</span></span><br><span class="line"><span class="comment">// #### 数组</span></span><br><span class="line">types.arrayExpression([</span><br><span class="line">  types.stringLiteral(<span class="string">"Hello World"</span>),</span><br><span class="line">  types.numericLiteral(<span class="number">100</span>),</span><br><span class="line">  types.booleanLiteral(<span class="literal">true</span>),</span><br><span class="line">  types.regExpLiteral(<span class="string">"\\.js?$"</span>, <span class="string">"g"</span>),</span><br><span class="line">]);</span><br><span class="line"><span class="comment">// #### 对象</span></span><br><span class="line">types.objectExpression([</span><br><span class="line">  types.objectProperty(</span><br><span class="line">    types.identifier(<span class="string">"key"</span>),</span><br><span class="line">    types.stringLiteral(<span class="string">"HelloWorld"</span>)</span><br><span class="line">  ),</span><br><span class="line">  types.objectProperty(</span><br><span class="line">    <span class="comment">// 字符串类型 key</span></span><br><span class="line">    types.stringLiteral(<span class="string">"str"</span>),</span><br><span class="line">    types.arrayExpression([])</span><br><span class="line">  ),</span><br><span class="line">  types.objectProperty(</span><br><span class="line">    types.memberExpression(</span><br><span class="line">      types.identifier(<span class="string">"obj"</span>),</span><br><span class="line">      types.identifier(<span class="string">"propName"</span>)</span><br><span class="line">    ),</span><br><span class="line">    types.booleanLiteral(<span class="literal">false</span>),</span><br><span class="line">    <span class="comment">// 计算值 key</span></span><br><span class="line">    <span class="literal">true</span></span><br><span class="line">  ),</span><br><span class="line">]);</span><br><span class="line"><span class="comment">// ### JSX 节点</span></span><br><span class="line"><span class="comment">// ### 声明</span></span><br><span class="line"><span class="comment">// ### React 函数式组件</span></span><br><span class="line"><span class="comment">// ###</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>AST 本身应用非常广泛，例如:Babel 插件(ES6 转化 ES5)、构建时压缩代码 、css 预处理器编译、 webpack 插件等等，可以说是无处不在。</p>
+<p><img src="http://you img base url/../../assets/images/ast应用场景.png?e=1677084656&token=your qiniu access key:7Vjghre2W8bKyWieNHLlwzwzmtg=" alt="ast应用场景"><br><!-- 
+如图所示，不难发现，一旦涉及到编译，或者说代码本身的处理，都和 AST 息息相关。下面列举了一些常见应用，让我们看看是如何处理的。 --></p>
+<ul>
+<li>代码转换<!-- <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES6 =&gt; ES5 let 转 var</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">babel</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="attr">types</span>: t &#125; = babel;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    name: <span class="string">"let-to-var"</span>,</span><br><span class="line">    visitor: &#123;</span><br><span class="line">      VariableDeclaration(path) &#123;</span><br><span class="line">        <span class="keyword">if</span> (path.node.kind === <span class="string">"let"</span>) &#123;</span><br><span class="line">          path.node.kind = <span class="string">"var"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="string">``</span><span class="string">` --&gt;</span></span><br><span class="line"><span class="string">- babel-plugin-import</span></span><br><span class="line"><span class="string">&lt;!-- 在 CommonJS 规范下，当我们需要按需引入antd的时候，通常会借助该插件。</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">babel</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="attr">types</span>: t &#125; = babel;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    name: <span class="string">"import-to-require"</span>,</span><br><span class="line">    visitor: &#123;</span><br><span class="line">      ImportDeclaration(path) &#123;</span><br><span class="line">        <span class="keyword">if</span> (path.node.source.value === <span class="string">"antd"</span>) &#123;</span><br><span class="line">          <span class="comment">// var _button = require("antd/lib/button");</span></span><br><span class="line">          <span class="keyword">const</span> _botton = t.variableDeclaration(<span class="string">"var"</span>, [</span><br><span class="line">            t.variableDeclarator(</span><br><span class="line">              t.identifier(<span class="string">"_button"</span>),</span><br><span class="line">              t.callExpression(t.identifier(<span class="string">"require"</span>), [</span><br><span class="line">                t.stringLiteral(<span class="string">"antd/lib/button"</span>),</span><br><span class="line">              ])</span><br><span class="line">            ),</span><br><span class="line">          ]);</span><br><span class="line">          <span class="comment">// 替换当前import语句</span></span><br><span class="line">          path.replaceWith(_botton);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>TIPS: 目前 antd 包中已包含esm规范文件，可以依赖 webpack 原生 TreeShaking 实现按需引入。<br> –&gt;</p>
+<ul>
+<li>LowCode 可视化编码<br>&lt;!– 当下LowCode，依旧是前端一大热门领域。目前主流的做法大致下述两种。<ul>
+<li>Schema 驱动: 目前主流做法，将表单或者表格的配置，描述为一份 Schema，可视化设计器基于 Schema 驱动，结合拖拽能力，快速搭建。</li>
+<li>AST 驱动</li>
+</ul>
+</li>
+</ul>
+<p>通过CloudIDE，CodeSandbox等浏览器端在线编译，编码。外加可视化设计器，最终实现可视化编码。</p>
+<p> –&gt;</p>
+<ul>
+<li>ESLint<!-- 自定义 eslint-rule,本质上也是访问 AST 节点，是不是跟 Babel 插件的写法很相似呢？ --></li>
+<li>Code2Code<br>&lt;!– 以 Vue To React 为例，大致过程跟ES6 =&gt; ES5类似，通过vue-template-compiler编译得到 Vue AST =&gt; 转换为 React AST =&gt; 输出 React 代码。</li>
+</ul>
+<p>有兴趣的同学可以参考<a href="https://github.com/dwqs/vue-to-react" target="_blank" rel="noopener">vue-to-react</a></p>
+<p>其他多端框架：一份代码 =&gt; 多端，大体思路一致。<br>–&gt;<br><!-- END: #2 --></p>
+<h2 id="babel-path操作"><a href="#babel-path操作" class="headerlink" title="babel path操作"></a>babel path操作</h2><!-- [AST介绍和babel插件开发](https://blog.csdn.net/web2022050903/article/details/124877015) -->
+<p>### path<br>其中path指的是两个节点的连接，其中可以访问节点信息，也包含相关增删改查方法，类似于DOM操作，其中path上的操作是操作子节点，想操作父节点可以使用path.parentPath</p>
+<p>增<br>插入相邻节点<br>插入进一个数组类型节点<br>删<br>改<br>查<br>可以通过.node获取<br>也可以.get</p>
+<p>### state</p>
+<p># babel插件实践</p>
+<h2 id="babel插件实例"><a href="#babel插件实例" class="headerlink" title="babel插件实例"></a>babel插件实例</h2><!-- 
+[通过写Babel插件理解抽象语法树（翻译）](https://www.jianshu.com/p/3c495dcbed49) 
+PS: 我们希望设计允许我们把普通的对象和数组字面量通过使用**Mori**转换为不可变的数据结构的插件。
+原文：https://www.sitepoint.com/understanding-asts-building-babel-plugin/
+今天，我们将看下如何写Bable插件为JavaScript添加默认的不可变数据。这个教程的代码可以从 [GitHub仓库](https://github.com/sitepoint-editors/moriscript?spm=a2c6h.12873639.article-detail.8.20ae2384C1u3iA)下载。
+-->
+<!-- 
+[babel 修改抽象语法树——入门与实践](https://www.jianshu.com/p/3c495dcbed49)
+PS: 实践新增一个route对象。
+--> 
+<!--
+[使用 Babel 进行抽象语法树操作](https://juejin.cn/post/6844903894284238856) 
+PS: 把log换成console.log
+
+[手撸一个babel自动埋点插件](https://juejin.cn/post/7026994278664503304)
+[点击这里查看源码](https://github.com/jialongsu/babel-auto-tracker)
+> 使用注释实现自动埋点的babel插件
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * autoTracker</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">id</span></span> - 订单id</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">name</span></span> - 用户名</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">needTracker</span>(<span class="params">id, name, text</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'needTracker====需要埋点1 '</span>, text);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p> –&gt;</p>
+<!-- 
+[通过编译器插件实现代码注入](https://segmentfault.com/a/1190000037521833)
+PS: 介绍了babel的一些概念。比如：tokenizer， TraversalContext，visitor， path, babel-generator ,Buffer,SourceMap等。
+
+babel-generator 主要实现了两个功能：
+使用缓冲区分步生成目标代码
+源码映射（sourcemap）
+
+PS: 将特定的注释替换成调试语句
+首先，应从 babel 构造的语法树上找到对应的注释节点。但我们发现，在 babel 构造的语法树中，无论何种注释，都不是一个具体的节点：
+在它的语法树中，注释节点既属于第一段的"trailingComments"属性，也属于第二段代码的"leadingComments"属性。包括代码和注释同行，结果也是相同的。
+
+ -->
+<p># Babylon</p>
+<h2 id="Babylon"><a href="#Babylon" class="headerlink" title="Babylon"></a>Babylon</h2><p>项目主页地址：<a href="https://babeljs.io/" target="_blank" rel="noopener">https://babeljs.io/</a><br>项目仓库地址: <a href="https://github.com/babel/babylon" target="_blank" rel="noopener">https://github.com/babel/babylon</a><br><!-- npm地址: https://www.npmjs.com/package/babylon --></p>
+<blockquote>
+<p>Babylon is a JavaScript parser used in Babel.</p>
+</blockquote>
+<p>Heavily based on <a href="https://github.com/acornjs/acorn" target="_blank" rel="noopener">acorn</a> and <a href="https://github.com/acornjs/acorn-jsx" target="_blank" rel="noopener">acorn-jsx</a>, thanks to the awesome work of @RReverser and @marijnh.</p>
+<!-- 
+PS: Acorn: A tiny, fast JavaScript parser, written completely in JavaScript.
+
+ -->
+<!-- 
+[babylon中文文档|babylon js中文教程|解析](http://www.npmdoc.org/babylonzhongwenwendangbabylon-jszhongwenjiaochengjiexi.html)
+PS: babylon中文翻译。parse options 选项。
+应用程序接口
+babylon.parse(code, [options])
+babylon.parseExpression(code, [options])
+parse()将提供的内容解析code为整个 ECMAScript 程序，同时
+parseExpression()尝试在考虑性能的情况下解析单个表达式。如有疑问，请使用.parse().
+ -->
+<p style="text-align:right"> </p>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/babel/" rel="tag"><i class="fa fa-tag"></i> babel</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/miniapp/微信h5开发记录/" rel="next" title="微信H5开发记录">
+                <i class="fa fa-chevron-left"></i> 微信H5开发记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/w3/frontend/babel文档/" rel="prev" title="Airbnbabel文档b风格学习">
+                Airbnbabel文档b风格学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AST简介"><span class="nav-text">AST简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码的编译流程"><span class="nav-text">代码的编译流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AST-的节点类型"><span class="nav-text">AST 的节点类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AST-与-babel-插件"><span class="nav-text">AST 与 babel 插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babel-path操作"><span class="nav-text">babel path操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babel插件实例"><span class="nav-text">babel插件实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Babylon"><span class="nav-text">Babylon</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

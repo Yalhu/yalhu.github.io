@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="angular.js,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="needTime前十章：简单内容；后几章，还没有记录    2018.3.8 四 20:19 天#13">
+<meta name="keywords" content="angular.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angularjs权威教程">
+<meta property="og:url" content="http://yoursite.com/pdf/jslib/AngularJS权威教程/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="needTime前十章：简单内容；后几章，还没有记录    2018.3.8 四 20:19 天#13">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.402Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angularjs权威教程">
+<meta name="twitter:description" content="needTime前十章：简单内容；后几章，还没有记录    2018.3.8 四 20:19 天#13">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/pdf/jslib/AngularJS权威教程/">
+
+
+
+
+
+  <title>Angularjs权威教程 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/pdf/jslib/AngularJS权威教程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Angularjs权威教程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-08T08:00:00+08:00">
+                2018-03-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pdf/" itemprop="url" rel="index">
+                    <span itemprop="name">pdf</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pdf/jslib/" itemprop="url" rel="index">
+                    <span itemprop="name">jslib</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/pdf/jslib/AngularJS权威教程/" class="leancloud_visitors" data-flag-title="Angularjs权威教程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,661
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>needTime<br>前十章：简单内容；后几章，还没有记录   </p>
+<p style="text-align:right">2018.3.8 四 20:19 天#13</p>
+
+<a id="more"></a>
+<p>全书 35 章，由浅入深地讲解了AngularJS 的基本概念和基本功能，包括<br> 模块、作用域、控制器、表达式、指令、路由、依赖注入等，</p>
+<p>后半部分深入到 AngularJS 应用开发，系统地讨论了服务器通信、事件、架构、动画、本地化、安全、缓存、移动应用等主题。<br>本书适合各个层次的 AngularJS 开发人员学习，无论是出于工作需要，还是好奇心的驱使，只要你想彻底理解 AngularJS，本书都会让你满载而归。</p>
+<p>著　　　　[美] Ari Lerner<br>译　　　　赵望野　徐　飞　何鹏飞</p>
+<p>人民邮电出版社出版发行　　<br>字数：760千字<br>2014年 8 月第 1 版<br>2014年 8 月北京第 1 次印刷</p>
+<p>AngularJS提供了一系列健壮的功能，以及将代码隔离成模块的方法，<br>这对提高可复用性、可维护性和可测试性都是非常有益的。它的核心功能包括DOM操作、动画、<br>模板、双向数据绑定、路由、历史管理、Ajax和测试，等等。</p>
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>2.3 数据绑定的最佳实践<br>由于JavaScript自身的特点，以及它在传递值和引用时的不同处理方式，<br>    通常认为，在视图中通过对象的属性而非对象本身来进行引用绑定，是Angular中的最佳实践。 </p>
+<h2 id="第三章-模块"><a href="#第三章-模块" class="headerlink" title="第三章 模块"></a>第三章 模块</h2><p>3.1.2 requires（字符串数组）<br>requires包含了一个字符串变量组成的列表，每个元素都是一个模块名称，本模块依赖于这<br>些模块，依赖需要在本模块加载之前由注入器进行预加载。 </p>
+<h2 id="第四章-作用域"><a href="#第四章-作用域" class="headerlink" title="第四章 作用域"></a>第四章 作用域</h2><p>应用的作用域是和应用的数据模型相关联的， 同时作用域也是表达式执行的上下文。 $scope<br>对象是定义应用业务逻辑、控制器方法和视图属性的地方。</p>
+<p>$rootScope是AngularJS中最接近全局作用域的对象。在$rootScope上附加太多业<br>务逻并不是好主意，这与污染JavaScript的全局作用域是一样的。</p>
+<p>angular.module(‘myApp’, [])<br>  .run(function($rootScope) {<br>    $rootScope.name = “World”;<br>}); </p>
+<h2 id="第五章-控制器"><a href="#第五章-控制器" class="headerlink" title="第五章 控制器"></a>第五章 控制器</h2><p>function FirstController($scope) {<br>  $scope.message = “hello”;<br>}<br> 将控制器命名为[Name]Controller而不是[Name]Ctrl是一个最佳实践。</p>
+<p>正如我们看到的那样，AngularJS会在创建作用域时调用控制器方法。<br>细心的读者会发现，我们是在全局作用域中创建的这个函数。这样做并不合适，因为会污染全局命名空间。更合理的方式是创建一个模块，然后在模块中创建控制器，</p>
+<p>控制器可以将与一个独立视图相关的业务逻辑封装在一个独立的容器中。 尽可能地精简控制器是很好的做法。作为AngularJS开发者，使用依赖注入来访问服务可以实现这个目的。 </p>
+<p>AngularJS同其他JavaScript框架最主要的一个区别就是，控制器并不适合用来执行DOM操作、格式化或数据操作，以及除存储数据模型之外的状态维护操作。它只是视图和$scope之间的桥梁。 </p>
+<h2 id="第六章-表达式"><a href="#第六章-表达式" class="headerlink" title="第六章 表达式"></a>第六章 表达式</h2><h3 id="6-1-解析-AngularJS-表达式"><a href="#6-1-解析-AngularJS-表达式" class="headerlink" title="6.1 解析 AngularJS 表达式"></a>6.1 解析 AngularJS 表达式</h3><pre><code>angular.module(&quot;myApp&quot;, []) 
+.controller(&apos;MyController&apos;,  
+function($scope,$parse) { 
+$scope.$watch(&apos;expr&apos;, function(newVal, oldVal, scope) { 
+    if (newVal !== oldVal) { 
+    // 用该表达式设置parseFun 
+    var parseFun = $parse(newVal); 
+    // 获取经过解析后表达式的值 
+    $scope.parsedValue = parseFun(scope); 
+    } 
+}); 
+}); 
+</code></pre><h3 id="6-2-插值字符串"><a href="#6-2-插值字符串" class="headerlink" title="6.2 插值字符串"></a>6.2 插值字符串</h3><pre><code>angular.module(&apos;myApp&apos;, []) 
+.controller(&apos;MyController&apos;, function($scope, $interpolate) { 
+    // 设置监听 
+    $scope.$watch(&apos;emailBody&apos;, function(body) { 
+    if (body) { 
+        var template = $interpolate(body); 
+        $scope.previewText =  
+        template({to: $scope.to}); 
+    } 
+    }; 
+}); 
+</code></pre><p><strong>$_MORE:</strong> P42-44 自定义及注入服务<br>如果要修改这两个符号的设置，需要在创建新模块时将$interpolateProvider注入进去。<br>下面我们来创建一个服务，第14章会对服务进行深入讨论。 </p>
+<h2 id="第七章-过滤器"><a href="#第七章-过滤器" class="headerlink" title="第七章 过滤器"></a>第七章 过滤器</h2><p>也可以用自定义函数进行过滤（在这个例子中函数定义在$scope上）:<br><code>{\{ [&quot;Ari&quot;,&quot;likes&quot;,&quot;to&quot;,&quot;travel&quot;] | filter:isCapitalized }}</code>   </p>
+<p>isCapitalized函数的功能是根据首字母是否为大写返回true或false，具体如下所示：</p>
+<pre><code>$scope.isCapitalized = function(str) { 
+    return str[0] == str[0].toUpperCase(); 
+}; 
+</code></pre><p>我们也可以给filter过滤器传入第二个参数，用来指定预期值同实际值进行比较的方式。</p>
+<pre><code>| filter:{&apos;favorite food&apos;: &apos;Pizza&apos;} }} 
+</code></pre><ol start="4">
+<li><code>{\{ {&#39;name&#39;: &#39;Ari&#39;, &#39;City&#39;: &#39;SanFrancisco&#39;} | json }}</code></li>
+<li><code>{\{ San Francisco is very cloudy | limitTo:-6 }}</code></li>
+<li><code>| orderBy:&#39;name&#39;:true }}</code> </li>
+</ol>
+<p><strong>$_PS:</strong> 没有` 和 \ hexo 编不过去</p>
+<h3 id="7-1-自定义过滤器"><a href="#7-1-自定义过滤器" class="headerlink" title="7.1 自定义过滤器"></a>7.1 自定义过滤器</h3><pre><code>angular.module(&apos;myApp.filters&apos;, []) 
+.filter(&apos;capitalize&apos;, function() { 
+    return function(input) { 
+        // input是我们传入的字符串 
+        if (input) { 
+        return input[0].toUpperCase() + input.slice(1); 
+    } 
+});
+</code></pre><h3 id="7-2-表单验证"><a href="#7-2-表单验证" class="headerlink" title="7.2 表单验证"></a>7.2 表单验证</h3><ol start="8">
+<li>自定义验证<br>在AngularJS中自定义指令是非常容易的。鉴于目前还没有介绍到指令的相关内容，第10章再深入研究如何创建自定义验证。目前先来看一下如何通过向后端服务器发送请求，并通过响应的结果来将输入字段设置为合法或不合法，以确保输入字段中的内容是唯一的。</li>
+</ol>
+<ol start="9">
+<li><p>在表单中控制变量<br>formName.inputFieldName.$pristine/$dirty  .$valid/$invalid   .$error<br><strong>$_MORE:</strong> 实际什么时候要，自定义验证</p>
+</li>
+<li><p>一些有用的CSS样式<br>AngularJS处理表单时，会根据表单当前的状态添加一些CSS类（例如当前是合法的、未发生<br>变化的，等等） ，这些CSS类的命名和前面介绍的属性很相似。<br>它们包括：<br>.ng-pristine {}<br>.ng-dirty {}<br>.ng-valid {}<br>.ng-invalid {} </p>
+</li>
+<li><p>组合实例<br>下面开始定义表单：</p>
+</li>
+</ol>
+<p>ngMessages(1.3+)<br>很多时候这些信息相互之间非常相似。我们可以将它们保存到模板中从而减少麻烦，而不是重新输入每个字段的错误信息。<br>有时，你可能希望为不同的字段自定义错误信息。没问题，你可以在这个指令内简单地插入一个自定义错误信息。</p>
+<p>此外，甚至还可以为自定义验证创建自定义消息。可以通过修改模型的 $parsers链做到这<br>一点。 </p>
+<p><strong>$_PS:</strong> 表单验证这一章，需要好好实践 验证</p>
+<h2 id="第八章-指令简介"><a href="#第八章-指令简介" class="headerlink" title="第八章 指令简介"></a>第八章 指令简介</h2><h3 id="8-1-指令：自定义-HTML-元素和属性"><a href="#8-1-指令：自定义-HTML-元素和属性" class="headerlink" title="8.1 指令：自定义 HTML 元素和属性"></a>8.1 指令：自定义 HTML 元素和属性</h3><p>注意，还有其他内置指令（比如ng-include和ng-view）也会创建新的子作用域，这意味着它们在被调用时行为和ng-controller类似。我们在构造自定义指令时也可以创建新的子作用域。  </p>
+<ol start="4">
+<li>表达式<br>由于指令可以用属性的形式调用，我们可能会好奇如果给属性赋值会发生什么： <ul>
+<li>用表达式来声明指令<br>  我们知道声明指令时既可以使用表达式，也可以不使用表达式。下面回顾一下几种合法的表达式声明：  </li>
+<li>当前作用域介绍    </li>
+</ul>
+</li>
+</ol>
+<p>注意，还有其他内置指令（比如ng-include和ng-view）也会创建新的子作用域，这意味着它们在被调用时行为和ng-controller类似。我们在构造自定义指令时也可以创建新的子作用域</p>
+<h3 id="8-2-向指令中传递数据"><a href="#8-2-向指令中传递数据" class="headerlink" title="8.2 向指令中传递数据"></a>8.2 向指令中传递数据</h3><p>有好几种途径可以设置指令内部作用域中属性的值。 最简单的方法就是使用由所属控制器提供的已经存在的作用域。 </p>
+<p>尽管简单，共享状态会导致很多其他问题。如果控制器被移除，或者在控制器的作用域中也定义了一个叫myUrl的属性，我们就被迫要修改代码，这是成本很高且让人沮丧的事情。<br>AngularJS允许通过创建新的子作用域或者隔离作用域来解决这个常见问题。</p>
+<p>目前为止，我们一直忽略了一个细节。实际上不能像上面的例子那样，在作用域对象内部直接设置someProperty属性。<br>scope: {<br>    // 这样行不通<br>    someProperty: ‘needs to be set’<br>}<br>实际上要在DOM中像之前提到过的那样，像给函数传递参数一样，通过属性来设置值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div my-directive </span><br><span class="line">    some-property=&quot;someProperty with @ binding&quot;&gt; </span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>现在，我们在作用域对象内部把someProperty值设置为@这个绑定策略。这个绑定策略告诉AngularJS将DOM中some-property属性的值复制给新作用域对象中的someProperty属性：<br>scope: {<br>    someProperty: ‘@’<br>}<br>注意，默认情况下someProperty在DOM中的映射是some-property属性。如果我们想显式指定绑定的属性名，可以用如下方式：<br>scope: {<br>    someProperty: ‘@someAttr’<br>} </p>
+<p><strong>$_MORE:</strong> P71–下一章<br>自定义指令：独立作用域需要实践，包括显示指定绑定的属性名</p>
+<h2 id="第九章-内置指令"><a href="#第九章-内置指令" class="headerlink" title="第九章 内置指令"></a>第九章 内置指令</h2><p>其中一些指令重载了原生的HTML元素，比如<code>&lt;form&gt;</code>和<code>&lt;a&gt;</code>标签，当在HTML中使用标签时，并不一定能明确看出是否在使用指令。</p>
+<ol start="2">
+<li>ng-controller<br>由于原型继承的关系，修改父级对象中的someBareValue会同时修改子对象中的值，但反之则不行。<br>如果将模型对象的某个属性设置为字符串， 它会通过引用进行共享， 因此在子$scope中修改属性也会修改父$scope中的这个属性。下面的例子展示了正确的做法：</li>
+</ol>
+<p><strong>$_MORE:</strong> P80最后–该小节结束<br>实践上面两句话</p>
+<p style="text-align:right">P82 22：30</p><br><p style="text-align:right">2018.3.10 六 10:02 天#13</p>
+
+
+<ol start="3">
+<li>ng-include </li>
+</ol>
+<h2 id="第十章-指令详解"><a href="#第十章-指令详解" class="headerlink" title="第十章 指令详解"></a>第十章 指令详解</h2><h3 id="10-1-指令定义"><a href="#10-1-指令定义" class="headerlink" title="10.1 指令定义"></a>10.1 指令定义</h3><ol start="2">
+<li>factory_function （函数）<br>这个函数返回一个对象， 其中定义了指令的全部行为。 $compile服务利用这个方法返回的对象，在DOM调用指令时来构造指令的行为。<br>angular.application(‘myApp’, [])<br>.directive(‘myDirective’, function() {<br> // 一个指令定义对象<br> return { <pre><code>// 通过设置项来定义指令，在这里进行覆写 
+</code></pre> };<br>});<br>我们也可以返回一个函数代替对象来定义指令，但是像上面的例子一样，通过对象来定义是最佳的方式。<br>当返回一个函数时，这个函数通常被称作链接传递（postLink）函数，利用它我们可以定义指令的链接（link）功能。由于返回函数而不是对象会限制定义指令时的自由度，因此只在构造简单的指令时才比较有用。</li>
+</ol>
+<p>10.2.2 隔离作用域 </p>
+<h3 id="10-3-绑定策略"><a href="#10-3-绑定策略" class="headerlink" title="10.3 绑定策略"></a>10.3 绑定策略</h3><h3 id="10-4-AngularJS-的生命周期"><a href="#10-4-AngularJS-的生命周期" class="headerlink" title="10.4 AngularJS 的生命周期"></a>10.4 AngularJS 的生命周期</h3><h3 id="10-5-ngModel"><a href="#10-5-ngModel" class="headerlink" title="10.5 ngModel"></a>10.5 ngModel</h3><p style="text-align:right">10:54</p><br><p style="text-align:right">2018 </p>
+
+
+<h2 id="第一章-AngularJS模块加载"><a href="#第一章-AngularJS模块加载" class="headerlink" title="第一章 AngularJS模块加载"></a>第一章 AngularJS模块加载</h2><h2 id="第二章-1"><a href="#第二章-1" class="headerlink" title="第二章"></a>第二章</h2><h2 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h2><h2 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h2><h2 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h2><h2 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h2><h2 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h2><h2 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h2><h2 id="第九章"><a href="#第九章" class="headerlink" title="第九章"></a>第九章</h2><h2 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h2><h2 id="第章"><a href="#第章" class="headerlink" title="第章"></a>第章</h2><p style="text-align:right"> </p><br><p style="text-align:right">2018 </p>
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/angular-js/" rel="tag"><i class="fa fa-tag"></i> angular.js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/others/基于Hexo+NexT的博客搭建指导/" rel="next" title="基于Hexo+NexT的博客搭建指导">
+                <i class="fa fa-chevron-left"></i> 基于Hexo+NexT的博客搭建指导
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/w3/js/canvas教程-MDN/" rel="prev" title="Canvas教程-MDN">
+                Canvas教程-MDN <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章"><span class="nav-text">第二章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章-模块"><span class="nav-text">第三章 模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章-作用域"><span class="nav-text">第四章 作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章-控制器"><span class="nav-text">第五章 控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章-表达式"><span class="nav-text">第六章 表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-解析-AngularJS-表达式"><span class="nav-text">6.1 解析 AngularJS 表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-插值字符串"><span class="nav-text">6.2 插值字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七章-过滤器"><span class="nav-text">第七章 过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-自定义过滤器"><span class="nav-text">7.1 自定义过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-表单验证"><span class="nav-text">7.2 表单验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第八章-指令简介"><span class="nav-text">第八章 指令简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-指令：自定义-HTML-元素和属性"><span class="nav-text">8.1 指令：自定义 HTML 元素和属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-向指令中传递数据"><span class="nav-text">8.2 向指令中传递数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第九章-内置指令"><span class="nav-text">第九章 内置指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十章-指令详解"><span class="nav-text">第十章 指令详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-1-指令定义"><span class="nav-text">10.1 指令定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-3-绑定策略"><span class="nav-text">10.3 绑定策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-4-AngularJS-的生命周期"><span class="nav-text">10.4 AngularJS 的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-5-ngModel"><span class="nav-text">10.5 ngModel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一章-AngularJS模块加载"><span class="nav-text">第一章 AngularJS模块加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二章-1"><span class="nav-text">第二章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三章"><span class="nav-text">第三章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章"><span class="nav-text">第四章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五章"><span class="nav-text">第五章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六章"><span class="nav-text">第六章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七章"><span class="nav-text">第七章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第八章"><span class="nav-text">第八章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第九章"><span class="nav-text">第九章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第十章"><span class="nav-text">第十章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第章"><span class="nav-text">第章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

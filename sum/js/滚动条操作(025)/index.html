@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="javascript,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="[页面滚动时自动显示隐藏导航效果]参考：页面滚动时自动显示隐藏导航效果页面滚动时自动显示隐藏导航效果（jQuery）$_PS: 第二个原文章。已下载.html   ## 下拉刷新（移动端） # [滑向未来（现代 JS 与 CSS 滚动实现指南）]   消逝的滚动条隐藏但可滚动### body{overflow:hidden}“模态框抖动”问题在Mac 系统中，无论任何浏览器（滚动条）都是统一15p">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="滚动条操作">
+<meta property="og:url" content="http://yoursite.com/sum/js/滚动条操作(025)/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="[页面滚动时自动显示隐藏导航效果]参考：页面滚动时自动显示隐藏导航效果页面滚动时自动显示隐藏导航效果（jQuery）$_PS: 第二个原文章。已下载.html   ## 下拉刷新（移动端） # [滑向未来（现代 JS 与 CSS 滚动实现指南）]   消逝的滚动条隐藏但可滚动### body{overflow:hidden}“模态框抖动”问题在Mac 系统中，无论任何浏览器（滚动条）都是统一15p">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="滚动条操作">
+<meta name="twitter:description" content="[页面滚动时自动显示隐藏导航效果]参考：页面滚动时自动显示隐藏导航效果页面滚动时自动显示隐藏导航效果（jQuery）$_PS: 第二个原文章。已下载.html   ## 下拉刷新（移动端） # [滑向未来（现代 JS 与 CSS 滚动实现指南）]   消逝的滚动条隐藏但可滚动### body{overflow:hidden}“模态框抖动”问题在Mac 系统中，无论任何浏览器（滚动条）都是统一15p">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/js/滚动条操作(025)/">
+
+
+
+
+
+  <title>滚动条操作 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/js/滚动条操作(025)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">滚动条操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-12T08:00:00+08:00">
+                2018-06-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/js/滚动条操作(025)/" class="leancloud_visitors" data-flag-title="滚动条操作">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,336
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="页面滚动时自动显示隐藏导航效果"><a href="#页面滚动时自动显示隐藏导航效果" class="headerlink" title="[页面滚动时自动显示隐藏导航效果]"></a>[页面滚动时自动显示隐藏导航效果]</h2><p>参考：<br><a href="https://mickey0524.github.io/2017/09/23/scroll-auto-show-hide/" target="_blank" rel="noopener">页面滚动时自动显示隐藏导航效果</a><br><a href="http://www.css88.com/archives/7883" target="_blank" rel="noopener">页面滚动时自动显示隐藏导航效果（jQuery）</a><br><strong>$_PS:</strong> 第二个原文章。已下载.html  </p>
+<p>## 下拉刷新（移动端）</p>
+<p># [滑向未来（现代 JS 与 CSS 滚动实现指南）]  </p>
+<h2 id="消逝的滚动条"><a href="#消逝的滚动条" class="headerlink" title="消逝的滚动条"></a>消逝的滚动条</h2><h2 id="隐藏但可滚动"><a href="#隐藏但可滚动" class="headerlink" title="隐藏但可滚动"></a>隐藏但可滚动</h2><p>### <code>body{overflow:hidden}</code>“模态框抖动”问题<br>在Mac 系统中，无论任何浏览器（滚动条）都是统一15px，然而 Windows 系统可会令开发者发狂：<br>o:15px,edge:16,chrome/ff/ie:17<br>#### css<br>至于 Firefox，很不幸，没有任何办法隐藏滚动条。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.container::-webkit-scrollbar &#123;</span><br><span class="line">  display: none;</span><br><span class="line">&#125;</span><br><span class="line">.container &#123;</span><br><span class="line">  -ms-overflow-style: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="外观争议"><a href="#外观争议" class="headerlink" title="外观争议"></a>外观争议</h2><h2 id="流畅的操作体验"><a href="#流畅的操作体验" class="headerlink" title="流畅的操作体验"></a>流畅的操作体验</h2><p>轮子<br>js:<code>elem.scrollIntoView({behavior: &#39;smooth&#39;});</code><br>css(草案):<code>html{scroll-behavior: smooth;}</code>   </p>
+<h2 id="粘性-CSS"><a href="#粘性-CSS" class="headerlink" title="粘性 CSS"></a>粘性 CSS</h2><p><code>position: sticky</code></p>
+<h2 id="全面使用函数节流"><a href="#全面使用函数节流" class="headerlink" title="全面使用函数节流"></a>全面使用函数节流</h2><h2 id="在视窗中显示"><a href="#在视窗中显示" class="headerlink" title="在视窗中显示"></a>在视窗中显示</h2><p><code>const rect = elem.getBoundingClientRect();</code><br><code>const observer = new IntersectionObserver(callback, options);</code></p>
+<h2 id="滚动边界问题"><a href="#滚动边界问题" class="headerlink" title="滚动边界问题"></a>滚动边界问题</h2><h2 id="触屏之后"><a href="#触屏之后" class="headerlink" title="触屏之后"></a>触屏之后</h2><p># [无尽滚动的复杂度]<br>我们将会使用3种技术来达成目标：DOM回收、墓碑和滚动锚定</p>
+<h2 id="自定义滚动条"><a href="#自定义滚动条" class="headerlink" title="自定义滚动条"></a>自定义滚动条</h2><p>参考：<br><a href="https://www.xiabingbao.com/scrollbar/2016/01/25/scrollbar.html" target="_blank" rel="noopener">[自定义滚动条]</a>   </p>
+<ol>
+<li>无滚动条但依然可以滚动</li>
+<li><p>美化后的滚动条<br>只有webkit内核的浏览器（chrome, opera, safari等）才支持，<br>firefox到目前位置还不支持滚动条美化，<br>IE浏览器只支持修改滚动条的颜色，其他的则无法修改。   </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 设置垂直滚动条的宽度和水平滚动条的高度 */</span></span><br><span class="line"><span class="selector-class">.demo</span><span class="selector-pseudo">::-webkit-scrollbar</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">8px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 设置滚动条的滑轨 */</span></span><br><span class="line"><span class="selector-class">.demo</span><span class="selector-pseudo">::-webkit-scrollbar-track</span> &#123;</span><br><span class="line">      <span class="attribute">background-color</span>: <span class="number">#ddd</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 滑块 */</span></span><br><span class="line"><span class="selector-class">.demo</span><span class="selector-pseudo">::-webkit-scrollbar-thumb</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.6</span>);</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/* 滑轨两头的监听按钮 */</span></span><br><span class="line"><span class="selector-class">.demo</span><span class="selector-pseudo">::-webkit-scrollbar-button</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#888</span>;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 横向滚动条和纵向滚动条相交处尖角 */</span></span><br><span class="line"><span class="selector-class">.demo</span><span class="selector-pseudo">::-webkit-scrollbar-corner</span> &#123;</span><br><span class="line">    <span class="comment">/*background-color: black;*/</span></span><br><span class="line">&#125;</span><br><span class="line">// ie</span><br><span class="line">scrollbar-arrow-color: color; //三角箭头的颜色/</span><br><span class="line">scrollbar-face-color: color; //立体滚动条的颜色（包括箭头部分的背景色）/</span><br><span class="line">scrollbar-3dlight-color: color; //立体滚动条亮边的颜色/</span><br><span class="line">scrollbar-highlight-color: color; //滚动条的高亮颜色（左阴影？）/</span><br><span class="line">scrollbar-shadow-color: color; //立体滚动条阴影的颜色/</span><br><span class="line">scrollbar-darkshadow-color: color; //立体滚动条外阴影的颜色/</span><br><span class="line">scrollbar-track-color: color; //立体滚动条背景颜色/</span><br><span class="line">scrollbar-base-color:color; //滚动条的基色/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自定义滚动条<br>自定义滚动条借助js里的滚轮事件，mousemove事件等，使用div来模拟一个滚动条，然后根据位移，滚动条和内容移动相应的距离</p>
+</li>
+<li>使用mCustomScrollbar</li>
+</ol>
+<p>其它：<br><a href="http://www.alloyteam.com/2012/05/perfect-custom-scrollbar/" target="_blank" rel="noopener">完美的自定义滚动条</a><br>为何称之为完美呢？只因其具有以下优点：    </p>
+<ol>
+<li>兼容所有浏览器。</li>
+<li>支持所有鼠标事件，包括长按。</li>
+<li>样式可以完全自定义。</li>
+<li>使用该组件无需改动原来的任何代码，也不要求原来的元素使用什么定位方式。</li>
+<li>只需引进一两个js文件，再添加一句代码即可</li>
+</ol>
+<h2 id="判断方向"><a href="#判断方向" class="headerlink" title="判断方向"></a>判断方向</h2><p># <a href="http://zccst.iteye.com/blog/2197139" target="_blank" rel="noopener">croll时判断向下滚动还是向上滚动</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$(document).ready(function()&#123;  </span><br><span class="line">    var p=0,t=0;  </span><br><span class="line">    $(window).scroll(function(e)&#123;  </span><br><span class="line">            p = $(this).scrollTop();  </span><br><span class="line">            if(t&lt;=p)&#123;//下滚  </span><br><span class="line">                .......  </span><br><span class="line">            &#125;  </span><br><span class="line">            else&#123;//上滚  </span><br><span class="line">                .......  </span><br><span class="line">            &#125;  </span><br><span class="line">            setTimeout(function()&#123;t = p;&#125;,0);         </span><br><span class="line">    &#125;);  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="是否滚动到底"><a href="#是否滚动到底" class="headerlink" title="是否滚动到底"></a>是否滚动到底</h2><p># <a href="https://www.haorooms.com/post/jquery_scroll_upanddown" target="_blank" rel="noopener">[jquery判断页面滚动条(scroll)是上滚还是下滚，且是否滚动到头部或者底部]</a>    </p>
+<p>## 项目背景<br>webtouch（webapp）页面，防苹果手机safari浏览器，网上滑动，底部导航消失，滑动到底部又出现。向下滑动，底部导航出现。<br><strong>$_PS:</strong> 和/mobile 项目有点类似  </p>
+<p>## 遇到问题<br>1、我一开始用swipeup和swipedown来做，发现因为有滚动条，不会触发。因此只能判断滚动条是上滚下滚等。关于手机手势，后面的文章会介绍，欢迎关注！<br>2、通过上滚下滚来让底部导航显示或者因此，安卓上面的浏览器都可以，但是苹果safari会一闪一闪，原因是苹果safari自动有个弹跳效果，导致事件重复执行，解决办法是给上滚下滚一个距离，滚动到一定距离后返回是上滚还是下滚。</p>
+<p>## 单纯判断滚动条方向<br>以上方法手机苹果浏览器事件会跳动，解决方法及代码改进<br>滚动条滚动到底部和头部判断<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">BottomJumpPage: function () &#123;</span><br><span class="line">    var scrollTop = $(this).scrollTop();</span><br><span class="line">    var scrollHeight = $(document).height();</span><br><span class="line">    var windowHeight = $(this).height();</span><br><span class="line">    if (scrollTop + windowHeight == scrollHeight) &#123;  //滚动到底部执行事件</span><br><span class="line">            console.dir(&quot;我到底部了&quot;)；</span><br><span class="line">    &#125;</span><br><span class="line">    if (scrollTop == 0) &#123;  //滚动到头部部执行事件</span><br><span class="line">        console.dir(&quot;我到头部了&quot;)；</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>## 判断div是否滚动到底部<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> $(document).ready(function ()&#123;</span><br><span class="line">    var nScrollHight = 0; //滚动距离总长(注意不是滚动条的长度)</span><br><span class="line">    var nScrollTop = 0;   //滚动到的当前位置</span><br><span class="line">    var nDivHight = $(&quot;#div1&quot;).height();</span><br><span class="line">    $(&quot;#div1&quot;).scroll(function()&#123;</span><br><span class="line">        nScrollHight = $(this)[0].scrollHeight;</span><br><span class="line">        nScrollTop = $(this)[0].scrollTop;</span><br><span class="line">        if(nScrollTop + nDivHight &gt;= nScrollHight)</span><br><span class="line">        alert(&quot;滚动条到底部了&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p># <a href="https://www.jianshu.com/p/4c37a2a56586" target="_blank" rel="noopener">原生js——获取滚动条的高度</a>   </p>
+<h2 id="浏览器获取滚动条高度的方法"><a href="#浏览器获取滚动条高度的方法" class="headerlink" title="浏览器获取滚动条高度的方法"></a>浏览器获取滚动条高度的方法</h2><p>浏览器  API<br>IE6/7/8   document.documentElement.scrollTop<br>IE9及以上   window.pageYOffset 或者 document.documentElement.scrollTop<br>Safari      window.pageYOffset或者document.body.scrollTop<br>Firefox     window.pageYOffset 或者 document.documentElement.scrollTop<br>Chrome  document.documentElement.scrollTop  </p>
+<p>## 备注    </p>
+<ul>
+<li>很多技术博客上面说Chrome只能使用document.body.scrollTop来获取滚动条的高度。</li>
+<li>但是我在测试的时候发现，Chrome不能使用document.body.scrollTop，只能使用document.documentElement.scrollTop来获取滚动条的高度。<br>如果使用document.body.scrollTop，那么所获得的数值始终是0。</li>
+<li>不过大家不用国语在意这一点，我们直接封装一个函数来获取滚动条的高度即可。      </li>
+</ul>
+<p>## 封装获取滚动条高度的函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getScrollTop</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> scroll_top = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.documentElement &amp;&amp; <span class="built_in">document</span>.documentElement.scrollTop) &#123;</span><br><span class="line">        scroll_top = <span class="built_in">document</span>.documentElement.scrollTop;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.body) &#123;</span><br><span class="line">        scroll_top = <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> scroll_top;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p># <a href="https://www.jb51.net/article/42744.htm" target="_blank" rel="noopener">[判断滚动条到底部的JS代码]</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//滚动条在Y轴上的滚动距离</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getScrollTop</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　<span class="keyword">var</span> scrollTop = <span class="number">0</span>, bodyScrollTop = <span class="number">0</span>, documentScrollTop = <span class="number">0</span>;</span><br><span class="line">　　<span class="keyword">if</span>(<span class="built_in">document</span>.body)&#123;</span><br><span class="line">　　　　bodyScrollTop = <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">if</span>(<span class="built_in">document</span>.documentElement)&#123;</span><br><span class="line">　　　　documentScrollTop = <span class="built_in">document</span>.documentElement.scrollTop;</span><br><span class="line">　　&#125;</span><br><span class="line">　　scrollTop = (bodyScrollTop - documentScrollTop &gt; <span class="number">0</span>) ? bodyScrollTop : documentScrollTop;</span><br><span class="line">　　<span class="keyword">return</span> scrollTop;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//文档的总高度</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getScrollHeight</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　<span class="keyword">var</span> scrollHeight = <span class="number">0</span>, bodyScrollHeight = <span class="number">0</span>, documentScrollHeight = <span class="number">0</span>;</span><br><span class="line">　　<span class="keyword">if</span>(<span class="built_in">document</span>.body)&#123;</span><br><span class="line">　　　　bodyScrollHeight = <span class="built_in">document</span>.body.scrollHeight;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">if</span>(<span class="built_in">document</span>.documentElement)&#123;</span><br><span class="line">　　　　documentScrollHeight = <span class="built_in">document</span>.documentElement.scrollHeight;</span><br><span class="line">　　&#125;</span><br><span class="line">　　scrollHeight = (bodyScrollHeight - documentScrollHeight &gt; <span class="number">0</span>) ? bodyScrollHeight : documentScrollHeight;</span><br><span class="line">　　<span class="keyword">return</span> scrollHeight;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//浏览器视口的高度</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getWindowHeight</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　<span class="keyword">var</span> windowHeight = <span class="number">0</span>;</span><br><span class="line">　　<span class="keyword">if</span>(<span class="built_in">document</span>.compatMode == <span class="string">"CSS1Compat"</span>)&#123;</span><br><span class="line">　　　　windowHeight = <span class="built_in">document</span>.documentElement.clientHeight;</span><br><span class="line">　　&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">　　　　windowHeight = <span class="built_in">document</span>.body.clientHeight;</span><br><span class="line">　　&#125;</span><br><span class="line">　　<span class="keyword">return</span> windowHeight;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　<span class="keyword">if</span>(getScrollTop() + getWindowHeight() == getScrollHeight())&#123;</span><br><span class="line">　　　　alert(<span class="string">"you are in the bottom!"</span>);</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>## mobile/common.php:is_scrolled_bottom 函数</p>
+<h2 id="自动滚动到底部"><a href="#自动滚动到底部" class="headerlink" title="自动滚动到底部"></a>自动滚动到底部</h2><p># <a href="http://zzc1684.iteye.com/blog/2171371" target="_blank" rel="noopener">[到最底部 - 4种方法]</a><br>方法一：<br>使用锚标记要滚动到的位置，然后通过click方法模拟点击滚动到锚所在位置<br>方法二：<br>利用DIV的scrollIntoView方法，将最底端滚动到可视位置<br>方法三：<br>scrollTop<br>方法4：<br>这个比较复杂也比较灵活一点，就是利用DIV+JS+图片构造一个滚动条，当然了图片是怎么好看怎么用了。<br>主要部分就是外层的DIV加个overflow:hidden属性，通过js代码调整内层DIV的margin-left和margin-top来控制内容的滚动，由于上面两种方法已经可以满足需求，所以这种方法没具体做深究，有兴趣的可以试一下  </p>
+<p>其它：<br><a href="https://juejin.im/entry/5a9a7fcdf265da23866f5885" target="_blank" rel="noopener">实现一个自定义滚动条</a><br><a href="http://www.cnblogs.com/fengyuqing/p/javascript_scrollbar.html" target="_blank" rel="noopener">javascript自定义滚动条插件，几行代码的事儿</a><br><a href="https://blog.csdn.net/qq_28602957/article/details/72551708" target="_blank" rel="noopener">【JQuery】HTML自定义滚动条（mCustomScrollbar）</a><br><a href="https://www.jb51.net/article/73905.htm" target="_blank" rel="noopener">JS实现的页面自定义滚动条效果</a>    </p>
+<h2 id="禁止滚动"><a href="#禁止滚动" class="headerlink" title="禁止滚动"></a>禁止滚动</h2><p>参考：<br><a href="https://blog.csdn.net/qq_35697034/article/details/78095760" target="_blank" rel="noopener">jquery 禁止滚动条滚动，并且滚动条不消失，页面大小不变</a><br><a href="https://segmentfault.com/q/1010000000523273" target="_blank" rel="noopener">JavaScript如何屏蔽页面的滚动？</a>   </p>
+<ol>
+<li>阻止所有能导致页面滚动的事件。 //scroll不能阻止，只能阻止mousewheel，鼠标拽滚动条就悲剧了</li>
+<li>body overflow:hidden //win下右侧滚动条会消失导致页面横移，移动端阻止不了</li>
+<li>把滚动部分单独放在一个div里，和弹出部分同级，body和window同高。 //所有涉及offset/scrollTop的方法都要修改。fix并且width100%的元素(比如微博顶栏)会压在内容区滚动条上</li>
+<li>弹出时算scrollTop，给内容区fix然后top移动到目前位置，同时body给一个overflow-y:scroll强撑出滚动条</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unScroll</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> top = $(<span class="built_in">document</span>).scrollTop();</span><br><span class="line">    $(<span class="built_in">document</span>).on(<span class="string">'scroll.unable'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        $(<span class="built_in">document</span>).scrollTop(top);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeUnScroll</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="built_in">document</span>).unbind(<span class="string">"scroll.unable"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1 scroll/mousewheel</span></span><br><span class="line">handler = (event) -&gt; event.preventDefault()</span><br><span class="line"><span class="built_in">document</span>.body.addEventListener(<span class="string">'mousewheel'</span>, handler)</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span><span class="built_in">document</span>.body.removeEventListener(<span class="string">'mousewheel'</span>, handler), <span class="number">4000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//0 页面滚动条消失，页面大小会变</span></span><br><span class="line">$(<span class="string">'body'</span>).css(<span class="string">'overflow'</span>,<span class="string">'hidden'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//**********************  Start with disable/enable scroll function  **********************</span></span><br><span class="line"><span class="comment">// left: 37, up: 38, right: 39, down: 40,</span></span><br><span class="line"><span class="comment">// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> keys = [<span class="number">37</span>, <span class="number">38</span>, <span class="number">39</span>, <span class="number">40</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">preventDefault</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    e = e || <span class="built_in">window</span>.event;</span><br><span class="line">    <span class="keyword">if</span> (e.preventDefault)</span><br><span class="line">        e.preventDefault();</span><br><span class="line">    e.returnValue = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">keydown</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = keys.length; i--;) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e.keyCode === keys[i]) &#123;</span><br><span class="line">            preventDefault(e);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wheel</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    preventDefault(e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">disable_scroll</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.addEventListener) &#123;</span><br><span class="line">        <span class="built_in">window</span>.addEventListener(<span class="string">'DOMMouseScroll'</span>, wheel, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">window</span>.onmousewheel = <span class="built_in">document</span>.onmousewheel = wheel;</span><br><span class="line">    <span class="built_in">document</span>.onkeydown = keydown;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">enable_scroll</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.removeEventListener) &#123;</span><br><span class="line">        <span class="built_in">window</span>.removeEventListener(<span class="string">'DOMMouseScroll'</span>, wheel, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">window</span>.onmousewheel = <span class="built_in">document</span>.onmousewheel = <span class="built_in">document</span>.onkeydown = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"><i class="fa fa-tag"></i> javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/js/移动端tap事件学习(071)/" rel="next" title="移动端Tap事件学习">
+                <i class="fa fa-chevron-left"></i> 移动端Tap事件学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/jsplus/html使用记录/" rel="prev" title="Html使用记录">
+                Html使用记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#页面滚动时自动显示隐藏导航效果"><span class="nav-text">[页面滚动时自动显示隐藏导航效果]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消逝的滚动条"><span class="nav-text">消逝的滚动条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐藏但可滚动"><span class="nav-text">隐藏但可滚动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外观争议"><span class="nav-text">外观争议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流畅的操作体验"><span class="nav-text">流畅的操作体验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#粘性-CSS"><span class="nav-text">粘性 CSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全面使用函数节流"><span class="nav-text">全面使用函数节流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在视窗中显示"><span class="nav-text">在视窗中显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#滚动边界问题"><span class="nav-text">滚动边界问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触屏之后"><span class="nav-text">触屏之后</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义滚动条"><span class="nav-text">自定义滚动条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断方向"><span class="nav-text">判断方向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#是否滚动到底"><span class="nav-text">是否滚动到底</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器获取滚动条高度的方法"><span class="nav-text">浏览器获取滚动条高度的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动滚动到底部"><span class="nav-text">自动滚动到底部</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#禁止滚动"><span class="nav-text">禁止滚动</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="test,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2022.1.19 星期三 :     测试知识测试分类在软件的测试领域，测试主要分为：单元测试、集成测试和功能测试。ui测试，e2e 软件测试之软件测试分类 你需要知道的软件测试类型和常识常见软件测试分类功能测试类型;非功能测试类型.上两篇同。介绍一些测试的名词解释：图形用户界面（GUI）测试，大猩猩测试，集成测试，猴子测试 等。  ### 开发模式TDD: 测试驱动开发，英文为Testin">
+<meta name="keywords" content="test">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端单元测试">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/前端单元测试-/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2022.1.19 星期三 :     测试知识测试分类在软件的测试领域，测试主要分为：单元测试、集成测试和功能测试。ui测试，e2e 软件测试之软件测试分类 你需要知道的软件测试类型和常识常见软件测试分类功能测试类型;非功能测试类型.上两篇同。介绍一些测试的名词解释：图形用户界面（GUI）测试，大猩猩测试，集成测试，猴子测试 等。  ### 开发模式TDD: 测试驱动开发，英文为Testin">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://you img base url/../assets/images/软件测试分类.jpg?e=1677084656&token=your qiniu access key:vkQ7SD3JIg1YGsXsPlIEDTX9vZ8=">
+<meta property="og:updated_time" content="2022-09-02T05:51:20.920Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端单元测试">
+<meta name="twitter:description" content="2022.1.19 星期三 :     测试知识测试分类在软件的测试领域，测试主要分为：单元测试、集成测试和功能测试。ui测试，e2e 软件测试之软件测试分类 你需要知道的软件测试类型和常识常见软件测试分类功能测试类型;非功能测试类型.上两篇同。介绍一些测试的名词解释：图形用户界面（GUI）测试，大猩猩测试，集成测试，猴子测试 等。  ### 开发模式TDD: 测试驱动开发，英文为Testin">
+<meta name="twitter:image" content="http://you img base url/../assets/images/软件测试分类.jpg?e=1677084656&token=your qiniu access key:vkQ7SD3JIg1YGsXsPlIEDTX9vZ8=">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/前端单元测试-/">
+
+
+
+
+
+  <title>前端单元测试 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/前端单元测试-/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端单元测试</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-19T08:00:00+08:00">
+                2022-01-19
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-09-02T13:51:20+08:00">
+                2022-09-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/jsplus/" itemprop="url" rel="index">
+                    <span itemprop="name">jsplus</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/前端单元测试-/" class="leancloud_visitors" data-flag-title="前端单元测试">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,624
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p style="text-align:right"> 2022.1.19 星期三 : </p>
+
+<!-- 
+在Jasmine之上构建的Javascript Jest测试框架中是否有代码覆盖的方法？ 内部框架does not打印出它获得的代码覆盖范围。我也尝试过使用Istanbul，blanket和JSCover，但没有一个能够工作。
+
+试试Chutzpah。我刚刚用过它。我在博客上写了关于如何在Visual Studio中集成的内容。 这就是我使用Chutzpah进行代码覆盖的方法：http://francorobles.wordpress.com/2014/09/14/code-coverage-with-chutzpah/
+
+FROM: [Jest的代码覆盖率](https://oomake.com/question/7263206) 
+-->
+<!-- 
+# oder使用Jest进行单元测试
+见[前端单元测试-order使用jest进行单元测试] -->
+<h1 id="测试知识"><a href="#测试知识" class="headerlink" title="测试知识"></a>测试知识</h1><h2 id="测试分类"><a href="#测试分类" class="headerlink" title="测试分类"></a>测试分类</h2><p>在软件的测试领域，测试主要分为：单元测试、集成测试和功能测试。<br>ui测试，e2e</p>
+<p><a href="https://zhuanlan.zhihu.com/p/81571007" target="_blank" rel="noopener">软件测试之软件测试分类</a><br><img src="http://you img base url/../assets/images/软件测试分类.jpg?e=1677084656&token=your qiniu access key:vkQ7SD3JIg1YGsXsPlIEDTX9vZ8=" alt="软件测试分类"></p>
+<p><a href="https://cloud.tencent.com/developer/article/1482234" target="_blank" rel="noopener">你需要知道的软件测试类型和常识</a><br><a href="https://testerhome.com/articles/22820" target="_blank" rel="noopener">常见软件测试分类</a><br>功能测试类型;非功能测试类型.<br>上两篇同。介绍一些测试的名词解释：图形用户界面（GUI）测试，大猩猩测试，集成测试，猴子测试 等。</p>
+<!-- ![接口测试](../assets/images/接口测试分类.png))
+![接口测试](../assets/images/接口测试分类-2.png)) -->
+<p>### 开发模式<br>TDD: 测试驱动开发，英文为Testing Driven Development，强调的是一种开发方式，以测试来驱动整个项目，即先根据接口完成测试编写，然后在完成功能是要不断通过测试，最终目的是通过所有测试<br>BDD: 行为驱动测试，英文为Behavior Driven Development，强调的是写测试的风格，即测试要写的像自然语言，让项目的各个成员甚至产品都能看懂测试，甚至编写测试</p>
+<p>TDD和BDD有各自的使用场景，BDD一般偏向于系统功能和业务逻辑的自动化测试设计；而TDD在快速开发并测试功能模块的过程中则更加高效，以快速完成开发为目的。</p>
+<p>两者不是一个层级的东西。 BDD 包含 TDD。</p>
+<h2 id="实际测试"><a href="#实际测试" class="headerlink" title="实际测试"></a>实际测试</h2><!--  -->
+<p>根据这些状态，来针对性写用例。<br>最后，从测试方法来说，有白盒、黑盒、灰盒。</p>
+<p>当然，在平日没有必要将彼此划分的很清楚，因为我们学习覆盖率的目的是用来度量测试完整性的手段，只是验证测试效果的一种衡量标准。</p>
+<p>还是要根据项目、测试阶段、测试方法不同，来采用不同的测试覆盖率。</p>
+<!--  -->
+<h1 id="前端单元测试"><a href="#前端单元测试" class="headerlink" title="前端单元测试"></a>前端单元测试</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><!-- \# 11 [单元测试(nyc + mocha + chai + typescript)](https://www.cnblogs.com/307914070/articles/11882555.html) -->
+<p>## 单元测试管理工具</p>
+<blockquote>
+<p>单元测试（unit testing），是指对软件中的最小可测试单元进行检查和验证。对于单元测试中单元的含义，一般来说，要根据实际情况去判定其具体含义，如 C 语言中单元指一个函数，Java 里单元指一个类，图形化的软件中可以指一个窗口或一个菜单等。总的来说，单元就是人为规定的最小的被测功能模块。单元测试是在软件开发过程中要进行的最低级别的测试活动，软件的独立单元将在与程序的其他部分相隔离的情况下进行测试。</p>
+</blockquote>
+<p>## 单元测试框架</p>
+<blockquote>
+<p>认为前端代码都运行在浏览器里，如何做单元测试？！对于 Javascript 来讲，当然是可以进行单元测试的，并且也通常是针对函数、模块、对象进行测试。前端单元测试框架也有不少，比如 <code>QUnit</code>、<code>Sinon</code>、<code>Mocha</code> 等等，单元测试的执行环境可以是我们日常使用的浏览器 ie、Chrome 等，也可以是无界面浏览器比如 <code>PhantomJS</code>、<code>Headless Chrome</code>。</p>
+<ul>
+<li>QUnit</li>
+<li>Jasmine</li>
+<li>Mocha</li>
+</ul>
+</blockquote>
+<p>## 断言库</p>
+<blockquote>
+<p>断言库提供了用于描述你的具体测试的 API，有了它们你的测试代码便能简单直接，也更为语义化，理想状态下你甚至可以让非开发人员来撰写单元测试。我们使用 <code>sinon-chai</code></p>
+<ul>
+<li>sinon-chai</li>
+</ul>
+</blockquote>
+<p>## 测试浏览器</p>
+<ul>
+<li>PhantomJS </li>
+<li>Headless Chrome</li>
+</ul>
+<p>## 测试覆盖率统计工具</p>
+<blockquote>
+<p>使用<code>Karma</code> 配套的<code>Karma-coverage</code></p>
+</blockquote>
+<p>## 依赖包 &amp;&amp; nyc config</p>
+<!-- End: #11 -->
+<h2 id="测试框架对比"><a href="#测试框架对比" class="headerlink" title="测试框架对比"></a>测试框架对比</h2><!-- \# 12[前端单元测试之Jest](https://blog.csdn.net/xiangzhihong8/article/details/83819929) -->
+<p>在软件的测试领域，测试主要分为：单元测试、集成测试和功能测试。</p>
+<p>前端的测试框架有很多：mocha, jasmine, ava, testcafe, jest，他们都有各自擅长的领域和特点，而我们采用的jest框架具有如下的一些特点：</p>
+<ul>
+<li>适应性：Jest是模块化、可扩展和可配置的；</li>
+<li>沙箱和快速：Jest虚拟化了JavaScript的环境，能模拟浏览器，并且并行执行；</li>
+<li>快照测试：Jest能够对React 树进行快照或别的序列化数值快速编写测试，提供快速更新的用户体验；</li>
+<li>支持异步代码测试：支持promises和async/await；</li>
+<li>自动生成静态分析结果：不仅显示测试用例执行结果，也显示语句、分支、函数等覆盖率。</li>
+</ul>
+<!-- END: #12 -->
+<!-- 
+* 方便的异步测试
+* snapshot功能
+* 集成断言库，不许要引用其他第三方库
+* 自带mock
+* 对React天生支持 -->
+<p>chai： 断言库。<br>Jest ： 测试框架。<br>mocha 语法和Jest一样<code>describe, it</code>，但是需要引入断言库，比如chai，assert<code>assert.equcal(fn(), 0)</code>。 Jest 自带断言<code>except(fn).toBe(0)</code>；代码覆盖率需要其他库支持。</p>
+<p>快照测试: enyme和test-react-lib</p>
+<blockquote>
+<p>Tips: 目前React官方推荐使用 React Testing Library + Jest 的方式测试React组件，Enzyme会出现误报的错误即：即使代码损坏，测试也会通过；即使代码正确，测试也会失败。<br><!-- test-react-lib 能力没有enyme强。 --></p>
+</blockquote>
+<h3 id="jest"><a href="#jest" class="headerlink" title="jest"></a>jest</h3><!-- [Jest单元测试入门和实例](https://juejin.cn/post/6943890786370977800#heading-11)
+\$_PS: 基础教程。 -->
+<p>Jest 是 Facebook 出品的一个测试框架，相对其他测试框架，其一大特点就是就是内置了常用的测试工具，比如自带断言、Mock 功能、测试覆盖率工具，实现了开箱即用。</p>
+<!-- 
+> 目前，前端领域比较主流的单元测试框架有Jest、Jasmine、Mocha和Ava等。对比这几种主流框架以及结合公司业务需求，最终选择了Jest框架，它是facebook推出的一个完整的单元测试技术方案，集测试框架, 断言库, 启动器, 快照，沙箱，mock工具于一身，也是React官方使用的测试工具。
+FROM: [通天塔前端单元测试实践](http://jmfe.jd.com/articles/272)
+PS: bamboo 原子插件也是基于jest，包括enyme。 
+
+
+## 在Storybook中使用Jest
+Storybook 是一个绝妙的UI组件驱动开发环境。它通过隔离组件使开发更快更容易，它可以一次只处理一个组件。通天塔灵活化组件采用@testing-library/react搭配Jest实现组件的单元测试。
+
+## 踩过的坑
+### 测试异步事件
+
+一个常见场景：点击领券后发送接口请求调用领券接口，根据接口的返回跳登录或进行盖戳。模拟click事件很简单，但如何测试一个异步点击回调呢？可以利用setTimeout保证执行到断言时异步点击函数已执行完成。
+### 链接跳转类事件
+通天塔有上百个单元测试，会在代码提交/构建时一次性跑完，但如果某个单元测试中测了一次跳商详的功能，页面跳出去了，就会导致接下来的测试用例全部失败(不在通天塔页面了)，针对于这类场景，需要在有跳转逻辑的单侧中进行特殊处理，在beforeEach和afterEach中重写location对象。
+-->
+<h2 id="覆盖率"><a href="#覆盖率" class="headerlink" title="覆盖率"></a>覆盖率</h2><p>见<a href="./%E5%89%8D%E7%AB%AF%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95-%E8%A6%86%E7%9B%96%E7%8E%87%E5%92%8C%E5%A2%9E%E9%87%8F%E8%A6%86%E7%9B%96%E7%8E%87.md">前端单元测试-覆盖率和增量覆盖率.md</a></p>
+<h2 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h2><h1 id="平台搭建"><a href="#平台搭建" class="headerlink" title="平台搭建"></a>平台搭建</h1><!-- 
+## 前置内容 - 乱七八糟的东西
+\# 21 [测试覆盖率 聊聊前端代码覆盖率 (长文慎入)](https://testerhome.com/topics/24122?locale=zh-CN)
+saii · 2020年06月06日 · 最后由 echoYan 回复于 2021年09月10日 · 5339 次阅读
+\# 21_d [前端代码覆盖率遇到问题及总结(一)_saii的专栏-程序员宝宝_前端覆盖率](https://cxybb.com/article/qq744746842/111349680)
+关于前端代码覆盖率还不了解这块内容的同学们，可以参考下以下几篇文章，这里就不做赘述了。
+**基于 Istanbul 优雅地搭建前端 JS 覆盖率平台**
+**前端精准测试探索：覆盖率实时统计工具**
+
+~~react/vue 项目打包插桩~~
+~~chrome 插件~~
+覆盖率后台 (node)
+这块的实现我们没有直接使用 istanbul-middleware 这个方案，因为对于一个长达 5 年没有维护更新的项目，我还是持有一定的怀疑态度 (当然可能项目本身很优秀，完全没有问题)。所以我们把目光放到了 nyc 上，不过 nyc 更多是结合单元测试框架：jest 使用或者说直接通过命令行的方式进行调用。没有太多有涉及到如何使用它的 api 的方法上。幸运的是我们又找到了另外一个项目 Cypress 的 [code-coverage](https://github.com/cypress-io/code-coverage),（这里做个小广告, cypress 是一个很优秀的前端自动化工具）。 在**这个项目里你可以看到它就是通过调用 nyc 的 api 进行生成覆盖率的测试报告的**。 所以这块我们毫不犹豫的选择了它做了一定的二次开发了。
+
+
+\## code-coverage
+Saves the code coverage collected during Cypress tests.
+
+Cypress: <https://github.com/cypress-io/cypress>
+> Fast, easy and reliable testing for anything that runs in a browser.
+
+
+
+\$_PS: 可以看出是搭建了一个平/后台。包括覆盖率测试遇到的一些问题：react/vue项目编辑，发布上线问题；测试报告生成。 方案图看到有增量测试部分，但是未介绍。
+
+<!-- End: #21 --!>
+ -->
+<p><a href="https://testerhome.com/topics/23570#3.1.1.%20部署middleware" target="_blank" rel="noopener">前端测试 基于 Istanbul 优雅地搭建前端 JS 覆盖率平台</a><br><a href="https://cloud.tencent.com/developer/news/453920" target="_blank" rel="noopener">前端精准测试探索：覆盖率实时统计工具</a><br><a href="https://qdmana.com/2022/01/202201101103163843.html" target="_blank" rel="noopener">前端质量提升利器-马可代码覆盖率平台</a></p>
+<h2 id="酷家乐质量保障体系-测试需要解决问题-场景，及方案"><a href="#酷家乐质量保障体系-测试需要解决问题-场景，及方案" class="headerlink" title="酷家乐质量保障体系 - 测试需要解决问题/场景，及方案"></a>酷家乐质量保障体系 - 测试需要解决问题/场景，及方案</h2><p># 71 <a href="https://testerhome.com/topics/23570#3.1.1.%20部署middleware" target="_blank" rel="noopener">前端测试 基于 Istanbul 优雅地搭建前端 JS 覆盖率平台</a><br>酷家乐质量效能 for 酷家乐质量效能 · 2020年05月12日 · 最后由 zhntester 回复于 2021年08月12日 · 3009 次阅读</p>
+<p>简单到复杂的三个场景<br>### 1 单版本，单次测试的覆盖率统计 </p>
+<table>
+<thead>
+<tr>
+<th>插件</th>
+<th>概述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ScriptCover</td>
+<td>浏览器插件，使用方便，但 Chrome 商店已下架； 无需预插桩即可监控 browser 运行 js 代码，拿混淆后的代码毫无办法； 开源，但已停止维护；</td>
+</tr>
+<tr>
+<td>Istanbul</td>
+<td>覆盖率统计插件，可配多种各种 UT 框架和自动化框架使用； 编译时预插桩，代码在 UT 或 browser 运行时都可统计覆盖率； 开源，旧版已停止维护，新版 (请搜 nyc) 维护的很好； Js 写的，可扩展；</td>
+</tr>
+<tr>
+<td>JsCoverage</td>
+<td>单测覆盖率统计插件，可配多种各种 UT 框架和自动化框架使用； 编译时预插桩，代码在 UT 或 browser 运行时都可统计覆盖率； 开源，旧版已停止维护，新版 (请搜 JsCover) 维护的很好； Java 写的，可扩展；和 Istanbul 非常的像；</td>
+</tr>
+<tr>
+<td>karma-coverage</td>
+<td>Karma 的插件，基于 Istanbul 写的； 如果用 Karma 做自动化，使用很方便； 较定制化，可模仿但不好直接扩展；</td>
+</tr>
+</tbody>
+</table>
+<p>### 2 单版本，多终端多次测试的覆盖率统计<br>插件 | 概述<br> – | –<br>Istanbul-Middleware | 基于 Istanbul 写的中间件； 需要前端代码预插桩并调用 middleware 提供的数据上传接口； 可统计一个前端工程在多个终端、多种方式测试的总覆盖率； 官方，开源，可扩展性强。<br>Istanbul | 覆盖率统计插件，可配多种各种 UT 框架和自动化框架使用； 编译时预插桩，代码在 UT 或 browser 运行时都可统计覆盖率； 开源，旧版已停止维护，新版 (请搜 nyc) 维护的很好； Js 写的，可扩展；<br>JsCover++ | 基于 JsCover 写的服务； 和 Istanbul-Middleware 很相似，但更定制化； 没开源。</p>
+<p>### 3 多版本，多终端多次测试的覆盖率统计<br>3.1 摸透 Istanbul-Middleware 的使用方法</p>
+<p>Git: <a href="https://github.com/gotwarlost/istanbul-middleware" target="_blank" rel="noopener">https://github.com/gotwarlost/istanbul-middleware</a><br>根据 Git 中的说明以及对 demo 的研究，想要把 istanbul-middleware 应用到自己的前端工程，可以分为五步：<br>3.1.1. 部署 middleware<br>3.1.2. 插桩<br>3.1.3. 浏览器运行插桩后代码<br>3.1.4. 前端代码调用 middleware 提供的接口<br>3.1.5. 查看代码覆盖率报告<br>middleware 提供了看报告的页面，直接访问即可查看。</p>
+<p>3.2. 如何改造</p>
+<!-- End: #71 -->
+<h2 id="有赞coder-更具体实现"><a href="#有赞coder-更具体实现" class="headerlink" title="有赞coder - 更具体实现"></a>有赞coder - 更具体实现</h2><p>本文转载自公众号有赞coder（ID：youzan_coder）。</p>
+<p># 72 <a href="https://www.infoq.cn/article/UPfOuyQIkVr6708DNV4V" target="_blank" rel="noopener">前端精准测试探索：覆盖率实时统计工具</a><br># 72 <a href="https://cloud.tencent.com/developer/news/453920" target="_blank" rel="noopener">前端精准测试探索：覆盖率实时统计工具</a><br># 72 <a href="https://www.cnblogs.com/YZ-coder/p/11576872.html" target="_blank" rel="noopener">前端精准测试探索：覆盖率实时统计工具</a><br>同时前端缺少像 jacoco 这样的集成测试覆盖率统计框架，无法通过集成测试收集覆盖率，对于测试阶段的质量仍然没有数据量化。</p>
+<p>### 一、技术选型<br>首先，覆盖率收集的前提，需要完成代码插桩工作，插桩方法来自于两个开源覆盖率统计框架，istanbul.js 以及 istanbul-middleware (以下称 im)，提供了若干个插桩方法，而 im 其实也是在 istanbul.js 的基础上做了封装, 能力来自于 istanbul-lib-instrument</p>
+<p>所有的插桩方法，大致分为两种类型：<br>运行前插桩<br>运行时插桩<br>&lt;!–<br>运行前插桩：<br>nyc instrument<br>针对编译之后的 JS 文件 , 进行手动插桩 , 形成插桩后的新 JS 文件。</p>
+<p>babel-plugin-istanbul<br>istanbul 提供的 babel 插件 , 能够在代码编译打包阶段直接植入插桩代码。适用于使用 babel 的前端工程，基于 react 和 vue 的工程都可以。</p>
+<p>1.2 运行时插桩<br>im.hookLoader：适用于服务端的文件挂载 比如 node 应用。<br>当应用启动时，会在 require 入口处添加 hook 方法，使得应用启动时加载到的都是插桩后的代码。<br>im.createClientHandler：适用于客户端的 JS 挂载，比如 react 和 vue 的 js。</p>
+<p>最后我们所使用的插桩方法：<br>App（node）—— istanbulMiddleware.hookLoader<br>Client（react &amp; vue）—— babel-plugin-istanbul</p>
+<p> –&gt;</p>
+<p>### 二、模块设计<br>主要分为三个模块，先通过代码插桩获得可追踪的代码，然后实时上报用户行为产生的代码行覆盖记录，最后呈现覆盖率相关信息。<br>2.1 代码插桩<br>Client 端：使用 babel-plugin-istanbul 插件，在 babel 编译阶段即可完成。<br>Node 端：依赖 istanbuljs 提供的能力 - istanbul-lib-hook 、istanbul-lib-instrument</p>
+<p>2.2 数据上报<br>Node 端：应用发布时，写入对应的工程和分支信息，创建定时器，实时上传_global.coverage 变量，即覆盖率信息。</p>
+<p>Client 端：客户端的上报比较特殊，客户端不像服务端，在发布后可以全局保持 coverage 变量以及定时器方法，client 端所有的数据生成和消耗都跟随页面的生命周期，所以不太可控，因此需要一个额外容器进行处理，我们选择了通过 chrome 插件来上报，通过全局管理覆盖率信息对象，以及通知下发来实现上报流程。该插件详细的工作流程如下：</p>
+<p>#### 覆盖率服务端<br>两个覆盖率展示接口，新增了 ns、repo、branch 三个入参，用来区别不同的覆盖率<br>同时增加额外参数 history 传入该变量，标志获取的是历史覆盖率。</p>
+<p>2.3 页面展示<br>全量覆盖率展示：使用istanbulmiddle原生报告生成。<br>增量覆盖率展示：通过gitlab接口对比master差异，分文件展示各自的覆盖率，同全量覆盖率，只是细化了，整体页面用vue + muse-ui完成。</p>
+<p>### 三、工作流程<br>主要分为3部分：对应上一节说的接入 、上报 、展示。<br>通过babel插件完成客户端代码插桩，提供给node端使用的插桩插件，可以一步完成服务端的代码插桩以及定时上报功能。<br>配合提供的chrome插件，完成客户端的覆盖率上报任务。<br>覆盖率服务端负责信息的接收和存储，并返回给前端数据信息。<br>前端负责数据信息展示。</p>
+<p>### 四、业务实践<br>目前在电商教育和行业两条业务线中已有接入,由于该工具限制在qa环境使用 , 仅限收集在qa环境测试的项目数据. 在功能测试阶段，从使用数据上来看 , 增量行代码覆盖率达到80%以上(目前的增量只到文件维度 , 未到行维度), 未覆盖的行主要包括四种: 异常捕获、防御性编码、非本次新增无需关心的代码以冗余代码 , 属于可允许的范围.</p>
+<p>\$_PS: 不仅全量，还有增量覆盖率，以及历史覆盖率。页面ui也有，功能都有了。<br>  但是借了chrome插件，不太聪明的亚子/或者业务场景不合适。</p>
+<!-- END: #72 -->
+<h2 id="马可代码覆盖率平台-一个平台需要什么（能力）"><a href="#马可代码覆盖率平台-一个平台需要什么（能力）" class="headerlink" title="马可代码覆盖率平台 - 一个平台需要什么（能力）"></a>马可代码覆盖率平台 - 一个平台需要什么（能力）</h2><p># 73 <a href="https://qdmana.com/2022/01/202201101103163843.html" target="_blank" rel="noopener">前端质量提升利器-马可代码覆盖率平台</a></p>
+<p>作者：vivo官网商城前端团队-Song Jiachao<br>本文根据Song Jiachao老师在“ 2021 vivo开发者大会”现场演讲内容整理而成。<!-- 公众号回复 【2021VDC】获取互联网技术分会场议题相关资料。 --></p>
+<p>二、马可平台的优势及亮点<br>2.1 优势及亮点<br>马可平台是一个完备的代码覆盖率平台，具有以下几个亮点：</p>
+<p>支持一键接入：不挑业务，框架，对现有代码零侵入，一键即可接入；<br>支持增量报告：能够让使用者更加精准的了解代码覆盖率情况；<br>支持多种语言：马可平台不局限于前端，也能服务后端；<br>支持多种工具：方便用户使用，比如代码对比，gitblame等；<br>支持多个用户：多种报告的实时合并与查看；<br>支持大盘监控：通过大盘实时查看覆盖率走势，了解项目质量趋势；<br>支持消息通知：定时推送项目覆盖率情况；<br>支持独立部署：不仅支持第三方直接接入，还支持一键私有化部署。<br>2.2 体验<br>2.3 价值<br>通过马可平台我们就将测试关注的四个点即：修改点、影响点、测试点和测试结果，给紧密的联系起来，同时将之前的缺乏数据的评估转化成精确的，有客观依据可量化的评估。</p>
+<p>三、马可平台的技术方案<br>马可平台的技术方案共有4个小部分：首先会介绍马可平台的整体架构，然后分别从接入层、服务层和展示层，三个方面加以详细的说明。</p>
+<!-- END: #73 -->
+<!-- 
+
+# 服务端测试
+Express 使用 Mocha、nyc 做单元、覆盖测试
+Mocha，nyc，supertest，power-assert -->
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/test/" rel="tag"><i class="fa fa-tag"></i> test</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/jsplus/前端单元测试-order使用jest/" rel="next" title="oder使用Jest进行单元测试">
+                <i class="fa fa-chevron-left"></i> oder使用Jest进行单元测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/others/glob模式/" rel="prev" title="Glob模式">
+                Glob模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#测试知识"><span class="nav-text">测试知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#测试分类"><span class="nav-text">测试分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实际测试"><span class="nav-text">实际测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前端单元测试"><span class="nav-text">前端单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试框架对比"><span class="nav-text">测试框架对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jest"><span class="nav-text">jest</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#覆盖率"><span class="nav-text">覆盖率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#意义"><span class="nav-text">意义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#平台搭建"><span class="nav-text">平台搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#酷家乐质量保障体系-测试需要解决问题-场景，及方案"><span class="nav-text">酷家乐质量保障体系 - 测试需要解决问题/场景，及方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有赞coder-更具体实现"><span class="nav-text">有赞coder - 更具体实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#马可代码覆盖率平台-一个平台需要什么（能力）"><span class="nav-text">马可代码覆盖率平台 - 一个平台需要什么（能力）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

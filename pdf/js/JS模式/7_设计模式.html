@@ -1,0 +1,388 @@
+<p>title: JS模式-7：设计模式<br>date: 2019.4.7<br>tags: </p>
+<ul>
+<li>Design Patterns<br>toc_fold: unfold</li>
+</ul>
+<hr>
+<p style="text-align:right">2019.4.7 星期日 17:57</p>
+
+
+<p>1 单体<br>2 工厂<br>3 迭代器<br>4 装饰者<br>5 策略<br>6 外观<br>7 代理<br>8 中介者<br>9 观察者        </p>
+<h2 id="7-1-单体-Singleton"><a href="#7-1-单体-Singleton" class="headerlink" title="7.1 单体 Singleton"></a>7.1 单体 Singleton</h2><p>对象字面量   </p>
+<h3 id="使用new操作符"><a href="#使用new操作符" class="headerlink" title="使用new操作符"></a>使用new操作符</h3><pre><code class="javascript"><span class="keyword">var</span> uni=<span class="keyword">new</span> Universe()
+<span class="keyword">var</span> uni2=<span class="keyword">new</span> Universe()
+uni===uni2 <span class="comment">// true</span>
+</code></pre>
+<p>1) 全局变量存储<br>2) 构造函数的静态属性中缓存该实例<br>3) 将该实例包装在闭包中</p>
+<pre><code class="javascript"><span class="comment">// ## 2 构造函数的静态属性中缓存该实例</span>
+funciton Universe(){
+    <span class="keyword">if</span>(<span class="keyword">typeof</span> Universe.instance === <span class="string">'object'</span>){
+        <span class="keyword">return</span> Universe.instance
+    }
+    <span class="keyword">this</span>.bang=<span class="string">'Big'</span>
+    <span class="comment">// 缓存</span>
+    Universe.instance=<span class="keyword">this</span>
+    <span class="comment">// 隐式返回</span>
+    <span class="keyword">return</span> <span class="keyword">this</span>
+}
+<span class="comment">// ## 3 将该实例包装在闭包中</span>
+funciton Universe(){
+    <span class="comment">// 缓存实例</span>
+    <span class="keyword">var</span> instance=<span class="keyword">this</span>
+    <span class="keyword">this</span>.bang=<span class="string">'Big'</span>
+    <span class="comment">// 重写构造函数</span>
+    Universe=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="keyword">return</span> instance
+    }
+}
+</code></pre>
+<p>方案3缺点：重写构造函数，会丢失所有初始定义和重新定义添加的属性</p>
+<pre><code class="javascript">funciton Universe(){
+    <span class="comment">// 缓存实例</span>
+    <span class="keyword">var</span> instance=<span class="keyword">this</span>
+    <span class="keyword">this</span>.bang=<span class="string">'Big'</span>
+    <span class="comment">// 重写构造函数</span>
+    Universe=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="keyword">return</span> instance
+    }
+    <span class="comment">// 保留原型属性</span>
+    Universe.prototype=<span class="keyword">this</span>
+    instance=<span class="keyword">new</span> Universe()
+    instance.construtor=Universe
+
+    instance.bang=<span class="string">'Big'</span>
+    <span class="keyword">return</span> instance
+}
+<span class="comment">// ### 3.2 另一种方案：</span>
+<span class="keyword">var</span> Universe
+(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+    <span class="keyword">var</span> instance
+    Universe=<span class="function"><span class="keyword">function</span> <span class="title">Universe</span>(<span class="params"></span>)</span>{
+        <span class="keyword">if</span>(instance) <span class="keyword">return</span> instance
+        instance=<span class="keyword">this</span>
+        <span class="keyword">this</span>.bang=<span class="string">'big'</span>
+    }
+})() 
+</code></pre>
+<h2 id="7-2-工厂"><a href="#7-2-工厂" class="headerlink" title="7.2 工厂"></a>7.2 工厂</h2><p>目的是为了创建对象。通常定义在类或者类的静态方法中实现，具有下列目标：</p>
+<ul>
+<li>当创建相似对象时执行重复操作</li>
+<li>在编译时不知道具体类型（类）的情况下，为工厂客户提供一种创建对象的接口<pre><code class="javascript"><span class="keyword">var</span> corolla=CarMaker.factory(<span class="string">'Compact'</span>)
+<span class="keyword">var</span> solstice=CarMaker.factory(<span class="string">'Convertible'</span>)
+<span class="keyword">var</span> cherokee=CarMaker.factory(<span class="string">'SUV'</span>)
+corolla.drive()
+solstice.drive()
+</code></pre>
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">CarMaker</span>(<span class="params"></span>)</span>{}
+CarMaker.prototype.drive=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="keyword">return</span> <span class="string">'Vromm, i have '</span>+<span class="keyword">this</span>.doors+<span class="string">' doors'</span>}
+CarMaker.factory=<span class="function"><span class="keyword">function</span>(<span class="params">type</span>)</span>{
+  <span class="keyword">var</span> constr=type,newcar
+  <span class="keyword">if</span>(<span class="keyword">typeof</span> CarMaker[constr]!==<span class="string">'funciton'</span>){
+      <span class="keyword">throw</span>{<span class="attr">name</span>:<span class="string">'Error'</span>,<span class="attr">message</span>:constr+<span class="string">'doesn\'t exist'</span>}
+  }
+  <span class="keyword">if</span>(<span class="keyword">typeof</span> CarMaker[constr].prototype.drive!==<span class="string">'function'</span>){
+      CarMaker[constr].prototype=<span class="keyword">new</span> CarMaker()
+  }
+  newcar=<span class="keyword">new</span> CarMaker[constr]()
+  <span class="keyword">return</span> newcar
+}
+<span class="comment">// 定义汽车制造商</span>
+CarMaker.Compact=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="keyword">this</span>.doors=<span class="number">4</span>}
+CarMaker.SUV=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="keyword">this</span>.doors=<span class="number">24</span>}
+</code></pre>
+<h3 id="内置对象工厂"><a href="#内置对象工厂" class="headerlink" title="内置对象工厂"></a>内置对象工厂</h3><pre><code class="javascript"><span class="keyword">var</span> o=<span class="keyword">new</span> <span class="built_in">Object</span>(),
+n=<span class="keyword">new</span> <span class="built_in">Object</span>(<span class="number">1</span>)
+s=<span class="built_in">Object</span>(<span class="string">'1'</span>)
+b=<span class="built_in">Object</span>(<span class="literal">true</span>)
+<span class="comment">// test</span>
+o.construtor === <span class="built_in">Object</span> <span class="comment">// true</span>
+s.construtor === <span class="built_in">String</span> <span class="comment">// true</span>
+</code></pre>
+</li>
+</ul>
+<h2 id="7-3-迭代器"><a href="#7-3-迭代器" class="headerlink" title="7.3 迭代器"></a>7.3 迭代器</h2><p>通常有一个包含某种数据集合的对象。该数据可能存储在一个复杂数据结构内部，而要提供一种简单的方法能够访问数据中每个元素。<br>对象的消费者并不需要知道如何组织数据，所需要做的就是…</p>
+<pre><code class="javascript"><span class="keyword">var</span> element
+<span class="comment">// while(element=agg.next())</span>
+<span class="keyword">while</span>(element=agg.hasNext()){
+    <span class="built_in">console</span>.log(element)
+}
+</code></pre>
+<pre><code class="javascript"><span class="keyword">var</span> agg=(funciton(){
+    <span class="keyword">var</span> index=<span class="number">0</span>,
+    data=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]
+    length=data.length
+    <span class="keyword">return</span> {
+        next:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+            <span class="keyword">var</span> element
+            <span class="keyword">if</span>(!<span class="keyword">this</span>.hasNext()) reutnr <span class="literal">null</span>
+            element=data[index]
+            index=index+<span class="number">2</span>  <span class="comment">// $PS: 此处可能是+1</span>
+            <span class="keyword">return</span> element
+        },
+        hasNext:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="keyword">return</span> index&lt;length},
+        rewind:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{index=<span class="number">0</span>},
+        current:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="keyword">return</span> data[index]}
+    }
+})()
+</code></pre>
+<h2 id="7-4-装饰者"><a href="#7-4-装饰者" class="headerlink" title="7.4 装饰者"></a>7.4 装饰者</h2><p>在运行时动态添加附加功能到对象中<br>一个方便特征是   ；可以从仅具有一些基本功能的普通对象开始，然后从装饰资源池中选择</p>
+<pre><code class="javascript"><span class="keyword">var</span> sale=<span class="keyword">new</span> Sale(<span class="number">100</span>)
+sale=sale.decorate(<span class="string">'fedtax'</span>)<span class="comment">// 增加联邦税</span>
+sale=sale.decorate(<span class="string">'quebec'</span>) <span class="comment">// 增加省级税</span>
+sale.getPrice() <span class="comment">// $112.88</span>
+<span class="comment">// 另一情况，没有省级税，用加元</span>
+<span class="keyword">var</span> sale=<span class="keyword">new</span> Sale(<span class="number">100</span>)
+sale.decorate(<span class="string">'fedtax'</span>)
+sale.decorate(<span class="string">'cdn'</span>)
+sale.getPrice() <span class="comment">// CDN$105.00</span>
+</code></pre>
+<p>### 实现1:每个装饰者成为一个对象，并且包含了应该被重载的方法</p>
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">Sale</span>(<span class="params">price</span>)</span>{<span class="keyword">this</span>.price=price||<span class="number">100</span>}
+Sale.prototype.getPrice=<span class="function"><span class="keyword">function</span>(<span class="params">return this.price</span>)</span>
+<span class="function"><span class="title">Sale</span>.<span class="title">decorators</span>=</span>{}
+Sale.decorators.fedtax={
+    getPrice:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="keyword">var</span> price=<span class="keyword">this</span>.uber.getPrice()
+        price += price * <span class="number">5</span> / <span class="number">100</span>
+        <span class="keyword">return</span> price
+    }
+}
+Sale.decorators.money={
+    getPrice:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="keyword">return</span> <span class="string">'$'</span>+<span class="keyword">this</span>.uber.getPrice().toFixed(<span class="number">2</span>)
+    }
+}
+<span class="comment">// 神奇的decorate方法</span>
+Sale.prototype.decorate=<span class="function"><span class="keyword">function</span>(<span class="params">decorator</span>)</span>{
+    <span class="keyword">var</span> F=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{},
+    overrides=<span class="keyword">this</span>.constructor.decorators[decorator]
+    ,i,newObj
+    F.prototype=<span class="keyword">this</span>
+    newObj=<span class="keyword">new</span> F()
+    newObj.uber=F.prototype
+    <span class="keyword">for</span>(i <span class="keyword">in</span> overrides){
+        <span class="keyword">if</span>(overrides.hasOwnProperty(i)){
+            newObj[i]=overrides[i]
+        }
+    }
+    <span class="keyword">return</span> newObj
+}
+</code></pre>
+<h3 id="使用列表实现"><a href="#使用列表实现" class="headerlink" title="使用列表实现"></a>使用列表实现</h3><p>利用js动态语言特性，不需要继承。不是每个装饰方法调用链中前面的方法，而是将结果做为参数传递到下一个方法<br>$PS: js面向对象中，好像是用了第一种方法</p>
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">Sale</span>(<span class="params">price</span>)</span>{
+    <span class="keyword">this</span>.price=(price&gt;<span class="number">0</span>) || <span class="number">100</span>  <span class="comment">// $PS: price &gt;0 返回的是一个boolean吧，怎么传递给price赋值</span>
+    <span class="keyword">this</span>.decorators_list=[]
+}
+Sale.decorators={}
+Sale.decorators.fedtax={
+    getPrice:<span class="function"><span class="keyword">function</span>(<span class="params">price</span>)</span>{
+        <span class="keyword">return</span> price += price * <span class="number">5</span> / <span class="number">100</span>
+    }
+}
+Sale.prototype.decorate=<span class="function"><span class="keyword">function</span>(<span class="params">decorator</span>)</span>{
+    <span class="keyword">this</span>.decorators_list.push(decorator)
+}
+Sale.prototype.getPrice=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+    <span class="keyword">var</span> price=<span class="keyword">this</span>.price,i,max=<span class="keyword">this</span>.decorators_list.length,name
+    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;max;i+=<span class="number">1</span>){
+        name=<span class="keyword">this</span>.decorators_list[i]
+        price=Sale.decorators[name].getPrice(price)
+    }
+}
+</code></pre>
+<h2 id="7-5-策略"><a href="#7-5-策略" class="headerlink" title="7.5 策略"></a>7.5 策略</h2><p>支持您在运行时选择算法。代码的客户端可以使用同一个接口来工作，但是他却根据客户正在试图执行任务的上下文，从多个算法中选择用于处理特定任务的算法。<br>一个例子是表单验证。创建具有validate方法的对象validator。不论表单的具体类型，都调用且返回相同结果：。。    </p>
+<pre><code class="javascript"><span class="keyword">var</span> data={<span class="attr">first_name</span>:<span class="string">'Super'</span>,<span class="attr">last_name</span>:<span class="string">'Man'</span>,<span class="attr">age</span>:<span class="string">'unknow'</span>,<span class="attr">useranme</span>:<span class="string">'o_0'</span>}
+validator.config={
+    first_name:<span class="string">'isNonEmpty'</span>,
+    age:<span class="string">'isNumber'</span>,
+    useranme:<span class="string">'isAplhaNum'</span>
+}
+validator.validate(data){
+    <span class="keyword">if</span>(validator.hasErrors()){
+        <span class="built_in">console</span>.log(validator.message.join(<span class="string">'\n'</span>))
+    }
+}
+
+</code></pre>
+<p>$PS: element UI：rules, props(vue,react)的类型检查类似都是这个格式<code>rule:[{name:{required:true}},],pros:{name:{type:String,required:true,default:&#39;&#39;},age:{}}</code><br>### 实现<br>用于检查的可用算法也是对象，它们具有一个预定义的接口，提供了**validate 方法和 提示信息</p>
+<pre><code class="javascript">validator.types.isNonEmpty={
+    validate:funciton(value){
+        <span class="keyword">return</span> value!==<span class="string">''</span>
+    },
+    instructions:<span class="string">'the value cannot be empty'</span>
+}
+<span class="keyword">var</span> validator={
+    types:{}, <span class="comment">// 所有可用的检查</span>
+    messages:[], <span class="comment">// </span>
+    config:{}, <span class="comment">// 当前验证配置，名称：验证类型</span>
+    validate:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>{
+        <span class="keyword">var</span> i,msg,type,checker,result_ok
+        <span class="keyword">this</span>.messages=[]
+        <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> data){
+            <span class="keyword">if</span>(data.hasOwnProperty(i)){
+                type=<span class="keyword">this</span>.config[i]
+                checker=<span class="keyword">this</span>.types[type]
+                <span class="keyword">if</span>(!type){
+                    <span class="keyword">continue</span> <span class="comment">// 不需要验证</span>
+                }
+                <span class="keyword">if</span>(!checker){
+                    <span class="keyword">throw</span> {<span class="attr">name</span>:<span class="string">'ValidationError'</span>,<span class="attr">message</span>:<span class="string">'No handler to validate type '</span>+type}
+                }
+                result_ok=checker.validate(data[i])
+                <span class="keyword">if</span>(!result_ok){
+                    msg=<span class="string">'Invalid value for '</span>+i+checker.instructions  
+                    <span class="keyword">this</span>.message.push(msg)
+                }
+            }
+        }
+        <span class="keyword">return</span> <span class="keyword">this</span>.hasErrors
+    },
+    hasErrors:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="keyword">return</span> <span class="keyword">this</span>.message.length!==<span class="number">0</span>
+    }
+}
+</code></pre>
+<h2 id="7-6-外观"><a href="#7-6-外观" class="headerlink" title="7.6 外观"></a>7.6 外观</h2><p>有时候，两个或更多方法可能普遍的被一起调用。这，创建另一个方法以包装重复的方法嗲用非常有意义<br>也非常适合浏览器脚本处理，据此可将浏览器之间的差异隐藏在外观之后。<br>对重新设计和重构工作也有帮助。当需要替换一个具有不同实现对象时，不得不重新修改，而且新代码。通过外观模式，首先考虑新对象的api，然后继续在原有对象的前面创建一个外观。这样，。。。<br>$PS: 包装几个方法；或者，在原有的基础上再包一层，相当于穿衣服，所以叫外观。<br>$PS: compd-ReviewCode, 新的api可以在老的api，外面包一层    </p>
+<pre><code class="javascript"><span class="keyword">var</span> myevent={
+    stop:<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>{
+        <span class="keyword">if</span>(<span class="keyword">typeof</span> e.preventDefault === <span class="string">'function'</span>) e.preventDefault()
+        <span class="keyword">if</span>(<span class="keyword">typeof</span> e.stopPropagation === <span class="string">'function'</span>) e.stopPropagation()
+        <span class="keyword">if</span>(<span class="keyword">typeof</span> e.returnValue === <span class="string">'boolean'</span>) e.returnValue=<span class="literal">false</span>
+        <span class="keyword">if</span>(<span class="keyword">typeof</span> e.cancelBubble===<span class="string">'boolean'</span>) e.cancelBubble=<span class="literal">true</span>
+    }
+}
+</code></pre>
+<h2 id="7-7-代理"><a href="#7-7-代理" class="headerlink" title="7.7 代理"></a>7.7 代理</h2><p>一个对象充当另一个对象的接口。<br>与外观合并多个方法调用不同。代理介于对象的客户端和对象本身，且对该对象的访问进行保护    </p>
+<p>举例：客户端发起初始化请求，然后代理以一切正常做为响应。实际没有传递消息，直到客户端明显需要本体对象完成一些工作时，才将消息一并发出。   </p>
+<p>1) 短时间内请求了多个，代理后可以一并发出。50ms的延迟对用户是不易察觉的。<br>2) 代理可以将结果缓存到新短的cache属性中  </p>
+<pre><code class="javascript"><span class="comment">// 代码：略</span>
+</code></pre>
+<h2 id="7-8-中介者"><a href="#7-8-中介者" class="headerlink" title="7.8 中介者"></a>7.8 中介者</h2><p>多个对象互相通信，一定程度上不<br>中介者模式缓解了该问题并促进形成松耦合，且有助于提高可维护性。<br>独立对象并不直接通信，而是通过mediator对象。   </p>
+<p>实例：玩家1，玩家2，计分板，中介者  </p>
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">Player</span>(<span class="params">name</span>)</span>{
+    <span class="keyword">this</span>.points=<span class="number">0</span>
+    <span class="keyword">this</span>.name=name
+}
+Player.prototype.play=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+    <span class="keyword">this</span>.points+=<span class="number">1</span>
+    mediator.played()
+}
+<span class="keyword">var</span> scoreboard={
+    element:<span class="built_in">document</span>.getElementById(<span class="string">'result'</span>),
+    update:<span class="function"><span class="keyword">function</span>(<span class="params">score</span>)</span>{
+        <span class="keyword">var</span> i,msg=<span class="string">''</span>
+        <span class="keyword">for</span>(i <span class="keyword">in</span> score){
+            <span class="keyword">if</span>(score.hasOwnProperty(i)){
+                msg+=<span class="string">'&lt;strong&gt;'</span>+i+<span class="string">'&lt;/strong&gt;'</span>
+                msg+=score[i]
+            }
+        }
+        <span class="keyword">this</span>.element.innerHTML=msg
+    }
+}
+<span class="keyword">var</span> mediator={
+    players:{},
+    setup:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="keyword">var</span> players=<span class="keyword">this</span>.players
+        players.home=<span class="keyword">new</span> Play(<span class="string">'Home'</span>)
+        players.gest=<span class="keyword">new</span> Play(<span class="string">'Guest'</span>)
+    },
+    played:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="keyword">var</span> players=<span class="keyword">this</span>.players,
+        score={
+            Home:players.home.points
+            Guest:players.guest.points
+        }
+        scoreboard.update(score)
+    },
+    keypress:<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>{
+        e=e||<span class="built_in">window</span>.event
+        <span class="keyword">if</span>(e.which===<span class="number">49</span>){ <span class="comment">// 按键1</span>
+            mediator.players.home.play()
+            <span class="keyword">return</span>
+        }
+        <span class="keyword">if</span>(e.which===<span class="number">48</span>){ <span class="comment">// 按键0</span>
+            mediator.players.guest.play()
+            <span class="keyword">return</span>
+        }
+    }
+}
+</code></pre>
+<h2 id="7-9-观察者"><a href="#7-9-观察者" class="headerlink" title="7.9 观察者"></a>7.9 观察者</h2><p>所有浏览器事件<br>主要动机是促进形成松散耦合。并不是一个对象调用另一个对象，而是一个对象订阅另一个对象的特定活动并在状态改变后获得通知。订阅者也称之为观察者，被观察的对象称为发布者或者主题。    </p>
+<h3 id="示例1：杂志订阅"><a href="#示例1：杂志订阅" class="headerlink" title="示例1：杂志订阅"></a>示例1：杂志订阅</h3><pre><code class="javascript"><span class="keyword">var</span> publisher={
+    subscribers:{
+        any:[] <span class="comment">// 事件类型：订阅者</span>
+    },
+    subscribe:<span class="function"><span class="keyword">function</span>(<span class="params">fn,type</span>)</span>{
+        type=type || <span class="string">'any'</span>
+        <span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="keyword">this</span>.subscribers[type]===<span class="string">'undefined'</span>){
+            <span class="keyword">this</span>.subscribers[type]=[]
+        }
+        <span class="keyword">this</span>.subscribers[type].push(fn)
+    },
+    unsubscribe:<span class="function"><span class="keyword">function</span>(<span class="params">fn,type</span>)</span>{
+        <span class="keyword">this</span>.visitSubscribers(<span class="string">'unsubscribe'</span>,fn,type)
+    },
+    publish:<span class="function"><span class="keyword">function</span>(<span class="params">publication,type</span>)</span>{
+        <span class="keyword">this</span>.visitSubscribers(<span class="string">'publish'</span>,publication,type)
+    },
+    visitSubscribers:<span class="function"><span class="keyword">function</span>(<span class="params">action,arg,type</span>)</span>{
+        <span class="keyword">var</span> pubtype=type||<span class="string">'any'</span>
+        ,subscribers=<span class="keyword">this</span>.subscribers[pubtype],i
+        ,max=subscribers.length
+        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;max;i+=<span class="number">1</span>){
+            <span class="keyword">if</span>(action===<span class="string">'action'</span>){
+                subscribers[i](arg)
+            }<span class="keyword">else</span>{
+                <span class="keyword">if</span>(subscribers[i]===arg){
+                    subscribers.splice(i,<span class="number">1</span>)
+                }
+            }
+        }
+    }
+}
+<span class="function"><span class="keyword">function</span> <span class="title">makePublisher</span>(<span class="params">o</span>)</span>{
+    <span class="keyword">var</span> i
+    <span class="keyword">for</span>(i <span class="keyword">in</span> publisher){
+        <span class="keyword">if</span>(publisher.hasOwnProperty(i)&amp;&amp; <span class="keyword">typeof</span> publisher[i]===<span class="string">'function'</span>){
+            o[i]=publish[i]
+        }
+    }
+    o.subscribers={<span class="attr">any</span>:[]}
+}
+<span class="comment">// </span>
+<span class="keyword">var</span> pager={
+    daily:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="keyword">this</span>.publish(<span class="string">'big news today'</span>)},
+    monthly:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="keyword">this</span>.publish(<span class="string">'interestion analysis'</span>,<span class="string">'monthly'</span>)}
+}
+makePublisher(pager)
+<span class="comment">// </span>
+<span class="keyword">var</span> joe={
+    drinkCoffee:<span class="function"><span class="keyword">function</span>(<span class="params">pager</span>)</span>{
+        <span class="built_in">console</span>.log(<span class="string">'just read'</span>+pager)
+    },
+    sundayPreNap:<span class="function"><span class="keyword">function</span>(<span class="params">monthly</span>)</span>{
+        <span class="built_in">console</span>.log(<span class="string">'about to fall asleep reading this'</span>+monthly)
+    }
+}
+<span class="comment">// pager注册Joe：joe向pager订阅</span>
+pager.subscribe(joe.drinkCoffee)
+pager.subscribe(joe.sundayPreNap,<span class="string">'monthly'</span>)
+<span class="comment">// 触发事件</span>
+pager.daily()
+pager.daily()
+pager.monthly()
+
+<span class="comment">// # 2  joe成为发布者</span>
+makePublisher(joe)
+joe.tweet=<span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>{
+    <span class="keyword">this</span>.publish(msg)
+}
+pager.readTweets=funciton(tweet){
+    <span class="built_in">console</span>.log(<span class="string">'call big meeting! someone'</span>+tweet)
+}
+joe.tweet(<span class="string">'hated the pager today'</span>)
+</code></pre>
+<h3 id="示例2：键盘按键游戏"><a href="#示例2：键盘按键游戏" class="headerlink" title="示例2：键盘按键游戏"></a>示例2：键盘按键游戏</h3><p>接受无限量玩家<br>中介者：mediator对象必须知道所有其他参与对象并调用他们的方法；<br>观察者更缺乏只能，主要依赖于对象观察某些事件并采取行动。比如scoreboard监听scorechange事件<br>调整使更解决浏览器：fire,on,remove;type;context    </p>
+<pre><code class="javascript"><span class="comment">// 代码：略</span>
+</code></pre>
+<p style="text-align:right">20:28</p>

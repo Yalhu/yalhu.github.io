@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ui-lib,vue.js,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2020.6.17 星期三  17：03   基础 可以按需引入,也可以全部引入     改变/自定义 element ui 样式:需要在全局中修改(style标签不加 scoped),比如 .el-carousel__button, 或者单独引入css文件,即使是在本模块import; 添加className 提高权重,即使!import 也不会生效(如果样式不是全局的话).$PS:听说可以在">
+<meta name="keywords" content="ui-lib,vue.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Element-Ui 实践">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/element ui实践/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2020.6.17 星期三  17：03   基础 可以按需引入,也可以全部引入     改变/自定义 element ui 样式:需要在全局中修改(style标签不加 scoped),比如 .el-carousel__button, 或者单独引入css文件,即使是在本模块import; 添加className 提高权重,即使!import 也不会生效(如果样式不是全局的话).$PS:听说可以在">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-09-04T15:59:46.813Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Element-Ui 实践">
+<meta name="twitter:description" content="2020.6.17 星期三  17：03   基础 可以按需引入,也可以全部引入     改变/自定义 element ui 样式:需要在全局中修改(style标签不加 scoped),比如 .el-carousel__button, 或者单独引入css文件,即使是在本模块import; 添加className 提高权重,即使!import 也不会生效(如果样式不是全局的话).$PS:听说可以在">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/element ui实践/">
+
+
+
+
+
+  <title>Element-Ui 实践 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/element ui实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Element-Ui 实践</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-17T08:00:00+08:00">
+                2020-06-17
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-09-04T23:59:46+08:00">
+                2021-09-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/jsplus/" itemprop="url" rel="index">
+                    <span itemprop="name">jsplus</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/element ui实践/" class="leancloud_visitors" data-flag-title="Element-Ui 实践">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,096
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p style="text-align:right"> 2020.6.17 星期三  17：03 </p>
+
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ol>
+<li><p>可以按需引入,也可以全部引入   </p>
+</li>
+<li><p>改变/自定义 element ui 样式:需要在全局中修改(style标签不加 scoped),比如 <code>.el-carousel__button</code>, 或者单独引入css文件,即使是在本模块import; 添加className 提高权重,即使!import 也不会生效(如果样式不是全局的话).<br>$PS:听说可以在style中添加!import, html标签都找不到,往哪个元素上添加.自述比较麻烦<br>$PS:有的样式好像可以在scoped中修改,比如<code>.el-main</code>,<code>.el-col-6</code>,或许因为这些是layout样式?  </p>
+</li>
+</ol>
+<p>$TODO: 样式引入方式/权重 分析.<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* &lt;!--  &lt;style scoped&gt;: worked --&gt; */</span></span><br><span class="line"><span class="selector-class">.el-col-6</span>&#123;</span><br><span class="line">    <span class="attribute">padding</span>:<span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.el-main</span>&#123;</span><br><span class="line">    <span class="attribute">padding</span>:<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* &lt;!--  &lt;style scoped&gt;: not work --&gt; */</span></span><br><span class="line"><span class="selector-class">.self</span> <span class="selector-class">.el-carousel__button</span>&#123;  <span class="comment">/* not work */</span></span><br><span class="line">    <span class="attribute">border-radius</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">background</span>:#<span class="number">#ff0</span><span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.el-carousel__button</span>&#123; <span class="comment">/* not work */</span></span><br><span class="line">    <span class="attribute">border-radius</span>:<span class="number">30%</span>;</span><br><span class="line">    <span class="attribute">background</span>:#<span class="number">#f00</span><span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li>自定义主题。可以在网站设置每个具体组件的大小，样式等；包括主要的颜色主题等。<br>或者文档其他自定义变量方式等。<br>还动态切换主题色。</li>
+</ol>
+<h2 id="el-form"><a href="#el-form" class="headerlink" title="el-form"></a>el-form</h2><p>数据类型：v-model  可以指定数据类型。比如 <code>v-model.number = &quot;numb1&quot;</code></p>
+<blockquote>
+<p>注意这里为 v-model attribute 添加了 .number。它会告诉 Vue 将其值作为数字来使用。不过这里有一个小小的 bug，那就是当其值为空的时候，它会回到字符串格式，<!-- 变通的办法: computed --><br>事件：对于elementUI的input，我们需要在后面加上.native, 因为elementUI对input进行了封装，原生的事件不起作用。<br>&lt;!–<br>视图更新：下拉多选 和 时间范围选择 编辑的时候，点击修改视图不会更新 // – 而是修改其他一个东西：比如输入框，单选的时候，多选只更新了最后的操作<br>  下拉多选<code>&lt;el-select v-model=&quot;form_base.grades&quot; @change=&quot;$forceUpdate()&quot; multiple placeholder=&quot;请选择&quot; style=&quot;width: 100%&quot;&gt;</code><br>    或者<code>this.subscribeData.splice();</code>,<code>this.$set()</code>  // 并没有实际，应该是可以的。必forceUpdate 更好一些<br>  时间范围选择<code>@blur=&quot;handleTimestamp&quot;</code> // @change 并没有触发<br>  源码中，为什么是blur才行：date-picker组件内监听picker显示隐藏属性里拉起blur函数，但未拉起change函数。</p>
+</blockquote>
+<p>上面问题的原因是初始化的时候直接赋值<code>this.form_base.grades = []</code>，没有走vue的数据绑定。<br>正确的方式<code>this.form_base = { title: &#39;&#39;, grades: []}</code> 或者<code>this.$set(this.form_base, &#39;grades&#39;, [])</code><br> –&gt;</p>
+<h3 id="el-form-item"><a href="#el-form-item" class="headerlink" title="el-form-item"></a>el-form-item</h3><ol>
+<li>自定义label 标签 <code>&lt;span slot=&quot;label&quot;&gt;自己写label &lt;/span&gt;</code><h3 id="表单验证"><a href="#表单验证" class="headerlink" title="表单验证"></a>表单验证</h3></li>
+<li>el-form validate方法组织程序后续流程<br>原因：自己写的validate <!-- 条件分支 -->没有调用callback()</li>
+<li>validate() 用asycn/await 拿不到结果。需要在回调中赋值<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> valid</span><br><span class="line"><span class="keyword">await</span> <span class="keyword">this</span>.$refs.r_form_base.validate(<span class="function"><span class="params">r</span> =&gt;</span> valid = r)</span><br><span class="line"><span class="keyword">if</span>(!valid) <span class="keyword">return</span> <span class="keyword">this</span>.$message.warning(<span class="string">'当前内容设置未完成'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p>后台返回数据为0（为选择），如果options 中没有，会显示没有的id。<br>解决：可以手动添加一行（for 循环外）为0的情况。<code>&lt;el-option label=&quot;请选择&quot; :value=&quot;0&quot;&gt;&lt;/el-option&gt;</code><br>同理提交的时候，可以默认值为0，而不是空字符串。 （后端强类型，一定要）<br>&lt;!–<br>但是：上面添加的请选择就成为了一个选项 出现在了 下拉选择列表中了。<br>并不想要，只好再改回去。手动修改数据了。</p>
+<p>也不能把‘请选择’ 换为‘全部’。因为这里就是 请选择。<br>最后，筛选区可以把placeholder 改成 ‘全部’。<br>提交的时候也可以是0（需要和后端统一）<br> –&gt;</p>
+<h2 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h2><ol>
+<li><p>手动展开/收起 全部。<br><code>:default-expand-all=&quot;treeExpand&quot;</code> 只能设置默认状态。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">expandAll(bool) &#123;</span><br><span class="line">  <span class="keyword">var</span> nodes = <span class="keyword">this</span>.$refs.ProjectTree.store.nodesMap;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> nodes) &#123;</span><br><span class="line">    nodes[i].expanded = bool;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 或者</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="keyword">this</span>.$refs.tree.store._getAllNodes().length;i++)&#123;</span><br><span class="line">    <span class="keyword">this</span>.$refs.tree.store._getAllNodes()[i].expanded=<span class="keyword">this</span>.isexpand;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>props：curr-course-id 变化并不会引起css高亮。 #/17246<br>需要监听变化，然后调用api：setCurrentKey。或者</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.$refs.tree.store.nodesMap[oldValue].isCurrent = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">this</span>.$refs.tree.store.nodesMap[value].isCurrent = <span class="literal">true</span>;</span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取消高亮的时候，不能通过设置currentKey，需要先获取currKey，调用上面的api修改tree.store</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// this.currCourseId = '';</span></span><br><span class="line"><span class="comment">// this.$refs.courseTree.$refs.tree.setCurrentKey('');</span></span><br><span class="line"><span class="comment">// 高亮并不会被取消，需要如下调用</span></span><br><span class="line"><span class="keyword">const</span> currKey = <span class="keyword">this</span>.$refs.courseTree.$refs.tree.getCurrentKey();</span><br><span class="line"><span class="keyword">this</span>.$refs.courseTree.$refs.tree.store.nodesMap[currKey].isCurrent = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>树 会把叶子节点也展示出来，也就是说不是一个文件夹结构，文件也会出现在层级。<br>如果业务只需要展示文件夹目录，而且前面的小三角icon 也不需要显示。<br>两种方式：1）重新格式化(后端)返回的数据结构；2）调用 tree的相关api 进行数据和ui 的展示。</p>
+</li>
+<li>如果数据源发生变化，要调用filter方法，需要在nextTick 中。</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sidebar-course"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- &lt;h3&gt;课程管理&lt;/h3&gt; --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">course-tree</span> <span class="attr">ref</span>=<span class="string">"courseTree"</span> <span class="attr">:course-data</span>=<span class="string">"courseTreeData"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:curr-course-id</span>=<span class="string">"currCourseId"</span> <span class="attr">:expand-course-id</span>=<span class="string">"expandCourseId"</span></span></span><br><span class="line"><span class="tag">    @<span class="attr">courseDirClick</span>=<span class="string">"changeCourseViewData"</span></span></span><br><span class="line"><span class="tag">  /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- End: 课程管理 --&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line"> * @title: 课件包切换/选择</span><br><span class="line"> * @desc: 左侧边栏课件包选择</span><br><span class="line"> * @date: 20200604</span><br><span class="line">--&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;course-tree&quot;&gt;</span><br><span class="line">    &lt;!-- &lt;el-input placeholder=&quot;输入关键字进行过滤&quot; v-model.trim=&quot;filterText&quot; size=&quot;small&quot;</span><br><span class="line">      style=&quot;width:80%;&quot;</span><br><span class="line">      @input=&quot;filterCoureseName&quot;</span><br><span class="line">      v-if=&quot;false&quot;</span><br><span class="line">    &gt;</span><br><span class="line">    &lt;/el-input&gt; --&gt;</span><br><span class="line">    &lt;el-tree ref=&quot;tree&quot; :data=&quot;courseData&quot; :props=&quot;defaultProps&quot; empty-text=&quot;没有设置名称&quot;</span><br><span class="line">      node-key=&quot;id&quot; :current-node-key.sync=&quot;currCourseId&quot;</span><br><span class="line">      :default-expanded-keys=&quot;expandCourseId&quot;</span><br><span class="line">      :highlight-current=&quot;true&quot; :expand-on-click-node=&quot;false&quot; :check-on-click-node=&quot;true&quot;</span><br><span class="line">      :lazy=&quot;true&quot;</span><br><span class="line">      :load=&quot;loadNode&quot;</span><br><span class="line">      @node-click=&quot;handleNodeClick&quot;</span><br><span class="line">      :filter-node-method=&quot;filterNode&quot;</span><br><span class="line">      @current-change=&quot;handleCurrNodeChange&quot;</span><br><span class="line">    &gt;</span><br><span class="line">      &lt;span :class=&quot;[&apos;custom-tree-node&apos;, `custom-tree-node-$&#123;data.type&#125;`]&quot; slot-scope=&quot;&#123; node, data &#125;&quot;&gt;</span><br><span class="line">        &#123;&#123; node.label &#125;&#125; &#123;&#123; node.level &#125;&#125;</span><br><span class="line">      &lt;/span&gt;</span><br><span class="line">    &lt;/el-tree&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  name: &apos;CourseTree&apos;,</span><br><span class="line">  components: &#123;&#125;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    courseData: &#123;</span><br><span class="line">      type: Array,</span><br><span class="line">      default: () =&gt; [],</span><br><span class="line">    &#125;,</span><br><span class="line">    currCourseId: &#123;</span><br><span class="line">      type: String,</span><br><span class="line">      default: &apos;&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    expandCourseId: &#123;</span><br><span class="line">      type: Array,</span><br><span class="line">      default: () =&gt; [],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      filterText: &apos;&apos;,</span><br><span class="line">      defaultProps: &#123;</span><br><span class="line">        children: &apos;children&apos;,</span><br><span class="line">        label: &apos;label&apos;,</span><br><span class="line">        isLeaf: (data, node) =&gt; &#123;</span><br><span class="line">          // console.log(&apos;is leaf. node&apos;, data, node);</span><br><span class="line">          return !data.children || !data.children.some(v =&gt; v.type !== &apos;courseware&apos;);</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    currCourseId(value, oldValue) &#123;</span><br><span class="line">      this.$refs.tree.setCurrentKey(value);</span><br><span class="line">      // this.$refs.tree.store.nodesMap[oldValue].isCurrent = false;</span><br><span class="line">      // this.$refs.tree.store.nodesMap[value].isCurrent = true;</span><br><span class="line">    &#125;,</span><br><span class="line">    courseData() &#123;</span><br><span class="line">      // console.log(&apos;watch course data&apos;);</span><br><span class="line">      this.$nextTick(() =&gt; &#123;</span><br><span class="line">        this.$refs.tree.filter(); // 把课程子节点过滤掉</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    // this.$refs.tree.filter();</span><br><span class="line">    // setTimeout(() =&gt; this.$refs.tree.filter(), 200);</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    filterCoureseName(value) &#123;</span><br><span class="line">      this.$refs.tree.filter(value);</span><br><span class="line">    &#125;,</span><br><span class="line">    filterNode(value, data) &#123;</span><br><span class="line">      // console.log(&apos;filter node.&apos;, value, data);</span><br><span class="line">      const isShow = data.type !== &apos;courseware&apos;;</span><br><span class="line">      if (!value) return isShow;</span><br><span class="line">      return isShow &amp;&amp; data.label.includes(value);</span><br><span class="line">    &#125;,</span><br><span class="line">    loadNode(node, resolve) &#123;</span><br><span class="line">      // console.log(&apos;load node.&apos;, node);</span><br><span class="line">      if (node.level === 0) &#123;</span><br><span class="line">        return resolve(node.data);</span><br><span class="line">      &#125;</span><br><span class="line">      const treeNode = node.data.children.filter(v =&gt; v.type !== &apos;courseware&apos;);</span><br><span class="line">      // node.data.children = treeNode; // 必须修改源node，否则项目切换时不会过滤掉课件；还要调用filter</span><br><span class="line">      return resolve(treeNode);</span><br><span class="line">    &#125;,</span><br><span class="line">    /* eslint-disable no-unused-vars */</span><br><span class="line">    handleNodeClick(obj, node, comp) &#123;</span><br><span class="line">      // console.log(obj, node, comp);</span><br><span class="line">      this.$emit(&apos;courseDirClick&apos;, obj);</span><br><span class="line">    &#125;,</span><br><span class="line">    handleCurrNodeChange(obj) &#123;</span><br><span class="line">      // console.log(&apos;current node changed.&apos;, obj);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">const _data = [&#123;</span><br><span class="line">  id: &apos;-&apos;,</span><br><span class="line">  label: &apos;课程管理&apos;,</span><br><span class="line">  children: [</span><br><span class="line">    &#123;</span><br><span class="line">      id: &apos;1&apos;,</span><br><span class="line">      label: &apos;大班&apos;,</span><br><span class="line">      children: [</span><br><span class="line">        &#123;</span><br><span class="line">          id: &apos;1-1&apos;,</span><br><span class="line">          label: &apos;大班-1周&apos;,</span><br><span class="line">          children: [</span><br><span class="line">            &#123; id: &apos;&apos;, type: &apos;courseware&apos;, label: &apos;1-1-课件1&apos;, updated: &apos;2020.6.4 12:00&apos;, &#125;,</span><br><span class="line">            &#123; id: &apos;&apos;, type: &apos;courseware&apos;, label: &apos;1-1-课件1&apos;, updated: &apos;2020.6.4 13:00&apos; &#125;,</span><br><span class="line">            &#123; id: &apos;&apos;, type: &apos;courseware&apos;, label: &apos;1-1-课件2&apos;, updated: &apos;2020.6.4 13:00&apos; &#125;,</span><br><span class="line">            &#123; id: &apos;&apos;, type: &apos;courseware&apos;, label: &apos;1-1-课件3&apos;, updated: &apos;2020.6.4 13:00&apos; &#125;,</span><br><span class="line">          ],</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          id: &apos;1-2&apos;,</span><br><span class="line">          label: &apos;大班-2周&apos;,</span><br><span class="line">          children: [</span><br><span class="line">            &#123;</span><br><span class="line">              id: &apos;1-2-1&apos;,</span><br><span class="line">              label: &apos;大班-2周(1)&apos;,</span><br><span class="line">              children: [</span><br><span class="line">                &#123; id: &apos;&apos;, type: &apos;courseware&apos;, status: 1, resources: [], label: &apos;1-2(1)-课件1&apos;, updated: &apos;2020.6.4 12:00&apos;, &#125;,</span><br><span class="line">                &#123; id: &apos;&apos;, type: &apos;courseware&apos;, status: 2, resources: [2, 4], label: &apos;1-2(1)-课件1&apos;, updated: &apos;2020.6.4 13:00&apos; &#125;,</span><br><span class="line">                &#123; id: &apos;&apos;, type: &apos;courseware&apos;, status: 0, resources: [], label: &apos;1-2(1)-课件1&apos;, updated: &apos;2020.6.4 13:00&apos; &#125;,</span><br><span class="line">                &#123; id: &apos;&apos;, type: &apos;courseware&apos;, status: 3, resources: [1, 2, 3, 4], label: &apos;1-2(1)-课件2&apos;, updated: &apos;2020.6.4 13:00&apos; &#125;,</span><br><span class="line">                &#123; id: &apos;&apos;, type: &apos;courseware&apos;, status: 4, resources: [], label: &apos;1-2(1)-课件3&apos;, updated: &apos;2020.6.4 13:00&apos; &#125;,</span><br><span class="line">              ]</span><br><span class="line">            &#125;,</span><br><span class="line">          ],</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;id: &apos;c1&apos;, type: &apos;courseware&apos;, label: &apos;待定课件1&apos;, updated: &apos;2020 14:00&apos;, status: 1, thumbnail: &apos;http://t8.baidu.com/it/u=1484500186,1503043093&amp;fm=79&amp;app=86&amp;f=JPEG?w=1280&amp;h=853&apos;&#125;,</span><br><span class="line">        &#123;id: &apos;c2&apos;, type: &apos;courseware&apos;, label: &apos;待定课件12&apos;, updated: &apos;2020 14:00&apos;, status: 1, thumbnail: &apos;http://t8.baidu.com/it/u=1484500186,1503043093&amp;fm=79&amp;app=86&amp;f=JPEG?w=1280&amp;h=853&apos;&#125;,</span><br><span class="line">      ],</span><br><span class="line">    &#125;,</span><br><span class="line">  ]</span><br><span class="line">];</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="datePicker"><a href="#datePicker" class="headerlink" title="datePicker"></a>datePicker</h2><ol>
+<li>如果是时间范围选择器 清空情况的时候会把数据改为null. 导致解构赋值的时候报错 <code>[start, end] = timeRange</code><br>&lt;!– </li>
+<li>下面是无用的。其实value-format 是可以实现的<br>&lt;!–<br>不能设置value-format，使用默认。<br>使用format指定输入框的格式；使用value-format指定绑定值的格式。</li>
+</ol>
+<!-- 
+计算/设置时间间隔. 最近一天/当天，最近一周/7天内， 最近一个月（30天）/30天内
+new Date().toLocaleDateString() 返回时间格式 2021/1/20
+利用日期时间组件的format 和 dispalyValue 返回后端需要的时间格式
+因为用到了refs，所以必须在mounted之后才可以
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 当天，7天内，30天内。</span></span><br><span class="line"><span class="comment"> * 负数向前，正数向后</span></span><br><span class="line"><span class="comment"> * 不手动replace或moment等手段转化时间格式。</span></span><br><span class="line"><span class="comment"> * 直接利用日期时间组件的format 和 dispalyValue, 获取时间格式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">changeTimeRange(day) &#123;</span><br><span class="line">    <span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleDateString();</span><br><span class="line">    <span class="keyword">const</span> end = <span class="keyword">new</span> <span class="built_in">Date</span>(date);</span><br><span class="line">    <span class="comment">// 含头不含尾</span></span><br><span class="line">    <span class="comment">// end.setTime(end.getTime() + 3600 * 1000 * 24);</span></span><br><span class="line">    <span class="keyword">let</span> start = <span class="keyword">new</span> <span class="built_in">Date</span>(end);</span><br><span class="line">    start.setTime(start.getTime() + <span class="number">3600</span> * <span class="number">1000</span> * <span class="number">24</span> * day);</span><br><span class="line">    <span class="comment">// start = (new Date(start)).toLocaleDateString().replace(/\//g, '-')</span></span><br><span class="line">    <span class="keyword">this</span>.timeRange = [start, end];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// 必须在mounted 中使用</span></span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="keyword">this</span>.getList()</span><br><span class="line">  &#125;,</span><br><span class="line">  getList() &#123;</span><br><span class="line">    <span class="keyword">let</span> [startTime, endTime] = <span class="keyword">this</span>.$refs.datePicker.displayValue;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> –&gt;</p>
+<p style="text-align:right" > </p>
+
+-->
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ui-lib/" rel="tag"><i class="fa fa-tag"></i> ui-lib</a>
+          
+            <a href="/tags/vue-js/" rel="tag"><i class="fa fa-tag"></i> vue.js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/js/mouseevent鼠标坐标位置/" rel="next" title="Mouseevent">
+                <i class="fa fa-chevron-left"></i> Mouseevent
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/js/dom坐标移动/" rel="prev" title="Dom坐标移动">
+                Dom坐标移动 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#el-form"><span class="nav-text">el-form</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#el-form-item"><span class="nav-text">el-form-item</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表单验证"><span class="nav-text">表单验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select"><span class="nav-text">select</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tree"><span class="nav-text">tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#datePicker"><span class="nav-text">datePicker</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

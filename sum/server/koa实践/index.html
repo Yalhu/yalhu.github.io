@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2021.2 星期  ：    koa-router##  3. 多个中间件1234567router.get(&apos;/admin/:user/*&apos;, (ctx, next) =&amp;gt; &amp;#123;    ctx.body += ctx._matchedRoute + &apos;--&apos; + ctx.params.user + &apos;\n&apos;;    next();&amp;#125;, (ctx, next) =&amp;gt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Koa实践">
+<meta property="og:url" content="http://yoursite.com/sum/server/koa实践/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2021.2 星期  ：    koa-router##  3. 多个中间件1234567router.get(&apos;/admin/:user/*&apos;, (ctx, next) =&amp;gt; &amp;#123;    ctx.body += ctx._matchedRoute + &apos;--&apos; + ctx.params.user + &apos;\n&apos;;    next();&amp;#125;, (ctx, next) =&amp;gt">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-05-04T09:32:23.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Koa实践">
+<meta name="twitter:description" content="2021.2 星期  ：    koa-router##  3. 多个中间件1234567router.get(&apos;/admin/:user/*&apos;, (ctx, next) =&amp;gt; &amp;#123;    ctx.body += ctx._matchedRoute + &apos;--&apos; + ctx.params.user + &apos;\n&apos;;    next();&amp;#125;, (ctx, next) =&amp;gt">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/server/koa实践/">
+
+
+
+
+
+  <title>Koa实践 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/server/koa实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Koa实践</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-17T08:00:00+08:00">
+                2021-02-17
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-04T17:32:23+08:00">
+                2022-05-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/server/koa实践/" class="leancloud_visitors" data-flag-title="Koa实践">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,928
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p style="text-align:right"> 2021.2 星期  ： </p>
+
+
+<h1 id="koa-router"><a href="#koa-router" class="headerlink" title="koa-router"></a>koa-router</h1><p>## </p>
+<h3 id="3-多个中间件"><a href="#3-多个中间件" class="headerlink" title="3. 多个中间件"></a>3. 多个中间件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">'/admin/:user/*'</span>, (ctx, next) =&gt; &#123;</span><br><span class="line">    ctx.body += ctx._matchedRoute + <span class="string">'--'</span> + ctx.params.user + <span class="string">'\n'</span>;</span><br><span class="line">    next();</span><br><span class="line">&#125;, (ctx, next) =&gt; &#123;</span><br><span class="line">    ctx.body += <span class="string">' get admin/user\n'</span>;</span><br><span class="line">    next();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><!-- \# [Koa 、Koa-router 常用 API](https://blog.csdn.net/mjzhang1993/article/details/78752314) -->
+<ol>
+<li>router.routes()<br>返回一个中间件，这个中间件根据请求分派路由</li>
+<li><p>router.allowedMethods([options])<br>根据不同类型（也就是 options 参数）的请求允许请求头包含的方法，返回不同的中间件，以及响应 405 [不被允许] 和 501 [未实现]<br>options =&gt; {throw: true} 抛出错误而不是设置返回状态码 statue 和标头 header<br>options =&gt; {notImplemented: () =&gt; returnedValue} 使用这个函数抛出的值代替原来的 notImplemented 501 未实现错误<br>options =&gt; {methodNotAllowed: () =&gt; returnedValue} 使用这个函数抛出的值代替原来的 notImplemented 405 不被允许错误</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 官网例子</span></span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>);</span><br><span class="line"><span class="keyword">const</span> Boom = <span class="built_in">require</span>(<span class="string">'boom'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router();</span><br><span class="line"></span><br><span class="line">app.use(router.routes());</span><br><span class="line">app.use(router.allowedMethods(&#123;</span><br><span class="line">  <span class="keyword">throw</span>: <span class="literal">true</span>,</span><br><span class="line">  notImplemented: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">new</span> Boom.notImplemented(),</span><br><span class="line">  methodNotAllowed: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">new</span> Boom.methodNotAllowed()</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>router.use([path], middleware)<br>在路由中使用中间件，中间件运行的顺序是 .use() 方法调用的顺序<br>path 允许调用中间件的路径，可以是一个路径字符串，也可以是路径组成的数组，不设置表示所有路径都可以使用<br>middleware 要使用的中间件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> admin = <span class="keyword">new</span> Router(&#123;</span><br><span class="line">    prefix: <span class="string">'/admin'</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">admin.use([<span class="string">'/default/:user'</span>, <span class="string">'/test'</span>], (ctx, next) =&gt; &#123;</span><br><span class="line">    ctx.body = <span class="string">'in admin\n'</span>;</span><br><span class="line">    ctx.body += ctx._matchedRoute + <span class="string">'--'</span> + ctx.params.user + <span class="string">'\n'</span>;</span><br><span class="line">    next();</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">admin.get(<span class="string">'/**'</span>, (ctx) =&gt; &#123;</span><br><span class="line">    ctx.body += <span class="string">'finish\n'</span>;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.use(admin.routes());</span><br><span class="line">app.use(admin.allowedMethods());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>router.prefix(prefix)<br>返回一个子路由，这个路由挂载在 router 上，并且设置了 prefix 前缀</p>
+</li>
+<li>router.redirect(source, destination, code)<br>重定向资源 source 到目的地地址 destination 使用 30x 状态码（code 定义）</li>
+<li>router.param(param, middleware)<br>给路由参数 param 添加中间件，后续 router 路径中 含有 这个参数的，都会首先触发这个中间件，一般用于自动验证等</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">admin</span><br><span class="line">  .param(<span class="string">'user'</span>, (id, ctx, next) =&gt; &#123;</span><br><span class="line">      ctx.state.user = users[id] || <span class="literal">null</span>;</span><br><span class="line">      <span class="keyword">if</span> (!ctx.state.user) &#123;</span><br><span class="line">          <span class="keyword">return</span> ctx.status = <span class="number">404</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> next();</span><br><span class="line">  &#125;)</span><br><span class="line">  .get(<span class="string">'/abc/:user'</span>, (ctx, next) =&gt; &#123;</span><br><span class="line">      ctx.body = <span class="string">'/admin/abc '</span> + <span class="built_in">JSON</span>.stringify(ctx.state.user)</span><br><span class="line">      next();</span><br><span class="line">  &#125;)</span><br><span class="line">  .get(<span class="string">'/bcd/:user'</span>, (ctx, next) =&gt; &#123;</span><br><span class="line">      ctx.body = <span class="string">'/admin/bcd '</span> + <span class="built_in">JSON</span>.stringify(ctx.state.user);</span><br><span class="line">      next();</span><br><span class="line">  &#125;)</span><br><span class="line">  .get(<span class="string">'/cde/test'</span>, (ctx, next) =&gt; &#123;</span><br><span class="line">      <span class="comment">// 没有 user 参数 所以 不经过 param('user') ctx.state.user 不存在</span></span><br><span class="line">      ctx.body = <span class="string">'/admin/cde '</span> + <span class="built_in">JSON</span>.stringify(ctx.state.user); </span><br><span class="line">      next();</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="其他中间件"><a href="#其他中间件" class="headerlink" title="其他中间件"></a>其他中间件</h1><!-- \# [koa实践总结，总有你用的到抄的走的](https://juejin.cn/post/6952665400890884127#heading-2) -->
+<p>## 统一返回格式 &amp; 错误处理<br>在实现错误处理和统一返回格式之前，我们再做一点小小的改造。前面我们创建了 config 目录，里面存了一些常量配置，<br>接下来我们还会创建一个 common/utils.js 用来存放工具函数，<br>如果每个引用到的地方都 require 来引入是比较麻烦的，<br>所以我们把工具函数和常量配置放到 app.context 的属性上，之后就不用频繁引入了，<strong>可以通过 ctx.来访问</strong></p>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p>koa-passport，koa-session中间件之</p>
+<h2 id="compose"><a href="#compose" class="headerlink" title="compose"></a>compose</h2><p>这里引入了一个插件 koa-compose，作用是简化引用中间件的写法。到这里准备工作已经做好了，开始处理参数解析的问题<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> compose = <span class="built_in">require</span>(<span class="string">'koa-compose'</span>);</span><br><span class="line"><span class="keyword">const</span> MD = <span class="built_in">require</span>(<span class="string">'./middlewares/'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = <span class="string">'8082'</span></span><br><span class="line"><span class="keyword">const</span> host = <span class="string">'0.0.0.0'</span></span><br><span class="line"></span><br><span class="line">app.use(compose(MD));</span><br><span class="line"></span><br><span class="line">app.listen(port, host, () =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`API server listening on <span class="subst">$&#123;host&#125;</span>:<span class="subst">$&#123;port&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="koa-bodyparser"><a href="#koa-bodyparser" class="headerlink" title="koa-bodyparser"></a>koa-bodyparser</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> koaBody = <span class="built_in">require</span>(<span class="string">'koa-bodyparser'</span>);</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">'../router'</span>);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 参数解析</span></span><br><span class="line"><span class="comment"> * https://github.com/koajs/bodyparser</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> mdKoaBody = koaBody(&#123;</span><br><span class="line">  enableTypes: [ <span class="string">'json'</span>, <span class="string">'form'</span>, <span class="string">'text'</span>, <span class="string">'xml'</span> ],</span><br><span class="line">  formLimit: <span class="string">'56kb'</span>,</span><br><span class="line">  jsonLimit: <span class="string">'1mb'</span>,</span><br><span class="line">  textLimit: <span class="string">'1mb'</span>,</span><br><span class="line">  xmlLimit: <span class="string">'1mb'</span>,</span><br><span class="line">  strict: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 路由处理</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> mdRoute = router.routes();</span><br><span class="line"><span class="keyword">const</span> mdRouterAllowed = router.allowedMethods();</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = [</span><br><span class="line">  mdKoaBody,</span><br><span class="line">  mdRoute,</span><br><span class="line">  mdRouterAllowed</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<h2 id="cors"><a href="#cors" class="headerlink" title="cors"></a>cors</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 跨域处理</span><br><span class="line"> */</span><br><span class="line">const mdCors = cors(&#123;</span><br><span class="line">  origin: &apos;*&apos;,</span><br><span class="line">  credentials: true,</span><br><span class="line">  allowMethods: [ &apos;GET&apos;, &apos;HEAD&apos;, &apos;PUT&apos;, &apos;POST&apos;, &apos;DELETE&apos;, &apos;PATCH&apos; ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>koa-router 是可以添加多个路由级中间件的，我们将参数校验放在这里处理。<br>然后我们添加新的目录 schema，用来存放参数校验部分的代码，添加两个文件</p>
+<h2 id="hapi-joi"><a href="#hapi-joi" class="headerlink" title="@hapi/joi"></a>@hapi/joi</h2><p>app/middlewares/ 下添加 paramValidator.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="params">paramSchema</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params">ctx, next</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> body = ctx.request.body;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> body === <span class="string">'string'</span> &amp;&amp; body.length) body = <span class="built_in">JSON</span>.parse(body);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;&#125;</span><br><span class="line">    <span class="keyword">const</span> paramMap = &#123;</span><br><span class="line">      router: ctx.request.params,</span><br><span class="line">      query: ctx.request.query,</span><br><span class="line">      body</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!paramSchema) <span class="keyword">return</span> next();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> schemaKeys = <span class="built_in">Object</span>.getOwnPropertyNames(paramSchema);</span><br><span class="line">    <span class="keyword">if</span> (!schemaKeys.length) <span class="keyword">return</span> next();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// eslint-disable-next-line array-callback-return</span></span><br><span class="line">    schemaKeys.some(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> validObj = paramMap[item];</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> validResult = paramSchema[item].validate(validObj, &#123;</span><br><span class="line">        allowUnknown: <span class="literal">true</span></span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (validResult.error) &#123;</span><br><span class="line">        ctx.utils.assert(<span class="literal">false</span>, ctx.utils.throwError(<span class="number">9998</span>, validResult.error.message));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">await</span> next();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app/index.js</span></span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> router = <span class="built_in">require</span>(<span class="string">'./router'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = <span class="string">'8082'</span></span><br><span class="line"><span class="keyword">const</span> host = <span class="string">'0.0.0.0'</span></span><br><span class="line"></span><br><span class="line">app.use(router.routes());</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    原先当路由存在，请求方式不匹配的时候，会报 404，</span></span><br><span class="line"><span class="comment">    加了这个中间件，会报请求方式不被允许</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">app.use(router.allowedMethods());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app.listen(port, host, () =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`API server listening on <span class="subst">$&#123;host&#125;</span>:<span class="subst">$&#123;port&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// app/router/index.js:</span></span><br><span class="line"><span class="keyword">const</span> koaRouter = <span class="built_in">require</span>(<span class="string">'koa-router'</span>);</span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> koaRouter();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> routeList = <span class="built_in">require</span>(<span class="string">'./routes'</span>);</span><br><span class="line"><span class="keyword">const</span> paramValidator = <span class="built_in">require</span>(<span class="string">'../middlewares/paramValidator'</span>);</span><br><span class="line"></span><br><span class="line">routeList.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; method, path, controller, valid &#125; = item;</span><br><span class="line">  router[method](path, paramValidator(valid), controller);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br><span class="line"></span><br><span class="line"><span class="comment">// app/router/routes.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; test &#125; = <span class="built_in">require</span>(<span class="string">'../controllers'</span>);</span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//  测试</span></span><br><span class="line">    method: <span class="string">'get'</span>,</span><br><span class="line">    path: <span class="string">'/a'</span>,</span><br><span class="line">    controller: test.list</span><br><span class="line">  &#125;</span><br><span class="line">];</span><br><span class="line"><span class="built_in">module</span>.exports = routes;</span><br><span class="line"></span><br><span class="line"><span class="comment">// app/contronllers/index.js</span></span><br><span class="line"><span class="keyword">const</span> test = <span class="built_in">require</span>(<span class="string">'./test'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  test</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// # validate</span></span><br><span class="line"><span class="comment">// app/schema/index.js</span></span><br><span class="line"><span class="keyword">const</span> scmTest = <span class="built_in">require</span>(<span class="string">'./test'</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  scmTest</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// app/schema/test.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Joi = <span class="built_in">require</span>(<span class="string">'@hapi/joi'</span>);</span><br><span class="line"><span class="keyword">const</span> list = &#123;</span><br><span class="line">  query: Joi.object(&#123;</span><br><span class="line">    name: Joi.string().required(),</span><br><span class="line">    age: Joi.number().required()</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  list</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// app/router/routes.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; test &#125; = <span class="built_in">require</span>(<span class="string">'../controllers'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; scmTest &#125; = <span class="built_in">require</span>(<span class="string">'../schema/index'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//  测试</span></span><br><span class="line">    method: <span class="string">'get'</span>,</span><br><span class="line">    path: <span class="string">'/a'</span>,</span><br><span class="line">    valid: scmTest.list,</span><br><span class="line">    controller: test.list</span><br><span class="line">  &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = routes;</span><br></pre></td></tr></table></figure>
+<h1 id="koa"><a href="#koa" class="headerlink" title="koa"></a>koa</h1><h2 id="中间价"><a href="#中间价" class="headerlink" title="中间价"></a>中间价</h2><p>中间件使用</p>
+<p>中间件是一个函数（异步或者同步）处在 HTTP request（请求）与 HTTP response （响应）之间，用来实现某种中间功能 app.use() 来加载中间件。基本上，Koa 所有功能都是通过中间件来实现的，中间件函数会被传入两个参数：1) ctx context 对象，表示一次对话的上下文（requset和response）；2) next 函数，调用 next 函数可以把执行权交给下一个中间件，下一个中间件执行完会把执行权再交回上一个中间件。如果中间件中有异步操作，需要使用 async、await 关键字，将其写成异步函数<br>————————————————<br>版权声明：本文为CSDN博主「mjzhang1993」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mjzhang1993/article/details/78752314" target="_blank" rel="noopener">https://blog.csdn.net/mjzhang1993/article/details/78752314</a></p>
+<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><p>当涉及到数据库操作时，我们可以在 app 下再新增一个 <strong>service</strong> 目录。 将数据库操作从 controller 目录下分离出来放在 service 目录下，两个目录各司其职，一个专注业务处理，一个专注数据库层面的增删改查。另外再添加一个 model 目录，用来定义数据库表结构，具体的这里暂时不介绍了。</p>
+<ol start="8">
+<li>error 事件</li>
+</ol>
+<p>运行过程中一旦出错，Koa 会触发一个 error 事件，监听这个事件，可以处理错误，但是中间件中如果错误被 try…catch 捕获，则不会触发 error 事件，这个时候可以调用 ctx.app.emit() 手动释放 error 事件<br>    app.on(‘error’, function (err) {<br>        console.log(‘error Event’, err);<br>    })</p>
+<pre><code>app.use(async (ctx, next) =&gt; {
+    ctx.body = &apos;in app&apos;;
+    try {
+        await next();    
+    } catch (error) {
+        ctx.status = 404;
+        ctx.app.emit(&apos;error&apos;, error, ctx);
+    }
+
+});
+
+app.use((ctx) =&gt; {
+    ctx.body = &apos;error&apos;;
+    ctx.throw(&apos;error here&apos;);
+})
+</code></pre><p style="text-align:right"> </p>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/others/sonarqube了解/" rel="next" title="Sonarqube了解">
+                <i class="fa fa-chevron-left"></i> Sonarqube了解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/others/orm了解/" rel="prev" title="Orm了解">
+                Orm了解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#koa-router"><span class="nav-text">koa-router</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-多个中间件"><span class="nav-text">3. 多个中间件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API"><span class="nav-text">API</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#其他中间件"><span class="nav-text">其他中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#登录"><span class="nav-text">登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#compose"><span class="nav-text">compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#koa-bodyparser"><span class="nav-text">koa-bodyparser</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cors"><span class="nav-text">cors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hapi-joi"><span class="nav-text">@hapi/joi</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#koa"><span class="nav-text">koa</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#中间价"><span class="nav-text">中间价</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库操作"><span class="nav-text">数据库操作</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

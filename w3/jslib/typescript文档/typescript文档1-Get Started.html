@@ -1,0 +1,46 @@
+<p>title: typescript文档1-Get Started<br>date: 2023.2.19<br>tags: </p>
+<ul>
+<li>typescript<br>toc_fold: unfold</li>
+</ul>
+<hr>
+<p><a href="https://www.typescriptlang.org/zh/docs/handbook/typescript-from-scratch.html">https://www.typescriptlang.org/zh/docs/handbook/typescript-from-scratch.html</a></p>
+<!-- 前面我们提到，一些语言根本不允许那些错误的程序运行。在不运行代码的情况下检测其中的错误称为 静态检查 。根据被操作的值的种类来确定是什么错误和什么不是错误，这称为静态 类型 检查。
+
+TypeScript 在执行之前，基于 值的类型 检查程序是否有错误。它是 静态类型检查器。例如，基于 obj 的 类型，TypeScript 在上面的最后一个示例中发现了一个错误： 
+-->
+<!-- more -->
+<p style="text-align:right">2023.2.19 星期日</p>
+
+
+<h2 id="TypeScript-for-the-New-Programmer"><a href="#TypeScript-for-the-New-Programmer" class="headerlink" title="TypeScript for the New Programmer"></a>TypeScript for the New Programmer</h2><p>JavaScript 的类型化超集</p>
+<p>不过，TypeScript 与 JavaScript 是什么关系呢？</p>
+<p>语法<br>TypeScript 是 JavaScript 的 超集 ：因此 JS 语法是合法的 TS。&lt;!– 语法是指我们编写文本以组成程序的方式。例如，这段代码有一个 语法 错误，因为它缺少一个 )：</p>
+<p>类型<br>但是，TypeScript 是一个 类型化 的超集，意味着它添加了针对如何使用不同类型的值的规则。<!-- 之前关于 obj.heigth 的错误不是 语法 错误，而是以不正确的方式使用了某种值（ 类型 ）。 --></p>
+<p>运行时行为<br>TypeScript 保留了 JavaScript 的 运行时行为 。<!-- 例如，在JavaScript 中被零除的结果是 Infinity，而不是抛出运行时异常。 -->原则上，TypeScript 绝不 改变 JavaScript 代码的运行时行为。</p>
+<!-- 这意味着，如果将代码从 JavaScript 迁移到 TypeScript ，即使 TypeScript 认为代码有类型错误，也可以 保证 以相同的方式运行。 -->
+<p>擦除类型<br>粗略地说，一旦 TypeScript 的编译器完成了检查代码的工作，它就会 擦除 类型以生成最终的“已编译”代码<!-- 。这意味着一旦您的代码被编译，生成的普通 JS 代码便没有类型信息。 --><br><!-- 这也意味着 TypeScript 绝不会根据它推断的类型更改程序的 行为 。最重要的是，尽管您可能会在编译过程中看到类型错误，但类型系统自身与程序如何运行无关。 --></p>
+<h2 id="TypeScript-for-JavaScript-Programmers"><a href="#TypeScript-for-JavaScript-Programmers" class="headerlink" title="TypeScript for JavaScript Programmers"></a>TypeScript for JavaScript Programmers</h2><h3 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a>类型推断</h3><!-- 
+通过感知 JavaScript 的工作原理，TypeScript 可以构建一个接受 JavaScript 代码但具有类型的类型系统。这个类型系统使得我们不需要添加额外的字符来显式地指定类型。在上面的例子中，TypeScript就是这样知道 helloWorld 是 string 类型的。
+
+你可能已经在 Visual Studio Code 中编写了 JavaScript，并已使用了编辑器的自动补全功能。Visual Studio Code 使用了 TypeScript 的引擎，以便更容易地处理 JavaScript。 -->
+<h3 id="定义类型"><a href="#定义类型" class="headerlink" title="定义类型"></a>定义类型</h3><p>JavaScript 中已经有一些基本类型可用：boolean、 bigint、 null、number、 string、 symbol 和 undefined，它们都可以在接口中使用。TypeScript 将此列表扩展为更多的内容，例如 any （允许任何类型）、unknown （确保使用此类型的人声明类型是什么）、 never （这种类型不可能发生）和 void （返回 undefined 或没有返回值的函数）。</p>
+<p>构建类型有两种语法： 接口和类型。 你应该更喜欢 interface。当需要特定功能时使用 type 。</p>
+<h3 id="组合类型"><a href="#组合类型" class="headerlink" title="组合类型"></a>组合类型</h3><!-- 使用 TypeScript，可以通过组合简单类型来创建复杂类型。 -->有两种流行的方法可以做到这一点：联合和泛型。<br>#### 联合<br>使用联合，可以声明类型可以是许多类型中的一种。<br>#### 泛型<br>泛型为类型提供变量。一个常见的例子是数组。没有泛型的数组可以包含任何内容。带有泛型的数组可以描述数组包含的值。<br><code>ts
+type StringArray = Array&lt;string&gt;;
+type NumberArray = Array&lt;number&gt;;
+type ObjectWithNameArray = Array&lt;{ name: string }&gt;;
+
+// # 声明自己使用泛型的类型
+interface Backpack&lt;Type&gt; {
+  add: (obj: Type) =&gt; void;
+  get: () =&gt; Type;
+}
+// 这一行是一个简写，可以告诉 TypeScript 有一个常量，叫做`backpack`，并且不用担心它是从哪
+// 里来的。
+declare const backpack: Backpack&lt;string&gt;;
+// 对象是一个字符串，因为我们在上面声明了它作为 Backpack 的变量部分。
+const object = backpack.get();
+// 因为 backpack 变量是一个字符串，不能将数字传递给 add 函数。
+backpack.add(23);
+// Argument of type &#39;number&#39; is not assignable to parameter of type &#39;string&#39;.</code><br><br><br>### 结构化的类型系统（structural type system）<br>TypeScript 的一个核心原则是类型检查基于对象的属性和行为（type checking focuses on the shape that values have）。<!-- 这有时被叫做“鸭子类型”或“结构类型”（structural typing）。 -->
+<p>在结构化的类型系统当中，如果两个对象具有相同的结构，则认为它们是相同类型的。</p>

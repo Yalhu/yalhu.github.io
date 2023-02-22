@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="javascript,optimise,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="web性能优化web性能 (w3)      A 前端监控 前端监控目标稳定性1）JS错误：执行错误&amp;amp;promise异常1）资源错误：script/link等资源加载异常1）接口错误 ajax/fetch请求接口异常 用户体验1）加载时间1）TTFB（首字节时间）1）FP（首次绘制）1）FCP（首次内容绘制）1）FMP（首次有意义绘制）1）FID（首次输入延迟）：用户首次和页面交互到页面响">
+<meta name="keywords" content="javascript,optimise">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端性能监控">
+<meta property="og:url" content="http://yoursite.com/sum/js/前端性能监控/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="web性能优化web性能 (w3)      A 前端监控 前端监控目标稳定性1）JS错误：执行错误&amp;amp;promise异常1）资源错误：script/link等资源加载异常1）接口错误 ajax/fetch请求接口异常 用户体验1）加载时间1）TTFB（首字节时间）1）FP（首次绘制）1）FCP（首次内容绘制）1）FMP（首次有意义绘制）1）FID（首次输入延迟）：用户首次和页面交互到页面响">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2023-02-22T14:01:19.398Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端性能监控">
+<meta name="twitter:description" content="web性能优化web性能 (w3)      A 前端监控 前端监控目标稳定性1）JS错误：执行错误&amp;amp;promise异常1）资源错误：script/link等资源加载异常1）接口错误 ajax/fetch请求接口异常 用户体验1）加载时间1）TTFB（首字节时间）1）FP（首次绘制）1）FCP（首次内容绘制）1）FMP（首次有意义绘制）1）FID（首次输入延迟）：用户首次和页面交互到页面响">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/js/前端性能监控/">
+
+
+
+
+
+  <title>前端性能监控 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/js/前端性能监控/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端性能监控</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-21T08:00:00+08:00">
+                2020-10-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-02-22T22:01:19+08:00">
+                2023-02-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/js/前端性能监控/" class="leancloud_visitors" data-flag-title="前端性能监控">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,891
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="/sum/js/web性能优化指南">web性能优化</a><br><a href="/w3/web性能/web性能/">web性能 (w3)</a></p>
+<!-- 
+# 全链路监控
+一、第一阶段（2020.8.31 ----2020.10.15）
+了解已有各个平台，了解全链路监控，制定下一阶段目标
+二、第二阶段（2020.10.21-----2020.11.15）
+调研使用grafana平台配置各种维度的图表、是否可实现对比类型的图表
+梳理现有c.gif 上报的错误信息&类型，提取有效错误信息
+调研并推动华佗平台支持解析sourcemap快速定位错误的能力
+制定下一阶段目标
+
+## 第一阶段：学习调研
+a、初
+b、前端监控
+c、h5 sdk 性能指标上报梳理
+d、阶段总结&展望
+## 第二阶段：深入一点
+日志sdk
+ -->
+<hr>
+<!-- 
+# 性能准入规则方向
+ weiyuan
+一、第一阶段（2020.8.31 ----2020.9.18）
+阅读谷歌开发者文档，深入理解html渲染全过程
+文档：https://web.dev/fast/
+http://taligarsiel.com/Projects/howbrowserswork1.htm
+
+二、第二阶段（2020.9.21 — 2020.10.10）
+深入理解性能指标，比如
+window.performance.getEntriesByType('navigation')[0] 
+window.onload
+
+获取的指标具体含义是什么，对应的时间节点是什么
+[[chrome 中的 First Meaningful Paint]](https://www.cnblogs.com/videring/articles/7603864.html)
+  知乎相同地址：https://zhuanlan.zhihu.com/p/28249188
+[First Meaningful Paint 首次有效绘制时间](https://www.colabug.com/2019/1231/6792791/amp/)
+[first-meaningful-paint](https://github.com/iyjhabc/first-meaningful-paint)
+  https://github.com/iyjhabc/first-meaningful-paint/blob/master/src/index.js
+  star 只有20（20201023）
+
+
+三、第三阶段（2020.10.11-----2020.10.20）
+现有模块业务性能分析，主要针对优选课切入
+
+四、第四阶段（2020.10.21-----2020.11.15）
+### 整理性能优化方案
+整理影响性能关键节点
+整理性能优化方案
+（1）哪些通过脚手架解决
+（2）哪些服务端配置解决
+（3）哪些开发阶段解决
+
+五、第五阶段（2020.11.16----2020.12.1）
+梳理性能优化指标，输出准入规则
+
+六、第六阶段（2020.12.1----2020.12.20）
+性能日志收集sdk
+
+## 1. 竞品对比
+  谷歌开发者文档推荐使用 lighthouse 来进行测评，下面是通过lighthouse测评结果
+
+## 2. 性能指标
+1. window.performance.getEntries()
+2. [[文章：利用Performance API分析网站性能]](https://blog.csdn.net/c_kite/article/details/78568877)
+   2017-11-18 
+3. [[Chrome Performance常见名词解释(FP, FCP, LCP, DCL, FMP, TTI, TBT, FID, CLS)]](https://blog.csdn.net/c_kite/article/details/104237256)
+   2020-02-09
+4. 以上所有的衡量性能的英文名词均可在https://web.dev/ 这里查看详细的解释和说明.
+
+### 参考链接:
+https://developers.google.com/web/showcase ( First Input Delay)
+https://web.dev/speed-index/ (speed-index)
+https://web.dev/tbt/ (Total Blocking Time)
+https://web.dev/lcp/ (Largest Contentful Paint)
+https://web.dev/cls/ (Cumulative Layout Shift)
+https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event ( DOMContentLoaded )
+[Chrome Dev Summit 2019，你需要知道关于前端性能的内容都在这里](https://juejin.im/post/5dd6682e6fb9a05a7e67123b#heading-2)
+https://developers.google.com/web/fundamentals/performance/user-centric-performance-metrics#耗时较长的任务
+
+### performance 属性说明
+### 【性能指标落地】
+
+## 3. 优选课分析
+1. 页面加载时长分析 
+2. performance看板
+3. 性能优化前
+4. 性能优化后
+
+## 4.性能展示及准则确定
+1. 性能日志如何上报
+利用现有日志，c.gif上报性能日志进行统计分析
+2. 性能看板展示
+使用华佗系统性能看板，进行性能展示
+3.需要解决的问题
+（1） 投入人力构建性能监控看板，满足我们的需求
+（2）制定合理准则
+
+
+ -->
+<hr>
+<!-- 
+# 自动化埋点 
+-->
+<h1 id="A-前端监控"><a href="#A-前端监控" class="headerlink" title="A 前端监控"></a>A 前端监控</h1><!-- [b、前端监控](https://wiki.zhiyinlou.com/pages/viewpage.action?pageId=90438680) -->
+<h2 id="前端监控目标"><a href="#前端监控目标" class="headerlink" title="前端监控目标"></a>前端监控目标</h2><h3 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h3><p>1）JS错误：执行错误&amp;promise异常<br>1）资源错误：script/link等资源加载异常<br>1）接口错误 ajax/fetch请求接口异常</p>
+<h3 id="用户体验"><a href="#用户体验" class="headerlink" title="用户体验"></a>用户体验</h3><p>1）加载时间<br>1）TTFB（首字节时间）<br>1）FP（首次绘制）<br>1）FCP（首次内容绘制）<br>1）FMP（首次有意义绘制）<br>1）FID（首次输入延迟）：用户首次和页面交互到页面响应交互的时间<br>1）卡顿</p>
+<h3 id="业务"><a href="#业务" class="headerlink" title="业务"></a>业务</h3><p>pv,uv,页面停留时间  等</p>
+<h2 id="前端监控流程"><a href="#前端监控流程" class="headerlink" title="前端监控流程"></a>前端监控流程</h2><p>1）前端埋点<br>1）数据采集<br>1）数据建模存储<br>1）数据传输（实时/传输）<br>1）数据统计（分析/挖掘）<br>1）数据可视化反馈/报告和报警</p>
+<h2 id="RAIL测量模型"><a href="#RAIL测量模型" class="headerlink" title="RAIL测量模型"></a>RAIL测量模型</h2><p>1）<a href="https://web.dev/rail/" target="_blank" rel="noopener">RAIL测量模型</a>：Response 响应，给用户的响应体验、Animation 动画、Idle 空闲，主线程的空闲时间、Load 加载空闲<br>1）响应：处理事件应在50ms 以内完成<br>1）动画：每10ms产生一帧（60fps:一秒60帧，需考虑浏览器的绘制时间，大约6ms）<br>1）空闲：尽可能增加空闲时间<br>1）加载：在5s内完成内容加载并可以交互</p>
+<h2 id="B-错误捕获"><a href="#B-错误捕获" class="headerlink" title="B 错误捕获"></a>B 错误捕获</h2><h3 id="1-脚本错误监控"><a href="#1-脚本错误监控" class="headerlink" title="1 脚本错误监控"></a>1 脚本错误监控</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ### 常规脚本错误</span></span><br><span class="line"><span class="comment">// 1) try catch : 侵入式捕获错误，需在开发代码时在可能发生错误的代码片段中嵌入</span></span><br><span class="line"><span class="comment">// 2) error事件 捕获常规脚本错误</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description </span>window.onerror 全局捕获错误</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>event 错误信息，如果是</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>source 错误源文件URL</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>lineno 行号</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>colno 列号</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>error Error对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">window</span>.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">event, source, lineno, colno, error</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 上报错误</span></span><br><span class="line">  <span class="comment">// 如果不想在控制台抛出错误，只需返回 true 即可</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>event 事件名</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>function 回调函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>useCapture 回调函数是否在捕获阶段执行，默认是false，在冒泡阶段执行</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'error'</span>, (event) =&gt; &#123;</span><br><span class="line">  <span class="comment">// addEventListener 回调函数的离散参数全部聚合在 error 对象中</span></span><br><span class="line">  <span class="comment">// 上报错误</span></span><br><span class="line">&#125;, <span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* ### 2 Promise错误</span></span><br><span class="line"><span class="comment">当 Promise 被 reject 且没有 reject 处理器的时候，会触发 unhandledrejection 事件。</span></span><br><span class="line"><span class="comment">当 Promise 被 reject 且有 reject 处理器的时候，会触发 rejectionhandled 事件 */</span></span><br><span class="line"><span class="comment">// unhandledrejection 推荐处理方案</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'unhandledrejection'</span>, (event) =&gt; &#123;</span><br><span class="line"><span class="built_in">console</span>.log(event)</span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// rejectionhandled 推荐处理方案</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'rejectionhandled'</span>, (event) =&gt; &#123;</span><br><span class="line"><span class="built_in">console</span>.log(event)</span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ### 3 框架错误</span></span><br><span class="line">捕获vue框架错误</span><br><span class="line">Vue.config.errorHandler = <span class="function"><span class="keyword">function</span> (<span class="params">err, vm, info</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// handle error</span></span><br><span class="line">  <span class="comment">// `info` 是 Vue 特定的错误信息，比如错误所在的生命周期钩子</span></span><br><span class="line">  <span class="comment">// 只在 2.2.0+ 可用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-请求错误监控"><a href="#2-请求错误监控" class="headerlink" title="2 请求错误监控"></a>2 请求错误监控</h3><p>axios: 在请求拦截器以及响应拦截器进行处理上报</p>
+<h3 id="3-资源错误监控"><a href="#3-资源错误监控" class="headerlink" title="3 资源错误监控"></a>3 资源错误监控</h3><p>脚本错误参数对象 instanceof ErrorEvent<br>资源错误的参数对象 instanceof Event<br>ErrorEvent 继承于 Event<br>资源错误在捕获阶段被捕获<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>event 事件名</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>function 回调函数</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>useCapture 回调函数是否在捕获阶段执行，默认是false，在冒泡阶段执行</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'error'</span>, (event) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (event <span class="keyword">instanceof</span> ErrorEvent) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'脚本错误'</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (event <span class="keyword">instanceof</span> Event) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'资源错误'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-跨域脚本错误捕获"><a href="#4-跨域脚本错误捕获" class="headerlink" title="4 跨域脚本错误捕获"></a>4 跨域脚本错误捕获</h3><p>在 script 标签中，添加 crossorigin 属性；同时，配置 CDN 服务器，为跨域脚本配上 CORS（存在兼容性问题，crossorigin 属性对于 IE 以及 Safari 支持程度不高）</p>
+<p style="text-align:right">22:12 </p><br><p style="text-align:right"> 2020.10.22 星期四  14：32 </p>
+
+
+
+<h1 id="C-性能指标"><a href="#C-性能指标" class="headerlink" title="C 性能指标"></a>C 性能指标</h1><!-- [c、h5 sdk 性能指标上报梳理](https://wiki.zhiyinlou.com/pages/viewpage.action?pageId=94196228) -->
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> t;</span><br><span class="line"><span class="keyword">var</span> _performance = <span class="built_in">window</span>.performance || <span class="built_in">window</span>.msPerformance || <span class="built_in">window</span>.webkitPerformance;</span><br><span class="line">t = _performance.getEntriesByType(<span class="string">'navigation'</span>)[<span class="number">0</span>] || _performance.timing</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>计算方式</th>
+<th>描述 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fcp</td>
+<td>perfEntries[key].startTime.toFixed(0) * 1</td>
+<td>首次内容绘制  </td>
+</tr>
+<tr>
+<td>tcp</td>
+<td>t.connectEnd - t.connectStart</td>
+<td>TCP 建立连接完成握手的时间 </td>
+</tr>
+<tr>
+<td>dns</td>
+<td>t.domainLookupEnd - t.domainLookupStart</td>
+<td></td>
+<td>0</td>
+<td>DNS 查询时间 </td>
+</tr>
+<tr>
+<td>ttfb</td>
+<td>t.responseStart - t.requestStart</td>
+<td>Time to First Byte，读取页面第一个字节的时间 </td>
+</tr>
+<tr>
+<td>trans</td>
+<td>t.responseEnd - t.responseStart</td>
+<td>内容加载完成的时间 </td>
+</tr>
+<tr>
+<td>dom</td>
+<td>t.domInteractive - t.responseEnd</td>
+<td></td>
+</tr>
+<tr>
+<td>res</td>
+<td>t.loadEventStart - t.domContentLoadedEventEnd</td>
+<td></td>
+</tr>
+<tr>
+<td>ssl</td>
+<td>t.connectEnd - t.secureConnectionStart</td>
+<td></td>
+</tr>
+<tr>
+<td>firstbyte</td>
+<td>t.responseStart - t.domainLookupStart</td>
+<td></td>
+</tr>
+<tr>
+<td>fp</td>
+<td>var perfEntries = _performance.getEntries(); perfEntries[key].startTime.toFixed(0) * 1 &gt; t.responseEnd - t.fetchStart</td>
+<td>首次绘制 </td>
+</tr>
+<tr>
+<td>tti</td>
+<td>t.domInteractive - t.fetchStart</td>
+<td></td>
+</tr>
+<tr>
+<td>ready</td>
+<td>t.domContentLoadedEventEnd - t.fetchStart</td>
+<td></td>
+</tr>
+<tr>
+<td>load</td>
+<td>t.loadEventStart - t.fetchStart</td>
+<td></td>
+</tr>
+<tr>
+<td>effectiveType</td>
+<td>window.navigator.connection.effectiveType</td>
+<td>网络类型（草案）  </td>
+</tr>
+<tr>
+<td>downlink</td>
+<td>window.navigator.connection.downlink</td>
+<td>网络下行速度（草案）  </td>
+</tr>
+<tr>
+<td>rtt</td>
+<td>window.navigator.connection.rtt</td>
+<td>估算的往返时间（草案）  </td>
+</tr>
+<tr>
+<td>platform</td>
+<td>window.navigator.platform</td>
+<td>运行浏览器的操作系统和（或）硬件平台  </td>
+</tr>
+<tr>
+<td>rd</td>
+<td>如下</td>
+<td>重定向耗时</td>
+</tr>
+</tbody>
+</table>
+<p>// rd 计算<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (t.navigationStart !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">  pData.rd = t.fetchStart - t.navigationStart</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (t.redirectEnd !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">  pData.rd = t.redirectEnd - t.redirectStart</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  pData.rd = <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="C-补充-1-performance-属性说明"><a href="#C-补充-1-performance-属性说明" class="headerlink" title="C_补充 1 performance 属性说明"></a>C_补充 1 performance 属性说明</h1><!-- [performance 属性说明](https://wiki.zhiyinlou.com/pages/viewpage.action?pageId=90425949) -->
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">  performance = &#123;</span><br><span class="line">    <span class="comment">// memory 是非标准属性，只在 Chrome 有</span></span><br><span class="line">    <span class="comment">// 这个属性提供了一个可以获取到基本内存使用情况的对象</span></span><br><span class="line">    memory: &#123;</span><br><span class="line">        usedJSHeapSize: <span class="number">10000000</span>, <span class="comment">// JS 对象（包括V8引擎内部对象）占用的内存</span></span><br><span class="line">        totalJSHeapSize: <span class="number">10000000</span>, <span class="comment">// 可使用的内存</span></span><br><span class="line">        jsHeapSizeLimit: <span class="number">2190000000</span> <span class="comment">// 内存大小限制</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// navigation: 提供操作（包含在 timing 里时间）的有用上下文</span></span><br><span class="line">    <span class="comment">// 包括页面是加载还是刷新、发生了多少次重定向，等等。</span></span><br><span class="line">    navigation: &#123;</span><br><span class="line">        redirectCount: <span class="number">0</span>, <span class="comment">// 重定向次数</span></span><br><span class="line">        type: <span class="number">0</span> <span class="comment">// 0 正常进入的页面（即非刷新、非重定向等）</span></span><br><span class="line">        <span class="comment">// 1 通过 window.location.reload() (即刷新页面)</span></span><br><span class="line">        <span class="comment">// 2 通过浏览器的前进后退按钮进入的页面（历史记录）</span></span><br><span class="line">        <span class="comment">// 255 非以上方式进入的页面</span></span><br><span class="line">    &#125;,</span><br><span class="line">    timing: &#123;</span><br><span class="line">        <span class="comment">// 同一个浏览器上下文的上一个文档卸载(unload)结束时的UNIX时间戳。</span></span><br><span class="line">        <span class="comment">//如果没有上一个文档，这个值会和fetchStart相同。</span></span><br><span class="line">        navigationStart: <span class="number">1441112691935</span>,</span><br><span class="line">        <span class="comment">// 上一个文档unload事件抛出时的UNIX时间戳。</span></span><br><span class="line">        <span class="comment">//如果没有上一个文档,这个值会返回0.</span></span><br><span class="line">        unloadEventStart: <span class="number">0</span>,</span><br><span class="line">        <span class="comment">// 和 unloadEventStart 相对应，unload事件处理完成时的UNIX时间戳。</span></span><br><span class="line">        <span class="comment">//如果没有上一个文档,这个值会返回0.</span></span><br><span class="line">        unloadEventEnd: <span class="number">0</span>,</span><br><span class="line">        <span class="comment">// 第一个HTTP重定向开始时的UNIX时间戳。</span></span><br><span class="line">        <span class="comment">//如果没有重定向，或者重定向中的一个不同源，这个值会返回0.</span></span><br><span class="line">        redirectStart: <span class="number">0</span>,</span><br><span class="line">        <span class="comment">// 最后一个HTTP重定向完成时（也就是说是HTTP响应的最后一个比特直接被收到的时间）的UNIX时间戳。</span></span><br><span class="line">        <span class="comment">//如果没有重定向，或者重定向中的一个不同源，这个值会返回0.</span></span><br><span class="line">        redirectEnd: <span class="number">0</span>,</span><br><span class="line">        <span class="comment">// 浏览器准备好使用HTTP请求来获取(fetch)文档的UNIX时间戳。这个时间点会在检查任何应用缓存之前。</span></span><br><span class="line">        fetchStart: <span class="number">1441112692155</span>,</span><br><span class="line">        <span class="comment">// DNS 域名查询开始的UNIX时间戳。</span></span><br><span class="line">        <span class="comment">//如果使用了持续连接(persistent connection)，或者这个信息存储到了缓存或者本地资源上，这个值将和fetchStart一致。</span></span><br><span class="line">       domainLookupStart: <span class="number">1441112692155</span>,</span><br><span class="line">       <span class="comment">// DNS 域名查询完成的时间.</span></span><br><span class="line">       <span class="comment">// 如果使用了本地缓存（即无 DNS 查询）或持久连接，则与 fetchStart 值相等</span></span><br><span class="line">       domainLookupEnd: <span class="number">1441112692155</span>,</span><br><span class="line">       <span class="comment">// HTTP（TCP） 域名查询结束的UNIX时间戳。</span></span><br><span class="line">       <span class="comment">// 如果使用了持续连接(persistent connection)，或者这个信息存储到了缓存或者本地资源上，这个值将和 fetchStart一致。</span></span><br><span class="line">       connectStart: <span class="number">1441112692155</span>,</span><br><span class="line">       <span class="comment">// HTTP（TCP） 返回浏览器与服务器之间的连接建立时的Unix毫秒时间戳。</span></span><br><span class="line">       <span class="comment">// 如果建立的是持久连接，则返回值等同于fetchStart属性的值。</span></span><br><span class="line">       <span class="comment">// 连接建立指的是所有握手和认证过程全部结束。</span></span><br><span class="line">       connectEnd: <span class="number">1441112692155</span>,</span><br><span class="line">       <span class="comment">// HTTPS 返回浏览器与服务器开始安全链接的握手时的Unix毫秒时间戳。</span></span><br><span class="line">       <span class="comment">// 如果当前网页不要求安全连接，则返回0。</span></span><br><span class="line">       secureConnectionStart: <span class="number">0</span>,</span><br><span class="line">       <span class="comment">// 返回浏览器向服务器发出HTTP请求时（或开始读取本地缓存时）的Unix毫秒时间戳。</span></span><br><span class="line">       requestStart: <span class="number">1441112692158</span>,</span><br><span class="line">       <span class="comment">// 返回浏览器从服务器收到（或从本地缓存读取）第一个字节时的Unix毫秒时间戳。</span></span><br><span class="line">       <span class="comment">// 如果传输层在开始请求之后失败并且连接被重开，该属性将会被数制成新的请求的相对应的发起时间。</span></span><br><span class="line">       responseStart: <span class="number">1441112692686</span>,</span><br><span class="line">       <span class="comment">// 返回浏览器从服务器收到（或从本地缓存读取，或从本地资源读取）最后一个字节时（如果在此之前HTTP连接已经关闭，则返回关闭时）的Unix毫秒时间戳。</span></span><br><span class="line">       responseEnd: <span class="number">1441112692687</span>,</span><br><span class="line">       <span class="comment">// 当前网页DOM结构开始解析时（即Document.readyState属性变为“loading”、相应的 readystatechange事件触发时）的Unix毫秒时间戳。</span></span><br><span class="line">       domLoading: <span class="number">1441112692690</span>,</span><br><span class="line">       <span class="comment">// 当前网页DOM结构结束解析、开始加载内嵌资源时（即Document.readyState属性变为“interactive”、相应的readystatechange事件触发时）的Unix毫秒时间戳。</span></span><br><span class="line">       domInteractive: <span class="number">1441112693093</span>,</span><br><span class="line">       <span class="comment">// 当解析器发送DOMContentLoaded 事件，即所有需要被执行的脚本已经被解析时的Unix毫秒时间戳。</span></span><br><span class="line">       domContentLoadedEventStart: <span class="number">1441112693093</span>,</span><br><span class="line">       <span class="comment">// 当所有需要立即执行的脚本已经被执行（不论执行顺序）时的Unix毫秒时间戳。</span></span><br><span class="line">       domContentLoadedEventEnd: <span class="number">1441112693101</span>,</span><br><span class="line">       <span class="comment">// 当前文档解析完成，即Document.readyState 变为 'complete'且相对应的readystatechange 被触发时的Unix毫秒时间戳</span></span><br><span class="line">       domComplete: <span class="number">1441112693214</span>,</span><br><span class="line">       <span class="comment">// load事件被发送时的Unix毫秒时间戳。如果这个事件还未被发送，它的值将会是0。</span></span><br><span class="line">       loadEventStart: <span class="number">1441112693214</span>,</span><br><span class="line">       <span class="comment">// 当load事件结束，即加载事件完成时的Unix毫秒时间戳。如果这个事件还未被发送，或者尚未完成，它的值将会是0.</span></span><br><span class="line">       loadEventEnd: <span class="number">1441112693215</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="通过这些属性-能够计算出一些重要的网页性能数据"><a href="#通过这些属性-能够计算出一些重要的网页性能数据" class="headerlink" title="通过这些属性, 能够计算出一些重要的网页性能数据"></a>通过这些属性, 能够计算出一些重要的网页性能数据</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// ## 计算加载时间</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getPerformanceTiming</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> performance = <span class="built_in">window</span>.performance;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!performance) &#123;</span><br><span class="line">      <span class="comment">// 当前浏览器不支持</span></span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> &#123; loadEventEnd, navigationStart, domComplete, responseEnd, redirectEnd, redirectStart, domainLookupEnd, domainLookupStart, responseStart, requestStart,         loadEventStart, fetchStart, unloadEventEnd, unloadEventStart, connectEnd, connectStart &#125; = performance.timing;</span><br><span class="line">    <span class="keyword">const</span> times = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//页面加载完成的时间</span></span><br><span class="line">    times.loadPage = loadEventEnd - navigationStart;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//【重要】解析 DOM 树结构的时间</span></span><br><span class="line">    times.domReady = domComplete - responseEnd;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//  重定向的时间</span></span><br><span class="line">    times.redirect = redirectEnd - redirectStart;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//【重要】DNS 查询时间</span></span><br><span class="line">    times.lookupDomain = domainLookupEnd - domainLookupStart;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//【重要】读取页面第一个字节的时间</span></span><br><span class="line">    <span class="comment">//  TTFB 即 Time To First Byte</span></span><br><span class="line">    times.ttfb = responseStart - navigationStart;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//【重要】内容加载完成的时间</span></span><br><span class="line">    times.request = responseEnd - requestStart;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//【重要】执行 onload 回调函数的时间</span></span><br><span class="line">    times.loadEvent = loadEventEnd - loadEventStart;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// DNS 缓存时间</span></span><br><span class="line">    times.appcache = domainLookupStart - fetchStart;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 卸载页面的时间</span></span><br><span class="line">    times.unloadEvent = unloadEventEnd - unloadEventStart;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// TCP 建立连接完成握手的时间</span></span><br><span class="line">    times.connect = connectEnd - connectStart;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> times;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="C-补-2-性能指标落地"><a href="#C-补-2-性能指标落地" class="headerlink" title="C_补 2 性能指标落地"></a>C_补 2 性能指标落地</h1><!-- [【性能指标落地】](https://wiki.zhiyinlou.com/pages/editpage.action?pageId=91864557) -->
+<h2 id="1-指标获取方式"><a href="#1-指标获取方式" class="headerlink" title="1. 指标获取方式"></a>1. 指标获取方式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ## （1）navigation相关: performance.getEntriesByType('navigation')[0]  ||  performance.timing</span></span><br><span class="line"><span class="comment">// 获取navigation-time</span></span><br><span class="line"><span class="keyword">let</span> _performance = <span class="built_in">window</span>.performance || <span class="built_in">window</span>.msPerformance || <span class="built_in">window</span>.webkitPerformance;</span><br><span class="line"><span class="keyword">let</span> timing = _performance.getEntriesByType &amp;&amp; _performance.getEntriesByType(<span class="string">'navigation'</span>) &amp;&amp; _performance.getEntriesByType(<span class="string">'navigation'</span>)[<span class="number">0</span>] || performance.timing</span><br><span class="line"></span><br><span class="line"><span class="comment">// ##（2）Paint相关：</span></span><br><span class="line"><span class="comment">// 获取首次绘制时间、首次内容绘制 || 不需要通过遍历获取 first-contentful-pain 和 first-paint</span></span><br><span class="line"><span class="keyword">var</span> perfEntries = _performance.getEntries();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> perfEntries) &#123; <span class="keyword">if</span>() &#123;&#125; &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-通过上述方式获取到的指标及其含义"><a href="#2-通过上述方式获取到的指标及其含义" class="headerlink" title="2. 通过上述方式获取到的指标及其含义"></a>2. 通过上述方式获取到的指标及其含义</h2><p>(1)  navigation-time<br>(2)  paint<br>performance.getEntriesByType(‘paint’) // 返回数组包含 [PerformancePaintTiming, PerformancePaintTiming]<br>分别为：first-contentful-paint， first-paint<br>PerformancePaintTiming    : <code>{duration: 0, entryType: &quot;paint&quot;, name: &quot;first-paint&quot;, startTime: 552.2650000057183 }</code></p>
+<h2 id="3-常用分析指标及计算方式"><a href="#3-常用分析指标及计算方式" class="headerlink" title="3. 常用分析指标及计算方式"></a>3. 常用分析指标及计算方式</h2><p>dns, tcp, ttfb, trans,<br>dom, res, ssl, firstbyte, tti, ready, load,<br>fp, fcp, fmp, …<br><!-- $_PS: 见上文  性能指标 --></p>
+<p>新的性能指标：LCP、TBT、CLS<br>最大内容渲染 (Largest Contentful Paint - LCP), 页面阻塞总时长(Total Blocking Time - TBT) 和 累积布局位移 (Cumulative Layout Shift - CLS) 代表了新一代的性能数据，这些指标将更加聚焦于用户真实体验，而不仅仅是初始化加载时间例如首次内容加载时间（FCP）和首次有意义内容加载（FMP）。<br><!-- [Chrome Dev Summit 2019，你需要知道关于前端性能的内容都在这里](https://juejin.im/post/5dd6682e6fb9a05a7e67123b#heading-2) --></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"><i class="fa fa-tag"></i> javascript</a>
+          
+            <a href="/tags/optimise/" rel="tag"><i class="fa fa-tag"></i> optimise</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/others/jenkins实践/" rel="next" title="Jenkins 实践">
+                <i class="fa fa-chevron-left"></i> Jenkins 实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/w3/web性能/window performance/" rel="prev" title="Performance">
+                Performance <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-前端监控"><span class="nav-text">A 前端监控</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前端监控目标"><span class="nav-text">前端监控目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#稳定性"><span class="nav-text">稳定性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户体验"><span class="nav-text">用户体验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#业务"><span class="nav-text">业务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端监控流程"><span class="nav-text">前端监控流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAIL测量模型"><span class="nav-text">RAIL测量模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-错误捕获"><span class="nav-text">B 错误捕获</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-脚本错误监控"><span class="nav-text">1 脚本错误监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-请求错误监控"><span class="nav-text">2 请求错误监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-资源错误监控"><span class="nav-text">3 资源错误监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-跨域脚本错误捕获"><span class="nav-text">4 跨域脚本错误捕获</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-性能指标"><span class="nav-text">C 性能指标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-补充-1-performance-属性说明"><span class="nav-text">C_补充 1 performance 属性说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通过这些属性-能够计算出一些重要的网页性能数据"><span class="nav-text">通过这些属性, 能够计算出一些重要的网页性能数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-补-2-性能指标落地"><span class="nav-text">C_补 2 性能指标落地</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-指标获取方式"><span class="nav-text">1. 指标获取方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-通过上述方式获取到的指标及其含义"><span class="nav-text">2. 通过上述方式获取到的指标及其含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-常用分析指标及计算方式"><span class="nav-text">3. 常用分析指标及计算方式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

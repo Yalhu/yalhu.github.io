@@ -1,0 +1,72 @@
+<!-- [微前端的那些事](http://xingyun.jd.com/shendeng/article/detail/2403?forumId=27&jdme_router=jdme%3A%2F%2Fweb%2F202206081297%3Furl%3Dhttps%3A%2F%2Fshendengh5.jd.com%2FarticleDetail%3Fid%3D2403) 
+@霍中意 2022-06-12 23:39:35
+-->
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>首先介绍一下微前端，微前端是一种类似于微服务的架构，是一种由独立交付的多个前端应用组成整体的架构风格，将前端应用分解成一些更小、更简单的能够独立开发、测试、部署的应用，而在用户看来仍然是内聚的单个产品。</p>
+<p>微前端不是一门技术，而是整合技术、策略和方法，目前市面上有很多解决方案，比如脚手架、辅助插件和规范约束等。虽然有很多方案但是只要适用前端业务场景就是好的方案。</p>
+<p>微前端诞生在两个大的背景下，在提倡拥抱变化的前端社区可以看到新的框架、技术、概念层出不穷，并且随着 Web 标准的演进，前端应用已经具备更好的性能、更快的开发效率。但随着而来的是应用的复杂程度更高、涉及的团队规模更广、更高的性能要求，应用复杂度已经成为阻塞业务发展的重要瓶颈。</p>
+<h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>目前国内市场微前端也是各种各样，但是还是主要解决一下痛点就能完整得将微前端框架输入：</p>
+<ul>
+<li>加载器（Loader）</li>
+<li>沙箱隔离（Sandbox）</li>
+<li>路由托管（Router）</li>
+<li>子应用通信（Store）</li>
+</ul>
+<p>下面介绍一下目前业界反响还不错的微前端架构以及他们的思路</p>
+<h3 id="single-spa"><a href="#single-spa" class="headerlink" title="single-spa"></a>single-spa</h3><p>single-spa 是一个用于前端微服务化的 JavaScript 前端解决方案 (本身没有处理样式隔离， js 执行隔离) 实现了路由劫持和应用加载。也是比较早的作出微前端的框架，下面的几个框架也是借鉴了不少内容。</p>
+<p>通过主项目提供注册逻辑、子应用提供三个协议接入方法和打包格式</p>
+<p>single-spa只是实现了加载器、路由托管。沙箱隔离并没有实现。因此它只支持单应用的场景。</p>
+<h3 id="qiankun"><a href="#qiankun" class="headerlink" title="qiankun"></a>qiankun</h3><p>这个框架是阿里出品的，也是比较早的微前端处理方式。总结来说它有以下特点：</p>
+<ul>
+<li>简单——任意 js 框架均可使用。微应用接入像使用接入一个 iframe 系统一样简单，但实际不是 iframe。</li>
+<li>完备——几乎包含所有构建微前端系统时所需要的基本能力，如 样式隔离、js 沙箱、预加载等。</li>
+<li>生产可用——已在蚂蚁内外经受过足够大量的线上系统的考验及打磨，健壮性值得信赖。<br>API这些就去官网看就行了。</li>
+</ul>
+<p>路由劫持是通过single-spa去做的，它的加载则是通过fetch来获取当前子应用的html字符串，拿到之后通过一系列正则匹配去获取js、css、注释、入口文件等。css则是获取到文件后用style包裹一下嵌入到html中。js则是获取完相应的文件通过eval去执行上下文。</p>
+<p>再说一下隔离吧，沙箱隔离是微前端得重中之重。qiankun得js沙箱隔离分三种方式</p>
+<ul>
+<li>legacySandBox</li>
+<li>proxySandBox</li>
+<li>snapshotSandBox<br>legacySandBox、proxySandBox 是基于 Proxy API 来实现的，在不支持 Proxy API 的低版本浏览器中，会降级为 snapshotSandBox。在现版本中，legacySandBox 仅用于 singular 单实例模式，而多实例模式会使用 proxySandBox。</li>
+</ul>
+<p>简单得介绍一下，legacySandBox还是从windows上面入手的，他是分三个状态：子应用新增全局变量、自应用更新全局变量、还原自应用。</p>
+<p>proxy 其实就是在子应用状态更新后来监听，保存当前状态。让收到影响主应用或者其它子应用获取当前状态并保存起来以便还原子应用</p>
+<p>在聊一下proxySandBox， 它不会直接操作 window 对象。并且为了避免子应用操作或者修改主应用上诸如 window、document、location 这些重要的属性，会遍历这些属性到子应用 window 副本（fakeWindow）上。用户在操作的过程中去吧当前运行子应用的状态保存到该沙箱下。</p>
+<p>最后说snapshotSandBox，这个就很简单了，它是为了兼容ie等低版本浏览器不支持proxy得情况，通过快照的方式去实现，其实就是在子应用激活合卸载的状态去保存当前节点信息进行存储。</p>
+<p>css隔离就简单很多了，通过约定式将html和css保证相同得根节点信息就可以了。</p>
+<h3 id="MicroApp"><a href="#MicroApp" class="headerlink" title="MicroApp"></a>MicroApp</h3><p>MicroApp我们jd开发的一款基于类WebComponent进行渲染的微前端框架，它是以组件的思维去实现的，它有以下特性：</p>
+<ul>
+<li>JS沙箱</li>
+<li>样式隔离</li>
+<li>元素隔离</li>
+<li>数据通信</li>
+<li>插件系统</li>
+<li>预加载<br>实现方式其实就是2个概念：HTML Entry和类WebComponent。</li>
+</ul>
+<p>HTML Entry其实就是上面我提到qiankun得实现方式，通过加载远程html，去解析其 Dom 结构从而获取js、css等静态资源来实现渲染。</p>
+<p>类WebComponent其实是将CustomElement结合自定义的ShadowDom实现WebComponent基本一致的功能。这里简单的介绍一下WebComponent，它有两个东西：</p>
+<ul>
+<li>CustomElement 创建自定义标签</li>
+<li>ShadowDom 创建阴影DOM，天然具备样式隔离和元素隔离<br>ShadowDom 有兼容性，这里我们自定义的样式隔离和元素隔离实现ShadowDom类似的功能，然后将微前端应用封装在一个CustomElement中，从而模拟实现了一个类WebComponent组件，它的使用方式和兼容性与WebComponent一致，同时也避开了ShadowDom的问题</li>
+</ul>
+<p>js隔离原理上跟qiankun是一样的，通过proxy代理自应用的全局对象，防止应用之间全局变量的冲突。</p>
+<p>API大家看官网就行了。Micro App不需要像single-spa和qiankun一样要求子应用修改渲染逻辑并暴露出方法，也不需要跟 Emp 修改webpack配置</p>
+<h3 id="Emp"><a href="#Emp" class="headerlink" title="Emp"></a>Emp</h3><p>Emp是YY前端团队开发得一款微前端的解决方案，目前在YY场景下被广泛实验。介绍下它的特性：</p>
+<ul>
+<li>结合webpack5、Module Federation的丰富项目实战、建立三层共享模型</li>
+<li>结合SWC进行bundle编译构建、提升整体构建速度</li>
+<li>对 TypeScript、JSX、CSS、Less、Sass 等支持开箱即用</li>
+<li>可选 “多页应用” 或 “库” 模式的预配置 webpack 构建</li>
+<li>在开发和构建之间共享 webpack chain 插件接口<br>这上面的特性，其实最主要的东西还是webpack5 Module Federation。介绍一下Module Federatio，翻译过来就是模块联邦，多个独立的构建可以形成一个应用程序。这些独立的构建不会相互依赖，因此可以单独开发和部署它们。<br>这通常被称为微前端，但并不仅限于此。</li>
+</ul>
+<p>每个构建都充当容器，并且还将其他构建用作容器。这样，每个构建都可以通过从其容器中加载来访问任何其他公开的模块。其实就是把每个构建当作一个容器，其它的模块都可以在这个容器里面记载，这样就可以动态去加载别的容器。这里简单的介绍了一下，细节还是看官方文档吧。</p>
+<p>Emp通过这一套Module Federation去配置webpack，将我们项目按照模块联邦的方式去实现。</p>
+<p>还有一点目前微前端框架中Emp是支持SSR的。</p>
+<h3 id="无界"><a href="#无界" class="headerlink" title="无界"></a>无界</h3><p>无界则是腾讯推出的一款微前端解决方式。它是一种基于 iframe的全新微前端方案，继承iframe的优点，补足 iframe 的缺点，让 iframe 焕发新生。这种方式有它的优点也有缺点，优点是：非常简单，使用没有任何心智负担；隔离完美，无论是 js、css、dom 都完全隔离开来；多应用激活，页面上可以摆放多个iframe来组合业务。缺点也很明显路由状态丢失，刷新一下，iframe 的 url 状态就丢失了；dom 割裂严重，弹窗只能在 iframe；内部展示，无法覆盖全局；通信非常困难，只能通过 postmessage 传递序列化的消息。</p>
+<p>路由的问题，通过iframe的url，iframe保持和主应用同域但是保留子应用的路径信息，这样子应用的js可以运行在iframe的location和history中保持路由正确</p>
+<p>dom得割裂，主应用提供一个容器给到shadowRoot插拔，shadowRoot内部的弹窗也就可以覆盖到整个应用。</p>
+<p>通信的话，则是通过主应用和子应用同域名的特性，天然的共享内存通信</p>
+<p>白屏的问题就很好解决了，通过实例化，提前将shadowRoot、iframe进行创建和解析。实例化后就可以讲子应用缓存起来，打开速度就会很快。</p>
+<p>白屏时间太长，对于SPA 应用应用来说无法接受</p>
+<h3 id="Garfish"><a href="#Garfish" class="headerlink" title="Garfish"></a>Garfish</h3><p>该框架是字节团队提出的一款微前端解决方案，其中得原理跟上面的qiankun也差不多。</p>
+<p>沙箱的话通过两种方式：快照和Vm。快照就不用说了，Vm其实就是利用proxy去建立宿主环境执行代码。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>微前端是前端发展的必然阶段。目前微前端框架百花齐放，每个框架都有自己的优缺点，大家根据自己得项目去选择自己好用的即可。微前端并非是最好的，它只是解决项目复杂性、代码管控等问题的一种方式，但对于我们得架构设计更加具有挑战性。</p>

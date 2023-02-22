@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="2021.6.26 星期六  11：47    ORM 介绍 ORM（Object Relational Mapping，对象关系映射），是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术，通过描述对象和数据库之间映射的元数据，把程序中的对象自动持久化到关系数据库中。它的作用是在关系型数据库和对象之间作一个映射，这样，我们在具体的操作数据库的时候，就不需要再去和复杂的SQL语句打交道，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nodejs Orm 框架">
+<meta property="og:url" content="http://yoursite.com/sum/server/nodejs orm框架/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="2021.6.26 星期六  11：47    ORM 介绍 ORM（Object Relational Mapping，对象关系映射），是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术，通过描述对象和数据库之间映射的元数据，把程序中的对象自动持久化到关系数据库中。它的作用是在关系型数据库和对象之间作一个映射，这样，我们在具体的操作数据库的时候，就不需要再去和复杂的SQL语句打交道，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-05-04T09:32:47.106Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nodejs Orm 框架">
+<meta name="twitter:description" content="2021.6.26 星期六  11：47    ORM 介绍 ORM（Object Relational Mapping，对象关系映射），是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术，通过描述对象和数据库之间映射的元数据，把程序中的对象自动持久化到关系数据库中。它的作用是在关系型数据库和对象之间作一个映射，这样，我们在具体的操作数据库的时候，就不需要再去和复杂的SQL语句打交道，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/server/nodejs orm框架/">
+
+
+
+
+
+  <title>Nodejs Orm 框架 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/server/nodejs orm框架/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Nodejs Orm 框架</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-26T08:00:00+08:00">
+                2021-06-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-05-04T17:32:47+08:00">
+                2022-05-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/server/" itemprop="url" rel="index">
+                    <span itemprop="name">server</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/server/nodejs orm框架/" class="leancloud_visitors" data-flag-title="Nodejs Orm 框架">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6,445
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  30
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p style="text-align:right"> 2021.6.26 星期六  11：47 </p>
+
+
+<h1 id="ORM-介绍"><a href="#ORM-介绍" class="headerlink" title="ORM 介绍"></a>ORM 介绍</h1><!-- \#1 [Node.js ORM框架 sequelize 入门](https://www.jianshu.com/p/07141d53f119) -->
+<p>ORM（Object Relational Mapping，对象关系映射），是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术，通过描述对象和数据库之间映射的元数据，把程序中的对象自动持久化到关系数据库中。<br>它的作用是在关系型数据库和对象之间作一个映射，这样，我们在具体的操作数据库的时候，就不需要再去和复杂的SQL语句打交道，只要像平时操作对象一样操作它就可以了 。</p>
+<p>ORM就是把业务实体中的对象与关系数据库中的关系数据关联起来。<br>对象-关系映射(ORM)系统一般以中间件的形式存在，主要实现程序对象到关系数据库数据的映射。</p>
+<p>ORM技术特点：</p>
+<ol>
+<li>提高了开发效率。ORM可以自动对Entity对象与数据库中的Table进行字段与属性的映射，所以我们实际可能已经不需要一个专用的、庞大的数据访问层。</li>
+<li>ORM提供了对数据库的映射，不用sql直接编码，能够像操作对象一样从数据库获取数据。</li>
+</ol>
+<p>ORM的优缺点：</p>
+<ol>
+<li>性能影响。面向对象的处理方式会对性能造成影响</li>
+<li>更多的系统层次会造成执行效率的降低。</li>
+</ol>
+<h2 id="常见框架"><a href="#常见框架" class="headerlink" title="常见框架"></a>常见框架</h2><p>常见的ORM框架</p>
+<p>Java系列：<br>Apache OJB<br>Hibernate：目前最流行的开源ORM框架<br>iBatic<br>Mybatis</p>
+<p>.Net系列：<br>NHibernate：面向.NET环境的对象/关系数据库映射工具<br>Linq to sql：适用于一些轻型的，小的ORM适用<br>EntitysCodeGenerate<br>PetaPoco</p>
+<p>Node.js系列：<br>ORM2:<a href="https://github.com/dresende/node-orm2" target="_blank" rel="noopener">https://github.com/dresende/node-orm2</a><br>sequelize：本文要研究的框架,较常用<br>Knex.js:官网：<a href="https://knexjs.org/" target="_blank" rel="noopener">https://knexjs.org/</a><br>TypeORM:采用 TypeScript 编写，支持使用 TypeScript 或 Javascript（ES5，ES6，ES7） 开发。目标是保持支持最新的 Javascript 特性来帮助开发各种用户数据库的应用 - 不管是轻应用还是企业级的<br><!-- END: #1 --></p>
+<h1 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h1><!-- \#3 [Nodejs之ORM框架](https://www.jianshu.com/p/0738e29d8af3) -->
+<!-- \#3 [Nodejs之ORM框架](https://dumplingbao.github.io/2019/08/29/node-orm/) -->
+<!-- java开发者目前主流的hibernate、mybatis很熟悉了，JDBC原始驱动的方式想必也不在成为主流了。下面介绍几款node的ORM框架，介绍之前先介绍ORM的两种模式： -->
+<h2 id="ORM的两种模式"><a href="#ORM的两种模式" class="headerlink" title="ORM的两种模式"></a>ORM的两种模式</h2><p>Active Record 模式：活动记录模式，领域模型模式一个模型类对应关系型数据库中的一个表，模型类的一个实例对应表中的一行记录。这个不难理解，比较简单，但是不够灵活，再看另一种模式，比较一下</p>
+<p>Data Mapper 模式：数据映射模式，领域模型对象和数据表是松耦合关系，只进行业务逻辑的处理，和数据层解耦。需要一个实体管理器来将模型和持久化层做对应，这样一来，灵活性就高，当然复杂性也增加了。</p>
+<p>所以说，Data Mapper模式对业务代码干预少，Active Record模式直接在对象上CRUD，代码编写也更方便，这就像hibernate和mybatis两种框架，如果想深入研究，可以了解一下贫血与充血领域对象的平衡。</p>
+<p>有这么一句话很认同，ActiveRecord更加适合快速开发成型的短期简单项目，而DataMapper更加适合长线开发，保持业务逻辑与数据存储独立的复杂项目。除此之外，技术选型还要考虑其他因素，比如项目历史背景等等。</p>
+<h2 id="TypeORM"><a href="#TypeORM" class="headerlink" title="TypeORM"></a>TypeORM</h2><p>TypeORM 是一个 ORM 框架，详细介绍见 TypeORM 官方介绍，TypeORM 也借鉴了hibernate，所以你会发现它特别熟悉，尤其是装饰类的方式。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实体model，user类</span></span><br><span class="line"><span class="keyword">import</span> &#123;Entity, PrimaryGeneratedColumn, Column&#125; <span class="keyword">from</span> <span class="string">"typeorm"</span>;</span><br><span class="line">@Entity()</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">​    @PrimaryGeneratedColumn()</span><br><span class="line">​    id: number;</span><br><span class="line"></span><br><span class="line">​    @Column()</span><br><span class="line">​    firstName: string;</span><br><span class="line"></span><br><span class="line">​    @Column()</span><br><span class="line">​    lastName: string;</span><br><span class="line"></span><br><span class="line">​    @Column()</span><br><span class="line">​    age: number;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// CRUD操作：逻辑层</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"reflect-metadata"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;createConnection&#125; <span class="keyword">from</span> <span class="string">"typeorm"</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;User&#125; <span class="keyword">from</span> <span class="string">"./entity/User"</span>;</span><br><span class="line"></span><br><span class="line">createConnection().then(<span class="keyword">async</span> connection =&gt; &#123;</span><br><span class="line">​    <span class="built_in">console</span>.log(<span class="string">"Inserting a new user into the database..."</span>);</span><br><span class="line">​    <span class="keyword">const</span> user = <span class="keyword">new</span> User();</span><br><span class="line">​    user.firstName = <span class="string">"Timber"</span>;</span><br><span class="line">​    user.lastName = <span class="string">"Saw"</span>;</span><br><span class="line">​    user.age = <span class="number">25</span>;</span><br><span class="line">​    <span class="keyword">await</span> connection.manager.save(user);</span><br><span class="line">​    <span class="built_in">console</span>.log(<span class="string">"Saved a new user with id: "</span> + user.id);</span><br><span class="line">​    <span class="built_in">console</span>.log(<span class="string">"Loading users from the database..."</span>);</span><br><span class="line">​    <span class="keyword">const</span> users = <span class="keyword">await</span> connection.manager.find(User);</span><br><span class="line">​    <span class="built_in">console</span>.log(<span class="string">"Loaded users: "</span>, users);</span><br><span class="line">​    <span class="built_in">console</span>.log(<span class="string">"Here you can setup and run express/koa/any other framework."</span>);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log(error));</span><br></pre></td></tr></table></figure></p>
+<!-- 所以，TypeORM的方式很像hibernate的方式，虽然es6中就已经有装饰器类似java的注解的功能了，但是还是和装饰器有所区别，因为TypeORM采用的是TypeScript 的方式，TypeScript 是 JavaScript 的一个超集，TypeScript 采用类型注解方式，虽然支持es6的标准，但是有些语法还是需要了解，这也或多或少增加了一些选择难度。 -->
+<h2 id="Sequelize"><a href="#Sequelize" class="headerlink" title="Sequelize"></a>Sequelize</h2><p>这个被star数最多了一个ORM框架，官方居然不给中文文档，找个CLI命令快速构建也没有，也没找到个合适轮子，只能自己搭了，也不是少了轮子就不能活了。不过Sequelize的官网文档看着很顺眼，<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// # 构建数据库访问公共文件db.js</span></span><br><span class="line"><span class="keyword">const</span> Sequelize = <span class="built_in">require</span>(<span class="string">'sequelize'</span>)</span><br><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">​    dbName,</span><br><span class="line">​    host,</span><br><span class="line">​    port,</span><br><span class="line">​    user,</span><br><span class="line">​    password</span><br><span class="line">&#125; = <span class="built_in">require</span>(<span class="string">'../config'</span>).database</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> sequelize = <span class="keyword">new</span> Sequelize(dbName, user, password, &#123;</span><br><span class="line">​    dialect: <span class="string">'mysql'</span>,</span><br><span class="line">​    host,</span><br><span class="line">​    port,</span><br><span class="line">​    logging: <span class="literal">true</span>,</span><br><span class="line">​    timezone: <span class="string">'+08:00'</span>,</span><br><span class="line">    dialect: <span class="string">'mysql'</span>|<span class="string">'sqlite'</span>|<span class="string">'postgres'</span>|<span class="string">'mssql'</span>,</span><br><span class="line">    pool: &#123;</span><br><span class="line">      max: <span class="number">5</span>,</span><br><span class="line">      min: <span class="number">0</span>,</span><br><span class="line">      idle: <span class="number">10000</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// SQLite only</span></span><br><span class="line">    storage: <span class="string">'path/to/database.sqlite'</span>,</span><br><span class="line">    <span class="comment">// operatorsAliases, // 定义别名。（可能不需要？？）</span></span><br><span class="line"></span><br><span class="line">​    define: &#123;</span><br><span class="line">​        <span class="comment">// create_time &amp;&amp; update_time</span></span><br><span class="line">​        timestamps: <span class="literal">true</span>,</span><br><span class="line">​        <span class="comment">// delete_time</span></span><br><span class="line">​        paranoid: <span class="literal">true</span>,</span><br><span class="line">​        createdAt: <span class="string">'created_at'</span>,</span><br><span class="line">​        updatedAt: <span class="string">'updated_at'</span>,</span><br><span class="line">​        deletedAt: <span class="string">'deleted_at'</span>,</span><br><span class="line">​        <span class="comment">// 把驼峰命名转换为下划线</span></span><br><span class="line">​        underscored: <span class="literal">true</span>,</span><br><span class="line">​        scopes: &#123;</span><br><span class="line">​            bh: &#123;</span><br><span class="line">​                attributes: &#123;</span><br><span class="line">​                    exclude: [<span class="string">'password'</span>, <span class="string">'updated_at'</span>, <span class="string">'deleted_at'</span>, <span class="string">'created_at'</span>]</span><br><span class="line">​                &#125;</span><br><span class="line">​            &#125;,</span><br><span class="line">​            iv: &#123;</span><br><span class="line">​                attributes: &#123;</span><br><span class="line">​                    exclude: [<span class="string">'content'</span>, <span class="string">'password'</span>, <span class="string">'updated_at'</span>, <span class="string">'deleted_at'</span>]</span><br><span class="line">​                &#125;</span><br><span class="line">​            &#125;</span><br><span class="line">​        &#125;</span><br><span class="line">​    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 创建模型</span></span><br><span class="line">sequelize.sync(&#123;</span><br><span class="line">​    force: <span class="literal">false</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">​    sequelize</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// # model</span></span><br><span class="line"><span class="keyword">const</span> &#123;Sequelize, Model&#125; = <span class="built_in">require</span>(<span class="string">'sequelize'</span>)</span><br><span class="line"><span class="keyword">const</span> &#123;db&#125; = <span class="built_in">require</span>(<span class="string">'../../db'</span>)</span><br><span class="line"><span class="comment">// ## //定义数据模型</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Model</span> </span>&#123;&#125;</span><br><span class="line">User.init(&#123;</span><br><span class="line">    <span class="comment">// attributes</span></span><br><span class="line">    firstName: &#123;</span><br><span class="line">        type: Sequelize.STRING,</span><br><span class="line">        allowNull: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    lastName: &#123;</span><br><span class="line">        type: Sequelize.STRING</span><br><span class="line">        <span class="comment">// allowNull defaults to true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    db,</span><br><span class="line">    modelName: <span class="string">'user'</span></span><br><span class="line">    <span class="comment">// options</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// ### 还有一种写法，兼容老版本，不推荐</span></span><br><span class="line"><span class="keyword">const</span> User = db.define(<span class="string">'user'</span>, &#123;</span><br><span class="line">    <span class="comment">// attributes</span></span><br><span class="line">    firstName: &#123;</span><br><span class="line">        type: Sequelize.STRING,</span><br><span class="line">        allowNull: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    lastName: &#123;</span><br><span class="line">        type: Sequelize.STRING</span><br><span class="line">        <span class="comment">// allowNull defaults to true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    birthday: Sequelize.DATE</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    <span class="comment">// options</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ## 同步数据库</span></span><br><span class="line"><span class="comment">// Note: using `force: true` will drop the table if it already exists</span></span><br><span class="line">User.sync(&#123; <span class="attr">force</span>: <span class="literal">true</span> &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// Now the `users` table in the database corresponds to the model definition</span></span><br><span class="line">  <span class="keyword">return</span> User.create(&#123;</span><br><span class="line">    firstName: <span class="string">'John'</span>,</span><br><span class="line">    lastName: <span class="string">'Hancock'</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// # CRUD操作：然后看一下逻辑层，就非常简单了，直接使用ES7 async/await即可</span></span><br><span class="line"><span class="comment">// Find all users</span></span><br><span class="line">User.findAll().then(<span class="function"><span class="params">users</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"All users:"</span>, <span class="built_in">JSON</span>.stringify(users, <span class="literal">null</span>, <span class="number">4</span>));</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// Create a new user</span></span><br><span class="line">User.create(&#123; <span class="attr">firstName</span>: <span class="string">"Jane"</span>, <span class="attr">lastName</span>: <span class="string">"Doe"</span> &#125;).then(<span class="function"><span class="params">jane</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"Jane's auto-generated ID:"</span>, jane.id);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// Delete everyone named "Jane"</span></span><br><span class="line">User.destroy(&#123;</span><br><span class="line">    where: &#123;</span><br><span class="line">    	firstName: <span class="string">"Jane"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"Done"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// Change everyone without a last name to "Doe"</span></span><br><span class="line">User.update(&#123; <span class="attr">lastName</span>: <span class="string">"Doe"</span> &#125;, &#123;</span><br><span class="line">    where: &#123;</span><br><span class="line">    	lastName: <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"Done"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这种实际上是sequelize.define内部调用了model.init，但是老版本是没有第一种写法的。</p>
+<p>此外需要知道的是，sequelize还默认为每个模型定义字段id（主键）、createdat和updatedat，也可以进行设置。<br>我们的db.js文件里面配置了，不自动创建模型，也就是自动创建数据表，关闭是有原因的，因为如果表存在会先drop然后再创建，这种操作本身就很可怕的<br>单个模型也可以配置，切记这种操作很危险，尤其是生成环境</p>
+<p>由此来看，没有typeorm装饰类的方式看着顺眼，但是整体构造也容易上手，操作简单，容易理解，看官网文档，功能覆盖强大，typeorm用户反馈使用问题比Sequelize要多，后期用到再做比较。</p>
+<h2 id="ORM2"><a href="#ORM2" class="headerlink" title="ORM2"></a>ORM2</h2><p>ORM2貌似没有正了八经的官网，所以看起来就特别麻烦，但是可以看一下github介绍node-orm2，只支持四种数据库MySQL、PostgreSQL、Amazon Redshift、SQLite，这个我没写demo，直接分析一下</p>
+<p>所以，准确应该是node-orm2，写法和sequelize类似，但是文档确实不行，数据库支持也少，很难想象后续的可维护性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// # 数据库连接</span></span><br><span class="line"><span class="keyword">var</span> orm = <span class="built_in">require</span>(<span class="string">"orm"</span>);</span><br><span class="line">orm.connect(<span class="string">"mysql://username:password@host/database"</span>, </span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params">err, db</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ...里面一些参数不详细写了</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// # model</span></span><br><span class="line"><span class="keyword">var</span> Person = db.define(<span class="string">'person'</span>, &#123;</span><br><span class="line">	name: <span class="built_in">String</span>,</span><br><span class="line">	surname: <span class="built_in">String</span>,</span><br><span class="line">	age: <span class="built_in">String</span>,</span><br><span class="line">	male: boolean</span><br><span class="line">&#125;, &#123;</span><br><span class="line">	identityCache : <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// # CRUD操作</span></span><br><span class="line">Person.create([</span><br><span class="line">	&#123;</span><br><span class="line">		name: <span class="string">"John"</span>,</span><br><span class="line">		surname: <span class="string">"Doe"</span>,</span><br><span class="line">		age: <span class="number">25</span>,</span><br><span class="line">		male: <span class="literal">true</span></span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		name: <span class="string">"Liza"</span>,</span><br><span class="line">		surname: <span class="string">"Kollan"</span>,</span><br><span class="line">		age: <span class="number">19</span>,</span><br><span class="line">		male: <span class="literal">false</span></span><br><span class="line">	&#125;</span><br><span class="line">], <span class="function"><span class="keyword">function</span> (<span class="params">err, items</span>) </span>&#123;</span><br><span class="line">	<span class="comment">// err - description of the error or null</span></span><br><span class="line">	<span class="comment">// items - array of inserted items</span></span><br><span class="line">&#125;);</span><br><span class="line">Person.get(<span class="number">1</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, John</span>) </span>&#123;</span><br><span class="line">	John.name = <span class="string">"Joe"</span>;</span><br><span class="line">	John.surname = <span class="string">"Doe"</span>;</span><br><span class="line">	John.save(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"saved!"</span>);</span><br><span class="line">&#125;);<span class="comment">//保存</span></span><br><span class="line">Person.find(&#123; <span class="attr">surname</span>: <span class="string">"Doe"</span> &#125;).remove(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Does gone..</span></span><br><span class="line">&#125;);<span class="comment">//删除</span></span><br><span class="line">&#125;);</span><br><span class="line">Person.find(&#123;</span><br><span class="line">  name: <span class="string">"admin"</span>&#125;)</span><br><span class="line">  .limit(<span class="number">3</span>)</span><br><span class="line">  .offset(<span class="number">2</span>)<span class="comment">//跳过</span></span><br><span class="line">  .only(<span class="string">"name"</span>, <span class="string">"age"</span>)<span class="comment">//返回字段</span></span><br><span class="line">  .run(<span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>## 其它<br>8 bookshelf（这个用的也挺多）<br>persistencejs<br>6 waterline<br>5 mongoose<br>node-mysql<br>knex</p>
+<h1 id="汇总对比"><a href="#汇总对比" class="headerlink" title="汇总对比"></a>汇总对比</h1><p><a href="https://www.dunebook.com/best-node-js-orms/" target="_blank" rel="noopener">12 Best Node.js ORMs</a><br>1 RxDB<br>4 Loopback<br>7 CaminteJS<br>9 Objection.js<br>11 Node-ORM2<br>12 Mikro-ORM</p>
+<h2 id="Node-js-ORM-框架对比"><a href="#Node-js-ORM-框架对比" class="headerlink" title="Node.js ORM 框架对比"></a>Node.js ORM 框架对比</h2><!-- \#2 [Node.js ORM 框架对比](https://blog.ipsfan.com/6455.html) -->
+<!-- \#2 [Node.js ORM 框架对比](https://www.cnblogs.com/nayek/p/12917504.html) -->
+<p>### Mongoose<br>目前比较常见的 MongoDB ORM 框架，官方说法是 ODM 框架，可见对关系型数据库支持一般</p>
+<p>官网：<a href="https://mongoosejs.com/" target="_blank" rel="noopener">https://mongoosejs.com/</a><br>数据库：仅支持 MongoDB<br>编程风格：<br>支持 Promise/async/await<br>基于 JS 内置类型的 Schema 声明<br>基于链式构造的 Query Builder 查询</p>
+<p>周边技术：Typegoose<br><a href="https://www.npmjs.com/package/typegoose" target="_blank" rel="noopener">https://www.npmjs.com/package/typegoose</a><br>可以增加 TypeScript 支持，支持使用 Reflect Metadata 自动映射 TS 类型标注</p>
+<p>热度：周频持续更新，NPM 周下载 70W+</p>
+<p>### Sequelize<br>较老牌的 Node.js ORM 框架，相对简易</p>
+<p>官网：<a href="http://docs.sequelizejs.com/" target="_blank" rel="noopener">http://docs.sequelizejs.com/</a><br>数据库：支持关系型数据库（MySQL/MSSQL/PostgreSQL/SQLite）<br>编程风格：<br>支持 Promise/async/await<br>基于自带的一套类型枚举声明<br>基于 JSON 对象的查询方式<br>基于自带的一套操作符描述</p>
+<p>热度：月频持续更新，NPM 周下载 20W+</p>
+<p>### Bookshelf<br>Sequelize 之后出现的 ORM 框架，风格与 Sequelize 较相似，看上去比 Sequelize 易用性高</p>
+<p>官网：<a href="http://bookshelfjs.org/" target="_blank" rel="noopener">http://bookshelfjs.org/</a><br>数据库：支持关系型数据库<br>编程风格：<br>基本上是 Eloquent ORM 的 JS 版本<br>支持 Promise/async/await<br>支持基于链式构造的 Query Builder 查询</p>
+<p>热度：近半年未更新，NPM 周下载 1.7W</p>
+<p>### TypeORM<br>基于 Decorator 的 ORM 框架，对 TypeScript 支持较好，同时支持在 JavaScript 中通过手动声明使用，以及 JSON 方式的 Entity 配置声明</p>
+<p>官网：<a href="https://github.com/typeorm/typeorm/" target="_blank" rel="noopener">https://github.com/typeorm/typeorm/</a><br>数据库：支持关系型数据库，Beta 支持 MongoDB<br>编程风格：<br>基本上是 Hibernate 的 JS 版本<br>支持 Promise/async/await<br>支持基于链式构造的 Query Builder 查询<br>支持 CLI 工具</p>
+<p>热度：周频持续更新，NPM 周下载 2.8W</p>
+<!-- 参考链接：https://github.com/CyanSalt/notebook/issues/12 -->
+<!-- 参考链接：https://www.jianshu.com/p/07141d53f119 -->
+<!-- END: #2 -->
+<h1 id="优化数据库查询-Sequelize"><a href="#优化数据库查询-Sequelize" class="headerlink" title="优化数据库查询 (Sequelize)"></a>优化数据库查询 (Sequelize)</h1><!-- \#6 [nodejs/Sequelize/MySQL——基础、联表及优化]() -->
+<h2 id="2-基础用法"><a href="#2-基础用法" class="headerlink" title="2 基础用法"></a>2 基础用法</h2><p>你也可以通过 define 的第三个参数做一些自定义，这些配置会被合并到 Sequlize 构造函数的 define 字段中，用来定义模型和数据表的关联行为，比如「自动更新表中的 update_at、create_at」。</p>
+<h3 id="基础的CURD"><a href="#基础的CURD" class="headerlink" title="基础的CURD"></a>基础的CURD</h3><p>Sequlize 对象提供丰富的 api，诸如：<br>findOne、findAll……<br>create、upsert……<br>aggregate、max……</p>
+<!-- > 当没给 attributes，Sequelize 默认会把模型中的定义拿出来做 attributes，这样比 Select * 节约数据库操作成本和传输带宽。  -->
+<p>一个例子：findAll<br>第二个例子：findOrCreate</p>
+<blockquote>
+<p>有些高级 API 会::触发数据库事务:: </p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Station.findOrCreate(&#123; </span><br><span class="line">    where: &#123; </span><br><span class="line">        id: <span class="number">1</span>, </span><br><span class="line">    &#125;, </span><br><span class="line">    defaults: &#123; </span><br><span class="line">        name: <span class="string">'haha'</span>, </span><br><span class="line">    &#125;, </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* START TRANSACTION; </span></span><br><span class="line"><span class="comment">SELECT `id`, `store_id`, `name`, `type`, `status`, `ip`, `plate_no` FROM `station` AS `station` WHERE `station`.`id` = 2; </span></span><br><span class="line"><span class="comment">INSERT INTO `station` (`id`,`name`) VALUES (2,`haha`); </span></span><br><span class="line"><span class="comment">COMMIT; */</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-联表查询"><a href="#3-联表查询" class="headerlink" title="3 联表查询"></a>3 联表查询</h2><h3 id="3-2-联表关系"><a href="#3-2-联表关系" class="headerlink" title="3.2 联表关系"></a>3.2 联表关系</h3><p>在 Sequlize 中，联表关系需要在模型 associate 方法中标记，通常为这种格式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">File.belongsTo(User, &#123;...option&#125;);</span><br><span class="line">File.findOne(&#123;</span><br><span class="line">    include: [&#123; <span class="attr">model</span>: User &#125;],</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ### 3.3</span></span><br><span class="line">User.HasOne(File, &#123; </span><br><span class="line">    foreignKey: <span class="string">'creator_id'</span>,   <span class="comment">// 如果不定义这个，也会自动定义为「源模型名 + 源模型主键名」即 user_id</span></span><br><span class="line">    sourceKey: <span class="string">'id'</span>,    <span class="comment">// 源模型的关联键，默认主键，通常省略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>两种模型<br>源模型：需要标记和其他模型关系的模型，就是执行联表查询的模型 （上面的 File）<br>目标模型：被标记关系的模型，本身不因此次标记获得联表查询能力 （上面的 User）<br>四种关联键<br>foreignKey：外键，用来关联外部模型，::一个模型有了外键，对关联的模型来说就是唯一了::<br>targetKey<br>sourceKey<br>otherKey：当一个 foreignKey 不够用时的替代品<br>表之间的关系通常包括：一对一、一对多、多对多。</p>
+<h3 id="3-3-一对一关系（belongsTo-hasOne）"><a href="#3-3-一对一关系（belongsTo-hasOne）" class="headerlink" title="3.3 一对一关系（belongsTo / hasOne）"></a>3.3 一对一关系（belongsTo / hasOne）</h3><h3 id="3-4-一对多（hasMany）"><a href="#3-4-一对多（hasMany）" class="headerlink" title="3.4 一对多（hasMany）"></a>3.4 一对多（hasMany）</h3><h3 id="3-5-多对多关系（belongsToMany）"><a href="#3-5-多对多关系（belongsToMany）" class="headerlink" title="3.5 多对多关系（belongsToMany）"></a>3.5 多对多关系（belongsToMany）</h3><h3 id="3-6-几种-JOIN"><a href="#3-6-几种-JOIN" class="headerlink" title="3.6 几种 JOIN"></a>3.6 几种 JOIN</h3><h2 id="4-数据库查询的优化"><a href="#4-数据库查询的优化" class="headerlink" title="4 数据库查询的优化"></a>4 数据库查询的优化</h2><h3 id="4-1-慢查询、全表扫描和索引"><a href="#4-1-慢查询、全表扫描和索引" class="headerlink" title="4.1 慢查询、全表扫描和索引"></a>4.1 慢查询、全表扫描和索引</h3><p>在数据库界，人们常常提到「慢查询」，指的是查询时长超过指定时长的查询。慢查询的危害在于不仅本次查询的请求时间变长，还会较长时间的占用系统资源，对其他查询造成影响或者干脆撑挂数据库。</p>
+<p>而「慢查询」最常见的罪魁祸首就是「全表扫描」，指的是数据库引擎为了找到某条记录，对全表进行逐个搜索，直到搜索到这条记录。<!-- 想象下，如果你有上亿条数据，而要查的数据碰巧比较靠后，这个得查到什么时候？（复杂度在 O(n)） 那怎么样才不「全表扫描」呢？ --></p>
+<p>举个例子，当你用主键查一条记录的时候，就不会全表扫描。<br><code>File.findByPk(123);</code><br>因为 MySQL 默认给主键列加了「索引」。</p>
+<p>::「索引」厉害在哪？MySQL 为这一列建立了一个 btree::（不同数据库的实现是不一样的，但 btree 是主流）。这样查“id 为 318 的 Station”只需要从根节点沿着找下去，类似这个意思：</p>
+<p>3xx –&gt; 31x –&gt; 318</p>
+<h3 id="4-2-给其他列加索引"><a href="#4-2-给其他列加索引" class="headerlink" title="4.2 给其他列加索引"></a>4.2 给其他列加索引</h3><p>那么如果我查普通列呢？也可以通过索引提升查询效率。<br><!-- 
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">File.findOne(&#123; </span><br><span class="line">    where: &#123; </span><br><span class="line">        name: <span class="string">'station1'</span> </span><br><span class="line">    &#125; </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>你也可以为这个列手动增加一个索引： –&gt;</p>
+<p><code>create index index_name on file(name);</code><br>但这个索引的实现是和主键索引有区别的，它不直接查到数据记录，而是把 btree 建立在主键 id 上，现在查一个「name 为 station1 的记录」的过程变成类似这种：<br><!-- 
+开始 
+-- > name: sta... -- > name: statio -- > name: station1 
+-- > 拿到 station1 的 id: 816 
+-- > id: 8xx -- > id: 81x -- > id: 816 
+-- > 拿到 816 的数据
+--><br>如果嫌这个路径长，还有更近一步的，对于常查的列，比如 File 的 name 和 author，可以建立「覆盖索引」：</p>
+<p><code>create index index_name_and_address on file(name, author);</code><br>这时候如果我只根据 name 查 author：</p>
+<p>File.findOne({<br>    where: {<br>        name: ‘station1’<br>    },<br>    attributes: [‘author’]<br>})<br>因为索引里已经存了 address，就不需要再去访问源数据了：</p>
+<p>开始<br>–&gt; name: sta… –&gt; name: statio –&gt; name: station1<br>–&gt; 拿到 station1 的 address: xxx</p>
+<h4 id="索引越多越好吗？"><a href="#索引越多越好吗？" class="headerlink" title="索引越多越好吗？"></a>索引越多越好吗？</h4><p>然而索引并不是越多越好，索引虽然提升了查询的效率，缺牺牲了插入、删除的效率。想象下以前只要把新数据堆到表上就行，现在还要修改索引，更麻烦的是索引是个平衡树，很多场景需要对整个树进行调整。（主键为什么默认是自增的？我猜也是为了减少插入数据时树操作的成本）</p>
+<p>所以我们一般考虑在常用来「where」或者「order」的列上加索引。</p>
+<h3 id="4-3-查询语句优化"><a href="#4-3-查询语句优化" class="headerlink" title="4.3 查询语句优化"></a>4.3 查询语句优化</h3><p>前面说的给常用列增加索引可以提升查询效率，让查询尽量走「btree」而不是「全表扫描」。 但前提是别上来就 select *，而是要用 attributes 只摘取你要的列：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">where: &#123; </span><br><span class="line">    attributes: [<span class="string">'id'</span>, <span class="string">'name'</span>] </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但并不是所有的查询都会走「btree」，不优秀的 sql 仍然会触发全表扫描，产生慢查询，应该尽量避免。</p>
+<p>当你 where 一个列时，MySQL只有对以下操作符才使用索引：&lt;，&lt;=，=，&gt;，&gt;=，BETWEEN，IN，以及某些时候的LIKE。<br>放到 Sequelize 里就是：<br><code>Sequelize.Op.gt|gte|lt|lte|eq|between|in</code> …<br>比如，能用 in 尽量别用 not in<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不好 </span></span><br><span class="line">status: &#123; </span><br><span class="line">    [Op.notIn]: [ <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span> ], </span><br><span class="line">&#125;, </span><br><span class="line"><span class="comment">// 好 </span></span><br><span class="line">status: &#123; </span><br><span class="line">    [Op.in]: [ <span class="number">1</span>, <span class="number">2</span> ], </span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<!-- 具体的网上一搜「避免全表扫描」一大把，就不展开了。 -->
+<!-- END: #6 -->
+<h1 id="实现ORM框架"><a href="#实现ORM框架" class="headerlink" title="实现ORM框架"></a>实现ORM框架</h1><!-- \# [在NodeJS下实现简单的ORM框架](https://blog.csdn.net/daydream13580130043/article/details/91490860) -->
+<p>使用TypeScript以及mysql包。</p>
+<p>mysql.ts文件，主要实现连接mysql，以及一下基本的增删改查函数<br>ORM.ts，封装ORM类</p>
+<!-- 
+koa-orbit 实现数据库操作
+## modal
+
+baseModal 只是简单实现sql 基本操作（加SQLStringify）：create, update, delete, list,detail 等
+并没有定义 对象--表 的关系映射。 -->
+<h1 id="sequelize"><a href="#sequelize" class="headerlink" title="sequelize"></a>sequelize</h1><!-- 在上述例子， -->使用sequelize使用三段式：<br>连接数据库<br>定义模型<br>同步数据库<br><br><!-- \#11 [Nodejs ORM框架Sequelize快速入门](https://blog.csdn.net/huwei2003/article/details/77646054) 
+ 2017-08-28
+-->
+<h2 id="Sequelize有哪些特色？"><a href="#Sequelize有哪些特色？" class="headerlink" title="Sequelize有哪些特色？"></a>Sequelize有哪些特色？</h2><p>1) 强大的模型定义，支持虚拟类型。Javascript虽然被很多人诟病杂乱无章法，但是函数即对象这个特色，可以说是我的最爱，非常灵活强大。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Foo = sequelize.define(<span class="string">'foo'</span>, &#123;</span><br><span class="line">  firstname: Sequelize.STRING,</span><br><span class="line">  lastname: Sequelize.STRING</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  getterMethods   : &#123;</span><br><span class="line">    fullName       : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)  </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>.firstname + <span class="string">' '</span> + <span class="keyword">this</span>.lastname &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  setterMethods   : &#123;</span><br><span class="line">    fullName       : <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> names = value.split(<span class="string">' '</span>);</span><br><span class="line">        <span class="keyword">this</span>.setDataValue(<span class="string">'firstname'</span>, names.slice(<span class="number">0</span>, <span class="number">-1</span>).join(<span class="string">' '</span>));</span><br><span class="line">        <span class="keyword">this</span>.setDataValue(<span class="string">'lastname'</span>, names.slice(<span class="number">-1</span>).join(<span class="string">' '</span>));</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>2) 支持完善的数据验证，减轻前后端的验证压力。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ValidateMe = sequelize.define(<span class="string">'foo'</span>, &#123;</span><br><span class="line">  foo: &#123;</span><br><span class="line">    type: Sequelize.STRING,</span><br><span class="line">    validate: &#123;</span><br><span class="line">      is: [<span class="string">"^[a-z]+$"</span>,<span class="string">'i'</span>],     <span class="comment">// 全匹配字母</span></span><br><span class="line">      is: <span class="regexp">/^[a-z]+$/i</span>,          <span class="comment">// 全匹配字母，用规则表达式写法</span></span><br><span class="line">      not: [<span class="string">"[a-z]"</span>,<span class="string">'i'</span>],       <span class="comment">// 不能包含字母</span></span><br><span class="line">      isEmail: <span class="literal">true</span>,            <span class="comment">// 检查邮件格式</span></span><br><span class="line">      isUrl: <span class="literal">true</span>,              <span class="comment">// 是否是合法网址</span></span><br><span class="line">      isIP: <span class="literal">true</span>,               <span class="comment">// 是否是合法IP地址</span></span><br><span class="line">      isIPv4: <span class="literal">true</span>,             <span class="comment">// 是否是合法IPv4地址</span></span><br><span class="line">      isIPv6: <span class="literal">true</span>,             <span class="comment">// 是否是合法IPv6地址</span></span><br><span class="line">      isAlpha: <span class="literal">true</span>,            <span class="comment">// 是否是字母</span></span><br><span class="line">      isAlphanumeric: <span class="literal">true</span>,     <span class="comment">// 是否是数字和字母</span></span><br><span class="line">      isNumeric: <span class="literal">true</span>,          <span class="comment">// 只允许数字</span></span><br><span class="line">      isInt: <span class="literal">true</span>,              <span class="comment">// 只允许整数</span></span><br><span class="line">      isFloat: <span class="literal">true</span>,            <span class="comment">// 是否是浮点数</span></span><br><span class="line">      isDecimal: <span class="literal">true</span>,          <span class="comment">// 是否是十进制书</span></span><br><span class="line">      isLowercase: <span class="literal">true</span>,        <span class="comment">// 是否是小写</span></span><br><span class="line">      isUppercase: <span class="literal">true</span>,        <span class="comment">// 是否大写</span></span><br><span class="line">      notNull: <span class="literal">true</span>,            <span class="comment">// 不允许为null</span></span><br><span class="line">      isNull: <span class="literal">true</span>,             <span class="comment">// 是否是null</span></span><br><span class="line">      notEmpty: <span class="literal">true</span>,           <span class="comment">// 不允许为空</span></span><br><span class="line">      equals: <span class="string">'specific value'</span>, <span class="comment">// 等于某些值</span></span><br><span class="line">      contains: <span class="string">'foo'</span>,          <span class="comment">// 包含某些字符</span></span><br><span class="line">      notIn: [[<span class="string">'foo'</span>, <span class="string">'bar'</span>]],  <span class="comment">// 不在列表中</span></span><br><span class="line">      isIn: [[<span class="string">'foo'</span>, <span class="string">'bar'</span>]],   <span class="comment">// 在列表中</span></span><br><span class="line">      notContains: <span class="string">'bar'</span>,       <span class="comment">// 不包含</span></span><br><span class="line">      len: [<span class="number">2</span>,<span class="number">10</span>],              <span class="comment">// 长度范围</span></span><br><span class="line">      isUUID: <span class="number">4</span>,                <span class="comment">// 是否是合法 uuids</span></span><br><span class="line">      isDate: <span class="literal">true</span>,             <span class="comment">// 是否是有效日期</span></span><br><span class="line">      isAfter: <span class="string">"2011-11-05"</span>,    <span class="comment">// 是否晚于某个日期</span></span><br><span class="line">      isBefore: <span class="string">"2011-11-05"</span>,   <span class="comment">// 是否早于某个日期</span></span><br><span class="line">      max: <span class="number">23</span>,                  <span class="comment">// 最大值</span></span><br><span class="line">      min: <span class="number">23</span>,                  <span class="comment">// 最小值</span></span><br><span class="line">      isArray: <span class="literal">true</span>,            <span class="comment">// 是否是数组</span></span><br><span class="line">      isCreditCard: <span class="literal">true</span>,       <span class="comment">// 是否是有效信用卡号</span></span><br><span class="line">      <span class="comment">// 自定义规则</span></span><br><span class="line">      isEven: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">parseInt</span>(value) % <span class="number">2</span> != <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'请输入偶数!'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>3) Sequelize的查询非常全面和灵活<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">Project.findAll(&#123;</span><br><span class="line">  <span class="comment">//复杂过滤，可嵌套</span></span><br><span class="line">  where: &#123;</span><br><span class="line">    id: &#123;</span><br><span class="line">      $and: &#123;<span class="attr">a</span>: <span class="number">5</span>&#125;           <span class="comment">// AND (a = 5)</span></span><br><span class="line">      $or: [&#123;<span class="attr">a</span>: <span class="number">5</span>&#125;, &#123;<span class="attr">a</span>: <span class="number">6</span>&#125;]  <span class="comment">// (a = 5 OR a = 6)</span></span><br><span class="line">      $gt: <span class="number">6</span>,                <span class="comment">// id &gt; 6</span></span><br><span class="line">      $gte: <span class="number">6</span>,               <span class="comment">// id &gt;= 6</span></span><br><span class="line">      $lt: <span class="number">10</span>,               <span class="comment">// id &lt; 10</span></span><br><span class="line">      $lte: <span class="number">10</span>,              <span class="comment">// id &lt;= 10</span></span><br><span class="line">      $ne: <span class="number">20</span>,               <span class="comment">// id != 20</span></span><br><span class="line">      $between: [<span class="number">6</span>, <span class="number">10</span>],     <span class="comment">// BETWEEN 6 AND 10</span></span><br><span class="line">      $notBetween: [<span class="number">11</span>, <span class="number">15</span>], <span class="comment">// NOT BETWEEN 11 AND 15</span></span><br><span class="line">      $<span class="keyword">in</span>: [<span class="number">1</span>, <span class="number">2</span>],           <span class="comment">// IN [1, 2]</span></span><br><span class="line">      $notIn: [<span class="number">1</span>, <span class="number">2</span>],        <span class="comment">// NOT IN [1, 2]</span></span><br><span class="line">      $like: <span class="string">'%hat'</span>,         <span class="comment">// LIKE '%hat'</span></span><br><span class="line">      $notLike: <span class="string">'%hat'</span>       <span class="comment">// NOT LIKE '%hat'</span></span><br><span class="line">      $iLike: <span class="string">'%hat'</span>         <span class="comment">// ILIKE '%hat' (case insensitive)  (PG only)</span></span><br><span class="line">      $notILike: <span class="string">'%hat'</span>      <span class="comment">// NOT ILIKE '%hat'  (PG only)</span></span><br><span class="line">      $overlap: [<span class="number">1</span>, <span class="number">2</span>]       <span class="comment">// &amp;&amp; [1, 2] (PG array overlap operator)</span></span><br><span class="line">      $contains: [<span class="number">1</span>, <span class="number">2</span>]      <span class="comment">// @&gt; [1, 2] (PG array contains operator)</span></span><br><span class="line">      $contained: [<span class="number">1</span>, <span class="number">2</span>]     <span class="comment">// &lt;@ [1, 2] (PG array contained by operator)</span></span><br><span class="line">      $any: [<span class="number">2</span>,<span class="number">3</span>]            <span class="comment">// ANY ARRAY[2, 3]::INTEGER (PG only)</span></span><br><span class="line">    &#125;,</span><br><span class="line">    status: &#123;</span><br><span class="line">      $not: <span class="literal">false</span>,           <span class="comment">// status NOT FALSE</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">Project.all()</span><br><span class="line">findByPk</span><br><span class="line">Project.findById</span><br><span class="line">Project.findByOne</span><br><span class="line">Project.findOrCreate</span><br><span class="line">Project.findAndCountAll</span><br><span class="line">Project.count()</span><br><span class="line">Project.max()</span><br><span class="line"><span class="comment">//CRUD</span></span><br><span class="line">Project.create()</span><br><span class="line">Project.save()</span><br><span class="line">Project.update()</span><br><span class="line">Project.destroy()</span><br><span class="line"><span class="comment">//批量</span></span><br><span class="line">User.bulkCreate([])</span><br><span class="line"><span class="comment">//排序</span></span><br><span class="line">something.findOne(&#123;</span><br><span class="line">  order: [</span><br><span class="line">    <span class="string">'name'</span>,</span><br><span class="line">    <span class="comment">// 返回 `name`</span></span><br><span class="line">    <span class="string">'username DESC'</span>,</span><br><span class="line">    <span class="comment">// 返回 `username DESC`</span></span><br><span class="line">    [<span class="string">'username'</span>, <span class="string">'DESC'</span>],</span><br><span class="line">    <span class="comment">// 返回 `username` DESC</span></span><br><span class="line">    sequelize.fn(<span class="string">'max'</span>, sequelize.col(<span class="string">'age'</span>)),</span><br><span class="line">    <span class="comment">// 返回 max(`age`)</span></span><br><span class="line">    [sequelize.fn(<span class="string">'max'</span>, sequelize.col(<span class="string">'age'</span>)), <span class="string">'DESC'</span>],</span><br><span class="line">    <span class="comment">// 返回 max(`age`) DESC</span></span><br><span class="line">    [sequelize.fn(<span class="string">'otherfunction'</span>, sequelize.col(<span class="string">'col1'</span>), <span class="number">12</span>, <span class="string">'lalala'</span>), <span class="string">'DESC'</span>],</span><br><span class="line">    <span class="comment">// 返回 otherfunction(`col1`, 12, 'lalala') DESC</span></span><br><span class="line">    [sequelize.fn(<span class="string">'otherfunction'</span>, sequelize.fn(<span class="string">'awesomefunction'</span>, sequelize.col(<span class="string">'col'</span>))), <span class="string">'DESC'</span>]</span><br><span class="line">    <span class="comment">// 返回 otherfunction(awesomefunction(`col`)) DESC, 有可能是无限循环</span></span><br><span class="line">    [&#123; <span class="attr">raw</span>: <span class="string">'otherfunction(awesomefunction(`col`))'</span> &#125;, <span class="string">'DESC'</span>]</span><br><span class="line">    <span class="comment">// 也可以这样写</span></span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 分页查询</span></span><br><span class="line">Project.findAll(&#123; <span class="attr">limit</span>: <span class="number">10</span> &#125;)</span><br><span class="line">Project.findAll(&#123; <span class="attr">offset</span>: <span class="number">8</span> &#125;)</span><br><span class="line">Project.findAll(&#123; <span class="attr">offset</span>: <span class="number">5</span>, <span class="attr">limit</span>: <span class="number">5</span> &#125;)</span><br><span class="line"><span class="comment">//关联查询 include 支持嵌套，这可能是ORM里面最难的部分。</span></span><br><span class="line"><span class="keyword">var</span> User = sequelize.define(<span class="string">'user'</span>, &#123; <span class="attr">name</span>: Sequelize.STRING &#125;)</span><br><span class="line">  , Task = sequelize.define(<span class="string">'task'</span>, &#123; <span class="attr">name</span>: Sequelize.STRING &#125;)</span><br><span class="line">  , Tool = sequelize.define(<span class="string">'tool'</span>, &#123; <span class="attr">name</span>: Sequelize.STRING &#125;)</span><br><span class="line">Task.belongsTo(User) <span class="comment">// 增加外键属性 UserId 到 Task</span></span><br><span class="line">User.hasMany(Task) <span class="comment">// 给 Task 增加外键属性 userId</span></span><br><span class="line">User.hasMany(Tool, &#123; <span class="attr">as</span>: <span class="string">'Instruments'</span> &#125;) <span class="comment">// 给 Task 增加自定义外键属性 InstrumentsId</span></span><br><span class="line">Task.findAll(&#123; <span class="attr">include</span>: [ User ] &#125;)</span><br><span class="line">User.findAll(&#123; <span class="attr">include</span>: [&#123;</span><br><span class="line">    model: Tool,</span><br><span class="line">    <span class="keyword">as</span>: <span class="string">'Instruments'</span>,</span><br><span class="line">    where: &#123; <span class="attr">name</span>: &#123; <span class="attr">$like</span>: <span class="string">'%ooth%'</span> &#125; &#125;</span><br><span class="line">&#125;] &#125;)</span><br><span class="line">User.findAll(&#123; <span class="attr">include</span>: [<span class="string">'Instruments'</span>] &#125;)</span><br><span class="line"><span class="keyword">var</span> User = <span class="keyword">this</span>.sequelize.define(<span class="string">'user'</span>, &#123;<span class="comment">/* attributes */</span>&#125;, &#123;<span class="attr">underscored</span>: <span class="literal">true</span>&#125;)</span><br><span class="line">  , Company  = <span class="keyword">this</span>.sequelize.define(<span class="string">'company'</span>, &#123;</span><br><span class="line">    uuid: &#123;</span><br><span class="line">      type: Sequelize.UUID,</span><br><span class="line">      primaryKey: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">User.belongsTo(Company); <span class="comment">// 增加 company_uuid 外键属性到 user</span></span><br><span class="line">User.belongsTo(UserRole, &#123;<span class="attr">as</span>: <span class="string">'role'</span>&#125;);</span><br><span class="line"><span class="comment">// 自定义外键属性 roleId 到 user 而不是 userRoleId</span></span><br><span class="line">User.belongsTo(Company, &#123;<span class="attr">foreignKey</span>: <span class="string">'fk_companyname'</span>, <span class="attr">targetKey</span>: <span class="string">'name'</span>&#125;); <span class="comment">// 增加自定义外键属性 fk_companyname 到 User</span></span><br><span class="line">Person.hasOne(Person, &#123;<span class="attr">as</span>: <span class="string">'Father'</span>, <span class="attr">foreignKey</span>: <span class="string">'DadId'</span>&#125;)</span><br><span class="line"><span class="comment">// Person 增加外键属性 DadId</span></span><br><span class="line">Coach.hasOne(Team)  <span class="comment">// `coachId` 作为 Team 的外键属性</span></span><br><span class="line">Project.hasMany(User, &#123;<span class="attr">as</span>: <span class="string">'Workers'</span>&#125;)</span><br><span class="line"><span class="comment">// 给 User 增加外键属性 projectId ／ project_id</span></span><br><span class="line">Project.belongsToMany(User, &#123;<span class="attr">through</span>: <span class="string">'UserProject'</span>&#125;);</span><br><span class="line">User.belongsToMany(Project, &#123;<span class="attr">through</span>: <span class="string">'UserProject'</span>&#125;);</span><br><span class="line"><span class="comment">// 创建新的模型: UserProject 包含外键属性：projectId 和 userId</span></span><br></pre></td></tr></table></figure></p>
+<p>4) Sequelize还有完善的迁移同步数据方案,migrate so easy。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//$ sequelize db:migrate //用命令直接生成模版脚本，接下来的还是写js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  up: <span class="function"><span class="keyword">function</span>(<span class="params">queryInterface, Sequelize</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 需要修改数据库的操作</span></span><br><span class="line">  &#125;,</span><br><span class="line">  down: <span class="function"><span class="keyword">function</span>(<span class="params">queryInterface, Sequelize</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 取消修改的操作</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<!-- 转自: http://hopperclouds.github.io/2016/09/12/Nodejs-ORM框架Sequelizejs快速入门/ -->
+<!-- END: #11 -->
+<!-- \#12 [nodejs中ORM框架sequelize使用](https://blog.csdn.net/chinabestchina/article/details/104645312) 
+2020-03-04 -->
+<h2 id="二、知识点"><a href="#二、知识点" class="headerlink" title="二、知识点"></a>二、知识点</h2><p>2.1 官网地址<br>文档地址：<a href="https://sequelize.org/v5/index.html" target="_blank" rel="noopener">https://sequelize.org/v5/index.html</a><br>github地址：<a href="https://github.com/demopark/sequelize-docs-Zh-CN" target="_blank" rel="noopener">https://github.com/demopark/sequelize-docs-Zh-CN</a><br>更多参考地址：<a href="http://www.nodeclass.com/api/sequelize.html" target="_blank" rel="noopener">http://www.nodeclass.com/api/sequelize.html</a></p>
+<p>2.2 安装<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装sequelize包</span></span><br><span class="line">npm install --save sequelize</span><br><span class="line"><span class="comment">#安装mysql包</span></span><br><span class="line">npm install --save mysql2</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-3-语句映射"><a href="#2-3-语句映射" class="headerlink" title="2.3 语句映射"></a>2.3 语句映射</h3><p>sequelize中sql操作函数及mysql语句略有不同，映射如下：</p>
+<table>
+<thead>
+<tr>
+<th>mysql关键字</th>
+<th>sequelize函数关键字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>select</td>
+<td>find</td>
+</tr>
+<tr>
+<td>update</td>
+<td>update</td>
+</tr>
+<tr>
+<td>insert</td>
+<td>create</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>destory</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-4-部分关键参数"><a href="#2-4-部分关键参数" class="headerlink" title="2.4 部分关键参数"></a>2.4 部分关键参数</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>raw:true</td>
+<td>sql语句执行后，只返回原始数据，没有附加信息</td>
+</tr>
+<tr>
+<td>freezeTableName: true</td>
+<td>定义model时，默认false(即修改表名为复数)，true不修改表名，与数据库表名同步</td>
+</tr>
+<tr>
+<td>如：modelName: ‘Stu’</td>
+<td>指定model名，相当于sql语句中表的别名，如select * from stu as Stu; 这里Stu即Model</td>
+</tr>
+<tr>
+<td>如：tableName: ‘stu’,</td>
+<td>指定表名,如select * from stu ;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="三、使用示例"><a href="#三、使用示例" class="headerlink" title="三、使用示例"></a>三、使用示例</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// # 2.1 创建连接sequelize_config.js</span></span><br><span class="line"><span class="keyword">const</span> Sequelize = <span class="built_in">require</span>(<span class="string">'sequelize'</span>);</span><br><span class="line"><span class="keyword">const</span> Op = Sequelize.Op;</span><br><span class="line"><span class="comment">//配置操作符别称</span></span><br><span class="line"><span class="keyword">const</span> operatorsAliases = &#123;</span><br><span class="line">    $eq: Op.eq,</span><br><span class="line">    $ne: Op.ne,</span><br><span class="line">    $gte: Op.gte,</span><br><span class="line">    $gt: Op.gt,</span><br><span class="line">    $lte: Op.lte,</span><br><span class="line">    $lt: Op.lt,</span><br><span class="line">    $not: Op.not,</span><br><span class="line">    $<span class="keyword">in</span>: Op.in,</span><br><span class="line">    $notIn: Op.notIn,</span><br><span class="line">    $is: Op.is,</span><br><span class="line">    $like: Op.like,</span><br><span class="line">    $notLike: Op.notLike,</span><br><span class="line">    $iLike: Op.iLike,</span><br><span class="line">    $notILike: Op.notILike,</span><br><span class="line">    $regexp: Op.regexp,</span><br><span class="line">    $notRegexp: Op.notRegexp,</span><br><span class="line">    $iRegexp: Op.iRegexp,</span><br><span class="line">    $notIRegexp: Op.notIRegexp,</span><br><span class="line">    $between: Op.between,</span><br><span class="line">    $notBetween: Op.notBetween,</span><br><span class="line">    $overlap: Op.overlap,</span><br><span class="line">    $contains: Op.contains,</span><br><span class="line">    $contained: Op.contained,</span><br><span class="line">    $adjacent: Op.adjacent,</span><br><span class="line">    $strictLeft: Op.strictLeft,</span><br><span class="line">    $strictRight: Op.strictRight,</span><br><span class="line">    $noExtendRight: Op.noExtendRight,</span><br><span class="line">    $noExtendLeft: Op.noExtendLeft,</span><br><span class="line">    $and: Op.and,</span><br><span class="line">    $or: Op.or,</span><br><span class="line">    $any: Op.any,</span><br><span class="line">    $all: Op.all,</span><br><span class="line">    $values: Op.values,</span><br><span class="line">    $col: Op.col</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//创建sequelize</span></span><br><span class="line"><span class="keyword">const</span> sequelize = <span class="keyword">new</span> Sequelize(<span class="string">'schema'</span>, <span class="string">'user'</span>, <span class="string">'password'</span>, &#123;</span><br><span class="line">    host: <span class="string">'localhost'</span>,</span><br><span class="line">    dialect: <span class="string">'mysql'</span>,</span><br><span class="line">    port: <span class="number">3306</span>,</span><br><span class="line">    pool: &#123;</span><br><span class="line">        max: <span class="number">3</span>,</span><br><span class="line">        min: <span class="number">1</span>,</span><br><span class="line">        idle: <span class="number">8000</span></span><br><span class="line">    &#125;,</span><br><span class="line">    operatorsAliases</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">module</span>.exports = sequelize;</span><br><span class="line"><span class="comment">// # 3.2 创建对象Stu.js</span></span><br><span class="line"><span class="keyword">const</span> sequelize = <span class="built_in">require</span>(<span class="string">'../db/sequelize_config'</span>);</span><br><span class="line"><span class="keyword">const</span> &#123;Sequelize, Model, DataTypes&#125; = <span class="built_in">require</span>(<span class="string">'sequelize'</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stu</span> <span class="keyword">extends</span> <span class="title">Model</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Stu.init(&#123;</span><br><span class="line">    <span class="comment">//定义表字段，多属性定义用&#123;&#125;,只定义类型可省略</span></span><br><span class="line">    id: &#123;<span class="attr">type</span>: DataTypes.INTEGER, <span class="attr">primaryKey</span>: <span class="literal">true</span>, <span class="attr">autoIncrement</span>: <span class="literal">true</span>, <span class="attr">allowNull</span>: <span class="literal">true</span>&#125;,</span><br><span class="line">    no: DataTypes.STRING,</span><br><span class="line">    name: DataTypes.STRING,</span><br><span class="line">    operator: &#123;<span class="attr">type</span>: DataTypes.STRING, <span class="attr">field</span>: <span class="string">'create_user'</span>&#125;,</span><br><span class="line">    create_user: &#123;<span class="attr">type</span>: DataTypes.STRING, <span class="attr">defaultValue</span>: <span class="string">'default'</span>&#125;,</span><br><span class="line">    create_time: DataTypes.DATE,</span><br><span class="line">    update_time: DataTypes.DATE,</span><br><span class="line">    update_user: DataTypes.STRING</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    sequelize,</span><br><span class="line">    modelName: <span class="string">'stu'</span>, <span class="comment">//model名</span></span><br><span class="line">  	tableName: <span class="string">'stu'</span>, <span class="comment">//表名</span></span><br><span class="line">    timestamps: <span class="literal">false</span>,</span><br><span class="line">    freezeTableName: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">module</span>.exports = Stu;</span><br><span class="line"></span><br><span class="line"><span class="comment">// # 操作示例</span></span><br><span class="line"><span class="keyword">const</span> Sequelize = <span class="built_in">require</span>(<span class="string">'sequelize'</span>);</span><br><span class="line"><span class="keyword">const</span> Op = Sequelize.Op;</span><br><span class="line"><span class="keyword">let</span> Stu = <span class="built_in">require</span>(<span class="string">'./model/Stu'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据主键查询</span></span><br><span class="line"><span class="comment">// 等价sql: SELECT `id`, `no`, `name`, `create_user` AS `operator`, `create_user`, `create_time`, `update_time`, `update_user` FROM `stu` AS `stu` WHERE `stu`.`id` = '1';</span></span><br><span class="line">Stu.findByPk(<span class="string">'1'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//查询取一个值, raw:true表示只返回原始数据</span></span><br><span class="line"><span class="comment">//等价sql: SELECT `id`, `no`, `name` FROM `stu` AS `stu` LIMIT 1;</span></span><br><span class="line">Stu.findOne(&#123;<span class="attr">attributes</span>:[<span class="string">'id'</span>, <span class="string">'no'</span>, <span class="string">'name'</span>], <span class="attr">raw</span>:<span class="literal">true</span>&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//根据条件查询,只查询指定字段</span></span><br><span class="line"><span class="comment">//等价sql: SELECT `id`, `no`, `name` FROM `stu` AS `stu` WHERE (`stu`.`id` &gt; 9 OR `stu`.`no` = '004') AND `stu`.`name` LIKE 'apple%';</span></span><br><span class="line">Stu.findAll(&#123;<span class="attr">attributes</span>:[<span class="string">'id'</span>, <span class="string">'no'</span>, <span class="string">'name'</span>], <span class="attr">where</span>:&#123;<span class="attr">name</span>:&#123;[Op.like]:<span class="string">'apple%'</span>&#125;,[Op.or]:&#123;<span class="attr">id</span>:&#123;[Op.gt]:<span class="number">9</span>&#125;, <span class="attr">no</span>:<span class="string">'004'</span>&#125;&#125;&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//根据条件查询,包含排序和个数限制,</span></span><br><span class="line"><span class="comment">//等价sql: SELECT `id`, `name` FROM `stu` AS `stu` WHERE `stu`.`name` = 'apple3' AND (`stu`.`id` &gt; 6 AND `stu`.`id` &lt;= 9) ORDER BY `stu`.`no`, `stu`.`create_time` DESC LIMIT 1, 2;</span></span><br><span class="line">Stu.findAll(&#123;<span class="attr">attributes</span>:[<span class="string">'id'</span>, <span class="string">'name'</span>], <span class="attr">where</span>:&#123;<span class="attr">name</span>:<span class="string">'apple3'</span>, <span class="attr">id</span>:&#123;[Op.gt]:<span class="number">6</span>, [Op.lte]:<span class="number">9</span>&#125;&#125;, <span class="attr">limit</span>:<span class="number">2</span>, <span class="attr">offset</span>:<span class="number">1</span>, <span class="attr">order</span>:[<span class="string">'no'</span>, [<span class="string">'create_time'</span>,<span class="string">'desc'</span>]]&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//根据指定字段分组，统计，使用函数count</span></span><br><span class="line"><span class="comment">//等价sql: SELECT `name`, count(*) AS `数量` FROM `stu` AS `stu` GROUP BY `name`;</span></span><br><span class="line">Stu.findAll(&#123;<span class="attr">attributes</span>:[<span class="string">'name'</span>,[Sequelize.fn(<span class="string">'count'</span>,Sequelize.col(<span class="string">'*'</span>)), <span class="string">'数量'</span>]], <span class="attr">group</span>:<span class="string">'name'</span>&#125;).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//存在则查找，没有同新建，default为新建数据值</span></span><br><span class="line"><span class="comment">/* 等价sql:</span></span><br><span class="line"><span class="comment">TART TRANSACTION;</span></span><br><span class="line"><span class="comment">SELECT `id`, `name` FROM `stu` AS `stu` WHERE `stu`.`id` = 90;</span></span><br><span class="line"><span class="comment">INSERT INTO `stu` (`id`,`name`,`create_user`) VALUES (?,?,?);</span></span><br><span class="line"><span class="comment">COMMIT; */</span></span><br><span class="line">Stu.findOrCreate(&#123;<span class="attr">attributes</span>:[<span class="string">'id'</span>, <span class="string">'name'</span>], <span class="attr">where</span>:&#123;<span class="attr">id</span>:<span class="number">90</span>&#125;, <span class="attr">defaults</span>:&#123;<span class="attr">name</span>:<span class="string">'apple90_x'</span>&#125;&#125;).then(<span class="function">(<span class="params">[stu, created]</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(stu);</span><br><span class="line">    <span class="built_in">console</span>.log(created);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 统计查询</span></span><br><span class="line"><span class="comment">//等价sql: SELECT count(*) AS `count` FROM `stu` AS `stu` WHERE `stu`.`id` &lt; 7;</span></span><br><span class="line">Stu.count(&#123;<span class="attr">where</span>: &#123;<span class="attr">id</span>: &#123;[Op.lt]: <span class="number">7</span>&#125;&#125;&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 统计查询,这里使用了别名$lt,即是[Op.lt]</span></span><br><span class="line"><span class="comment">//等价sql: SELECT count(*) AS `count` FROM `stu` AS `stu` WHERE `stu`.`id` &lt; 7;</span></span><br><span class="line">Stu.count(&#123;<span class="attr">where</span>: &#123;<span class="attr">id</span>: &#123;<span class="attr">$lt</span>: <span class="number">7</span>&#125;&#125;&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//新增</span></span><br><span class="line"><span class="comment">//等价sql: INSERT INTO `stu` (`id`,`no`,`name`,`create_user`) VALUES (DEFAULT,?,?,?);</span></span><br><span class="line">Stu.create(&#123;<span class="attr">no</span>: <span class="string">'003'</span>, <span class="attr">name</span>: <span class="string">'apple3'</span>&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//批量创建</span></span><br><span class="line"><span class="comment">//等价sql: INSERT INTO `stu` (`id`,`no`,`name`,`create_user`) VALUES (NULL,'003','apple3','default'),(NULL,'004','apple3','default');</span></span><br><span class="line">Stu.bulkCreate([&#123;<span class="attr">no</span>: <span class="string">'003'</span>, <span class="attr">name</span>: <span class="string">'apple3'</span>&#125;,&#123;<span class="attr">no</span>: <span class="string">'004'</span>, <span class="attr">name</span>: <span class="string">'apple3'</span>&#125;]).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//更新</span></span><br><span class="line"><span class="comment">//等价sql: UPDATE `stu` SET `name`=?,`update_user`=? WHERE `id` = ?</span></span><br><span class="line">Stu.update(&#123;<span class="attr">name</span>: <span class="string">'banana3'</span>, <span class="attr">update_user</span>:<span class="string">'up3'</span>&#125;, &#123;<span class="attr">where</span>:&#123;<span class="attr">id</span>: <span class="number">2</span>&#125;&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//插入或更新</span></span><br><span class="line"><span class="comment">//等价sql: INSERT INTO `stu` (`id`,`no`,`name`,`create_user`,`update_time`) VALUES (?,?,?,?,?) ON DUPLICATE KEY UPDATE `id`=VALUES(`id`), `no`=VALUES(`no`), `name`=VALUES(`name`), `update_time`=VALUES(`update_time`);</span></span><br><span class="line">Stu.upsert(&#123;<span class="attr">id</span>: <span class="number">4</span>, <span class="attr">no</span>: <span class="string">'004'</span>, <span class="attr">name</span>: <span class="string">'004'</span>, <span class="attr">update_time</span>: <span class="built_in">Date</span>.now()&#125;, &#123;<span class="attr">id</span>: <span class="number">4</span>&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除</span></span><br><span class="line"><span class="comment">//等价sql: DELETE FROM `stu` WHERE `id` = 91</span></span><br><span class="line">Stu.destroy(&#123;<span class="attr">where</span>: &#123;<span class="attr">id</span>: <span class="number">91</span>&#125;&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">e</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//异常处理</span></span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// # 还可使用原始mysql语句查询：</span></span><br><span class="line"><span class="keyword">const</span> sequelize = <span class="built_in">require</span>(<span class="string">'./db/sequelize_config'</span>);</span><br><span class="line"><span class="comment">//sql执行</span></span><br><span class="line">sequelize.query(<span class="string">"select * from stu"</span>, &#123;<span class="attr">type</span>: sequelize.QueryTypes.SELECT&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//带参数sql执行</span></span><br><span class="line">sequelize.query(<span class="string">"select * from stu where id&lt;$id"</span>, &#123;<span class="attr">bind</span>:&#123;<span class="attr">id</span>:<span class="number">7</span>&#125;, <span class="attr">type</span>: sequelize.QueryTypes.SELECT&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="四、扩展"><a href="#四、扩展" class="headerlink" title="四、扩展"></a>四、扩展</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ### 4.1 sequelize.define定义model</span></span><br><span class="line"><span class="comment">// model还可以直接使用sequelize.define定义，使用示例如下：</span></span><br><span class="line"><span class="keyword">const</span> Stu = sequelize.define(<span class="string">'stu'</span>, &#123;</span><br><span class="line">    id:&#123;<span class="attr">type</span>:DataTypes.INTEGER, <span class="attr">primaryKey</span>:<span class="literal">true</span>, <span class="attr">autoIncrement</span>: <span class="literal">true</span>&#125;,</span><br><span class="line">    no:&#123;<span class="attr">type</span>:DataTypes.STRING&#125;,</span><br><span class="line">    name:&#123;<span class="attr">type</span>:DataTypes.STRING&#125;,</span><br><span class="line">    create_time:&#123;<span class="attr">type</span>:DataTypes.DATE&#125;,</span><br><span class="line">    update_time:&#123;<span class="attr">type</span>:DataTypes.DATE&#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    freezeTableName: <span class="literal">true</span>, <span class="comment">// 默认false修改表名为复数，true不修改表名，与数据库表名同步</span></span><br><span class="line">    tableName: <span class="string">'stu'</span>,</span><br><span class="line">    timestamps: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="number">11</span></span><br><span class="line"><span class="comment">// ## 4.2 异步转同步</span></span><br><span class="line"><span class="comment">// sequelize采用promise方式，语句执行结果是回调处理的。可以通过async、await包裹来实现内部同步处理，示例如下：</span></span><br><span class="line"></span><br><span class="line">(<span class="keyword">async</span> ()=&gt;&#123;</span><br><span class="line">    <span class="comment">//通过await等待获取结果</span></span><br><span class="line">    <span class="keyword">let</span> result = <span class="keyword">await</span> Stu.findByPk(<span class="number">7</span>, &#123;<span class="attr">raw</span>:<span class="literal">true</span>&#125;);</span><br><span class="line">    <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<!-- END: #12 -->
+<h1 id="TypeORM-1"><a href="#TypeORM-1" class="headerlink" title="TypeORM"></a>TypeORM</h1><!-- \# 21 [【译】Nodejs最好的ORM - TypeORM](https://www.cnblogs.com/brookshi/p/6446155.html) -->
+<p style="text-align:right"> 01:30</p>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/others/http基础/" rel="next" title="Http基础">
+                <i class="fa fa-chevron-left"></i> Http基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/js/js复制内容-navigator/" rel="prev" title="Js复制内容-Navigator">
+                Js复制内容-Navigator <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ORM-介绍"><span class="nav-text">ORM 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见框架"><span class="nav-text">常见框架</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单使用"><span class="nav-text">简单使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM的两种模式"><span class="nav-text">ORM的两种模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TypeORM"><span class="nav-text">TypeORM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequelize"><span class="nav-text">Sequelize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM2"><span class="nav-text">ORM2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汇总对比"><span class="nav-text">汇总对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-js-ORM-框架对比"><span class="nav-text">Node.js ORM 框架对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化数据库查询-Sequelize"><span class="nav-text">优化数据库查询 (Sequelize)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-基础用法"><span class="nav-text">2 基础用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础的CURD"><span class="nav-text">基础的CURD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-联表查询"><span class="nav-text">3 联表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-联表关系"><span class="nav-text">3.2 联表关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-一对一关系（belongsTo-hasOne）"><span class="nav-text">3.3 一对一关系（belongsTo / hasOne）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-一对多（hasMany）"><span class="nav-text">3.4 一对多（hasMany）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-多对多关系（belongsToMany）"><span class="nav-text">3.5 多对多关系（belongsToMany）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-几种-JOIN"><span class="nav-text">3.6 几种 JOIN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-数据库查询的优化"><span class="nav-text">4 数据库查询的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-慢查询、全表扫描和索引"><span class="nav-text">4.1 慢查询、全表扫描和索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-给其他列加索引"><span class="nav-text">4.2 给其他列加索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#索引越多越好吗？"><span class="nav-text">索引越多越好吗？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-查询语句优化"><span class="nav-text">4.3 查询语句优化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现ORM框架"><span class="nav-text">实现ORM框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sequelize"><span class="nav-text">sequelize</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequelize有哪些特色？"><span class="nav-text">Sequelize有哪些特色？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、知识点"><span class="nav-text">二、知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-语句映射"><span class="nav-text">2.3 语句映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-部分关键参数"><span class="nav-text">2.4 部分关键参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、使用示例"><span class="nav-text">三、使用示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、扩展"><span class="nav-text">四、扩展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TypeORM-1"><span class="nav-text">TypeORM</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

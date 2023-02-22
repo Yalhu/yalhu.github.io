@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="test,jest,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="jest：https://github.com/facebook/jestjest文档：https://jestjs.io/zh-Hans/docs/configuration">
+<meta name="keywords" content="test,jest">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端单元测试-Jest使用记录">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/前端单元测试-Jest使用记录/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="jest：https://github.com/facebook/jestjest文档：https://jestjs.io/zh-Hans/docs/configuration">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-09-02T05:51:20.920Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端单元测试-Jest使用记录">
+<meta name="twitter:description" content="jest：https://github.com/facebook/jestjest文档：https://jestjs.io/zh-Hans/docs/configuration">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/前端单元测试-Jest使用记录/">
+
+
+
+
+
+  <title>前端单元测试-Jest使用记录 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/前端单元测试-Jest使用记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端单元测试-Jest使用记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-21T08:00:00+08:00">
+                2021-12-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2022-09-02T13:51:20+08:00">
+                2022-09-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/jsplus/" itemprop="url" rel="index">
+                    <span itemprop="name">jsplus</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/前端单元测试-Jest使用记录/" class="leancloud_visitors" data-flag-title="前端单元测试-Jest使用记录">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,218
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>jest：<a href="https://github.com/facebook/jest" target="_blank" rel="noopener">https://github.com/facebook/jest</a><br>jest文档：<a href="https://jestjs.io/zh-Hans/docs/configuration" target="_blank" rel="noopener">https://jestjs.io/zh-Hans/docs/configuration</a></p>
+<a id="more"></a>
+<p style="text-align:right"> 2021.12.21 星期二 : </p>
+
+
+<!-- [代码覆盖率浅谈 ](https://www.cnblogs.com/coderzh/archive/2009/03/29/1424344.html)
+$_PS: 更全的介绍。 TODO: 添加到印象 -->
+<!-- 通常，mock函数会提供以下三个功能，来实现替换：捕获函数调用情况，设置函数返回值，改变原函数的实现。 -->
+<h2 id="文件结构设计"><a href="#文件结构设计" class="headerlink" title="文件结构设计"></a>文件结构设计</h2><blockquote>
+<p>Jest 推荐你在被测试代码的所在目录下创建一个 <code>__tests__</code> 目录，但你也可以为你的测试文件随意设计自己习惯的文件结构。不过要当心 Jest 会为快照测试在临近测试文件的地方创建一个 <code>__snapshots__</code> 目录。</p>
+</blockquote>
+<p>– 单测文件或者<strong>tests</strong>目录跟要测试的文件放在同个目录，方便我们查找</p>
+<h3 id="实际经验"><a href="#实际经验" class="headerlink" title="实际经验"></a>实际经验</h3><p>1-1 统一的测试内容，比如shallow，mount等，都放在了test目录下，和源码分离。<!-- 用脚本格式化生成 --><br>1-2 业务相关或定制测试内容，放在源码目录中，有些测试内容并不生成<strong>snapshots</strong>。<br>1-3 utils（数量可见）还是放在了test目录下，未和源码在一起。不像components，pages等添加/修改随意。<br>2-1 test目录下放置所有测试相关的内容，包括测试用例，mocks，jest配置文件等。<br>3-2 但是mocks数据还是放在了src目录下，用.mock 区分。<!-- 一是方便脚本@/mocks 应用。而是开发时可能需要。 --></p>
+<!--
+Jest识别三种测试文件，以.test.js结尾的文件，以.spec.js结尾的文件，和放到__tests__ 文件夹中的文件。 
+
+Jest识别三种测试文件:
+* 测试文件后缀为js，jsx，ts，tsx
+* 测试文件需要放在tests/unit/目录下或者是/__tests__/目录下
+* 以xx.test.js/...结尾的文件，以xx.spec.js/...结尾的文件，
+只要满足这三个要求的测试文件，使用运行jest时就会自动执行
+
+\$_PS: 应该是在设置中配置的。
+-->
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>awesome-jest：<a href="https://github.com/jest-community/awesome-jest#results-processors" target="_blank" rel="noopener">https://github.com/jest-community/awesome-jest#results-processors</a></p>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>jest-dom: Custom Jest matchers to test the dom structure.<br><!-- PS: 在jest@28 及以上版本。不再内置jest-dom了。 --><br>NOTE: 从jest28开始，默认情况不再提供’Jest环境jsdom’, 请确保单独安装它。<br><!-- localStorage等问题，和他有关系 --></p>
+<h3 id="result"><a href="#result" class="headerlink" title="result"></a>result</h3><p>报告：<br>jest-html-reporters 比 jest-html-reporter 强一扭扭:<br>有dashboard，可以看到图表。列表有分组/折叠。直接跳转到lcov-report，查看每个文件的细节。</p>
+<p><a href="https://github.com/dkelosky/jest-stare" target="_blank" rel="noopener">https://github.com/dkelosky/jest-stare</a></p>
+<blockquote>
+<p>This is a Jest HTML reporter. It takes summary test results from jest and parses them into an HTML file for improved readability and filtering.</p>
+</blockquote>
+<p><a href>majestic</a> Zero config UI for Jest.<br>jest-bamboo-formatter: <a href="https://github.com/adalbertoteixeira/jest-bamboo-formatter" target="_blank" rel="noopener">https://github.com/adalbertoteixeira/jest-bamboo-formatter</a></p>
+<!-- 
+VSCode 调试
+Debugging tests in VS Code：<https://github.com/microsoft/vscode-recipes/tree/master/debugging-jest-tests>
+vscode-jest  -->
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p><code>npx jest --showConfig &gt; test/jest.conf.output.json</code><br>onlyChanged: 只是针对修改的测试用例。<!-- 并不是增量 --><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&quot;automock&quot;: false,</span><br><span class="line">&quot;cacheDirectory&quot;: &quot;/private/var/folders/84/q_vxngn51816smpv9prjnx6h0000gp/T/jest_dy&quot;,</span><br><span class="line"></span><br><span class="line">&quot;injectGlobals&quot;: true,</span><br><span class="line"></span><br><span class="line">&quot;onlyFailures&quot;: false,</span><br><span class="line"></span><br><span class="line">&quot;onlyChanged&quot;: false,</span><br><span class="line">&quot;lastCommit&quot;: false,</span><br><span class="line">--changedSince</span><br><span class="line">  </span><br><span class="line">&quot;maxConcurrency&quot;: 5,</span><br><span class="line"></span><br><span class="line">&quot;maxWorkers&quot;: 9,</span><br></pre></td></tr></table></figure></p>
+<h3 id="SMTC"><a href="#SMTC" class="headerlink" title="SMTC"></a>SMTC</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bail: 1,</span></span><br><span class="line">preset: <span class="string">"ts-jest"</span>,</span><br><span class="line"><span class="comment">// verbose: true,</span></span><br><span class="line">globals: &#123;</span><br><span class="line">    <span class="string">"ts-jest"</span>: &#123;</span><br><span class="line">        tsConfig: <span class="string">"&lt;rootDir&gt;/tsconfig.json"</span>,</span><br><span class="line">        importHelpers: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">testEnvironment: <span class="string">"jsdom"</span>,</span><br><span class="line">rootDir: path.resolve(__dirname, <span class="string">"../"</span>),</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在jest inital之前执行，比setupFilesAfterEnv更早，例如可以设置全局变量到global</span></span><br><span class="line"><span class="string">"setupFiles"</span>: [</span><br><span class="line">  <span class="comment">// jsdom，不涉及dom可不引入</span></span><br><span class="line">  <span class="string">"react-app-polyfill/jsdom"</span></span><br><span class="line">],</span><br><span class="line"><span class="comment">// 类似，在jest inital之后执行，这一步能拿到jest的api进行扩展（故名AfterEnv）</span></span><br><span class="line"><span class="comment">// 可以执行例如引入enzyme配置等</span></span><br><span class="line"><span class="string">"setupFilesAfterEnv"</span>: [</span><br><span class="line">  <span class="string">"&lt;rootDir&gt;/src/setupTests.js"</span></span><br><span class="line">],</span><br><span class="line"></span><br><span class="line">moduleFileExtensions: [<span class="string">"ts"</span>, <span class="string">"tsx"</span>, <span class="string">"js"</span>, <span class="string">"jsx"</span>, <span class="string">"json"</span>, <span class="string">"node"</span>],</span><br><span class="line">moduleNameMapper: &#123;</span><br><span class="line">    <span class="string">'@tarojs/taro'</span>: <span class="string">'&lt;rootDir&gt;/test/mocks/taroMock.js'</span>, <span class="comment">// tarojs mock</span></span><br><span class="line">    <span class="string">'@tarojs/components'</span>: <span class="string">'@tarojs/components/dist-h5/react'</span>,</span><br><span class="line">    <span class="string">"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$"</span>:</span><br><span class="line">        <span class="string">"&lt;rootDir&gt;/test/mocks/fileMock.js"</span>,</span><br><span class="line">    <span class="string">"\\.(css|less|scss)$"</span>: <span class="string">"&lt;rootDir&gt;/test/mocks/styleMock.js"</span>,</span><br><span class="line">    <span class="string">'@/utils/Cookie'</span>: <span class="string">'&lt;rootDir&gt;/src/utils/Cookie/index.h5.js'</span>,</span><br><span class="line">    <span class="string">'@/utils/Track'</span>: <span class="string">'&lt;rootDir&gt;/test/mocks/emptyMock.js'</span>,</span><br><span class="line">    <span class="string">'^@/(.*)$'</span>: <span class="string">'&lt;rootDir&gt;/src/$1'</span>, <span class="comment">// webpack alias 配置</span></span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">testMatch: [<span class="string">"&lt;rootDir&gt;/test/**/*.spec.js"</span>, <span class="string">"&lt;rootDir&gt;/test/**/*.spec.jsx"</span>],</span><br><span class="line">testPathIgnorePatterns: [</span><br><span class="line">    <span class="string">"/node_modules"</span>,</span><br><span class="line">    <span class="string">"test/components/Dialog.spec.js*"</span>,</span><br><span class="line">    <span class="string">"test/pages/balance_confirm*"</span>,</span><br><span class="line">],</span><br><span class="line"></span><br><span class="line"><span class="string">"transform"</span>: &#123;</span><br><span class="line">  <span class="comment">// 用 `babel-jest` 处理 js</span></span><br><span class="line">  <span class="string">"^.+\\.js$"</span>: <span class="string">"&lt;rootDir&gt;/node_modules/babel-jest"</span></span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">// 快照的序列化工具 || 否则测通过，但是快照文件没有内容生成。</span></span><br><span class="line">snapshotSerializers: [<span class="string">"enzyme-to-json/serializer"</span>],  </span><br><span class="line"><span class="comment">// "snapshotSerializers":["jest-serializer-vue"],</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">collectCoverage: <span class="literal">true</span>,</span><br><span class="line">coverageDirectory: <span class="string">"&lt;rootDir&gt;/test/coverage"</span>,</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 可以用一个 通配模式 的数组来指出仅哪些文件需要收集覆盖率信息。</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 1）lcov-report 目录结构是根据这个配置生成的。</span></span><br><span class="line"><span class="comment"> *  比如：同时配置 src/** 和src/utils 会生成两个utils的目录。</span></span><br><span class="line"><span class="comment"> *  src/** /*.ts?(x) 和 src/** /*.ts?(x) 是通一个目录 （ext: 空格是防止注释）</span></span><br><span class="line"><span class="comment"> * 2）路径后面必须有`**`, 比如`!/src/enums/**`</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">collectCoverageFrom: [</span><br><span class="line">    <span class="comment">// "&lt;rootDir&gt;/src/utils/**",</span></span><br><span class="line">    <span class="comment">// 'src/**/!(*.d).&#123;js,ts&#125;',</span></span><br><span class="line">    <span class="string">"&lt;rootDir&gt;/src/**/*.[jt]s?(x)"</span>,</span><br><span class="line">    <span class="string">"!/src/enums/**"</span>,</span><br><span class="line">    <span class="string">"!src/**/*-mock*"</span>,</span><br><span class="line">],</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * An array of regexp pattern strings that are matched against all file paths before executing the test. </span></span><br><span class="line"><span class="comment"> * 执行测试前 忽略掉的文件。</span></span><br><span class="line"><span class="comment"> *  即不会运行test， 区别于上面的collectCoverageFrom。</span></span><br><span class="line"><span class="comment"> * 防止某些文件输出意外的error等信息。</span></span><br><span class="line"><span class="comment"> *  `STACK: SyntaxError: /Users/user123/myprojects/xxx/pagev32614-mock.js:`</span></span><br><span class="line"><span class="comment"> *  collectCoverageFrom 和 coveragePathIgnorePatterns 都可以生效。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">coveragePathIgnorePatterns: [</span><br><span class="line">    <span class="string">'url-decode\\.json'</span>,</span><br><span class="line">    <span class="string">'.*-mock\..*'</span>,</span><br><span class="line">],</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * clover -&gt; clover.xml;</span></span><br><span class="line"><span class="comment"> * json -&gt; `coverage-final.json`; </span></span><br><span class="line"><span class="comment"> * lcov -&gt; lcov-report/目录, Icov.info; 每一个测试用例/文件的结果报告（详细）。</span></span><br><span class="line"><span class="comment"> * text: 控制台视图.</span></span><br><span class="line"><span class="comment"> *  Icov.info 文件记录了一堆信息。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="string">"coverageReporters"</span>: [<span class="comment">/* "clover", */</span> <span class="string">"json"</span>, <span class="string">"lcov"</span>, [<span class="string">"text"</span>, &#123;<span class="string">"skipFull"</span>: <span class="literal">true</span>&#125;]],</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 平台报告解析，需要配置JEST_REPORT_FILE路径。</span></span><br><span class="line"><span class="comment">    jest-bamboo-formatter: https://github.com/adalbertoteixeira/jest-bamboo-formatter/issues</span></span><br><span class="line"><span class="comment">    package.json</span></span><br><span class="line"><span class="comment"> *</span></span><br></pre></td></tr></table></figure>
+<pre><code>       &quot;test&quot;: &quot;cross-env JEST_REPORT_FILE=&apos;./test/report/test-report.json&apos; jest --config test/jest.conf.js&quot;
+*   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"> */</span><br><span class="line">testResultsProcessor: &quot;jest-bamboo-reporter&quot;,</span><br><span class="line">// &quot;coverageThreshold&quot;: &#123;</span><br><span class="line">//     &quot;global&quot;: &#123;</span><br><span class="line">//         &quot;branches&quot;: 50,</span><br><span class="line">//         &quot;functions&quot;: 50,</span><br><span class="line">//         &quot;lines&quot;: 50,</span><br><span class="line">//         &quot;statements&quot;: 50</span><br><span class="line">//       &#125;,</span><br><span class="line">//       &quot;./src/components/&quot;: &#123;</span><br><span class="line">//         &quot;branches&quot;: 40,</span><br><span class="line">//         &quot;statements&quot;: 40</span><br><span class="line">//       &#125;,</span><br><span class="line">// &#125;,</span><br><span class="line"></span><br><span class="line">reporters: [</span><br><span class="line">    &quot;default&quot;,</span><br><span class="line">    [</span><br><span class="line">        &quot;./node_modules/jest-html-reporter&quot;,</span><br><span class="line">        &#123;</span><br><span class="line">            pageTitle: &quot;Test Report&quot;,</span><br><span class="line">            outputPath: &quot;./test/report/test-report.html&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    [&quot;jest-html-reporters&quot;, &#123;</span><br><span class="line">        &quot;publicPath&quot;: &quot;./test/report&quot;,</span><br><span class="line">        &quot;filename&quot;: &quot;jest_html_reporters.html&quot;,</span><br><span class="line">        &quot;openReport&quot;: true</span><br><span class="line">    &#125;]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</code></pre><p>globals, globalSetup; setupFiles, setupFilesAfterEnv</p>
+<h3 id="小程序配置"><a href="#小程序配置" class="headerlink" title="小程序配置"></a>小程序配置</h3><p><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/unit-test.html" target="_blank" rel="noopener">小程序-自定义组件-单元测试</a><br>miniprogram-simulate: <a href="https://github.com/wechat-miniprogram/miniprogram-simulate" target="_blank" rel="noopener">https://github.com/wechat-miniprogram/miniprogram-simulate</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// jest 是直接在 nodejs 环境进行测试，使用 jsdom 进行 dom 环境的模拟。在使用时需要将 jest 的 `testEnvironment` 配置为 `jsdom`。</span></span><br><span class="line">    <span class="comment">// jest 内置 jsdom，所以不需要额外引入。</span></span><br><span class="line">    <span class="string">"testEnvironment"</span>: <span class="string">"jsdom"</span>,</span><br><span class="line">    <span class="comment">// 配置 jest-snapshot-plugin 从而在使用 jest 的 snapshot 功能时获得更加适合肉眼阅读的结构</span></span><br><span class="line">    <span class="string">"snapshotSerializers"</span>: [<span class="string">"miniprogram-simulate/jest-snapshot-plugin"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ol>
+<li><code>getApp is not defined</code><blockquote>
+<p>我们可以通过jest提供的global设置全局变量，可以在测试文件中单独编写，或者在package.json的jest块设置setupFiles属性，让jest自动加载。</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>由于小程序页面的构成包含Page和生命钩子等miniprogram-simulate不提供的能力，所以我们需要自己先进行全局配置Page。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  globals: &#123;</span><br><span class="line">    getApp: () =&gt; &quot;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;setupFiles&quot;: [&quot;./setup.js&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>\$_PS: 但是实际中，通过globals 只有一个用例单独测试的时候可以通过。两个用例一起测试又回报错。？？不解。</p>
+<!-- 
+<figure class="highlight plain"><figcaption><span>|| weapp.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">export const noop = () =&gt; &#123;&#125;;</span><br><span class="line">export const isFn = fn =&gt; typeof fn === &apos;function&apos;;</span><br><span class="line">let wId = 0;</span><br><span class="line">global.Page = (&#123; data, ...rest &#125;) =&gt; &#123;</span><br><span class="line">  const page = &#123;</span><br><span class="line">    data,</span><br><span class="line">    setData: jest.fn(function (newData, cb) &#123;</span><br><span class="line">      this.data = &#123;</span><br><span class="line">        ...this.data,</span><br><span class="line">        ...newData,</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      cb &amp;&amp; cb();</span><br><span class="line">    &#125;),</span><br><span class="line">    onLoad: noop,</span><br><span class="line">    onReady: noop,</span><br><span class="line">    onUnLoad: noop,</span><br><span class="line">    __wxWebviewId__: wId++,</span><br><span class="line">    ...rest,</span><br><span class="line">  &#125;;</span><br><span class="line">  global.wxPageInstance = page;</span><br><span class="line">  return page;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">global.getApp = function () &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    baseUrl: &apos;https://m.maizuo.com/v4/api&apos;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">global.Date.now = jest.fn(() =&gt; 1536708613825);</span><br><span class="line">global.wx = &#123;</span><br><span class="line">  showLoading: jest.fn(),</span><br><span class="line">  hideLoading: jest.fn(),</span><br><span class="line">  showModal: jest.fn(),</span><br><span class="line">  request: jest.fn(),</span><br><span class="line">  getStorageSync: jest.fn(),</span><br><span class="line">  showShareMenu: jest.fn(),</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">module.exports = global;</span><br><span class="line">``` </span><br><span class="line">--&gt;</span><br><span class="line">&lt;!-- 参考：</span><br><span class="line">[微信小程序的单元测试miniprogram-simulate 和 Jest](https://juejin.cn/post/6976886009971605541)</span><br><span class="line">[小程序单元测试](https://juejin.cn/post/6844903687580549134)</span><br><span class="line">[小程序单元测试 getApp() 实例无法获取？](https://developers.weixin.qq.com/community/develop/doc/000e28e71d8d70ea9479da1f951400) --&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## mock</span><br><span class="line">### 配置</span><br><span class="line">有3种方式。</span><br><span class="line">1. 在配置中moduleNameMapper，定义模块路径</span><br><span class="line">2. 在配置globals中定义（全局）变量</span><br><span class="line">3. 在启动文件setup.js 中定义global。&lt;!-- 配置中不能定义函数。 --&gt;</span><br><span class="line"></span><br><span class="line">setup.js 在小程序中的配置。</span><br><span class="line">```js</span><br><span class="line">global.getApp = function () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      systemInfo:&#123;</span><br><span class="line">        SDKVersion:&apos;&apos;</span><br><span class="line">      &#125;,</span><br><span class="line">      isAppShare:&#123;</span><br><span class="line">        isAppBarClosed:&apos;&apos;</span><br><span class="line">      &#125;,</span><br><span class="line">      event:&#123;</span><br><span class="line">        on:function()&#123;</span><br><span class="line">        &#125;,</span><br><span class="line">        emit:function()&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">global.getCurrentPages=function () &#123;</span><br><span class="line">    return [&#123;&#125;]</span><br><span class="line">&#125;</span><br><span class="line">global.wx = &#123;</span><br><span class="line">    showLoading: jest.fn(),</span><br><span class="line">    hideLoading: jest.fn(),</span><br><span class="line">    showModal: jest.fn(),</span><br><span class="line">    request: jest.fn(),</span><br><span class="line">    getStorageSync: jest.fn(),</span><br><span class="line">    showShareMenu: jest.fn(),</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">module.exports = global;</span><br></pre></td></tr></table></figure>
+<h3 id="mock-taro"><a href="#mock-taro" class="headerlink" title="mock taro"></a>mock taro</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> handleApiMock <span class="keyword">from</span> <span class="string">'./apiMock'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getApp = jest.fn(<span class="function"><span class="params">()</span> =&gt;</span> (&#123;&#125;));</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getCurrentInstance = jest.fn(<span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">    page: &#123;&#125;,</span><br><span class="line">    router: &#123;</span><br><span class="line">        params: &#123;</span><br><span class="line">            id: <span class="string">'2342999999'</span>, <span class="comment">// remind</span></span><br><span class="line">            phone: <span class="string">''</span> <span class="comment">// remind</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;));</span><br><span class="line"><span class="comment">// export const request = jest.fn();</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> request = jest.fn().mockImplementation(handleApiMock);</span><br><span class="line"><span class="keyword">const</span> Taro = &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    getApp,</span><br><span class="line">    getCurrentInstance,</span><br><span class="line">    request,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Taro</span><br></pre></td></tr></table></figure>
+<h3 id="mock-接口数据"><a href="#mock-接口数据" class="headerlink" title="mock 接口数据"></a>mock 接口数据</h3><!-- 
+京购小程序订单单元测试数据前后对比：
+有变化：detail, follow（有报错，解决后有提升）, addr_modify, balance_confirm, orderCancelDetail, 
+变化不大：cancel, list, remind, webview, wuliumap 
+snapshots发生变化：follow, list, wuliuMap; 
+还有页面下的组件。因为修改taro.getCurrentInstance 返回了router.params 参数
+-->
+<p>snapshots 会有变化，因为有数据了。覆盖率也有提升。</p>
+<!-- 
+第一种方式：直接在接口mock整个taro，好像对全局的mock没有影响。 做了merge？？
+ -->
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ## 1 直接在测试用例中mock(单个)接口</span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line">jest.mock(<span class="string">'@tarojs/taro'</span>)</span><br><span class="line"><span class="comment">// Taro.request.mockResolvedValue(mockData);</span></span><br><span class="line">Taro.request.mockImplementation(<span class="function">(<span class="params">requests</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; url, data, method, header &#125; = requests || &#123;&#125;</span><br><span class="line">    <span class="keyword">let</span> result = &#123; <span class="attr">code</span>: <span class="string">'0'</span>, <span class="attr">body</span>: &#123;&#125;, <span class="attr">message</span>: <span class="string">'mock data'</span> &#125;</span><br><span class="line">    <span class="keyword">if</span> (url.includes(<span class="string">'api.m.jd.com/client.action'</span>)) &#123;</span><br><span class="line">        result =  mockData</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(result)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ## 2 保留taro其他模块的mock</span></span><br><span class="line"><span class="comment"> *  jest.requireActual</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">jest.mock(<span class="string">'@tarojs/taro'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> originalModule = jest.requireActual(<span class="string">'../../mocks/taroMock'</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        __esModule: <span class="literal">true</span>,</span><br><span class="line">        ...originalModule,</span><br><span class="line">        request: jest.fn().mockImplementationOnce(<span class="function">(<span class="params">requests</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// console.log('mocks Implementation', requests)</span></span><br><span class="line">            <span class="keyword">const</span> &#123; url, data, method, header &#125; = requests || &#123;&#125;</span><br><span class="line">            <span class="keyword">let</span> result = &#123; <span class="attr">code</span>: <span class="string">'7890'</span>, <span class="attr">body</span>: &#123;&#125;, <span class="attr">message</span>: <span class="string">'mock data'</span> &#125;</span><br><span class="line">            <span class="keyword">if</span> (url.includes(<span class="string">'api.m.jd.com/client.action'</span>)) &#123;</span><br><span class="line">                <span class="keyword">const</span> functionId = data.functionId</span><br><span class="line">                <span class="comment">// console.log('mocks Implementation. functionId', functionId)</span></span><br><span class="line">                <span class="keyword">if</span> (functionId.includes(<span class="string">'get_address_detail'</span>)) &#123;</span><br><span class="line">                    result =  mockData</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(result)</span><br><span class="line">        &#125;),</span><br><span class="line">        foo: <span class="string">'mocked foo'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ## 3 分离测试用例和数据mock</span></span><br><span class="line"><span class="comment"> * 1） 在外层taro.request mock的时候处理返回数据，从用例中分离数据mock逻辑。</span></span><br><span class="line"><span class="comment"> * 2） 并且分离taro mock 和api数据mock</span></span><br><span class="line"><span class="comment"> * 3)  在Implementation 根据不同的请求接口去处理数据。</span></span><br><span class="line"><span class="comment"> * 通过mockImplementation，对不同的方法（url等）返回不同的数据。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/* test/mocks/apiMock.js */</span></span><br><span class="line"><span class="comment">// api Mock 数据模块路径。目前仅mock主接口。</span></span><br><span class="line"><span class="keyword">const</span> apiMockModule = &#123;</span><br><span class="line">    order_list: <span class="string">'list'</span>,</span><br><span class="line">    order_detail: <span class="string">'detail'</span>,</span><br><span class="line">    get_logistics_list_by_order: <span class="string">'follow'</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 处理Taro.requests 请求mock</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;*&#125;</span> <span class="variable">request</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> handleApiMock = <span class="function"><span class="keyword">function</span>(<span class="params">requests</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// console.log('mocks Implementation', requests)</span></span><br><span class="line">    <span class="keyword">const</span> &#123; url, data, method, header &#125; = requests || &#123;&#125;</span><br><span class="line">    <span class="keyword">let</span> result = &#123; <span class="attr">code</span>: <span class="string">'7890'</span>, <span class="attr">body</span>: <span class="literal">null</span>, <span class="attr">message</span>: <span class="string">'mock data'</span> &#125;</span><br><span class="line">    <span class="keyword">if</span> (url.includes(<span class="string">'api.m.com/client'</span>)) &#123;</span><br><span class="line">        <span class="keyword">const</span> functionId = data.functionId.replace(<span class="regexp">/_m$/g</span>, <span class="string">''</span>)</span><br><span class="line">        <span class="keyword">const</span> mockItem = apiMockModule[functionId]</span><br><span class="line">        <span class="keyword">if</span> (mockItem &amp;&amp; <span class="built_in">Object</span>.keys(apiMockModule).includes(functionId)) &#123;</span><br><span class="line">            result =  <span class="built_in">require</span>(<span class="string">`@/mocks/<span class="subst">$&#123;mockItem&#125;</span>.mock`</span>).default</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(result)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> handleApiMock</span><br><span class="line"><span class="comment">/* test/mocks/taroMock.js */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> request = jest.fn().mockImplementation(handleApiMock);</span><br></pre></td></tr></table></figure>
+<!-- 
+发生了什么？这里面最核心的一句是 jest.mock('axios')，这让 jest 用一个空的函数，接管了 axios 的所有行为，在没有使用 mockResolvedValue 方法前，本文件中的 axios 的所有方法都将返回 undefined：
+
+
+\# 41 [在 jest 单元测试中模拟接口请求](https://zhaohaodang.com/2021/01/05/jest单元测试如何模拟接口请求/)
+注意，jest.mock() 应该在外层调用，而不是在 it 中调用。
+一旦调用了 jest.mock('axios')，在测试文件 index.test.js 中的所有 axio 请求都会被接管，包括在该文件中导入的 getFirstAlbumTitle 中的 axios，其他测试文件不受影响。
+
+至此，我们已经知道了如何模拟 axios 请求，这种方案暂且命名为方案 1。
+方案 1 有个缺点，就是模拟的数据和测试用例杂糅在一起，如果模拟的数据过于庞大，远超过测试用例的代码量，这就有点混乱了，测试用例应该注重逻辑的书写，而不是人为模拟的数据。
+接下来说的是方案 2，讲的是如何把模拟的数据和测试用例分开。
+在项目根目录下新建__mocks__目录，大小写不能错，在__mocks__目录下，新建一个和 axios 齐名的 js 文件 axios.js，代码如下：
+
+[使用Jest模拟axios，不同接口返回不同数据](https://juejin.cn/post/7005459406389248008)
+[使用Jest模拟axios，不同接口返回不同数据](https://cdmana.com/2021/09/20210908162504173h.html)
+* jest.mock('axios')相当于使用jest.fn()代理了axios模块内的所有(get/post/patch等)方法
+* jest.fn().mockResolvedValue(response)是jest.fn().mockImplementation(() => Promise.resolve(response))的语法糖函数，可结合async...await使用
+* 不同的请求方法可直接根据请求方法区分返回指定response;相同请求方法不同url可根据axios.post.mockImplementation(url => ...)参数url区分，返回指定response
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据不同请求方法返回不同的response</span></span><br><span class="line">axios.get.mockResolvedValue(response1)</span><br><span class="line">axios.post.mockResolvedValue(response2)</span><br><span class="line">axios.patch.mockResolvedValue(response3)</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果请求方式都一致，可通过url再细分，返回不同的response</span></span><br><span class="line">axios.get.mockImplementation(<span class="function"><span class="params">url</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> (url) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'/url-1'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(response1)</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'/url-2'</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(response2)</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><a href="https://itxiaohao.github.io/passages/test-learn-jest-mock2/#mock-axios">2-12：Jest 中的 Mock（2）</a><br>PS: 这是一个文档。没有发现干货。是一个前端blob，还有其他内容。 –&gt;</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><h4 id="window-location"><a href="#window-location" class="headerlink" title="window.location"></a>window.location</h4><blockquote>
+<p>默认location.href或者location.search的值无法修改。 原因是location对象对这两个key或者也有类似到key进行了锁定。<br><!-- $_PS: 虽然修改了（控制台）search，但是值并没有改变。｜ 生命周期引起的全局变化（Object.assign）
+$_PS: 修改href后，页面刷新了。
+ --><p></p>
+
+<p>库：jest-location-mock<br>或者4中方式：1 delete;2 Object.defineProperty;3 mockFile; 4 spyOn</p>
+<!-- \#2 [Jest: mock window.location methods](https://remarkablemark.org/blog/2018/11/17/mock-window-location/)
+> Spying on window.location does make the test pass:
+Mock method
+delete -->
+<!-- 
+\#1 [Window对象的各种测试方法总结](https://guzhongren.github.io/2020/06/window对象的各种测试方法总结/)
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ## 1 delete </span></span><br><span class="line"><span class="keyword">import</span> &#123; addHash &#125; <span class="keyword">from</span> <span class="string">'../src/attribute'</span></span><br><span class="line"></span><br><span class="line">describe(<span class="string">'method'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; location &#125; = <span class="built_in">window</span></span><br><span class="line">  beforeEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">delete</span> <span class="built_in">window</span>.location;</span><br><span class="line">    <span class="built_in">window</span>.location = &#123;</span><br><span class="line">      ...location,</span><br><span class="line">      href: <span class="string">'http://href.com'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  afterEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.location = location</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  it(<span class="string">"should return http://href.com#123 when give 123"</span>, () =&gt; &#123;</span><br><span class="line">    expect(addHash(<span class="string">'123'</span>)).toEqual(<span class="string">'http://href.com#123'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ## 2 Object.defineProperty</span></span><br><span class="line"><span class="keyword">import</span> &#123; addHash &#125; <span class="keyword">from</span> <span class="string">'../src/attribute'</span></span><br><span class="line">describe(<span class="string">'method'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; location &#125; = <span class="built_in">window</span></span><br><span class="line">  beforeEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(<span class="built_in">window</span>, <span class="string">'location'</span>, &#123;</span><br><span class="line">      value: &#123;</span><br><span class="line">        ...location,</span><br><span class="line">        href: <span class="string">'http://href.com'</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  afterEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(<span class="built_in">window</span>, <span class="string">'location'</span>, location)</span><br><span class="line">  &#125;)</span><br><span class="line">  it(<span class="string">"should return http://href.com#123 when give 123"</span>, () =&gt; &#123;</span><br><span class="line">      expect(addHash(<span class="string">'123'</span>)).toEqual(<span class="string">'http://href.com#123'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// ## 3 mockFile</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> attribute <span class="keyword">from</span> <span class="string">'../src/attribute'</span></span><br><span class="line">jest.mock(<span class="string">'../src/attribute'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    __esModule: <span class="literal">true</span>,</span><br><span class="line">    addHash: jest.fn(),</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">beforeEach( <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  jest.resetModules();</span><br><span class="line">&#125;)</span><br><span class="line">describe(<span class="string">'method'</span>, () =&gt; &#123;</span><br><span class="line">  it(<span class="string">'mocks `addHash`'</span>, () =&gt; &#123;</span><br><span class="line">    expect(jest.isMockFunction(attribute.addHash)).toBe(<span class="literal">true</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  it(<span class="string">'verify method has been invoked'</span>, () =&gt; &#123;</span><br><span class="line">    expect(attribute.addHash).not.toHaveBeenCalled();</span><br><span class="line">    <span class="comment">// will failed</span></span><br><span class="line">    <span class="comment">// expect(attribute.addHash('test')).toEqual('http://localhost/#test')</span></span><br><span class="line">    attribute.addHash(<span class="string">'234'</span>)</span><br><span class="line">    expect(attribute.addHash).toHaveBeenCalled()</span><br><span class="line">    expect(attribute.addHash).toBeCalledTimes(<span class="number">1</span>)</span><br><span class="line">    expect(attribute.addHash).toBeCalledWith(<span class="string">'234'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ## 4 spyOn</span></span><br><span class="line"><span class="keyword">import</span> &#123; addHash &#125; <span class="keyword">from</span> <span class="string">'../src/attribute'</span></span><br><span class="line"></span><br><span class="line">describe(<span class="string">'method'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> windowSpy</span><br><span class="line">  beforeEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    windowSpy = jest.spyOn(<span class="built_in">window</span>, <span class="string">'location'</span>, <span class="string">'get'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  afterEach(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    windowSpy.mockRestore()</span><br><span class="line">  &#125;)</span><br><span class="line">  it(<span class="string">'mocks `addHash`'</span>, () =&gt; &#123;</span><br><span class="line">    expect(jest.isMockFunction(windowSpy)).toBe(<span class="literal">true</span>)</span><br><span class="line">  &#125;);</span><br><span class="line">  it(<span class="string">'spyOn for addHash'</span>, () =&gt; &#123;</span><br><span class="line">    windowSpy.mockImplementation(<span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">      href: <span class="string">'http://test.com'</span>,</span><br><span class="line">    &#125;))</span><br><span class="line">    expect(windowSpy).not.toHaveBeenCalled()</span><br><span class="line">    expect(addHash(<span class="string">'123'</span>)).toEqual(<span class="string">'http://test.com#123'</span>)</span><br><span class="line">    expect(windowSpy).toHaveBeenCalled();</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p> –&gt;</p>
+<!-- \$_PS: 如果两个descibe 通过Object.defineProperty 会互相影响。
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; location &#125; = <span class="built_in">window</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initSearch</span>(<span class="params">search = <span class="string">''</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Object.defineProperty(window, 'location', &#123;</span></span><br><span class="line">    <span class="comment">//     value: &#123;</span></span><br><span class="line">    <span class="comment">//         ...location,</span></span><br><span class="line">    <span class="comment">//         search,</span></span><br><span class="line">    <span class="comment">//     &#125;,</span></span><br><span class="line">    <span class="comment">// &#125;);</span></span><br><span class="line">    <span class="keyword">delete</span> <span class="built_in">window</span>.location;</span><br><span class="line">    <span class="built_in">window</span>.location = &#123;</span><br><span class="line">        ...location,</span><br><span class="line">        href: <span class="string">`http://m.jd.com?`</span>,</span><br><span class="line">        search,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">describe(<span class="string">'test Get Query from url search'</span>, () =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    describe(<span class="string">'test url: "http://m.jd.com/test?a=1&amp;b=2"'</span>, () =&gt; &#123;</span><br><span class="line">        beforeAll(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            initSearch(<span class="string">'a=1&amp;b=2'</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// afterAll(() =&gt; &#123;</span></span><br><span class="line">        <span class="comment">//     initSearch();</span></span><br><span class="line">        <span class="comment">// &#125;);</span></span><br><span class="line">        test(<span class="string">'should return 1 when query a'</span>, () =&gt; &#123;</span><br><span class="line">            expect(getQuery(<span class="string">'a'</span>)).toMatch(<span class="regexp">/1/</span>);</span><br><span class="line">            expect(getQuery(<span class="string">'a'</span>)).toBe(<span class="string">'1'</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    describe(<span class="string">'test url with none search: "http://m.jd.com/test?"'</span>, () =&gt; &#123;</span><br><span class="line">        beforeAll(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            initSearch(<span class="string">''</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        it(<span class="string">'should return "" when query sth is not included in search'</span>, () =&gt; &#123;</span><br><span class="line">            expect(getQuery(<span class="string">'a'</span>)).toBe(<span class="string">''</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        it(<span class="string">'should return "" when query sth is not included in search'</span>, () =&gt; &#123;</span><br><span class="line">            expect(getQuery(<span class="string">'b'</span>)).toBe(<span class="string">''</span>);</span><br><span class="line">            expect(getQuery(<span class="string">'c'</span>)).toBe(<span class="string">''</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="string">``</span><span class="string">` --&gt;</span></span><br><span class="line"><span class="string">&lt;!-- End: #1 --&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">## react测试</span></span><br><span class="line"><span class="string">### 组件</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>sh</span><br><span class="line"><span class="built_in">console</span>.error</span><br><span class="line">    Warning: An update to OrderButton inside a test was not wrapped <span class="keyword">in</span> act(...).</span><br><span class="line">    </span><br><span class="line">    When testing, code that causes React state updates should be wrapped into act(...):</span><br><span class="line">    </span><br><span class="line">    act(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">/* fire events that update state */</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">/* assert on the output */</span></span><br><span class="line">    </span><br><span class="line">    This ensures that you<span class="string">'re testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">console.error</span></span><br><span class="line"><span class="string">    Warning: Do not await the result of calling act(...) with sync logic, it is not a Promise.</span></span><br></pre></td></tr></table></figure>
+<p>解决: 两个async 都不可以少。<!-- 否则影响到覆盖率提升；或者报第二个错误 --><br><!-- 原因：大致是有交互/异步接口数据/update操作，需要等act完成后，再做expect --><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Comp <span class="keyword">from</span> <span class="string">'../../src/pages/detail'</span>;</span><br><span class="line"></span><br><span class="line">describe(<span class="string">'Comp Snapshot'</span>, () =&gt; &#123;</span><br><span class="line">    it(<span class="string">'shallow:: [src/pages/detail]should be correct.'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> wrapper = shallow(<span class="xml"><span class="tag">&lt;<span class="name">Comp</span> /&gt;</span></span>);</span><br><span class="line">        expect(wrapper).toMatchSnapshot();</span><br><span class="line">    &#125;);</span><br><span class="line">    it(<span class="string">'mount:: [src/pages/detail]should be correct.'</span>, <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">        <span class="keyword">let</span> wrapper;</span><br><span class="line">        <span class="keyword">await</span> act(<span class="keyword">async</span> () =&gt; wrapper = mount(<span class="xml"><span class="tag">&lt;<span class="name">Comp</span> /&gt;</span></span>));</span><br><span class="line">        expect(wrapper).toMatchSnapshot();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p></p>
+<!-- \# 991 [React Testing Library and the “not wrapped in act” Errors](https://davidwcai.medium.com/react-testing-library-and-the-not-wrapped-in-act-errors-491a5629193b) -->
+<p>## Why do I get this error?<br>In test, the code to render and update React components need to be included in React’s call stack. So the test behaves more similar to the user experience in real browsers.</p>
+<p>However, if your test still complains about “not wrapped in act(…)”, you might encounter one of these 4 cases described below.<br>Case 1: Asynchronous Updates<br>Case 2: Jest Fake Timers<br>Case 3: Premature Exit<br>Case 4: Formik Updates</p>
+<p>## Conclusion<br>In test, React needs extra hint to understand that certain code will cause component updates. To achieve that, React-dom introduced act API to wrap code that renders or updates components. React testing library already wraps some of its APIs in the act function. But in some cases, you would still need to use waitFor, waitForElementToBeRemoved, or act to provide such “hint” to test.<br><!-- END: #991 --><br>&lt;!–<br>其他：<br><a href="https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning" target="_blank" rel="noopener">Fix the “not wrapped in act(…)” warning</a><br>PS: 视频+代码演示说明。</p>
+<p><a href="https://stackoverflow.com/questions/60115885/how-to-solve-the-update-was-not-wrapped-in-act-warning-in-testing-library-re" target="_blank" rel="noopener">How to solve the “update was not wrapped in act()” warning in testing-library-react?</a></p>
+<blockquote>
+<p>No need for the waitFor or waitForElement. You can just use findBy* selectors which return a promise that can be awaited. e.g await findByTestId(‘list’);<br>Wait until the mocked get request promise resolves and the component calls setState and re-renders. waitForElement waits until the callback doesn’t throw an error<br> –&gt;</p>
+</blockquote>
+<ol>
+<li><code>TypeError: Cannot read property &#39;propTypes&#39; of undefined</code> 和单测没有关系。单测检测出来的结构赋值有问题。定位到位置，然后修改。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/test/" rel="tag"><i class="fa fa-tag"></i> test</a>
+          
+            <a href="/tags/jest/" rel="tag"><i class="fa fa-tag"></i> jest</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/jsplus/地图库调研/" rel="next" title="地图库调研">
+                <i class="fa fa-chevron-left"></i> 地图库调研
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/miniapp/taro和Jest测试/" rel="prev" title="taro和Jest测试">
+                taro和Jest测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件结构设计"><span class="nav-text">文件结构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实际经验"><span class="nav-text">实际经验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件"><span class="nav-text">插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境"><span class="nav-text">环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#result"><span class="nav-text">result</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SMTC"><span class="nav-text">SMTC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小程序配置"><span class="nav-text">小程序配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题"><span class="nav-text">问题</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

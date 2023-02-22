@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="canvas,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="准备做annotation/board，做了一些google。尽管原生基本功能已经完成；选择库，功能会更强壮">
+<meta name="keywords" content="canvas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Canvas库研究--非图表类">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/canvas库研究--非图表类/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="准备做annotation/board，做了一些google。尽管原生基本功能已经完成；选择库，功能会更强壮">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.420Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Canvas库研究--非图表类">
+<meta name="twitter:description" content="准备做annotation/board，做了一些google。尽管原生基本功能已经完成；选择库，功能会更强壮">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/canvas库研究--非图表类/">
+
+
+
+
+
+  <title>Canvas库研究--非图表类 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/canvas库研究--非图表类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Canvas库研究--非图表类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T08:00:00+08:00">
+                2018-02-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/jsplus/" itemprop="url" rel="index">
+                    <span itemprop="name">jsplus</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/canvas库研究--非图表类/" class="leancloud_visitors" data-flag-title="Canvas库研究--非图表类">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,860
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>准备做annotation/board，做了一些google。<br>尽管原生基本功能已经完成；选择库，功能会更强壮</p>
+<a id="more"></a>
+<p style="text-align:right">2018.2.22 四 14:50</p>
+
+<h1 id="A-译-知名Html5-Canvas-Javascript库对比"><a href="#A-译-知名Html5-Canvas-Javascript库对比" class="headerlink" title="A [译]知名Html5 Canvas Javascript库对比"></a>A [译]知名Html5 Canvas Javascript库对比</h1><!-- 1.24及之前仔细看过，现记    -->
+<p>2013.06.24 BY 十年灯·6条评论<br>声明：<br>原文链接：<a href="http://www.softr.li/blog/2012/06/20/which-html5-canvas-javascript-library-should-i-use" target="_blank" rel="noopener">http://www.softr.li/blog/2012/06/20/which-html5-canvas-javascript-library-should-i-use</a><br>本译文地址：<a href="http://jo2.org/html5-canvas-libary-introduction/" target="_blank" rel="noopener">http://jo2.org/html5-canvas-libary-introduction/</a><br>印象：  </p>
+<p>#《我应该选哪个Canvas库？》译文（以下的“我”是指原作者）</p>
+<p>我一直在找一个Html5 canvas库，可以让我创建可交互的、带动画的UI界面。我的要求是：</p>
+<ul>
+<li>良好的文档，支持与维护，因为我想在以后的项目里还能重用它</li>
+<li>可以轻松的创造复杂的图形对象（我的工程比较复杂，可不是一个简单的按钮那样的活儿），最好能支持分组和多层</li>
+<li>能帮我处理用户交互</li>
+<li>支持触摸设备</li>
+<li>提供用于作动态图形的工具<br>我搜了一些适合的库，想和你分享我的搜索成果。在可用的库的名单后面，我调查了这些库：EaselJS,fabric.js,Paper.js,processing.js和Kinetic.js，希望能帮你做出你自己的选择。</li>
+</ul>
+<h2 id="一-我找到的库"><a href="#一-我找到的库" class="headerlink" title="一 我找到的库"></a>一 我找到的库</h2><p>这儿是一些迄今为止看起来还有人维护的Canvas库：<br>CAAT<br>EaselJS<br>Fabric.js<br>Gury<br>JcanvaScript<br>Kinetic.js<br>oCanvas<br>Paper.js<br>processing.js</p>
+<p>这儿还有一些我没有研究过的库，因为他们没有架在Github上，或者看起来没人更新了：<br>cakejs<br>Doodle-js<br>CanvasToolkit<br>Mootools Canvas lib</p>
+<h2 id="二-在Github上的对比"><a href="#二-在Github上的对比" class="headerlink" title="二 在Github上的对比"></a>二 在Github上的对比</h2><table>
+<thead>
+<tr>
+<th>库</th>
+<th>关注</th>
+<th>分支</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CAAT</td>
+<td>336</td>
+<td>42</td>
+<td>17</td>
+</tr>
+<tr>
+<td>EaselJS</td>
+<td></td>
+<td>1,440</td>
+<td>203</td>
+<td>90</td>
+</tr>
+<tr>
+<td>fabric.js</td>
+<td>1,059</td>
+<td>101    38</td>
+</tr>
+<tr>
+<td>gury</td>
+<td>348</td>
+<td>19</td>
+<td>9</td>
+<td></td>
+</tr>
+<tr>
+<td>jCanvaScript</td>
+<td>80</td>
+<td>5</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Kinetic.js</td>
+<td>267</td>
+<td>41</td>
+<td>7</td>
+</tr>
+<tr>
+<td>oCanvas</td>
+<td>194</td>
+<td>20</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Paper.js</td>
+<td>1,706</td>
+<td>111</td>
+<td>30</td>
+</tr>
+<tr>
+<td>processing.js</td>
+<td>1,276</td>
+<td>206</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<h2 id="三-最小体积对比"><a href="#三-最小体积对比" class="headerlink" title="三 最小体积对比"></a>三 最小体积对比</h2><table>
+<thead>
+<tr>
+<th>库</th>
+<th>代码量 (kb)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CAAT</td>
+<td>210</td>
+</tr>
+<tr>
+<td>EaselJS</td>
+<td>44</td>
+</tr>
+<tr>
+<td>fabric.js</td>
+<td>133</td>
+</tr>
+<tr>
+<td>gury</td>
+<td>11</td>
+</tr>
+<tr>
+<td>Kinetic.js</td>
+<td>53</td>
+</tr>
+<tr>
+<td>oCanvas</td>
+<td>18</td>
+</tr>
+</tbody>
+</table>
+<p>不过jCanvaScript,Paper.js和processing.js在Github是没有压缩版</p>
+<h2 id="四-在Stackoverflow的比较"><a href="#四-在Stackoverflow的比较" class="headerlink" title="四 在Stackoverflow的比较"></a>四 在Stackoverflow的比较</h2><p>搜索词    标签    # 被标记的问题    # 搜索到的问题<br>CAAT    N/A    N/A    5<br>EaselJS    easeljs    30    79<br>fabric.js    fabricjs    43    78<br>jCanvaScript    N/A    N/A    6<br>Kinetic.js    kineticjs    74    30<br>oCanvas    N/A    N/A    19<br>Paper.js    paperjs    9    49<br>processing.js    processing.js    117    289<br>gury库在stackoverflow上没找到，我用N/A标识了没找到的。</p>
+<h2 id="五-对文档，教程和其他资源的研究"><a href="#五-对文档，教程和其他资源的研究" class="headerlink" title="五 对文档，教程和其他资源的研究"></a>五 对文档，教程和其他资源的研究</h2><p>在选择框架时，我更看重Github的比较。他能提供库的开发状态概览以及正在用这个库的社区。在我并不想变成某领域的专家时，我希望能依靠社区（解决问题）。</p>
+<p>但是，StackOverflow(SO)太有用了，尤其在已经有人问了比较问题的时候，比如：Current state of Javascript canvas libraries</p>
+<h2 id="六-深入评论"><a href="#六-深入评论" class="headerlink" title="六 深入评论"></a>六 深入评论</h2><p>于是，我打算就文档，教程和其他资源，给出一个深入的评论。对比：EaselJS, fabric.js, Paper.js, processing.js 以及这个外来者：Kinetic.js,来做个选择。</p>
+<h3 id="0-摘要"><a href="#0-摘要" class="headerlink" title="0 摘要"></a>0 摘要</h3><p>EaselJS, fabric.js, Paper.js, processing.js可以看作是4个领头者，他们有很明确的庞大用户社区，也架设在Github上，文档完善，大量的引用（就是在SO上的问题，以及论坛），更好的是，根据SO上他们之前的问题，他们是有单元测试的。</p>
+<p>Kinetic.js是个后来者，最近才上线Github，还有很多变数，但受到了kangax的（Fabric.js的作者）热烈欢迎。</p>
+<p>这4个库都有Github地址，都基于MIT许可发布。</p>
+<h3 id="1-EaselJS"><a href="#1-EaselJS" class="headerlink" title="1 EaselJS"></a>1 EaselJS</h3><p>这个库是CreateJS 套件的一部分，是一个全功能的用来创建先进html5交互与动画图形库。</p>
+<p>特别的是，结合动画库（TweenJS），可以创建很复杂的动画！如果你打算开发游戏，你还可以用SoundJS库和资源预载入库（PreloadJS）搞定。</p>
+<p>这个网站提供了一些漂亮的示例，源码可以和Github宝库上找到。</p>
+<p>这个库看起来也能和其他库协同工作，比如Box2d和TexturePacker.</p>
+<p>内置对触摸设备的支持</p>
+<h3 id="2-fabric-js"><a href="#2-fabric-js" class="headerlink" title="2 fabric.js"></a>2 fabric.js</h3><p>查看官网发现，此库貌似偏向建立“矢量图形编辑工具”。主要特色有：</p>
+<ul>
+<li>创建和操作（移动，缩放，旋转…）矢量图形和文本对象</li>
+<li>导入/导出成SVG或反过来<br>总结起来就是“一个在canvas上的可交互对象模型”。<br>如果你的目的是建立复杂场景，动态对象，在我看来他不是正确选择。</li>
+</ul>
+<h3 id="3-Paper-js"><a href="#3-Paper-js" class="headerlink" title="3 Paper.js"></a>3 Paper.js</h3><p>这个库是Scriptographer库的一部分。他有个特长是其Paperscript语言，基于一个提供了对点和图形精妙进行精妙数学操作的Javascript扩展——但是，他仍然没有文档。</p>
+<p>这个库的强大在于，他在建立复杂矢量对象和管理鼠标交互上出类拔萃。然而，他没有实现对移动设备的支持，而且其动画能力貌似被 onFrame() 这个方法限制了——每秒被调用60次，也允许你改变canvas的内容。</p>
+<h3 id="4-processing-js"><a href="#4-processing-js" class="headerlink" title="4 processing.js"></a>4 processing.js</h3><p>这个库的核心目标是建立可视化交互</p>
+<p>这个库有个独特的历史——他是著名的Processing库的一个接口。我说著名，不是因为我自己知道，而是因为他在多媒体艺术社区非常知名，用来进行交互式艺术创造。</p>
+<p>请看这第一个示例,看起来此库打算降低在canvas上创建交互式图形动画的学习曲线。他提供了易用的循环，和一个 draw() 方法，你可以简单的建立你的可视化交互。</p>
+<p>我认为，因为其学习曲线低，对没有开发能力的艺术家们是完美的，但并不是建立面向对象组件的最佳工具。</p>
+<h3 id="5-Kinetic-js"><a href="#5-Kinetic-js" class="headerlink" title="5 Kinetic.js"></a>5 Kinetic.js</h3><p>Kinetic.js本是这次比较的门外汉，因为在他的Github上看起来，他离最多人使用的那个还很远。然而，如果搜索”canvas library”的话，他的html5教程是排在第一位的，而且，他在SO上也有很多不错的提问。</p>
+<p>这个名字是个很好的线索，但这个库在处理大量对象的时候蛮快的，因为使用了多canvas技术。</p>
+<p>他提供了很好的文档讲解和教程，包括系统的html5 canvas应用，详细的Kinetic.js和Three.js文档。他也提供了些好用的小提示——不是针对这个库的，有的是对于canvas。</p>
+<h3 id="6-结论"><a href="#6-结论" class="headerlink" title="6 结论"></a>6 结论</h3><p>基于本篇评论，我认为我应该用EaselJS或Kinetic.js。Paper.js也不错但是不支持触摸设备，我敢肯定要集成这个功能并不复杂，但我更喜欢库中本来就有的。</p>
+<p>最后，我决定用Kinetic.js，因为：</p>
+<ol>
+<li>我觉得示例代码不错</li>
+<li>作者本身写了一个优秀的系列教程</li>
+<li>文档和例子都很清晰易懂</li>
+<li>我要的库里都有了（我并不觉得在我做到20%的时候却需要引进另一个大1. 库比如TweenJS来解决个小问题会让我高兴）<br>请不吝分享你的评论，或者我没提到的库，谢谢。</li>
+</ol>
+<p>—————————————————-</p>
+<h2 id="七-译者的总结："><a href="#七-译者的总结：" class="headerlink" title="七 译者的总结："></a>七 译者的总结：</h2><p>翻译完了觉得这文章有点像Kinetic.js的软广告。不过，上面的所有库功能都是非常强大的，日常应用毫无问题。Kinetic.js是综合来讲比较合理的一个——功能中等，体积中等。</p>
+<p>个人觉得fabric.js最强大，体积也最大；Paper.js其次。</p>
+<p>另外，在对比了国外的教程和我写的教程后，不知道我写的教程还有人看吗？——虽然，我也是完全原创的，但我的技术可比不上外国作者，唉</p>
+<h1 id="B-有哪些值得推荐的开源-JavaScript-Canvas-库，分别有哪些优势和劣势？"><a href="#B-有哪些值得推荐的开源-JavaScript-Canvas-库，分别有哪些优势和劣势？" class="headerlink" title="B 有哪些值得推荐的开源 JavaScript Canvas 库，分别有哪些优势和劣势？"></a>B 有哪些值得推荐的开源 JavaScript Canvas 库，分别有哪些优势和劣势？</h1><p><a href="https://www.zhihu.com/question/19796641" target="_blank" rel="noopener">https://www.zhihu.com/question/19796641</a><br>作者：rambo<br>我个人认为 在初学的时候,可以选择jcanvasscript进行辅助了解canvas . 等学会了 有必要再去掌握别的时候,原理明白了 也就只有一些语法不同而已</p>
+<p>作者：吴立志<br>链接：<a href="https://www.zhihu.com/question/19796641/answer/131856479" target="_blank" rel="noopener">https://www.zhihu.com/question/19796641/answer/131856479</a></p>
+<h2 id="Processing-js"><a href="#Processing-js" class="headerlink" title="Processing.js"></a>Processing.js</h2><p>Processing.js是一个开放的编程语言，在不使用Flash或Java小程序的前提下，可以实现程序图像、动画和互动的应用。Processing.js是轻量，易于了解掌握的理想工具，可用于可视化的数据，创建用户界面和开发基于Web的游戏。</p>
+<h2 id="FABRIC-JS"><a href="#FABRIC-JS" class="headerlink" title="FABRIC.JS"></a>FABRIC.JS</h2><p>FABRIC.JS是一款简单而强大的JavaScript Canvas 库，提供了互动的对象模型，同时还包含 Canvas-to-SVG 解析器。</p>
+<h2 id="oCanvas"><a href="#oCanvas" class="headerlink" title="oCanvas"></a>oCanvas</h2><p>oCanvas是一个JavaScript框架，用于简化HTML5 Canvas标签的使用，可以利用对象来代替像素。 oCanvas 可以帮助你很容易的在 HTML5 的 Canvas 标签上创建对象，并且创建这些对象的动画。</p>
+<h2 id="jCanvas"><a href="#jCanvas" class="headerlink" title="jCanvas"></a>jCanvas</h2><p>jCanvas 就是一个 jQuery 的绘图插件，它封装了一些绘制图形的方法，只需编写几行代码即可生成图形。</p>
+<h2 id="RGraph"><a href="#RGraph" class="headerlink" title="RGraph"></a>RGraph</h2><p>RGraph是一个使用HTML5 Canvas标签实现的图表制作Library。利用该Library生成的Chart具有可交互性，当鼠标点击或移过时会显示相应的信息，可以动态加载Chart或对特殊点进行缩放。</p>
+<h2 id="Two-js"><a href="#Two-js" class="headerlink" title="Two.js"></a>Two.js</h2><p>Two.js 是面向现代 Web 浏览器的一个二维绘图 API。Two.js 可以用于多个场合：SVG，Canvas 和 WebGL，旨在使平面形状和动画的创建更方便，更简洁。</p>
+<h2 id="Paper-js"><a href="#Paper-js" class="headerlink" title="Paper.js"></a>Paper.js</h2><p>Paper.js是一款开源的矢量图形脚本框架，基于 HTML5 Canvas 开发，提供清晰的场景图、DOM和大量强大的功能用来创建各种向量图和贝塞尔曲线。</p>
+<h2 id="EaselJS"><a href="#EaselJS" class="headerlink" title="EaselJS"></a>EaselJS</h2><p>EaselJS 是一个封装了 HTML5 画布(Canvas) 元素的 JavaScript 库。</p>
+<h2 id="Kinetic-JS"><a href="#Kinetic-JS" class="headerlink" title="Kinetic.JS"></a>Kinetic.JS</h2><p>Kinetic.JS 是一个封装了 HTML5 Canvas的JavaScript 库，能为桌面和移动应用提供高性能动画，转场效果，节点嵌套，分层，滤镜，缓存，事件处理以及更多功能。</p>
+<h2 id="Pixi-js"><a href="#Pixi-js" class="headerlink" title="Pixi.js"></a>Pixi.js</h2><p>Pixi.js 是一个 2D webGL 渲染器，提供无缝 Canvas 回退，支持主流浏览器，包括桌面和移动。人生很短暂，过着过着你就没了，明白吗？JS攻城师你若有前端干货，欢迎前来投稿，一起执笔分享思考—-前端范。<a href="http://weixin.qq.com/r/UHWwqHbEnCvjrTLL9yBC" target="_blank" rel="noopener">http://weixin.qq.com/r/UHWwqHbEnCvjrTLL9yBC</a><br>公众号：js_gcs代码也是一种思考艺术编辑于 2016-11-18</p>
+<h1 id="C-Fabric-js-–-简单而强大的-JavaScript-Canvas-库"><a href="#C-Fabric-js-–-简单而强大的-JavaScript-Canvas-库" class="headerlink" title="C Fabric.js – 简单而强大的 JavaScript Canvas 库"></a>C Fabric.js – 简单而强大的 JavaScript Canvas 库</h1><p><a href="http://www.cnblogs.com/lhb25/archive/2013/03/14/fabric-js-canvas-library.html" target="_blank" rel="noopener">http://www.cnblogs.com/lhb25/archive/2013/03/14/fabric-js-canvas-library.html</a>   </p>
+<p>Fabric.js 是一个简单而强大的 JavaScript Canvas 库，在 HTML5 Canvas 元素之上提供了互动的对象模型，同时还包含 Canvas-to-SVG 解析器。</p>
+<p>使用 Fabric.js 你可以创建和填充画布上的对象，从简单的几何图形到成百上千路径组成的复杂图形。你可以通过鼠标轻松的移动、缩放和旋转这些对象，修改它们的属性（颜色、透明度，层叠顺序）等等。</p>
+<p>/图表类库/</p>
+<h1 id="D-20-个最棒的-JavaScript-图表库"><a href="#D-20-个最棒的-JavaScript-图表库" class="headerlink" title="D 20 个最棒的 JavaScript 图表库"></a>D 20 个最棒的 JavaScript 图表库</h1><p><a href="http://www.imooc.com/article/1427" target="_blank" rel="noopener">http://www.imooc.com/article/1427</a><br>2015-08-26 10:33:36<br><strong>$_YX:</strong> <a href="https://app.yinxiang.com/shard/s67/nl/18114453/8f5e4997-b58a-4864-9e6e-6c5819ef4780?title=20%20%E4%B8%AA%E6%9C%80%E6%A3%92%E7%9A%84%20JavaScript%20%E5%9B%BE%E8%A1%A8%E5%BA%93_%E6%85%95%E8%AF%BE%E6%89%8B%E8%AE%B0" target="_blank" rel="noopener">https://app.yinxiang.com/shard/s67/nl/18114453/8f5e4997-b58a-4864-9e6e-6c5819ef4780?title=20%20%E4%B8%AA%E6%9C%80%E6%A3%92%E7%9A%84%20JavaScript%20%E5%9B%BE%E8%A1%A8%E5%BA%93_%E6%85%95%E8%AF%BE%E6%89%8B%E8%AE%B0</a></p>
+<h1 id="E-Boarder成熟作品"><a href="#E-Boarder成熟作品" class="headerlink" title="E Boarder成熟作品"></a>E Boarder成熟作品</h1><h1 id="Z-实际"><a href="#Z-实际" class="headerlink" title="Z 实际"></a>Z 实际</h1><ol>
+<li>不用成熟作品</li>
+<li>原生canvas已成熟，欠面向对象，移动，旋转等操作</li>
+<li>利用库，仅oCanvas重写就可以了：体积小，文档全，操作简单，适合本（小）项目。（没必要使用那么大的库）</li>
+<li>原生没有做移动设备，希望oCanvas可以处理</li>
+</ol>
+<p style="text-align:right">15:33 </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Yalhu
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/sum/jsplus/canvas库研究--非图表类/" title="Canvas库研究--非图表类">http://yoursite.com/sum/jsplus/canvas库研究--非图表类/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/canvas/" rel="tag"><i class="fa fa-tag"></i> canvas</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/jsplus/文档注释生成库调研(011)/" rel="next" title="文档注释生成库调研">
+                <i class="fa fa-chevron-left"></i> 文档注释生成库调研
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/others/个人博客搭建技术研究/" rel="prev" title="个人博客搭建技术研究">
+                个人博客搭建技术研究 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-译-知名Html5-Canvas-Javascript库对比"><span class="nav-text">A [译]知名Html5 Canvas Javascript库对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-我找到的库"><span class="nav-text">一 我找到的库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-在Github上的对比"><span class="nav-text">二 在Github上的对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-最小体积对比"><span class="nav-text">三 最小体积对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-在Stackoverflow的比较"><span class="nav-text">四 在Stackoverflow的比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-对文档，教程和其他资源的研究"><span class="nav-text">五 对文档，教程和其他资源的研究</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-深入评论"><span class="nav-text">六 深入评论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-摘要"><span class="nav-text">0 摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-EaselJS"><span class="nav-text">1 EaselJS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-fabric-js"><span class="nav-text">2 fabric.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Paper-js"><span class="nav-text">3 Paper.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-processing-js"><span class="nav-text">4 processing.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Kinetic-js"><span class="nav-text">5 Kinetic.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-结论"><span class="nav-text">6 结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七-译者的总结："><span class="nav-text">七 译者的总结：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-有哪些值得推荐的开源-JavaScript-Canvas-库，分别有哪些优势和劣势？"><span class="nav-text">B 有哪些值得推荐的开源 JavaScript Canvas 库，分别有哪些优势和劣势？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Processing-js"><span class="nav-text">Processing.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FABRIC-JS"><span class="nav-text">FABRIC.JS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oCanvas"><span class="nav-text">oCanvas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jCanvas"><span class="nav-text">jCanvas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RGraph"><span class="nav-text">RGraph</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Two-js"><span class="nav-text">Two.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Paper-js"><span class="nav-text">Paper.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EaselJS"><span class="nav-text">EaselJS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kinetic-JS"><span class="nav-text">Kinetic.JS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pixi-js"><span class="nav-text">Pixi.js</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-Fabric-js-–-简单而强大的-JavaScript-Canvas-库"><span class="nav-text">C Fabric.js – 简单而强大的 JavaScript Canvas 库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D-20-个最棒的-JavaScript-图表库"><span class="nav-text">D 20 个最棒的 JavaScript 图表库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#E-Boarder成熟作品"><span class="nav-text">E Boarder成熟作品</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Z-实际"><span class="nav-text">Z 实际</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

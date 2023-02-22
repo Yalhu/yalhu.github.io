@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="webpack,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="toc only.    https://doc.webpack-china.org/concepts/ 2018.2.9 星期五 15:30">
+<meta name="keywords" content="webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Webpack文档">
+<meta property="og:url" content="http://yoursite.com/w3/pack/webpack-v3.10.0/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="toc only.    https://doc.webpack-china.org/concepts/ 2018.2.9 星期五 15:30">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-04T09:13:55.451Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Webpack文档">
+<meta name="twitter:description" content="toc only.    https://doc.webpack-china.org/concepts/ 2018.2.9 星期五 15:30">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/w3/pack/webpack-v3.10.0/">
+
+
+
+
+
+  <title>Webpack文档 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/w3/pack/webpack-v3.10.0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Webpack文档</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T08:00:00+08:00">
+                2018-02-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-04T17:13:55+08:00">
+                2020-02-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/w3/" itemprop="url" rel="index">
+                    <span itemprop="name">w3</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/w3/pack/" itemprop="url" rel="index">
+                    <span itemprop="name">pack</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+
+          
+          
+             <span id="/w3/pack/webpack-v3.10.0/" class="leancloud_visitors" data-flag-title="Webpack文档">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,529
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>toc only.   </p>
+<p><a href="https://doc.webpack-china.org/concepts/" target="_blank" rel="noopener">https://doc.webpack-china.org/concepts/</a></p>
+<p style="text-align:right">2018.2.9 星期五 15:30</p>
+
+<a id="more"></a>
+<p><a href="https://doc.webpack-china.org/" target="_blank" rel="noopener">https://doc.webpack-china.org/</a></p>
+<h1 id="A-概念"><a href="#A-概念" class="headerlink" title="A 概念"></a>A 概念</h1><h2 id="一-概念"><a href="#一-概念" class="headerlink" title="一 概念"></a>一 概念</h2><h3 id="1-1-入口-entry"><a href="#1-1-入口-entry" class="headerlink" title="1.1 入口(entry)"></a>1.1 入口(entry)</h3><h3 id="1-2-出口-output"><a href="#1-2-出口-output" class="headerlink" title="1.2 出口(output)"></a>1.2 出口(output)</h3><h3 id="1-3-loader"><a href="#1-3-loader" class="headerlink" title="1.3 loader"></a>1.3 loader</h3><h3 id="1-4-插件-plugins"><a href="#1-4-插件-plugins" class="headerlink" title="1.4 插件(plugins)"></a>1.4 插件(plugins)</h3><h2 id="二-入口起点-Entry-Points"><a href="#二-入口起点-Entry-Points" class="headerlink" title="二 入口起点(Entry Points)"></a>二 入口起点(Entry Points)</h2><h3 id="2-1-单个入口（简写）语法"><a href="#2-1-单个入口（简写）语法" class="headerlink" title="2.1 单个入口（简写）语法"></a>2.1 单个入口（简写）语法</h3><h3 id="2-2-对象语法"><a href="#2-2-对象语法" class="headerlink" title="2.2 对象语法"></a>2.2 对象语法</h3><h3 id="2-3-常见场景"><a href="#2-3-常见场景" class="headerlink" title="2.3 常见场景"></a>2.3 常见场景</h3><h4 id="1-分离应用程序"><a href="#1-分离应用程序" class="headerlink" title="1 分离应用程序"></a>1 分离应用程序</h4><h4 id="2-多页面应用程序"><a href="#2-多页面应用程序" class="headerlink" title="2 多页面应用程序"></a>2 多页面应用程序</h4><h2 id="三-输出-Output"><a href="#三-输出-Output" class="headerlink" title="三 输出(Output)"></a>三 输出(Output)</h2><h3 id="3-1-用法"><a href="#3-1-用法" class="headerlink" title="3.1 用法"></a>3.1 用法</h3><h3 id="3-2-多个入口起点"><a href="#3-2-多个入口起点" class="headerlink" title="3.2 多个入口起点"></a>3.2 多个入口起点</h3><h3 id="3-3-高级进阶"><a href="#3-3-高级进阶" class="headerlink" title="3.3 高级进阶"></a>3.3 高级进阶</h3><h2 id="四-Loader"><a href="#四-Loader" class="headerlink" title="四 Loader"></a>四 Loader</h2><h3 id="4-1-示例"><a href="#4-1-示例" class="headerlink" title="4.1 示例"></a>4.1 示例</h3><h3 id="4-2-使用Loader"><a href="#4-2-使用Loader" class="headerlink" title="4.2 使用Loader"></a>4.2 使用Loader</h3><h4 id="1-配置"><a href="#1-配置" class="headerlink" title="1 配置"></a>1 配置</h4><h4 id="2-内联"><a href="#2-内联" class="headerlink" title="2 内联"></a>2 内联</h4><h4 id="3-CLI"><a href="#3-CLI" class="headerlink" title="3 CLI"></a>3 CLI</h4><h3 id="4-3-Loader特性"><a href="#4-3-Loader特性" class="headerlink" title="4.3 Loader特性"></a>4.3 Loader特性</h3><h3 id="4-4-解析Loader"><a href="#4-4-解析Loader" class="headerlink" title="4.4 解析Loader"></a>4.4 解析Loader</h3><h2 id="五-插件-Plugins"><a href="#五-插件-Plugins" class="headerlink" title="五 插件(Plugins)"></a>五 插件(Plugins)</h2><h3 id="5-1-剖析"><a href="#5-1-剖析" class="headerlink" title="5.1 剖析"></a>5.1 剖析</h3><h3 id="5-2-用法"><a href="#5-2-用法" class="headerlink" title="5.2 用法"></a>5.2 用法</h3><h3 id="5-3-配置"><a href="#5-3-配置" class="headerlink" title="5.3 配置"></a>5.3 配置</h3><h3 id="5-4-Node-API"><a href="#5-4-Node-API" class="headerlink" title="5.4 Node API"></a>5.4 Node API</h3><h2 id="六-配置-Configuration"><a href="#六-配置-Configuration" class="headerlink" title="六 配置(Configuration)"></a>六 配置(Configuration)</h2><h3 id="6-1-最简单的配置"><a href="#6-1-最简单的配置" class="headerlink" title="6.1 最简单的配置"></a>6.1 最简单的配置</h3><h3 id="6-2-多个Target"><a href="#6-2-多个Target" class="headerlink" title="6.2 多个Target"></a>6.2 多个Target</h3><h3 id="6-3-使用其他配置语言"><a href="#6-3-使用其他配置语言" class="headerlink" title="6.3 使用其他配置语言"></a>6.3 使用其他配置语言</h3><h2 id="七-模块-Modules"><a href="#七-模块-Modules" class="headerlink" title="七 模块(Modules)"></a>七 模块(Modules)</h2><h3 id="7-1-什么是webpack模块"><a href="#7-1-什么是webpack模块" class="headerlink" title="7.1 什么是webpack模块"></a>7.1 什么是webpack模块</h3><h3 id="7-2-支持的模块类型"><a href="#7-2-支持的模块类型" class="headerlink" title="7.2 支持的模块类型"></a>7.2 支持的模块类型</h3><h2 id="八-模块解析-Module-Resolution"><a href="#八-模块解析-Module-Resolution" class="headerlink" title="八 模块解析(Module Resolution)"></a>八 模块解析(Module Resolution)</h2><h3 id="8-1-webpack中的解析规则"><a href="#8-1-webpack中的解析规则" class="headerlink" title="8.1 webpack中的解析规则"></a>8.1 webpack中的解析规则</h3><h4 id="1-绝对路径"><a href="#1-绝对路径" class="headerlink" title="1 绝对路径"></a>1 绝对路径</h4><h4 id="2-相对路径"><a href="#2-相对路径" class="headerlink" title="2 相对路径"></a>2 相对路径</h4><h4 id="3-模块路径"><a href="#3-模块路径" class="headerlink" title="3 模块路径"></a>3 模块路径</h4><h3 id="8-2-解析Loader-Resolving-Loader"><a href="#8-2-解析Loader-Resolving-Loader" class="headerlink" title="8.2 解析Loader(Resolving Loader)"></a>8.2 解析Loader(Resolving Loader)</h3><h3 id="8-3-缓存"><a href="#8-3-缓存" class="headerlink" title="8.3 缓存"></a>8.3 缓存</h3><h2 id="九-依赖图-Dependency-Graph"><a href="#九-依赖图-Dependency-Graph" class="headerlink" title="九 依赖图(Dependency Graph)"></a>九 依赖图(Dependency Graph)</h2><h2 id="零-构建目标-Targets"><a href="#零-构建目标-Targets" class="headerlink" title="零 构建目标(Targets)"></a>零 构建目标(Targets)</h2><h3 id="0-1-用法"><a href="#0-1-用法" class="headerlink" title="0.1 用法"></a>0.1 用法</h3><h3 id="0-2-多个Target"><a href="#0-2-多个Target" class="headerlink" title="0.2 多个Target"></a>0.2 多个Target</h3><h3 id="0-3-资源"><a href="#0-3-资源" class="headerlink" title="0.3 资源"></a>0.3 资源</h3><h2 id="一-Manifest"><a href="#一-Manifest" class="headerlink" title="一 Manifest"></a>一 Manifest</h2><h3 id="1-1-Runtime"><a href="#1-1-Runtime" class="headerlink" title="1.1 Runtime"></a>1.1 Runtime</h3><h3 id="1-2-Manifest"><a href="#1-2-Manifest" class="headerlink" title="1.2 Manifest"></a>1.2 Manifest</h3><h3 id="1-3-问题"><a href="#1-3-问题" class="headerlink" title="1.3 问题"></a>1.3 问题</h3><h2 id="二-模块热替换-Hot-Module-Replace"><a href="#二-模块热替换-Hot-Module-Replace" class="headerlink" title="二 模块热替换(Hot Module Replace)"></a>二 模块热替换(Hot Module Replace)</h2><h3 id="2-1-这一切是如何运行的？"><a href="#2-1-这一切是如何运行的？" class="headerlink" title="2.1 这一切是如何运行的？"></a>2.1 这一切是如何运行的？</h3><h3 id="2-2-在应用程序中"><a href="#2-2-在应用程序中" class="headerlink" title="2.2 在应用程序中"></a>2.2 在应用程序中</h3><h3 id="2-3-在编译器中"><a href="#2-3-在编译器中" class="headerlink" title="2.3 在编译器中"></a>2.3 在编译器中</h3><h3 id="2-4-在HMT-Runtime中"><a href="#2-4-在HMT-Runtime中" class="headerlink" title="2.4 在HMT Runtime中"></a>2.4 在HMT Runtime中</h3><h3 id="2-5-入门"><a href="#2-5-入门" class="headerlink" title="2.5 入门"></a>2.5 入门</h3><p>==========================</p>
+<h1 id="B-配置"><a href="#B-配置" class="headerlink" title="B 配置"></a>B 配置</h1><p style="text-align:right">2018.2.8 星期四 19:02</p>
+
+<h2 id="一-配置"><a href="#一-配置" class="headerlink" title="一 配置"></a>一 配置</h2><h3 id="1-1-选项"><a href="#1-1-选项" class="headerlink" title="1.1 选项"></a>1.1 选项</h3><h2 id="二-使用不同语言进行配置"><a href="#二-使用不同语言进行配置" class="headerlink" title="二 使用不同语言进行配置"></a>二 使用不同语言进行配置</h2><h3 id="2-1-TypeScript"><a href="#2-1-TypeScript" class="headerlink" title="2.1 TypeScript"></a>2.1 TypeScript</h3><h3 id="2-2-CoffeeScript"><a href="#2-2-CoffeeScript" class="headerlink" title="2.2 CoffeeScript"></a>2.2 CoffeeScript</h3><h3 id="2-3-Babel-and-JSX"><a href="#2-3-Babel-and-JSX" class="headerlink" title="2.3 Babel and JSX"></a>2.3 Babel and JSX</h3><h2 id="三-多种配置类型"><a href="#三-多种配置类型" class="headerlink" title="三 多种配置类型"></a>三 多种配置类型</h2><h3 id="3-1-导出一个函数"><a href="#3-1-导出一个函数" class="headerlink" title="3.1 导出一个函数"></a>3.1 导出一个函数</h3><h3 id="3-2-导出一个Promise"><a href="#3-2-导出一个Promise" class="headerlink" title="3.2 导出一个Promise"></a>3.2 导出一个Promise</h3><h3 id="3-3-导出多个配置对象"><a href="#3-3-导出多个配置对象" class="headerlink" title="3.3 导出多个配置对象"></a>3.3 导出多个配置对象</h3><h2 id="四-入口和上下文"><a href="#四-入口和上下文" class="headerlink" title="四 入口和上下文"></a>四 入口和上下文</h2><h3 id="4-1-context"><a href="#4-1-context" class="headerlink" title="4.1 context"></a>4.1 context</h3><h3 id="4-2-entry"><a href="#4-2-entry" class="headerlink" title="4.2 entry"></a>4.2 entry</h3><h3 id="4-3-命名"><a href="#4-3-命名" class="headerlink" title="4.3 命名"></a>4.3 命名</h3><h3 id="4-4-动态入口"><a href="#4-4-动态入口" class="headerlink" title="4.4 动态入口"></a>4.4 动态入口</h3><h2 id="五-输出"><a href="#五-输出" class="headerlink" title="五 输出"></a>五 输出</h2><h3 id="5-1"><a href="#5-1" class="headerlink" title="5.1"></a>5.1</h3><h3 id="5-2"><a href="#5-2" class="headerlink" title="5.2"></a>5.2</h3><h3 id="5-3"><a href="#5-3" class="headerlink" title="5.3"></a>5.3</h3><h3 id="5-4"><a href="#5-4" class="headerlink" title="5.4"></a>5.4</h3><h3 id="5-5"><a href="#5-5" class="headerlink" title="5.5"></a>5.5</h3><h3 id="5"><a href="#5" class="headerlink" title="5."></a>5.</h3><h2 id="六-模块-Module"><a href="#六-模块-Module" class="headerlink" title="六 模块(Module)"></a>六 模块(Module)</h2><h3 id="6-1-module-noParse"><a href="#6-1-module-noParse" class="headerlink" title="6.1 module.noParse"></a>6.1 module.noParse</h3><h3 id="6-2-module-rules"><a href="#6-2-module-rules" class="headerlink" title="6.2 module.rules"></a>6.2 module.rules</h3><h3 id="6-3-Rule"><a href="#6-3-Rule" class="headerlink" title="6.3 Rule"></a>6.3 Rule</h3><h4 id="1-Rule条件"><a href="#1-Rule条件" class="headerlink" title="1 Rule条件"></a>1 Rule条件</h4><h4 id="2-Rule-结果"><a href="#2-Rule-结果" class="headerlink" title="2 Rule 结果"></a>2 Rule 结果</h4><h4 id="3-嵌套的-Rule"><a href="#3-嵌套的-Rule" class="headerlink" title="3 嵌套的 Rule"></a>3 嵌套的 Rule</h4><h3 id="6-4-Rule-enforce"><a href="#6-4-Rule-enforce" class="headerlink" title="6.4 Rule.enforce"></a>6.4 Rule.enforce</h3><h3 id="6-5-Rule-exclude"><a href="#6-5-Rule-exclude" class="headerlink" title="6.5 Rule.exclude"></a>6.5 Rule.exclude</h3><h3 id="6-6-Rule-include"><a href="#6-6-Rule-include" class="headerlink" title="6.6 Rule.include"></a>6.6 Rule.include</h3><h3 id="6-7-Rule-issuer"><a href="#6-7-Rule-issuer" class="headerlink" title="6.7 Rule.issuer"></a>6.7 Rule.issuer</h3><h3 id="6-8-Rule-loader"><a href="#6-8-Rule-loader" class="headerlink" title="6.8 Rule.loader"></a>6.8 Rule.loader</h3><h3 id="6-9-Rule-loaders"><a href="#6-9-Rule-loaders" class="headerlink" title="6.9 Rule.loaders"></a>6.9 <del>Rule.loaders</del></h3><h3 id="6-0-Rule-oneOf"><a href="#6-0-Rule-oneOf" class="headerlink" title="6.0 Rule.oneOf"></a>6.0 Rule.oneOf</h3><h3 id="6-1-Rule-options-Rule-query"><a href="#6-1-Rule-options-Rule-query" class="headerlink" title="6.1 Rule.options/Rule.query"></a>6.1 <del>Rule.options/Rule.query</del></h3><h3 id="6-2-Rule-parser"><a href="#6-2-Rule-parser" class="headerlink" title="6.2 Rule.parser"></a>6.2 Rule.parser</h3><h3 id="6-3-Rule-resource"><a href="#6-3-Rule-resource" class="headerlink" title="6.3 Rule.resource"></a>6.3 Rule.resource</h3><h3 id="6-4-Rule-resourceQuery"><a href="#6-4-Rule-resourceQuery" class="headerlink" title="6.4 Rule.resourceQuery"></a>6.4 Rule.resourceQuery</h3><h3 id="6-5-Rule-rules"><a href="#6-5-Rule-rules" class="headerlink" title="6.5 Rule.rules"></a>6.5 Rule.rules</h3><h3 id="6-6-Rule-test"><a href="#6-6-Rule-test" class="headerlink" title="6.6 Rule.test"></a>6.6 Rule.test</h3><h3 id="6-7-Rule-use"><a href="#6-7-Rule-use" class="headerlink" title="6.7 Rule.use"></a>6.7 Rule.use</h3><h3 id="6-8-条件"><a href="#6-8-条件" class="headerlink" title="6.8 条件"></a>6.8 条件</h3><h3 id="6-9-UseEntry"><a href="#6-9-UseEntry" class="headerlink" title="6.9 UseEntry"></a>6.9 UseEntry</h3><h3 id="6-0-模块上下文"><a href="#6-0-模块上下文" class="headerlink" title="6.0 模块上下文"></a>6.0 模块上下文</h3><h2 id="七-解析"><a href="#七-解析" class="headerlink" title="七 解析"></a>七 解析</h2><h3 id="7-1"><a href="#7-1" class="headerlink" title="7.1"></a>7.1</h3><h3 id="7-2"><a href="#7-2" class="headerlink" title="7.2"></a>7.2</h3><h3 id="7-3"><a href="#7-3" class="headerlink" title="7.3"></a>7.3</h3><h3 id="7-4"><a href="#7-4" class="headerlink" title="7.4"></a>7.4</h3><h3 id="7-5"><a href="#7-5" class="headerlink" title="7.5"></a>7.5</h3><h3 id="7"><a href="#7" class="headerlink" title="7."></a>7.</h3><h2 id="八-插件"><a href="#八-插件" class="headerlink" title="八 插件"></a>八 插件</h2><h3 id="8-1-plugins"><a href="#8-1-plugins" class="headerlink" title="8.1 plugins"></a>8.1 plugins</h3><h2 id="九-开发中Server-DevServer"><a href="#九-开发中Server-DevServer" class="headerlink" title="九 开发中Server(DevServer)"></a>九 开发中Server(DevServer)</h2><h3 id="9-1"><a href="#9-1" class="headerlink" title="9.1"></a>9.1</h3><h3 id="9-2"><a href="#9-2" class="headerlink" title="9.2"></a>9.2</h3><h3 id="9-3"><a href="#9-3" class="headerlink" title="9.3"></a>9.3</h3><h3 id="9-4"><a href="#9-4" class="headerlink" title="9.4"></a>9.4</h3><h3 id="9"><a href="#9" class="headerlink" title="9."></a>9.</h3><h2 id="零-Devtool"><a href="#零-Devtool" class="headerlink" title="零 Devtool"></a>零 Devtool</h2><h3 id="0-1-devtool"><a href="#0-1-devtool" class="headerlink" title="0.1 devtool"></a>0.1 devtool</h3><h3 id="0-2-Qualities"><a href="#0-2-Qualities" class="headerlink" title="0.2 Qualities"></a>0.2 Qualities</h3><h3 id="0-3-Development"><a href="#0-3-Development" class="headerlink" title="0.3 Development"></a>0.3 Development</h3><h3 id="0-4-Special-cases"><a href="#0-4-Special-cases" class="headerlink" title="0.4 Special cases"></a>0.4 Special cases</h3><h3 id="0-5-Production"><a href="#0-5-Production" class="headerlink" title="0.5 Production"></a>0.5 Production</h3><h2 id="一-构建目标"><a href="#一-构建目标" class="headerlink" title="一 构建目标"></a>一 构建目标</h2><h3 id="1-1-target"><a href="#1-1-target" class="headerlink" title="1.1 target"></a>1.1 target</h3><h3 id="1-2-string"><a href="#1-2-string" class="headerlink" title="1.2 string"></a>1.2 string</h3><h3 id="1-3-function"><a href="#1-3-function" class="headerlink" title="1.3 function"></a>1.3 function</h3><h2 id="二-Watch和WatchOptions"><a href="#二-Watch和WatchOptions" class="headerlink" title="二 Watch和WatchOptions"></a>二 Watch和WatchOptions</h2><h3 id="2-1-watch"><a href="#2-1-watch" class="headerlink" title="2.1 watch"></a>2.1 watch</h3><h3 id="2-2-watchOptions"><a href="#2-2-watchOptions" class="headerlink" title="2.2 watchOptions"></a>2.2 watchOptions</h3><h3 id="2-3-watchOptions-aggregated"><a href="#2-3-watchOptions-aggregated" class="headerlink" title="2.3 watchOptions.aggregated"></a>2.3 watchOptions.aggregated</h3><h3 id="2-4-watchOptions-ignored"><a href="#2-4-watchOptions-ignored" class="headerlink" title="2.4 watchOptions.ignored"></a>2.4 watchOptions.ignored</h3><h3 id="2-5-watchOptions-poll"><a href="#2-5-watchOptions-poll" class="headerlink" title="2.5 watchOptions.poll"></a>2.5 watchOptions.poll</h3><h2 id="三-外部扩展-Externals"><a href="#三-外部扩展-Externals" class="headerlink" title="三 外部扩展(Externals)"></a>三 外部扩展(Externals)</h2><h3 id="3-1-externals"><a href="#3-1-externals" class="headerlink" title="3.1 externals"></a>3.1 externals</h3><h4 id="1-string"><a href="#1-string" class="headerlink" title="1 string"></a>1 string</h4><h4 id="2-array"><a href="#2-array" class="headerlink" title="2 array"></a>2 array</h4><h4 id="3-object"><a href="#3-object" class="headerlink" title="3 object"></a>3 object</h4><h4 id="4-funciton"><a href="#4-funciton" class="headerlink" title="4 funciton"></a>4 funciton</h4><h4 id="5-regex"><a href="#5-regex" class="headerlink" title="5 regex"></a>5 regex</h4><h2 id="四-性能-Performance"><a href="#四-性能-Performance" class="headerlink" title="四 性能(Performance)"></a>四 性能(Performance)</h2><h3 id="4-1-performance"><a href="#4-1-performance" class="headerlink" title="4.1 performance"></a>4.1 performance</h3><h3 id="4-2-performance-hints"><a href="#4-2-performance-hints" class="headerlink" title="4.2 performance.hints"></a>4.2 performance.hints</h3><h3 id="4-3-performanc-emaxEntry"><a href="#4-3-performanc-emaxEntry" class="headerlink" title="4.3 performanc.emaxEntry"></a>4.3 performanc.emaxEntry</h3><h3 id="4-4-performanc"><a href="#4-4-performanc" class="headerlink" title="4.4 performanc."></a>4.4 performanc.</h3><h3 id="4-5-performanc"><a href="#4-5-performanc" class="headerlink" title="4.5 performanc."></a>4.5 performanc.</h3><h2 id="五-Node"><a href="#五-Node" class="headerlink" title="五 Node"></a>五 Node</h2><h3 id="5-1-1"><a href="#5-1-1" class="headerlink" title="5.1"></a>5.1</h3><h3 id="5-2-1"><a href="#5-2-1" class="headerlink" title="5.2"></a>5.2</h3><h3 id="5-3-1"><a href="#5-3-1" class="headerlink" title="5.3"></a>5.3</h3><h3 id="5-4-1"><a href="#5-4-1" class="headerlink" title="5.4"></a>5.4</h3><h3 id="5-5-1"><a href="#5-5-1" class="headerlink" title="5.5"></a>5.5</h3><h3 id="5-1"><a href="#5-1" class="headerlink" title="5."></a>5.</h3><h2 id="六-统计-Stats"><a href="#六-统计-Stats" class="headerlink" title="六 统计(Stats)"></a>六 统计(Stats)</h2><h3 id="6-1-stats"><a href="#6-1-stats" class="headerlink" title="6.1 stats"></a>6.1 stats</h3><h2 id="七-其它选项"><a href="#七-其它选项" class="headerlink" title="七 其它选项"></a>七 其它选项</h2><h3 id="7-1-amd"><a href="#7-1-amd" class="headerlink" title="7.1 amd"></a>7.1 amd</h3><h3 id="7-2-bail"><a href="#7-2-bail" class="headerlink" title="7.2 bail"></a>7.2 bail</h3><h3 id="7-3-cache"><a href="#7-3-cache" class="headerlink" title="7.3 cache"></a>7.3 cache</h3><h3 id="7-4-loader"><a href="#7-4-loader" class="headerlink" title="7.4 loader"></a>7.4 loader</h3><h3 id="7-5-parallelism"><a href="#7-5-parallelism" class="headerlink" title="7.5 parallelism"></a>7.5 parallelism</h3><h3 id="7-6-profile"><a href="#7-6-profile" class="headerlink" title="7.6 profile"></a>7.6 profile</h3><h3 id="7-7-recordPath"><a href="#7-7-recordPath" class="headerlink" title="7.7 recordPath"></a>7.7 recordPath</h3><h3 id="7-8-recordInputPath"><a href="#7-8-recordInputPath" class="headerlink" title="7.8 recordInputPath"></a>7.8 recordInputPath</h3><h3 id="7-9-recordOutputPath"><a href="#7-9-recordOutputPath" class="headerlink" title="7.9 recordOutputPath"></a>7.9 recordOutputPath</h3><p>==========================</p>
+<h1 id="C-API"><a href="#C-API" class="headerlink" title="C API"></a>C API</h1><p>===============================</p>
+<h1 id="D-指南"><a href="#D-指南" class="headerlink" title="D 指南"></a>D 指南</h1><p><a href="https://doc.webpack-china.org/guides/development/" target="_blank" rel="noopener">https://doc.webpack-china.org/guides/development/</a></p>
+<p style="text-align:right">2018.1.25 星期四 14:42 </p>
+
+<h2 id="一-安装"><a href="#一-安装" class="headerlink" title="一 安装"></a>一 安装</h2><h3 id="1-1-前提条件"><a href="#1-1-前提条件" class="headerlink" title="1.1 前提条件"></a>1.1 前提条件</h3><h3 id="1-2-本地安装"><a href="#1-2-本地安装" class="headerlink" title="1.2 本地安装"></a>1.2 本地安装</h3><h3 id="1-3-全局安装"><a href="#1-3-全局安装" class="headerlink" title="1.3 全局安装"></a>1.3 全局安装</h3><h3 id="1-4-最新体验版本"><a href="#1-4-最新体验版本" class="headerlink" title="1.4 最新体验版本"></a>1.4 最新体验版本</h3><h2 id="二-起步"><a href="#二-起步" class="headerlink" title="二 起步"></a>二 起步</h2><h3 id="2-1-基本安装"><a href="#2-1-基本安装" class="headerlink" title="2.1 基本安装"></a>2.1 基本安装</h3><h3 id="2-2-创建一个bundle文件"><a href="#2-2-创建一个bundle文件" class="headerlink" title="2.2 创建一个bundle文件"></a>2.2 创建一个bundle文件</h3><h3 id="2-3-模块"><a href="#2-3-模块" class="headerlink" title="2.3 模块"></a>2.3 模块</h3><h3 id="2-4-使用一个配置文件"><a href="#2-4-使用一个配置文件" class="headerlink" title="2.4 使用一个配置文件"></a>2.4 使用一个配置文件</h3><h3 id="2-5-NPM脚本"><a href="#2-5-NPM脚本" class="headerlink" title="2.5 NPM脚本"></a>2.5 NPM脚本</h3><h3 id="2-6-结论"><a href="#2-6-结论" class="headerlink" title="2.6 结论"></a>2.6 结论</h3><h2 id="三-管理资源"><a href="#三-管理资源" class="headerlink" title="三 管理资源"></a>三 管理资源</h2><h3 id="3-1-安装"><a href="#3-1-安装" class="headerlink" title="3.1 安装"></a>3.1 安装</h3><h3 id="3-2-加载CSS"><a href="#3-2-加载CSS" class="headerlink" title="3.2 加载CSS"></a>3.2 加载CSS</h3><h3 id="3-3-加载字体"><a href="#3-3-加载字体" class="headerlink" title="3.3 加载字体"></a>3.3 加载字体</h3><h3 id="3-4-加载数据"><a href="#3-4-加载数据" class="headerlink" title="3.4 加载数据"></a>3.4 加载数据</h3><h3 id="3-5-全局资源"><a href="#3-5-全局资源" class="headerlink" title="3.5 全局资源"></a>3.5 全局资源</h3><h3 id="3-6-回退处理"><a href="#3-6-回退处理" class="headerlink" title="3.6 回退处理"></a>3.6 回退处理</h3><h3 id="3-7-下一章节指南"><a href="#3-7-下一章节指南" class="headerlink" title="3.7 下一章节指南"></a>3.7 下一章节指南</h3><h3 id="3-8-延伸阅读"><a href="#3-8-延伸阅读" class="headerlink" title="3.8 延伸阅读"></a>3.8 延伸阅读</h3><h2 id="四-管理输出"><a href="#四-管理输出" class="headerlink" title="四 管理输出"></a>四 管理输出</h2><h3 id="4-1-预先准备"><a href="#4-1-预先准备" class="headerlink" title="4.1 预先准备"></a>4.1 预先准备</h3><h3 id="4-2-设定HtmlWebpackPlugin"><a href="#4-2-设定HtmlWebpackPlugin" class="headerlink" title="4.2 设定HtmlWebpackPlugin"></a>4.2 设定HtmlWebpackPlugin</h3><h3 id="4-3-清理-dist文件夹"><a href="#4-3-清理-dist文件夹" class="headerlink" title="4.3 清理/dist文件夹"></a>4.3 清理/dist文件夹</h3><h3 id="4-4-Manifest"><a href="#4-4-Manifest" class="headerlink" title="4.4 Manifest"></a>4.4 Manifest</h3><h3 id="4-5-结论"><a href="#4-5-结论" class="headerlink" title="4.5 结论"></a>4.5 结论</h3><h2 id="五-开发"><a href="#五-开发" class="headerlink" title="五 开发"></a>五 开发</h2><h3 id="5-1-使用source-map"><a href="#5-1-使用source-map" class="headerlink" title="5.1 使用source map"></a>5.1 使用source map</h3><h3 id="5-2-选择一个开发工具"><a href="#5-2-选择一个开发工具" class="headerlink" title="5.2 选择一个开发工具"></a>5.2 选择一个开发工具</h3><h3 id="5-3-使用观察模式"><a href="#5-3-使用观察模式" class="headerlink" title="5.3 使用观察模式"></a>5.3 使用观察模式</h3><h3 id="5-4-使用-webpack-dev-server"><a href="#5-4-使用-webpack-dev-server" class="headerlink" title="5.4 使用 webpack-dev-server"></a>5.4 使用 webpack-dev-server</h3><h3 id="5-5-使用-Webpack-dev-middleware"><a href="#5-5-使用-Webpack-dev-middleware" class="headerlink" title="5.5 使用 Webpack-dev-middleware"></a>5.5 使用 Webpack-dev-middleware</h3><h3 id="5-6-调整文本编辑器"><a href="#5-6-调整文本编辑器" class="headerlink" title="5.6 调整文本编辑器"></a>5.6 调整文本编辑器</h3><h3 id="5-7-结论"><a href="#5-7-结论" class="headerlink" title="5.7 结论"></a>5.7 结论</h3><h2 id="六-模块热替换"><a href="#六-模块热替换" class="headerlink" title="六 模块热替换"></a>六 模块热替换</h2><h3 id="6-1-启用-HMR"><a href="#6-1-启用-HMR" class="headerlink" title="6.1 启用 HMR"></a>6.1 启用 HMR</h3><h3 id="6-2-通过Node-js-API"><a href="#6-2-通过Node-js-API" class="headerlink" title="6.2 通过Node.js API"></a>6.2 通过Node.js API</h3><h3 id="6-3-问题"><a href="#6-3-问题" class="headerlink" title="6.3 问题"></a>6.3 问题</h3><h3 id="6-4-HMR-修改样式表"><a href="#6-4-HMR-修改样式表" class="headerlink" title="6.4 HMR 修改样式表"></a>6.4 HMR 修改样式表</h3><h3 id="6-5-其他代码和框架"><a href="#6-5-其他代码和框架" class="headerlink" title="6.5 其他代码和框架"></a>6.5 其他代码和框架</h3><h2 id="七-Tree-Shaking"><a href="#七-Tree-Shaking" class="headerlink" title="七 Tree Shaking"></a>七 Tree Shaking</h2><h3 id="7-1-添加一个通用模块"><a href="#7-1-添加一个通用模块" class="headerlink" title="7.1 添加一个通用模块"></a>7.1 添加一个通用模块</h3><h3 id="7-2-精简输出"><a href="#7-2-精简输出" class="headerlink" title="7.2 精简输出"></a>7.2 精简输出</h3><h3 id="7-3-警告"><a href="#7-3-警告" class="headerlink" title="7.3 警告"></a>7.3 警告</h3><h3 id="7-4-结论"><a href="#7-4-结论" class="headerlink" title="7.4 结论"></a>7.4 结论</h3><h2 id="八-生产环境构建"><a href="#八-生产环境构建" class="headerlink" title="八 生产环境构建"></a>八 生产环境构建</h2><h3 id="8-1-配置"><a href="#8-1-配置" class="headerlink" title="8.1 配置"></a>8.1 配置</h3><h3 id="8-2-NPM-Script"><a href="#8-2-NPM-Script" class="headerlink" title="8.2 NPM Script"></a>8.2 NPM Script</h3><h3 id="8-3-Minification"><a href="#8-3-Minification" class="headerlink" title="8.3 Minification"></a>8.3 Minification</h3><h3 id="8-4-source-map"><a href="#8-4-source-map" class="headerlink" title="8.4 source map"></a>8.4 source map</h3><h3 id="8-5-指定环境"><a href="#8-5-指定环境" class="headerlink" title="8.5 指定环境"></a>8.5 指定环境</h3><h3 id="8-6-Split-CSS"><a href="#8-6-Split-CSS" class="headerlink" title="8.6 Split CSS"></a>8.6 Split CSS</h3><h3 id="8-7-CLI-替代选项"><a href="#8-7-CLI-替代选项" class="headerlink" title="8.7 CLI 替代选项"></a>8.7 CLI 替代选项</h3><h2 id="九-代码分离"><a href="#九-代码分离" class="headerlink" title="九 代码分离"></a>九 代码分离</h2><h3 id="9-1-入口起点"><a href="#9-1-入口起点" class="headerlink" title="9.1 入口起点"></a>9.1 入口起点</h3><h3 id="9-2-防止重复"><a href="#9-2-防止重复" class="headerlink" title="9.2 防止重复"></a>9.2 防止重复</h3><h3 id="9-3-动态导入"><a href="#9-3-动态导入" class="headerlink" title="9.3 动态导入"></a>9.3 动态导入</h3><h3 id="9-4-bundle分析"><a href="#9-4-bundle分析" class="headerlink" title="9.4 bundle分析"></a>9.4 bundle分析</h3><h3 id="9-5-下一步"><a href="#9-5-下一步" class="headerlink" title="9.5 下一步"></a>9.5 下一步</h3><h2 id="零-懒加载"><a href="#零-懒加载" class="headerlink" title="零 懒加载"></a>零 懒加载</h2><h3 id="0-1-示例"><a href="#0-1-示例" class="headerlink" title="0.1 示例"></a>0.1 示例</h3><h3 id="0-2-框架"><a href="#0-2-框架" class="headerlink" title="0.2 框架"></a>0.2 框架</h3><h2 id="一-缓存"><a href="#一-缓存" class="headerlink" title="一 缓存"></a>一 缓存</h2><h3 id="1-1-输出文件的文件名"><a href="#1-1-输出文件的文件名" class="headerlink" title="1.1 输出文件的文件名"></a>1.1 输出文件的文件名</h3><h3 id="1-2-提取模板"><a href="#1-2-提取模板" class="headerlink" title="1.2 提取模板"></a>1.2 提取模板</h3><h3 id="1-3-模块标识符"><a href="#1-3-模块标识符" class="headerlink" title="1.3 模块标识符"></a>1.3 模块标识符</h3><h3 id="1-4-结论"><a href="#1-4-结论" class="headerlink" title="1.4 结论"></a>1.4 结论</h3><h3 id="1-5-译注"><a href="#1-5-译注" class="headerlink" title="1.5 译注"></a>1.5 译注</h3><h2 id="二-创建Library"><a href="#二-创建Library" class="headerlink" title="二 创建Library"></a>二 创建Library</h2><h3 id="2-1-创建一个library"><a href="#2-1-创建一个library" class="headerlink" title="2.1 创建一个library"></a>2.1 创建一个library</h3><h3 id="2-2-基本配置"><a href="#2-2-基本配置" class="headerlink" title="2.2 基本配置"></a>2.2 基本配置</h3><h3 id="2-3-外部化lodash"><a href="#2-3-外部化lodash" class="headerlink" title="2.3 外部化lodash"></a>2.3 外部化lodash</h3><h3 id="2-4-外部扩展的限制"><a href="#2-4-外部扩展的限制" class="headerlink" title="2.4 外部扩展的限制"></a>2.4 外部扩展的限制</h3><h3 id="2-5-暴露library"><a href="#2-5-暴露library" class="headerlink" title="2.5 暴露library"></a>2.5 暴露library</h3><h3 id="2-6-最终步骤"><a href="#2-6-最终步骤" class="headerlink" title="2.6 最终步骤"></a>2.6 最终步骤</h3><h2 id="三-Shimming"><a href="#三-Shimming" class="headerlink" title="三 Shimming"></a>三 Shimming</h2><h3 id="3-1-shimming全局变量"><a href="#3-1-shimming全局变量" class="headerlink" title="3.1 shimming全局变量"></a>3.1 shimming全局变量</h3><h3 id="3-2-细粒度shimming"><a href="#3-2-细粒度shimming" class="headerlink" title="3.2 细粒度shimming"></a>3.2 细粒度shimming</h3><h3 id="3-3-全局exports"><a href="#3-3-全局exports" class="headerlink" title="3.3 全局exports"></a>3.3 全局exports</h3><h3 id="3-4-加载polyfills"><a href="#3-4-加载polyfills" class="headerlink" title="3.4 加载polyfills"></a>3.4 加载polyfills</h3><h3 id="3-5-深度优化"><a href="#3-5-深度优化" class="headerlink" title="3.5 深度优化"></a>3.5 深度优化</h3><h3 id="3-6-Node内置"><a href="#3-6-Node内置" class="headerlink" title="3.6 Node内置"></a>3.6 Node内置</h3><h3 id="3-7-其他工具"><a href="#3-7-其他工具" class="headerlink" title="3.7 其他工具"></a>3.7 其他工具</h3><h2 id="四-TypeScript"><a href="#四-TypeScript" class="headerlink" title="四 TypeScript"></a>四 TypeScript</h2><h3 id="4-1-基础安装"><a href="#4-1-基础安装" class="headerlink" title="4.1 基础安装"></a>4.1 基础安装</h3><h3 id="4-2-Loader"><a href="#4-2-Loader" class="headerlink" title="4.2 Loader"></a>4.2 Loader</h3><h3 id="4-3-source-map"><a href="#4-3-source-map" class="headerlink" title="4.3 source map"></a>4.3 source map</h3><h3 id="4-4-使用第三方库"><a href="#4-4-使用第三方库" class="headerlink" title="4.4 使用第三方库"></a>4.4 使用第三方库</h3><h3 id="4-5-导入其他资源"><a href="#4-5-导入其他资源" class="headerlink" title="4.5 导入其他资源"></a>4.5 导入其他资源</h3><h3 id="4-6-构建性能"><a href="#4-6-构建性能" class="headerlink" title="4.6 构建性能"></a>4.6 构建性能</h3><h2 id="五-渐进式网络应用程序"><a href="#五-渐进式网络应用程序" class="headerlink" title="五 渐进式网络应用程序"></a>五 渐进式网络应用程序</h2><h3 id="5-1-现在我们并没有离线环境"><a href="#5-1-现在我们并没有离线环境" class="headerlink" title="5.1 现在我们并没有离线环境"></a>5.1 现在我们并没有离线环境</h3><h3 id="5-2-天津Workbox"><a href="#5-2-天津Workbox" class="headerlink" title="5.2 天津Workbox"></a>5.2 天津Workbox</h3><h3 id="5-3-注册我们的Service-Worker"><a href="#5-3-注册我们的Service-Worker" class="headerlink" title="5.3 注册我们的Service Worker"></a>5.3 注册我们的Service Worker</h3><h3 id="5-4-结论"><a href="#5-4-结论" class="headerlink" title="5.4 结论"></a>5.4 结论</h3><h2 id="六-迁移到新版本"><a href="#六-迁移到新版本" class="headerlink" title="六 迁移到新版本"></a>六 迁移到新版本</h2><h2 id="七-使用环境变量"><a href="#七-使用环境变量" class="headerlink" title="七 使用环境变量"></a>七 使用环境变量</h2><h2 id="八-构建性能"><a href="#八-构建性能" class="headerlink" title="八 构建性能"></a>八 构建性能</h2><h3 id="8-1-常规"><a href="#8-1-常规" class="headerlink" title="8.1 常规"></a>8.1 常规</h3><h4 id="1-保持版本最新"><a href="#1-保持版本最新" class="headerlink" title="1 保持版本最新"></a>1 保持版本最新</h4><h4 id="2-Loaders"><a href="#2-Loaders" class="headerlink" title="2 Loaders"></a>2 Loaders</h4><h4 id="3-Bootstrap"><a href="#3-Bootstrap" class="headerlink" title="3 Bootstrap"></a>3 Bootstrap</h4><h4 id="4-解析"><a href="#4-解析" class="headerlink" title="4 解析"></a>4 解析</h4><h4 id="5-Dlls"><a href="#5-Dlls" class="headerlink" title="5 Dlls"></a>5 Dlls</h4><h4 id="6-Samller-Faster"><a href="#6-Samller-Faster" class="headerlink" title="6 Samller = Faster"></a>6 Samller = Faster</h4><h4 id="7-Worker-Pool"><a href="#7-Worker-Pool" class="headerlink" title="7 Worker Pool"></a>7 Worker Pool</h4><h4 id="8-持久化缓存"><a href="#8-持久化缓存" class="headerlink" title="8 持久化缓存"></a>8 持久化缓存</h4><h4 id="9-自定义-plugins-loaders"><a href="#9-自定义-plugins-loaders" class="headerlink" title="9 自定义 plugins/loaders"></a>9 自定义 plugins/loaders</h4><h3 id="8-2-Development"><a href="#8-2-Development" class="headerlink" title="8.2 Development"></a>8.2 Development</h3><h4 id="1-增量编译"><a href="#1-增量编译" class="headerlink" title="1 增量编译"></a>1 增量编译</h4><h4 id="2-在内存中编译"><a href="#2-在内存中编译" class="headerlink" title="2 在内存中编译"></a>2 在内存中编译</h4><h4 id="3-Devtool"><a href="#3-Devtool" class="headerlink" title="3 Devtool"></a>3 Devtool</h4><h4 id="4-避免在生产环境下才会用"><a href="#4-避免在生产环境下才会用" class="headerlink" title="4 避免在生产环境下才会用"></a>4 避免在生产环境下才会用</h4><h4 id="5-最小化入口chunk"><a href="#5-最小化入口chunk" class="headerlink" title="5 最小化入口chunk"></a>5 最小化入口chunk</h4><h3 id="8-3-Production"><a href="#8-3-Production" class="headerlink" title="8.3 Production"></a>8.3 Production</h3><h4 id="1-多个编译时"><a href="#1-多个编译时" class="headerlink" title="1 多个编译时"></a>1 多个编译时</h4><h4 id="2-Source-Maps"><a href="#2-Source-Maps" class="headerlink" title="2 Source Maps"></a>2 Source Maps</h4><h3 id="8-4-工具相关问题"><a href="#8-4-工具相关问题" class="headerlink" title="8.4 工具相关问题"></a>8.4 工具相关问题</h3><h4 id="1-Babel"><a href="#1-Babel" class="headerlink" title="1 Babel"></a>1 Babel</h4><h4 id="2-Typescript"><a href="#2-Typescript" class="headerlink" title="2 Typescript"></a>2 Typescript</h4><h4 id="3-Sass"><a href="#3-Sass" class="headerlink" title="3 Sass"></a>3 Sass</h4><h2 id="九-开发-Vagrant"><a href="#九-开发-Vagrant" class="headerlink" title="九 开发-Vagrant"></a>九 开发-Vagrant</h2><h3 id="9-1-项目配置"><a href="#9-1-项目配置" class="headerlink" title="9.1 项目配置"></a>9.1 项目配置</h3><h3 id="9-2-启动服务器"><a href="#9-2-启动服务器" class="headerlink" title="9.2 启动服务器"></a>9.2 启动服务器</h3><h3 id="9-3-配合nginx的高级用法"><a href="#9-3-配合nginx的高级用法" class="headerlink" title="9.3 配合nginx的高级用法"></a>9.3 配合nginx的高级用法</h3><h3 id="9-4-小结"><a href="#9-4-小结" class="headerlink" title="9.4 小结"></a>9.4 小结</h3><h2 id="零-管理依赖"><a href="#零-管理依赖" class="headerlink" title="零 管理依赖"></a>零 管理依赖</h2><h3 id="0-1-带表达式的require语句"><a href="#0-1-带表达式的require语句" class="headerlink" title="0.1 带表达式的require语句"></a>0.1 带表达式的require语句</h3><h3 id="0-2-require-context"><a href="#0-2-require-context" class="headerlink" title="0.2 require.context"></a>0.2 require.context</h3><h3 id="0-3-上下文模块"><a href="#0-3-上下文模块" class="headerlink" title="0.3 上下文模块"></a>0.3 上下文模块</h3><h2 id="一-公共路径-Public-Path"><a href="#一-公共路径-Public-Path" class="headerlink" title="一 公共路径(Public Path)"></a>一 公共路径(Public Path)</h2><h3 id="1-1-示例"><a href="#1-1-示例" class="headerlink" title="1.1 示例"></a>1.1 示例</h3><h3 id="1-2-在构建项目时设置路径值"><a href="#1-2-在构建项目时设置路径值" class="headerlink" title="1.2 在构建项目时设置路径值"></a>1.2 在构建项目时设置路径值</h3><h3 id="1-3-即时设定路径值"><a href="#1-3-即时设定路径值" class="headerlink" title="1.3 即时设定路径值"></a>1.3 即时设定路径值</h3><h2 id="二-集成-Intergrations"><a href="#二-集成-Intergrations" class="headerlink" title="二 集成(Intergrations)"></a>二 集成(Intergrations)</h2><h3 id="2-1-NPM-Scripts"><a href="#2-1-NPM-Scripts" class="headerlink" title="2.1 NPM Scripts"></a>2.1 NPM Scripts</h3><h3 id="2-2-Grunt"><a href="#2-2-Grunt" class="headerlink" title="2.2 Grunt"></a>2.2 Grunt</h3><h3 id="2-3-Gulp"><a href="#2-3-Gulp" class="headerlink" title="2.3 Gulp"></a>2.3 Gulp</h3><h3 id="2-4-Mocha"><a href="#2-4-Mocha" class="headerlink" title="2.4 Mocha"></a>2.4 Mocha</h3><h3 id="2-5-Karma"><a href="#2-5-Karma" class="headerlink" title="2.5 Karma"></a>2.5 Karma</h3><h1 id="E-LOADERS"><a href="#E-LOADERS" class="headerlink" title="E LOADERS"></a>E LOADERS</h1><h1 id="F-插件"><a href="#F-插件" class="headerlink" title="F 插件"></a>F 插件</h1>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack/" rel="tag"><i class="fa fa-tag"></i> webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/js/iframe操作(008)/" rel="next" title="Iframe操作">
+                <i class="fa fa-chevron-left"></i> Iframe操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/jsplus/文档注释生成库调研(011)/" rel="prev" title="文档注释生成库调研">
+                文档注释生成库调研 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-概念"><span class="nav-text">A 概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-概念"><span class="nav-text">一 概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-入口-entry"><span class="nav-text">1.1 入口(entry)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-出口-output"><span class="nav-text">1.2 出口(output)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-loader"><span class="nav-text">1.3 loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-插件-plugins"><span class="nav-text">1.4 插件(plugins)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-入口起点-Entry-Points"><span class="nav-text">二 入口起点(Entry Points)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-单个入口（简写）语法"><span class="nav-text">2.1 单个入口（简写）语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-对象语法"><span class="nav-text">2.2 对象语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-常见场景"><span class="nav-text">2.3 常见场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-分离应用程序"><span class="nav-text">1 分离应用程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-多页面应用程序"><span class="nav-text">2 多页面应用程序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-输出-Output"><span class="nav-text">三 输出(Output)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-用法"><span class="nav-text">3.1 用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-多个入口起点"><span class="nav-text">3.2 多个入口起点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-高级进阶"><span class="nav-text">3.3 高级进阶</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-Loader"><span class="nav-text">四 Loader</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-示例"><span class="nav-text">4.1 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-使用Loader"><span class="nav-text">4.2 使用Loader</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-配置"><span class="nav-text">1 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-内联"><span class="nav-text">2 内联</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-CLI"><span class="nav-text">3 CLI</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-Loader特性"><span class="nav-text">4.3 Loader特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-解析Loader"><span class="nav-text">4.4 解析Loader</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-插件-Plugins"><span class="nav-text">五 插件(Plugins)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-剖析"><span class="nav-text">5.1 剖析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-用法"><span class="nav-text">5.2 用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-配置"><span class="nav-text">5.3 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-Node-API"><span class="nav-text">5.4 Node API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-配置-Configuration"><span class="nav-text">六 配置(Configuration)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-最简单的配置"><span class="nav-text">6.1 最简单的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-多个Target"><span class="nav-text">6.2 多个Target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-使用其他配置语言"><span class="nav-text">6.3 使用其他配置语言</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七-模块-Modules"><span class="nav-text">七 模块(Modules)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-什么是webpack模块"><span class="nav-text">7.1 什么是webpack模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-支持的模块类型"><span class="nav-text">7.2 支持的模块类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八-模块解析-Module-Resolution"><span class="nav-text">八 模块解析(Module Resolution)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-webpack中的解析规则"><span class="nav-text">8.1 webpack中的解析规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-绝对路径"><span class="nav-text">1 绝对路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-相对路径"><span class="nav-text">2 相对路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-模块路径"><span class="nav-text">3 模块路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-解析Loader-Resolving-Loader"><span class="nav-text">8.2 解析Loader(Resolving Loader)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-缓存"><span class="nav-text">8.3 缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九-依赖图-Dependency-Graph"><span class="nav-text">九 依赖图(Dependency Graph)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零-构建目标-Targets"><span class="nav-text">零 构建目标(Targets)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1-用法"><span class="nav-text">0.1 用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-2-多个Target"><span class="nav-text">0.2 多个Target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-3-资源"><span class="nav-text">0.3 资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-Manifest"><span class="nav-text">一 Manifest</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Runtime"><span class="nav-text">1.1 Runtime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Manifest"><span class="nav-text">1.2 Manifest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-问题"><span class="nav-text">1.3 问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-模块热替换-Hot-Module-Replace"><span class="nav-text">二 模块热替换(Hot Module Replace)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-这一切是如何运行的？"><span class="nav-text">2.1 这一切是如何运行的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-在应用程序中"><span class="nav-text">2.2 在应用程序中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-在编译器中"><span class="nav-text">2.3 在编译器中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-在HMT-Runtime中"><span class="nav-text">2.4 在HMT Runtime中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-入门"><span class="nav-text">2.5 入门</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-配置"><span class="nav-text">B 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-配置"><span class="nav-text">一 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-选项"><span class="nav-text">1.1 选项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-使用不同语言进行配置"><span class="nav-text">二 使用不同语言进行配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-TypeScript"><span class="nav-text">2.1 TypeScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-CoffeeScript"><span class="nav-text">2.2 CoffeeScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Babel-and-JSX"><span class="nav-text">2.3 Babel and JSX</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-多种配置类型"><span class="nav-text">三 多种配置类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-导出一个函数"><span class="nav-text">3.1 导出一个函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-导出一个Promise"><span class="nav-text">3.2 导出一个Promise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-导出多个配置对象"><span class="nav-text">3.3 导出多个配置对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-入口和上下文"><span class="nav-text">四 入口和上下文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-context"><span class="nav-text">4.1 context</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-entry"><span class="nav-text">4.2 entry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-命名"><span class="nav-text">4.3 命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-动态入口"><span class="nav-text">4.4 动态入口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-输出"><span class="nav-text">五 输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1"><span class="nav-text">5.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2"><span class="nav-text">5.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3"><span class="nav-text">5.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4"><span class="nav-text">5.4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5"><span class="nav-text">5.5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5"><span class="nav-text">5.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-模块-Module"><span class="nav-text">六 模块(Module)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-module-noParse"><span class="nav-text">6.1 module.noParse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-module-rules"><span class="nav-text">6.2 module.rules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-Rule"><span class="nav-text">6.3 Rule</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Rule条件"><span class="nav-text">1 Rule条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Rule-结果"><span class="nav-text">2 Rule 结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-嵌套的-Rule"><span class="nav-text">3 嵌套的 Rule</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-Rule-enforce"><span class="nav-text">6.4 Rule.enforce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-Rule-exclude"><span class="nav-text">6.5 Rule.exclude</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-Rule-include"><span class="nav-text">6.6 Rule.include</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-Rule-issuer"><span class="nav-text">6.7 Rule.issuer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-8-Rule-loader"><span class="nav-text">6.8 Rule.loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-Rule-loaders"><span class="nav-text">6.9 Rule.loaders</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-0-Rule-oneOf"><span class="nav-text">6.0 Rule.oneOf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-Rule-options-Rule-query"><span class="nav-text">6.1 Rule.options/Rule.query</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-Rule-parser"><span class="nav-text">6.2 Rule.parser</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-Rule-resource"><span class="nav-text">6.3 Rule.resource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-Rule-resourceQuery"><span class="nav-text">6.4 Rule.resourceQuery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-Rule-rules"><span class="nav-text">6.5 Rule.rules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-Rule-test"><span class="nav-text">6.6 Rule.test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-Rule-use"><span class="nav-text">6.7 Rule.use</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-8-条件"><span class="nav-text">6.8 条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-UseEntry"><span class="nav-text">6.9 UseEntry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-0-模块上下文"><span class="nav-text">6.0 模块上下文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七-解析"><span class="nav-text">七 解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1"><span class="nav-text">7.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2"><span class="nav-text">7.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3"><span class="nav-text">7.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4"><span class="nav-text">7.4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5"><span class="nav-text">7.5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7"><span class="nav-text">7.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八-插件"><span class="nav-text">八 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-plugins"><span class="nav-text">8.1 plugins</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九-开发中Server-DevServer"><span class="nav-text">九 开发中Server(DevServer)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1"><span class="nav-text">9.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2"><span class="nav-text">9.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3"><span class="nav-text">9.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4"><span class="nav-text">9.4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9"><span class="nav-text">9.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零-Devtool"><span class="nav-text">零 Devtool</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1-devtool"><span class="nav-text">0.1 devtool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-2-Qualities"><span class="nav-text">0.2 Qualities</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-3-Development"><span class="nav-text">0.3 Development</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-4-Special-cases"><span class="nav-text">0.4 Special cases</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-5-Production"><span class="nav-text">0.5 Production</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-构建目标"><span class="nav-text">一 构建目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-target"><span class="nav-text">1.1 target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-string"><span class="nav-text">1.2 string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-function"><span class="nav-text">1.3 function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-Watch和WatchOptions"><span class="nav-text">二 Watch和WatchOptions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-watch"><span class="nav-text">2.1 watch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-watchOptions"><span class="nav-text">2.2 watchOptions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-watchOptions-aggregated"><span class="nav-text">2.3 watchOptions.aggregated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-watchOptions-ignored"><span class="nav-text">2.4 watchOptions.ignored</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-watchOptions-poll"><span class="nav-text">2.5 watchOptions.poll</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-外部扩展-Externals"><span class="nav-text">三 外部扩展(Externals)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-externals"><span class="nav-text">3.1 externals</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-string"><span class="nav-text">1 string</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-array"><span class="nav-text">2 array</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-object"><span class="nav-text">3 object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-funciton"><span class="nav-text">4 funciton</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-regex"><span class="nav-text">5 regex</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-性能-Performance"><span class="nav-text">四 性能(Performance)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-performance"><span class="nav-text">4.1 performance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-performance-hints"><span class="nav-text">4.2 performance.hints</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-performanc-emaxEntry"><span class="nav-text">4.3 performanc.emaxEntry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-performanc"><span class="nav-text">4.4 performanc.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-performanc"><span class="nav-text">4.5 performanc.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-Node"><span class="nav-text">五 Node</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-1"><span class="nav-text">5.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-1"><span class="nav-text">5.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1"><span class="nav-text">5.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-1"><span class="nav-text">5.4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-1"><span class="nav-text">5.5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1"><span class="nav-text">5.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-统计-Stats"><span class="nav-text">六 统计(Stats)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-stats"><span class="nav-text">6.1 stats</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七-其它选项"><span class="nav-text">七 其它选项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-amd"><span class="nav-text">7.1 amd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-bail"><span class="nav-text">7.2 bail</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-cache"><span class="nav-text">7.3 cache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-loader"><span class="nav-text">7.4 loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-parallelism"><span class="nav-text">7.5 parallelism</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-6-profile"><span class="nav-text">7.6 profile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-7-recordPath"><span class="nav-text">7.7 recordPath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-8-recordInputPath"><span class="nav-text">7.8 recordInputPath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-9-recordOutputPath"><span class="nav-text">7.9 recordOutputPath</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-API"><span class="nav-text">C API</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D-指南"><span class="nav-text">D 指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-安装"><span class="nav-text">一 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-前提条件"><span class="nav-text">1.1 前提条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-本地安装"><span class="nav-text">1.2 本地安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-全局安装"><span class="nav-text">1.3 全局安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-最新体验版本"><span class="nav-text">1.4 最新体验版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-起步"><span class="nav-text">二 起步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本安装"><span class="nav-text">2.1 基本安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-创建一个bundle文件"><span class="nav-text">2.2 创建一个bundle文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-模块"><span class="nav-text">2.3 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-使用一个配置文件"><span class="nav-text">2.4 使用一个配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-NPM脚本"><span class="nav-text">2.5 NPM脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-结论"><span class="nav-text">2.6 结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-管理资源"><span class="nav-text">三 管理资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-安装"><span class="nav-text">3.1 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-加载CSS"><span class="nav-text">3.2 加载CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-加载字体"><span class="nav-text">3.3 加载字体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-加载数据"><span class="nav-text">3.4 加载数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-全局资源"><span class="nav-text">3.5 全局资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-回退处理"><span class="nav-text">3.6 回退处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-下一章节指南"><span class="nav-text">3.7 下一章节指南</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8-延伸阅读"><span class="nav-text">3.8 延伸阅读</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-管理输出"><span class="nav-text">四 管理输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-预先准备"><span class="nav-text">4.1 预先准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-设定HtmlWebpackPlugin"><span class="nav-text">4.2 设定HtmlWebpackPlugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-清理-dist文件夹"><span class="nav-text">4.3 清理/dist文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-Manifest"><span class="nav-text">4.4 Manifest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-结论"><span class="nav-text">4.5 结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-开发"><span class="nav-text">五 开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-使用source-map"><span class="nav-text">5.1 使用source map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-选择一个开发工具"><span class="nav-text">5.2 选择一个开发工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-使用观察模式"><span class="nav-text">5.3 使用观察模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-使用-webpack-dev-server"><span class="nav-text">5.4 使用 webpack-dev-server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-使用-Webpack-dev-middleware"><span class="nav-text">5.5 使用 Webpack-dev-middleware</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-调整文本编辑器"><span class="nav-text">5.6 调整文本编辑器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-7-结论"><span class="nav-text">5.7 结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-模块热替换"><span class="nav-text">六 模块热替换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-启用-HMR"><span class="nav-text">6.1 启用 HMR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-通过Node-js-API"><span class="nav-text">6.2 通过Node.js API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-问题"><span class="nav-text">6.3 问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-HMR-修改样式表"><span class="nav-text">6.4 HMR 修改样式表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-其他代码和框架"><span class="nav-text">6.5 其他代码和框架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七-Tree-Shaking"><span class="nav-text">七 Tree Shaking</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-添加一个通用模块"><span class="nav-text">7.1 添加一个通用模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-精简输出"><span class="nav-text">7.2 精简输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-警告"><span class="nav-text">7.3 警告</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-结论"><span class="nav-text">7.4 结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八-生产环境构建"><span class="nav-text">八 生产环境构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-配置"><span class="nav-text">8.1 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-NPM-Script"><span class="nav-text">8.2 NPM Script</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-Minification"><span class="nav-text">8.3 Minification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-source-map"><span class="nav-text">8.4 source map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-5-指定环境"><span class="nav-text">8.5 指定环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-6-Split-CSS"><span class="nav-text">8.6 Split CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-7-CLI-替代选项"><span class="nav-text">8.7 CLI 替代选项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九-代码分离"><span class="nav-text">九 代码分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-入口起点"><span class="nav-text">9.1 入口起点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-防止重复"><span class="nav-text">9.2 防止重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-动态导入"><span class="nav-text">9.3 动态导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-bundle分析"><span class="nav-text">9.4 bundle分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-5-下一步"><span class="nav-text">9.5 下一步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零-懒加载"><span class="nav-text">零 懒加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1-示例"><span class="nav-text">0.1 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-2-框架"><span class="nav-text">0.2 框架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-缓存"><span class="nav-text">一 缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-输出文件的文件名"><span class="nav-text">1.1 输出文件的文件名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-提取模板"><span class="nav-text">1.2 提取模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-模块标识符"><span class="nav-text">1.3 模块标识符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-结论"><span class="nav-text">1.4 结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-译注"><span class="nav-text">1.5 译注</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-创建Library"><span class="nav-text">二 创建Library</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-创建一个library"><span class="nav-text">2.1 创建一个library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-基本配置"><span class="nav-text">2.2 基本配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-外部化lodash"><span class="nav-text">2.3 外部化lodash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-外部扩展的限制"><span class="nav-text">2.4 外部扩展的限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-暴露library"><span class="nav-text">2.5 暴露library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-最终步骤"><span class="nav-text">2.6 最终步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-Shimming"><span class="nav-text">三 Shimming</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-shimming全局变量"><span class="nav-text">3.1 shimming全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-细粒度shimming"><span class="nav-text">3.2 细粒度shimming</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-全局exports"><span class="nav-text">3.3 全局exports</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-加载polyfills"><span class="nav-text">3.4 加载polyfills</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-深度优化"><span class="nav-text">3.5 深度优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-Node内置"><span class="nav-text">3.6 Node内置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-其他工具"><span class="nav-text">3.7 其他工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-TypeScript"><span class="nav-text">四 TypeScript</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-基础安装"><span class="nav-text">4.1 基础安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Loader"><span class="nav-text">4.2 Loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-source-map"><span class="nav-text">4.3 source map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-使用第三方库"><span class="nav-text">4.4 使用第三方库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-导入其他资源"><span class="nav-text">4.5 导入其他资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-构建性能"><span class="nav-text">4.6 构建性能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-渐进式网络应用程序"><span class="nav-text">五 渐进式网络应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-现在我们并没有离线环境"><span class="nav-text">5.1 现在我们并没有离线环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-天津Workbox"><span class="nav-text">5.2 天津Workbox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-注册我们的Service-Worker"><span class="nav-text">5.3 注册我们的Service Worker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-结论"><span class="nav-text">5.4 结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-迁移到新版本"><span class="nav-text">六 迁移到新版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七-使用环境变量"><span class="nav-text">七 使用环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八-构建性能"><span class="nav-text">八 构建性能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-常规"><span class="nav-text">8.1 常规</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-保持版本最新"><span class="nav-text">1 保持版本最新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Loaders"><span class="nav-text">2 Loaders</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Bootstrap"><span class="nav-text">3 Bootstrap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-解析"><span class="nav-text">4 解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Dlls"><span class="nav-text">5 Dlls</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Samller-Faster"><span class="nav-text">6 Samller = Faster</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-Worker-Pool"><span class="nav-text">7 Worker Pool</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-持久化缓存"><span class="nav-text">8 持久化缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-自定义-plugins-loaders"><span class="nav-text">9 自定义 plugins/loaders</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-Development"><span class="nav-text">8.2 Development</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-增量编译"><span class="nav-text">1 增量编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-在内存中编译"><span class="nav-text">2 在内存中编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Devtool"><span class="nav-text">3 Devtool</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-避免在生产环境下才会用"><span class="nav-text">4 避免在生产环境下才会用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-最小化入口chunk"><span class="nav-text">5 最小化入口chunk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-Production"><span class="nav-text">8.3 Production</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-多个编译时"><span class="nav-text">1 多个编译时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Source-Maps"><span class="nav-text">2 Source Maps</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-工具相关问题"><span class="nav-text">8.4 工具相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Babel"><span class="nav-text">1 Babel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Typescript"><span class="nav-text">2 Typescript</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Sass"><span class="nav-text">3 Sass</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九-开发-Vagrant"><span class="nav-text">九 开发-Vagrant</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-项目配置"><span class="nav-text">9.1 项目配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-启动服务器"><span class="nav-text">9.2 启动服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-配合nginx的高级用法"><span class="nav-text">9.3 配合nginx的高级用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-小结"><span class="nav-text">9.4 小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#零-管理依赖"><span class="nav-text">零 管理依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1-带表达式的require语句"><span class="nav-text">0.1 带表达式的require语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-2-require-context"><span class="nav-text">0.2 require.context</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-3-上下文模块"><span class="nav-text">0.3 上下文模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-公共路径-Public-Path"><span class="nav-text">一 公共路径(Public Path)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-示例"><span class="nav-text">1.1 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-在构建项目时设置路径值"><span class="nav-text">1.2 在构建项目时设置路径值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-即时设定路径值"><span class="nav-text">1.3 即时设定路径值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-集成-Intergrations"><span class="nav-text">二 集成(Intergrations)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-NPM-Scripts"><span class="nav-text">2.1 NPM Scripts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Grunt"><span class="nav-text">2.2 Grunt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Gulp"><span class="nav-text">2.3 Gulp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Mocha"><span class="nav-text">2.4 Mocha</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-Karma"><span class="nav-text">2.5 Karma</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#E-LOADERS"><span class="nav-text">E LOADERS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#F-插件"><span class="nav-text">F 插件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<a id="more"></a>
+<p style="text-align:right"> 2022.1.19 星期三 : </p>
+
+<!-- # oder使用Jest进行单元测试 -->
+<h2 id="成果分享"><a href="#成果分享" class="headerlink" title="成果分享"></a>成果分享</h2><p>baboom 报告，<br>utils测试，组件/页面测试-快照测试</p>
+<h2 id="Jest配置"><a href="#Jest配置" class="headerlink" title="Jest配置"></a>Jest配置</h2><p>jest：<a href="https://github.com/facebook/jest" target="_blank" rel="noopener">https://github.com/facebook/jest</a><br>jest文档：<a href="https://jestjs.io/zh-Hans/docs/configuration" target="_blank" rel="noopener">https://jestjs.io/zh-Hans/docs/configuration</a></p>
+<h3 id="bamboo"><a href="#bamboo" class="headerlink" title="bamboo"></a>bamboo</h3><p>有jacoco增量覆盖率和python增量覆盖率扫描，可以参考原子说明</p>
+<p><a href="http://bamboo.jd.com/platform/#/atom/atomDetail?atomId=68" target="_blank" rel="noopener">http://bamboo.jd.com/platform/#/atom/atomDetail?atomId=68</a><br><a href="http://bamboo.jd.com/platform/#/atom/atomDetail?atomId=221" target="_blank" rel="noopener">http://bamboo.jd.com/platform/#/atom/atomDetail?atomId=221</a></p>
+<p><code>testResultsProcessor: &quot;jest-bamboo-reporter&quot;,</code><br>jest-bamboo-formatter: <a href="https://github.com/adalbertoteixeira/jest-bamboo-formatter/issues" target="_blank" rel="noopener">https://github.com/adalbertoteixeira/jest-bamboo-formatter/issues</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;test&quot;: &quot;cross-env JEST_REPORT_FILE=&apos;./test/report/test-report.json&apos; jest --config test/jest.conf.js&quot;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2022-01-24 15:30:11.579 [1300212] [ERROR] -- [BPE] : Stage: [前端Jest单元测试_3-0] 执行异常 java.io.FileNotFoundException:/export/Data/jenkins_slave/workspace/JCD_N/pipeline_preset_4/JD-ORDER/test/report/test-report.json does not exist.</span><br><span class="line"></span><br><span class="line">2022-01-24 16:07:44.039 [1300499] [ERROR] -- [BPE] : Stage: [前端Jest代码覆盖率_4-0] 执行异常 java.io.IOException:java.nio.file.NoSuchFileException: /export/Data/jenkins_slave/workspace/JCD_N/pipeline_preset_4/JD-ORDER/test/coverage/clover.xml</span><br></pre></td></tr></table></figure>
+<p>#### bamboo 原子配置<br>##### 前端Jest单元测试<br>JSON文件输出相对路径： test/report/test-report.json<br>Html报告输出相对路径：test/report/test-report.html </p>
+<p>json路径必须有。<br>html可能也需要有。但是bamboo平台看到的结果报告，好像是平台自己出的，和jest 生成的html不一致。</p>
+<p>##### 前端Jest代码覆盖率<br>Coverage输出相对路径: test/coverage</p>

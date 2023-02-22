@@ -1,0 +1,40 @@
+<p>title: react文档1-7_条件渲染<br>date: 2018.9.14<br>tags: </p>
+<ul>
+<li>react.js<br>toc_fold: unfold</li>
+</ul>
+<hr>
+<p style="text-align:right">2018.9.14 星期五 22:32</p>
+
+<p>在 React 中，你可以创建不同的组件来封装各种你需要的行为。然后还可以根据应用的状态变化只渲染其中的一部分。</p>
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">Greeting</span>(<span class="params">props</span>) </span>{
+  <span class="keyword">const</span> isLoggedIn = props.isLoggedIn;
+  <span class="keyword">if</span> (isLoggedIn) {
+    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">UserGreeting</span> /&gt;</span></span>;
+  }
+  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">GuestGreeting</span> /&gt;</span></span>;
+}
+ReactDOM.render(
+  <span class="comment">// Try changing to isLoggedIn={true}:</span>
+  &lt;Greeting isLoggedIn={<span class="literal">false</span>} /&gt;,
+  <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>)
+);
+</code></pre>
+<h2 id="元素变量"><a href="#元素变量" class="headerlink" title="元素变量"></a>元素变量</h2><p>你可以使用变量来储存元素。它可以帮助你有条件的渲染组件的一部分，而输出的其他部分不会更改。  </p>
+<p>在下面的例子中，我们将要创建一个名为 LoginControl 的有状态的组件。<br>它会根据当前的状态来渲染 <code>&lt;LoginButton /&gt;</code> 或 <code>&lt;LogoutButton&gt;</code>，它也将渲染前面例子中的 <code>&lt;Greeting /&gt;</code>。  </p>
+<p>声明变量并使用 if 语句是条件渲染组件的不错的方式，但有时你也想使用更简洁的语法，在 JSX 中有如下几种方法。   </p>
+<h2 id="与运算符-amp-amp"><a href="#与运算符-amp-amp" class="headerlink" title="与运算符 &amp;&amp;"></a>与运算符 &amp;&amp;</h2><h2 id="三目运算符"><a href="#三目运算符" class="headerlink" title="三目运算符"></a>三目运算符</h2><h2 id="阻止组件渲染"><a href="#阻止组件渲染" class="headerlink" title="阻止组件渲染"></a>阻止组件渲染</h2><p>在极少数情况下，你可能希望隐藏组件，即使它被其他组件渲染。让 render 方法返回 null 而不是它的渲染结果即可实现。  </p>
+<p>在下面的例子中，<WarningBanner /> 根据属性 warn 的值条件渲染。如果 warn 的值是 false，则组件不会渲染：  </p>
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">WarningBanner</span>(<span class="params">props</span>) </span>{
+  <span class="keyword">if</span> (!props.warn) {
+    <span class="keyword">return</span> <span class="literal">null</span>;
+  }
+
+  <span class="keyword">return</span> (
+    &lt;div className=<span class="string">"warning"</span>&gt;
+      Warning!
+    &lt;<span class="regexp">/div&gt;</span>
+<span class="regexp">  );</span>
+<span class="regexp">}</span>
+</code></pre>
+<p>组件的 render 方法返回 null 并不会影响该组件生命周期方法的回调。例如，componentWillUpdate 和 componentDidUpdate 依然可以被调用。</p>
+<p style="text-align:right">22:39</p>

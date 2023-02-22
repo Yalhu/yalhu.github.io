@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Lerna: https://www.lernajs.cnyarn workspace: https://yarn.bootcss.com/docs/workspaces/  2021.5.30 星期日    背景 https://github.com/lerna/lerna  背景MonoLith：一个项目，一个 Git 仓库。multrepo：将项目分化为多个模块，并针对每一个模块单独的开辟一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lerna 学习笔记">
+<meta property="og:url" content="http://yoursite.com/sum/others/lerna 学习笔记/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="Lerna: https://www.lernajs.cnyarn workspace: https://yarn.bootcss.com/docs/workspaces/  2021.5.30 星期日    背景 https://github.com/lerna/lerna  背景MonoLith：一个项目，一个 Git 仓库。multrepo：将项目分化为多个模块，并针对每一个模块单独的开辟一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-09-04T09:01:46.163Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lerna 学习笔记">
+<meta name="twitter:description" content="Lerna: https://www.lernajs.cnyarn workspace: https://yarn.bootcss.com/docs/workspaces/  2021.5.30 星期日    背景 https://github.com/lerna/lerna  背景MonoLith：一个项目，一个 Git 仓库。multrepo：将项目分化为多个模块，并针对每一个模块单独的开辟一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/others/lerna 学习笔记/">
+
+
+
+
+
+  <title>Lerna 学习笔记 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/others/lerna 学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lerna 学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-30T08:00:00+08:00">
+                2021-05-30
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-09-04T17:01:46+08:00">
+                2021-09-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/others/" itemprop="url" rel="index">
+                    <span itemprop="name">others</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/others/lerna 学习笔记/" class="leancloud_visitors" data-flag-title="Lerna 学习笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6,599
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  27
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Lerna: <a href="https://www.lernajs.cn" target="_blank" rel="noopener">https://www.lernajs.cn</a><br>yarn workspace: <a href="https://yarn.bootcss.com/docs/workspaces/" target="_blank" rel="noopener">https://yarn.bootcss.com/docs/workspaces/</a></p>
+<p style="text-align:right"> 2021.5.30 星期日 </p>
+
+
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><!-- lerna: <https://www.lernajs.cn> -->
+<p><a href="https://github.com/lerna/lerna" target="_blank" rel="noopener">https://github.com/lerna/lerna</a></p>
+<!-- 
+lerna管理开发者最关心的几个问题
+
+lerna采用的是monorepo模式，它和multrepo有什么区别?
+lerna是如何实现内部文件软链的？是npm link么？
+lerna在哪些场景下使用会比较优势？
+lerna如何安装依赖，如何更新，如何发布？
+lerna如何提升安装性能？
+lerna如何指定发布版本，如何指定发布子目录？
+————————————————
+版权声明：本文为CSDN博主「after you」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/gwdgwd123/article/details/86715012 -->
+<h1 id="背景-1"><a href="#背景-1" class="headerlink" title="背景"></a>背景</h1><p>MonoLith：一个项目，一个 Git 仓库。<br>multrepo：将项目分化为多个模块，并针对每一个模块单独的开辟一个 reporsitory来进行管理。<br>monorepo：是将所有的模块统一的放在一个主干分支之中管理。<br><!-- Monorepo： 多个项目的代码放在在同一存储库中这种开发策略称 --><br>lerna： Babel开发用来管理多包的工具，基于 Monorepo 理念在工具端的实现。<br>yarn: Facebook 贡献的 Javascript 包管理器。</p>
+<!-- 
+## 关于
+将大型代码仓库分割成多个独立版本化的 软件包（package）对于代码共享来说非常有用。但是，如果某些更改 跨越了多个代码仓库的话将变得很 麻烦 并且难以跟踪，并且， 跨越多个代码仓库的测试将迅速变得非常复杂。
+
+为了解决这些（以及许多其它）问题，某些项目会将 代码仓库分割成多个软件包（package），并将每个软件包存放到独立的代码仓库中。但是，例如 Babel、 React、Angular、Ember、Meteor、Jest 等项目以及许多其他项目则是在 一个代码仓库中包含了多个软件包（package）并进行开发。
+
+Lerna 是一种工具，针对 使用 git 和 npm 管理多软件包代码仓库的工作流程进行优化 -->
+<!-- ## 繁星
+微前端：多个子项目，会依赖到主项目。而且子项目有一些相同的依赖，包括npm包。
+
+我们在开发一个大型项目的时候，通常会遇到如下情况：
+一个业务工程Project1，会同时依赖于lib1、lib2、lib3，其中lib2又依赖于lib1，lib3又依赖于lib1和lib2这种复杂依赖情况。（lib1,lib2,lib3是自己开发维护的npm包，分别发布到私有服务器，我们称为自研依赖库，以区别第三方依赖库）。
+-->
+<h1 id="lerna"><a href="#lerna" class="headerlink" title="lerna"></a>lerna</h1><p>A tool for managing JavaScript projects with multiple packages.</p>
+<blockquote>
+<p>Lerna is a tool that optimizes the workflow around managing multi-package repositories with git and npm.</p>
+</blockquote>
+<p>Lerna 是一个用来优化托管在git\npm上的多package代码库的工作流的一个管理工具,可以让你在主项目下管理多个子项目，从而解决了多个包互相依赖，且发布时需要手动维护多个包的问题。</p>
+<!-- [Lerna 中文教程详解](https://juejin.cn/post/6844903856153821198) -->
+<h2 id="两种工作模式"><a href="#两种工作模式" class="headerlink" title="两种工作模式"></a>两种工作模式</h2><h3 id="Fixed-Locked-mode-default"><a href="#Fixed-Locked-mode-default" class="headerlink" title="Fixed/Locked mode (default)"></a>Fixed/Locked mode (default)</h3><p>固定模式，通过lerna.json的版本进行版本管理。<!-- 当你执行lerna publish命令时， 如果距离上次发布只修改了一个模块，将会更新对应模块的版本到新的版本号，然后你可以只发布修改的库。 --><br><!-- 这种模式也是Babel使用的方式。如果你希望所有的版本一起变更， 可以更新minor版本号，这样会导致所有的模块都更新版本。 --><br>vue,babel都是用这种，在publish的时候,会在lerna.json文件里面”version”: “0.1.5”,依据这个号，进行增加，只选择一次，其他有改动的包自动更新版本号。</p>
+<h3 id="Independent-mode"><a href="#Independent-mode" class="headerlink" title="Independent mode"></a>Independent mode</h3><p>lerna init –independent初始化项目。<br>lerna.json文件里面”version”: “independent”,<br>独立模式允许管理者对每个库单独改变版本号，每次发布的时候，<!-- 你 --><strong>需要为每个改动的库指定版本号</strong>。<br><!-- 这种情况下， lerna.json的版本号不会变化了， 默认为independent。 --></p>
+<p>publish时得到一个提示符，提示每个已更改的包，以指定是补丁、次要更改、主要更改还是自定义更改。<br><!-- > 如果使用了 independent 方式进行版本控制，在 packages 内部的包进行互相依赖时，每次发布之后记得修改下发布后的版本号，否则在本地调试时会出现刚发布的代码不生效问题(这个问题本人亲自遇到过，单独说下) --></p>
+<!-- ### 比较
+固定模式中，packages下的所有包共用一个版本号(version)，会自动将所有的包绑定到一个版本号上(该版本号也就是lerna.json中的version字段)，所以任意一个包发生了更新，这个共用的版本号就会发生改变。
+
+独立模式允许每一个包有一个独立的版本号，在使用lerna publish命令时，可以为每个包单独制定具体的操作，同时可以只更新某一个包的版本号。此种模式时，lerna.json中的version字段指定为independent即可。 -->
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><!-- 如何创建一次 -->lerna工作流:<br>lerna boostrap(依赖包安装) –&gt; 开发模块 –&gt; git commit –&gt; lerna changed(查看包变化) –&gt; lerna publish。<br><!-- 或者version, 项目不需要发包，只提交git仓库并打tag。 -->
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">lerna init --independent</span><br><span class="line">lerna boostrap --hoist</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> packages &amp;&amp; mkdir commPkg pkg1 pkg2</span><br><span class="line"><span class="comment"># 创建新项目，或者现有项目</span></span><br><span class="line"></span><br><span class="line">lerna add commPkg --scope=pkg1</span><br><span class="line">lerna add commPkg --scope=pkg2</span><br><span class="line"></span><br><span class="line">lerna run --parallel serve</span><br><span class="line"><span class="comment">## npm run dev:all</span></span><br><span class="line"><span class="comment">## npm run dev:system</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交 发布</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">'feat: sth.'</span></span><br><span class="line"></span><br><span class="line">lerna changed</span><br><span class="line">lerna publish</span><br></pre></td></tr></table></figure>
+<p>lerna.json 配置项<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.1.3"</span>, <span class="comment">// independent</span></span><br><span class="line">  <span class="attr">"npmClient"</span>: <span class="string">"npm"</span>, <span class="comment">// cnpm;yarn: run all commands with yarn</span></span><br><span class="line">  <span class="attr">"command"</span>: &#123;</span><br><span class="line">    <span class="attr">"publish"</span>: &#123;</span><br><span class="line">      <span class="attr">"ignoreChanges"</span>: [<span class="string">"ignored-file"</span>, <span class="string">"*.md"</span>],</span><br><span class="line">      <span class="attr">"message"</span>: <span class="string">"chore(release): publish"</span>,</span><br><span class="line">      <span class="attr">"registry"</span>: <span class="string">"https://npm.xesv5.com"</span> </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"bootstrap"</span>: &#123;</span><br><span class="line">      <span class="attr">"scope"</span>: [], <span class="comment">// </span></span><br><span class="line">      <span class="attr">"ignore"</span>: <span class="string">"component-*"</span>,</span><br><span class="line">      <span class="attr">"npmClientArgs"</span>: [<span class="string">"--no-package-lock"</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"version"</span>: &#123;</span><br><span class="line">      <span class="attr">"allowBranch"</span>: <span class="string">"master"</span>,</span><br><span class="line">      <span class="attr">"conventionalCommits"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"createRelease"</span>: <span class="string">"github"</span>,</span><br><span class="line">      <span class="attr">"exact"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"message"</span>: <span class="string">"chore(release): %s"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"packages"</span>: [<span class="string">"packages/*"</span>] <span class="comment">// ["projects/*", "src/**"]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>version, 当前库的版本<br>npmClient, 允许指定命令使用的client， 默认是 npm， 可以设置成 yarn 或者cnpm<br>command.publish.ignoreChanges， 可以指定那些目录或者文件的变更不会被publish<br>command.bootstrap.ignore， 指定不受 bootstrap 命令影响的包<br>command.bootstrap.npmClientArgs， 指定默认传给 lerna bootstrap 命令的参数<br>command.bootstrap.scope， 指定那些包会受 lerna bootstrap 命令影响<br>packages， 指定包所在的目录</p>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><blockquote>
+<p>The only restriction is that you can’t directly nest package locations, but this is a restriction shared by “normal” npm packages as well.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// Locating leaf packages under packages/* is considered a &quot;best-practice&quot;</span><br><span class="line">├── lerna.json</span><br><span class="line">├── package.json</span><br><span class="line">|── packages/</span><br><span class="line">    ├── foo-pkg</span><br><span class="line">    │   └── package.json</span><br><span class="line">    ├── bar-pkg</span><br><span class="line">    │   └── package.json</span><br><span class="line">    ├── baz-pkg</span><br><span class="line">    │   └── package.json</span><br><span class="line">    └── qux-pkg</span><br><span class="line">        └── package.json</span><br><span class="line"></span><br><span class="line">// but is not a requirement for using Lerna.</span><br><span class="line">├── lerna.json</span><br><span class="line">├── package.json</span><br><span class="line">├── src/</span><br><span class="line">    ├── admin</span><br><span class="line">    │   ├── my-app</span><br><span class="line">    │   │   └── package.json</span><br><span class="line">    │   ├── stuff</span><br><span class="line">    │   │   └── package.json</span><br><span class="line">    │   └── things</span><br><span class="line">    │       └── package.json</span><br><span class="line">    ├── profile</span><br><span class="line">    │   └── more-things</span><br><span class="line">    │       └── package.json</span><br><span class="line">    ├── property</span><br><span class="line">    │   ├── more-stuff</span><br><span class="line">    │   │   └── package.json</span><br><span class="line">    │   └── other-things</span><br><span class="line">    │       └── package.json</span><br><span class="line">    └── upload</span><br><span class="line">        └── other-stuff</span><br><span class="line">            └── package.json</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="yarn的workspaces模式"><a href="#yarn的workspaces模式" class="headerlink" title="yarn的workspaces模式"></a>yarn的workspaces模式</h3><p><code>lerna bootstrop --hoist</code> 会将 packages 目录下的公共模块包抽离到最顶层。<br>不同版本号只会保留使用最多的版本；不同于顶层的依赖保留在自己的node_modules目录下。<!-- 不需要yarn workspaces --><br>&lt;!– 但是这种方式会有一个问题，不同版本号只会保留使用最多的版本，这种配置不太好，当项目中有些功能需要依赖老版本时，就会出现问题。</p>
+<p>有没有更优雅的方式？再介绍一个命令 yarn workspaces ，可以解决前面说的当不同的项目依赖不同的版本号问题， yarn workspaces会检查每个子项目里面依赖及其版本，如果版本不一致都会保留到自己的 node_modules 中，只有依赖版本号一致的时候才会提升到顶层。注意：这种需要在 lerna.json 中增加配置。</p>
+<p>增加了这个配置后 不再需要 lerna bootstrap 来安装依赖了，可以直接使用 yarn install 进行依赖的安装。</p>
+<blockquote>
+<p>注意：yarn install 无论在顶层运行还是在任意一个子项目运行效果都是可以。<br>–&gt;<br>TODO: yarn workspaces 的必要性。<br>目前最常见的 monorepo 解决方案是 Lerna 和 yarn 的 workspaces 特性，基于lerna和yarn workspace的monorepo工作流。<br>由于yarn和lerna在功能上有较多的重叠,<!-- 我们 -->采用yarn官方推荐的做法,用yarn来处理依赖问题，用lerna来处理发布问题。</p>
+</blockquote>
+<!-- 
+在 MonoRepo项目中我们使用Yarn Workspaces 管理我们的依赖关系。 它没有多个node_modules目录，而是智能地优化了依赖关系的安装，并允许在monorepo中进行依赖关系的交叉链接。
+ -->
+<p>修改顶层 package.json 和 lerna.json<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// # package.json 文件加入</span></span><br><span class="line"> <span class="string">"private"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="string">"workspaces"</span>: [</span><br><span class="line">    <span class="string">"packages/*"</span></span><br><span class="line">  ],</span><br><span class="line"></span><br><span class="line"><span class="comment">// # lerna.json 文件加入</span></span><br><span class="line"><span class="string">"useWorkspaces"</span>: <span class="literal">true</span>,</span><br><span class="line"><span class="string">"npmClient"</span>: <span class="string">"yarn"</span>,</span><br></pre></td></tr></table></figure></p>
+<!-- 
+在看vue-cli3的代码的时候发现，它是用yarn的workspaces特性处理包之间的软连接的，但是同时也用了lerna，而lerna bootstrap也是会处理软连接的。所以想问下这两者有什么区别，vue-cli为什么用yarn的workspaces而不是lerna bootstrap？ 
+
+默认是npm, 而且每个子package都有自己的node_modules，通过这样设置后，只有顶层有一个node_modules
+-->
+<!-- 
+## Common devDependencies
+Most devDependencies can be pulled up to the root of a Lerna repo with lerna link convert
+Hoisting has a few benefits:
+* All packages use the same version of a given dependency
+* Can keep dependencies at the root up-to-date with an automated tool such as [Snyk](https://snyk.io/)
+* Dependency installation time is reduced
+* Less storage is needed
+
+## Git Hosted Dependencies
+Please note that lerna does not perform the actual splitting of git history into the separate read-only repositories. This is the responsibility of the user. (See this comment for implementation details) 
+-->
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><!-- monorepo 和 multrepo 对比
+multrepo：将项目分化为多个模块，并针对每一个模块单独的开辟一个 reporsitory来进行管理。 -->
+<!-- monorepo：是将所有的模块统一的放在一个主干分支之中管理。 -->
+<h3 id="lerna-软链实现"><a href="#lerna-软链实现" class="headerlink" title="lerna 软链实现"></a>lerna 软链实现</h3><!-- (如何动态创建软链) -->
+<h4 id="软链是什么？"><a href="#软链是什么？" class="headerlink" title="软链是什么？"></a>软链是什么？</h4><p>未使用 lerna 之前，想要调试一个本地的 npm 模块包，需要使用 npm link 来进行调试。<br><!-- 但是在 lerna 中可以直接进行模块的引入和调试，这种动态创建软链是如何实现的？ --><br><!-- lerna是如何做到内部模块的软链和管理，对于作者来说是一个很大的困惑？ --><br><!-- 在npm下， -->npm link可以在系统目录下建立包软链。软链可以不需要发布，就可以使用本地包，很好的提高开发效率。<br>lerna 也是软链的方式直接进行模块的引入和调试。<br><!-- 
+阅读源码发现lerna实现软链使用了symlink-dependencies包。最终使用fs.symlink函数实现了文件软链。
+  [Lerna包管理](https://blog.csdn.net/gwdgwd123/article/details/86715012)
+  --></p>
+<h4 id="symlinkSync"><a href="#symlinkSync" class="headerlink" title="symlinkSync"></a>symlinkSync</h4><!-- Node.js 中实现软链 -->
+<p>lerna 同 nodejs中一样，通过 <code>fs.symlinkSync(target,path,type)</code>实现软链。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.symlinkSync(target,path,type)</span><br><span class="line">target &lt;string&gt; | &lt;Buffer&gt; | &lt;URL&gt;   // 目标文件</span><br><span class="line">path &lt;string&gt; | &lt;Buffer&gt; | &lt;URL&gt;  // 创建软链对应的地址</span><br><span class="line">type &lt;string&gt;</span><br></pre></td></tr></table></figure></p>
+<!-- 它会创建名为 path 的链接，该链接指向 target。type 参数仅在 Windows 上可用，在其他平台上则会被忽略。它可以被设置为 'dir'、 'file' 或 'junction'。如果未设置 type 参数，则 Node.js 将会自动检测 target 的类型并使用 'file' 或 'dir'。如果 target 不存在，则将会使用 'file'。Windows 上的连接点要求目标路径是绝对路径。当使用 'junction' 时， target 参数将会自动地标准化为绝对路径。 -->
+<p>源码：utils/create-symlink<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createSymbolicLink</span>(<span class="params">src, dest, type</span>) </span>&#123;</span><br><span class="line">  log.silly(<span class="string">"createSymbolicLink"</span>, [src, dest, type]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> fs</span><br><span class="line">    .lstat(dest)</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> fs.unlink(dest))</span><br><span class="line">    .catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">/* nothing exists at destination */</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> fs.symlink(src, dest, type));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="lerna-应用"><a href="#lerna-应用" class="headerlink" title="lerna 应用"></a>lerna 应用</h2><p>lerna 比较适合的场景：基础框架，组件库，工具类。<br>lerna库自己也是通过这种方式管理的。<br>&lt;!– 1) 从零搭建一个 平台基础组件库项目<br>ui-component 中会存在 h5 组件库，web 组件库，mobile 组件库，以及对应的 doc 项目，三个项目通用的 common 代码。为了方便多个项目的联调，以及分别打包，这里采用了lerna 的管理方式。</p>
+<p>2）框架类项目<br>公司组件库项目。<br>组件库项目类似上面实战的目录结构，但是会在 packages 包下添加很多其他的模块，比如 ui-h5 , example-h5 等</p>
+<p>3）工具类项目<br>举例一些开源项目。<br>babel 使用的就是 lerna 进行管理<br>facebook/jest 使用的是 lerna 进行管理<br>alibaba/rax 使用的是 lerna 进行管理<br>–&gt;<br><a href="https://www.lernajs.cn" target="_blank" rel="noopener">Lerna 用户列表：</a><br><!-- typescript-eslint/typescript-eslint --><br>babel/babel<br>webpack/webpack-cli<br>vuejs/vue-cli<br>facebook/create-react-app<br><!-- ReactTraining/react-router
+dvajs/dva
+reactotron/reactotron
+facebook/jest
+primer/primer
+ElemeFE/mint-ui
+umijs/umi
+pugjs/pug
+lore/lore --></p>
+<h3 id="结合项目"><a href="#结合项目" class="headerlink" title="结合项目"></a>结合项目</h3><!-- v/cli: 脚手架工具。多个项目模版和主脚手架应用之间存在依赖关系。 -->
+<!-- 繁星系统：基于qiankun的微应用。多个子系统依赖，工具，ui一致；需要和主应用一起开发。多人参与。
+活动的项目：vue的多页应用。多个项目，共有一些组件，utlis，基础组件更新可以找到依赖的使用方。
+编辑平台：x-core, x-cli, x-service。互相依赖，比如x-cli的某些更新必须要在特定的x-core中可以使用。 -->
+<p>凡是涉及到两个项目及以上，有依赖关系，都可以用lerna/monorepo来管理。<br>但不是必须的。比如一个后端服务，和一个前端项目，可以用Multi-Repo管理。技术实现不一样，也无强依赖关系。<br>PS：可以考虑git submodule，subtree。</p>
+<p>可以开放讨论，我们现在的哪些项目可以用到lerna。<br><!-- 活动的组件仓库 一种好的方式是抽离组件，npm包使用。 --><br>繁星系统：multrepo vs monorepo 。</p>
+<h2 id="痛点解决"><a href="#痛点解决" class="headerlink" title="痛点解决"></a>痛点解决</h2><p>1) 资源浪费<br>通常情况下，一个项目只有一个主干，多 git repo 的方式，这样 node_module 会出现大量的冗余，比如它们都会安装 React、axios、lodash等包，浪费了大量存储空间。<br><!-- 通常情况下，一个公司的业务项目只有一个主干，多 git repo 的方式，这样 node_module 会出现大量的冗余，比如它们可能都会安装 React、React-dom 等包，浪费了大量存储空间。
+ --><br>2) 调试繁琐<br>很多公共的包通过 npm 安装，想要调试依赖的包时，需要通过 npm link 的方式进行调试。</p>
+<p>3) 资源包升级/模块引用 问题<br>一个项目依赖了多个 npm 包，当某一个子 npm 包代码修改升级时，都要对主干项目包进行升级修改。<br><!-- (这个问题感觉是最烦的，可能一个版本号就要去更新一下代码并发布) --><br><!-- 或者是有依赖关系的项目。 --></p>
+<h3 id="monorepo弊端"><a href="#monorepo弊端" class="headerlink" title="monorepo弊端"></a>monorepo弊端</h3><p>可能需要下载所有模块项目才可以运行。<br>可以看到所有的模块（既是优势也是劣势），包括开发者不需要关注的项目，一个项目会很大。<br>可以通过<!-- git -->权限去控制。<br><!--占据存储空间。 ||  ~~前端项目来说~~，  不是问题。common Dependencies 放在根目录去管理，总的空间反而更少了。<!-- 开发代码相对于宇宙数量级别的npm包 --><br><!-- ## lerna 弊端
+和传统的 git submodules 多仓库方式对比，我觉得 lerna 优势很明显的，
+个人认为唯一不足的是: 由于源码在一起，仓库变更非常常见，存储空间也变得很大，甚至几G，CI 测试运行时间也会变长,虽然如此也是可以接受的。 --></p>
+<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><!-- lerna import/ lerna link： 项目公用模块，utils -->
+<ol>
+<li><ul>
+<li style="list-style: none"><input type="checkbox"> 抽离公共的配置：eslint，babel，webpack-config，oss等。</li>
+</ul>
+</li>
+<li><ul>
+<li style="list-style: none"><input type="checkbox"> 抽离公共的模块：utils，axios，components等。</li>
+</ul>
+</li>
+<li><ul>
+<li style="list-style: none"><input type="checkbox"> ci/cd 优化：<!-- 微前端应用 -->既可以单独打包部署, 也可以一起打包部署在一台服务器。</li>
+</ul>
+</li>
+<li><ul>
+<li style="list-style: none"><input type="checkbox"> Conventional commit 规范。条件验证，version_bump，生成 changelog，生成 git tag。</li>
+</ul>
+</li>
+</ol>
+<h3 id="version-问题"><a href="#version-问题" class="headerlink" title="version 问题"></a>version 问题</h3><!-- 5. - [] 重写version 命令。必须先创建commit，然后又检查版本，提交新的commit。类似publish 的contents 参数
+   $_PS: 是否必要。实现的意义。
+   通过git 和lerna 的冲突影响大小 -->
+<!-- 如果不发包，只提交git 仓库。
+lerna version 可以限制只有master分支的修改做
+lerna version 直接打tag （只能在master，执行version 和 打tag） -->
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><!-- If you prefer some guidance for cli (in case you're about to start using lerna or introducing it to a new team), you might like lerna-wizard. It will lead you through a series of well-defined steps: -->
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cli 引导 lerna-wizard</span></span><br><span class="line">npm i -g lerna-wizard</span><br><span class="line"><span class="comment"># 更新公共依赖 lerna-update-wizard</span></span><br><span class="line">npm install --save-dev lerna-update-wizard</span><br></pre></td></tr></table></figure>
+<!-- 
+./node_modules/.bin/lernaupdate
+npx lernaupdate 
+-->
+<!-- 假设要升级 moduleA 和 moduleB 都依赖的 lodash 版本，不必依次到各子package下升级，可以借助 lerna-update-wizard 这个包来做 -->
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p>目录结构.会创建3份文件（夹）<br>package.json<br>lerna.json<br>packages/</p>
+<h3 id="create"><a href="#create" class="headerlink" title="create"></a>create</h3><p>lerna create &lt; name &gt; [loc]<br>创建一个包，name包名，loc 位置可选</p>
+<h3 id="add"><a href="#add" class="headerlink" title="add"></a>add</h3><p>lerna add [@version] [–dev] [–exact] –scope=module-2</p>
+<h3 id="boostrap"><a href="#boostrap" class="headerlink" title="boostrap"></a>boostrap</h3><!-- 通过lerna的命令lerna bootstrap 将会把代码库进行link。 -->
+<ol>
+<li>为每个包安装依赖</li>
+<li>链接相互依赖的库到具体的目录（symlink）</li>
+<li>执行 npm run prepublish</li>
+<li>执行 npm run prepare<br>&lt;!– </li>
+<li>在每个 package 下面执行 npm install 。</li>
+<li>根据各个 package 下 package.json 里面的 dependencies 和 devDependencies 配置，使用 symlink 在各个 package 的 node_modules 下面建立引用关系。</li>
+<li>在每个 package 下执行 npm run prepublish 。</li>
+<li>在每个 package 下执行 npm run prepare 。 –&gt;</li>
+</ol>
+<p>–hoist<br>将 packages 里重复的依赖提取到最外层的 node_modules 里，同时最外层的 package.json 也不会更新 dependency 信息，<br>所以不建议将公用依赖写到最外层的package.json里，而是重复写到每个子package.json 里，然后用 –hoist 提取出来<br>  <!-- [lerna 使用指南](https://www.jianshu.com/p/db3ee301af47) --></p>
+<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p>lerna list [–json]</p>
+<h3 id="import"><a href="#import" class="headerlink" title="import"></a>import</h3><p>导入本地已经存在的包</p>
+<h3 id="run"><a href="#run" class="headerlink" title="run"></a>run</h3><p>运行所有包里面的有这个script的命令。类比 exec<br>lerna run &lt; script &gt; – [..args]<br><code>lerna run --scope my-component test</code></p>
+<h3 id="exec"><a href="#exec" class="headerlink" title="exec"></a>exec</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ lerna <span class="built_in">exec</span> -- &lt; <span class="built_in">command</span> &gt; [..args] <span class="comment"># runs the command in all packages</span></span><br><span class="line">$ lerna <span class="built_in">exec</span> -- rm -rf ./node_modules</span><br><span class="line">$ lerna <span class="built_in">exec</span> -- protractor conf.js</span><br><span class="line">lerna <span class="built_in">exec</span> --scope my-component -- ls -la</span><br></pre></td></tr></table></figure>
+<p>–concurrency<br>默认命令时并行执行的， 我们可以设置并发量为1<br>lerna exec –concurrency 1 – ls -la</p>
+<p>–scope<br>lerna exec –scope my-component – ls -la</p>
+<p>–stream<br>交叉并行输出结果<br>lerna exec –stream – babel src -d lib</p>
+<p>–parallel</p>
+<p>–no-bail<br>默认lerna exec，如果有命令返回了非0， 则会停止执行， 通过设置这个参数 忽略返回非0， 继续执行其它命令</p>
+<h3 id="link"><a href="#link" class="headerlink" title="link"></a>link</h3><p>项目包建立软链，类似npm link</p>
+<h3 id="clean"><a href="#clean" class="headerlink" title="clean"></a>clean</h3><p>删除所有包的node_modules目录</p>
+<blockquote>
+<p>lerna clean 不会删除项目最外层的根 node_modules</p>
+</blockquote>
+<h3 id="changed"><a href="#changed" class="headerlink" title="changed"></a>changed</h3><p>列出下次发版lerna publish 要更新的包。<br><!-- 显示自上次relase tag以来有修改的包， 选项通 list --></p>
+<p>原理： 需要先git add,git commit 提交。 然后内部会运行git diff –name-only v版本号，搜集改动的包，就是下次要发布的。<!-- 并不是网上人说的所有包都是同一个版全发布。 --></p>
+<h3 id="lerna-diff"><a href="#lerna-diff" class="headerlink" title="lerna diff"></a>lerna diff</h3><p>显示自上次release tag以来有修改的包的差异， 执行 git diff</p>
+<h3 id="publish"><a href="#publish" class="headerlink" title="publish"></a>publish</h3><p>发布最新改动的库</p>
+<ol>
+<li>运行lerna updated来决定哪一个包需要被publish</li>
+<li>如果有必要，将会更新lerna.json中的version</li>
+<li>将所有更新过的的包中的package.json的version字段更新</li>
+<li>将所有更新过的包中的依赖更新</li>
+<li>为新版本创建一个git commit或tag</li>
+<li>将包publish到npm上</li>
+</ol>
+<!-- 会打tag，上传git,上传npm。 如果你的包名是带scope的例如："name": "@gp0320/gpwebpack", 那需要在packages.json添加`publishConfig.access = public` -->
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 某些发布的情况，开发者需要指定安装包版本，或者指定子目录发布。</span></span><br><span class="line">lerna publish --dist-tag next   <span class="comment">#// 指定当前版本号</span></span><br><span class="line">lerna publish --contents dist   <span class="comment">#// 指定dist目录为发布目录</span></span><br></pre></td></tr></table></figure>
+<!-- 同时，该命令也有许多的参数，例如 -->
+<p>–skip-git 将不会创建git commit或tag<br>–skip-npm将不会把包publish到npm上。</p>
+<p>–canary<br>可以用来独立发布每个commit，不打tag</p>
+<p>–npm-client<br>默认npm</p>
+<p>–npm-tag<br>为发布的版本添加 dist-tag</p>
+<p>–no-verify-access<br>不进行用户发布的权限校验</p>
+<p>–registry <url><br>指定registry</url></p>
+<p>–yes<br>用于ci自动输入 yes</p>
+<!-- --temp-tag
+没啥用 -->
+<h3 id="version"><a href="#version" class="headerlink" title="version"></a>version</h3><p>识别出修改的包 –&gt; 创建新的版本号 –&gt; 修改package.json –&gt; 提交修改，打上版本的tag –&gt; 推送到git上。</p>
+<p>–allow-branch <glob><br>设置git上的哪些分支允许执行 lerna version 命令， 也可以在lerna.json中设置</glob></p>
+<p>–amend<br>把version的修改都合并到前一个commit， 而且不会推送哦。</p>
+<p>–message <msg><br>指定提交信息， 而不是自动生成的log<br>也可以在lerna.json配置</msg></p>
+<p>–conventional-commits<br>使用了这个选项， lerna会收集日志， 自动生成 CHANGELOG</p>
+<!-- 
+--commit-hooks
+执行对应的commit-hook， 默认true
+
+--changelog-preset
+修改changelog生成插件， 默认是 angular
+
+--exact
+??? 没试出什么效果
+
+--force-publish
+强制更改所有包的版本， 不管有没有修改 
+
+--git-remote <name>
+把修改推送到其它的源， 而不是origin
+-->
+<p>–ignore-changes<br>忽略检查某些文件的修改<br>lerna version –ignore-changes ‘<strong>/*.md’ ‘</strong>/<strong>tests</strong>/**’<br>也可以在lerna.json中配置</p>
+<p>–git-tag-version<br>添加git的tag， 默认true</p>
+<p>–no-git-tag-version       Do not commit or tag version changes.<br><!-- --no-private Do not version private packages. --><br><!-- --no-granular-pathspec     Do not stage changes file-by-file, but globally.              [布尔] --></p>
+<p>使用​–no-push​会把tag推送一起禁止掉，好在禁止推送主分支只会报错，但不影响整个流程</p>
+<!-- 
+# 参考
+[现代前端工程化-基于 Monorepo 的 lerna 详解(从原理到实战)](https://blog.csdn.net/xgangzai/article/details/115423425)
+[现代前端工程化-彻底搞懂基于 Monorepo 的 lerna 模块(从原理到实战)](https://jishuin.proginn.com/p/763bfbd57cc5)
+$_PS: 内容大致相同。简介，原理，应用，优劣势。
+[Lerna 中文教程详解](https://juejin.cn/post/6844903856153821198)
+$_PS: 英文文档。转为中文文档。
+
+-->
+<!-- 
+Storybook：辅助UI组件开发的工具。
+Storybook是一个辅助UI组件开发的工具。通过story创建独立的组件，让每个组件开发都有一个独立的开发调试环境。 Storybook的运行不依赖于项目，开发人员不用担心由于开发环境、依赖问题导致不能开发控件。 他是通过 iframe 的形式嵌入组件网页。 -->
+<!-- 
+[lerna的基础使用](https://www.jianshu.com/p/8b7e6025354b)
+$_PS: 每个指令的参数。
+
+
+ -->
+<!-- # 题外话 -->
+<!-- 上周比较忙，周六加班，本来周日也考虑加班。
+周日抽空开始整理了一下。
+之前也想分享活动开发相关。
+包括快速开始，脚手架，开发人员的思考/自觉等。
+ -->
+<!-- 最近比较忙，周日简单整理了一下。
+讲的不好的地方，提出来改进。
+
+项目最开始，考虑当作一个简单的后台项系统去开发，用路由去实现，不考虑拆分项目。
+多人倾向于微前端。人力有了支持，技术应用不难。项目快速跑起来。
+对于个人技术积累也是一个机会。 -->
+<h1 id="yarn-workspace"><a href="#yarn-workspace" class="headerlink" title="yarn workspace"></a>yarn workspace</h1><p>yarn workspace: <a href="https://yarn.bootcss.com/docs/workspaces/" target="_blank" rel="noopener">https://yarn.bootcss.com/docs/workspaces/</a><br><!-- yarn workspace: <https://yarnpkg.com/lang/en/docs/workspaces/> --></p>
+<blockquote>
+<p>It allows you to setup multiple packages in such a way that you only need to run yarn install once to install all of them in a single pass. 。</p>
+</blockquote>
+<p>简而言之，workspace能帮助你更好的管理有多个子project的repo。你既可以在每个子project下使用独立的package.json管理你的依赖，又可以享受一条yarn命令安装或者升级所有依赖的都便利性。</p>
+<!-- \#0 [封装Vue组件库（四）、Yarn workspaces 和 lerna](https://blog.csdn.net/u012961419/article/details/108704826) -->
+<p>npm 不支持 workspaces，所以之前安装依赖都要使用 yarn。<br>monorepo的项目结构，一般都会配合 yarn workspace 来管理包的依赖。</p>
+<!-- 
+[Yarn Workspace 使用指南](https://www.jianshu.com/p/990afa30b6fe)
+没有使用 Yarn Workspace 前，需要分别在 project1 和 project2 目录下分别执行 yarn|npm install 来安装依赖包到各自的 node_modules 目录下。或者使用 yarn|npm upgrade 来升级依赖的包。
+
+如果 project2 依赖 project1，而 project1 并没有发布到 npm 仓库，只是一个本地项目，有两种方式配置依赖：
+1) 使用相对路径（如 file: 协议）在 project2 中指定 project1 的依赖。
+1) 使用 yarn|npm link 来配置依赖。
+-->
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"workspaces"</span>: [</span><br><span class="line">    <span class="string">"packages/*"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根目录执行 yarn install<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rm -r project1/node_modules</span><br><span class="line"></span><br><span class="line">yarn install</span><br><span class="line"></span><br><span class="line">yarn workspace &lt;workspace_name&gt; &lt;<span class="built_in">command</span>&gt;</span><br><span class="line">yarn workspaces &lt;<span class="built_in">command</span>&gt;</span><br><span class="line">yarn workspaces info [--json]</span><br></pre></td></tr></table></figure></p>
+<p>使用 yarn workspaces 后无法直接 yarn add &lt;pkg_name&gt; 或 yarn remove &lt;pkg_name&gt;，需要指定工作区。</p>
+<ul>
+<li>安装根工作区（workspace root）的依赖</li>
+<li>给指定的工作区（包）安装单独的依赖</li>
+<li>给所有工作区安装依赖</li>
+<li>删除依赖</li>
+<li>执行指定工作区的 scripts 命令<!-- End: #0 -->
+</li>
+</ul>
+<!-- \#3 [使用Yarn Workspace管理多project repo](https://hateonion.me/posts/b2b0/)
+## workspace能帮你做什么
+简化你的工作流: 一条在根目录运行yarn install 或updage 或指令
+降低包安装和包升级的成本
+
+你会发现整个repo只生成了一份yarn.lock，绝大多数的依赖包都被提升到了根目录下的node_modules之内。各个子project的node_modules里面不会重复存在依赖，只会有针对根目录下cross-env的引用。不仅如此，你会发现，对于repo内部的依赖关系（比如workspace-b依赖于workspace-a），yarn也能很好的进行管理。
+
+## 一些使用yarn workspace的小tips
+尽可能多的保证子project的包版本一致，可能的情况下，不要让某个子project依赖于某个特定版本的包。在这种情况下，yarn会尽可能的帮你做hoist，减少安装成本。同时，当你想要升级这个包的时候，一切也会变得非常方便。
+对于一些包，由于没法做hoist（比如react-native），我们可以使用nohoist属性进行声明。
+如果在上面的例子中，如果workspace-b中依赖的workspace-a的版本并不是1.0.0，那么yarn会从github而不是从你本地去安装workspace-a这个依赖。
+## workspace有哪些不足和限制？
+yarn workspace并没有像lerna那样封装大量的高层API，整个workspace整体上还是依赖于整个yarn命令体系。
+workspace不能嵌套（只能有一个根workspace）
+workspace采用的是向上遍历，所以workspace并不能识别根workspace之外的依赖。 
+ End: #3 -->
+<!-- \#4 [yarn workspaces 文档](https://yarn.bootcss.com/docs/cli/workspaces/) -->
+<h2 id="与Lerna相比"><a href="#与Lerna相比" class="headerlink" title="与Lerna相比"></a>与Lerna相比</h2><!-- \# [ Workspaces（工作区）](https://cloud.tencent.com/developer/section/1477773) -->
+<p>Yarn的工作区是Lerna的工具可以（和做！）使用的底层原语。<br>他们绝不会尝试支持Lerna提供的高级功能，但通过实施Yarn内部的解决方案和链接步骤的核心逻辑，我们希望能够启用新的用法并提高性能。</p>
+<h3 id="提示与技巧"><a href="#提示与技巧" class="headerlink" title="提示与技巧"></a>提示与技巧</h3><p>workspaces字段是包含每个工作区的路径的数组。由于追踪每个路径可能很乏味，因此该字段也接受glob模式！例如，Babel通过一个packages/*指令来引用它们的所有包。<br>工作空间足够稳定，可用于大规模应用程序，不应该改变常规安装的工作方式，但如果您认为他们正在破坏某些东西，可以通过将以下行添加到Yarnrc文件中来禁用它们：工作区 - 实验错误</p>
+<h3 id="制和注意事项"><a href="#制和注意事项" class="headerlink" title="制和注意事项"></a>制和注意事项</h3><ul>
+<li>程序包布局在您的工作空间和用户将得到的内容之间会有所不同（工作空间依赖关系将被升高到文件系统层次结构中）。对这种布局做出假设已经很危险，因为提升过程不规范，理论上这里没有什么新的东西。</li>
+<li>在上面的例子中，如果workspace-b依赖于workspace-apackage.json中引用的不同版本，依赖将从Github安装，而不是从本地文件系统链接。这是因为一些软件包实际上需要使用以前的版本才能构建新的版本（Babel就是其中之一）。</li>
+<li>根据文件夹层次结构，工作空间必须是工作空间根的子项。您不能也不能引用位于此文件系统层次结构之外的工作空间。</li>
+<li>目前不支持嵌套工作区。<!-- End: #4 -->
+</li>
+</ul>
+<h1 id="lerna-yarn-workspace"><a href="#lerna-yarn-workspace" class="headerlink" title="lerna+yarn workspace"></a>lerna+yarn workspace</h1><h2 id="日志信息"><a href="#日志信息" class="headerlink" title="日志信息"></a>日志信息</h2><!-- 
+\# [lerna+yarn workspace+monorepo项目的最佳实践](https://www.cnblogs.com/cczlovexw/p/14621939.html)
+3.2 优雅的提交
+3.2.1 commitizen && cz-lerna-changelog
+commitizen 是用来格式化 git commit message 的工具，它提供了一种问询式的方式去获取所需的提交信息。
+
+cz-lerna-changelog 是专门为 Lerna 项目量身定制的提交规范，在问询的过程，会有类似影响哪些 package 的选择。如下：
+
+3.2.2 commitlint && husky
+3.2.3 eslint && lint-staged
+
+
+3.3 发布自动生成日志
+ -->
+<!-- 
+[结合 lerna 和 yarn workspace 管理多项目工作流](https://segmentfault.com/a/1190000025173538)
+$_PS: 参考了 下面 [基于lerna和yarn workspace的monorepo工作流]
+cz-conventional-changelog 
+> 用于使 commitizen 支持Angular的Commit message格式
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"config"</span>: &#123;</span><br><span class="line">        <span class="attr">"commitizen"</span>: &#123;</span><br><span class="line">            <span class="attr">"path"</span>: <span class="string">"./node_modules/cz-conventional-changelog"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>–&gt;<br>conventional-changelog-cli<br>根据commit message生成 changelog.md 文件 <!--（这里功能和 lerna version --conventional-commits 生成changelog 有部分重叠 ，下文会详细区分 -->）。<br><code>conventional-changelog -p angular -i CHANGELOG.md -s -r 2</code><p></p>
+<blockquote>
+<p>注意：这里生成的是整个仓库的 changelog ，<strong>而非每个 package生成 changelog</strong></p>
+</blockquote>
+<!-- \#1 [工程化:基于yarn和lerna的workspace工作流](https://blog.staleclosure.com/monorepo-yarn-workspace/)
+[基于lerna和yarn workspace的monorepo工作流](https://zhuanlan.zhihu.com/p/71385053)
+$_PS: 详细说了工作流。 
+-->
+<h2 id="lerna-版本升级"><a href="#lerna-版本升级" class="headerlink" title="lerna 版本升级"></a>lerna 版本升级</h2><h3 id="lerna-version"><a href="#lerna-version" class="headerlink" title="lerna version"></a>lerna version</h3><p>lerna version的作用是进行version bump,支持手动和自动两种模式</p>
+<h4 id="只发布某个package"><a href="#只发布某个package" class="headerlink" title="只发布某个package"></a>只发布某个package</h4><p>不支持，lerna官方不支持仅发布某个package，见 <a href="https://github.com/lerna/lerna/issues/1691，如果需要，只能自己手动的进入package进行发布，这样lerna自带的各种功能就需要手动完成且可能和lerna的功能相互冲突" target="_blank" rel="noopener">https://github.com/lerna/lerna/issues/1691，如果需要，只能自己手动的进入package进行发布，这样lerna自带的各种功能就需要手动完成且可能和lerna的功能相互冲突</a></p>
+<p>由于lerna会自动的监测git提交记录里是否包含指定package的文件修改记录，来确定版本更新，这要求设置好合理的ignore规则（否则会造成频繁的，无意义的某个版本更新），好处是其可以自动的帮助package之间更新版本</p>
+<p>例如如果ui-form依赖了ui-button，如果ui-button发生了版本变动，会自动的将ui-form的对ui-button版本依赖更新为ui-button的最新版本。 如果ui-form发生了版本变动，对ui-button并不会造成影响。</p>
+<h4 id="自动选择发布版本"><a href="#自动选择发布版本" class="headerlink" title="自动选择发布版本"></a>自动选择发布版本</h4><p>使用–conventional-commits 参数会自动的根据conventional commit规范和git commit message记录帮忙确定更新的版本号。</p>
+<h4 id="手动选择发布版本"><a href="#手动选择发布版本" class="headerlink" title="手动选择发布版本"></a>手动选择发布版本</h4><p>如果git commit message发现不太靠谱，且无法修改的话，那么需要手动的确认新版本，version默认是手动选择版本</p>
+<blockquote>
+<p>version成功后会自动的推送到主分支，我一般是关闭主分支的推送权限的，这样就会导致推送失败，但是暂时没找到如何禁止推送主分支的好办法，使用​–no-push​会把tag推送一起禁止掉，好在禁止推送主分支只会报错，但不影响整个流程<br>lerna version自动生成的提交格式为“ publish xxx”,并不符合conventional-commit规范，因此需要加以修改，我们通过message参数可以修改自动生成的提交记录<br><!-- End: #1 --></p>
+</blockquote>
+<!-- 
+其它：
+[使用Lerna & Yarn Workspaces 构建mono-repo项目](https://zhuanlan.zhihu.com/p/108118011)
+$_PS: 线编辑器 的一个实例，集成了测试Jest。MonoLith，Multi-Repo，Mono-Repo。 
+[基于 Yarn WorkSpace + Lerna + OrangeCI 搭建 Typescript Monorepo 项目实践](https://cloud.tencent.com/developer/article/1659352) -->
+<!-- 
+# 其他
+git的子工程管理subtree和submodule了解下，将公用库A作为独立的子工程导入项目B中，同时在A里的修改本身在你项目B的git管理目录下，跟现行的操作方式没有区别，当完成一个版本的开发后如果公共库A里有修改的内容，通过git subtree 或 submodule将该修改推到远程公共库A的git仓库，这样别的项目也能直接使用了。建议使用git subtree，新增的命令和管理方式都比较简单，学习和维护成本低。
+[git subtree教程](https://segmentfault.com/a/1190000012002151)
+ -->
+<h1 id="Git多项目管理"><a href="#Git多项目管理" class="headerlink" title="Git多项目管理"></a>Git多项目管理</h1><!-- \#1 [Git多项目管理](https://www.jianshu.com/p/284ded3d191b) -->
+<p>基于Git有多种方式来解决这个问题：Git Submodule，Git Subtree，GitSlave和Google Repo。</p>
+<!-- 
+\#_-_ [用git管理多项目引用的大项目最好的方式是什么呢？](https://www.zhihu.com/question/37573837)
+在中心服务器上将所有项目综合起来拆分成不同的git repo（假设有100个），用REPO（管理git的工具）为每个项目配置一套code。
+
+爱的 Kevin，你这个问题是依赖的问题不是版本控制的问题。说到底只需要在新项目checkout出来的时候，让他可以随时引用多个第三方类库呗？用依赖管理工具啊，Git 只解决区分版本，不解决依赖和重建依赖的问题，这个东西应该用 NuGet 啊！
+
+Git的submodule功能设计成这样是有原因的。假设项目A和项目B都引用了项目C，但是项目A引用的是版本1.0的项目C，而项目B引用的是2.0版本，那么项目C的代码就必须分两份存放，否则就会发生问题。根结在于，submodule引用的不是“项目C”，而是“具体某一版本的项目C”。如果你需要这种精确到版本的引用管理，就得接受这种设定。如果你不需要，当然你也可以不用Git，手动管理引用。
+
+我一般选择自己搭建私有maven仓库，然后依赖到每个具体工程。 
+End -->
+<h2 id="Git-Submodule"><a href="#Git-Submodule" class="headerlink" title="Git Submodule"></a>Git Submodule</h2><p>Git 1.5.3中加入了git submodule这个命令。<br>Git子模块允许你将一个Git仓库作为另一个Git仓库的子目录。它能让你将另一个仓库克隆到自己的项目中，同时还保持独立的提交。</p>
+<p>默认情况下，子模块会将子项目放在一个与仓库同名的目录中。我们也可以通过在命令结尾添加一个path来指定放到其他地方。</p>
+<p>不过还有更简单一点的方式。如果给git clone命令传递–recursive选项，它就会自动初始化并更新仓库中的每一个子模块。<br>如果你不想在子模块目录中手动抓取与合并，那么还有种更容易的方式。运行git submodule update –remote，Git将会进入子模块然后抓取并更新。</p>
+<p>如果在此时提交，那么你会将父项目锁定为子模块master分支最新的代码。<br>提交子模块的改动最简单的选项是进入每一个子模块中然后手动推送到远程仓库。然而git push命令接受值为on-demand的–recurse-submodules参数，它会尝试为你这样做。<br>遍历子模块.Git提供了foreach子模块命令。<code>$ git submodule foreach &#39;git checkout -b featureA&#39;</code></p>
+<h3 id="子模块的问题"><a href="#子模块的问题" class="headerlink" title="子模块的问题"></a>子模块的问题</h3><!-- 然而使用子模块还是有一些小问题： -->
+<p>1) 在父项目中git pull并不会自动更新子模块，需要调用git submodule update来更新子模块信息。如果忘记调用git submodule update，那么你极有可能再次把旧的子模块依赖信息提交上去。<br>2) 调用git submodule update并不会将子模块切换到任何分支，默认情况下子模块处于“游离的 HEAD”的状态。如果此时我们改动子模块而没有检出一个工作分支，那调用git submodule update时你所做的任何改动都会丢失。<br>3) Git子模块在父项目中维护所有依赖的子模块版本，当包含大量子模块时，父项目的更新将很容发生冲突，并且父项目的维护历史与所有子模块的维护历史相互交织，维护成本也会比较高。</p>
+<h2 id="Git-Subtree"><a href="#Git-Subtree" class="headerlink" title="Git Subtree"></a>Git Subtree</h2><p>Git在1.8.0版本引入了git subtree这个命令，<br>它使用Git的subtree merge策略来得到类似git submodule的结果。但本质上，它是将子项目的代码全部merge进父项目。<br>使用git subtree，你不仅可以将其他项目合并为父项目的一个子目录，而且可以从父项目提取某个子目录的全部历史作为一个单独的项目。</p>
+<h3 id="相比Git子模块"><a href="#相比Git子模块" class="headerlink" title="相比Git子模块"></a>相比Git子模块</h3><p>管理和更新流程比较方便<br>不再有.gitmodules文件<br>克隆仓库不再需要init和update等操作<br>删除时不再像git submodule那样费劲</p>
+<h2 id="GitSlave"><a href="#GitSlave" class="headerlink" title="GitSlave"></a>GitSlave</h2><p>GitSlave用于管理相关的一个父项目和多个Slave项目。<br>通常，它会将你要执行的Git常规操作顺序在父项目和Slave项目中执行一遍，所以当你执行pull操作，项目中的所有仓库会顺序执行pull操作。<br>GitSlave是对Git命令的封装，是被设计用于简化多仓库的Git操作，而不是要取代Git。<br><!-- 我们还是以Hexo博客项目和Hacker主题项目为例来说明GitSlave的用法。 --></p>
+<h3 id="GitSlave的缺点"><a href="#GitSlave的缺点" class="headerlink" title="GitSlave的缺点"></a>GitSlave的缺点</h3><p>GitSlave被设计用于包含多个Slave仓库的中等大小项目的开发，其在父项目的.gitslave文件中记录所需子项目的信息，并在所有仓库中顺序执行相应Git操作的设计原理，注定其使用场景有一定局限性。</p>
+<p>GitSlave并不会记录所需子项目的版本，所以其永远只是追踪子项目的最新版本，无法满足父项目基于某一特定版本子项目的场景，而此种场景在开发中却是极为常见。<br>GitSlave在父项目的.gitslave文件中记录相关子项目的信息，使得父项目本身的提交历史与子项目的增删历史相互交织在一起，一旦子项目增多，父项目的提交历史将变得混乱。</p>
+<h2 id="Google-Repo"><a href="#Google-Repo" class="headerlink" title="Google Repo"></a>Google Repo</h2><!-- 到此，我们可以总结出，一 -->个优秀的基于Git的多项目管理系统设计需要满足如下2点：<br>记录子项目的远程地址、所需版本和对应的本地路径。<br>这个记录文件应该单独维护，而不应该污染任何一个仓库，因为它与这些仓库本身毫无关系。<br>Google Repo正是完美匹配这2个设计要点的Git多项目管理系统。<br><br>Repo是Google为了有效组织Android的源代码而开发的一个基于Git的管理工具。<br><br><!-- End: #1 -->
+<h2 id="subtree-和-submodule-切换历程"><a href="#subtree-和-submodule-切换历程" class="headerlink" title="subtree 和 submodule 切换历程"></a>subtree 和 submodule 切换历程</h2><!-- \# [使用git subtree & submodule管理多个子项目](https://www.jianshu.com/p/84e34ac318e4) -->
+<p>第一阶段：gulp等自动化工具手动同步<br>第二阶段：使用Git subtree<br><!-- 第二阶段最终选择了subtree，一是官网已经不再推荐使用submodule了，二是subtree实在是太方便易用了。（后来和同事商量了下发现submodule还是有使用价值的，在第三阶段中我们再分析。） --></p>
+<p>第三阶段：使用Git submodule<br>1.在新员工加入团队时：一次性clone项目，submodule可以一起clone出来，只需添加–recursive递归参数就可以了，而subtree并不行，只能手动添加，不过可以借助神器Yeoman(一个自动生成项目脚手架的工具)来实现。<br>2.subtree适合像配置文件这种需要跟着项目走的情况。<br>3.submodule适合在开发阶段时引用，到了生产环境会被打包到指定文件内，而本身并不用跟着版本走的情况。</p>
+<h1 id="git-subtree"><a href="#git-subtree" class="headerlink" title="git subtree"></a>git subtree</h1><!-- \#1 [git subtree教程](https://segmentfault.com/a/1190000012002151) -->
+<!-- 关于子仓库或者说是仓库共用，git官方推荐的工具是git subtree。 我自己也用了一段时间的git subtree，感觉比git submodule好用，但是也有一些缺点，在可接受的范围内。
+所以对于仓库共用，在git subtree 与 git submodule之中选择的话，我推荐git subtree。 -->
+<p>使用git subtree 有以下几个原因：</p>
+<p>旧版本的git也支持(最老版本可以到 v1.5.2).<br>git subtree与git submodule不同，它不增加任何像.gitmodule这样的新的元数据文件.<br>git subtree对于项目中的其他成员透明，意味着可以不知道git subtree的存在.<br>当然，git subtree也有它的缺点，但是这些缺点还在可以接受的范围内：</p>
+<p>必须学习新的指令(如：git subtree).<br>子仓库的更新与推送指令相对复杂。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git subtree add   --prefix=&lt;prefix&gt; &lt;commit&gt;</span><br><span class="line">git subtree add   --prefix=&lt;prefix&gt; &lt;repository&gt; &lt;ref&gt;</span><br><span class="line">git subtree pull  --prefix=&lt;prefix&gt; &lt;repository&gt; &lt;ref&gt;</span><br><span class="line">git subtree push  --prefix=&lt;prefix&gt; &lt;repository&gt; &lt;ref&gt;</span><br><span class="line">git subtree merge --prefix=&lt;prefix&gt; &lt;commit&gt;</span><br><span class="line">git subtree split --prefix=&lt;prefix&gt; [OPTIONS] [&lt;commit&gt;]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加</span></span><br><span class="line">git subtree add --prefix=sub/libpng https://github.com/<span class="built_in">test</span>/libpng.git master --squash</span><br></pre></td></tr></table></figure></p>
+<p>(–squash参数表示不拉取历史信息，而只生成一条commit信息。)</p>
+<!-- 执行git status可以看到提示新增两条commit： -->
+<!-- git log查看详细修改： -->
+<!-- 执行git push把修改推送到远端photoshop仓库，现在本地仓库与远端仓库的目录结构为： -->
+<p>注意，现在的photoshop仓库对于其他项目人员来说，可以不需要知道libpng是一个子仓库。什么意思呢？<br>当你git clone或者git pull的时候，你拉取到的是整个photoshop(包括libpng在内，libpng就相当于photoshop里的一个普通目录)；当你修改了libpng里的内容后执行git push，你将会把修改push到photoshop上。<br>也就是说photoshop仓库下的libpng与其他文件无异。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从源仓库拉取更新</span></span><br><span class="line">git subtree pull --prefix=sub/libpng https://github.com/<span class="built_in">test</span>/libpng.git master --squash</span><br><span class="line"><span class="comment"># 推送修改到源仓库</span></span><br><span class="line">git subtree push --prefix=sub/libpng https://github.com/<span class="built_in">test</span>/libpng.git master</span><br><span class="line"><span class="comment"># 简化git subtree命令</span></span><br><span class="line"><span class="comment"># 我们已经知道了git subtree 的命令的基本用法，但是上述几个命令还是显得有点复杂，特别是子仓库的源仓库地址，特别不方便记忆。</span></span><br><span class="line"><span class="comment"># 这里我们把子仓库的地址作为一个remote，方便记忆：</span></span><br><span class="line">git remote add -f libpng https://github.com/<span class="built_in">test</span>/libpng.git</span><br><span class="line"><span class="comment"># 然后可以这样来使用git subtree命令：</span></span><br><span class="line">git subtree add --prefix=sub/libpng libpng master --squash</span><br><span class="line">git subtree pull --prefix=sub/libpng libpng master --squash</span><br><span class="line">git subtree push --prefix=sub/libpng libpng master</span><br></pre></td></tr></table></figure>
+<!-- End: #1 -->
+<h1 id="Git-Repo"><a href="#Git-Repo" class="headerlink" title="Git-Repo"></a>Git-Repo</h1><p>文档： <a href="https://gerrit.googlesource.com/git-repo/" target="_blank" rel="noopener">https://gerrit.googlesource.com/git-repo/</a></p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><!-- \# [Google Git-Repo 多仓库项目管理](https://zhuanlan.zhihu.com/p/50564255) -->
+<p>除了 git-repo 外的几个要么 子模块需要手动指定本地仓库路径、要么 主仓库与子仓库会产生污染 且操作不够简便化。所以最终就采用了 Google 的 Git-repo（Repo）</p>
+<p>Repo 是对 Git 构成补充的多（可以巨多的那种）代码库管理工具，简单说就是使用 Python 在 Git 基础上开发的一系列脚本命令。<!-- 当前整个 Android 项目（AOSP）就是通过 repo 来管理，最新版本的仓库大约 七百多个，可见 Repo 在多仓库的代码管理和版本管理上是可以支撑现有我们的项目的。接下来描述分析下迁移使用 Repo 的过程和一些解释。 --></p>
+<h3 id="Manifest"><a href="#Manifest" class="headerlink" title="Manifest"></a>Manifest</h3><p>Repo 管理的核心就在于 Manifest，每个采用 repo 管理的复杂多仓库项目都需要一个对应的 manifest 仓库，如 AOSP 的 manifest ，此仓库用来存储所有子仓库的配置信息，repo 也是读取此仓库的配置文件来进行管理操作。里面的配置就是 xml 定义的结构，一般有两个主要的配置：子仓库用到的仓库地址（remote）、子仓库详细配置信息（project）。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">remote</span>  <span class="attr">name</span>=<span class="string">"remote1"</span></span></span><br><span class="line"><span class="tag">           <span class="attr">alias</span>=<span class="string">"origin"</span></span></span><br><span class="line"><span class="tag">           <span class="attr">fetch</span>=<span class="string">".."</span></span></span><br><span class="line"><span class="tag">           <span class="attr">review</span>=<span class="string">"https://android-review.googlesource.com/"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">remote</span>  <span class="attr">name</span>=<span class="string">"remote2"</span></span></span><br><span class="line"><span class="tag">           <span class="attr">alias</span>=<span class="string">"origin"</span></span></span><br><span class="line"><span class="tag">           <span class="attr">fetch</span>=<span class="string">"git@github.com:group2/"</span></span></span><br><span class="line"><span class="tag">           <span class="attr">review</span>=<span class="string">"https://android-review2.googlesource.com/"</span> /&gt;</span>         </span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">default</span> <span class="attr">revision</span>=<span class="string">"master"</span></span></span><br><span class="line"><span class="tag">           <span class="attr">remote</span>=<span class="string">"remote1"</span></span></span><br><span class="line"><span class="tag">           <span class="attr">sync-j</span>=<span class="string">"4"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">project</span> <span class="attr">path</span>=<span class="string">"build/make"</span> <span class="attr">name</span>=<span class="string">"platform/build"</span> <span class="attr">groups</span>=<span class="string">"pdk"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">copyfile</span> <span class="attr">src</span>=<span class="string">"core/root.mk"</span> <span class="attr">dest</span>=<span class="string">"Makefile"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">linkfile</span> <span class="attr">src</span>=<span class="string">"CleanSpec.mk"</span> <span class="attr">dest</span>=<span class="string">"build/CleanSpec.mk"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">project</span> <span class="attr">path</span>=<span class="string">"build/blueprint"</span> <span class="attr">name</span>=<span class="string">"platform/build/blueprint"</span> <span class="attr">groups</span>=<span class="string">"pdk,tradefed"</span> <span class="attr">revision</span>=<span class="string">"other_branch"</span> <span class="attr">remote</span>=<span class="string">"remote1"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>remote: 远程仓库地址配置，可以多个。<br>project</p>
+<p>子项目仓库配置，可以多个。<br>copyfile</p>
+<p>project 的子节点属性.</p>
+<h3 id="Repo-命令"><a href="#Repo-命令" class="headerlink" title="Repo 命令"></a>Repo 命令</h3><p><code>repo init -u yout_manifest_git_url</code> 初始化了你的项目 repo 工作区后，repo sync，你就可以进入正常的特性开发状态了。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">repo init -u your_project_git_url</span><br><span class="line">repo sync</span><br><span class="line">repo start</span><br></pre></td></tr></table></figure>
+<p>Jenkins</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/server/node服务端开发框架/" rel="next" title="Node服务端开发框架">
+                <i class="fa fa-chevron-left"></i> Node服务端开发框架
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/jsplus/后台管理页面模版/" rel="prev" title="后台管理页面模版">
+                后台管理页面模版 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#背景-1"><span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lerna"><span class="nav-text">lerna</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#两种工作模式"><span class="nav-text">两种工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fixed-Locked-mode-default"><span class="nav-text">Fixed/Locked mode (default)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Independent-mode"><span class="nav-text">Independent mode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践"><span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yarn的workspaces模式"><span class="nav-text">yarn的workspaces模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lerna-软链实现"><span class="nav-text">lerna 软链实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#软链是什么？"><span class="nav-text">软链是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#symlinkSync"><span class="nav-text">symlinkSync</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lerna-应用"><span class="nav-text">lerna 应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结合项目"><span class="nav-text">结合项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#痛点解决"><span class="nav-text">痛点解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#monorepo弊端"><span class="nav-text">monorepo弊端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多"><span class="nav-text">更多</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#version-问题"><span class="nav-text">version 问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具"><span class="nav-text">工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令"><span class="nav-text">指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#init"><span class="nav-text">init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#create"><span class="nav-text">create</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#add"><span class="nav-text">add</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#boostrap"><span class="nav-text">boostrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list"><span class="nav-text">list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import"><span class="nav-text">import</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run"><span class="nav-text">run</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exec"><span class="nav-text">exec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#link"><span class="nav-text">link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clean"><span class="nav-text">clean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#changed"><span class="nav-text">changed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lerna-diff"><span class="nav-text">lerna diff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#publish"><span class="nav-text">publish</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#version"><span class="nav-text">version</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#yarn-workspace"><span class="nav-text">yarn workspace</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与Lerna相比"><span class="nav-text">与Lerna相比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#提示与技巧"><span class="nav-text">提示与技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#制和注意事项"><span class="nav-text">制和注意事项</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lerna-yarn-workspace"><span class="nav-text">lerna+yarn workspace</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#日志信息"><span class="nav-text">日志信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lerna-版本升级"><span class="nav-text">lerna 版本升级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lerna-version"><span class="nav-text">lerna version</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#只发布某个package"><span class="nav-text">只发布某个package</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动选择发布版本"><span class="nav-text">自动选择发布版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#手动选择发布版本"><span class="nav-text">手动选择发布版本</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git多项目管理"><span class="nav-text">Git多项目管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-Submodule"><span class="nav-text">Git Submodule</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#子模块的问题"><span class="nav-text">子模块的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-Subtree"><span class="nav-text">Git Subtree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#相比Git子模块"><span class="nav-text">相比Git子模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitSlave"><span class="nav-text">GitSlave</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitSlave的缺点"><span class="nav-text">GitSlave的缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google-Repo"><span class="nav-text">Google Repo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#subtree-和-submodule-切换历程"><span class="nav-text">subtree 和 submodule 切换历程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-subtree"><span class="nav-text">git subtree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Repo"><span class="nav-text">Git-Repo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Manifest"><span class="nav-text">Manifest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Repo-命令"><span class="nav-text">Repo 命令</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">653.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
