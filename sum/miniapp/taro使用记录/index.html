@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="2021.11.3 星期三 17:00    基础配置run dev 后访问页面路由出现Cannot GET /order/xxx.shtml 可能是有错误运行失败了（虽然看到是控制台输出是正常的） 语法生命周期每次进入小程序首页的时候有时候会先执行onlaunch方法，有时又会先执行首页的onload的方法，最后经过确定，在微信小程序中这两个方法并没有执行先后的顺序，因为他们都是异步执行的。">
+<meta name="description" content="2021.11.3 星期三 17:00    基础语法生命周期每次进入小程序首页的时候有时候会先执行onlaunch方法，有时又会先执行首页的onload的方法，最后经过确定，在微信小程序中这两个方法并没有执行先后的顺序，因为他们都是异步执行的。 问题： 本来按照事件顺序，小程序初始化时触发App里的onLaunch，后面再执行页面Page里的onLoad，但是在onLaunch里请求获取是否">
 <meta name="keywords" content="taro.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Taro使用记录">
 <meta property="og:url" content="http://yoursite.com/sum/miniapp/taro使用记录/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2021.11.3 星期三 17:00    基础配置run dev 后访问页面路由出现Cannot GET /order/xxx.shtml 可能是有错误运行失败了（虽然看到是控制台输出是正常的） 语法生命周期每次进入小程序首页的时候有时候会先执行onlaunch方法，有时又会先执行首页的onload的方法，最后经过确定，在微信小程序中这两个方法并没有执行先后的顺序，因为他们都是异步执行的。">
+<meta property="og:description" content="2021.11.3 星期三 17:00    基础语法生命周期每次进入小程序首页的时候有时候会先执行onlaunch方法，有时又会先执行首页的onload的方法，最后经过确定，在微信小程序中这两个方法并没有执行先后的顺序，因为他们都是异步执行的。 问题： 本来按照事件顺序，小程序初始化时触发App里的onLaunch，后面再执行页面Page里的onLoad，但是在onLaunch里请求获取是否">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2023-02-22T14:01:19.453Z">
+<meta property="og:updated_time" content="2023-08-20T15:19:47.390Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Taro使用记录">
-<meta name="twitter:description" content="2021.11.3 星期三 17:00    基础配置run dev 后访问页面路由出现Cannot GET /order/xxx.shtml 可能是有错误运行失败了（虽然看到是控制台输出是正常的） 语法生命周期每次进入小程序首页的时候有时候会先执行onlaunch方法，有时又会先执行首页的onload的方法，最后经过确定，在微信小程序中这两个方法并没有执行先后的顺序，因为他们都是异步执行的。">
+<meta name="twitter:description" content="2021.11.3 星期三 17:00    基础语法生命周期每次进入小程序首页的时候有时候会先执行onlaunch方法，有时又会先执行首页的onload的方法，最后经过确定，在微信小程序中这两个方法并没有执行先后的顺序，因为他们都是异步执行的。 问题： 本来按照事件顺序，小程序初始化时触发App里的onLaunch，后面再执行页面Page里的onLoad，但是在onLaunch里请求获取是否">
 
 
 
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2023-02-22T22:01:19+08:00">
-                2023-02-22
+              <time title="更新于" itemprop="dateModified" datetime="2023-08-20T23:19:47+08:00">
+                2023-08-20
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,777
+                  2,096
                 </span>
               
 
@@ -437,7 +437,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9
+                  10
                 </span>
               
             </div>
@@ -462,8 +462,7 @@
 <p style="text-align:right"> 2021.11.3 星期三 17:00 </p>
 
 
-<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>run dev 后访问页面路由出现<code>Cannot GET /order/xxx.shtml</code> 可能是有错误运行失败了（虽然看到是控制台输出是正常的）</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>每次进入小程序首页的时候有时候会先执行onlaunch方法，有时又会先执行首页的onload的方法，最后经过确定，在微信小程序中这两个方法并没有执行先后的顺序，因为他们都是异步执行的。</p>
+<h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>每次进入小程序首页的时候有时候会先执行onlaunch方法，有时又会先执行首页的onload的方法，最后经过确定，在微信小程序中这两个方法并没有执行先后的顺序，因为他们都是异步执行的。</p>
 <p>问题： 本来按照事件顺序，小程序初始化时触发App里的onLaunch，后面再执行页面Page里的onLoad，但是在onLaunch里请求获取是否有权限，等待返回值的时候Page里的onLoad事件就已经执行了。</p>
 <h3 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h3><!-- [taro 全局变量四种方法](https://www.jianshu.com/p/0d39404a1dea) 
 [Taro -- 定义全局变量](https://www.cnblogs.com/juewuzhe/p/11097146.html)
@@ -474,11 +473,7 @@
 <p>方法2：新增一个自行命名的 JS 文件，例如 global.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> globalData = &#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">setGlobalData</span> (<span class="params">key, val</span>) </span>&#123;</span><br><span class="line">  globalData[key] = val</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getGlobalData</span> (<span class="params">key</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> globalData[key]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>方法3：使用 Redux 来进行全局变量的管理</p>
 <p>方法4：使用配置。<br>使用config下的env<br>使用config下的defineConstants</p>
-<h3 id="dom-相关"><a href="#dom-相关" class="headerlink" title="dom 相关"></a>dom 相关</h3><p><code>const observer = Taro.createIntersectionObserver(this, { thresholds: [0], observeAll: true })</code></p>
-<blockquote>
-<p>创建并返回一个 IntersectionObserver 对象实例。<br>监听文档/dom的变化以他用<!-- 比如：添加埋点 --></p>
-</blockquote>
-<h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><ol>
+<h3 id="dom-相关"><a href="#dom-相关" class="headerlink" title="dom 相关"></a>dom 相关</h3><h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><ol>
 <li>获取输入标签的值<code>Input</code> <code>Textarea</code> 通过<code>event.detail.value</code>。<!-- 
  通过event.target.value 取不到值，设置值的时候也不准确。
  event.target 是容器标签里面的target，并没有最新的值。
@@ -497,10 +492,31 @@
 <p>在旧版本中可以通过 this.$router 访问当前组件/页面路由的详情。在 Taro Next 对应的 API 是在 @tarojs/taro 中的 getCurrentInstance().router，两者的属性一模一样。</p>
 <p>### </p>
 <p> // useEffect(() =&gt; {<br>    //     history.pushState(‘couponList’, ‘’, null)<br>    //     return () =&gt; {<br>    //         if(!history.state.couponList) {<br>    //             Taro.removeStorageSync(‘bl_confirm_cids’);<br>    //         }<br>    //     }<br>    // }, []);</p>
-<h3 id="api"><a href="#api" class="headerlink" title="api"></a>api</h3><h2 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h2><p>v3.4.1 版本默认使用webpack 4.x。 后续版本可以指定webpack 版本。<br><!-- 
+<h3 id="api"><a href="#api" class="headerlink" title="api"></a>api</h3><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><p>v3.4.1 版本默认使用webpack 4.x。 后续版本可以指定webpack 版本。<br><!-- 
 导出webpack配置
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NODE_ENV=development npx taro inspect --type h5 &gt; config/webpack.dev.output.js</span></span><br><span class="line"><span class="comment"># NODE_ENV=production npx taro inspect --type h5 &gt; config/webpack.prod.output.js</span></span><br><span class="line"><span class="comment"># npx taro inspect --type h5 &gt; config/webpack.output.js</span></span><br><span class="line"></span><br><span class="line">npx taro inspect -t h5 -o config/webpack.h5.prod.output.js</span><br><span class="line">NODE_ENV=development npx taro inspect --<span class="built_in">type</span> h5 -o config/webpack.h5.dev.output.js</span><br></pre></td></tr></table></figure></p>
 <p>默认导出的是生产环境。 –&gt;</p>
+<h3 id="设计稿"><a href="#设计稿" class="headerlink" title="设计稿"></a>设计稿</h3><blockquote>
+<p>看看把 index.html 里的脚本替换成 <code>&lt;script&gt;&lt;%= htmlWebpackPlugin.options.script %&gt;&lt;/script&gt;</code></p>
+</blockquote>
+<p>加了上面的脚步，并没有生效。<br><!-- 
+原因： 可能是从3.4.1 版本升上来的。但是依赖包都重新安装了，也没有用。
+手动在html中添加了js
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">! <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> e = n.document.documentElement,</span><br><span class="line">            w = e.getBoundingClientRect().width,</span><br><span class="line">            x = <span class="number">40</span> * w / <span class="number">750</span>;</span><br><span class="line">        e.style.fontSize = x &gt;= <span class="number">40</span> ? <span class="string">"40px"</span> : x &lt;= <span class="number">22</span> ? <span class="string">"22px"</span> : x + <span class="string">"px"</span></span><br><span class="line">    &#125;</span><br><span class="line">    n.addEventListener(<span class="string">"resize"</span>, (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        f()</span><br><span class="line">    &#125;)), f()</span><br><span class="line">&#125;(<span class="built_in">window</span>);</span><br></pre></td></tr></table></figure></p>
+<p> –&gt;</p>
+<!-- 
+相关内容：
+[taro3.5.4版本h5平台，Taro.pxTransform转换方法底层实现基准值还是640而不是750，导致转换异常，请尽快修复 #12475](https://github.com/NervJS/taro/issues/12475)
+[3.5.3 的字体相比较3.4.x版本字体偏大 #12361](https://github.com/NervJS/taro/issues/12361)
+[尺寸转换错误 #12089](https://github.com/NervJS/taro/issues/12089)
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    designWidth: <span class="number">750</span>,</span><br><span class="line">    deviceRatio: &#123;</span><br><span class="line">        <span class="number">640</span>: <span class="number">2.34</span> / <span class="number">2</span>,</span><br><span class="line">        <span class="number">750</span>: process.env.TARO_ENV === <span class="string">'h5'</span> ? <span class="number">640</span> / <span class="number">750</span> : <span class="number">1</span>,</span><br><span class="line">        <span class="number">828</span>: <span class="number">1.81</span> / <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// h5或者mini</span></span><br><span class="line">    pxtransform: &#123;</span><br><span class="line">        enable: <span class="literal">true</span>,</span><br><span class="line">        config: &#123;</span><br><span class="line">            minRootSize: <span class="number">10</span>,</span><br><span class="line">            maxRootSize: <span class="number">100</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p> –&gt;</p>
+<h4 id="原理及优化"><a href="#原理及优化" class="headerlink" title="原理及优化"></a>原理及优化</h4><blockquote>
+<p>至此，就能实现类似 postcss-pxtorem 设置 rootValue 为 100 的效果<br><a href="https://developer.aliyun.com/article/919446">从 postcss-pxtransform 源码到 Taro 跨端单位转换方案优化</a><br><a href="https://www.jianshu.com/p/0ea5d47bcd2d">从 postcss-pxtransform 源码到 Taro 跨端单位转换方案优化</a></p>
+</blockquote>
+<p>而 Taro 的单位转换插件 <a href="https://github.com/Pines-Cheng/postcss-pxtransform/">postcss-pxtransform</a> 正是基于它二次开发而来的，在原来的基础拓展了对小程序的支持，即 px 转换为 rpx。</p>
+<p>从源码中看，rootValue 在不同端会有不同的换算规则。</p>
+<p>源文件 taro/packages/postcss-pxtransform/index.js。<br>源文件中 rootValue 的关键逻辑，请看<a href="https://github.com/NervJS/taro/blob/be064b6c9c872bcda2410ad77871021d4c2b70eb/packages/postcss-pxtransform/index.js#L50-L71">这里</a>。</p>
 <h3 id="h5"><a href="#h5" class="headerlink" title="h5"></a>h5</h3><ol>
 <li>静态资源hash，解决cdn缓存问题。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    path.join(process.cwd(), <span class="string">"/plugins/events/index.ts"</span>),</span><br><span class="line">    path.join(process.cwd(), <span class="string">"/plugins/move/index.js"</span>),</span><br><span class="line">    <span class="string">"@tarojs/plugin-indie"</span></span><br><span class="line">  ],</span><br><span class="line">  h5: &#123;</span><br><span class="line">    <span class="comment">// NOTE H5 打包静态资源时带 hash 值，方便缓存、版本管理</span></span><br><span class="line">    publicPath: <span class="string">'/'</span>,</span><br><span class="line">    staticDirectory: <span class="string">'static'</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">      filename: <span class="string">'js/[name].[hash].js'</span>,</span><br><span class="line">      chunkFilename: <span class="string">'js/[name].[chunkhash].js'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    imageUrlLoaderOption: &#123;</span><br><span class="line">      limit: <span class="number">5000</span>,</span><br><span class="line">      name: <span class="string">'static/images/[name].[hash].[ext]'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    miniCssExtractPluginOption: &#123;</span><br><span class="line">      filename: <span class="string">'css/[name].[hash].css'</span>,</span><br><span class="line">      chunkFilename: <span class="string">'css/[name].[chunkhash].css'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -523,7 +539,30 @@ plugins/<figure class="highlight js"><table><tr><td class="gutter"><pre><span cl
 <h2 id="多端"><a href="#多端" class="headerlink" title="多端"></a>多端</h2><p><a href="./taro%E5%A4%9A%E7%AB%AF%E5%BC%80%E5%8F%91%E5%AE%9E%E9%99%85.md">taro多端开发实际</a></p>
 <h2 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">taro -h</span><br><span class="line"></span><br><span class="line">Usage: taro &lt;<span class="built_in">command</span>&gt; [options]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -v, --version       output the version number</span><br><span class="line">  -h, --<span class="built_in">help</span>          output usage information</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line">  init [projectName]  Init a project with default templete</span><br><span class="line">  config &lt;cmd&gt;        Taro config</span><br><span class="line">  create              Create page <span class="keyword">for</span> project</span><br><span class="line">  build               Build a project with options</span><br><span class="line">  update              Update packages of taro</span><br><span class="line">  info                Diagnostics Taro env info</span><br><span class="line">  doctor              Diagnose taro project</span><br><span class="line">  inspect             Inspect the webpack config</span><br><span class="line">  convert             Convert native WeiXin-Mini-App to Taro app</span><br><span class="line">  <span class="built_in">help</span> [cmd]          display <span class="built_in">help</span> <span class="keyword">for</span> [cmd]</span><br></pre></td></tr></table></figure>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">taro inspect --<span class="built_in">help</span> <span class="comment"># -h</span></span><br><span class="line"><span class="comment"># taro help inspect</span></span><br><span class="line">taro inspect -t -o </span><br><span class="line"><span class="comment">## </span></span><br><span class="line">$ taro inspect --<span class="built_in">type</span> weapp</span><br><span class="line">$ taro inspect --<span class="built_in">type</span> weapp --output inspect.config.js</span><br><span class="line">$ taro inspect --<span class="built_in">type</span> weapp plugins</span><br><span class="line">$ taro inspect --<span class="built_in">type</span> weapp module.rules.0</span><br></pre></td></tr></table></figure>
-<h1 id="ISSUES"><a href="#ISSUES" class="headerlink" title="ISSUES"></a>ISSUES</h1><h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><ol>
+<h1 id="ISSUES"><a href="#ISSUES" class="headerlink" title="ISSUES"></a>ISSUES</h1><h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>run dev 后访问页面路由出现<code>Cannot GET /order/xxx.shtml</code><br>原因：可能是有错误运行失败了（虽然看到是控制台输出是正常的）</p>
+<h3 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h3><ol>
+<li><p>uploadFile 上传文件跨域<br>从3.4.1升级到3.5.7: 解决Taro.uploadFile 上传图片出现跨域的问题。<br>解决：需要手动添加withCredentials: false （修改node_modules）<br><a href="https://github.com/NervJS/taro/issues/12642#issuecomment-1274426005" target="_blank" rel="noopener">Taro 3.5.6: uploadFile 上传文件始终报跨域问题</a></p>
+</li>
+<li><p>运行失败：<code>Cannot find module &#39;/Users/xxxxxx/node_modules/react-refresh/index.js&#39;. Please verify that the package.json has a valid &quot;main&quot; entry</code><br>解决：在devServer配置<code>hot: false</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    port: <span class="number">10086</span>,</span><br><span class="line">    open: <span class="literal">false</span>,</span><br><span class="line">    hot: <span class="literal">false</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>但是添加这个配置后，出现下面<code>RefreshReg</code>的问题：</p>
+<ol>
+<li>运行成功，但是页面报错：<code>Uncaught ReferenceError: $RefreshReg$ is not defined</code><br>解决： 根据<a href="https://github.com/NervJS/taro/issues/12685" target="_blank" rel="noopener">升级3.5.7后Uncaught ReferenceError: $RefreshSig$ is not defined</a> 中提示升级到3.5.8. 并且修改了<a href="https://taro-docs.jd.com/docs/h5#fast-refresh" target="_blank" rel="noopener">fast refresh</a>相关配置。<blockquote>
+<p>或配置了 Webpack devServer 关闭热更新：hot: false 时，会出现以下报错：<br>而且 fast refresh 的 Babel plugin 和 loader 必须同时启用或关闭。<br>&lt;!–<br>其他解决方案：</p>
+</blockquote>
+</li>
+<li><code>npx browserslist@latest --update-db</code> 失败<br><a href="https://blog.csdn.net/m0_38082783/article/details/124984203" target="_blank" rel="noopener">【taro react】—- 编译H5运行后报错：Uncaught ReferenceError: $RefreshSig$ is not defined</a></li>
+<li>设置webpack <code>mode: &#39;development&#39;</code>, 原因未webapck5热更新问题。<br><a href="https://blog.csdn.net/m0_38082783/article/details/124984203" target="_blank" rel="noopener">Webpack使用ReactRefreshWebpackPlugin对JSX文件进行本地热更新解析时 $RefreshSig$ is not defined</a></li>
+<li><p>在dev配置中添加<code>isWatch: true</code>   </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    mode: <span class="string">"development"</span>,</span><br><span class="line">    env: &#123;</span><br><span class="line">        NODE_ENV: <span class="string">'"development"'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    defineConstants: &#123;&#125;,</span><br><span class="line">    isWatch: <span class="literal">true</span>,</span><br><span class="line">    mini: &#123;&#125;,</span><br><span class="line">    h5: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <a href="https://github.com/NervJS/taro/issues/12685#issuecomment-1284985910" target="_blank" rel="noopener">升级3.5.7后Uncaught ReferenceError: $RefreshSig$ is not defined</a></p>
+</li>
+<li>根据<a href="https://github.com/NervJS/taro/issues/12685" target="_blank" rel="noopener">升级3.5.7后Uncaught ReferenceError: $RefreshSig$ is not defined</a>继续升级到3.5.8</li>
+</ol>
+<p><a href="https://github.com/NervJS/taro/pull/12895" target="_blank" rel="noopener">chore(release): publish 3.5.8</a> –&gt;</p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><ol>
 <li>watch 文件修改没有更新<br><code>npm run build dev:h5</code><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"dev:h5": "cross-env NODE_ENV=development CLIENT_ENV=h5 taro build --type h5 --watch",</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -757,7 +796,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-count">407</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -768,7 +807,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -779,7 +818,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -862,7 +901,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语法"><span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局变量"><span class="nav-text">全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dom-相关"><span class="nav-text">dom 相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#标签"><span class="nav-text">标签</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件"><span class="nav-text">组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改路径-url"><span class="nav-text">修改路径-url</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#api"><span class="nav-text">api</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-1"><span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件"><span class="nav-text">插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多端"><span class="nav-text">多端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行"><span class="nav-text">命令行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ISSUES"><span class="nav-text">ISSUES</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行"><span class="nav-text">运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平台"><span class="nav-text">平台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装问题"><span class="nav-text">安装问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本不一致"><span class="nav-text">版本不一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gyp-ERR-find-VS-gyp-ERR-find-VS-msvs-version"><span class="nav-text">gyp ERR! find VS gyp ERR! find VS msvs_version</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#windows-安装"><span class="nav-text">windows 安装</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#语法"><span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局变量"><span class="nav-text">全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dom-相关"><span class="nav-text">dom 相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#标签"><span class="nav-text">标签</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件"><span class="nav-text">组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改路径-url"><span class="nav-text">修改路径-url</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#api"><span class="nav-text">api</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack"><span class="nav-text">webpack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件"><span class="nav-text">插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多端"><span class="nav-text">多端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行"><span class="nav-text">命令行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ISSUES"><span class="nav-text">ISSUES</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#运行"><span class="nav-text">运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#升级"><span class="nav-text">升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平台"><span class="nav-text">平台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装问题"><span class="nav-text">安装问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本不一致"><span class="nav-text">版本不一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gyp-ERR-find-VS-gyp-ERR-find-VS-msvs-version"><span class="nav-text">gyp ERR! find VS gyp ERR! find VS msvs_version</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#windows-安装"><span class="nav-text">windows 安装</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -896,7 +935,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">653.5k</span>
+    <span title="Site words total count">668.7k</span>
   
 </div>
 

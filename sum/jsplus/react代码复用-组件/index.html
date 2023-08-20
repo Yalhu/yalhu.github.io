@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="react.js,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yalhu" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="实现一个功能：统一处理页面接口数据加载；并且渲染不同状态的ui。    或者是子组件；也可以自定义loading/skeleton，error。最后：高阶组件-render props  react文档-高阶组件： https://zh-hans.reactjs.org/docs/higher-order-components.html 2023.3.8 星期三   1 React中封装组件的一些">
+<meta name="keywords" content="react.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React代码复用-组件">
+<meta property="og:url" content="http://yoursite.com/sum/jsplus/react代码复用-组件/index.html">
+<meta property="og:site_name" content="Yalhu">
+<meta property="og:description" content="实现一个功能：统一处理页面接口数据加载；并且渲染不同状态的ui。    或者是子组件；也可以自定义loading/skeleton，error。最后：高阶组件-render props  react文档-高阶组件： https://zh-hans.reactjs.org/docs/higher-order-components.html 2023.3.8 星期三   1 React中封装组件的一些">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2023-08-20T15:19:47.343Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React代码复用-组件">
+<meta name="twitter:description" content="实现一个功能：统一处理页面接口数据加载；并且渲染不同状态的ui。    或者是子组件；也可以自定义loading/skeleton，error。最后：高阶组件-render props  react文档-高阶组件： https://zh-hans.reactjs.org/docs/higher-order-components.html 2023.3.8 星期三   1 React中封装组件的一些">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/sum/jsplus/react代码复用-组件/">
+
+
+
+
+
+  <title>React代码复用-组件 | Yalhu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yalhu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">yalhu's blob</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sum/jsplus/react代码复用-组件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yalhu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/robbot.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yalhu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React代码复用-组件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-03-08T00:00:00Z">
+                2023-03-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2023-08-20T23:19:47+08:00">
+                2023-08-20
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/" itemprop="url" rel="index">
+                    <span itemprop="name">sum</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sum/jsplus/" itemprop="url" rel="index">
+                    <span itemprop="name">jsplus</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+          
+          
+            
+          
+
+          
+          
+             <span id="/sum/jsplus/react代码复用-组件/" class="leancloud_visitors" data-flag-title="React代码复用-组件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,347
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  17
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>实现一个功能：统一处理页面接口数据加载；并且渲染不同状态的ui。<br>    或者是子组件；也可以自定义loading/skeleton，error。<br>最后：高阶组件-render props<br><!-- 实现上参考：先1 -》 4 -》5。 最后发现是2的实践-页面复用 --></p>
+<!-- 
+1: 组件封装方法 - 
+2: 介绍高阶组件
+3： 介绍hooks
+4: 封装请求 - DataBoundary
+5: render-props - display name： 文档有介绍
+ -->
+<p>react文档-高阶组件： <a href="https://zh-hans.reactjs.org/docs/higher-order-components.html" target="_blank" rel="noopener">https://zh-hans.reactjs.org/docs/higher-order-components.html</a></p>
+<p style="text-align:right">2023.3.8 星期三</p>
+
+
+<h1 id="1-React中封装组件的一些方法"><a href="#1-React中封装组件的一些方法" class="headerlink" title="1 React中封装组件的一些方法"></a>1 React中封装组件的一些方法</h1><p># 1 SS <a href="https://www.shymean.com/article/React中封装组件的一些方法" target="_blank" rel="noopener">React中封装组件的一些方法</a></p>
+<h2 id="1-extends-正向继承"><a href="#1-extends-正向继承" class="headerlink" title="1. extends 正向继承"></a>1. extends 正向继承</h2><p>对于类组件而言，可以通过extends继承某个父类，从而获得一些公共的能力<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogPage</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">    trackLog() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"trackLog"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Page1</span> <span class="keyword">extends</span> <span class="title">LogPage</span> </span>&#123;</span><br><span class="line">    onBtnClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'click'</span>)</span><br><span class="line">        <span class="keyword">this</span>.trackLog();</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.onBtnClick&#125;</span>&gt;</span>click<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>借助OOP的思想，可以通过封装、继承和多态来实现数据的隔离和功能的复用。</p>
+<h2 id="2-HOC"><a href="#2-HOC" class="headerlink" title="2. HOC"></a>2. HOC</h2><h3 id="2-1-劫持props"><a href="#2-1-劫持props" class="headerlink" title="2.1. 劫持props"></a>2.1. 劫持props</h3><p>高阶组件会返回一个新的组件，这个组件会拦截传递过来的props，这样就可以做一些特殊的处理，或者仅仅是添加一些通用的props<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">HOC</span>(<span class="params">Comp</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> commonProps = &#123; <span class="attr">x</span>: <span class="number">1</span>, commonMethod1, commonMethod2  &#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">props</span> =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">Comp</span> &#123;<span class="attr">...commonProps</span>&#125; &#123;<span class="attr">...props</span>&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<!-- 看起来像组件注入一些通用的props就更轻松了。 -->
+<h3 id="2-2-反向继承"><a href="#2-2-反向继承" class="headerlink" title="2.2. 反向继承"></a>2.2. 反向继承</h3><p>高阶组件的核心思想是返回一个新的组件，如果是类组件，甚至可以通过继承的方式劫持组件原本的生命周期函数，扩展新的功能<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">HOC</span>(<span class="params">Comp</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="title">SubComp</span> <span class="keyword">extends</span> <span class="title">Comp</span> </span>&#123;</span><br><span class="line">    componentDidMount()&#123;</span><br><span class="line">        <span class="comment">// 处理新的生命周期方法，可以按需要决定是否调用supder.componentDidMount</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="comment">// 使用原始的render</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">super</span>.render();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-3-控制渲染"><a href="#2-3-控制渲染" class="headerlink" title="2.3. 控制渲染"></a>2.3. 控制渲染</h3><p>比如我们需要判断某个页面是否需要登录，一种做法是直接在页面组件逻辑中编写判断，如果存在多个这种的页面，就变得重复了<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (Comp) =&gt; <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isLogin = checkLogin()</span><br><span class="line">  <span class="keyword">if</span> (isLogin) &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="xml"><span class="tag">&lt;<span class="name">Comp</span> &#123;<span class="attr">...props</span>&#125;/&gt;</span></span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (<span class="xml"><span class="tag">&lt;<span class="name">Redirect</span> <span class="attr">to</span>=<span class="string">&#123;&#123;</span> <span class="attr">pathname:</span> '<span class="attr">login</span>' &#125;&#125;/&gt;</span></span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.4. HOC的缺点<br>劫持Props是HOC最常用的功能之一，但这也是它的缺点：层级的嵌套和状态的透传。</p>
+<p>对于HOC本身而言，传递给他的props是不需要关心的，他只是负责将props透传下去。这就要求对于一些特殊的prop如ref等，需要额外使用forwardRef才能够满足需求。</p>
+<p>此外，我认为这也导致组件的props来源变得不清晰。最后组件经过多个HOC的装饰之后，我们就很难区分某个props注入的数据到底是哪里来的了</p>
+<h2 id="3-Render-Props"><a href="#3-Render-Props" class="headerlink" title="3. Render Props"></a>3. Render Props</h2><p>3.1. prop传递ReactElement<br>React组件默认的prop: children可以实现default slot的功能<br>3.2. prop传递函数<br>但这种直接传递ReactElement也存在一些问题，那就是这些节点都是在父元素定义的。</p>
+<p>如果能够根据组件内部的一些数据来动态渲染要展示的元素，这样就会更加灵活了。换言之，我们需要实现在组件内部动态构建渲染元素。</p>
+<p>最简单的解决办法就是传递一个函数，由组件内部通过传参的形式通过函数动态生成需要渲染的元素<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Baz = <span class="function">(<span class="params">&#123; renderHead &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> count = <span class="number">123</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;renderHead(count)&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&lt;Baz </span><br><span class="line">  renderHead=&#123;(count) =&gt; <span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>count is &#123;count&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span>&#125;</span><br><span class="line">&gt;&lt;<span class="regexp">/Baz&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>通过函数的方式，可以在不改动组件内部实现的前提下，利用组件的数据实现UI分发和逻辑复用，类似于Vue的插槽作用域，也跟JavaScript中常见的回调函数作用一致。</p>
+<p>React官方把这种技术称作Render Props:</p>
+<blockquote>
+<p>Render Props是指一种在 React 组件之间使用一个值为函数的 prop 共享代码的简单技术</p>
+</blockquote>
+<p>Render Props有下面几个特点</p>
+<ul>
+<li>也是一个prop，用于父子组件之间传递数据</li>
+<li>他的值是一个函数，其参数由子组件在合适的时候传入</li>
+<li>通常用来render(渲染)某个元素或组件</li>
+</ul>
+<p>再举一个更常用的例子，渲染列表组件，</p>
+<p>3.3. prop传递组件<br>上面提到Render props是值为函数的prop，这个函数返回的是ReactElement。那不就是一个函数组件吗？既然如此，是不是也可以直接传递组件呢？答案是肯定的。</p>
+<p>3.4. Render Props存在的问题<br>Render Props可以有效地以松散耦合的方式设计组件，但由于其本质是一个函数，也会存在回调嵌套过深的问题：当返回的节点也需要传入render props时，就会发生多层嵌套。</p>
+<p>一种解决办法是使用<a href="https://github.com/pedronauck/react-adopt" target="_blank" rel="noopener">react-adopt</a>，它提供了组合多个render props返回结果的功能。</p>
+<h2 id="4-Hooks"><a href="#4-Hooks" class="headerlink" title="4. Hooks"></a>4. Hooks</h2><h3 id="4-1-Hooks解决的问题"><a href="#4-1-Hooks解决的问题" class="headerlink" title="4.1. Hooks解决的问题"></a>4.1. Hooks解决的问题</h3><p>React中组件分为了函数组件和Class组件，函数组件是无状态的，在Hooks之前，只能通过props控制函数组件的数据，如果希望实现一个带状态的组件，则需要通过Class组件的instace来维护。</p>
+<p>Class组件主要有几个问题</p>
+<ul>
+<li>逻辑分散，相互关连的逻辑分散在各个生命周期函数；每个生命周期函数又塞满了各不相同的逻辑</li>
+<li>逻辑复用需要通过高阶组件HOC或者Render Props来处理，<br>不论是HOC还是Render Props，都需要重新组织组件结构，很容易形成组件嵌套，代码阅读性和可维护性都会变差。</li>
+</ul>
+<p>因此需要一种扁平化的逻辑复用的方式，因此Hooks出现了。其优点有</p>
+<ul>
+<li>扁平化的逻辑复用，在无需修改组件结构的情况下复用状态逻辑</li>
+<li>将相互关联的部分放在一起，互不相关的地方相互隔离</li>
+<li>函数式编程</li>
+</ul>
+<p>## 5. 小结<br>本文主要总结了几种封装React组件的方式，包括正向继承、HOC、Render Props、 Hooks等方式，每种方式都有各自的优缺点。恰好最近参与了新的React项目，可以多尝试一下这些方法。<br><!-- END#1 --></p>
+<h1 id="2-高阶组件-HOC-的入门及实践"><a href="#2-高阶组件-HOC-的入门及实践" class="headerlink" title="2 高阶组件(HOC)的入门及实践"></a>2 高阶组件(HOC)的入门及实践</h1><p># 2 <a href="https://juejin.cn/post/6844904050236850184#heading-11" target="_blank" rel="noopener">React高阶组件(HOC)的入门及实践</a><br>## 使用高阶组件的原因（为什么❓）<br>关于高阶组件能解决的问题可以简单概括成以下三个方面：<br>1) 抽取重复代码，实现组件复用，常见场景：页面复用。<br>1) 条件渲染，控制组件的渲染逻辑（渲染劫持），常见场景：权限控制。<br>1) 捕获/劫持被处理组件的生命周期，常见场景：组件渲染性能追踪、日志打点。</p>
+<h2 id="高阶组件的实现（怎么做❓）"><a href="#高阶组件的实现（怎么做❓）" class="headerlink" title="高阶组件的实现（怎么做❓）"></a>高阶组件的实现（怎么做❓）</h2><p>通常情况下，实现高阶组件的方式有以下两种:</p>
+<ul>
+<li>属性代理(Props Proxy)<ul>
+<li>返回一个无状态（stateless）的函数组件</li>
+<li>返回一个 class 组件</li>
+</ul>
+</li>
+<li>反向继承(Inheritance Inversion)</li>
+</ul>
+<p>高阶组件实现方式的差异性决定了它们各自的应用场景：一个 React 组件包含了 props、state、ref、生命周期方法、static方法和React 元素树几个重要部分，所以我将从以下几个方面对比两</p>
+<h3 id="属性代理-Props-Proxy"><a href="#属性代理-Props-Proxy" class="headerlink" title="属性代理(Props Proxy)"></a>属性代理(Props Proxy)</h3><ul>
+<li>属性代理是最常见的实现方式，它本质上是使用组合的方式，通过将组件包装在容器组件中实现功能。</li>
+<li>属性代理方式实现的高阶组件和原组件的生命周期关系完全是React父子组件的生命周期关系，所以该方式实现的高阶组件会影响原组件某些生命周期等方法。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回一个无状态的函数组件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">HOC</span>(<span class="params">WrappedComponent</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> newProps = &#123; <span class="attr">type</span>: <span class="string">'HOC'</span> &#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">props</span> =&gt;</span> <span class="xml"><span class="tag">&lt;<span class="name">WrappedComponent</span> &#123;<span class="attr">...props</span>&#125; &#123;<span class="attr">...newProps</span>&#125;/&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回一个有状态的 class 组件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">HOC</span>(<span class="params">WrappedComponent</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">      <span class="keyword">const</span> newProps = &#123; <span class="attr">type</span>: <span class="string">'HOC'</span> &#125;;</span><br><span class="line">      <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">WrappedComponent</span> &#123;<span class="attr">...this.props</span>&#125; &#123;<span class="attr">...newProps</span>&#125;/&gt;</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>#### 操作 props<br>#### 抽象 state<br>#### 获取 refs 引用<br>#### 获取原组件的 static 方法<br>#### 通过 props 实现条件渲染<br>#### 用其他元素包裹传入的组件<br>我们可以通过类似下面的方式将原组件包裹起来，从而实现布局或者是样式的目的：</p>
+<h3 id="反向继承"><a href="#反向继承" class="headerlink" title="反向继承"></a>反向继承</h3><p>反向继承指的是使用一个函数接受一个组件作为参数传入，并返回一个继承了该传入组件的类组件，且在返回组件的 render() 方法中返回 super.render() 方法，最简单的实现如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HOC = <span class="function">(<span class="params">WrappedComponent</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">WrappedComponent</span> </span>&#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">super</span>.render();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#### 劫持原组件生命周期方法<br>#### 读取/操作原组件的 state<br>#### 渲染劫持</p>
+<h3 id="属性代理和反向继承的对比"><a href="#属性代理和反向继承的对比" class="headerlink" title="属性代理和反向继承的对比"></a>属性代理和反向继承的对比</h3><p>## 具体实践<br>### 页面复用<br>### 权限控制<br>### 组件渲染性能追踪<br>## 扩展阅读（Q &amp; A）<br>### Hook 会替代高阶组件吗？<br><!-- END#2 --></p>
+<h1 id="3-使用React-hooks"><a href="#3-使用React-hooks" class="headerlink" title="3 使用React hooks"></a>3 使用React hooks</h1><p># 3 SS <a href="https://developer.aliyun.com/article/900776#slide-52" target="_blank" rel="noopener">使用React hooks，些许又多了不少摸鱼时间</a><br>一、📻概述<br>1、关于React Hooks<br>• React Hooks 是一个可选功能，通常用 class 组件 来和它做比较；<br>• 100% 向后兼容，没有破坏性改动；<br>• 不会取代 class 组件，尚无计划要移除 class 组件。</p>
+<p>2、认识React Hooks<br>（1）回顾React函数式组件<br>（2）函数组件的特点</p>
+<ul>
+<li>没有组件实例；</li>
+<li>没有生命周期；</li>
+<li>没有 state 和 setState ，只能接收 props 。<br>（3）class组件的问题<br>上面我们说到了函数组件是一个纯函数，只能接收 props ，没有任何其他功能。而 class 组件拥有以上功能，但是呢，class 组件会存在以下问题：</li>
+<li>大型组件很难拆分和重构，很难测试（即 class 不易拆分）；</li>
+<li>相同业务逻辑，分散到各个方法中，逻辑混乱；</li>
+<li>复用逻辑变得复杂，如 Mixins 、 HOC 、 Render Props 。</li>
+</ul>
+<p>因此，有了以上问题的出现，也就有了 React Hooks 。<br>（4）React 组件<br>• React 组件更易于用函数来表达：<br>• React 提倡函数式编程，即 view=fn(props) ；<br>• 函数更灵活，更易拆分，更易测试；<br>• 但函数组件太简单，需要增强能力 ——因此，有了 React Hooks 。<br>二、🪕几种 Hooks</p>
+<h2 id="三、⌨️React-Hooks组件逻辑复用"><a href="#三、⌨️React-Hooks组件逻辑复用" class="headerlink" title="三、⌨️React-Hooks组件逻辑复用"></a>三、⌨️React-Hooks组件逻辑复用</h2><p>1、class组件的逻辑复用<br>class 组件有三种逻辑复用形式。分别是：</p>
+<ul>
+<li>Mixin</li>
+<li>高阶组件 HOC</li>
+<li>Render Prop</li>
+</ul>
+<p>下面说下它们三者各自的缺点。<br>（1）Mixin</p>
+<ul>
+<li>变量作用域来源不清</li>
+<li>属性重名</li>
+<li>mixins 引入过多会导致顺序冲突<br>（2）高阶组件 HOC</li>
+<li>组件层级嵌套过多，不易渲染，不易调试</li>
+<li>HOC 会劫持 props ，必须严格规范，容易出现疏漏<br>（3）Render Prop</li>
+<li>学习成本高，不易理解</li>
+<li>只能传递纯函数，而默认情况下纯函数功能有限</li>
+</ul>
+<p>了解了三种 class 组件的缺点之后，现在，我们来看下如何使用 Hooks 做组件逻辑复用。</p>
+<h3 id="2、使用-Hooks-做组件逻辑复用"><a href="#2、使用-Hooks-做组件逻辑复用" class="headerlink" title="2、使用 Hooks 做组件逻辑复用"></a>2、使用 Hooks 做组件逻辑复用</h3><p>使用 hooks 来使得组件可以进行逻辑复用的本质是：自定义 hooks 。下面我们用一个例子来展示。<br>useMousePosition</p>
+<!-- END#3 -->
+<h1 id="4-React-Hooks：发请求这件小事"><a href="#4-React-Hooks：发请求这件小事" class="headerlink" title="4 React Hooks：发请求这件小事"></a>4 React Hooks：发请求这件小事</h1><p># 4 <a href="https://zhuanlan.zhihu.com/p/72596932" target="_blank" rel="noopener">React Hooks 第二期：发请求这件小事</a><br>## useData ?<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useData</span>(<span class="params">dataLoader</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> currentDataLoader = useRef(<span class="literal">null</span>);</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    currentDataGetter.current = dataGetter;</span><br><span class="line"></span><br><span class="line">    dataLoader().then(<span class="function">(<span class="params">responseData</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// 如果有更新的请求，放弃之前的</span></span><br><span class="line">      <span class="keyword">if</span> (currentDataGetter.current !== dataGetter) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      setData(responseData);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;, [dataLoader);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>## 处理异步状态<br>以上的 useData 只能解决关于数据获取的那一部分问题，为了处理我们得到的几个状态，不免需要写出这样的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (loading &amp;&amp; data == <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Spin</span> /&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (error) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Exception</span> /&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">    &lt;Spin loading=&#123;loading&#125;&gt;</span><br><span class="line">    &#123;renderMovieList(movieListData)&#125;</span><br><span class="line">    &lt;<span class="regexp">/Spin&gt;</span></span><br><span class="line"><span class="regexp">);</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="renderProps"><a href="#renderProps" class="headerlink" title="renderProps"></a>renderProps</h2><p>久而久之我们会发现在所有使用这个 useData 的组件中，我们都避免不了手写这两个 if。但是 hooks 只能解决生命周期的问题，没法封装一些 render 的逻辑。其实这里<strong>最有效的解决方法就是 Suspense</strong>，但是因为还没有发布，所以我们想到了 <strong>renderProps</strong>:<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">DataBoundary</span>(<span class="params">&#123; data, loading, error, children &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (loading) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Spin</span> /&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Spin</span> <span class="attr">loading</span>=<span class="string">&#123;loading&#125;</span>&gt;</span>&#123;children(data)&#125;<span class="tag">&lt;/<span class="name">Spin</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*  */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MovieList</span>(<span class="params">&#123; page, size &#125;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> queryMovieList = useCallback(<span class="function">(<span class="params">page, size</span>) =&gt;</span> api.queryMovieList(&#123; page, size &#125;), [page, size]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> movieListResult = useData(queryMovieList);</span><br><span class="line">  <span class="comment">// const &#123; data: movieListData, loading, error &#125; = useData(queryMovieList);</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;DataBoundary &#123;...movieListResult&#125;&gt;</span><br><span class="line">    &#123;<span class="comment">/* &lt;DataBoundary data=&#123;movieListData&#125; loading=&#123;loading&#125; error=&#123;error&#125;&gt; */</span>&#125;</span><br><span class="line">      &#123;(data) =&gt; renderMovieList(data)&#125;</span><br><span class="line">    &lt;<span class="regexp">/DataBoundary&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  function renderMovieList(movieList) &#123;</span></span><br><span class="line"><span class="regexp">    return movieList.map(item =&gt; &lt;MovieItem key=&#123;item.id&#125; data=&#123;item&#125; /</span>&gt;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在 DataBoundary 里，我们封装了关于异步状态处理的渲染流程，还可以提供出类似 fallback 的钩子，满足需要定制化的组件场景。用它做到了类似于 Suspense 的事情。</p>
+<p>## All in Hooks？<br>但是如果我们真的想在 hooks 里完成所有的事情呢？这里再抛出一个彩蛋：</p>
+<p>如果我们可以在 hooks 中返回一个 “renderProp”，我们就可以完整的将 render 相关的逻辑也封装在 hooks 里了，但是同时这样也会使得一个 hook 里的代码变得复杂，这里只是提供一种思路。那么这两种写法你更喜欢那个呢？</p>
+<!-- END#4 -->
+<h1 id="44-Suspense"><a href="#44-Suspense" class="headerlink" title="44 Suspense"></a>44 Suspense</h1><p># 44 <a href="https://juejin.cn/post/7155268983246028807#heading-1" target="_blank" rel="noopener">React组件如何优雅地处理异步数据</a><br>PS: Suspense 文档只处理动态加载组件；并没有拦截渲染的说明。<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ErrorBoundary <span class="keyword">from</span> <span class="string">"./ErrorBoundary"</span></span><br><span class="line"><span class="keyword">import</span> RandomWord <span class="keyword">from</span> <span class="string">"./RandomWord"</span></span><br><span class="line"><span class="keyword">import</span> &#123;Suspense&#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">   &lt;ErrorBoundary&gt;</span><br><span class="line">    &lt;Suspense fallback=&#123;&lt;div&gt;loading...&lt;<span class="regexp">/div&gt;&#125;&gt;</span></span><br><span class="line"><span class="regexp">      &lt;RandomWord /</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/Suspense&gt;</span></span><br><span class="line"><span class="regexp">   &lt;/</span>ErrorBoundary&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App</span><br></pre></td></tr></table></figure></p>
+<!-- END#44 -->
+<h1 id="5-React的render-props模式"><a href="#5-React的render-props模式" class="headerlink" title="5 React的render-props模式"></a>5 React的render-props模式</h1><p># 5 <a href="https://www.jianshu.com/p/8d69a74fc5b3" target="_blank" rel="noopener">React的render-props模式、高阶组件</a><br>props.render()模式<br>使用children代替render</p>
+<h2 id="使用displayName"><a href="#使用displayName" class="headerlink" title="使用displayName"></a>使用displayName</h2><p>使用了高阶组件之后会存在一个问题: 开发者工具会显示两个组件名称一样的组件</p>
+<p>因为默认情况下, React会使用组件名称作为组件名称,所有在两个组件都使用了高阶组件的情况下,两个组件的外壳都是其高阶组件的名称</p>
+<p>解决方案: 手动设置displayName<br>使用步骤<br>在高阶组件的函数内部定义一个函数getDisplayName(){}把传入组件作为参数传入这个函数</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个函数,在函数内部创建一个类式组件</span></span><br><span class="line"><span class="keyword">const</span> withMouse = <span class="function"><span class="params">WarppedComponent</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Mouse</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 复用的逻辑代码</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 设置开发者工具显示名称,如果不设置开发者工具显示的外壳组件都是一样的</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getDisplayName</span>(<span class="params">WarppedComponent</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> WarppedComponent.displayName || WarppedComponent.name || <span class="string">'Component'</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 给组件添加displayName属性</span></span><br><span class="line">  Mouse.displayName = <span class="string">`WithMouse<span class="subst">$&#123;getDisplayName(WarppedComponent)&#125;</span>`</span></span><br><span class="line">  <span class="keyword">return</span> Mouse</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withMouse</span><br></pre></td></tr></table></figure>
+<!-- END#5-->
+<h1 id="111-高阶组件和axios的拦截器"><a href="#111-高阶组件和axios的拦截器" class="headerlink" title="111 高阶组件和axios的拦截器"></a>111 高阶组件和axios的拦截器</h1><p># 111 <a href="https://zhuanlan.zhihu.com/p/34192569" target="_blank" rel="noopener">React中使用高阶组件和axios的拦截器，统一处理请求失败提示</a><br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (WrappedComponent) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">      <span class="keyword">super</span>(props)</span><br><span class="line">      <span class="keyword">this</span>.state = &#123;</span><br><span class="line">        error: <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    componentWillMount() &#123;</span><br><span class="line">      axios.interceptors.response.use(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> response;</span><br><span class="line">      &#125;,  (error) =&gt; &#123;</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">          error: <span class="literal">true</span></span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">      <span class="keyword">const</span> errorElem = <span class="keyword">this</span>.state.error ? <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>请求出错了<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span> : <span class="literal">null</span></span><br><span class="line">      <span class="keyword">return</span> (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &#123; errorElem &#125;</span><br><span class="line">          &lt;WrappedComponent &#123;...this.props&#125;/&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<!-- END#111 -->
+<p># 第三方库</p>
+<h1 id="react-adopt"><a href="#react-adopt" class="headerlink" title="react-adopt"></a>react-adopt</h1><p>react-adopt: <a href="https://github.com/pedronauck/react-adopt" target="_blank" rel="noopener">https://github.com/pedronauck/react-adopt</a></p>
+<p>React Adopt - Compose render props components like a pro</p>
+<h1 id="SWR"><a href="#SWR" class="headerlink" title="SWR"></a>SWR</h1><p>SWR: <a href="https://swr.vercel.app/zh-CN" target="_blank" rel="noopener">https://swr.vercel.app/zh-CN</a><br>vercel/swr: <a href="https://github.com/vercel/swr" target="_blank" rel="noopener">https://github.com/vercel/swr</a><br>“SWR” 这个名字来自于 stale-while-revalidate：一种由 HTTP RFC 5861(opens in a new tab) 推广的 HTTP 缓存失效策略。这种策略首先从缓存中返回数据（过期的），同时发送 fetch 请求（重新验证），最后得到最新数据。</p>
+<blockquote>
+<p>使用 SWR，组件将会不断地、自动获得最新数据流。<br>UI 也会一直保持快速响应。</p>
+</blockquote>
+<h1 id="useRequest"><a href="#useRequest" class="headerlink" title="useRequest"></a>useRequest</h1><p><a href="https://github.com/alibaba/hooks" target="_blank" rel="noopener">https://github.com/alibaba/hooks</a><br><code>import { useRequest } from &#39;ahooks&#39;;</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useRequest &#125; <span class="keyword">from</span> <span class="string">'@umijs/hooks'</span>;</span><br><span class="line">​</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUsername</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="string">'jack'</span>);</span><br><span class="line">&#125;</span><br><span class="line">​</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; data, error, loading &#125; = useRequest(getUsername)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (error) <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>failed to load<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  <span class="keyword">if</span> (loading) <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>loading...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Username: &#123;data&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://zhuanlan.zhihu.com/p/106796295" target="_blank" rel="noopener">useRequest- 蚂蚁中台标准请求 Hooks</a><br>但日常工作中，只用一个 useAsync 还是不够的，Umi Hooks 中和网络请求相关的 Hooks 就有非常多。比如和分页请求相关的 usePagination，请求自带防抖的 useSearch，内置 umi-request 的 useAPI，加载更多场景的 useLoadMore，等等等等。</p>
+<p>同时随着 zeit/swr 的诞生，给了我们很多灵感，原来网络请求还可以这么玩！swr 有非常多好用，并且我们想不到的能力。比如：</p>
+<ul>
+<li>屏幕聚焦重新发起请求。</li>
+<li>swr 能力。</li>
+</ul>
+<p>能力介绍</p>
+<ul>
+<li>基础网络请求</li>
+<li>手动请求</li>
+<li>轮询</li>
+<li>并行请求</li>
+<li>防抖 &amp; 节流</li>
+<li>缓存 &amp; SWR &amp; 预加载</li>
+<li>屏幕聚焦重新请求</li>
+<li>集成请求库</li>
+<li>分页</li>
+<li>加载更多</li>
+</ul>
+<!-- > 看起来像是一个堆砌了很多业务功能的复刻 swr，没有什么值得兴奋的地方。不过项目收藏了，可以提醒一下自己不要写出缺乏技术审美的东西。 -->
+<h1 id="42-fetching-box"><a href="#42-fetching-box" class="headerlink" title="42 fetching-box"></a>42 fetching-box</h1><p>fetching-box: <a href="https://github.com/GitHubJiKe/fetching-box" target="_blank" rel="noopener">https://github.com/GitHubJiKe/fetching-box</a></p>
+<blockquote>
+<p>React 开发中，更简洁、优雅的处理 loading、error 以及统一 Container 样式的问题的思路<br><!-- PS: 利用render props 高阶组件。 --><br><!-- END#42 fetching-box--></p>
+</blockquote>
+<!-- 
+\# 其他
+下面两篇和想要实现的功能不匹配了
+[loading 动画 放在请求拦截里做统一处理，还是放在每个页面里？](https://www.zhihu.com/question/361499790)
+[React项目优化(2)-使用Axios+CommonModel统一处理Loading](https://juejin.cn/post/7105994337913143333)
+ -->
+<h1 id="React组件设计实践总结04-组件的思维"><a href="#React组件设计实践总结04-组件的思维" class="headerlink" title="React组件设计实践总结04 - 组件的思维"></a>React组件设计实践总结04 - 组件的思维</h1><!-- \# [React组件设计实践总结04 - 组件的思维](https://juejin.cn/post/6844903844711759880) -->
+<ol>
+<li>高阶组件</li>
+<li>Render Props</li>
+<li>使用组件的方式来抽象业务逻辑</li>
+<li>hooks 取代高阶组件</li>
+<li>hooks 实现响应式编程</li>
+<li>类继承也有用处</li>
+<li>模态框管理</li>
+<li>使用 Context 进行依赖注入</li>
+<li>不可变的状态</li>
+<li>React-router: URL 即状态</li>
+<li>组件规范<br>扩展</li>
+</ol>
+<h2 id="4-hooks-取代高阶组件"><a href="#4-hooks-取代高阶组件" class="headerlink" title="4. hooks 取代高阶组件"></a>4. hooks 取代高阶组件</h2><p>自定义 hook 和函数组件的代码结构基本一致, 所以有时候hooks 写着写着原来越像组件, 组件写着写着越像 hooks. 我觉得可以认为组件就是一种特殊的 hook, 只不过它输出 Virtual DOM.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>knowledge is no pay,reward is kindness</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Yalhu 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Yalhu 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/react-js/" rel="tag"><i class="fa fa-tag"></i> react.js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sum/jsplus/骨架屏方案/" rel="next" title="骨架屏方案">
+                <i class="fa fa-chevron-left"></i> 骨架屏方案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sum/jsplus/pnpm使用记录/" rel="prev" title="Pnpm使用记录">
+                Pnpm使用记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="//www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/robbot.jpg" alt="Yalhu">
+            
+              <p class="site-author-name" itemprop="name">Yalhu</p>
+              <p class="site-description motion-element" itemprop="description">no better,but great !</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">407</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xxxx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/home2/" title="Home2" target="_blank">Home2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/archives2/" title="Archives2" target="_blank">Archives2</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/acategories/" title="Acategories" target="_blank">Acategories</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        
+          <style>
+            .post-toc .nav .nav-child { display: block; }
+          </style>
+        
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-React中封装组件的一些方法"><span class="nav-text">1 React中封装组件的一些方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-extends-正向继承"><span class="nav-text">1. extends 正向继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-HOC"><span class="nav-text">2. HOC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-劫持props"><span class="nav-text">2.1. 劫持props</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-反向继承"><span class="nav-text">2.2. 反向继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-控制渲染"><span class="nav-text">2.3. 控制渲染</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Render-Props"><span class="nav-text">3. Render Props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Hooks"><span class="nav-text">4. Hooks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Hooks解决的问题"><span class="nav-text">4.1. Hooks解决的问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-高阶组件-HOC-的入门及实践"><span class="nav-text">2 高阶组件(HOC)的入门及实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#高阶组件的实现（怎么做❓）"><span class="nav-text">高阶组件的实现（怎么做❓）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性代理-Props-Proxy"><span class="nav-text">属性代理(Props Proxy)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向继承"><span class="nav-text">反向继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性代理和反向继承的对比"><span class="nav-text">属性代理和反向继承的对比</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-使用React-hooks"><span class="nav-text">3 使用React hooks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三、⌨️React-Hooks组件逻辑复用"><span class="nav-text">三、⌨️React-Hooks组件逻辑复用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2、使用-Hooks-做组件逻辑复用"><span class="nav-text">2、使用 Hooks 做组件逻辑复用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-React-Hooks：发请求这件小事"><span class="nav-text">4 React Hooks：发请求这件小事</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#renderProps"><span class="nav-text">renderProps</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#44-Suspense"><span class="nav-text">44 Suspense</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-React的render-props模式"><span class="nav-text">5 React的render-props模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用displayName"><span class="nav-text">使用displayName</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#111-高阶组件和axios的拦截器"><span class="nav-text">111 高阶组件和axios的拦截器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react-adopt"><span class="nav-text">react-adopt</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SWR"><span class="nav-text">SWR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#useRequest"><span class="nav-text">useRequest</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#42-fetching-box"><span class="nav-text">42 fetching-box</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React组件设计实践总结04-组件的思维"><span class="nav-text">React组件设计实践总结04 - 组件的思维</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-hooks-取代高阶组件"><span class="nav-text">4. hooks 取代高阶组件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yalhu</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">668.7k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'yalhu',
+            repo: 'ablobComment',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'e2dffa7f47b9523021b9ae56b08f1a8901ec5b47',
+            
+                client_id: '55b918d3485e51d807dd'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FR1Ck8VBxN9d1lKPIOSKmvgl-gzGzoHsz", "bLUjHdwtJTf00J8OwVTT8urs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

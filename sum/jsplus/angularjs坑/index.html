@@ -477,7 +477,7 @@
 <h3 id="angular方法"><a href="#angular方法" class="headerlink" title="angular方法"></a>angular方法</h3><p>copy,equals,forEach,element,… </p>
 <p>isNumber,isObject没有用<br>forEach: 和ES5的参数，顺序不一样；如果不支持ES5,可以用ng<br>copy: 深度克隆<br>equals: 对象/数值的数值比较<br>element: jQ方式的dom操作<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// jQuery Lite </span></span><br><span class="line">angular.element(<span class="string">'.table-headFixed_body .table tr'</span>).css(&#123;<span class="attr">background</span>:<span class="string">'#fff'</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以在全局得到$scope绑定数据，控制台可以调试 </span></span><br><span class="line"><span class="keyword">var</span> appElement = <span class="built_in">document</span>.querySelector(<span class="string">'[ng-controller=controller]'</span>);</span><br><span class="line">goScope = angular.element(appElement).scope();</span><br></pre></td></tr></table></figure></p>
 <h3 id="ng-class"><a href="#ng-class" class="headerlink" title="ng-class"></a>ng-class</h3><p>对象时： 可以写表达式<br>className有特殊字符，比如<code>-</code>需要加引号  </p>
-<p>结合css的优先级，样式切换的话，写一个ng-class(后定义的-优先级高，可以覆盖)就可以了<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-class</span>=<span class="string">"&#123;'quiz-bg-danger':quizQuestionView.correct===0&#125;"</span> <span class="attr">class</span>=<span class="string">"quiz-bg-success"</span>&gt;</span></span><br><span class="line">    &#123;&#123; quizQuestionView.correct?'<span class="php"><span class="meta">&lt;?</span>=$langmsg[<span class="string">"1324"</span>]<span class="meta">?&gt;</span></span>':'<span class="php"><span class="meta">&lt;?</span>=$langmsg[<span class="string">"1325"</span>]<span class="meta">?&gt;</span></span>' &#125;&#125;<span class="comment">&lt;!-- Correct/Incorrect --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>结合css的优先级，样式切换的话，写一个ng-class(后定义的-优先级高，可以覆盖)就可以了<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-class</span>=<span class="string">"&#123;'quiz-bg-danger':quizQuestionView.correct===0&#125;"</span> <span class="attr">class</span>=<span class="string">"quiz-bg-success"</span>&gt;</span></span><br><span class="line">    &#123;&#123; quizQuestionView.correct?'&lt;?=$langmsg["1324"]?&gt;':'&lt;?=$langmsg["1325"]?&gt;' &#125;&#125;<span class="comment">&lt;!-- Correct/Incorrect --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="下拉列表"><a href="#下拉列表" class="headerlink" title="下拉列表"></a>下拉列表</h3><p>可以给默认选项；设置选中项值的类型。<br>还可以获取之前选项，进行更改前的验证（如果需要的话）。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">ng-change</span>=<span class="string">"doQuizQuestionType('&#123;&#123;quizQuestionEdit.type&#125;&#125;')"</span> <span class="attr">ng-model</span>=<span class="string">"quizQue stionEdit.type"</span> <span class="attr">ng-options</span>=<span class="string">"x.id as x.name for x in quizQuestion_type"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"edit_quizType"</span> <span class="attr">id</span>=<span class="string">"quizQuestion_type"</span>&gt;</span><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">ng-model</span>=<span class="string">"oEditQuiz.FQuizSetting.passingType"</span> <span class="attr">ng-options</span>=<span class="string">"x.id as x.name for x in quizSetting_types"</span> <span class="attr">name</span>=<span class="string">"quizSetting_type"</span> <span class="attr">id</span>=<span class="string">"quizSetting_type"</span>&gt;</span><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$scope.quizQuestion_type=[</span><br><span class="line">	&#123;<span class="attr">id</span>:<span class="number">1</span>,<span class="attr">name</span>:<span class="string">'&lt;?=$langmsg["1345"]?&gt;'</span>&#125;,<span class="comment">/* Multiple Choice */</span></span><br><span class="line">	&#123;<span class="attr">id</span>:<span class="number">0</span>,<span class="attr">name</span>:<span class="string">'&lt;?=$langmsg["1344"]?&gt;'</span>&#125;,<span class="comment">/* Multiple Response */</span></span><br><span class="line">	&#123;<span class="attr">id</span>:<span class="number">2</span>,<span class="attr">name</span>:<span class="string">'&lt;?=$langmsg["1346"]?&gt;'</span>&#125;<span class="comment">/* True/False */</span></span><br><span class="line">];</span><br></pre></td></tr></table></figure>
 <p>参考：<br><a href="http://www.voidcn.com/article/p-xhcqlnkn-bhs.html" target="_blank" rel="noopener">AngularJs select绑定数字类型问题</a><br><a href="https://codeday.me/bug/20170704/35101.html" target="_blank" rel="noopener">angularjs – ng-change获取新值和原始值</a>   </p>
@@ -724,7 +724,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-count">407</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -735,7 +735,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -746,7 +746,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -863,7 +863,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">653.5k</span>
+    <span title="Site words total count">668.7k</span>
   
 </div>
 

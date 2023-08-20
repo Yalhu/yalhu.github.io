@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="chrome,browser,">
 
 
 
@@ -89,13 +89,14 @@
 
 
 <meta name="description" content="https://developer.chrome.com/extensions/manifest    2021.4.6 星期二 ## chrome extendsion 开发https://developer.chrome.com/extensions/manifest360开发文档-书签manifest.json: name, icons, manifest_version, version,">
+<meta name="keywords" content="chrome,browser">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器插件开发">
 <meta property="og:url" content="http://yoursite.com/sum/others/浏览器插件开发/index.html">
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="https://developer.chrome.com/extensions/manifest    2021.4.6 星期二 ## chrome extendsion 开发https://developer.chrome.com/extensions/manifest360开发文档-书签manifest.json: name, icons, manifest_version, version,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-09-02T05:51:21.476Z">
+<meta property="og:updated_time" content="2023-08-20T15:19:47.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器插件开发">
 <meta name="twitter:description" content="https://developer.chrome.com/extensions/manifest    2021.4.6 星期二 ## chrome extendsion 开发https://developer.chrome.com/extensions/manifest360开发文档-书签manifest.json: name, icons, manifest_version, version,">
@@ -348,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-09-02T13:51:21+08:00">
-                2022-09-02
+              <time title="更新于" itemprop="dateModified" datetime="2023-08-20T23:19:47+08:00">
+                2023-08-20
               </time>
             
           </span>
@@ -553,8 +554,7 @@ https://www.tampermonkey.net/?browser=safari
  --><br><br><br># 开发<br>## 基础<br>### api<br>1. declarative_net_request权限rules动作为requestHeaders时不能设置append操作。<br>1. The ‘webRequest’ API cannot be used with event pages.<br>&gt; For those who don’t want to use the new Event Pages and would prefer to stick with Background Pages, make sure to set “persistent”: true in your manifest file’s background property.<br>对于那些不想使用新的事件页面并且更喜欢坚持使用背景页面的人，请确保在清单文件的background属性中设置”persistent”: true。<br><!-- [Using webrequest api with event page](https://www.e-learn.cn/content/wangluowenzhang/445643) 
 [关于Google Chrome扩展程序：将webrequest api与事件页面一起使用](https://www.codenong.com/13326105/)
 --><br><br>### v3注意<br>Migrating to Manifest V3: <a href="https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/" target="_blank" rel="noopener">https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/</a><br><br>0. permission 分成了3块<br>1. background scripts 改成server_worker<br>2. page action 和browser action 统一为action<br>3. <code>Chrome Extensions: You do not have permission to use blocking webRequest listeners</code><br>   v3 已经不建议webRequestBlocking, 即使添加了权限。新的能力Declarative Net Request<br>   &gt; The blocking version of the Web Request API exists in Manifest V3, but it can only be used by extensions that are force-installed using Chrome’s enterprise policies: ExtensionSettings, ExtensionInstallForcelist.<br>    <!-- [Can Manifest V3 extensions use blocking Web Request?](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-migration/Modifying network requests) --><br>4. Web-accessible resources<br><br>&lt;!–<br>## 自动加载<br><a href="https://github.com/rubenspgcavalcante/webpack-extension-reloader" target="_blank" rel="noopener">https://github.com/rubenspgcavalcante/webpack-extension-reloader</a><br><a href="https://github.com/v-limc/crx-auto-reload-plugin" target="_blank" rel="noopener">https://github.com/v-limc/crx-auto-reload-plugin</a><br><a href="https://github.com/cezaraugusto/webpack-run-chrome-extension" target="_blank" rel="noopener">https://github.com/cezaraugusto/webpack-run-chrome-extension</a><br><br>无脑选webpack-extension-reloader。 星多，且bkmv的模版也在用。虽然提交记录久了。<br><br>github数据对比。From 20220731<br>name | form | star | issue(open/23) | last commit | others<br>– | – | – | – | – | –<br>webpack-extension-reloader  | 69 | 453 | 46/23 | 22 Nov 2019 | bkmv的模版也在用<br>crx-auto-reload-plugin ｜  0 ｜ 3 ｜ 0/0 ｜ 30 Jan 2021 ｜ 有点中文<br>webpack-run-chrome-extension ｜ 2 ｜ 20 ｜ 4/2 ｜  12 Feb 2022 ｜ 0配置<br>### Webpack Extension Reloader<br>Note: This plugin doesn’t allow Hot Module Replacement (HMR) yet.<br>What it does?<br>Basically something similar to what the webpack hot reload middleware does. When you change the code and the webpack trigger and finish the compilation, your extension is notified and then reloaded using the standard browser runtime API.<br>Check out Hot reloading extensions using Webpack for more background.<br><br><br><br>### crx-auto-reload-plugin<br>How it works<br>server side with ‘webpack –watch’ mode
-</em> Parse and modify the ‘manifest.json’ asset if exists to inject auto reload script.<br>* Always generate a ‘auto-reload.js’ asset in every build, for watching changes.<br><br>client side<br>Watch for ‘auto-reload.json’ file’s ‘lastModified’ change and auto call chrome.runtime.reload().<br><br><br>### webpack-run-chrome-extension workflow npm<br>Run your browser extension on Chrome with zero-config auto-reload support<br>Opens up a new Chrome instance with an extension loaded. Resources declared in manifest.json are auto-reloaded by default, including JavaScript and CSS declared in Manifest HTML pages. This plugin accepts all flags Chrome does (see browserFlags) and loads on a clean profile by default. –&gt;<br><br>## 开发模版<br>###<br>chrome-extension-boilerplate-react： <a href="https://github.com/lxieyang/chrome-extension-boilerplate-react.git" target="_blank" rel="noopener">https://github.com/lxieyang/chrome-extension-boilerplate-react.git</a><br>&gt; This is a basic Chrome Extensions boilerplate to help you write modular and modern Javascript code, load CSS easily and automatic reload the browser on code changes.<br><br>Chrome Extension Boilerplate with React 17 and Webpack 5<br>This boilerplate adopts Manifest V3!<br>个人小结：试用一下。<br><br>###<br>react-chrome-extension-boilerplate：<a href="https://github.com/jhen0409/react-chrome-extension-boilerplate" target="_blank" rel="noopener">https://github.com/jhen0409/react-chrome-extension-boilerplate</a><br>&gt; Boilerplate for Chrome Extension React.js project.<br>    最新更新：3 Feb 2018；Start：2.1k<br>个人小结：<br>    有些落后。webpack3，react15。<br>    模版有些重，包括了redux。<br>    目录结构未找到pages，对齐chrome插件结构明确。<br><br>###<br>plasmo: <a href="https://github.com/PlasmoHQ/plasmo" target="_blank" rel="noopener">https://github.com/PlasmoHQ/plasmo</a><br>&gt; The Plasmo Framework is a battery-packed browser extension SDK made by hackers for hackers. Build your product and stop worrying about config files and the odd peculiarities of building browser extensions.<br>个人小结：<br>    虽然有文档，但是提高了门槛。<br>    不是一个单纯的模版。有些复杂。目录不名，manifest文件不清。<br>    react模版。<br>    2022.7有更新。Start：3.9k<br><br><br><br>###<br>extension-boilerplate：<a href="https://github.com/EmailThis/extension-boilerplate" target="_blank" rel="noopener">https://github.com/EmailThis/extension-boilerplate</a><br>&gt; A foundation for creating browser extensions for Chrome, Opera &amp; Firefox.<br>PS: 使用gulpfile.babel.js。未使用前端框架。<br>    最新更新：8 Jun 2017。Start：3.1k<br><br><br><br><br><br><br><p style="text-align:right"> </p>
-
+</em> Parse and modify the ‘manifest.json’ asset if exists to inject auto reload script.<br>* Always generate a ‘auto-reload.js’ asset in every build, for watching changes.<br><br>client side<br>Watch for ‘auto-reload.json’ file’s ‘lastModified’ change and auto call chrome.runtime.reload().<br><br><br>### webpack-run-chrome-extension workflow npm<br>Run your browser extension on Chrome with zero-config auto-reload support<br>Opens up a new Chrome instance with an extension loaded. Resources declared in manifest.json are auto-reloaded by default, including JavaScript and CSS declared in Manifest HTML pages. This plugin accepts all flags Chrome does (see browserFlags) and loads on a clean profile by default. –&gt;<br><br>## 开发模版<br>###<br>chrome-extension-boilerplate-react： <a href="https://github.com/lxieyang/chrome-extension-boilerplate-react.git" target="_blank" rel="noopener">https://github.com/lxieyang/chrome-extension-boilerplate-react.git</a><br>&gt; This is a basic Chrome Extensions boilerplate to help you write modular and modern Javascript code, load CSS easily and automatic reload the browser on code changes.<br><br>Chrome Extension Boilerplate with React 17 and Webpack 5<br>This boilerplate adopts Manifest V3!<br>个人小结：试用一下。<br><br>###<br>react-chrome-extension-boilerplate：<a href="https://github.com/jhen0409/react-chrome-extension-boilerplate" target="_blank" rel="noopener">https://github.com/jhen0409/react-chrome-extension-boilerplate</a><br>&gt; Boilerplate for Chrome Extension React.js project.<br>    最新更新：3 Feb 2018；Start：2.1k<br>个人小结：<br>    有些落后。webpack3，react15。<br>    模版有些重，包括了redux。<br>    目录结构未找到pages，对齐chrome插件结构明确。<br><br>###<br>plasmo: <a href="https://github.com/PlasmoHQ/plasmo" target="_blank" rel="noopener">https://github.com/PlasmoHQ/plasmo</a><br>&gt; The Plasmo Framework is a battery-packed browser extension SDK made by hackers for hackers. Build your product and stop worrying about config files and the odd peculiarities of building browser extensions.<br>个人小结：<br>    虽然有文档，但是提高了门槛。<br>    不是一个单纯的模版。有些复杂。目录不名，manifest文件不清。<br>    react模版。<br>    2022.7有更新。Start：3.9k<br><br><br><br>###<br>extension-boilerplate：<a href="https://github.com/EmailThis/extension-boilerplate" target="_blank" rel="noopener">https://github.com/EmailThis/extension-boilerplate</a><br>&gt; A foundation for creating browser extensions for Chrome, Opera &amp; Firefox.<br>PS: 使用gulpfile.babel.js。未使用前端框架。<br>    最新更新：8 Jun 2017。Start：3.1k<br><br><br><br><p style="text-align:right"> </p>
 
       
     </div>
@@ -603,6 +603,14 @@ https://www.tampermonkey.net/?browser=safari
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/chrome/" rel="tag"><i class="fa fa-tag"></i> chrome</a>
+          
+            <a href="/tags/browser/" rel="tag"><i class="fa fa-tag"></i> browser</a>
+          
+        </div>
       
 
       
@@ -728,7 +736,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-count">407</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -739,7 +747,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -750,7 +758,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -846,7 +854,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">653.5k</span>
+    <span title="Site words total count">668.7k</span>
   
 </div>
 

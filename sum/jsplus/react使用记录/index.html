@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="2018.10.18 星期四 9:46   插件拖拽排序react-drag-sortable react-drag-sortable-plus：https://github.com/yalhu/react-drag-sortable-plus 1234567891011121314.draggable &amp;#123;  cursor: move;  margin-bottom: 10px;&amp;#12">
+<meta name="description" content="2018.10.18 星期四 9:46   reactapi&amp;amp;&amp;amp;运算符 1. &amp;amp;&amp;amp;运算符导致的React UI界面错误但实际上，当该list长度为0时，经过&amp;amp;&amp;amp;运算符判断，则会在页面展示一个0，并不是什么都没有！那这不就出现了页面错误嘛！！！！！！12345678910111213141516171819202122232425262728const">
 <meta name="keywords" content="react.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React使用记录">
 <meta property="og:url" content="http://yoursite.com/sum/jsplus/react使用记录/index.html">
 <meta property="og:site_name" content="Yalhu">
-<meta property="og:description" content="2018.10.18 星期四 9:46   插件拖拽排序react-drag-sortable react-drag-sortable-plus：https://github.com/yalhu/react-drag-sortable-plus 1234567891011121314.draggable &amp;#123;  cursor: move;  margin-bottom: 10px;&amp;#12">
+<meta property="og:description" content="2018.10.18 星期四 9:46   reactapi&amp;amp;&amp;amp;运算符 1. &amp;amp;&amp;amp;运算符导致的React UI界面错误但实际上，当该list长度为0时，经过&amp;amp;&amp;amp;运算符判断，则会在页面展示一个0，并不是什么都没有！那这不就出现了页面错误嘛！！！！！！12345678910111213141516171819202122232425262728const">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-09-02T05:51:20.917Z">
+<meta property="og:updated_time" content="2023-08-20T15:19:47.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React使用记录">
-<meta name="twitter:description" content="2018.10.18 星期四 9:46   插件拖拽排序react-drag-sortable react-drag-sortable-plus：https://github.com/yalhu/react-drag-sortable-plus 1234567891011121314.draggable &amp;#123;  cursor: move;  margin-bottom: 10px;&amp;#12">
+<meta name="twitter:description" content="2018.10.18 星期四 9:46   reactapi&amp;amp;&amp;amp;运算符 1. &amp;amp;&amp;amp;运算符导致的React UI界面错误但实际上，当该list长度为0时，经过&amp;amp;&amp;amp;运算符判断，则会在页面展示一个0，并不是什么都没有！那这不就出现了页面错误嘛！！！！！！12345678910111213141516171819202122232425262728const">
 
 
 
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-09-02T13:51:20+08:00">
-                2022-09-02
+              <time title="更新于" itemprop="dateModified" datetime="2023-08-20T23:19:47+08:00">
+                2023-08-20
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  710
+                  601
                 </span>
               
 
@@ -461,6 +461,9 @@
         <p style="text-align:right">2018.10.18 星期四 9:46</p>
 
 
+<h1 id="react"><a href="#react" class="headerlink" title="react"></a>react</h1><h2 id="api"><a href="#api" class="headerlink" title="api"></a>api</h2><h3 id="amp-amp-运算符"><a href="#amp-amp-运算符" class="headerlink" title="&amp;&amp;运算符"></a>&amp;&amp;运算符</h3><!-- [为什么React 中最好不要使用“&&”进行条件渲染] -->
+<h4 id="1-amp-amp-运算符导致的React-UI界面错误"><a href="#1-amp-amp-运算符导致的React-UI界面错误" class="headerlink" title="1. &amp;&amp;运算符导致的React UI界面错误"></a>1. &amp;&amp;运算符导致的React UI界面错误</h4><p>但实际上，当该list长度为0时，经过&amp;&amp;运算符判断，则会在页面展示一个0，并不是什么都没有！那这不就出现了页面错误嘛！！！！！！<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Demo = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        list.length &amp;&amp; (</span><br><span class="line">        &lt;div className=<span class="string">"name-list-container"</span>&gt;</span><br><span class="line">            &#123;list.map(<span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">"name-list-item"</span>&gt;</span>&#123;name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">            &#125;)&#125;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">``` </span></span><br><span class="line"><span class="regexp">#### 2. &amp;&amp;运算符的工作原理是什么？</span></span><br><span class="line"><span class="regexp">那这种错误是React本身造成的吗？经过深入研究，并不是React本身的问题，而要将问题归结于JavaScript的工作原理上。</span></span><br><span class="line"><span class="regexp">&amp;&amp; 运算符是逻辑与运算符，它的工作原理是：当它的两个操作数都为真（true）时，它返回 true，否则返回 false。</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">在 JavaScript 中，当使用 &amp;&amp; 运算符判断 DOM 渲染时，如果某个元素的值为 0、null、undefined、false 或空字符串（''），则该元素被视为假（false），因此 &amp;&amp; 运算符将返回该元素的值（即 0）。</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">```js</span></span><br><span class="line"><span class="regexp">const a = "example";</span></span><br><span class="line"><span class="regexp">const b = 0;</span></span><br><span class="line"><span class="regexp">const c = 1;</span></span><br><span class="line"><span class="regexp">console.log(a &amp;&amp; b);    /</span><span class="regexp">/ 0</span></span><br><span class="line"><span class="regexp">console.log(a &amp;&amp; c);    /</span><span class="regexp">/ 1</span></span><br><span class="line"><span class="regexp">console.log(b &amp;&amp; c);    /</span><span class="regexp">/ 0</span></span><br><span class="line"><span class="regexp">console.log(c &amp;&amp; b);    /</span><span class="regexp">/ 0</span></span><br><span class="line"><span class="regexp">console.log(c &amp;&amp; a);    /</span><span class="regexp">/ example</span></span><br><span class="line"><span class="regexp">console.log(b &amp;&amp; a);    /</span><span class="regexp">/ 0</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="3-如何正确使用-amp-amp-运算符，或者用什么来替代-amp-amp-？"><a href="#3-如何正确使用-amp-amp-运算符，或者用什么来替代-amp-amp-？" class="headerlink" title="3. 如何正确使用&amp;&amp;运算符，或者用什么来替代&amp;&amp;？"></a>3. 如何正确使用&amp;&amp;运算符，或者用什么来替代&amp;&amp;？</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ①使用list.length &gt;= 1</span></span><br><span class="line">list.length &gt;= <span class="number">1</span> &amp;&amp; <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>"hello list" <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ②使用!!list.length</span></span><br><span class="line"><span class="comment">// 将数组的长度强制转化为布尔值。</span></span><br><span class="line">!!list.length &amp;&amp; <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>"hello list" <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ③使用三元表达式</span></span><br><span class="line"><span class="comment">// 如果需要判断的条件场景只有3种以下，三元表达式是很好的解决办法~非常推荐</span></span><br><span class="line">list.length ? <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>"hello list" <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span> : <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
 <h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><h2 id="拖拽排序"><a href="#拖拽排序" class="headerlink" title="拖拽排序"></a>拖拽排序</h2><h3 id="react-drag-sortable"><a href="#react-drag-sortable" class="headerlink" title="react-drag-sortable"></a>react-drag-sortable</h3><!-- react-drag-sortable：<https://github.com/tom-s/react-drag-sortable> -->
 <p>react-drag-sortable-plus：<a href="https://github.com/yalhu/react-drag-sortable-plus" target="_blank" rel="noopener">https://github.com/yalhu/react-drag-sortable-plus</a></p>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.draggable</span> &#123;</span><br><span class="line">  <span class="attribute">cursor</span>: move;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 复制的元素</span></span><br><span class="line"><span class="selector-class">.dragged</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">349px</span>;</span><br><span class="line">  <span class="attribute">background</span>:<span class="number">#d9d9d9</span>;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.7</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 被复制元素</span></span><br><span class="line"><span class="selector-class">.placeholder</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -483,24 +486,12 @@
 [Can't select input text in Chrome](https://github.com/react-dnd/react-dnd/issues/438)
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">I am also looking for a good solution to this.</span><br><span class="line"></span><br><span class="line">Here is a collection of issues that have been created for this, for reference:</span><br><span class="line"></span><br><span class="line">#335</span><br><span class="line">#358</span><br><span class="line">#178</span><br></pre></td></tr></table></figure></p>
 <p> –&gt;</p>
-<h1 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h1><p><a href="./react%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E5%BA%93%E5%AF%B9%E6%AF%94.md">react状态管理库对比</a></p>
-<h2 id="mobx"><a href="#mobx" class="headerlink" title="mobx"></a>mobx</h2><p>mobxjs/mobx: <a href="https://github.com/mobxjs/mobx">https://github.com/mobxjs/mobx</a><br>mobx-react: <a href="https://github.com/mobxjs/mobx-react">https://github.com/mobxjs/mobx-react</a></p>
-<p>文档：<a href="https://cn.mobx.js.org/best/react-performance.html">https://cn.mobx.js.org/best/react-performance.html</a><br><a href="https://www.jianshu.com/p/505d9d9fe36a">Mobx使用详解</a><br><!-- $_PS: 概览 --></p>
-<h1 id="ui库"><a href="#ui库" class="headerlink" title="ui库"></a>ui库</h1><p><a href="https://cloud.tencent.com/developer/article/1638343" target="_blank" rel="noopener">React常用的5个UI框架</a><br><a href="https://juejin.cn/post/6844903955269419015" target="_blank" rel="noopener">React的十大UI框架</a><br># 91 <a href="https://developer.51cto.com/article/708611.html" target="_blank" rel="noopener">八个好用的React UI组件库</a><br>1、Material UI<br>地址：​​<a href="https://mui.com/zh/​​" target="_blank" rel="noopener">https://mui.com/zh/​​</a></p>
-<p>Material 是简单且可定制的组件库，它也是我最喜欢的。易于上手，并且库已经加载了大多数应用程序需要/需要的组件集。<br>2、 Ant Design<br>地址：​​<a href="https://ant.design​​" target="_blank" rel="noopener">https://ant.design​​</a><br>优雅的企业级产品设计系统。Ant Design 提供了 50 多个可用于创建精美 Web 应用程序的组件。</p>
-<p>3 、React Bootstrap<br>地址：​​​​<a href="https://react-bootstrap.github.io/​​" target="_blank" rel="noopener">https://react-bootstrap.github.io/​​</a><br>对于熟悉 Bootstrap 框架的团队和个人来说，使用 React Bootstrap 会很容易和舒适。它提供大量组件集，遵循与 Bootstrap 框架类似的类和模式。</p>
-<p>4、 Rebass<br>地址：​​<a href="https://rebassjs.org/​​" target="_blank" rel="noopener">https://rebassjs.org/​​</a><br>React 使用样式系统构建的原始 UI 组件，您可以选择主题、变体等等。还通过文档提供出色的支持。</p>
-<p>5、Blueprint<br>地址：​​<a href="https://blueprintjs.com/​​" target="_blank" rel="noopener">https://blueprintjs.com/​​</a><br>又一个很棒的 React UI 库。该库针对构建复杂的数据密集型界面桌面应用程序进行了优化。</p>
-<p>6、 Semantic UI React<br>地址：​​<a href="https://react.semantic-ui.com/​​" target="_blank" rel="noopener">https://react.semantic-ui.com/​​</a><br>它与 React Bootstrap 非常相似，因为它是 Semantic UI 的 React 版本，Semantic UI React 提供 React 组件，而 Semantic UI 提供主题作为 CSS 样式表.</p>
-<p>7、Chakra UI<br>地址：​​<a href="https://chakra-ui.com/​​" target="_blank" rel="noopener">https://chakra-ui.com/​​</a><br>Chakra UI 是一个简单、模块化且可访问的组件库，它为您提供构建 React 应用程序所需的构建块。</p>
-<p>8、Evergreen UI<br>地址：​​<a href="https://evergreen.segment.com/​​" target="_blank" rel="noopener">https://evergreen.segment.com/​​</a><br><!-- END: 91 --></p>
-<!-- 
-[React常用的5个UI框架](https://cloud.tencent.com/developer/article/1638343)
-PS: 有github星星
+<h1 id="React-Developer-Tools"><a href="#React-Developer-Tools" class="headerlink" title="React Developer Tools"></a>React Developer Tools</h1><p>加入插件后，不生效。<br>解决: </p>
+<blockquote>
+<p>安装完毕后打开扩展程序管理页面。将 React Developer Tools 的“允许访问文件网址”勾选。<br><!-- 参考：
+[React - React Developer Tools开发者工具的安装与使用（Chrome调试插件）](https://www.cnplugins.com/zhuanti/how-to-use-react-tools.html)
+ --><br><!-- 也可以在控制台设置中开启：Enable Javascript source maps 和 Enable Css source maps --></p>
 
-[7 款最棒的开源 React UI 组件库和模版框架测评 - 特别针对国内使用场景推荐](https://kalacloud.com/blog/best-react-ui-component-libraries/)
-我筛选了国内常用的开源前端 UI 库，选出了 7 款来自国内互联网一线大厂或是商业化较好的企业的免费开源 UI 库分享给大家，一定有一款适合你。 -->
-<p>Semi Design - 抖音团队力作，虽简洁轻量，可轻松应对复杂场景，抖音内部多项目迭代，品质可靠<br>TDesign - 腾讯优质 UI 组件，配套工具完满，设计工整，文档清晰<br>ArcoDesign - 字节跳动 UI 组件库开源，大厂逻辑，设计文档完美<br>Ant Design React - 阿里前端 UI 库，面向企业级中后台<br>Material-UI - 全球顶级 React 组件库 Google Material 设计标准<br>微软 FluentUI - 背靠微软，大型项目首先，代码简洁高效<br>Element for React - 饿了么出品 Element 的 React 版，适合有使用 Element 习惯的开发者</p>
 
       
     </div>
@@ -689,7 +680,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-count">407</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -700,7 +691,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -711,7 +702,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -794,7 +785,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#插件"><span class="nav-text">插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拖拽排序"><span class="nav-text">拖拽排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#react-drag-sortable"><span class="nav-text">react-drag-sortable</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#issue"><span class="nav-text">issue</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ui库"><span class="nav-text">ui库</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#react"><span class="nav-text">react</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#api"><span class="nav-text">api</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#amp-amp-运算符"><span class="nav-text">&amp;&amp;运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-amp-amp-运算符导致的React-UI界面错误"><span class="nav-text">1. &amp;&amp;运算符导致的React UI界面错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-如何正确使用-amp-amp-运算符，或者用什么来替代-amp-amp-？"><span class="nav-text">3. 如何正确使用&amp;&amp;运算符，或者用什么来替代&amp;&amp;？</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#插件"><span class="nav-text">插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拖拽排序"><span class="nav-text">拖拽排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#react-drag-sortable"><span class="nav-text">react-drag-sortable</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#issue"><span class="nav-text">issue</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -828,7 +819,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">653.5k</span>
+    <span title="Site words total count">668.7k</span>
   
 </div>
 

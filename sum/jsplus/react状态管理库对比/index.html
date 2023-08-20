@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Yalhu">
 <meta property="og:description" content="2020.12.13 星期日  21：35   实际状态管理项目实际使用了redux，也是得益于其“啰嗦”的设计，把所有reducer 定义于一处，包括定义action。清晰，方便查找/追踪state没有使用immutable。但是确实做了一些性能优化的处理，包括state及某个属性如何更新等。 没使用dva，因为是一个框架，内置了router等，并不需要，仅是一个简单的状态管理。redux 简">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-09-02T05:51:20.919Z">
+<meta property="og:updated_time" content="2023-08-20T15:19:47.371Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React状态管理库对比">
 <meta name="twitter:description" content="2020.12.13 星期日  21：35   实际状态管理项目实际使用了redux，也是得益于其“啰嗦”的设计，把所有reducer 定义于一处，包括定义action。清晰，方便查找/追踪state没有使用immutable。但是确实做了一些性能优化的处理，包括state及某个属性如何更新等。 没使用dva，因为是一个框架，内置了router等，并不需要，仅是一个简单的状态管理。redux 简">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-09-02T13:51:20+08:00">
-                2022-09-02
+              <time title="更新于" itemprop="dateModified" datetime="2023-08-20T23:19:47+08:00">
+                2023-08-20
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,050
+                  2,191
                 </span>
               
 
@@ -437,7 +437,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  9
                 </span>
               
             </div>
@@ -542,6 +542,9 @@ $_PS: 通过第二篇文档，基本用法已了解。高阶/详细 需要使用
 <h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>出于兼容性和简便性的考虑，相比使用外部的全局状态，使用 React 内置的状态管理能力是个最佳的选择。但是 React 有这样一些局限性：</p>
 <p>组件间的状态共享只能通过将 state 提升至它们的公共祖先来实现，但这样做可能导致重新渲染一颗巨大的组件树。<br>Context 只能存储单一值，无法存储多个各自拥有消费者的值的集合。<br>以上两种方式都很难将组件树的顶层（state 必须存在的地方）与叶子组件 (使用 state 的地方) 进行代码分割。<br>我们希望改善上述的问题的同时，不仅能保留 API 以及语义，还能使其的表现尽可能保持 React 的样子。</p>
 <p>Recoil 定义了一个有向图 (directed graph)，正交同时又天然连结于你的 React 树上。状态的变化从该图的顶点（我们称之为 atom）开始，流经纯函数 (我们称之为 selector) 再传入组件。基于这样的实现：</p>
+<h1 id="React组件设计实践总结05-状态管理"><a href="#React组件设计实践总结05-状态管理" class="headerlink" title="React组件设计实践总结05 - 状态管理"></a>React组件设计实践总结05 - 状态管理</h1><!-- \# [React组件设计实践总结05 - 状态管理](https://juejin.cn/post/6844903848255946766#heading-6) -->
+<p>## 状态管理<br>## 你不需要状态管理<br>## 你不需要复杂的状态管理<br>## Redux<br>七，可能还有性能问题<br>Redux 常见问题：性能<br>redux 中的 state 树太大会不会有性能问题？<br>我为什么从 Redux 迁移到了 Mobx<br>Mobx 与 Redux 的性能对比<br>### 扩展阅读</p>
+<p>## Mobx<br>Mobx 提供了一个类似 Vue 的响应式系统，相对 Redux 来说 Mobx 的架构更容易理解。 拿官方的图来看:<br>## RxJS<br>## 其他状态管理方案<br>## 扩展阅读</p>
 <p style="text-align:right"> </p>
 
 
@@ -732,7 +735,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">395</span>
+                  <span class="site-state-item-count">407</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -743,7 +746,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -754,7 +757,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -837,7 +840,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实际状态管理项目"><span class="nav-text">实际状态管理项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#github-对比"><span class="nav-text">github 对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux"><span class="nav-text">redux</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dva"><span class="nav-text">dva</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MobX"><span class="nav-text">MobX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SMTC"><span class="nav-text">SMTC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mobx-react"><span class="nav-text">mobx-react</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#REDUX的好处"><span class="nav-text">REDUX的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MobX-1"><span class="nav-text">MobX</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#compute"><span class="nav-text">compute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#action"><span class="nav-text">action</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对比"><span class="nav-text">对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dva-1"><span class="nav-text">dva</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mobx"><span class="nav-text">mobx</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#recoil"><span class="nav-text">recoil</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#动机"><span class="nav-text">动机</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实际状态管理项目"><span class="nav-text">实际状态管理项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#github-对比"><span class="nav-text">github 对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#redux"><span class="nav-text">redux</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dva"><span class="nav-text">dva</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MobX"><span class="nav-text">MobX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SMTC"><span class="nav-text">SMTC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mobx-react"><span class="nav-text">mobx-react</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#REDUX的好处"><span class="nav-text">REDUX的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MobX-1"><span class="nav-text">MobX</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#compute"><span class="nav-text">compute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#action"><span class="nav-text">action</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对比"><span class="nav-text">对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dva-1"><span class="nav-text">dva</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mobx"><span class="nav-text">mobx</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#recoil"><span class="nav-text">recoil</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#动机"><span class="nav-text">动机</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React组件设计实践总结05-状态管理"><span class="nav-text">React组件设计实践总结05 - 状态管理</span></a></li></ol></div>
             
 
           </div>
@@ -871,7 +874,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">653.5k</span>
+    <span title="Site words total count">668.7k</span>
   
 </div>
 
